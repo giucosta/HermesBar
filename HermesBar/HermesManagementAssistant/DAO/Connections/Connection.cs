@@ -8,31 +8,52 @@ using System.Threading.Tasks;
 
 namespace DAO.Connections
 {
-    class Connection
+    public class Connection
     {
-        private static string connString = @"server = GIULIANOCOSTA\SQLEXPRESS; Database = HermesBar; integrated security = true;";
+        private static string conectionString = @"server = GIULIANOCOSTA\SQLEXPRESS; Database = HermesBar; integrated security = true;";
+        private static SqlConnection connection = null;   
 
-        private static SqlConnection conn = null;   
-
-        public static SqlConnection obterConexao(){
-            conn = new SqlConnection(connString);
-            try{
-                conn.Open();
-            }
-            catch(SqlException sqle)
+        public static SqlConnection getConnection(){
+            connection = new SqlConnection(conectionString);
+            try
             {
-                conn = null;
+                connection.Open();
             }
-            return conn;
+            catch(SqlException)
+            {
+                connection = null;
+            }
+            return connection;
         }
-
-        public static void fecharConexao(){
-          if(conn != null)
-            conn.Close();
+        public static void ExecutarComando(string strQuery)
+        {
+            try
+            {
+                var cmd = new SqlCommand(strQuery, getConnection());
+                cmd.ExecuteNonQuery();
+            }
+            catch(SqlException)
+            {
+                outConnection();
+            }
         }
-
+        public static SqlDataReader RetornarDataReader(string strQuery)
+        {
+            try
+            {
+                var cmd = new SqlCommand(strQuery, getConnection());
+                return cmd.ExecuteReader();
+            }
+            catch(SqlException)
+            {
+                outConnection();
+                return null;
+            }
+        }
+        public static void outConnection(){
+            if (connection != null)
+                connection.Close();
+        }
     }
-
-
 }
 

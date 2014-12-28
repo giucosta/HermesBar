@@ -7,7 +7,7 @@
         <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,146,0,0" TabIndex="20"/>
         <Label x:Name="lbSenha" Content="Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,179,0,0"/>
         <TextBox x:Name="tbSenha" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,205,0,0" TabIndex="2"/>
-        <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="222,246,0,0" TabIndex="3" Tag="Clique para entrar"/>
+        <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="222,246,0,0" TabIndex="3" Tag="Clique para entrar" Click="btEntrar_Click"/>
         <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="301" Margin="25,10,0,0" Source="/HermesManagementAssistant;component/images/LOGO_GENERICA 04.png"/>
 
     </Grid>

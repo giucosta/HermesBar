@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
+using BLL.Login;
+using MODEL.Login;
 
 namespace HermesManagementAssistant.View.Login
 {
@@ -28,6 +31,20 @@ namespace HermesManagementAssistant.View.Login
             splash.Close(new TimeSpan(0, 0, 5));
 
             InitializeComponent();
+        }
+
+        private void btEntrar_Click(object sender, RoutedEventArgs e)
+        {
+            var login = new LoginModel();
+            var usuario = new MODEL.UsuarioModel();
+            usuario.Senha = tbSenha.Text;
+            usuario.Nome = tbLogin.Text;
+            login.Usuario = usuario;
+
+            if (new LoginBLL().efetuaLogin(login))
+                MessageBox.Show("Login ok");
+            else
+                MessageBox.Show("tenso");
         }
     }
 }
