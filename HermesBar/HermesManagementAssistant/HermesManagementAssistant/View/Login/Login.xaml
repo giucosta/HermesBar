@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Login" Height="327.068" Width="343.985" Background="#FF9C9C9C" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFDADADA">
-        <Label x:Name="lbLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,120,0,0"/>
-        <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,146,0,0" TabIndex="20"/>
+        <Label x:Name="lbLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,130,0,0"/>
+        <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,156,0,0" TabIndex="20"/>
         <Label x:Name="lbSenha" Content="Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,179,0,0"/>
-        <TextBox x:Name="tbSenha" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,205,0,0" TabIndex="2"/>
         <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="222,246,0,0" TabIndex="3" Tag="Clique para entrar" Click="btEntrar_Click"/>
-        <Image HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="301" Margin="25,10,0,0" Source="/HermesManagementAssistant;component/images/LOGO_GENERICA 04.png"/>
+        <Image HorizontalAlignment="Left" Height="105" VerticalAlignment="Top" Width="316" Margin="10,10,0,0" Source="/HermesManagementAssistant;component/images/LOGO_GENERICA 04.png"/>
+        <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" Margin="42,205,0,0" VerticalAlignment="Top" Width="255" Height="25" MaxLength="6" PasswordChar="*"/>
 
     </Grid>
 </Window>

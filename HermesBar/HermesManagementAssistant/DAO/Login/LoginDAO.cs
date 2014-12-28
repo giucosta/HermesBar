@@ -12,6 +12,11 @@ namespace DAO.Login
 {
     public class LoginDAO
     {
+        /// <summary>
+        /// Recebe login como parametro, efetua a decriptacao da senha do banco e compara com a digitada pelo usuario
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         public bool efetuaLogin(LoginModel login)
         {
             try
@@ -21,7 +26,7 @@ namespace DAO.Login
                 var comando = new SqlCommand(sql, Connection.getConnection());
                 comando.Parameters.Add(new SqlParameter("@Nome", login.Usuario.Nome));
 
-                if (login.Usuario.Senha.Equals(Connection.getDataTable(comando).Rows[0]["Senha"].ToString()))
+                if (login.Usuario.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable(comando).Rows[0]["Senha"].ToString())))
                     return true;
 
                 return false;

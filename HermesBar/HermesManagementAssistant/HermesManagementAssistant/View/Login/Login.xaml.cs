@@ -35,16 +35,27 @@ namespace HermesManagementAssistant.View.Login
 
         private void btEntrar_Click(object sender, RoutedEventArgs e)
         {
-            var login = new LoginModel();
-            var usuario = new MODEL.UsuarioModel();
-            usuario.Senha = tbSenha.Text;
-            usuario.Nome = tbLogin.Text;
-            login.Usuario = usuario;
 
-            if (new LoginBLL().efetuaLogin(login))
-                MessageBox.Show("Login ok");
+            var usuario = new MODEL.UsuarioModel()
+            {
+                Senha = tbSenha.Password,
+                Nome = tbLogin.Text
+            };
+
+            if (new LoginBLL().efetuaLogin(new LoginModel() { Usuario = usuario }))
+                new MainWindow().Show();
             else
-                MessageBox.Show("tenso");
+            {
+                MessageBox.Show("Login e/ou senha inválido", "Login e/ou senha inválido !", MessageBoxButton.OK, MessageBoxImage.Error);
+                limparCampos();
+            }
+                
+        }
+
+        private void limparCampos()
+        {
+            tbSenha.Clear();
+            tbSenha.Clear();
         }
     }
 }
