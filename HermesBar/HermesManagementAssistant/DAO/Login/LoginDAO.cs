@@ -21,19 +21,13 @@ namespace DAO.Login
                 var comando = new SqlCommand(sql, Connection.getConnection());
                 comando.Parameters.Add(new SqlParameter("@Nome", login.Usuario.Nome));
 
-                var dataTable = new DataTable();
-                dataTable.Load(comando.ExecuteReader());
-                if (login.Usuario.Senha.Equals(dataTable.Rows[0]["Senha"].ToString()))
-                {
-                    Connection.outConnection();
+                if (login.Usuario.Senha.Equals(Connection.getDataTable(comando).Rows[0]["Senha"].ToString()))
                     return true;
-                }
-                Connection.outConnection();
+
                 return false;
             }
             catch (Exception)
             {
-                Connection.outConnection();
                 return false;
             }
         }

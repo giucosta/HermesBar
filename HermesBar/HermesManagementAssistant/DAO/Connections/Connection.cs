@@ -37,12 +37,15 @@ namespace DAO.Connections
                 outConnection();
             }
         }
-        public static SqlDataReader RetornarDataReader(string strQuery)
+        public static DataTable getDataTable(SqlCommand command)
         {
             try
             {
-                var cmd = new SqlCommand(strQuery, getConnection());
-                return cmd.ExecuteReader();
+                var dataTable = new DataTable();
+                dataTable.Load(command.ExecuteReader());
+
+                outConnection();
+                return dataTable;
             }
             catch(SqlException)
             {
