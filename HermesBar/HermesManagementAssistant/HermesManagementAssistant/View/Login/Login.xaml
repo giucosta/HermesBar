@@ -6,9 +6,10 @@
         <Label x:Name="lbLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,130,0,0"/>
         <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" Margin="42,156,0,0" TabIndex="20"/>
         <Label x:Name="lbSenha" Content="Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,179,0,0"/>
-        <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="222,246,0,0" TabIndex="3" Tag="Clique para entrar" Click="btEntrar_Click"/>
+        <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="222,246,0,0" TabIndex="3" Tag="Clique para entrar" Click="btEntrar_Click" Background="#FF8DBEE2"/>
         <Image HorizontalAlignment="Left" Height="105" VerticalAlignment="Top" Width="316" Margin="10,10,0,0" Source="/HermesManagementAssistant;component/images/LOGO_GENERICA 04.png"/>
-        <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" Margin="42,205,0,0" VerticalAlignment="Top" Width="255" Height="25" MaxLength="6" PasswordChar="*"/>
+        <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" Margin="42,205,0,0" VerticalAlignment="Top" Width="255" Height="25" MaxLength="16" PasswordChar="*"/>
+        <Button x:Name="btEsqueceuSenha" Content="Esqueceu sua senha?" HorizontalAlignment="Left" VerticalAlignment="Top" Width="102" Margin="195,271,0,0" FontSize="10" FontStyle="Italic" Background="#FFB2A7A7" Click="Button_Click"></Button>
 
     </Grid>
 </Window>

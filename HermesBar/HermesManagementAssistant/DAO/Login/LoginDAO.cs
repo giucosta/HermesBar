@@ -17,7 +17,7 @@ namespace DAO.Login
         /// </summary>
         /// <param name="login"></param>
         /// <returns></returns>
-        public bool efetuaLogin(LoginModel login)
+        public bool EfetuaLogin(LoginModel login)
         {
             try
             {

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using BLL.Login;
 using MODEL.Login;
+using MODEL;
 
 namespace HermesManagementAssistant.View.Login
 {
@@ -42,7 +43,7 @@ namespace HermesManagementAssistant.View.Login
                 Nome = tbLogin.Text
             };
 
-            if (new LoginBLL().efetuaLogin(new LoginModel() { Usuario = usuario }))
+            if (new LoginBLL().EfetuaLogin(new LoginModel() { Usuario = usuario }))
                 new MainWindow().Show();
             else
             {
@@ -56,6 +57,23 @@ namespace HermesManagementAssistant.View.Login
         {
             tbSenha.Clear();
             tbSenha.Clear();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(tbLogin.Text))
+            {
+                var usuario = new UsuarioModel() { Nome = tbLogin.Text };
+                if (new LoginBLL().EsqueceuSenha(new LoginModel() { Usuario = usuario }))
+                    MessageBox.Show("Sua nova senha foi enviada para o email cadastrado!", "Email enviado", MessageBoxButton.OK, MessageBoxImage.Information);
+                else
+                    MessageBox.Show("Ocorreu um erro ao enviar email, favor consultar o administrador do sistema", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MessageBox.Show("Favor preencher o campo LOGIN", "Preencha os campos", MessageBoxButton.OK, MessageBoxImage.Warning);
+                tbLogin.Focus();
+            }
         }
     }
 }

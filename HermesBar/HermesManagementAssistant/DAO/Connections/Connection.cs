@@ -25,12 +25,11 @@ namespace DAO.Connections
             }
             return connection;
         }
-        public static void ExecutarComando(string strQuery)
+        public static void ExecutarComando(SqlCommand command)
         {
             try
             {
-                var cmd = new SqlCommand(strQuery, getConnection());
-                cmd.ExecuteNonQuery();
+                command.ExecuteNonQuery();
             }
             catch(SqlException)
             {
