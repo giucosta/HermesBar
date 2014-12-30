@@ -11,6 +11,11 @@ namespace DAO.Usuario
 {
     public class UsuarioDAO
     {
+        /// <summary>
+        /// Recupera no banco o email do usuario
+        /// </summary>
+        /// <param name="login">LoginModel</param>
+        /// <returns>Email</returns>
         public string RecuperaEmailUsuario(LoginModel login)
         {
             try
@@ -30,6 +35,11 @@ namespace DAO.Usuario
             }
         }
 
+        /// <summary>
+        /// Grava a nova senha do usuario no banco
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns>boolean</returns>
         public bool GravaNovaSenha(LoginModel login)
         {
             try

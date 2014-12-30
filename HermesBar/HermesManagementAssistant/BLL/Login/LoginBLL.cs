@@ -37,6 +37,11 @@ namespace BLL.Login
             }
         }
         #endregion
+        /// <summary>
+        /// Verifica o usuario e senha
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
         public bool EfetuaLogin(LoginModel login)
         {
             if (login.Usuario.Nome != null && login.Usuario.Senha != null)
@@ -45,6 +50,11 @@ namespace BLL.Login
             return false;
         }
 
+        /// <summary>
+        /// Envia email com a nova senha ao usuario e grava a senha no banco
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
         public bool EsqueceuSenha(LoginModel login)
         {
             using (var smtp = new SmtpClient())
@@ -117,12 +127,20 @@ namespace BLL.Login
                 }
             }
         }
-
+        /// <summary>
+        /// Recupera email do usuario
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
         public string RecuperaEmailUsuario(LoginModel login)
         {
             return UsuarioDAO.RecuperaEmailUsuario(login);
         }
-
+        /// <summary>
+        /// Gera uma nova senha pro usuario e grava a senha no banco
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
         public string GeraNovaSenha(LoginModel login)
         {
             string guid = Guid.NewGuid().ToString().Replace("-", "");
@@ -139,7 +157,11 @@ namespace BLL.Login
                 return novaSenha;
             return null;
         }
-
+        /// <summary>
+        /// Grava a nova senha no banco
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
         public bool GravaNovaSenha(LoginModel login)
         {
             if (UsuarioDAO.GravaNovaSenha(login))
