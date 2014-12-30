@@ -59,6 +59,9 @@ namespace BLL.Login
                     #endregion
 
                     #region Definicoes do usuario
+
+                    if (RecuperaEmailUsuario(login) == null)
+                        return false;
                     var envioPara = new MailAddress(RecuperaEmailUsuario(login));
                     var passwordEmailUsuario = GeraNovaSenha(login);
                     #endregion

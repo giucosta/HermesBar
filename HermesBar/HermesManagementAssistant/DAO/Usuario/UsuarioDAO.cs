@@ -20,6 +20,8 @@ namespace DAO.Usuario
                 var comando = new SqlCommand(sql, Connection.getConnection());
                 comando.Parameters.Add(new SqlParameter("@Nome", login.Usuario.Nome));
 
+                if (string.IsNullOrWhiteSpace(Connection.getDataTable(comando).Rows[0]["Email"].ToString()))
+                    return null;
                 return Connection.getDataTable(comando).Rows[0]["Email"].ToString();
             }
             catch (Exception e)
