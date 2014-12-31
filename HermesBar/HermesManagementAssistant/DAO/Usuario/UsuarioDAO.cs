@@ -1,5 +1,5 @@
 ﻿using DAO.Connections;
-using MODEL.Login;
+using MODEL;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -20,13 +20,16 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = "SELECT Email FROM Usuarios where Nome = @Nome";
+                string sql = @"
+                            SELECT 
+                                Email 
+                            FROM Usuario U
+                            INNER JOIN Login L ON L.Id_Login = U.Id_Login 
+                            WHERE L.Login = @Login";
 
                 var comando = new SqlCommand(sql, Connection.getConnection());
-                comando.Parameters.Add(new SqlParameter("@Nome", login.Usuario.Nome));
+                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
-                if (string.IsNullOrWhiteSpace(Connection.getDataTable(comando).Rows[0]["Email"].ToString()))
-                    return null;
                 return Connection.getDataTable(comando).Rows[0]["Email"].ToString();
             }
             catch (Exception e)
@@ -44,10 +47,10 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = "UPDATE Usuarios SET Senha = @Senha where Nome = @Nome";
+                string sql = "UPDATE Login SET Senha = @Senha WHERE Login = @Login";
                 var comando = new SqlCommand(sql, Connection.getConnection());
-                comando.Parameters.Add(new SqlParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Usuario.Senha)));
-                comando.Parameters.Add(new SqlParameter("@Nome", login.Usuario.Nome));
+                comando.Parameters.Add(new SqlParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha)));
+                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 Connection.ExecutarComando(comando);
                 return true;

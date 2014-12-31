@@ -14,7 +14,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using BLL.Login;
-using MODEL.Login;
 using MODEL;
 
 namespace HermesManagementAssistant.View.Login
@@ -36,21 +35,13 @@ namespace HermesManagementAssistant.View.Login
 
         private void btEntrar_Click(object sender, RoutedEventArgs e)
         {
-
-            var usuario = new MODEL.UsuarioModel()
-            {
-                Senha = tbSenha.Password,
-                Nome = tbLogin.Text
-            };
-
-            if (new LoginBLL().EfetuaLogin(new LoginModel() { Usuario = usuario }))
+            if (new LoginBLL().EfetuaLogin(new LoginModel(){Login = tbLogin.Text, Senha = tbSenha.Password}))
                 new MainWindow().Show();
             else
             {
                 MessageBox.Show("Login e/ou senha inválido", "Login e/ou senha inválido !", MessageBoxButton.OK, MessageBoxImage.Error);
                 limparCampos();
-            }
-                
+            }    
         }
 
         private void limparCampos()
@@ -63,8 +54,7 @@ namespace HermesManagementAssistant.View.Login
         {
             if (!string.IsNullOrWhiteSpace(tbLogin.Text))
             {
-                var usuario = new UsuarioModel() { Nome = tbLogin.Text };
-                if (new LoginBLL().EsqueceuSenha(new LoginModel() { Usuario = usuario }))
+                if (new LoginBLL().EsqueceuSenha(new LoginModel() { Login = tbLogin.Text }))
                     MessageBox.Show("Sua nova senha foi enviada para o email cadastrado!", "Email enviado", MessageBoxButton.OK, MessageBoxImage.Information);
                 else
                     MessageBox.Show("Ocorreu um erro ao enviar email, favor consultar o administrador do sistema", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);

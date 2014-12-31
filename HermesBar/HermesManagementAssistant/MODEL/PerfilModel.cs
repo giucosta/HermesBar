@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MODEL
 {
-    public class FuncaoModel
+    public class PerfilModel
     {
-        public int Id_Funcao { get; set; }
-        public string DescFuncao { get; set; }
+        public int IdPerfil { get; set; }
+        public string Perfil { get; set; }
     }
 }

@@ -8,10 +8,11 @@ namespace MODEL
 {
     public class UsuarioModel
     {
-        public int Id_Usuario { get; set; }
+        public int IdUsuario { get; set; }
+        public LoginModel Login { get; set; }
+        public PerfilModel Perfil { get; set; }
         public string Nome { get; set; }
+        public string Status { get; set; }
         public string Email { get; set; }
-        public string Senha { get; set; }
-        public FuncaoModel Funcao { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MODEL.Login;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +8,7 @@ using System.Net.Mail;
 using System.Net;
 using DAO.Usuario;
 using DAO.Encript;
+using MODEL;
 
 namespace BLL.Login
 {
@@ -44,7 +44,7 @@ namespace BLL.Login
         /// <returns></returns>
         public bool EfetuaLogin(LoginModel login)
         {
-            if (login.Usuario.Nome != null && login.Usuario.Senha != null)
+            if(!string.IsNullOrWhiteSpace(login.Login) && !string.IsNullOrWhiteSpace(login.Senha))
                 return LoginDAO.EfetuaLogin(login);
 
             return false;
@@ -70,9 +70,10 @@ namespace BLL.Login
 
                     #region Definicoes do usuario
 
-                    if (RecuperaEmailUsuario(login) == null)
+                    var emailUsuario = RecuperaEmailUsuario(login);
+                    if (string.IsNullOrWhiteSpace(emailUsuario))
                         return false;
-                    var envioPara = new MailAddress(RecuperaEmailUsuario(login));
+                    var envioPara = new MailAddress(emailUsuario);
                     var passwordEmailUsuario = GeraNovaSenha(login);
                     #endregion
 
@@ -152,7 +153,7 @@ namespace BLL.Login
             for (Int32 i = 0; i <= tamanhoSenha; i++)
                 novaSenha += guid.Substring(clsRan.Next(1, guid.Length), 1);
 
-            login.Usuario.Senha = novaSenha;
+            login.Senha = novaSenha;
             if (GravaNovaSenha(login))
                 return novaSenha;
             return null;

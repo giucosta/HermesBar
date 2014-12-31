@@ -4,10 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MODEL.Login
+namespace MODEL
 {
     public class LoginModel
     {
-        public UsuarioModel Usuario { get; set; }
+        public int IdLogin { get; set; }
+        public string Login { get; set; }
+        public string Senha { get; set; }
+        public DateTime UltimoLogin
+        {
+            get
+            {
+                return DateTime.Now;
+            }
+        }
     }
 }
