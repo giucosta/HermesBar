@@ -11,12 +11,6 @@ namespace MODEL
         public int IdLogin { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-        public DateTime UltimoLogin
-        {
-            get
-            {
-                return DateTime.Now;
-            }
-        }
+        public DateTime UltimoLogin { get; set; }
     }
 }

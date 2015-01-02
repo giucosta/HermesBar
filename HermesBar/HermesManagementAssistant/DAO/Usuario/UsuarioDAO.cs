@@ -1,4 +1,6 @@
 ﻿using DAO.Connections;
+using DAO.Login;
+using DAO.Perfil;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -58,6 +60,38 @@ namespace DAO.Usuario
             catch (Exception)
             {
                 
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Carrega todos os dados do usuario
+        /// Metodo utilizado principalmente pra carregar a Session
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns>UsuarioModel</returns>
+        public UsuarioModel RetornaUsuario(LoginModel login)
+        {
+            try
+            {
+                string sql = @"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ";
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+
+                var dataTable = Connection.getDataTable(comando);
+
+                return new UsuarioModel()
+                {
+                    IdUsuario = (int)dataTable.Rows[0]["Id_Usuario"],
+                    Email = dataTable.Rows[0]["Email"].ToString(),
+                    Nome = dataTable.Rows[0]["Nome"].ToString(),
+                    Status = dataTable.Rows[0]["Status"].ToString(),
+                    Login = new LoginDAO().RecuperaLogin(login),
+                    Perfil = new PerfilDAO().RecuperaPerfil(login)
+                };
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

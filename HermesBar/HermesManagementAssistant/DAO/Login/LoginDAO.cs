@@ -36,5 +36,37 @@ namespace DAO.Login
                 return false;
             }
         }
+
+        /// <summary>
+        /// Retorna um LoginModel carregado, recebendo como parametro pra pesquisa um LoginModel
+        /// </summary>
+        /// <param name="login">LoginModel login</param>
+        /// <returns></returns>
+        public LoginModel RecuperaLogin(LoginModel login)
+        {
+            try
+            {
+                string sql = "SELECT * FROM Login WHERE Login = @Login";
+
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+
+                var dataTable = Connection.getDataTable(comando);
+
+                if (dataTable.Rows.Count == 0)
+                    return null;
+
+                login.IdLogin = (int)dataTable.Rows[0]["Id_Login"];
+                login.Senha = dataTable.Rows[0]["Senha"].ToString();
+                login.UltimoLogin = DateTime.Parse(dataTable.Rows[0]["DataUltimoLogin"].ToString());
+
+                return login;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }

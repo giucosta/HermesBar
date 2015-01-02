@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using BLL.Login;
+using BLL.Session;
 using MODEL;
 
 namespace HermesManagementAssistant.View.Login
@@ -35,8 +36,16 @@ namespace HermesManagementAssistant.View.Login
 
         private void btEntrar_Click(object sender, RoutedEventArgs e)
         {
-            if (new LoginBLL().EfetuaLogin(new LoginModel(){Login = tbLogin.Text, Senha = tbSenha.Password}))
+            var login = new LoginModel()
+            {
+                Login = tbLogin.Text,
+                Senha = tbSenha.Password
+            };
+            if (new LoginBLL().EfetuaLogin(login))
+            {
                 new MainWindow().Show();
+                new SessionBLL().CarregaSession(login);
+            }    
             else
             {
                 MessageBox.Show("Login e/ou senha inválido", "Login e/ou senha inválido !", MessageBoxButton.OK, MessageBoxImage.Error);

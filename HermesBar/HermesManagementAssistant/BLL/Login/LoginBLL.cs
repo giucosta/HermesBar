@@ -169,5 +169,10 @@ namespace BLL.Login
                 return true;
             return false;
         }
+
+        public LoginModel RecuperaLogin(LoginModel login)
+        {
+            return LoginDAO.RecuperaLogin(login);
+        }
     }
 }

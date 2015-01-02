@@ -45,6 +45,7 @@
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Encript\EncriptMd5.cs" />
     <Compile Include="Login\LoginDAO.cs" />
+    <Compile Include="Perfil\PerfilDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario\UsuarioDAO.cs" />
   </ItemGroup>
