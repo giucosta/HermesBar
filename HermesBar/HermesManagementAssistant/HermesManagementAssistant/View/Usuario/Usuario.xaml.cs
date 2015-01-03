@@ -31,5 +31,10 @@ namespace HermesManagementAssistant.View.Usuario
         {
             DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = tbNome.Text, Email = tbEmail.Text });
         }
+
+        private void btNovo_Click(object sender, RoutedEventArgs e)
+        {
+            new UsuarioCadastro().Show();
+        }
     }
 }

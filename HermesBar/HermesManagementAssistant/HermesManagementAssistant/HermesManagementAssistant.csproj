@@ -54,8 +54,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\Mensagens.cs" />
     <Compile Include="View\Usuario\Usuario.xaml.cs">
       <DependentUpon>Usuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usuario\UsuarioCadastro.xaml.cs">
+      <DependentUpon>UsuarioCadastro.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Login\Login.xaml">
       <SubType>Designer</SubType>
@@ -77,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Usuario\Usuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usuario\UsuarioCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

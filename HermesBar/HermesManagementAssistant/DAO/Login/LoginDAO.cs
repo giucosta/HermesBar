@@ -7,6 +7,8 @@ using DAO.Connections;
 using System.Data.SqlClient;
 using System.Data;
 using MODEL;
+using DAO.Log;
+using System.Diagnostics;
 
 namespace DAO.Login
 {
@@ -37,6 +39,7 @@ namespace DAO.Login
             }
             catch (Exception)
             {
+                Log.Log.GravarLog("EfetuaLogin", "LoginDAO");
                 return false;
             }
         }
@@ -68,7 +71,7 @@ namespace DAO.Login
             }
             catch (Exception)
             {
-                
+                Log.Log.GravarLog("RecuperaLogin", "LoginDAO");
                 throw;
             }
         }
@@ -86,7 +89,31 @@ namespace DAO.Login
             }
             catch (Exception)
             {
+                Log.Log.GravarLog("AlteraUltimaDataAcesso", "LoginDAO");
                 throw;
+            }
+        }
+
+        public bool GravaLogin(LoginModel login)
+        {
+            try
+            {
+                var sql = @"INSERT INTO Login VALUES(
+                                @Login,
+                                @Senha,
+                                null
+                            )";
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@Login",login.Login));
+                comando.Parameters.Add(new SqlParameter("@Senha",Encript.EncriptMd5.Criptografar(login.Senha)));
+
+                Connection.ExecutarComando(comando);
+                return true;
+            }
+            catch (Exception)
+            {
+                Log.Log.GravarLog("GravarLogin", "LoginDAO");
+                return false;
             }
         }
     }

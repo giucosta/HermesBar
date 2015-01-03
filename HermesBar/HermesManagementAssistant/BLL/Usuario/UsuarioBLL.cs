@@ -24,5 +24,10 @@ namespace BLL.Usuario
         {
             return UsuarioDao.PesquisaUsuario(usuario);
         }
+
+        public bool RetornaUsuarioExistente(string usuario)
+        {
+            return UsuarioDao.PesquisaUsuarioExistente(usuario);
+        }
     }
 }

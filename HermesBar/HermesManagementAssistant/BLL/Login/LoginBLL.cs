@@ -174,5 +174,10 @@ namespace BLL.Login
         {
             return LoginDAO.RecuperaLogin(login);
         }
+
+        public bool GravarLogin(LoginModel login)
+        {
+            return LoginDAO.GravaLogin(login);
+        }
     }
 }

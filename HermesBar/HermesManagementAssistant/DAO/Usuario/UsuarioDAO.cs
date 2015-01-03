@@ -143,5 +143,47 @@ namespace DAO.Usuario
                 return null;
             }
         }
+
+        public bool PesquisaUsuarioExistente(string nome)
+        {
+            try
+            {
+                var sql = "SELECT Count(Nome) AS Quantidade FROM Usuario WHERE Nome = @Nome";
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@Nome", nome));
+
+                if ((int)Connection.getDataTable(comando).Rows[0]["Quantidade"] > 0)
+                    return true;
+
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+                return false;
+            }
+        }
+
+        public bool GravaUsuario(UsuarioModel usuario)
+        {
+            try
+            {
+                var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email";
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("IdLogin", usuario.Login.IdLogin));
+                comando.Parameters.Add(new SqlParameter("@IdPerfil", usuario.Perfil.IdPerfil));
+                comando.Parameters.Add(new SqlParameter("@Nome",usuario.Nome));
+                comando.Parameters.Add(new SqlParameter("@Status", usuario.Status));
+                comando.Parameters.Add(new SqlParameter("@Email", usuario.Email));
+
+                Connection.ExecutarComando(comando);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+                return false;
+            }
+        }
     }
 }
