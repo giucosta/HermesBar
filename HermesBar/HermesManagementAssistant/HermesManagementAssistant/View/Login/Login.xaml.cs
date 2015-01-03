@@ -43,8 +43,8 @@ namespace HermesManagementAssistant.View.Login
             };
             if (new LoginBLL().EfetuaLogin(login))
             {
-                new MainWindow().Show();
                 new SessionBLL().CarregaSession(login);
+                new MainWindow().Show();
             }    
             else
             {

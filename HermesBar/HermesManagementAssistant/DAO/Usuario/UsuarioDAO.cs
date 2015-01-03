@@ -4,6 +4,7 @@ using DAO.Perfil;
 using MODEL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -93,6 +94,53 @@ namespace DAO.Usuario
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        public List<UsuarioModel> PesquisaUsuario(UsuarioModel usuario)
+        {
+            try
+            {
+                string sql = @"
+                                SELECT 
+                                    Id_Usuario,
+	                                Nome, 
+	                                Email,
+	                                CASE Status
+		                                WHEN 'A' THEN 'Ativo'
+		                                WHEN 'C' THEN 'Cancelado'
+	                                END Status
+                                FROM Usuario
+                                INNER JOIN Perfil ON Perfil.Id_Perfil = Usuario.Id_Perfil
+                                WHERE 1=1
+                                AND Nome LIKE @Nome
+                                AND Email LIKE @Email";
+
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@Nome", "%" + usuario.Nome + "%"));
+                comando.Parameters.Add(new SqlParameter("@Email", "%" + usuario.Email + "%"));
+
+                var dataTable = Connection.getDataTable(comando);
+
+                if (dataTable.Rows.Count == 0)
+                    return null;
+
+                var modelList = new List<UsuarioModel>();
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    var user = new UsuarioModel();
+                    user.Email = dataTable.Rows[i]["Email"].ToString();
+                    user.Nome = dataTable.Rows[i]["Nome"].ToString();
+                    user.Status = dataTable.Rows[i]["Status"].ToString();
+                    user.IdUsuario = (int)dataTable.Rows[i]["Id_Usuario"];
+                    modelList.Add(user);
+                }
+
+                return modelList;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

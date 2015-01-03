@@ -1,4 +1,5 @@
 ﻿using HermesManagementAssistant.View.Usuario;
+using MODEL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UTILS;
 
 namespace HermesManagementAssistant
 {
@@ -24,7 +26,10 @@ namespace HermesManagementAssistant
     {
         public MainWindow()
         {
-            InitializeComponent();
+            if (Session.Usuario.Perfil.Perfil == Constantes.APerfil.ADMINISTRADOR)
+                InitializeComponent();
+            else
+                MessageBox.Show("Não tem permissão");
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

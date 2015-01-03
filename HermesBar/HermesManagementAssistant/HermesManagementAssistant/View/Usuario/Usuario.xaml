@@ -8,7 +8,11 @@
         <Label x:Name="lbNome" Content="Nome&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,34,0,0" Height="23"/>
         <Label x:Name="lbEmail" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,76,0,0"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Margin="94,76,0,0"/>
-        <Button x:Name="tbPesquisar" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="30,124,0,0"/>
-        <DataGrid HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Height="148" Width="527"/>
+        <Button x:Name="tbPesquisar" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="30,124,0,0" Click="tbPesquisar_Click"/>
+        <DataGrid Name="DataGridPesquisaUsuario" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Height="148" Width="527" AlternatingRowBackground="Gray">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="Selecione"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

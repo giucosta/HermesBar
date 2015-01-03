@@ -27,7 +27,11 @@ namespace DAO.Login
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable(comando).Rows[0]["Senha"].ToString())))
+                {
+                    AlteraUltimaDataAcesso(login);
                     return true;
+                }
+                    
 
                 return false;
             }
@@ -65,6 +69,23 @@ namespace DAO.Login
             catch (Exception)
             {
                 
+                throw;
+            }
+        }
+
+        public void AlteraUltimaDataAcesso(LoginModel login)
+        {
+            try
+            {
+                var sql = "UPDATE Login SET DataUltimoLogin = @UltimoLogin WHERE Login = @Login";
+                var comando = new SqlCommand(sql, Connection.getConnection());
+                comando.Parameters.Add(new SqlParameter("@UltimoLogin", DateTime.Now));
+                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+
+                Connection.ExecutarComando(comando);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

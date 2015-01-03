@@ -54,6 +54,10 @@
       <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UTILS\UTILS.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTILS</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

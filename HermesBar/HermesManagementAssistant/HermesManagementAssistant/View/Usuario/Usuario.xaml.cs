@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL.Usuario;
+using MODEL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +24,12 @@ namespace HermesManagementAssistant.View.Usuario
         public Usuario()
         {
             InitializeComponent();
+            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = "", Email = "" });
+        }
+
+        private void tbPesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = tbNome.Text, Email = tbEmail.Text });
         }
     }
 }
