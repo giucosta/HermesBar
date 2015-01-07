@@ -24,12 +24,12 @@ namespace HermesManagementAssistant.View.Usuario
         public Usuario()
         {
             InitializeComponent();
-            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = "", Email = "" });
+            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = "", Email = "" }).DefaultView;
         }
 
         private void tbPesquisar_Click(object sender, RoutedEventArgs e)
         {
-            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = tbNome.Text, Email = tbEmail.Text });
+            DataGridPesquisaUsuario.ItemsSource = new UsuarioBLL().PesquisaUsuario(new UsuarioModel() { Nome = tbNome.Text, Email = tbEmail.Text }).DefaultView;
         }
 
         private void btNovo_Click(object sender, RoutedEventArgs e)

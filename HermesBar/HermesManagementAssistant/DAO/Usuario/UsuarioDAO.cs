@@ -97,7 +97,7 @@ namespace DAO.Usuario
             }
         }
 
-        public List<UsuarioModel> PesquisaUsuario(UsuarioModel usuario)
+        public DataTable PesquisaUsuario(UsuarioModel usuario)
         {
             try
             {
@@ -125,18 +125,7 @@ namespace DAO.Usuario
                 if (dataTable.Rows.Count == 0)
                     return null;
 
-                var modelList = new List<UsuarioModel>();
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    var user = new UsuarioModel();
-                    user.Email = dataTable.Rows[i]["Email"].ToString();
-                    user.Nome = dataTable.Rows[i]["Nome"].ToString();
-                    user.Status = dataTable.Rows[i]["Status"].ToString();
-                    user.IdUsuario = (int)dataTable.Rows[i]["Id_Usuario"];
-                    modelList.Add(user);
-                }
-
-                return modelList;
+                return dataTable;
             }
             catch (Exception)
             {
