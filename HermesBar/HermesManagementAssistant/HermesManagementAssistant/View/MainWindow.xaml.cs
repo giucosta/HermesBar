@@ -26,7 +26,7 @@ namespace HermesManagementAssistant
     {
         public MainWindow()
         {
-            if (Session.Usuario.Perfil.Perfil == Constantes.APerfil.ADMINISTRADOR)
+            if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.ADMINISTRADOR)
                 InitializeComponent();
             else
                 MessageBox.Show("Não tem permissão");

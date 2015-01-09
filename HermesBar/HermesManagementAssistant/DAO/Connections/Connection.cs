@@ -10,20 +10,20 @@ namespace DAO.Connections
 {
     public class Connection
     {
-        private static string conectionString = @"server = GIULIANOCOSTA\SQLEXPRESS; Database = HermesBar; integrated security = true;";
-        private static SqlConnection connection = null;   
+        private static string _connectionString = @"server = GIULIANOCOSTA\SQLEXPRESS; Database = HermesBar; integrated security = true;";
+        private static SqlConnection _connection = null;   
 
-        public static SqlConnection getConnection(){
-            connection = new SqlConnection(conectionString);
+        public static SqlConnection GetConnection(){
+            _connection = new SqlConnection(_connectionString);
             try
             {
-                connection.Open();
+                _connection.Open();
             }
             catch(SqlException)
             {
-                connection = null;
+                _connection = null;
             }
-            return connection;
+            return _connection;
         }
         public static void ExecutarComando(SqlCommand command)
         {
@@ -33,7 +33,7 @@ namespace DAO.Connections
             }
             catch(SqlException)
             {
-                outConnection();
+                OutConnection();
             }
         }
         public static DataTable getDataTable(SqlCommand command)
@@ -43,18 +43,18 @@ namespace DAO.Connections
                 var dataTable = new DataTable();
                 dataTable.Load(command.ExecuteReader());
 
-                outConnection();
+                OutConnection();
                 return dataTable;
             }
             catch(SqlException)
             {
-                outConnection();
+                OutConnection();
                 return null;
             }
         }
-        public static void outConnection(){
-            if (connection != null)
-                connection.Close();
+        public static void OutConnection(){
+            if (_connection != null)
+                _connection.Close();
         }
     }
 }

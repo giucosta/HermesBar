@@ -16,6 +16,7 @@ using System.Data.SqlClient;
 using BLL.Login;
 using BLL.Session;
 using MODEL;
+using Utils;
 
 namespace HermesManagementAssistant.View.Login
 {
@@ -48,7 +49,7 @@ namespace HermesManagementAssistant.View.Login
             }    
             else
             {
-                MessageBox.Show("Login e/ou senha inválido", "Login e/ou senha inválido !", MessageBoxButton.OK, MessageBoxImage.Error);
+                Mensagens.GeraMensagens(MENSAGEM.LOGIN_INVALIDO, MENSAGEM.LOGIN_INVALIDO, null,TIPOS_MENSAGENS.ERRO );
                 limparCampos();
             }    
         }
@@ -64,13 +65,13 @@ namespace HermesManagementAssistant.View.Login
             if (!string.IsNullOrWhiteSpace(tbLogin.Text))
             {
                 if (new LoginBLL().EsqueceuSenha(new LoginModel() { Login = tbLogin.Text }))
-                    MessageBox.Show("Sua nova senha foi enviada para o email cadastrado!", "Email enviado", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Mensagens.GeraMensagens("Email enviado", MENSAGEM.NOVA_SENHA_EMAIL, null, TIPOS_MENSAGENS.SUCESSO);
                 else
-                    MessageBox.Show("Ocorreu um erro ao enviar email, favor consultar o administrador do sistema", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Mensagens.GeraMensagens("Erro",MENSAGEM.ERRO_ENVIA_EMAIL,null,TIPOS_MENSAGENS.ERRO);
             }
             else
             {
-                MessageBox.Show("Favor preencher o campo LOGIN", "Preencha os campos", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Mensagens.GeraMensagens("Preencha os campos",MENSAGEM.PREENCHE_CAMPO_LOGIN,null,TIPOS_MENSAGENS.ALERTA);
                 tbLogin.Focus();
             }
         }

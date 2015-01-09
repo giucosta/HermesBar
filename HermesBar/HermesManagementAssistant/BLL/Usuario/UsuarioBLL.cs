@@ -12,7 +12,7 @@ namespace BLL.Usuario
     public class UsuarioBLL
     {
         private UsuarioDAO _usuarioDao;
-        public UsuarioDAO UsuarioDao
+        public UsuarioDAO UsuarioDAO
         {
             get
             {
@@ -23,12 +23,16 @@ namespace BLL.Usuario
         }
         public DataTable PesquisaUsuario(UsuarioModel usuario)
         {
-            return UsuarioDao.PesquisaUsuario(usuario);
+            return UsuarioDAO.PesquisaUsuario(usuario);
         }
-
         public bool RetornaUsuarioExistente(string usuario)
         {
-            return UsuarioDao.PesquisaUsuarioExistente(usuario);
+            return UsuarioDAO.PesquisaUsuarioExistente(usuario);
+        }
+
+        public bool GravarUsuario(UsuarioModel usuario)
+        {
+            return UsuarioDAO.GravaUsuario(usuario);
         }
     }
 }

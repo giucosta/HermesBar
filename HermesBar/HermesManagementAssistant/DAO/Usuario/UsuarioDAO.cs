@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace DAO.Usuario
 {
@@ -30,13 +31,14 @@ namespace DAO.Usuario
                             INNER JOIN Login L ON L.Id_Login = U.Id_Login 
                             WHERE L.Login = @Login";
 
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 return Connection.getDataTable(comando).Rows[0]["Email"].ToString();
             }
             catch (Exception e)
             {
+                Log.Log.GravarLog("RecuperaEmailUsuario", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 throw e;
             }
         }
@@ -51,16 +53,16 @@ namespace DAO.Usuario
             try
             {
                 string sql = "UPDATE Login SET Senha = @Senha WHERE Login = @Login";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha)));
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 Connection.ExecutarComando(comando);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                
+                Log.Log.GravarLog("GravaNovaSenha","UsuarioDAO",e.StackTrace,Constantes.ATipoMetodo.UPDATE);
                 throw;
             }
         }
@@ -76,7 +78,7 @@ namespace DAO.Usuario
             try
             {
                 string sql = @"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 var dataTable = Connection.getDataTable(comando);
@@ -91,9 +93,10 @@ namespace DAO.Usuario
                     Perfil = new PerfilDAO().RecuperaPerfil(login)
                 };
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("RetornaUsuario", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                return null;
             }
         }
 
@@ -116,7 +119,7 @@ namespace DAO.Usuario
                                 AND Nome LIKE @Nome
                                 AND Email LIKE @Email";
 
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Nome", "%" + usuario.Nome + "%"));
                 comando.Parameters.Add(new SqlParameter("@Email", "%" + usuario.Email + "%"));
 
@@ -127,8 +130,9 @@ namespace DAO.Usuario
 
                 return dataTable;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Log.Log.GravarLog("PesquisaUsuario", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 return null;
             }
         }
@@ -138,7 +142,7 @@ namespace DAO.Usuario
             try
             {
                 var sql = "SELECT Count(Nome) AS Quantidade FROM Usuario WHERE Nome = @Nome";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Nome", nome));
 
                 if ((int)Connection.getDataTable(comando).Rows[0]["Quantidade"] > 0)
@@ -146,9 +150,9 @@ namespace DAO.Usuario
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("PesquisaUsuarioExistente", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 return false;
             }
         }
@@ -157,8 +161,8 @@ namespace DAO.Usuario
         {
             try
             {
-                var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email )";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("IdLogin", usuario.Login.IdLogin));
                 comando.Parameters.Add(new SqlParameter("@IdPerfil", usuario.Perfil.IdPerfil));
                 comando.Parameters.Add(new SqlParameter("@Nome",usuario.Nome));
@@ -168,9 +172,9 @@ namespace DAO.Usuario
                 Connection.ExecutarComando(comando);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("GravaUsuario", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
                 return false;
             }
         }

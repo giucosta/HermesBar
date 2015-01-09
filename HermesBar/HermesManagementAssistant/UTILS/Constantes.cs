@@ -10,7 +10,18 @@ namespace UTILS
     {
         public static class APerfil
         {
-            public const string ADMINISTRADOR = "Administrador";
+            public const int ADMINISTRADOR = 1;
+            public const int GERENTE = 2;
+            public const int GARCOM = 3;
+            public const int BARMAN = 4;
+            public const int MANUTENCAO = 5;
+        }
+        public static class ATipoMetodo
+        {
+            public const string UPDATE = "Update";
+            public const string INSERT = "Insert";
+            public const string SELECT = "Pesquisa";
+            public const string DELETE = "Exclusão";
         }
     }
 }

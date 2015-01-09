@@ -175,7 +175,7 @@ namespace BLL.Login
             return LoginDAO.RecuperaLogin(login);
         }
 
-        public bool GravarLogin(LoginModel login)
+        public LoginModel GravarLogin(LoginModel login)
         {
             return LoginDAO.GravaLogin(login);
         }

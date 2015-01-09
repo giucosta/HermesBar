@@ -9,6 +9,7 @@ using System.Data;
 using MODEL;
 using DAO.Log;
 using System.Diagnostics;
+using UTILS;
 
 namespace DAO.Login
 {
@@ -25,7 +26,7 @@ namespace DAO.Login
             {
                 string sql = "SELECT * FROM Login WHERE Login = @Login";
                 
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable(comando).Rows[0]["Senha"].ToString())))
@@ -37,9 +38,9 @@ namespace DAO.Login
 
                 return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Log.GravarLog("EfetuaLogin", "LoginDAO");
+                Log.Log.GravarLog("EfetuaLogin", "LoginDAO",e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 return false;
             }
         }
@@ -55,7 +56,7 @@ namespace DAO.Login
             {
                 string sql = "SELECT * FROM Login WHERE Login = @Login";
 
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 var dataTable = Connection.getDataTable(comando);
@@ -65,14 +66,19 @@ namespace DAO.Login
 
                 login.IdLogin = (int)dataTable.Rows[0]["Id_Login"];
                 login.Senha = dataTable.Rows[0]["Senha"].ToString();
-                login.UltimoLogin = DateTime.Parse(dataTable.Rows[0]["DataUltimoLogin"].ToString());
+
+                var data = dataTable.Rows[0]["DataUltimoLogin"].ToString();
+                if (string.IsNullOrWhiteSpace(data))
+                    login.UltimoLogin = DateTime.Now;
+                else
+                    login.UltimoLogin = DateTime.Parse(data);
 
                 return login;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Log.GravarLog("RecuperaLogin", "LoginDAO");
-                throw;
+                Log.Log.GravarLog("RecuperaLogin", "LoginDAO",e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                return null;
             }
         }
 
@@ -81,20 +87,20 @@ namespace DAO.Login
             try
             {
                 var sql = "UPDATE Login SET DataUltimoLogin = @UltimoLogin WHERE Login = @Login";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@UltimoLogin", DateTime.Now));
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 Connection.ExecutarComando(comando);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Log.GravarLog("AlteraUltimaDataAcesso", "LoginDAO");
+                Log.Log.GravarLog("AlteraUltimaDataAcesso", "LoginDAO",e.StackTrace, Constantes.ATipoMetodo.UPDATE);
                 throw;
             }
         }
 
-        public bool GravaLogin(LoginModel login)
+        public LoginModel GravaLogin(LoginModel login)
         {
             try
             {
@@ -103,18 +109,19 @@ namespace DAO.Login
                                 @Senha,
                                 null
                             )";
-                var comando = new SqlCommand(sql, Connection.getConnection());
+                var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@Login",login.Login));
                 comando.Parameters.Add(new SqlParameter("@Senha",Encript.EncriptMd5.Criptografar(login.Senha)));
 
                 Connection.ExecutarComando(comando);
-                return true;
+                return RecuperaLogin(login);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Log.Log.GravarLog("GravarLogin", "LoginDAO");
-                return false;
+                Log.Log.GravarLog("GravarLogin", "LoginDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
+                return null;
             }
         }
+
     }
 }

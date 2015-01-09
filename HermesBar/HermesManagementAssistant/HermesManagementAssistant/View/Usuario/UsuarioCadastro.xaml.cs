@@ -1,4 +1,5 @@
 ﻿using BLL.Login;
+using BLL.Perfil;
 using BLL.Usuario;
 using MODEL;
 using System;
@@ -27,6 +28,7 @@ namespace HermesManagementAssistant.View.Usuario
         public UsuarioCadastro()
         {
             InitializeComponent();
+            CarregaComboPerfil();
         }
 
         private void btSalvar_Click(object sender, RoutedEventArgs e)
@@ -36,19 +38,21 @@ namespace HermesManagementAssistant.View.Usuario
             {
                 if (VerificaSenhas())
                 {
-                    if (!VerificaUsuarioExistente(tbNome.Text))
-                        GravarUsuario();
+                    if (!VerificaUsuarioExistente(tbNome.Text)){
+                        if (GravarUsuario())
+                            Mensagens.GeraMensagens("Cadastro OK!", MENSAGEM.USUARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                        else
+                            Mensagens.GeraMensagens("Erro ao cadastrar", MENSAGEM.USUARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    }
+                        
                     else
-                        Mensagens.GeraMensagens("Usuário já cadastrado", "Usuário já cadastrado", null,TIPOS_MENSAGENS.ALERTA);
-
-                        #warning terminar isso aqui
-
+                        Mensagens.GeraMensagens(MENSAGEM.USUARIO_CADASTRADO, MENSAGEM.USUARIO_CADASTRADO, null, TIPOS_MENSAGENS.ALERTA);
                 }
                 else
-                    Mensagens.GeraMensagens("A senha e a confirmação devem ser identicas", "Senhas não identicas", null,TIPOS_MENSAGENS.ALERTA);
+                    Mensagens.GeraMensagens(MENSAGEM.SENHA_IDENTICA, MENSAGEM.SENHA_IDENTICA, null, TIPOS_MENSAGENS.ALERTA);
             }
             else
-                Mensagens.GeraMensagens("Campos Obrigatórios","Campos obrigatórios não preenchidos: ",obrigatorios,TIPOS_MENSAGENS.ALERTA);
+                Mensagens.GeraMensagens("Campos Obrigatórios",MENSAGEM.CAMPOS_OBRIGATORIOS + " - ",obrigatorios,TIPOS_MENSAGENS.ALERTA);
         }
 
         private List<String> VerificaCamposObrigatorios()
@@ -62,8 +66,6 @@ namespace HermesManagementAssistant.View.Usuario
                 campos.Add("SENHA");
             if (string.IsNullOrWhiteSpace(tbConfirmaSenha.Password))
                 campos.Add("CONFIRMA SENHA");
-            if (cbPerfil.SelectedItem == null)
-                campos.Add("PERFIL");
 
             return campos;
         }
@@ -80,26 +82,50 @@ namespace HermesManagementAssistant.View.Usuario
             return false;
         }
 
-        private void GravarUsuario()
+        private bool GravarUsuario()
+        {
+            var login = new LoginBLL().GravarLogin(CarregaLoginCadastro());
+            if (login == null)
+            {
+                Mensagens.GeraMensagens(MENSAGEM.ERRO_GRAVAR_LOGIN, MENSAGEM.ERRO_GRAVAR_LOGIN, null, TIPOS_MENSAGENS.ERRO);
+                return false;
+            }
+
+            if (new UsuarioBLL().GravarUsuario(CarregaUsuarioCadastro(login)))
+                return true;
+
+            return false;
+        }
+        private void CarregaComboPerfil()
+        {
+            cbPerfil.ItemsSource = new PerfilBLL().RecuperaTodosPerfil();
+            cbPerfil.SelectedIndex = 0; //Administrador
+        }
+        private PerfilModel CarregaPerfilCadastro()
+        {
+            var perfil = new PerfilModel();
+            perfil.Perfil = cbPerfil.SelectionBoxItem.ToString();
+            perfil.IdPerfil = new PerfilBLL().RecuperaIdPerfil(perfil);
+
+            return perfil;
+        }
+        private LoginModel CarregaLoginCadastro()
         {
             var login = new LoginModel();
             login.Login = tbNome.Text;
             login.Senha = tbSenha.Password;
-
-            if (!new LoginBLL().GravarLogin(login))
-                Mensagens.GeraMensagens("Erro ao gravar o login", "Erro ao gravar login", null,TIPOS_MENSAGENS.ERRO);
-
-            var perfil = new PerfilModel() { Perfil = cbPerfil.SelectedItem.ToString() };
-
+            return login;
+        }
+        private UsuarioModel CarregaUsuarioCadastro(LoginModel login)
+        {
             var user = new UsuarioModel();
             user.Email = tbEmail.Text;
             user.Nome = tbNome.Text;
             user.Status = "A";
             user.Login = login;
-            user.Perfil = perfil;
+            user.Perfil = CarregaPerfilCadastro();
 
-
-
+            return user;
         }
     }
 }
