@@ -55,12 +55,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\Mensagens.cs" />
+    <Compile Include="View\Atracoes\AtracoesView.xaml.cs">
+      <DependentUpon>AtracoesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usuario\Usuario.xaml.cs">
       <DependentUpon>Usuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usuario\UsuarioCadastro.xaml.cs">
       <DependentUpon>UsuarioCadastro.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Atracoes\AtracoesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,6 +144,7 @@
       <Name>UTILS</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -47,6 +47,7 @@
     <Compile Include="Usuario\UsuarioModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Atracoes\" />
     <Folder Include="Perfil\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

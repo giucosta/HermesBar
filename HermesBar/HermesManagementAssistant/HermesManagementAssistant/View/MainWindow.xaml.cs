@@ -1,4 +1,6 @@
-﻿using HermesManagementAssistant.View.Usuario;
+﻿using HermesManagementAssistant.View.Atracoes;
+using HermesManagementAssistant.View.Login;
+using HermesManagementAssistant.View.Usuario;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -32,9 +34,14 @@ namespace HermesManagementAssistant
                 MessageBox.Show("Não tem permissão");
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void mniUsuarios_Novo_Click(object sender, RoutedEventArgs e)
         {
             new Usuario().Show();
+        }
+
+        private void mniAtrações_Click(object sender, RoutedEventArgs e)
+        {
+            new AtracoesView().Show();
         }
     }
 }

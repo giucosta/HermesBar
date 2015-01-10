@@ -46,6 +46,7 @@ namespace HermesManagementAssistant.View.Login
             {
                 new SessionBLL().CarregaSession(login);
                 new MainWindow().Show();
+                this.Close();
             }    
             else
             {
