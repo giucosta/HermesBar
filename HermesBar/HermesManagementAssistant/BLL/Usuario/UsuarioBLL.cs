@@ -23,7 +23,7 @@ namespace BLL.Usuario
         }
         public DataTable PesquisaUsuario(UsuarioModel usuario)
         {
-            return UsuarioDAO.PesquisaUsuario(usuario);
+            return UsuarioDAO.Pesquisar(usuario);
         }
         public bool RetornaUsuarioExistente(string usuario)
         {
@@ -32,7 +32,7 @@ namespace BLL.Usuario
 
         public bool GravarUsuario(UsuarioModel usuario)
         {
-            return UsuarioDAO.GravaUsuario(usuario);
+            return UsuarioDAO.Salvar(usuario);
         }
     }
 }

@@ -26,9 +26,9 @@ namespace DAO.Log
 
                 Connection.ExecutarComando(comando);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }

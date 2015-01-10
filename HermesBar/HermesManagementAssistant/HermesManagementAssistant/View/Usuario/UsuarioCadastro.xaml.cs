@@ -54,7 +54,6 @@ namespace HermesManagementAssistant.View.Usuario
             else
                 Mensagens.GeraMensagens("Campos Obrigatórios",MENSAGEM.CAMPOS_OBRIGATORIOS + " - ",obrigatorios,TIPOS_MENSAGENS.ALERTA);
         }
-
         private List<String> VerificaCamposObrigatorios()
         {
             var campos = new List<String>();
@@ -73,7 +72,6 @@ namespace HermesManagementAssistant.View.Usuario
         {
             return new UsuarioBLL().RetornaUsuarioExistente(nome);
         }
-
         private bool VerificaSenhas()
         {
             if (tbSenha.Password == tbConfirmaSenha.Password)
@@ -81,7 +79,6 @@ namespace HermesManagementAssistant.View.Usuario
 
             return false;
         }
-
         private bool GravarUsuario()
         {
             var login = new LoginBLL().GravarLogin(CarregaLoginCadastro());

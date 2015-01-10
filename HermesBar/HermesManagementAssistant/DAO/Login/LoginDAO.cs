@@ -7,19 +7,15 @@ using DAO.Connections;
 using System.Data.SqlClient;
 using System.Data;
 using MODEL;
-using DAO.Log;
 using System.Diagnostics;
 using UTILS;
+using DAO.Abstract;
+using DAO.Log;
 
 namespace DAO.Login
 {
     public class LoginDAO
     {
-        /// <summary>
-        /// Recebe login como parametro, efetua a decriptacao da senha do banco e compara com a digitada pelo usuario
-        /// </summary>
-        /// <param name="login"></param>
-        /// <returns></returns>
         public bool EfetuaLogin(LoginModel login)
         {
             try
@@ -45,11 +41,6 @@ namespace DAO.Login
             }
         }
 
-        /// <summary>
-        /// Retorna um LoginModel carregado, recebendo como parametro pra pesquisa um LoginModel
-        /// </summary>
-        /// <param name="login">LoginModel login</param>
-        /// <returns></returns>
         public LoginModel RecuperaLogin(LoginModel login)
         {
             try
@@ -100,7 +91,7 @@ namespace DAO.Login
             }
         }
 
-        public LoginModel GravaLogin(LoginModel login)
+        public LoginModel Salvar(LoginModel login)
         {
             try
             {
@@ -120,6 +111,24 @@ namespace DAO.Login
             {
                 Log.Log.GravarLog("GravarLogin", "LoginDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
                 return null;
+            }
+        }
+
+        public bool Excluir(LoginModel login)
+        {
+            try
+            {
+                var sql = @"DELETE FROM Login WHERE Id_Login = @IdLogin";
+                var comando = new SqlCommand(sql,Connection.GetConnection());
+                comando.Parameters.AddWithValue("@IdLogin",login.IdLogin);
+
+                Connection.ExecutarComando(comando);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Excluir","LoginDAO",e.StackTrace,Constantes.ATipoMetodo.DELETE);
+                return false;
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using DAO.Connections;
+﻿using DAO.Abstract;
+using DAO.Connections;
 using DAO.Login;
 using DAO.Perfil;
 using MODEL;
@@ -13,7 +14,7 @@ using UTILS;
 
 namespace DAO.Usuario
 {
-    public class UsuarioDAO
+    public class UsuarioDAO : IUsuario
     {
         /// <summary>
         /// Recupera no banco o email do usuario
@@ -100,7 +101,7 @@ namespace DAO.Usuario
             }
         }
 
-        public DataTable PesquisaUsuario(UsuarioModel usuario)
+        public DataTable Pesquisar(UsuarioModel usuario)
         {
             try
             {
@@ -157,7 +158,7 @@ namespace DAO.Usuario
             }
         }
 
-        public bool GravaUsuario(UsuarioModel usuario)
+        public bool Salvar(UsuarioModel usuario)
         {
             try
             {
@@ -175,6 +176,25 @@ namespace DAO.Usuario
             catch (Exception e)
             {
                 Log.Log.GravarLog("GravaUsuario", "UsuarioDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
+                return false;
+            }
+        }
+
+        public bool Excluir(UsuarioModel usuario)
+        {
+            try
+            {
+                var sql = @"DELETE FROM Usuario WHERE Id_Usuario = @IdUsuario";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+                comando.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+
+                Connection.ExecutarComando(comando);
+                return true;
+
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Excluir","UsuarioDAO", e.StackTrace,Constantes.ATipoMetodo.DELETE);
                 return false;
             }
         }

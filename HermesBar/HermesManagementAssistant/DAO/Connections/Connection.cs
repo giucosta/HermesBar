@@ -30,6 +30,7 @@ namespace DAO.Connections
             try
             {
                 command.ExecuteNonQuery();
+                OutConnection();
             }
             catch(SqlException)
             {

@@ -9,6 +9,9 @@
                     <MenuItem x:Name="mniUsuarios_Novo" Header="_Novo" Click="MenuItem_Click"/>
                 </MenuItem>
             </MenuItem>
+            <MenuItem x:Name="mnProdutos" Header="_Produtos">
+                <MenuItem x:Name="mniCadastrar" Header="_Cadastrar"  />
+            </MenuItem>
             <Menu Height="100" Width="100"/>
         </Menu>
     </Grid>

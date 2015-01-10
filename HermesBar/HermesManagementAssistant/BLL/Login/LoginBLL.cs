@@ -9,6 +9,7 @@ using System.Net;
 using DAO.Usuario;
 using DAO.Encript;
 using MODEL;
+using UTILS;
 
 namespace BLL.Login
 {
@@ -61,15 +62,9 @@ namespace BLL.Login
             {
                 try
                 {
-                    #region Dados de email
-                    var enderecoEmailHermes = "hermesmanagementassistant@gmail.com";
-                    var identificacaoEmailHermes = "Hermes Management Assistant";
-                    var passwordEmailHermes = "hermesBarSistema";
-                    var envioDe = new MailAddress(enderecoEmailHermes, identificacaoEmailHermes);
-                    #endregion
-
+                    var envioDe = new MailAddress(Constantes.ADadosEmail.ENDERECO_EMAIL, Constantes.ADadosEmail.IDENTIFICACAO_EMAIL);
+                    
                     #region Definicoes do usuario
-
                     var emailUsuario = RecuperaEmailUsuario(login);
                     if (string.IsNullOrWhiteSpace(emailUsuario))
                         return false;
@@ -77,42 +72,33 @@ namespace BLL.Login
                     var passwordEmailUsuario = GeraNovaSenha(login);
                     #endregion
 
-                    #region Configuracoes de email
-                    var tituloEmail = "Hermes Management Assistant";
-                    var corpoEmailInicio1 = "Olá, segue sua nova senha de acesso ao sistema Hermes Management Assistant";
-                    var corpoEmailInicio2 = "Acreditamos que seja interessante efetuar a troca da senha, acessando o módulo Gestão/Configurações/Senhas";
-                    var corpoEmailFinal = "Email enviando automaticamente, caso necessite entrar em contato envie email para: giulianocosta@outlook.com";
-                    var hostEmail = "smtp.gmail.com";
-                    var portaEnvioEmail = "587";
-                    #endregion
-
                     #region Smtp
-                    smtp.Host = hostEmail;
-                    smtp.Port = int.Parse(portaEnvioEmail);
+                    smtp.Host = Constantes.ADadosEmail.HOST_EMAIL;
+                    smtp.Port = Constantes.ADadosEmail.PORTA_EMAIL;
                     smtp.EnableSsl = true;
                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                     smtp.UseDefaultCredentials = false;
-                    smtp.Credentials = new NetworkCredential(envioDe.Address, passwordEmailHermes);
+                    smtp.Credentials = new NetworkCredential(envioDe.Address, Constantes.ADadosEmail.SENHA_EMAIL);
                     #endregion
 
                     #region Formatacao do Email e envio
                     using (var message = new MailMessage(envioDe, envioPara)
                     {
-                        Subject = tituloEmail,
+                        Subject = Constantes.ADadosEmail.TITULO_EMAIL,
                         IsBodyHtml = true,
                         Body = "<html>" +
                                     "<head>" +
                                     "</head>" +
                                     "<body>" +
-                                        corpoEmailInicio1 +
+                                        Constantes.ADadosEmail.CORPO_INICIO_EMAIL +
                                         "<br/>" +
                                         "<br/>" +
-                                        corpoEmailInicio2 +
+                                        Constantes.ADadosEmail.CORPO_MEIO_EMAIL +
                                         "<br/>"+
                                         "<b>" + passwordEmailUsuario + "</b>" +
                                         "<br/>" +
                                         "<br/>" +
-                                        corpoEmailFinal +
+                                        Constantes.ADadosEmail.CORPO_FINAL_EMAIL +
                                     "</body>" +
                                 "</html>"
                     })
@@ -122,7 +108,7 @@ namespace BLL.Login
                     #endregion
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -177,7 +163,7 @@ namespace BLL.Login
 
         public LoginModel GravarLogin(LoginModel login)
         {
-            return LoginDAO.GravaLogin(login);
+            return LoginDAO.Salvar(login);
         }
     }
 }
