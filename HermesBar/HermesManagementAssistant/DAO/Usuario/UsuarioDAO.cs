@@ -164,7 +164,7 @@ namespace DAO.Usuario
             {
                 var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email )";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("IdLogin", usuario.Login.IdLogin));
+                comando.Parameters.Add(new SqlParameter("IdLogin", usuario.Login.Id));
                 comando.Parameters.Add(new SqlParameter("@IdPerfil", usuario.Perfil.IdPerfil));
                 comando.Parameters.Add(new SqlParameter("@Nome",usuario.Nome));
                 comando.Parameters.Add(new SqlParameter("@Status", usuario.Status));

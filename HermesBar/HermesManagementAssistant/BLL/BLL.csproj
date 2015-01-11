@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atracoes\AtracoesBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -44,7 +44,7 @@ namespace Utils
 
         //Login
         public const string ERRO_GRAVAR_LOGIN = "Erro ao gravar o login";
-
+        public const string SEM_PERMISSAO = "PERMISSÃO INVÁLIDA";
         //CADASTRO USUARIO
         public const string USUARIO_CADASTRO_SUCESSO = "Usuário cadastrado com sucesso!";
         public const string USUARIO_CADASTRO_ERRO = "Erro ao cadastrar usuário!";

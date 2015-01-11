@@ -40,16 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IModel.cs" />
+    <Compile Include="Atracoes\AtracoesModel.cs" />
     <Compile Include="EnderecoModel.cs" />
     <Compile Include="Login\LoginModel.cs" />
-    <Compile Include="Usuario\PerfilModel.cs" />
+    <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Usuario\UsuarioModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Atracoes\" />
-    <Folder Include="Perfil\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

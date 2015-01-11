@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Utils;
 using UTILS;
 
 namespace HermesManagementAssistant
@@ -31,7 +32,7 @@ namespace HermesManagementAssistant
             if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.ADMINISTRADOR)
                 InitializeComponent();
             else
-                MessageBox.Show("Não tem permissão");
+                Mensagens.GeraMensagens("Permissões",MENSAGEM.SEM_PERMISSAO,null, TIPOS_MENSAGENS.ALERTA);
         }
 
         private void mniUsuarios_Novo_Click(object sender, RoutedEventArgs e)

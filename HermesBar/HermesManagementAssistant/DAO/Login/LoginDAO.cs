@@ -55,7 +55,7 @@ namespace DAO.Login
                 if (dataTable.Rows.Count == 0)
                     return null;
 
-                login.IdLogin = (int)dataTable.Rows[0]["Id_Login"];
+                login.Id = (int)dataTable.Rows[0]["Id_Login"];
                 login.Senha = dataTable.Rows[0]["Senha"].ToString();
 
                 var data = dataTable.Rows[0]["DataUltimoLogin"].ToString();
@@ -120,7 +120,7 @@ namespace DAO.Login
             {
                 var sql = @"DELETE FROM Login WHERE Id_Login = @IdLogin";
                 var comando = new SqlCommand(sql,Connection.GetConnection());
-                comando.Parameters.AddWithValue("@IdLogin",login.IdLogin);
+                comando.Parameters.AddWithValue("@IdLogin",login.Id);
 
                 Connection.ExecutarComando(comando);
                 return true;

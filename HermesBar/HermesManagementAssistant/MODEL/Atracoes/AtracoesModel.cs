@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace MODEL
 {
-    public class LoginModel : IModel
+    public class AtracoesModel : IModel
     {
-        public string Login { get; set; }
-        public string Senha { get; set; }
-        public DateTime UltimoLogin { get; set; }
+        public string Nome { get; set; }
+        public string EstiloPredominante { get; set; }
+
     }
 }

@@ -35,6 +35,7 @@ namespace HermesManagementAssistant.View.Usuario
         private void btNovo_Click(object sender, RoutedEventArgs e)
         {
             new UsuarioCadastro().Show();
+            InitializeComponent();
         }
     }
 }
