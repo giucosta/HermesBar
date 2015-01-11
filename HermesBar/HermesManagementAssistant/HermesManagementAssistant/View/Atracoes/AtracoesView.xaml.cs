@@ -32,17 +32,22 @@ namespace HermesManagementAssistant.View.Atracoes
         {
             InitializeComponent();
             CarregaDataGrid(new AtracoesModel() { Nome = "", EstiloPredominante = "" });
+            CarregaComboBox();
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
         {
             dgPesquisa.ItemsSource = BLL.Pesquisa(atracoes).DefaultView;
         }
+        private void CarregaComboBox()
+        {
+            cbTipo.ItemsSource = BLL.RecuperaEstilos();
+            cbTipo.SelectedIndex = 0;
+        }
 
         private void btPesquisar_Click(object sender, RoutedEventArgs e)
         {
             var atracoes = new AtracoesModel();
-            if (string.IsNullOrWhiteSpace(tbNome.Text))
-                atracoes.Nome = "";
+
             if (string.IsNullOrWhiteSpace(cbTipo.SelectionBoxItem.ToString()))
                 atracoes.EstiloPredominante = "";
 

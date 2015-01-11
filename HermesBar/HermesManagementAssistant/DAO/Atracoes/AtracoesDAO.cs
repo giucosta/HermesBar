@@ -71,5 +71,25 @@ namespace DAO.Atracoes
                 return null;
             }
         }
+        public List<String> RecuperaEstilos()
+        {
+            try
+            {
+                var sql = @"SELECT Estilo FROM Atracoes";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+
+                var dataTable = Connection.getDataTable(comando);
+                var lista = new List<String>();
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                    lista.Add(dataTable.Rows[i]["Estilo"].ToString());
+
+                return lista;
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaEstilos", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
+        }
     }
 }

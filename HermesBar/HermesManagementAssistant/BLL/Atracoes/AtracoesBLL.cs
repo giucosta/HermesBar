@@ -26,5 +26,9 @@ namespace BLL.Atracoes
         {
             return DAO.Pesquisa(atracoes);
         }
+        public List<String> RecuperaEstilos()
+        {
+            return DAO.RecuperaEstilos();
+        }
     }
 }
