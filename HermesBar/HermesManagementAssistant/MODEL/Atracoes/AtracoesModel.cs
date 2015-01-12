@@ -11,6 +11,8 @@ namespace MODEL
     {
         public string Nome { get; set; }
         public string EstiloPredominante { get; set; }
-
+        public ContatoModel Contato { get; set; }
+        public Double UltimoValorCobrado { get; set; }
+        public string TempoApresentacao { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAO.Atracoes;
 using System.Data;
 using MODEL;
+using BLL.Comum;
 
 namespace BLL.Atracoes
 {
@@ -21,6 +22,16 @@ namespace BLL.Atracoes
                 return _atracoesDAO;
             }
         }
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatcBLL
+        {
+            get
+            {
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
+            }
+        }
 
         public DataTable Pesquisa(AtracoesModel atracoes)
         {
@@ -29,6 +40,12 @@ namespace BLL.Atracoes
         public List<String> RecuperaEstilos()
         {
             return DAO.RecuperaEstilos();
+        }
+
+        public bool Salvar(AtracoesModel atracoes)
+        {
+            atracoes.Contato = ContatcBLL.Salvar(atracoes.Contato);
+            return DAO.Salvar(atracoes);
         }
     }
 }

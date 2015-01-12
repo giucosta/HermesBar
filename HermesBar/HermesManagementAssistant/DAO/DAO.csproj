@@ -46,6 +46,7 @@
     <Compile Include="Abstract\IDAO.cs" />
     <Compile Include="Abstract\IUsuario.cs" />
     <Compile Include="Atracoes\AtracoesDAO.cs" />
+    <Compile Include="Comum\ContatoDAO.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Encript\EncriptMd5.cs" />
     <Compile Include="Login\LoginDAO.cs" />

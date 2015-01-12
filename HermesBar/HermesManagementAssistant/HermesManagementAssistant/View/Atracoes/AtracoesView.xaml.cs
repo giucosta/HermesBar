@@ -43,7 +43,6 @@ namespace HermesManagementAssistant.View.Atracoes
             cbTipo.ItemsSource = BLL.RecuperaEstilos();
             cbTipo.SelectedIndex = 0;
         }
-
         private void btPesquisar_Click(object sender, RoutedEventArgs e)
         {
             var atracoes = new AtracoesModel();
@@ -55,6 +54,11 @@ namespace HermesManagementAssistant.View.Atracoes
             atracoes.EstiloPredominante = cbTipo.SelectionBoxItem.ToString();
             
             CarregaDataGrid(atracoes);
+        }
+
+        private void btNovo_Click(object sender, RoutedEventArgs e)
+        {
+            new CadastroAtracoesView().Show();
         }
     }
 }

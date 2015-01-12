@@ -18,10 +18,13 @@ namespace DAO.Atracoes
         {
             try
             {
-                var sql = @"INSERT INTO Atracoes VALUES (@Nome, @Estilo)";
+                var sql = @"INSERT INTO Atracoes VALUES (@Nome, @Estilo, @IdContato, @TempoShow, @UltimoValor)";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome",atracoes.Nome);
                 comando.Parameters.AddWithValue("@Estilo", atracoes.EstiloPredominante);
+                comando.Parameters.AddWithValue("@IdContato", atracoes.Contato.Id);
+                comando.Parameters.AddWithValue("@TempoShow", atracoes.TempoApresentacao);
+                comando.Parameters.AddWithValue("@UltimoValor", atracoes.UltimoValorCobrado);
 
                 Connection.ExecutarComando(comando);
                 return true;
@@ -32,7 +35,6 @@ namespace DAO.Atracoes
                 return false;
             }
         }
-
         public bool Excluir(AtracoesModel atracoes)
         {
             try
@@ -49,7 +51,6 @@ namespace DAO.Atracoes
                 return false;
             }
         }
-
         public DataTable Pesquisa(AtracoesModel atracoes)
         {
             try
