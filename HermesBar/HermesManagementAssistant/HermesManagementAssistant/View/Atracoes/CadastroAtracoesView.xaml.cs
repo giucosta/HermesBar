@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Utils;
 
 namespace HermesManagementAssistant.View.Atracoes
 {
@@ -26,21 +27,25 @@ namespace HermesManagementAssistant.View.Atracoes
         public CadastroAtracoesView()
         {
             InitializeComponent();
-            cbEstilo.ItemsSource = new AtracoesBLL().RecuperaEstilos();
+            CarregaComboEstilos();
         }
-
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            var contato = CarregaContato();
-            var atracoes = CarregaAtracoes();
-            atracoes.Contato = contato;
+            var obrigatorios = ValidarCampos();
+            if (obrigatorios.Count == 0)
+            {
+                var contato = CarregaContato();
+                var atracoes = CarregaAtracoes();
+                atracoes.Contato = contato;
 
-            if (new AtracoesBLL().Salvar(atracoes))
-                MessageBox.Show("Ok");
+                if (new AtracoesBLL().Salvar(atracoes))
+                    Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ATRACOES_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
             else
-                MessageBox.Show("Não");
+                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
         }
-
         private ContatoModel CarregaContato()
         {
             var contato = new ContatoModel();
@@ -66,5 +71,27 @@ namespace HermesManagementAssistant.View.Atracoes
 
             return atracoes;
         }
+        private List<String> ValidarCampos()
+        {
+            var camposObrigatorios = new List<String>();
+            if (string.IsNullOrWhiteSpace(tbAtracao.Text))
+                camposObrigatorios.Add("ATRACAO");
+            if (string.IsNullOrWhiteSpace(tbValor.Text))
+                camposObrigatorios.Add("VALOR");
+            if (string.IsNullOrWhiteSpace(tbTempo.Text))
+                camposObrigatorios.Add("TEMPO");
+            if (string.IsNullOrWhiteSpace(tbNome.Text))
+                camposObrigatorios.Add("NOME");
+            if (string.IsNullOrWhiteSpace(tbTelefone.Text))
+                camposObrigatorios.Add("TELEFONE");
+
+            return camposObrigatorios;
+        }
+        private void CarregaComboEstilos()
+        {
+            cbEstilo.ItemsSource = new AtracoesBLL().RecuperaEstilos();
+            cbEstilo.SelectedIndex = 0;
+        }
     }
+
 }

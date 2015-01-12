@@ -48,5 +48,8 @@ namespace Utils
         //CADASTRO USUARIO
         public const string USUARIO_CADASTRO_SUCESSO = "Usuário cadastrado com sucesso!";
         public const string USUARIO_CADASTRO_ERRO = "Erro ao cadastrar usuário!";
+        //CADASTRO ATRACOES
+        public const string ATRACOES_CADASTRO_SUCESSO = "Atração cadastrada com sucesso!";
+        public const string ATRACOES_CADASTRO_ERRO = "Erro ao cadastrar atração";
     }
 }

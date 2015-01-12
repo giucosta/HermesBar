@@ -4,15 +4,16 @@
         Title="Hermes Management Assistant" Height="734.079" Width="894.737" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
     <Grid Background="#FFDADADA">
         <Menu x:Name="Menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="887">
-            <MenuItem x:Name="mnConfiguracoes" Header="_Configurações">
+            <Image Source="/HermesManagementAssistant;component/images/settings48.png" Height="22" Width="22"/>
+            <MenuItem x:Name="mnConfiguracoes" Header="_Configurações" FontWeight="Bold">
                 <MenuItem x:Name="mniUsuarios" Header="_Usuários"  >
                     <MenuItem x:Name="mniUsuarios_Novo" Header="_Novo" Click="mniUsuarios_Novo_Click"/>
                 </MenuItem>
             </MenuItem>
-            <MenuItem x:Name="mnGestão" Header="_Gestão">
+            <Image Source="/HermesManagementAssistant;component/images/businessman1.png"/>
+            <MenuItem x:Name="mnGestão" Header="_Gestão" FontWeight="Bold">
                 <MenuItem x:Name="mniAtrações" Header="_Atrações" Click="mniAtrações_Click"/>
             </MenuItem>
-            <Menu Height="100" Width="100"/>
         </Menu>
     </Grid>
 </Window>
