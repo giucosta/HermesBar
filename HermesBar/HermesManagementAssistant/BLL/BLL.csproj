@@ -45,6 +45,7 @@
     <Compile Include="Perfil\PerfilBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\SessionBLL.cs" />
+    <Compile Include="TipoFuncionario\TipoFuncionarioBLL.cs" />
     <Compile Include="Usuario\UsuarioBLL.cs" />
   </ItemGroup>
   <ItemGroup>

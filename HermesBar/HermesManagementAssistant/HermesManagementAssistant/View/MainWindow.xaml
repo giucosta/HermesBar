@@ -13,7 +13,9 @@
             <Image Source="/HermesManagementAssistant;component/images/businessman1.png"/>
             <MenuItem x:Name="mnGestão" Header="_Gestão" FontWeight="Bold">
                 <MenuItem x:Name="mniAtrações" Header="_Atrações" Click="mniAtrações_Click"/>
+                <MenuItem x:Name="mniFuncionarios" Header="_Funcionários"/>
             </MenuItem>
+            
         </Menu>
     </Grid>
 </Window>

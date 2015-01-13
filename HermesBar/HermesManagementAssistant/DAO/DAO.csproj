@@ -44,15 +44,18 @@
   <ItemGroup>
     <Compile Include="Abstract\IAtracoes.cs" />
     <Compile Include="Abstract\IDAO.cs" />
+    <Compile Include="Abstract\IFuncionario.cs" />
     <Compile Include="Abstract\IUsuario.cs" />
     <Compile Include="Atracoes\AtracoesDAO.cs" />
     <Compile Include="Comum\ContatoDAO.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Encript\EncriptMd5.cs" />
+    <Compile Include="Funcionario\FuncionarioDAO.cs" />
     <Compile Include="Login\LoginDAO.cs" />
     <Compile Include="Log\Log.cs" />
     <Compile Include="Perfil\PerfilDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoFuncionario\TipoFuncionarioDAO.cs" />
     <Compile Include="Usuario\UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -43,9 +43,11 @@
     <Compile Include="Atracoes\AtracoesModel.cs" />
     <Compile Include="Comum\ContatoModel.cs" />
     <Compile Include="EnderecoModel.cs" />
+    <Compile Include="Funcionario\FuncionarioModel.cs" />
     <Compile Include="Login\LoginModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoFuncionario\TipoFuncionarioModel.cs" />
     <Compile Include="Usuario\UsuarioModel.cs" />
   </ItemGroup>
   <ItemGroup />
