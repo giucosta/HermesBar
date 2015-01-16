@@ -61,6 +61,9 @@
     <Compile Include="View\Atracoes\CadastroAtracoesView.xaml.cs">
       <DependentUpon>CadastroAtracoesView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Funcionario\Funcionario.xaml.cs">
+      <DependentUpon>Funcionario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usuario\Usuario.xaml.cs">
       <DependentUpon>Usuario.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Atracoes\CadastroAtracoesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Funcionario\Funcionario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

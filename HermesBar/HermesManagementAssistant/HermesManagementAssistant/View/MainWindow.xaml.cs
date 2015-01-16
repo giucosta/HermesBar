@@ -1,4 +1,5 @@
 ﻿using HermesManagementAssistant.View.Atracoes;
+using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Login;
 using HermesManagementAssistant.View.Usuario;
 using MODEL;
@@ -43,6 +44,11 @@ namespace HermesManagementAssistant
         private void mniAtrações_Click(object sender, RoutedEventArgs e)
         {
             new AtracoesView().Show();
+        }
+
+        private void mnGestão_Click(object sender, RoutedEventArgs e)
+        {
+            new Funcionario().Show();
         }
     }
 }

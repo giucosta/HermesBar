@@ -15,6 +15,7 @@ namespace MODEL
         public DateTime DataNascimento { get; set; }
         public string CarteiraTrabalho { get; set; }
         public string Serie { get; set; }
+        public DateTime DataAdmissao { get; set; }
         public EnderecoModel Endereco { get; set; }
         public TipoFuncionarioModel Tipo { get; set; }
         public ContatoModel Contato { get; set; }

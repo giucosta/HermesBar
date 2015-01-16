@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Atracoes\AtracoesBLL.cs" />
     <Compile Include="Comum\ContatoBLL.cs" />
+    <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

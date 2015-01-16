@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HermesManagementAssistant.View.Usuario.Usuario"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Pesquisa de Usuários" Height="432.744" Width="554.887" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
+        Title="Pesquisa de Usuários" Height="430" Width="560" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
     <Grid>
         <Rectangle Fill="#FFBFBFBF" HorizontalAlignment="Left" Height="149" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="527"/>
         <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="414" Margin="94,34,0,0"/>
