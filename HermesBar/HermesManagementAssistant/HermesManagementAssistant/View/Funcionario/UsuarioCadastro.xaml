@@ -1,0 +1,39 @@
+﻿<Window x:Class="HermesManagementAssistant.View.Funcionario.UsuarioCadastro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cadastro de Funcionários" Height="430" Width="560" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
+    <Grid>
+        <TabControl Name="Tabs1" TabStripPlacement="Top" Background="LightGray" Margin="12,11,16,30" Height="Auto" Width="Auto">
+            <TabItem Header="Nome" IsSelected="True">
+                <Grid Height="258" Margin="16,0,10,60" VerticalAlignment="Bottom">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="91*"></ColumnDefinition>
+                        <ColumnDefinition Width="401*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label HorizontalAlignment="Right" Margin="0,12,0,0" Width="42">Nome</Label>
+                    <TextBox Name="tbNome" Grid.Column="1" Margin="28,7,10,6" />
+                    <Label Grid.Row="1" HorizontalAlignment="Right" Margin="0,14,0,0" Width="40">CPF</Label>
+                    <TextBox Name="tbCpf" Grid.Column="1" Grid.Row="1" Margin="28,5,10,9" />
+                    <Label Name="lbRg" HorizontalAlignment="Right" Margin="0,8,12,29" Grid.Row="2" Grid.RowSpan="2" Width="25">RG</Label>
+                    <TextBox Name="tbRg" Grid.Column="1" Grid.Row="2" Margin="29,8,8,6" />
+                    <Label Name="lbCartTrabalho" HorizontalAlignment="Left" Margin="3,8,0,29" Grid.Row="3" Grid.RowSpan="2" Width="90" Grid.ColumnSpan="2">Cart. Trabalho</Label>
+                    <TextBox Name="tbCartTrabalho" Grid.Column="1" Grid.Row="3" Margin="28,9,9,5" />
+                    <!--<Button Grid.Column="1" Grid.Row="7" Width="75" HorizontalAlignment="Left" Name="TabButton" Click="TabButton_Click" Margin="0,6">OK</Button>-->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Cantora" Background="Aquamarine">
+            </TabItem>
+            <TabItem Header="Cantor" Background="Aquamarine">
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
