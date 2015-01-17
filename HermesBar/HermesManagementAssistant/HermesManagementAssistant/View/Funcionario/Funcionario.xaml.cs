@@ -44,7 +44,8 @@ namespace HermesManagementAssistant.View.Funcionario
 
         private void NovoFuncionario(object sender, RoutedEventArgs e)
         {
-            new UsuarioCadastro().Show();
+            new FuncionarioCadastro().Show();
+            this.Close();
         }
 
         private bool VerificaCampos()

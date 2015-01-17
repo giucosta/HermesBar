@@ -17,11 +17,17 @@ namespace HermesManagementAssistant.View.Funcionario
     /// <summary>
     /// Interaction logic for UsuarioCadastro.xaml
     /// </summary>
-    public partial class UsuarioCadastro : Window
+    public partial class FuncionarioCadastro : Window
     {
-        public UsuarioCadastro()
+        public FuncionarioCadastro()
         {
             InitializeComponent();
+        }
+
+        private void btSalvar_Click(object sender, RoutedEventArgs e)
+        {
+            new Funcionario().Show();
+            this.Close();
         }
     }
 }

@@ -68,8 +68,8 @@
     <Compile Include="View\Funcionario\Funcionario.xaml.cs">
       <DependentUpon>Funcionario.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Funcionario\UsuarioCadastro.xaml.cs">
-      <DependentUpon>UsuarioCadastro.xaml</DependentUpon>
+    <Compile Include="View\Funcionario\FuncionarioCadastro.xaml.cs">
+      <DependentUpon>FuncionarioCadastro.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Usuario\Usuario.xaml.cs">
       <DependentUpon>Usuario.xaml</DependentUpon>
@@ -89,7 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Funcionario\UsuarioCadastro.xaml">
+    <Page Include="View\Funcionario\FuncionarioCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
