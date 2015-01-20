@@ -18,11 +18,11 @@ namespace Utils
                 msg += x + " - ";
 
             if (tipo == TIPOS_MENSAGENS.SUCESSO)
-                MessageBox.Show(mensagemErro + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Information);
             if (tipo == TIPOS_MENSAGENS.ALERTA)
-                MessageBox.Show(mensagemErro + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Warning);
             if (tipo == TIPOS_MENSAGENS.ERRO)
-                MessageBox.Show(mensagemErro + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
     public static class TIPOS_MENSAGENS

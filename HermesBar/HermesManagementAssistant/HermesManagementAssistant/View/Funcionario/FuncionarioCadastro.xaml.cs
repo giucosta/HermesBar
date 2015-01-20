@@ -45,6 +45,26 @@ namespace HermesManagementAssistant.View.Funcionario
                 return _funcionarioBLL;
             }
         }
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatoBLL
+        {
+            get
+            {
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
+            }
+        }
+        private EnderecoBLL _enderecoBLL = null;
+        public EnderecoBLL EnderecoBLL
+        {
+            get
+            {
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
+            }
+        }
         #endregion
         public FuncionarioCadastro()
         {
@@ -54,10 +74,28 @@ namespace HermesManagementAssistant.View.Funcionario
 
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            var funcionario = new FuncionarioModel();
-            funcionario.Endereco = SalvarEndereco();
+            var camposObrigatorios = VerificaCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                var funcionario = new FuncionarioModel();
+                funcionario.Endereco = SalvarEndereco();
+                funcionario.Contato = SalvarContato();
+            }
+            else
+                Mensagens.GeraMensagens("Campos Obrigatórios",MENSAGEM.CAMPOS_OBRIGATORIOS,camposObrigatorios,TIPOS_MENSAGENS.ALERTA);
         }
 
+        private ContatoModel SalvarContato()
+        {
+            var contato = new ContatoModel();
+            contato.Nome = tbNome.Text;
+            contato.Site = "";
+            contato.Telefone = tbTelefone.Text;
+            contato.Celular = tbCelular.Text;
+            contato.Email = tbEmail.Text;
+
+            return ContatoBLL.Salvar(contato);
+        }
         private EnderecoModel SalvarEndereco()
         {
             var endereco = new EnderecoModel();
@@ -70,13 +108,38 @@ namespace HermesManagementAssistant.View.Funcionario
             endereco.Estado = tbEstado.Text;
             endereco.Tipo = new TipoEnderecoModel() { Tipo = Constantes.ATipoEndereco.PESSOAL };
 
-            return new EnderecoBLL().Salvar(endereco);
+            return EnderecoBLL.Salvar(endereco);
         }
-
         private void CarregaCombos()
         {
             cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();
             cbTipo.SelectedIndex = 0;
+        }
+
+        private List<String> VerificaCamposObrigatorios()
+        {
+            var campos = new List<String>();
+
+            if (string.IsNullOrWhiteSpace(tbNome.Text))
+                campos.Add("Nome");
+            if (string.IsNullOrWhiteSpace(tbCpf.Text))
+                campos.Add("Cpf");
+            if (string.IsNullOrWhiteSpace(tbRg.Text))
+                campos.Add("Rg");
+            if (string.IsNullOrWhiteSpace(tbDataNascimento.Text))
+                campos.Add("Data de Nascimento");
+            if (string.IsNullOrWhiteSpace(tbDataAdmissao.Text))
+                campos.Add("Data de Admissao");
+
+            if (string.IsNullOrWhiteSpace(tbRua.Text))
+                campos.Add("Rua");
+            if (string.IsNullOrWhiteSpace(tbNumero.Text))
+                campos.Add("Número");
+
+            if (string.IsNullOrWhiteSpace(tbCelular.Text))
+                campos.Add("Celular");
+
+            return campos;
         }
     }
 }
