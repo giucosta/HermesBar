@@ -16,13 +16,6 @@ namespace MODEL
         public string Cep { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
-        public TipoEndereco Tipo { get; set; }
-    }
-    public enum TipoEndereco
-    {
-        Cobrança,
-        Entrega,
-        Filial,
-        Matriz
+        public TipoEnderecoModel Tipo { get; set; }
     }
 }

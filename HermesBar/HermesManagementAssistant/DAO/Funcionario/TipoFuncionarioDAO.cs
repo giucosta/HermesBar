@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UTILS;
 
-namespace DAO.TipoFuncionario
+namespace DAO.Funcionario
 {
     public class TipoFuncionarioDAO
     {
@@ -65,6 +65,27 @@ namespace DAO.TipoFuncionario
             {
                 return null;
             }   
+        }
+
+        public List<String> TiposFuncionarios()
+        {
+            try
+            {
+                var sql = @"SELECT Tipo FROM TipoFuncionario";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var dataTable = Connection.getDataTable(comando);
+                var listaTipos = new List<String>();
+
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                    listaTipos.Add(dataTable.Rows[i]["Tipo"].ToString());
+
+                return listaTipos;
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("TiposFuncionarios","TipoFuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
         }
     }
 }

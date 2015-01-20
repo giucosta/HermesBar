@@ -48,6 +48,8 @@
     <Compile Include="Abstract\IUsuario.cs" />
     <Compile Include="Atracoes\AtracoesDAO.cs" />
     <Compile Include="Comum\ContatoDAO.cs" />
+    <Compile Include="Comum\EnderecoDAO.cs" />
+    <Compile Include="Comum\TipoEnderecoDAO.cs" />
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Encript\EncriptMd5.cs" />
     <Compile Include="Funcionario\FuncionarioDAO.cs" />
@@ -55,7 +57,7 @@
     <Compile Include="Log\Log.cs" />
     <Compile Include="Perfil\PerfilDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TipoFuncionario\TipoFuncionarioDAO.cs" />
+    <Compile Include="Funcionario\TipoFuncionarioDAO.cs" />
     <Compile Include="Usuario\UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>

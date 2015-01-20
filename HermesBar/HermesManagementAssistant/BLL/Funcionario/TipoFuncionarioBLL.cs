@@ -1,4 +1,4 @@
-﻿using DAO.TipoFuncionario;
+﻿using DAO.Funcionario;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL.TipoFuncionario
+namespace BLL.Funcionario
 {
     public class TipoFuncionarioBLL
     {
@@ -34,6 +34,10 @@ namespace BLL.TipoFuncionario
                 return true;
             else
                 return false;
+        }
+        public List<String> RetornaTipos()
+        {
+            return DAO.TiposFuncionarios();
         }
     }
 }

@@ -35,5 +35,14 @@ namespace UTILS
             public const string CORPO_MEIO_EMAIL = "Acreditamos que seja interessante efetuar a troca da senha, acessando o módulo Gestão/Configurações/Senhas";
             public const string CORPO_FINAL_EMAIL = "Email enviando automaticamente, caso necessite entrar em contato envie email para: giulianocosta@outlook.com";
         }
+        public static class ATipoEndereco
+        {
+            public const string COBRANCA = "Cobrança";
+            public const string ENTREGA = "Entrega";
+            public const string FILIAL = "Filial";
+            public const string MATRIZ = "Matriz";
+            public const string PESSOAL = "Pessoal";
+            public const string RECADO = "Recado";
+        }
     }
 }
