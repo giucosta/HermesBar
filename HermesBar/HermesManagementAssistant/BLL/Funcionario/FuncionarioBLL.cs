@@ -24,7 +24,9 @@ namespace BLL.Funcionario
 
         public bool Salvar(FuncionarioModel funcionario)
         {
-            return DAO.Salvar(funcionario);
+            if(VerificaIdadeFuncionario(funcionario))
+                return DAO.Salvar(funcionario);
+            return false;
         }
 
         public bool Excluir(FuncionarioModel funcionario)
@@ -36,5 +38,12 @@ namespace BLL.Funcionario
         {
             return DAO.Pesquisa(funcionario);
         }
+        private bool VerificaIdadeFuncionario(FuncionarioModel funcionario)
+        {
+            if ((funcionario.DataNascimento.Year - DateTime.Now.Year) < 18)
+                return false;
+            return true;
+        }
+
     }
 }

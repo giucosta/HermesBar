@@ -80,8 +80,12 @@ namespace HermesManagementAssistant.View.Funcionario
                 var funcionario = new FuncionarioModel();
                 funcionario.Endereco = SalvarEndereco();
                 funcionario.Contato = SalvarContato();
-                if(SalvarFuncionario(funcionario))
+                if (SalvarFuncionario(funcionario))
+                {
                     Mensagens.GeraMensagens("Registro Salvo", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Funcionario().Show();
+                    this.Close();
+                }       
             }
             else
                 Mensagens.GeraMensagens("Erro ao salvar registro",MENSAGEM.FUNCIONARIO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
