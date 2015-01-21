@@ -39,5 +39,9 @@ namespace BLL.Funcionario
         {
             return DAO.TiposFuncionarios();
         }
+        public TipoFuncionarioModel RetornaTipo(TipoFuncionarioModel tipo)
+        {
+            return DAO.RetornaTipo(tipo);
+        }
     }
 }

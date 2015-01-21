@@ -18,7 +18,7 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = @"INSERT INTO Funcionario VALUES(@Nome, @Cpf, @Rg, @DataNascimento,@CarteiraTrabalho,@Serie, @Id_Endereco, @Id_TipoFuncionario, @Id_Contato)";
+                var sql = @"INSERT INTO Funcionario VALUES(@Nome, @Cpf, @Rg, @DataNascimento,@CarteiraTrabalho,@Serie, @Id_Endereco, @Id_TipoFuncionario, @Id_Contato,@DataAdmissao)";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", funcionario.Nome);
                 comando.Parameters.AddWithValue("@Cpf", funcionario.Cpf);
@@ -29,6 +29,7 @@ namespace DAO.Funcionario
                 comando.Parameters.AddWithValue("@Id_Endereco", funcionario.Endereco.Id);
                 comando.Parameters.AddWithValue("@Id_TipoFuncionario", funcionario.Tipo.Id);
                 comando.Parameters.AddWithValue("@Id_Contato", funcionario.Contato.Id);
+                comando.Parameters.AddWithValue("@DataAdmissao",funcionario.DataAdmissao);
 
                 Connection.ExecutarComando(comando);
                 return true;

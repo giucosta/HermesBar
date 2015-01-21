@@ -80,9 +80,11 @@ namespace HermesManagementAssistant.View.Funcionario
                 var funcionario = new FuncionarioModel();
                 funcionario.Endereco = SalvarEndereco();
                 funcionario.Contato = SalvarContato();
+                if(SalvarFuncionario(funcionario))
+                    Mensagens.GeraMensagens("Registro Salvo", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
             }
             else
-                Mensagens.GeraMensagens("Campos Obrigatórios",MENSAGEM.CAMPOS_OBRIGATORIOS,camposObrigatorios,TIPOS_MENSAGENS.ALERTA);
+                Mensagens.GeraMensagens("Erro ao salvar registro",MENSAGEM.FUNCIONARIO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
         }
 
         private ContatoModel SalvarContato()
@@ -110,12 +112,25 @@ namespace HermesManagementAssistant.View.Funcionario
 
             return EnderecoBLL.Salvar(endereco);
         }
+        private bool SalvarFuncionario(FuncionarioModel funcionario)
+        {
+            funcionario.Nome = tbNome.Text;
+            funcionario.Rg = tbRg.Text;
+            funcionario.Serie = tbSerie.Text;
+            funcionario.Cpf = tbCpf.Text;
+            funcionario.DataAdmissao = tbDataAdmissao.SelectedDate.Value;
+            funcionario.DataNascimento = tbDataNascimento.SelectedDate.Value;
+            funcionario.CarteiraTrabalho = tbCartTrabalho.Text;
+            funcionario.Serie = tbSerie.Text;
+            funcionario.Tipo = TipoFuncionarioBLL.RetornaTipo(new TipoFuncionarioModel() { TipoFuncionario = cbTipo.SelectionBoxItem.ToString() });
+
+            return FuncionarioBLL.Salvar(funcionario);
+        }
         private void CarregaCombos()
         {
             cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();
             cbTipo.SelectedIndex = 0;
         }
-
         private List<String> VerificaCamposObrigatorios()
         {
             var campos = new List<String>();
