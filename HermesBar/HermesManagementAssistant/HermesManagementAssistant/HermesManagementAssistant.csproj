@@ -58,7 +58,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
     <Compile Include="View\Atracoes\AtracoesView.xaml.cs">
       <DependentUpon>AtracoesView.xaml</DependentUpon>
@@ -78,6 +77,7 @@
     <Compile Include="View\Usuario\UsuarioCadastro.xaml.cs">
       <DependentUpon>UsuarioCadastro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ViewModel\FuncionarioViewModel.cs" />
     <Page Include="View\Atracoes\AtracoesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -3,19 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Cadastro de Usuário" Height="392.737" Width="500.105" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
     <Grid>
+        <Label x:Name="lbTitulo" Content="Cadastro de Usuário" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,14,0,0" FontFamily="Aharoni" Height="38" Width="400" FontSize="24"/>
         <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Margin="109,102,0,0"/>
         <Label x:Name="lbNome" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,99,0,0"/>
+        <Label x:Name="lbEmail" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,148,0,0"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="356" Margin="109,143,0,0"/>
-        <Label x:Name="lbNome_Copy" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,148,0,0"/>
+        <Label x:Name="lbPerfil" Content="Perfil" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,187,0,0"/>
         <ComboBox x:Name="cbPerfil" HorizontalAlignment="Left" Margin="109,183,0,0" VerticalAlignment="Top" Width="356"/>
-        <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="356" Margin="109,224,0,0"/>
-        <PasswordBox x:Name="tbConfirmaSenha" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="356" Margin="109,267,0,0"/>
-        <Label x:Name="tbPerfil" Content="Perfil" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,187,0,0"/>
         <Label x:Name="lbSenha" Content="Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,224,0,0"/>
+        <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="356" Margin="109,224,0,0"/>
         <Label x:Name="lbConfirmaSenha" Content="Confirma Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,265,0,0"/>
+        <PasswordBox x:Name="tbConfirmaSenha" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="356" Margin="109,267,0,0"/>
         <Button x:Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" Margin="109,321,0,0" VerticalAlignment="Top" Width="75" Click="btSalvar_Click"/>
-        <Label x:Name="lbTitulo" Content="Cadastro de Usuário" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,14,0,0" FontFamily="Aharoni" Height="38" Width="400" FontSize="24"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="4" Margin="20,48,0,0" Stroke="Black" VerticalAlignment="Top" Width="445"/>
-
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
 ﻿<Window x:Class="HermesManagementAssistant.View.Funcionario.FuncionarioCadastro"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Cadastro de Funcionários" Height="430" Width="560" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Cadastro de Funcionários" Height="430" Width="560" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">
     <Grid>
         <TabControl Name="tabCadastroFuncionario" TabStripPlacement="Top" Background="LightGray" Margin="7,11,21,30" Height="Auto" Width="Auto">
             <TabItem Header="Dados Gerais" IsSelected="True">
@@ -21,13 +21,13 @@
                         <ColumnDefinition Width="203*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Label HorizontalAlignment="Right" Margin="0,5,4,7" Width="42" Grid.Column="0">Nome</Label>
-                    <TextBox Name="tbNome" Grid.Column="1" Margin="22,7,20,6" Grid.ColumnSpan="2" />
+                    <TextBox Name="tbNome" Grid.Column="1" Margin="22,7,20,6" Grid.ColumnSpan="2" MaxLength="100"/>
                     <Label Grid.Row="1" HorizontalAlignment="Right" Margin="0,8,177,1" Width="40" Grid.ColumnSpan="2">CPF</Label>
-                    <TextBox Name="tbCpf" Grid.Column="1" Grid.Row="1" Margin="22,5,10,5" />
+                    <TextBox Name="tbCpf" Grid.Column="1" Grid.Row="1" Margin="22,5,10,5" MaxLength="11"/>
                     <Label Name="lbRg" HorizontalAlignment="Right" Margin="0,8,3,29" Grid.Row="2" Grid.RowSpan="2" Width="25">RG</Label>
-                    <TextBox Name="tbRg" Grid.Column="1" Grid.Row="2" Margin="22,8,8,5" />
+                    <TextBox Name="tbRg" Grid.Column="1" Grid.Row="2" Margin="22,8,8,5" MaxLength="15"/>
                     <Label Name="lbCartTrabalho" HorizontalAlignment="Left" Margin="17,7,0,30" Grid.Row="3" Grid.RowSpan="2" Width="90" Grid.ColumnSpan="2">Cart. Trabalho</Label>
-                    <TextBox Name="tbCartTrabalho" Grid.Column="1" Grid.Row="3" Margin="22,9,9,5" />
+                    <TextBox Name="tbCartTrabalho" Grid.Column="1" Grid.Row="3" Margin="22,9,9,5" MaxLength="20"/>
                     <Label Name="lbSerie" HorizontalAlignment="Left" Margin="5,6,0,0" Grid.Row="3" Width="38" Grid.Column="2">Série</Label>
                     <TextBox Name="tbSerie" Grid.Column="2" Grid.Row="3" Margin="43,9,23,5" />
                     <Label Name="lbTipo" HorizontalAlignment="Left" Margin="66,4,0,1" Grid.Row="4" Width="38">Tipo</Label>

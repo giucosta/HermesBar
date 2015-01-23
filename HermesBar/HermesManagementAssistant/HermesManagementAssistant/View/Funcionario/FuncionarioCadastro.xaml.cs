@@ -78,18 +78,32 @@ namespace HermesManagementAssistant.View.Funcionario
             if (camposObrigatorios.Count == 0)
             {
                 var funcionario = new FuncionarioModel();
-                funcionario.Endereco = SalvarEndereco();
-                funcionario.Contato = SalvarContato();
-                if (SalvarFuncionario(funcionario))
+
+                var endereco = SalvarEndereco();
+                if (endereco != null)
                 {
-                    Mensagens.GeraMensagens("Registro Salvo", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                    new Funcionario().Show();
-                    this.Close();
-                }       
+                    funcionario.Endereco = endereco;
+                    var contato = SalvarContato();
+                    if (contato != null)
+                    {
+                        funcionario.Contato = contato;
+                        if (SalvarFuncionario(funcionario))
+                        {
+                            Mensagens.GeraMensagens("Registro Salvo", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                            new Funcionario().Show();
+                            this.Close();
+                        }
+                        else
+                            Mensagens.GeraMensagens("Erro ao salvar registro", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    }
+                    else
+                        Mensagens.GeraMensagens("Cadastro contato",MENSAGEM.CONTATO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
+                }
+                else
+                    Mensagens.GeraMensagens("Cadastro endereço", MENSAGEM.ENDERECO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }
-            else
-                Mensagens.GeraMensagens("Erro ao salvar registro",MENSAGEM.FUNCIONARIO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
         }
+         
 
         private ContatoModel SalvarContato()
         {
@@ -149,12 +163,14 @@ namespace HermesManagementAssistant.View.Funcionario
                 campos.Add("Data de Nascimento");
             if (string.IsNullOrWhiteSpace(tbDataAdmissao.Text))
                 campos.Add("Data de Admissao");
-
+            
+            //Endereço
             if (string.IsNullOrWhiteSpace(tbRua.Text))
                 campos.Add("Rua");
             if (string.IsNullOrWhiteSpace(tbNumero.Text))
                 campos.Add("Número");
 
+            //Contato
             if (string.IsNullOrWhiteSpace(tbCelular.Text))
                 campos.Add("Celular");
 

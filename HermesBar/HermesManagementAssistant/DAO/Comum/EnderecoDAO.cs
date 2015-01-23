@@ -42,7 +42,6 @@ namespace DAO.Comum
         {
             return new TipoEnderecoDAO().RetornaTipoEndereco(endereco);
         }
-
         public EnderecoModel RecuperaUltimoEndereco()
         {
             try
@@ -56,7 +55,6 @@ namespace DAO.Comum
                 throw;
             }
         }
-
         private EnderecoModel CarregaEndereco(DataTable endereco)
         {
             var end = new EnderecoModel();

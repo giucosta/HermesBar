@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace BLL.Funcionario
 {
@@ -24,8 +25,11 @@ namespace BLL.Funcionario
 
         public bool Salvar(FuncionarioModel funcionario)
         {
-            if(VerificaIdadeFuncionario(funcionario))
-                return DAO.Salvar(funcionario);
+            if (VerificaIdadeFuncionario(funcionario))
+            {
+                if(Validacoes.ValidaCPF(funcionario.Cpf))
+                    return DAO.Salvar(funcionario);
+            }
             return false;
         }
 
@@ -33,7 +37,6 @@ namespace BLL.Funcionario
         {
             return DAO.Excluir(funcionario);
         }
-
         public DataTable Pesquisa(FuncionarioModel funcionario)
         {
             return DAO.Pesquisa(funcionario);

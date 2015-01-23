@@ -54,5 +54,9 @@ namespace Utils
         //CADASTRO FUNCIONARIO
         public const string FUNCIONARIO_CADASTRO_SUCESSO = "Funcionário cadastrado com sucesso!";
         public const string FUNCIONARIO_CADASTRO_ERRO = "Erro ao cadastrar funcionário";
+        //CADASTRO ENDEREÇO
+        public const string ENDERECO_CADASTRO_ERRO = "Erro ao cadastrar endereço";
+        //CADASTRO CONTATO
+        public const string CONTATO_CADASTRO_ERRO = "Erro ao salvar contato";
     }
 }
