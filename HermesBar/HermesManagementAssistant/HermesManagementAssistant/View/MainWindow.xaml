@@ -6,16 +6,14 @@
         <Menu x:Name="Menu" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="887">
             <Image Source="/HermesManagementAssistant;component/images/settings48.png" Height="22" Width="22"/>
             <MenuItem x:Name="mnConfiguracoes" Header="_Configurações" FontWeight="Bold">
-                <MenuItem x:Name="mniUsuarios" Header="_Usuários" HorizontalAlignment="Left" Width="134"  >
-                    <MenuItem x:Name="mniUsuarios_Novo" Header="_Novo" Click="mniUsuarios_Novo_Click" HorizontalAlignment="Left" Width="116"/>
-                </MenuItem>
+                <MenuItem x:Name="mniUsuarios" Header="_Usuários" HorizontalAlignment="Left" Width="134" Click="PesquisaUsuario"/>
             </MenuItem>
             <Image Source="/HermesManagementAssistant;component/images/businessman1.png"/>
-            <MenuItem x:Name="mnGestão" Header="_Gestão" FontWeight="Bold" Click="mnGestão_Click">
-                <MenuItem x:Name="mniAtrações" Header="_Atrações" Click="mniAtrações_Click"/>
-                <MenuItem x:Name="mniFuncionarios" Header="_Funcionários" HorizontalAlignment="Left" Width="157"/>
+            <MenuItem x:Name="mnGestão" Header="_Gestão" FontWeight="Bold">
+                <MenuItem x:Name="mniAtrações" Header="_Atrações" Click="PesquisaAtracoes" Width="176"/>
+                <MenuItem x:Name="mniEstabelecimento" Header="_Estabelecimento" HorizontalAlignment="Left" Width="176" Click="PesquisaEstabelecimento" Margin="0,0,-19,0"/>
+                <MenuItem x:Name="mniFuncionarios" Header="_Funcionários" HorizontalAlignment="Left" Width="176" Click="PesquisaFuncionarios"/>
             </MenuItem>
-
         </Menu>
     </Grid>
 </Window>

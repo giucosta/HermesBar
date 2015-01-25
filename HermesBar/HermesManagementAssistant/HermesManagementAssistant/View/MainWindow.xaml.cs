@@ -1,4 +1,5 @@
 ﻿using HermesManagementAssistant.View.Atracoes;
+using HermesManagementAssistant.View.Estabelecimento;
 using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Login;
 using HermesManagementAssistant.View.Usuario;
@@ -36,19 +37,23 @@ namespace HermesManagementAssistant
                 Mensagens.GeraMensagens("Permissões",MENSAGEM.SEM_PERMISSAO,null, TIPOS_MENSAGENS.ALERTA);
         }
 
-        private void mniUsuarios_Novo_Click(object sender, RoutedEventArgs e)
+        private void PesquisaUsuario(object sender, RoutedEventArgs e)
         {
             new Usuario().Show();
         }
 
-        private void mniAtrações_Click(object sender, RoutedEventArgs e)
+        private void PesquisaAtracoes(object sender, RoutedEventArgs e)
         {
             new AtracoesView().Show();
         }
 
-        private void mnGestão_Click(object sender, RoutedEventArgs e)
+        private void PesquisaFuncionarios(object sender, RoutedEventArgs e)
         {
             new Funcionario().Show();
+        }
+        private void PesquisaEstabelecimento(object sender, RoutedEventArgs e)
+        {
+            new Estabelecimento().Show();
         }
     }
 }
