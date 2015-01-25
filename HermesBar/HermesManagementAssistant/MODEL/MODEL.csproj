@@ -44,6 +44,7 @@
     <Compile Include="Comum\ContatoModel.cs" />
     <Compile Include="Comum\EnderecoModel.cs" />
     <Compile Include="Comum\TipoEnderecoModel.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoModel.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoModel.cs" />
     <Compile Include="Funcionario\FuncionarioModel.cs" />
     <Compile Include="Login\LoginModel.cs" />

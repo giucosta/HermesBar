@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using UTILS;
 
 namespace HermesManagementAssistant.View.Estabelecimento
 {
@@ -24,6 +25,7 @@ namespace HermesManagementAssistant.View.Estabelecimento
         {
             InitializeComponent();
             cbEstado.ItemsSource = new EnderecoBLL().CarregaEstados();
+            GerenciaCamposEstabelecimentoSemConexao();
         }
 
         private void ConsultaCep_Click(object sender, RoutedEventArgs e)
@@ -54,6 +56,19 @@ namespace HermesManagementAssistant.View.Estabelecimento
         private void GravarEstabelecimento(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void GerenciaCamposEstabelecimentoSemConexao()
+        {
+            if (!ConexaoWeb.IsConnected())
+            {
+                tbRua.IsReadOnly = false;
+                tbRua.Background = tbNumero.Background;
+                tbBairro.IsReadOnly = false;
+                tbBairro.Background = tbNumero.Background;
+                tbCidade.IsReadOnly = false;
+                tbCidade.Background = tbNumero.Background;
+                btConsultaCep.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
     }
 }

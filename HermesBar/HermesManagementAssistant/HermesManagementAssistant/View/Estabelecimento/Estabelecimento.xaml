@@ -43,8 +43,9 @@
                     <TextBox x:Name="tbSite" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="461" Margin="141,510,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="Outras Configurações">
                 <Grid Background="#FFE5E5E5"/>
+                
             </TabItem>
         </TabControl>
 
