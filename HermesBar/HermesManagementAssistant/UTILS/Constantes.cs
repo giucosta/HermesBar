@@ -44,5 +44,11 @@ namespace UTILS
             public const string PESSOAL = "Pessoal";
             public const string RECADO = "Recado";
         }
+
+        public static class ATipoSistema
+        {
+            public const string MESA = "M";
+            public const string COMANDA = "C";
+        }
     }
 }

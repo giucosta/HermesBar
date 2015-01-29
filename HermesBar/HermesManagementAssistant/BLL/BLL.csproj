@@ -45,6 +45,8 @@
     <Compile Include="Atracoes\AtracoesBLL.cs" />
     <Compile Include="Comum\ContatoBLL.cs" />
     <Compile Include="Comum\EnderecoBLL.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />
+    <Compile Include="Estabelecimento\EstabelecimentoBLL.cs" />
     <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />

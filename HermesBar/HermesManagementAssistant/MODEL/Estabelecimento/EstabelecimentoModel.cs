@@ -15,5 +15,6 @@ namespace MODEL.Estabelecimento
         public string InscEstadual { get; set; }
         public EnderecoModel Endereco { get; set; }
         public ContatoModel Contato { get; set; }
+        public ConfigEstabelecimentoModel ConfigEstabelecimento { get; set; }
     }
 }

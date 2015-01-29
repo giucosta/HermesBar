@@ -53,6 +53,7 @@
     <Compile Include="Connections\Connection.cs" />
     <Compile Include="Encript\EncriptMd5.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoDAO.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoDAO.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoDAO.cs" />
     <Compile Include="Funcionario\FuncionarioDAO.cs" />
     <Compile Include="Login\LoginDAO.cs" />
