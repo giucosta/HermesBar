@@ -23,12 +23,34 @@ namespace BLL.Comum
 
         public EnderecoModel Salvar(EnderecoModel endereco)
         {
-            return DAO.Salvar(endereco);
+            return DAO.Salvar(VerificaCamposNulos(endereco));
         }
         public List<String> CarregaEstados()
         {
             string[] ufs = {"AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO" };
             return ufs.ToList();
+        }
+
+        private EnderecoModel VerificaCamposNulos(EnderecoModel endereco)
+        {
+            if (endereco.Bairro == null)
+                endereco.Bairro = "";
+            if (endereco.Cep == null)
+                endereco.Cep = "";
+            if (endereco.Cidade == null)
+                endereco.Cidade = "";
+            if (endereco.Complemento == null)
+                endereco.Complemento = "";
+            if (endereco.Estado == null)
+                endereco.Estado = "";
+            if (endereco.Numero == null)
+                endereco.Numero = "";
+            if (endereco.Rua == null)
+                endereco.Rua = "";
+            if (endereco.Tipo.Tipo == null)
+                endereco.Tipo.Tipo = "";
+
+            return endereco;
         }
     }
 }

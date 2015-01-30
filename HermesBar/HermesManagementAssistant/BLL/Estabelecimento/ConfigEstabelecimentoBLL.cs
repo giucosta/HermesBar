@@ -21,7 +21,7 @@ namespace BLL.Estabelecimento
             }
         }
 
-        public bool Salvar(ConfigEstabelecimentoModel configEstabelecimento)
+        public ConfigEstabelecimentoModel Salvar(ConfigEstabelecimentoModel configEstabelecimento)
         {
             return ConfigEstabelecimentoDAO.Salvar(configEstabelecimento);
         }

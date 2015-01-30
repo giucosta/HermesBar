@@ -26,7 +26,7 @@ namespace DAO.Estabelecimento
 
                 Connection.ExecutarComando(comando);
 
-                return RetornaConfigEstabelecimento(configEstabelecimento);
+                return RecuperaConfigEstabelecimentoPeloId(RecuperaUltimoIdCadastrado());
             }
             catch (Exception e)
             {
@@ -34,23 +34,29 @@ namespace DAO.Estabelecimento
                 return null;
             }
         }
-
-        private ConfigEstabelecimentoModel RetornaConfigEstabelecimento(ConfigEstabelecimentoModel configEstabelecimento)
+        private int RecuperaUltimoIdCadastrado()
         {
             try
             {
-                var sql = "SELECT MAX(Id_ConfigEstabelecimento) FROM ConfigEstabelecimento";
+                var sql = "SELECT MAX(Id_ConfigEstabelecimento) as Id_ConfigEstabelecimento FROM ConfigEstabelecimento";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                
-                return CarregaConfigEstabelecimento(Connection.getDataTable(comando));
+
+                return (int)Connection.getDataTable(comando).Rows[0]["Id_ConfigEstabelecimento"];
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("RetornaConfigestabelecimento","ConfigEstabelecimentoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                return 0;
             }
         }
+        private ConfigEstabelecimentoModel RecuperaConfigEstabelecimentoPeloId(int id)
+        {
+            var sql = "SELECT * FROM ConfigEstabelecimento WHERE Id_ConfigEstabelecimento = @id";
+            var comando = new SqlCommand(sql, Connection.GetConnection());
+            comando.Parameters.AddWithValue("@id",id);
 
+            return CarregaConfigEstabelecimento(Connection.getDataTable(comando));
+        }
         private ConfigEstabelecimentoModel CarregaConfigEstabelecimento(DataTable dataTable)
         {
             if (dataTable.Rows.Count != 0)
@@ -59,6 +65,10 @@ namespace DAO.Estabelecimento
                 configEstabelecimento.Id = (int)dataTable.Rows[0]["Id_ConfigEstabelecimento"];
                 configEstabelecimento.QuantidadeMesas = (int)dataTable.Rows[0]["QuantidadeMesa"];
                 configEstabelecimento.TaxaServico = (int)dataTable.Rows[0]["TaxaServico"];
+                if ((int)dataTable.Rows[0]["AgruparItensQuantidade"] == 1)
+                    configEstabelecimento.AgruparItensQuantidade = true;
+                else
+                    configEstabelecimento.AgruparItensQuantidade = false;
 
                 return configEstabelecimento;
             }
