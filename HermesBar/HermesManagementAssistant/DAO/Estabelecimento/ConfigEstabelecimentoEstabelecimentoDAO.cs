@@ -12,14 +12,14 @@ namespace DAO.Estabelecimento
 {
     public class ConfigEstabelecimentoEstabelecimentoDAO
     {
-        public bool Salvar(EstabelecimentoModel estabelecimento, ConfigEstabelecimentoModel configEstabelecimento)
+        public bool Salvar(EstabelecimentoModel estabelecimento)
         {
             try
             {
                 var sql = "INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES(@idEstabelecimento, @idConfigEstabelecimento)";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
-                comando.Parameters.AddWithValue("@idConfigEstabelecimento", configEstabelecimento.Id);
+                comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
 
                 Connection.ExecutarComando(comando);
                 return true;

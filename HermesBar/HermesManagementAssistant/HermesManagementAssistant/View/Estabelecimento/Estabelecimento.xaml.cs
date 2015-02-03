@@ -116,9 +116,9 @@ namespace HermesManagementAssistant.View.Estabelecimento
             estabelecimento.NomeFantasia = tbNomeFantasia.Text;
             estabelecimento.Cnpj = tbCnpj.Text;
             estabelecimento.InscEstadual = tbInscEstadual.Text;
-            estabelecimento.Endereco = SalvarEndereco(CarregaEnderecoEstabelecimento());
-            estabelecimento.Contato = SalvarContatoEstabelecimento(CarregaContatoEstabelecimento());
-            estabelecimento.ConfigEstabelecimento = SalvarConfiguracoesEstabelecimento(CarregaConfiguracaoEstabelecimento());
+            estabelecimento.Endereco = CarregaEnderecoEstabelecimento();
+            estabelecimento.Contato = CarregaContatoEstabelecimento();
+            estabelecimento.ConfigEstabelecimento = CarregaConfiguracaoEstabelecimento();
 
             return estabelecimento;
         }
@@ -135,11 +135,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
             return endereco;
         }
 
-        private EnderecoModel SalvarEndereco(EnderecoModel endereco)
-        {
-            return EnderecoBLL.Salvar(endereco);
-        }
-
         private ContatoModel CarregaContatoEstabelecimento()
         {
             var contato = new ContatoModel();
@@ -149,11 +144,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
             contato.Site = tbSite.Text;
             contato.Telefone = tbTelefone.Text;
             return contato;
-        }
-
-        private ContatoModel SalvarContatoEstabelecimento(ContatoModel contato)
-        {
-            return ContatoBLL.Salvar(contato);
         }
 
         private ConfigEstabelecimentoModel CarregaConfiguracaoEstabelecimento()
@@ -169,11 +159,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
 
             return configEstabelecimento;
 
-        }
-
-        private ConfigEstabelecimentoModel SalvarConfiguracoesEstabelecimento(ConfigEstabelecimentoModel configEstabelecimento)
-        {
-            return ConfigEstabelecimentoBLL.Salvar(configEstabelecimento);
         }
     }
 }

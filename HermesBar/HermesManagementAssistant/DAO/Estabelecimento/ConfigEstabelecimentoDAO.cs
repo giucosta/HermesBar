@@ -13,16 +13,16 @@ namespace DAO.Estabelecimento
 {
     public class ConfigEstabelecimentoDAO
     {
-        public ConfigEstabelecimentoModel Salvar(ConfigEstabelecimentoModel configEstabelecimento)
+        public ConfigEstabelecimentoModel Salvar(ConfigEstabelecimentoModel ConfigEstabelecimento)
         {
             try
             {
                 var sql = @"INSERT INTO ConfigEstabelecimento VALUES(@AgruparItensQuantidade,@TipoSistema,@QuantidadeMesa,@TaxaServico)";
                 var comando = new SqlCommand(sql,Connection.GetConnection());
-                comando.Parameters.AddWithValue("@AgruparItensQuantidade",configEstabelecimento.AgruparItensQuantidade);
-                comando.Parameters.AddWithValue("@TipoSistema",configEstabelecimento.TipoSistema);
-                comando.Parameters.AddWithValue("@QuantidadeMesa",configEstabelecimento.QuantidadeMesas);
-                comando.Parameters.AddWithValue("@TaxaServico",configEstabelecimento.TaxaServico);
+                comando.Parameters.AddWithValue("@AgruparItensQuantidade",ConfigEstabelecimento.AgruparItensQuantidade);
+                comando.Parameters.AddWithValue("@TipoSistema",ConfigEstabelecimento.TipoSistema);
+                comando.Parameters.AddWithValue("@QuantidadeMesa",ConfigEstabelecimento.QuantidadeMesas);
+                comando.Parameters.AddWithValue("@TaxaServico",ConfigEstabelecimento.TaxaServico);
 
                 Connection.ExecutarComando(comando);
 
@@ -73,6 +73,10 @@ namespace DAO.Estabelecimento
                 return configEstabelecimento;
             }
             return null;
+        }
+        public bool SalvarConfigEstabelecimentoEstabelecimento(EstabelecimentoModel estabelecimento)
+        {
+            return new ConfigEstabelecimentoEstabelecimentoDAO().Salvar(estabelecimento);
         }
     }
 }
