@@ -63,9 +63,9 @@ namespace DAO.Estabelecimento
             {
                 var configEstabelecimento = new ConfigEstabelecimentoModel();
                 configEstabelecimento.Id = (int)dataTable.Rows[0]["Id_ConfigEstabelecimento"];
-                configEstabelecimento.QuantidadeMesas = (int)dataTable.Rows[0]["QuantidadeMesa"];
-                configEstabelecimento.TaxaServico = (int)dataTable.Rows[0]["TaxaServico"];
-                if ((int)dataTable.Rows[0]["AgruparItensQuantidade"] == 1)
+                configEstabelecimento.QuantidadeMesas = int.Parse(dataTable.Rows[0]["QuantidadeMesa"].ToString());
+                configEstabelecimento.TaxaServico = int.Parse(dataTable.Rows[0]["TaxaServico"].ToString());
+                if (dataTable.Rows[0]["AgruparItensQuantidade"].ToString().Equals("1"))
                     configEstabelecimento.AgruparItensQuantidade = true;
                 else
                     configEstabelecimento.AgruparItensQuantidade = false;

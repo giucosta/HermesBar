@@ -58,5 +58,8 @@ namespace Utils
         public const string ENDERECO_CADASTRO_ERRO = "Erro ao cadastrar endereço";
         //CADASTRO CONTATO
         public const string CONTATO_CADASTRO_ERRO = "Erro ao salvar contato";
+        //CADASTRO ESTABELECIMENTO
+        public const string ESTABELECIMENTO_CADASTRO_SUCESSO = "Estabelecimento salvo com sucesso!";
+        public const string ESTABELECIMENTO_CADASTRO_ERRO = "Erro ao salvar o estabelecimento!";
     }
 }

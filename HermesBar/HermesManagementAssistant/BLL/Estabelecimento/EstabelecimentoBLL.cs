@@ -72,8 +72,13 @@ namespace BLL.Estabelecimento
                 estabelecimento.Contato = ContatoDAO.Salvar(estabelecimento.Contato);
                 estabelecimento.ConfigEstabelecimento = ConfigEstabelecimentoDAO.Salvar(estabelecimento.ConfigEstabelecimento);
 
-                if(ConfigEstabelecimentoEstabelecimentoDAO.Salvar(estabelecimento))
-                    return EstabelecimentoDAO.Salvar(estabelecimento);
+                var estabelecimentoSalvo = EstabelecimentoDAO.Salvar(estabelecimento);
+                if (estabelecimentoSalvo != null)
+                {
+                    estabelecimentoSalvo.ConfigEstabelecimento = new ConfigEstabelecimentoModel();
+                    estabelecimentoSalvo.ConfigEstabelecimento = estabelecimentoSalvo.ConfigEstabelecimento;
+                    return ConfigEstabelecimentoEstabelecimentoDAO.Salvar(estabelecimentoSalvo);
+                }
             }
             return false;
         }

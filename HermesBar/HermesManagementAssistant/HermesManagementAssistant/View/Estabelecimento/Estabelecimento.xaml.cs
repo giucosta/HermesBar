@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Utils;
 using UTILS;
 
 namespace HermesManagementAssistant.View.Estabelecimento
@@ -85,7 +86,10 @@ namespace HermesManagementAssistant.View.Estabelecimento
 
         private void GravarEstabelecimento(object sender, RoutedEventArgs e)
         {
-            EstabelecimentoBLL.Salvar(CarregaModelEstabelecimento());
+            if (EstabelecimentoBLL.Salvar(CarregaModelEstabelecimento()))
+                Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ESTABELECIMENTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+            else
+                Mensagens.GeraMensagens("Erro ao salvar",MENSAGEM.ESTABELECIMENTO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
         }
         private void GerenciaCamposEstabelecimentoSemConexao()
         {

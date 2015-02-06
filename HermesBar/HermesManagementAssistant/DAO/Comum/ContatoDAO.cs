@@ -63,7 +63,7 @@ namespace DAO.Comum
                 comando.Parameters.AddWithValue("@Nome", "%" + contato.Nome + "%");
                 comando.Parameters.AddWithValue("@Email", "%" + contato.Email + "%");
 
-                return CarregaModel(Connection.getDataTable(comando));
+                return CarregaContato(Connection.getDataTable(comando));
             }
             catch (Exception e)
             {
@@ -90,17 +90,38 @@ namespace DAO.Comum
             return contatoList;
         }
 
-        public ContatoModel CarregaModel(DataTable data)
+        private ContatoModel CarregaContato(DataTable data)
         {
-            var contato = new ContatoModel();
-            contato.Id = (int)data.Rows[0]["Id_Contato"];
-            contato.Nome = data.Rows[0]["Nome"].ToString();
-            contato.Telefone = data.Rows[0]["Telefone"].ToString();
-            contato.Celular = data.Rows[0]["Celular"].ToString();
-            contato.Email = data.Rows[0]["Email"].ToString();
-            contato.Site = data.Rows[0]["Site"].ToString();
+            if (data != null)
+            {
+                var contato = new ContatoModel();
+                contato.Id = (int)data.Rows[0]["Id_Contato"];
+                contato.Nome = data.Rows[0]["Nome"].ToString();
+                contato.Telefone = data.Rows[0]["Telefone"].ToString();
+                contato.Celular = data.Rows[0]["Celular"].ToString();
+                contato.Email = data.Rows[0]["Email"].ToString();
+                contato.Site = data.Rows[0]["Site"].ToString();
 
-            return contato;
+                return contato;
+            }
+            return null;
+            
+        }
+        public ContatoModel RecuperaContatoPeloId(int id)
+        {
+            try
+            {
+                var sql = "SELECT * FROM Contato WHERE Id_Contato = @Id";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+                comando.Parameters.AddWithValue("Id", id);
+
+                return CarregaContato(Connection.getDataTable(comando));
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaContatoPeloId","ContatoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace DAO.Comum
 {
@@ -57,18 +58,39 @@ namespace DAO.Comum
         }
         private EnderecoModel CarregaEndereco(DataTable endereco)
         {
-            var end = new EnderecoModel();
-            end.Id = (int)endereco.Rows[0]["Id_Endereco"];
-            end.Rua = endereco.Rows[0]["Rua"].ToString();
-            end.Numero = endereco.Rows[0]["Numero"].ToString();
-            end.Complemento = endereco.Rows[0]["Complemento"].ToString();
-            end.Bairro = endereco.Rows[0]["Bairro"].ToString();
-            end.Cep = endereco.Rows[0]["Cep"].ToString();
-            end.Cidade = endereco.Rows[0]["Cidade"].ToString();
-            end.Estado = endereco.Rows[0]["Estado"].ToString();
-            end.Tipo = new TipoEnderecoModel() { Tipo = endereco.Rows[0]["TipoEndereco"].ToString() };
+            if (endereco != null)
+            {
+                var end = new EnderecoModel();
+                end.Id = (int)endereco.Rows[0]["Id_Endereco"];
+                end.Rua = endereco.Rows[0]["Rua"].ToString();
+                end.Numero = endereco.Rows[0]["Numero"].ToString();
+                end.Complemento = endereco.Rows[0]["Complemento"].ToString();
+                end.Bairro = endereco.Rows[0]["Bairro"].ToString();
+                end.Cep = endereco.Rows[0]["Cep"].ToString();
+                end.Cidade = endereco.Rows[0]["Cidade"].ToString();
+                end.Estado = endereco.Rows[0]["Estado"].ToString();
+                end.Tipo = new TipoEnderecoModel() { Tipo = endereco.Rows[0]["TipoEndereco"].ToString() };
 
-            return end;
+                return end;
+            }
+            return null;
+        }
+
+        public EnderecoModel RecuperaEnderecoPeloId(int id)
+        {
+            try
+            {
+                var sql = "SELECT * FROM Endereco WHERE Id_Endereco = @Id";
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+                comando.Parameters.AddWithValue("Id",id);
+
+                return CarregaEndereco(Connection.getDataTable(comando));
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaEnderecoPeloId","EnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
         }
     }
 }
