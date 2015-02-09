@@ -61,7 +61,6 @@ namespace DAO.Funcionario
         {
             try
             {
-
                 var sql = "SELECT * FROM Funcionario WHERE Nome LIKE @Nome OR Id_Funcionario = @Codigo";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");

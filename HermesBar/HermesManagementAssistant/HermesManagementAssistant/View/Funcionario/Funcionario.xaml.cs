@@ -47,12 +47,5 @@ namespace HermesManagementAssistant.View.Funcionario
             new FuncionarioCadastro().Show();
             this.Close();
         }
-
-        private bool VerificaCampos()
-        {
-            if (string.IsNullOrEmpty(tbNome.Text) || string.IsNullOrEmpty(tbCodigo.Text))
-                return false;
-            return true;
-        }
     }
 }
