@@ -12,7 +12,7 @@
                     <Label x:Name="lbFantasia" Content="Nome Fantasia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,72,0,0" FontWeight="Bold"/>
                     <TextBox x:Name="tbNomeFantasia" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="459" Margin="141,75,0,0"/>
                     <Label x:Name="lbCnpj" Content="Cnpj" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,103,0,0" FontWeight="Bold"/>
-                    <TextBox x:Name="tbCnpj" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" Margin="141,105,0,0"/>
+                    <TextBox x:Name="tbCnpj" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" Margin="141,105,0,0" KeyDown="AplicarMascaraCnjp"/>
                     <Label x:Name="lbInscEstadual" Content="Insc. Estadual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="302,105,0,0" FontWeight="Bold"/>
                     <TextBox x:Name="tbInscEstadual" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="203" Margin="395,106,0,0"/>
                     <GroupBox Header="Endereço" HorizontalAlignment="Left" Margin="31,172,0,0" VerticalAlignment="Top" Height="214" Width="591" BorderBrush="#FF0F9BF0"/>

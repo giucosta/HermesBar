@@ -62,7 +62,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Utils\ConsultaCeps.cs" />
+    <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
+    <Compile Include="Utils\Verificadores.cs" />
     <Compile Include="View\Atracoes\AtracoesView.xaml.cs">
       <DependentUpon>AtracoesView.xaml</DependentUpon>
     </Compile>

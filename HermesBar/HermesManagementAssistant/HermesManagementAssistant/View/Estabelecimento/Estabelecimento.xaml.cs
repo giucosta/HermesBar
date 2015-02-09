@@ -164,5 +164,10 @@ namespace HermesManagementAssistant.View.Estabelecimento
             return configEstabelecimento;
 
         }
+
+        public void AplicarMascaraCnjp(Object e, KeyEventArgs c)
+        {
+            Mascaras.VerificaMascaraCnpj(tbCnpj, c);
+        }
     }
 }
