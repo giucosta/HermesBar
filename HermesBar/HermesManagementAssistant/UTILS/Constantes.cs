@@ -50,5 +50,13 @@ namespace UTILS
             public const string MESA = "M";
             public const string COMANDA = "C";
         }
+        public static class AUnidadeProduto
+        {
+            public const string LITRO = "LT";
+            public const string KILO = "KG";
+            public const string GRAMA = "GR";
+            public const string ML = "ML";
+            public const string LATA = "LATA";
+        }
     }
 }

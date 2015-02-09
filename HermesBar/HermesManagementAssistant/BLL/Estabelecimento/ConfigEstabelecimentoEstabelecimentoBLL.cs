@@ -10,7 +10,7 @@ namespace BLL.Estabelecimento
 {
     public class ConfigEstabelecimentoEstabelecimentoBLL
     {
-        private ConfigEstabelecimentoEstabelecimentoDAO _configEstabelecimentoEstabelecimentoDAO = null;
+        private ConfigEstabelecimentoEstabelecimentoDAO _configEstabelecimentoEstabelecimentoDAO;
         public ConfigEstabelecimentoEstabelecimentoDAO ConfigEstabelecimentoEstabelecimentoDAO
         {
             get
@@ -20,7 +20,6 @@ namespace BLL.Estabelecimento
                 return _configEstabelecimentoEstabelecimentoDAO;
             }
         }
-
         public bool Salvar(EstabelecimentoModel estabelecimento)
         {
             return ConfigEstabelecimentoEstabelecimentoDAO.Salvar(estabelecimento);

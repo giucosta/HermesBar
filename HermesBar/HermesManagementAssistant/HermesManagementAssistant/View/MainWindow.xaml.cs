@@ -55,5 +55,10 @@ namespace HermesManagementAssistant
         {
             new Estabelecimento().Show();
         }
+
+        private void PesquisaProdutos(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
