@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace UTILS
@@ -59,7 +60,6 @@ namespace UTILS
                     return false;
             return true;
         }
-
         public static bool ValidaCNPJ(string vrCNPJ)
         {
             string CNPJ = vrCNPJ.Replace(".", "");
@@ -105,6 +105,13 @@ namespace UTILS
             {
                 return false;
             }
+        }
+        public static bool ValidarEmail(string vrEMAIL)
+        { 
+            if (string.IsNullOrEmpty(vrEMAIL))
+                return true;
+            Regex regEx = new Regex(@"^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]$", RegexOptions.IgnoreCase);
+            return regEx.IsMatch(vrEMAIL);
         }
     }
 }

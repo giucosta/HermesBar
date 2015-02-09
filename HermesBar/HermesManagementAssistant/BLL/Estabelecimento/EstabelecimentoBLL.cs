@@ -1,4 +1,5 @@
-﻿using DAO.Comum;
+﻿using BLL.Comum;
+using DAO.Comum;
 using DAO.Estabelecimento;
 using MODEL.Estabelecimento;
 using System;
@@ -23,44 +24,45 @@ namespace BLL.Estabelecimento
                 return _estabelecimentoDAO;
             }
         }
-        private EnderecoDAO _enderecoDAO = null;
-        public EnderecoDAO EnderecoDAO
+        private EnderecoBLL _enderecoBLL = null;
+        public EnderecoBLL EnderecoBLL
         {
             get
             {
-                if (_enderecoDAO == null)
-                    _enderecoDAO = new EnderecoDAO();
-                return _enderecoDAO;
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
             }
         }
         private ContatoDAO _contatoDAO = null;
-        public ContatoDAO ContatoDAO
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatoBLL
         {
             get
             {
-                if (_contatoDAO == null)
-                    _contatoDAO = new ContatoDAO();
-                return _contatoDAO;
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
             }
         }
-        private ConfigEstabelecimentoDAO _configEstabelecimentoDAO = null;
-        public ConfigEstabelecimentoDAO ConfigEstabelecimentoDAO
+        private ConfigEstabelecimentoBLL _configEstabelecimentoBLL = null;
+        public ConfigEstabelecimentoBLL ConfigEstabelecimentoBLL
         {
             get
             {
-                if (_configEstabelecimentoDAO == null)
-                    _configEstabelecimentoDAO = new ConfigEstabelecimentoDAO();
-                return _configEstabelecimentoDAO;
+                if (_configEstabelecimentoBLL == null)
+                    _configEstabelecimentoBLL = new ConfigEstabelecimentoBLL();
+                return _configEstabelecimentoBLL;
             }
         }
-        private ConfigEstabelecimentoEstabelecimentoDAO _configEstabelecimentoEstabelecimentoDAO = null;
-        public ConfigEstabelecimentoEstabelecimentoDAO ConfigEstabelecimentoEstabelecimentoDAO
+        private ConfigEstabelecimentoEstabelecimentoBLL _configEstabelecimentoEstabelecimentoBLL = null;
+        public ConfigEstabelecimentoEstabelecimentoBLL ConfigEstabelecimentoEstabelecimentoBLL
         {
             get
             {
-                if (_configEstabelecimentoEstabelecimentoDAO == null)
-                    _configEstabelecimentoEstabelecimentoDAO = new ConfigEstabelecimentoEstabelecimentoDAO();
-                return _configEstabelecimentoEstabelecimentoDAO;
+                if (_configEstabelecimentoEstabelecimentoBLL == null)
+                    _configEstabelecimentoEstabelecimentoBLL = new ConfigEstabelecimentoEstabelecimentoBLL();
+                return _configEstabelecimentoEstabelecimentoBLL;
             }
         }
         #endregion
@@ -68,16 +70,16 @@ namespace BLL.Estabelecimento
         {
             if (Validacoes.ValidaCNPJ(estabelecimento.Cnpj))
             {
-                estabelecimento.Endereco = EnderecoDAO.Salvar(estabelecimento.Endereco);
-                estabelecimento.Contato = ContatoDAO.Salvar(estabelecimento.Contato);
-                estabelecimento.ConfigEstabelecimento = ConfigEstabelecimentoDAO.Salvar(estabelecimento.ConfigEstabelecimento);
+                estabelecimento.Endereco = EnderecoBLL.Salvar(estabelecimento.Endereco);
+                estabelecimento.Contato = ContatoBLL.Salvar(estabelecimento.Contato);
+                estabelecimento.ConfigEstabelecimento = ConfigEstabelecimentoBLL.Salvar(estabelecimento.ConfigEstabelecimento);
 
                 var estabelecimentoSalvo = EstabelecimentoDAO.Salvar(estabelecimento);
                 if (estabelecimentoSalvo != null)
                 {
                     estabelecimentoSalvo.ConfigEstabelecimento = new ConfigEstabelecimentoModel();
                     estabelecimentoSalvo.ConfigEstabelecimento = estabelecimentoSalvo.ConfigEstabelecimento;
-                    return ConfigEstabelecimentoEstabelecimentoDAO.Salvar(estabelecimentoSalvo);
+                    return ConfigEstabelecimentoEstabelecimentoBLL.Salvar(estabelecimentoSalvo);
                 }
             }
             return false;

@@ -77,13 +77,13 @@ namespace HermesManagementAssistant.View.Estabelecimento
 
         private void ConsultaCep_Click(object sender, RoutedEventArgs e)
         {
+            lbCepNaoExistente.Visibility = System.Windows.Visibility.Hidden;
             if (!ConsultaCeps.ConsultarCep(tbRua, tbCidade, tbBairro, cbEstado, tbCep))
             {
                 lbCepNaoExistente.Visibility = System.Windows.Visibility.Visible;
                 LimparCamposEndereco();
             }
         }
-
         private void GravarEstabelecimento(object sender, RoutedEventArgs e)
         {
             if (EstabelecimentoBLL.Salvar(CarregaModelEstabelecimento()))
@@ -104,7 +104,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
                 btConsultaCep.Visibility = System.Windows.Visibility.Hidden;
             }
         }
-
         private void LimparCamposEndereco()
         {
             tbRua.Text = "";
@@ -112,7 +111,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
             tbBairro.Text = "";
             cbEstado.SelectedIndex = 0;
         }
-
         private EstabelecimentoModel CarregaModelEstabelecimento()
         {
             var estabelecimento = new EstabelecimentoModel();
@@ -138,7 +136,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
 
             return endereco;
         }
-
         private ContatoModel CarregaContatoEstabelecimento()
         {
             var contato = new ContatoModel();
@@ -149,7 +146,6 @@ namespace HermesManagementAssistant.View.Estabelecimento
             contato.Telefone = tbTelefone.Text;
             return contato;
         }
-
         private ConfigEstabelecimentoModel CarregaConfiguracaoEstabelecimento()
         {
             var configEstabelecimento = new ConfigEstabelecimentoModel();
@@ -164,10 +160,17 @@ namespace HermesManagementAssistant.View.Estabelecimento
             return configEstabelecimento;
 
         }
-
-        public void AplicarMascaraCnjp(Object e, KeyEventArgs c)
+        private void AplicarMascaraCnjp(Object e, KeyEventArgs c)
         {
             Mascaras.VerificaMascaraCnpj(tbCnpj, c);
+        }
+        private void AplicarMascaraTelefone(Object e, KeyEventArgs c)
+        {
+            Mascaras.AplicaMascaraTelefone(tbTelefone, c);
+        }
+        private void AplicarMascaraCelular(Object e, KeyEventArgs c)
+        {
+            Mascaras.AplicaMascaraTelefone(tbCelular, c);
         }
     }
 }

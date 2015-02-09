@@ -11,12 +11,6 @@ namespace HermesManagementAssistant.Utils
 {
     class Mascaras : Window
     {
-        public static TextBox AplicarCnpj(TextBox textBox)
-        {
-            textBox.Text = @"  .   .   /    -  ";
-            return textBox;
-        }
-
         public static TextBox VerificaMascaraCnpj(TextBox textBox, KeyEventArgs e){
             if (Verificadores.VerificaNumero(textBox.Text))
             {
@@ -44,6 +38,30 @@ namespace HermesManagementAssistant.Utils
                 }
                 else
                     return textBox;
+            }
+            textBox.Text = "";
+            return textBox;
+        }
+
+        public static TextBox AplicaMascaraTelefone(TextBox textBox, KeyEventArgs e){
+            if (Verificadores.VerificaNumero(textBox.Text))
+            {
+                if (textBox.Text.Length == 10)
+                {
+                    char[] caracter = textBox.Text.ToCharArray();
+                    var telefone = "(";
+                    for (int i = 0; i < 2; i++)
+                        telefone += caracter[i];
+                    telefone += ")";
+                    for (int i = 2; i < 6; i++)
+                        telefone += caracter[i];
+                    telefone += "-";
+                    for (int i = 6; i < 10; i++)
+                        telefone += caracter[i];
+
+                    textBox.Text = telefone;
+                }
+                return textBox;
             }
             textBox.Text = "";
             return textBox;

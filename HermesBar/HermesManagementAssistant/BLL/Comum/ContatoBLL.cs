@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace BLL.Comum
 {
@@ -23,7 +24,9 @@ namespace BLL.Comum
 
         public ContatoModel Salvar(ContatoModel contato)
         {
-            return DAO.Salvar(contato);
+            if(Validacoes.ValidarEmail(contato.Email))
+                return DAO.Salvar(contato);
+            return null;
         }
     }
 }
