@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MODEL
+namespace DAO.Abstract
 {
-    public class FuncaoModel
+    public interface IDAO<T>
     {
-        public int Id_Funcao { get; set; }
-        public string DescFuncao { get; set; }
+        bool Salvar(T objeto);
+        bool Excluir(T objeto);
     }
 }

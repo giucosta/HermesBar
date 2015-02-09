@@ -14,8 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
 using BLL.Login;
-using MODEL.Login;
+using BLL.Session;
 using MODEL;
+using Utils;
 
 namespace HermesManagementAssistant.View.Login
 {
@@ -36,21 +37,22 @@ namespace HermesManagementAssistant.View.Login
 
         private void btEntrar_Click(object sender, RoutedEventArgs e)
         {
-
-            var usuario = new MODEL.UsuarioModel()
+            var login = new LoginModel()
             {
-                Senha = tbSenha.Password,
-                Nome = tbLogin.Text
+                Login = tbLogin.Text,
+                Senha = tbSenha.Password
             };
-
-            if (new LoginBLL().EfetuaLogin(new LoginModel() { Usuario = usuario }))
+            if (new LoginBLL().EfetuaLogin(login))
+            {
+                new SessionBLL().CarregaSession(login);
                 new MainWindow().Show();
+                this.Close();
+            }    
             else
             {
-                MessageBox.Show("Login e/ou senha inválido", "Login e/ou senha inválido !", MessageBoxButton.OK, MessageBoxImage.Error);
+                Mensagens.GeraMensagens(MENSAGEM.LOGIN_INVALIDO, MENSAGEM.LOGIN_INVALIDO, null,TIPOS_MENSAGENS.ERRO );
                 limparCampos();
-            }
-                
+            }    
         }
 
         private void limparCampos()
@@ -63,15 +65,14 @@ namespace HermesManagementAssistant.View.Login
         {
             if (!string.IsNullOrWhiteSpace(tbLogin.Text))
             {
-                var usuario = new UsuarioModel() { Nome = tbLogin.Text };
-                if (new LoginBLL().EsqueceuSenha(new LoginModel() { Usuario = usuario }))
-                    MessageBox.Show("Sua nova senha foi enviada para o email cadastrado!", "Email enviado", MessageBoxButton.OK, MessageBoxImage.Information);
+                if (new LoginBLL().EsqueceuSenha(new LoginModel() { Login = tbLogin.Text }))
+                    Mensagens.GeraMensagens("Email enviado", MENSAGEM.NOVA_SENHA_EMAIL, null, TIPOS_MENSAGENS.SUCESSO);
                 else
-                    MessageBox.Show("Ocorreu um erro ao enviar email, favor consultar o administrador do sistema", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Mensagens.GeraMensagens("Erro",MENSAGEM.ERRO_ENVIA_EMAIL,null,TIPOS_MENSAGENS.ERRO);
             }
             else
             {
-                MessageBox.Show("Favor preencher o campo LOGIN", "Preencha os campos", MessageBoxButton.OK, MessageBoxImage.Warning);
+                Mensagens.GeraMensagens("Preencha os campos",MENSAGEM.PREENCHE_CAMPO_LOGIN,null,TIPOS_MENSAGENS.ALERTA);
                 tbLogin.Focus();
             }
         }

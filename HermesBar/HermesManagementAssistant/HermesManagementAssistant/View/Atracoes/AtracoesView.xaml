@@ -1,0 +1,15 @@
+﻿<Window x:Name="view_Atracoes" x:Class="HermesManagementAssistant.View.Atracoes.AtracoesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Atrações" Background="#FF9C9C9C" Height="349.624" Width="509.774" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="lbNome" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,15,0,0"/>
+        <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Margin="107,10,0,0"/>
+        <Label x:Name="lbEstilo" Content="Estilo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,58,0,0"/>
+        <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="370" Margin="107,62,0,0"/>
+        <DataGrid x:Name="dgPesquisa" HorizontalAlignment="Left" Margin="32,184,0,0" VerticalAlignment="Top" Height="125" Width="445"/>
+        <Button x:Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" Margin="32,103,0,0" VerticalAlignment="Top" Width="75" Click="btPesquisar_Click"/>
+        <Button x:Name="btNovo" Content="Novo" HorizontalAlignment="Left" Margin="33,159,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold" Click="btNovo_Click"/>
+
+    </Grid>
+</Window>

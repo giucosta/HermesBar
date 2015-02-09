@@ -34,9 +34,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ConsultaCep">
+      <HintPath>.\ConsultaCep.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -45,15 +50,62 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Utils\ConsultaCeps.cs" />
+    <Compile Include="Utils\Mascaras.cs" />
+    <Compile Include="Utils\Mensagens.cs" />
+    <Compile Include="Utils\Verificadores.cs" />
+    <Compile Include="View\Atracoes\AtracoesView.xaml.cs">
+      <DependentUpon>AtracoesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Atracoes\CadastroAtracoesView.xaml.cs">
+      <DependentUpon>CadastroAtracoesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Estabelecimento\Estabelecimento.xaml.cs">
+      <DependentUpon>Estabelecimento.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Funcionario\Funcionario.xaml.cs">
+      <DependentUpon>Funcionario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Funcionario\FuncionarioCadastro.xaml.cs">
+      <DependentUpon>FuncionarioCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usuario\Usuario.xaml.cs">
+      <DependentUpon>Usuario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Usuario\UsuarioCadastro.xaml.cs">
+      <DependentUpon>UsuarioCadastro.xaml</DependentUpon>
+    </Compile>
+    <Page Include="View\Atracoes\AtracoesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Atracoes\CadastroAtracoesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Estabelecimento\Estabelecimento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Funcionario\Funcionario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Funcionario\FuncionarioCadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +125,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\Usuario\Usuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Usuario\UsuarioCadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -117,6 +177,19 @@
       <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UTILS\UTILS.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTILS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\settings48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\businessman1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

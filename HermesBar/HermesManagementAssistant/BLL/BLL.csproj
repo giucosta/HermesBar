@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ConsultaCep">
+      <HintPath>..\HermesManagementAssistant\ConsultaCep.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,8 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Atracoes\AtracoesBLL.cs" />
+    <Compile Include="Comum\ContatoBLL.cs" />
+    <Compile Include="Comum\EnderecoBLL.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoBLL.cs" />
+    <Compile Include="Estabelecimento\EstabelecimentoBLL.cs" />
+    <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
+    <Compile Include="Perfil\PerfilBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\SessionBLL.cs" />
+    <Compile Include="Funcionario\TipoFuncionarioBLL.cs" />
+    <Compile Include="Usuario\UsuarioBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj">
@@ -50,6 +64,10 @@
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
       <Name>MODEL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UTILS\UTILS.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTILS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
