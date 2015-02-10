@@ -56,7 +56,6 @@ namespace DAO.Estabelecimento
                 return null;
             }
         }
-
         private int RetornaUltimoId()
         {
             try
@@ -75,7 +74,6 @@ namespace DAO.Estabelecimento
             }
             
         }
-
         private EstabelecimentoModel RetornaUltimoEstabelecimentoSalvo()
         {
             var idEstabelecimento = RetornaUltimoId();
@@ -88,7 +86,6 @@ namespace DAO.Estabelecimento
 
             return PreencheEstabelecimento(Connection.getDataTable(comando));
         }
-
         private EstabelecimentoModel PreencheEstabelecimento(DataTable data)
         {
             if (data != null)

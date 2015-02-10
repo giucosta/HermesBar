@@ -42,6 +42,5 @@ namespace HermesManagementAssistant.Utils
             }
             return false;
         }
-         
     }
 }
