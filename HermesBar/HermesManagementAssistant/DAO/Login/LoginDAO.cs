@@ -23,15 +23,13 @@ namespace DAO.Login
                 string sql = "SELECT * FROM Login WHERE Login = @Login";
                 
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+                comando.Parameters.AddWithValue("@Login",login.Login);
 
                 if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable(comando).Rows[0]["Senha"].ToString())))
                 {
                     AlteraUltimaDataAcesso(login);
                     return true;
                 }
-                    
-
                 return false;
             }
             catch (Exception e)
@@ -48,7 +46,7 @@ namespace DAO.Login
                 string sql = "SELECT * FROM Login WHERE Login = @Login";
 
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+                comando.Parameters.AddWithValue("@login",login.Login);
 
                 var dataTable = Connection.getDataTable(comando);
 
@@ -101,9 +99,9 @@ namespace DAO.Login
                                 null
                             )";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login",login.Login));
-                comando.Parameters.Add(new SqlParameter("@Senha",Encript.EncriptMd5.Criptografar(login.Senha)));
-
+                comando.Parameters.AddWithValue("@Login", login.Login);
+                comando.Parameters.AddWithValue("@Senha",Encript.EncriptMd5.Criptografar(login.Senha));
+                
                 Connection.ExecutarComando(comando);
                 return RecuperaLogin(login);
             }

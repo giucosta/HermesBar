@@ -33,8 +33,8 @@ namespace DAO.Usuario
                             WHERE L.Login = @Login";
 
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
-
+                comando.Parameters.AddWithValue("@Login",login.Login);
+                
                 return Connection.getDataTable(comando).Rows[0]["Email"].ToString();
             }
             catch (Exception e)
@@ -55,8 +55,8 @@ namespace DAO.Usuario
             {
                 string sql = "UPDATE Login SET Senha = @Senha WHERE Login = @Login";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha)));
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
+                comando.Parameters.AddWithValue("@Senha",Encript.EncriptMd5.Criptografar(login.Senha));
+                comando.Parameters.AddWithValue("@Login",login.Login);
 
                 Connection.ExecutarComando(comando);
                 return true;
@@ -80,8 +80,8 @@ namespace DAO.Usuario
             {
                 string sql = @"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
-
+                comando.Parameters.AddWithValue("@Login",login.Login);
+                
                 var dataTable = Connection.getDataTable(comando);
 
                 return new UsuarioModel()
@@ -121,9 +121,9 @@ namespace DAO.Usuario
                                 AND Email LIKE @Email";
 
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Nome", "%" + usuario.Nome + "%"));
-                comando.Parameters.Add(new SqlParameter("@Email", "%" + usuario.Email + "%"));
-
+                comando.Parameters.AddWithValue("@Nome", "%" + usuario.Nome + "%");
+                comando.Parameters.AddWithValue("@Email", "%" + usuario.Email + "%");
+                
                 var dataTable = Connection.getDataTable(comando);
 
                 if (dataTable.Rows.Count == 0)
@@ -144,8 +144,8 @@ namespace DAO.Usuario
             {
                 var sql = "SELECT Count(Nome) AS Quantidade FROM Usuario WHERE Nome = @Nome";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Nome", nome));
-
+                comando.Parameters.AddWithValue("@Nome", nome);
+                
                 if ((int)Connection.getDataTable(comando).Rows[0]["Quantidade"] > 0)
                     return true;
 
@@ -164,11 +164,11 @@ namespace DAO.Usuario
             {
                 var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email )";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("IdLogin", usuario.Login.Id));
-                comando.Parameters.Add(new SqlParameter("@IdPerfil", usuario.Perfil.IdPerfil));
-                comando.Parameters.Add(new SqlParameter("@Nome",usuario.Nome));
-                comando.Parameters.Add(new SqlParameter("@Status", usuario.Status));
-                comando.Parameters.Add(new SqlParameter("@Email", usuario.Email));
+                comando.Parameters.AddWithValue("IdLogin", usuario.Login.Id);
+                comando.Parameters.AddWithValue("@IdPerfil", usuario.Perfil.IdPerfil);
+                comando.Parameters.AddWithValue("@Nome", usuario.Nome);
+                comando.Parameters.AddWithValue("@Status", usuario.Status);
+                comando.Parameters.AddWithValue("@Email", usuario.Email);
 
                 Connection.ExecutarComando(comando);
                 return true;

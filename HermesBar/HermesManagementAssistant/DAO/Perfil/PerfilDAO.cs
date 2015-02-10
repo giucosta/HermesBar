@@ -25,8 +25,8 @@ namespace DAO.Perfil
                             INNER JOIN Login L ON L.Id_Login = U.Id_Login
                             WHERE L.Login = @Login";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Login", login.Login));
-
+                comando.Parameters.AddWithValue("@Login", login.Login);
+                
                 var dataTable = Connection.getDataTable(comando);
 
                 if (dataTable.Rows.Count == 0)
@@ -73,8 +73,8 @@ namespace DAO.Perfil
             {
                 var sql = @"SELECT Id_Perfil FROM Perfil WHERE Perfil = @Perfil";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Perfil",perfil.Perfil));
-
+                comando.Parameters.AddWithValue("@Perfil",perfil.Perfil);
+                
                 var dataTable = Connection.getDataTable(comando);
                 return (int)dataTable.Rows[0]["Id_Perfil"];
             }

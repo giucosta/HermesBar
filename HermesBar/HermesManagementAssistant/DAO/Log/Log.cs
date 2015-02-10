@@ -17,13 +17,13 @@ namespace DAO.Log
             {
                 var sql = @"INSERT INTO Logs VALUES(@Metodo, @Classe, @Data, @Usuario, @Erro, @Tipo)";
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@Metodo", Metodo));
-                comando.Parameters.Add(new SqlParameter("@Classe", Classe));
-                comando.Parameters.Add(new SqlParameter("@Data", DateTime.Now));
-                comando.Parameters.Add(new SqlParameter("@Usuario", Session.Usuario.Nome));
-                comando.Parameters.Add(new SqlParameter("@Erro", Erro));
-                comando.Parameters.Add(new SqlParameter("@Tipo", Tipo));
-
+                comando.Parameters.AddWithValue("@Metodo", Metodo);
+                comando.Parameters.AddWithValue("@Classe", Classe);
+                comando.Parameters.AddWithValue("@Data",DateTime.Now);
+                comando.Parameters.AddWithValue("@Usuario",Session.Usuario.Nome);
+                comando.Parameters.AddWithValue("@Erro",Erro);
+                comando.Parameters.AddWithValue("@Tipo",Tipo);
+                
                 Connection.ExecutarComando(comando);
             }
             catch (Exception e)

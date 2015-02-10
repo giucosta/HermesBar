@@ -58,5 +58,12 @@ namespace UTILS
             public const string ML = "ML";
             public const string LATA = "LATA";
         }
+
+        public static class AConexaoBanco
+        {
+            public const string SERVER = @"server = GIULIANOCOSTA\SQLEXPRESS;";
+            public const string DATABASE = @"Database = HermesBar;";
+            public const string SEGURANCA = @"integrated security = true;";
+        }
     }
 }
