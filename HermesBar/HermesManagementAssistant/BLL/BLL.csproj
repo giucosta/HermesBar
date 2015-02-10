@@ -51,6 +51,7 @@
     <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />
+    <Compile Include="Produtos\TipoProdutoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\SessionBLL.cs" />
     <Compile Include="Funcionario\TipoFuncionarioBLL.cs" />
