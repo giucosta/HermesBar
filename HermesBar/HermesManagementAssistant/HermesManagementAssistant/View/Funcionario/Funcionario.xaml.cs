@@ -39,7 +39,10 @@ namespace HermesManagementAssistant.View.Funcionario
 
         private void PesquisarFuncionario(object sender, RoutedEventArgs e)
         {
-            gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text , Id = int.Parse(tbCodigo.Text) }).DefaultView;
+            if(!string.IsNullOrWhiteSpace(tbCodigo.Text))
+                gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text , Id = int.Parse(tbCodigo.Text) }).DefaultView;
+            else
+                gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text }).DefaultView;
         }
 
         private void NovoFuncionario(object sender, RoutedEventArgs e)
