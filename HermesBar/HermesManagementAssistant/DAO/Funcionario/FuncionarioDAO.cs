@@ -70,40 +70,13 @@ namespace DAO.Funcionario
                     comando.CommandText = "SELECT * FROM Funcionario WHERE Nome LIKE @Nome AND Id_Funcionario = @Codigo";
                     comando.Parameters.AddWithValue("@Codigo", funcionario.Id);
                 }
-                
-                var dataTable = Connection.getDataTable(comando);
-                return dataTable;
-                //var func = CriaTabelaFuncionario();
-
-                //for (int i = 0; i < dataTable.Rows.Count; i++)
-                //{
-                //    func.Rows.Add(
-                //        dataTable.Rows[i]["Id_funcionario"],
-                //        dataTable.Rows[i]["Nome"],
-                //        dataTable.Rows[i]["Cpf"],
-                //        dataTable.Rows[i]["Rg"],
-                //        String.Format("{0:dd/MM/yyyy}", dataTable.Rows[i]["DataAdmissao"])
-                //    );
-                //}
-                //return func; 
+                return Connection.getDataTable(comando);
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("Pesquisa", "FuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 return null;
             }
-        }
-        private DataTable CriaTabelaFuncionario()
-        {
-            var dataTable = new DataTable();
-
-            dataTable.Columns.Add("Código",typeof(int));
-            dataTable.Columns.Add("Nome", typeof(string));
-            dataTable.Columns.Add("Cpf", typeof(string));
-            dataTable.Columns.Add("Rg", typeof(string));
-            dataTable.Columns.Add("Data de Admissao", typeof(string));
-
-            return dataTable;
         }
     }
 }

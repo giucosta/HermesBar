@@ -39,7 +39,7 @@ namespace BLL.Funcionario
         }
         public List<FuncionarioModel> Pesquisa(FuncionarioModel funcionario)
         {
-            return ConvertDataTableToList(FuncionarioDAO.Pesquisa(funcionario));
+            return FuncionarioDAO.Pesquisa(funcionario).DataTableToList<FuncionarioModel>();
         }
         private bool VerificaIdadeFuncionario(FuncionarioModel funcionario)
         {
@@ -47,22 +47,5 @@ namespace BLL.Funcionario
                 return false;
             return true;
         }
-        private List<FuncionarioModel> ConvertDataTableToList(DataTable func)
-        {
-            var lista = new List<FuncionarioModel>();
-            for (int i = 0; i < func.Rows.Count; i++)
-            {
-                lista.Add(new FuncionarioModel()
-                {
-                    Id = (int)func.Rows[i]["Id_funcionario"],
-                    Nome = func.Rows[i]["Nome"].ToString(),
-                    Cpf = func.Rows[i]["Cpf"].ToString(),
-                    Rg = func.Rows[i]["Rg"].ToString(),
-                    DataAdmissao = DateTime.Parse(String.Format("{0:dd/MM/yyyy}", func.Rows[i]["DataAdmissao"]))
-                });
-            }
-            return lista;
-        }
-
     }
 }
