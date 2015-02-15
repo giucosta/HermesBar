@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTILS
+namespace DAO.Utils
 {
     public class AccessObject<T>
     {
@@ -48,7 +48,6 @@ namespace UTILS
 
             return stb.ToString();
         }
-
         public static String CreateSelectAll()
         {
             var nomeClasse = RetornaNomeClasse();
@@ -57,7 +56,6 @@ namespace UTILS
 
             return stb.ToString();
         }
-
         public static String DeleteFromId()
         {
             var nomeClasse = RetornaNomeClasse();
@@ -69,11 +67,34 @@ namespace UTILS
             stb.Append("@Id_" + nomeClasse);
             return stb.ToString();
         }
-
         private static String RetornaNomeClasse()
         {
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
+        }
+        public static String InsertParameter(String command, String parameter,String variavel)
+        {
+            var stb = new StringBuilder();
+            stb.Append(command);
+            stb.Append(" " + parameter);
+            stb.Append(" " + variavel);
+
+            return stb.ToString();
+        }
+        public static String InsertSimpleParameter(String parameter)
+        {
+            var stb = new StringBuilder();
+            stb.Append(parameter);
+            return stb.ToString();
+        }
+        public static String CreateSelectWithSimpleParameter(String parameter)
+        {
+            var stb = new StringBuilder();
+            stb.Append(ConstantesDAO.SELECT);
+            stb.Append(" " + parameter + " ");
+            stb.Append(ConstantesDAO.FROM);
+            stb.Append(" " + RetornaNomeClasse());
+            return stb.ToString();
         }
     }
 }

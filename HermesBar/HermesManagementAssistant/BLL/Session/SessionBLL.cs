@@ -12,7 +12,7 @@ namespace BLL.Session
     {
         public void CarregaSession(LoginModel login)
         {
-            UTILS.Session.Usuario = new UsuarioDAO().RetornaUsuario(login);
+            DAO.Session.Usuario = new UsuarioDAO().RetornaUsuario(login);
         }
     }
 }

@@ -7,7 +7,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using DAO;
+using DAO.Utils;
 
 namespace DAO.Comum
 {
@@ -15,28 +16,29 @@ namespace DAO.Comum
     {
         public EnderecoModel Salvar(EnderecoModel endereco)
         {
-            var sql = @"INSERT INTO Endereco VALUES (
-                            @Rua, 
-                            @Numero, 
-                            @Complemento, 
-                            @Bairro, 
-                            @Cep, 
-                            @Cidade, 
-                            @Estado, 
-                            @IdTipoEndereco
-                        )";
-            var comando = new SqlCommand(sql, Connection.GetConnection());
-            comando.Parameters.AddWithValue("@Rua",endereco.Rua);
-            comando.Parameters.AddWithValue("@Numero",endereco.Numero);
-            comando.Parameters.AddWithValue("@Complemento",endereco.Complemento);
-            comando.Parameters.AddWithValue("@Bairro", endereco.Bairro);
-            comando.Parameters.AddWithValue("@Cep",endereco.Cep);
-            comando.Parameters.AddWithValue("@Cidade",endereco.Cidade);
-            comando.Parameters.AddWithValue("@Estado", endereco.Estado);
-            comando.Parameters.AddWithValue("@IdTipoEndereco", endereco.Tipo.Tipo);
+            try
+            {
+                var sql = AccessObject<EnderecoModel>.CreateDataInsert();
 
-            Connection.ExecutarComando(comando);
-            return RecuperaUltimoEndereco();
+                var comando = new SqlCommand(sql, Connection.GetConnection());
+                comando.Parameters.AddWithValue("@Rua", endereco.Rua);
+                comando.Parameters.AddWithValue("@Numero", endereco.Numero);
+                comando.Parameters.AddWithValue("@Complemento", endereco.Complemento);
+                comando.Parameters.AddWithValue("@Bairro", endereco.Bairro);
+                comando.Parameters.AddWithValue("@Cep", endereco.Cep);
+                comando.Parameters.AddWithValue("@Cidade", endereco.Cidade);
+                comando.Parameters.AddWithValue("@Estado", endereco.Estado);
+                comando.Parameters.AddWithValue("@TipoEndereco", endereco.Tipo.Tipo);
+
+                Connection.ExecutarComando(comando);
+                return RecuperaUltimoEndereco();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Salvar","EnderecoDAO",e.StackTrace.ToString(),Constantes.ATipoMetodo.INSERT);
+                return null;
+            }
+            
         }
 
         public TipoEnderecoModel RetornaTipoEndereco(EnderecoModel endereco)
@@ -80,9 +82,11 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = "SELECT * FROM Endereco WHERE Id_Endereco = @Id";
+                var sql = AccessObject<EnderecoModel>.CreateSelectAll();
+                sql = AccessObject<EnderecoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Id_Endereco");
+                sql = AccessObject<EnderecoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("Id",id);
+                comando.Parameters.AddWithValue("@Id",id);
 
                 return CarregaEndereco(Connection.getDataTable(comando));
             }

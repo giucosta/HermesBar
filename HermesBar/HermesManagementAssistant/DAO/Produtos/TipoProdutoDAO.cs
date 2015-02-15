@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAO.Abstract;
 using MODEL.Produtos;
-using UTILS;
+using DAO;
 using System.Data.SqlClient;
 using DAO.Connections;
 using System.Data;

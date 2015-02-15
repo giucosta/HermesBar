@@ -16,7 +16,7 @@ using System.Data.SqlClient;
 using BLL.Login;
 using BLL.Session;
 using MODEL;
-using Utils;
+using DAO;
 
 namespace HermesManagementAssistant.View.Login
 {

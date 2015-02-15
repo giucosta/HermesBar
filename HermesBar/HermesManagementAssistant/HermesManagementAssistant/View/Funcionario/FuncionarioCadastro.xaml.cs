@@ -14,8 +14,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Utils;
-using UTILS;
+using DAO;
+using DAO;
 
 namespace HermesManagementAssistant.View.Funcionario
 {

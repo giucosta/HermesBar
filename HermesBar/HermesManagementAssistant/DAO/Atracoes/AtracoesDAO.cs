@@ -1,5 +1,6 @@
 ﻿using DAO.Abstract;
 using DAO.Connections;
+using DAO.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using DAO;
 
 namespace DAO.Atracoes
 {
@@ -40,9 +41,8 @@ namespace DAO.Atracoes
         {
             try
             {
-                var sql = @"DELETE FROM Atracoes WHERE Id_Atracoes = @Id";
-                var comando = new SqlCommand(sql,Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id",atracoes.Id);
+                var comando = new SqlCommand(AccessObject<AtracoesModel>.DeleteFromId(),Connection.GetConnection());
+                comando.Parameters.AddWithValue("@Id_Atracoes",atracoes.Id);
                 Connection.ExecutarComando(comando);
                 return true;
             }
@@ -56,10 +56,13 @@ namespace DAO.Atracoes
         {
             try
             {
-                var sql = @"SELECT * FROM Atracoes 
-                            WHERE 1=1 
-                            AND Nome LIKE @Nome
-                            AND Estilo LIKE @Estilo";
+                var sql = AccessObject<AtracoesModel>.CreateSelectAll();
+                sql = AccessObject<AtracoesModel>.InsertParameter(sql,ConstantesDAO.WHERE,"1=1");
+                sql = AccessObject<AtracoesModel>.InsertParameter(sql, ConstantesDAO.AND, "Nome");
+                sql = AccessObject<AtracoesModel>.InsertParameter(sql, ConstantesDAO.LIKE, "@Nome");
+                sql = AccessObject<AtracoesModel>.InsertParameter(sql, ConstantesDAO.AND,"Estilo");
+                sql = AccessObject<AtracoesModel>.InsertParameter(sql, ConstantesDAO.LIKE,"@Estilo");
+
                 var comando = new SqlCommand(sql,Connection.GetConnection());
 
                 comando.Parameters.AddWithValue("@Nome", "%" + atracoes.Nome + "%");
@@ -73,19 +76,14 @@ namespace DAO.Atracoes
                 return null;
             }
         }
-        public List<String> RecuperaEstilos()
+        public DataTable RecuperaEstilos()
         {
             try
             {
-                var sql = @"SELECT Estilo FROM Atracoes";
+                var sql = AccessObject<AtracoesModel>.CreateSelectWithSimpleParameter("Estilo");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
 
-                var dataTable = Connection.getDataTable(comando);
-                var lista = new List<String>();
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                    lista.Add(dataTable.Rows[i]["Estilo"].ToString());
-
-                return lista;
+                return Connection.getDataTable(comando);
             }
             catch (Exception e)
             {

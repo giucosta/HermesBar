@@ -7,7 +7,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using DAO;
+using DAO.Utils;
 
 namespace DAO.Comum
 {
@@ -17,7 +18,9 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = @"SELECT * FROM TipoEndereco WHERE Tipo = @Tipo";
+                var sql = AccessObject<TipoEnderecoModel>.CreateSelectAll();
+                sql = AccessObject<TipoEnderecoModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Tipo");
+                sql = AccessObject<TipoEnderecoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Tipo");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Tipo", endereco.Tipo);
 

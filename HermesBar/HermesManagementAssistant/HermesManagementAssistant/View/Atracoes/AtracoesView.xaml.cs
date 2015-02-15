@@ -19,7 +19,7 @@ namespace HermesManagementAssistant.View.Atracoes
     public partial class AtracoesView : Window
     {
         private AtracoesBLL _atracoesBLL = null;
-        public AtracoesBLL BLL
+        public AtracoesBLL AtracoesBLL
         {
             get
             {
@@ -36,11 +36,11 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
         {
-            dgPesquisa.ItemsSource = BLL.Pesquisa(atracoes).DefaultView;
+            dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa(atracoes);
         }
         private void CarregaComboBox()
         {
-            cbTipo.ItemsSource = BLL.RecuperaEstilos();
+            cbTipo.ItemsSource = AtracoesBLL.RecuperaEstilos();
             cbTipo.SelectedIndex = 0;
         }
         private void btPesquisar_Click(object sender, RoutedEventArgs e)
@@ -55,7 +55,6 @@ namespace HermesManagementAssistant.View.Atracoes
             
             CarregaDataGrid(atracoes);
         }
-
         private void btNovo_Click(object sender, RoutedEventArgs e)
         {
             new CadastroAtracoesView().Show();

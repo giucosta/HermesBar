@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTILS
+namespace DAO
 {
     public static class Conversores
     {
@@ -41,5 +41,15 @@ namespace UTILS
                 return null;
             }
         }
+        public static List<String> DataTableToListString(this DataTable table, List<String> atributos)
+        {
+            var lista = new List<String>();
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                foreach (String x in atributos)
+                    lista.Add(table.Rows[i][x].ToString());    
+            }
+            return lista;
+        } 
     }
 }

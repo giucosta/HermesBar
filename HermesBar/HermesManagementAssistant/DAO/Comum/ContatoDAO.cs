@@ -8,7 +8,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using DAO;
+using DAO.Utils;
 
 namespace DAO.Comum
 {
@@ -18,12 +19,12 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = @"INSERT INTO Contato VALUES(@Nome,@Telefone,@Celular,@Email,@Site)";
+                var sql = AccessObject<ContatoModel>.CreateDataInsert();
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome",contato.Nome);
                 comando.Parameters.AddWithValue("@Telefone",contato.Telefone);
                 comando.Parameters.AddWithValue("@Celular", contato.Celular);
-                comando.Parameters.AddWithValue("Email",contato.Email);
+                comando.Parameters.AddWithValue("@Email",contato.Email);
                 comando.Parameters.AddWithValue("@Site",contato.Site);
 
                 Connection.ExecutarComando(comando);
@@ -37,12 +38,10 @@ namespace DAO.Comum
         }
         public bool Excluir(ContatoModel contato)
         {
-
             try
             {
-                var sql = @"DELETE Contato WHERE Id_Contato = @IdContato";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@IdContato", contato.Id);
+                var comando = new SqlCommand(AccessObject<ContatoModel>.DeleteFromId(), Connection.GetConnection());
+                comando.Parameters.AddWithValue("@Id_Contato", contato.Id);
 
                 Connection.ExecutarComando(comando);
                 return true;
@@ -53,12 +52,16 @@ namespace DAO.Comum
                 return false;
             }
         }
-
         public ContatoModel Pesquisa(ContatoModel contato)
         {
             try
             {
-                var sql = @"SELECT * FROM Contato WHERE Nome LIKE @Nome AND Email LIKE @Email";
+                var sql = AccessObject<ContatoModel>.CreateSelectAll();
+                sql = AccessObject<ContatoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Nome");
+                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.LIKE, "@Nome");
+                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.AND, "Email");
+                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.LIKE, "@Email");
+
                 var comando = new SqlCommand(sql,Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + contato.Nome + "%");
                 comando.Parameters.AddWithValue("@Email", "%" + contato.Email + "%");
@@ -71,7 +74,6 @@ namespace DAO.Comum
                 return null;
             }
         }
-
         public List<ContatoModel> CarregaListModel(DataTable data)
         {
             var contatoList = new List<ContatoModel>();
@@ -89,7 +91,6 @@ namespace DAO.Comum
             }
             return contatoList;
         }
-
         private ContatoModel CarregaContato(DataTable data)
         {
             if (data != null)
@@ -105,15 +106,16 @@ namespace DAO.Comum
                 return contato;
             }
             return null;
-            
         }
         public ContatoModel RecuperaContatoPeloId(int id)
         {
             try
             {
-                var sql = "SELECT * FROM Contato WHERE Id_Contato = @Id";
+                var sql = AccessObject<ContatoModel>.CreateSelectAll();
+                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Id_Contato");
+                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("Id", id);
+                comando.Parameters.AddWithValue("@Id", id);
 
                 return CarregaContato(Connection.getDataTable(comando));
             }
