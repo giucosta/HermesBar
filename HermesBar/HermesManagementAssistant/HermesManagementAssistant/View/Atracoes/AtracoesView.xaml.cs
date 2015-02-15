@@ -31,7 +31,7 @@ namespace HermesManagementAssistant.View.Atracoes
         public AtracoesView()
         {
             InitializeComponent();
-            CarregaDataGrid(new AtracoesModel() { Nome = "", EstiloPredominante = "" });
+            CarregaDataGrid(new AtracoesModel() { Nome = "", Estilo = "" });
             CarregaComboBox();
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
@@ -48,10 +48,10 @@ namespace HermesManagementAssistant.View.Atracoes
             var atracoes = new AtracoesModel();
 
             if (string.IsNullOrWhiteSpace(cbTipo.SelectionBoxItem.ToString()))
-                atracoes.EstiloPredominante = "";
+                atracoes.Estilo = "";
 
             atracoes.Nome = tbNome.Text != null ? tbNome.Text : null;
-            atracoes.EstiloPredominante = cbTipo.SelectionBoxItem.ToString();
+            atracoes.Estilo = cbTipo.SelectionBoxItem.ToString();
             
             CarregaDataGrid(atracoes);
         }

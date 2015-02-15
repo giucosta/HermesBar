@@ -23,7 +23,7 @@ namespace BLL.Atracoes
             }
         }
         private ContatoBLL _contatoBLL = null;
-        public ContatoBLL ContatcBLL
+        public ContatoBLL ContatoBLL
         {
             get
             {
@@ -44,7 +44,7 @@ namespace BLL.Atracoes
 
         public bool Salvar(AtracoesModel atracoes)
         {
-            atracoes.Contato = ContatcBLL.Salvar(atracoes.Contato);
+            atracoes.Contato = ContatoBLL.Salvar(atracoes.Contato);
             return DAO.Salvar(atracoes);
         }
     }

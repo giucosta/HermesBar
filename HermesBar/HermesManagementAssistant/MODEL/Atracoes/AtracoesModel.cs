@@ -10,9 +10,9 @@ namespace MODEL
     public class AtracoesModel : IModel
     {
         public string Nome { get; set; }
-        public string EstiloPredominante { get; set; }
+        public string Estilo { get; set; }
         public ContatoModel Contato { get; set; }
-        public Double UltimoValorCobrado { get; set; }
-        public string TempoApresentacao { get; set; }
+        public Double Ultimo_Valor_Cobrado { get; set; }
+        public string Tempo_Show { get; set; }
     }
 }

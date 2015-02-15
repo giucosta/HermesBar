@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UTILS;
@@ -18,13 +19,13 @@ namespace DAO.Atracoes
         {
             try
             {
-                var sql = @"INSERT INTO Atracoes VALUES (@Nome, @Estilo, @IdContato, @TempoShow, @UltimoValor)";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var stb = AccessObject<AtracoesModel>.CreateDataInsert();
+                var comando = new SqlCommand(stb.ToString(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome",atracoes.Nome);
-                comando.Parameters.AddWithValue("@Estilo", atracoes.EstiloPredominante);
-                comando.Parameters.AddWithValue("@IdContato", atracoes.Contato.Id);
-                comando.Parameters.AddWithValue("@TempoShow", atracoes.TempoApresentacao);
-                comando.Parameters.AddWithValue("@UltimoValor", atracoes.UltimoValorCobrado);
+                comando.Parameters.AddWithValue("@Estilo", atracoes.Estilo);
+                comando.Parameters.AddWithValue("@Contato", atracoes.Contato.Id);
+                comando.Parameters.AddWithValue("@Tempo_Show", atracoes.Tempo_Show);
+                comando.Parameters.AddWithValue("@Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
 
                 Connection.ExecutarComando(comando);
                 return true;
@@ -62,7 +63,7 @@ namespace DAO.Atracoes
                 var comando = new SqlCommand(sql,Connection.GetConnection());
 
                 comando.Parameters.AddWithValue("@Nome", "%" + atracoes.Nome + "%");
-                comando.Parameters.AddWithValue("@Estilo", "%" + atracoes.EstiloPredominante + "%");
+                comando.Parameters.AddWithValue("@Estilo", "%" + atracoes.Estilo + "%");
 
                 return Connection.getDataTable(comando);
             }

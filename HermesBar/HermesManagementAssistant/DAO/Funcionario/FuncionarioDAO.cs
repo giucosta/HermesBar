@@ -61,15 +61,16 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = "SELECT * FROM Funcionario WHERE Nome LIKE @Nome";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");
-
+                var stb = new StringBuilder();
+                stb.Append("SELECT * FROM FUNCIONARIO ");
+                stb.Append("WHERE NOME LIKE @Nome ");
                 if (funcionario.Id != 0)
-                {
-                    comando.CommandText = "SELECT * FROM Funcionario WHERE Nome LIKE @Nome AND Id_Funcionario = @Codigo";
-                    comando.Parameters.AddWithValue("@Codigo", funcionario.Id);
-                }
+                    stb.Append("AND Id_Funcionario = @Codigo");
+
+                var comando = new SqlCommand(stb.ToString(), Connection.GetConnection());
+                comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");
+                comando.Parameters.AddWithValue("@Codigo", funcionario.Id);
+                
                 return Connection.getDataTable(comando);
             }
             catch (Exception e)

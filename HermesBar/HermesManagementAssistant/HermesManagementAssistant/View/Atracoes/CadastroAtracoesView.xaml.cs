@@ -65,9 +65,9 @@ namespace HermesManagementAssistant.View.Atracoes
         {
             var atracoes = new AtracoesModel();
             atracoes.Nome = tbAtracao.Text;
-            atracoes.TempoApresentacao = tbTempo.Text;
-            atracoes.UltimoValorCobrado = Double.Parse(tbValor.Text);
-            atracoes.EstiloPredominante = cbEstilo.SelectionBoxItem.ToString();
+            atracoes.Tempo_Show = tbTempo.Text;
+            atracoes.Ultimo_Valor_Cobrado = Double.Parse(tbValor.Text);
+            atracoes.Estilo = cbEstilo.SelectionBoxItem.ToString();
 
             return atracoes;
         }

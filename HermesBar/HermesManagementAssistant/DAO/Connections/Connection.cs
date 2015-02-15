@@ -33,8 +33,9 @@ namespace DAO.Connections
                 command.ExecuteNonQuery();
                 OutConnection();
             }
-            catch(SqlException)
+            catch(SqlException e)
             {
+                Log.Log.GravarLog("ExecutarComando","Connection",command.CommandText,"");
                 OutConnection();
             }
         }

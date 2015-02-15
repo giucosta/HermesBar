@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessObject.cs" />
     <Compile Include="ConexaoWeb.cs" />
     <Compile Include="Constantes.cs" />
     <Compile Include="Conversores.cs" />
