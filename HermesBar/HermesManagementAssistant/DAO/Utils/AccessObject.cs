@@ -72,20 +72,18 @@ namespace DAO.Utils
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
         }
-        public static String InsertParameter(String command, String parameter,String variavel)
+        public static String InsertParameter(String command, String sqlCommand,String atributo)
         {
             var stb = new StringBuilder();
             stb.Append(command);
-            stb.Append(" " + parameter);
-            stb.Append(" " + variavel);
+            stb.Append(" " + sqlCommand);
+            stb.Append(" " + atributo);
 
             return stb.ToString();
         }
         public static String InsertSimpleParameter(String parameter)
         {
-            var stb = new StringBuilder();
-            stb.Append(parameter);
-            return stb.ToString();
+            return new StringBuilder().Append(parameter).ToString();
         }
         public static String CreateSelectWithSimpleParameter(String parameter)
         {

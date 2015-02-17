@@ -37,7 +37,6 @@ namespace DAO.Comum
                 Log.Log.GravarLog("RetornaTipoEndereco","TipoEnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 return null;
             }
-            
         }
     }
 }

@@ -21,5 +21,7 @@ namespace DAO.Utils
         public const string SELECT = "SELECT";
         public const string ALL = "*";
         public const string EQUAL = "=";
+        public const string MAX = "MAX";
+        public const string AS = "AS";
     }
 }

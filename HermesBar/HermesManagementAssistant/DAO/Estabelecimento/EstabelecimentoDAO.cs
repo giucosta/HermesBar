@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using DAO.Utils;
 
 namespace DAO.Estabelecimento
 {
@@ -38,14 +39,14 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = @"INSERT INTO Estabelecimento VALUES(@RazaoSocial,@NomeFantasia,@Cnpj,@InscricaoEstadual,@Id_Endereco,@Id_Contato)";
+                var sql = AccessObject<EstabelecimentoModel>.CreateDataInsert();
                 var comando = new SqlCommand(sql,Connection.GetConnection());
                 comando.Parameters.AddWithValue("@RazaoSocial",estabelecimento.RazaoSocial);
                 comando.Parameters.AddWithValue("@NomeFantasia",estabelecimento.NomeFantasia);
                 comando.Parameters.AddWithValue("@Cnpj",estabelecimento.Cnpj);
                 comando.Parameters.AddWithValue("@InscricaoEstadual",estabelecimento.InscEstadual);
-                comando.Parameters.AddWithValue("@Id_Endereco",estabelecimento.Endereco.Id);
-                comando.Parameters.AddWithValue("@Id_Contato",estabelecimento.Contato.Id);
+                comando.Parameters.AddWithValue("@Endereco",estabelecimento.Endereco.Id);
+                comando.Parameters.AddWithValue("@Contato",estabelecimento.Contato.Id);
 
                 Connection.ExecutarComando(comando);
                 return RetornaUltimoEstabelecimentoSalvo();
@@ -60,7 +61,12 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = "SELECT MAX(Id_Estabelecimento) as Id FROM Estabelecimento";
+                var sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(ConstantesDAO.SELECT);
+                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(ConstantesDAO.MAX);
+                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter("(Id_Estabelecimento)");
+                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.AS,"Id");
+                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.FROM, "Estabelecimento");
+                
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 var dataTable = Connection.getDataTable(comando);
                 if(dataTable != null)
@@ -79,10 +85,13 @@ namespace DAO.Estabelecimento
             var idEstabelecimento = RetornaUltimoId();
             if (idEstabelecimento == 0)
                 return null;
-
-            var sql = "SELECT * FROM Estabelecimento WHERE Id_Estabelecimento = @Id";
+            
+            var sql = AccessObject<EstabelecimentoModel>.CreateSelectAll();
+            sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Id_Estabelecimento");
+            sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id_Estabelecimento");
+            
             var comando = new SqlCommand(sql,Connection.GetConnection());
-            comando.Parameters.AddWithValue("Id",idEstabelecimento);
+            comando.Parameters.AddWithValue("Id_Estabelecimento",idEstabelecimento);
 
             return PreencheEstabelecimento(Connection.getDataTable(comando));
         }
