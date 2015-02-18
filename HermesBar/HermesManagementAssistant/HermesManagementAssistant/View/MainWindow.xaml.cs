@@ -20,6 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAO;
+using HermesManagementAssistant.View.Fornecedor;
 
 namespace HermesManagementAssistant
 {
@@ -58,6 +59,10 @@ namespace HermesManagementAssistant
         private void PesquisaProdutos(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void PesquisaFornecedor(object sender, RoutedEventArgs e)
+        {
+            new Fornecedor().Show();
         }
     }
 }

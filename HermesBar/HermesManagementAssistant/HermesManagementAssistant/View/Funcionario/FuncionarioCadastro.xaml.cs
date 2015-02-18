@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAO;
+using HermesManagementAssistant.Utils;
 
 namespace HermesManagementAssistant.View.Funcionario
 {
@@ -70,7 +71,6 @@ namespace HermesManagementAssistant.View.Funcionario
             InitializeComponent();
             CarregaCombos();
         }
-
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
             var camposObrigatorios = VerificaCamposObrigatorios();
@@ -102,8 +102,6 @@ namespace HermesManagementAssistant.View.Funcionario
                     Mensagens.GeraMensagens("Cadastro endereço", MENSAGEM.ENDERECO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }
         }
-         
-
         private ContatoModel SalvarContato()
         {
             var contato = new ContatoModel();
@@ -175,5 +173,20 @@ namespace HermesManagementAssistant.View.Funcionario
 
             return campos;
         }
+
+        #region Masked
+        private void CpfMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.CpfMasked(tbCpf,e);
+        }
+        private void PhoneMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbTelefone, e);
+        }
+        private void CelularMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbCelular, e);
+        }
+        #endregion
     }
 }

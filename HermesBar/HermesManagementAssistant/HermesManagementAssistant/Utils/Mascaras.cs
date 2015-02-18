@@ -11,7 +11,7 @@ namespace HermesManagementAssistant.Utils
 {
     class Mascaras : Window
     {
-        public static TextBox VerificaMascaraCnpj(TextBox textBox, KeyEventArgs e){
+        public static TextBox CnpjMasked(TextBox textBox, KeyEventArgs e){
             if (Verificadores.VerificaNumero(textBox.Text))
             {
                 if (textBox.Text.Length == 14)
@@ -42,8 +42,35 @@ namespace HermesManagementAssistant.Utils
             textBox.Text = "";
             return textBox;
         }
+        public static TextBox CpfMasked(TextBox textBox, KeyEventArgs e){
+            if (Verificadores.VerificaNumero(textBox.Text))
+            {
+                if (textBox.Text.Length == 11)
+                {
+                    char[] caracter = textBox.Text.ToCharArray();
+                    var cpf = "";
+                    for (int i = 0; i < 3; i++)
+                        cpf += caracter[i];
+                    cpf += ".";
+                    for (int i = 3; i < 6; i++)
+                        cpf += caracter[i];
+                    cpf += ".";
+                    for (int i = 6; i < 9; i++)
+                        cpf += caracter[i];
+                    cpf += "-";
+                    for (int i = 9; i < 11; i++)
+                        cpf += caracter[i];
 
-        public static TextBox AplicaMascaraTelefone(TextBox textBox, KeyEventArgs e){
+                    textBox.Text = cpf;
+                    return textBox;
+                }
+                else
+                    return textBox;
+            }
+            textBox.Text = "";
+            return textBox;
+        }
+        public static TextBox PhoneMasked(TextBox textBox, KeyEventArgs e){
             if (Verificadores.VerificaNumero(textBox.Text))
             {
                 if (textBox.Text.Length == 10)

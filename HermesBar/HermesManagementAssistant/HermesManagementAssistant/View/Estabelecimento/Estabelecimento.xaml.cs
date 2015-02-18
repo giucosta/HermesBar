@@ -161,15 +161,15 @@ namespace HermesManagementAssistant.View.Estabelecimento
         }
         private void AplicarMascaraCnjp(Object e, KeyEventArgs c)
         {
-            Mascaras.VerificaMascaraCnpj(tbCnpj, c);
+            Mascaras.CnpjMasked(tbCnpj, c);
         }
         private void AplicarMascaraTelefone(Object e, KeyEventArgs c)
         {
-            Mascaras.AplicaMascaraTelefone(tbTelefone, c);
+            Mascaras.PhoneMasked(tbTelefone, c);
         }
         private void AplicarMascaraCelular(Object e, KeyEventArgs c)
         {
-            Mascaras.AplicaMascaraTelefone(tbCelular, c);
+            Mascaras.PhoneMasked(tbCelular, c);
         }
     }
 }

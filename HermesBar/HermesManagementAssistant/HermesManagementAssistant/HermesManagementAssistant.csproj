@@ -77,6 +77,9 @@
     <Compile Include="View\Fornecedor\Fornecedor.xaml.cs">
       <DependentUpon>Fornecedor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Fornecedor\FornecedorCadastro.xaml.cs">
+      <DependentUpon>FornecedorCadastro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Funcionario\Funcionario.xaml.cs">
       <DependentUpon>Funcionario.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Fornecedor\Fornecedor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Fornecedor\FornecedorCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
