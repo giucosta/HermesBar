@@ -10,7 +10,12 @@ namespace DAO.Utils
 {
     public class AccessObject<T>
     {
-        public static String CreateDataInsert()
+        private static string sql;
+        public AccessObject()
+        {
+            sql = string.Empty;
+        }
+        public void CreateDataInsert()
         {
             Type myType = typeof(T);
             var nomeClasse = RetornaNomeClasse();
@@ -45,18 +50,17 @@ namespace DAO.Utils
                 }
             }
             stb.Append(" )");
-
-            return stb.ToString();
+            sql += FormatSql(stb.ToString());
         }
-        public static String CreateSelectAll()
+        public void CreateSelectAll()
         {
             var nomeClasse = RetornaNomeClasse();
             var stb = new StringBuilder();
             stb.Append("SELECT * FROM " + nomeClasse);
 
-            return stb.ToString();
+            sql += FormatSql(stb.ToString());
         }
-        public static String DeleteFromId()
+        public void DeleteFromId()
         {
             var nomeClasse = RetornaNomeClasse();
             var stb = new StringBuilder();
@@ -65,37 +69,43 @@ namespace DAO.Utils
             stb.Append("Id_" + nomeClasse);
             stb.Append("=");
             stb.Append("@Id_" + nomeClasse);
-            return stb.ToString();
+            sql += FormatSql(stb.ToString());
         }
-        private static String RetornaNomeClasse()
+        private String RetornaNomeClasse()
         {
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
         }
-        public static String InsertParameter(String command, String sqlCommand,String atributo)
+        public void InsertParameter(String sqlCommand,String atributo)
         {
             var stb = new StringBuilder();
-            stb.Append(command);
             stb.Append(" " + sqlCommand);
             stb.Append(" " + atributo);
-
-            return stb.ToString();
+            sql += FormatSql(stb.ToString());
         }
-        public static String InsertSimpleParameter(String command, String parameter)
+        public void InsertSimpleParameter(String command, String parameter)
         {
             var stb = new StringBuilder();
             stb.Append(command);
             stb.Append(parameter);
-            return stb.ToString();
+            sql += FormatSql(stb.ToString());
         }
-        public static String CreateSelectWithSimpleParameter(String parameter)
+        public void CreateSelectWithSimpleParameter(String parameter)
         {
             var stb = new StringBuilder();
             stb.Append(ConstantesDAO.SELECT);
             stb.Append(" " + parameter + " ");
             stb.Append(ConstantesDAO.FROM);
             stb.Append(" " + RetornaNomeClasse());
-            return stb.ToString();
+            sql+= FormatSql(stb.ToString());
+        }
+        private string FormatSql(string command)
+        {
+            return sql = " " + command;
+        }
+        public String ReturnQuery()
+        {
+            return sql;
         }
     }
 }

@@ -21,11 +21,12 @@ namespace DAO.Login
         {
             try
             {
-                var sql = AccessObject<LoginModel>.CreateSelectAll();
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Login");
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Login");
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
                 
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Login",login.Login);
 
                 if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable(comando).Rows[0]["Senha"].ToString())))
@@ -46,11 +47,12 @@ namespace DAO.Login
         {
             try
             {
-                var sql = AccessObject<LoginModel>.CreateSelectAll();
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Login");
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Login");
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
                 
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Login",login.Login);
 
                 var dataTable = Connection.getDataTable(comando);
@@ -80,13 +82,14 @@ namespace DAO.Login
         {
             try
             {
-                var sql = AccessObject<LoginModel>.InsertParameter("",ConstantesDAO.UPDATE,"login");
-                sql = AccessObject<LoginModel>.InsertParameter(sql,ConstantesDAO.SET, "DataUltimoLogin");
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@UltimoLogin");
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Login");
-                sql = AccessObject<LoginModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Login");
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.InsertParameter(ConstantesDAO.UPDATE,"login");
+                AO.InsertParameter(ConstantesDAO.SET, "DataUltimoLogin");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@UltimoLogin");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
 
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.Add(new SqlParameter("@UltimoLogin", DateTime.Now));
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
@@ -103,13 +106,14 @@ namespace DAO.Login
         {
             try
             {
-                var sql = AccessObject<LoginModel>.CreateDataInsert();
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateDataInsert();
 //                var sql = @"INSERT INTO Login VALUES(
 //                                @Login,
 //                                @Senha,
 //                                null
 //                            )";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Login", login.Login);
                 comando.Parameters.AddWithValue("@Senha",Encript.EncriptMd5.Criptografar(login.Senha));
                 
@@ -127,8 +131,9 @@ namespace DAO.Login
         {
             try
             {
-                var sql = @"DELETE FROM Login WHERE Id_Login = @IdLogin";
-                var comando = new SqlCommand(sql,Connection.GetConnection());
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.DeleteFromId();
+                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@IdLogin",login.Id);
 
                 Connection.ExecutarComando(comando);

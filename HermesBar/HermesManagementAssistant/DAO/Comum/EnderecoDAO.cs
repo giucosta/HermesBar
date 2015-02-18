@@ -18,9 +18,10 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<EnderecoModel>.CreateDataInsert();
-
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var AO = new AccessObject<EnderecoModel>();
+                AO.CreateDataInsert();
+                
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Rua", endereco.Rua);
                 comando.Parameters.AddWithValue("@Numero", endereco.Numero);
                 comando.Parameters.AddWithValue("@Complemento", endereco.Complemento);
@@ -82,10 +83,12 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<EnderecoModel>.CreateSelectAll();
-                sql = AccessObject<EnderecoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Id_Endereco");
-                sql = AccessObject<EnderecoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id");
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var AO = new AccessObject<EnderecoModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id",id);
 
                 return CarregaEndereco(Connection.getDataTable(comando));

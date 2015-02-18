@@ -17,10 +17,11 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<EstabelecimentoModel>.InsertParameter("",ConstantesDAO.INSERT,ConstantesDAO.INTO);
-                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, "ConfigEstabelecimento_Estabelecimento",ConstantesDAO.VALUES);
-                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,"(@idEstabelecimento", " @idConfigEstabelecimento)");
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
+                AO.InsertParameter(ConstantesDAO.INSERT,ConstantesDAO.INTO);
+                AO.InsertParameter("ConfigEstabelecimento_Estabelecimento",ConstantesDAO.VALUES);
+                AO.InsertParameter("(@idEstabelecimento", " @idConfigEstabelecimento)");
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
                 comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
 

@@ -18,10 +18,11 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<TipoEnderecoModel>.CreateSelectAll();
-                sql = AccessObject<TipoEnderecoModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Tipo");
-                sql = AccessObject<TipoEnderecoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Tipo");
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                AccessObject<TipoEnderecoModel> AO = new AccessObject<TipoEnderecoModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Tipo");
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Tipo", endereco.Tipo);
 
                 var dataTable = Connection.getDataTable(comando);

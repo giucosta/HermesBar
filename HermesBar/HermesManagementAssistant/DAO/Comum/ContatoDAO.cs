@@ -19,8 +19,9 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<ContatoModel>.CreateDataInsert();
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.CreateDataInsert();
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome",contato.Nome);
                 comando.Parameters.AddWithValue("@Telefone",contato.Telefone);
                 comando.Parameters.AddWithValue("@Celular", contato.Celular);
@@ -40,7 +41,9 @@ namespace DAO.Comum
         {
             try
             {
-                var comando = new SqlCommand(AccessObject<ContatoModel>.DeleteFromId(), Connection.GetConnection());
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.DeleteFromId();
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id_Contato", contato.Id);
 
                 Connection.ExecutarComando(comando);
@@ -56,13 +59,14 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<ContatoModel>.CreateSelectAll();
-                sql = AccessObject<ContatoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Nome");
-                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.LIKE, "@Nome");
-                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.AND, "Email");
-                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.LIKE, "@Email");
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE,"Nome");
+                AO.InsertParameter(ConstantesDAO.LIKE, "@Nome");
+                AO.InsertParameter(ConstantesDAO.AND, "Email");
+                AO.InsertParameter(ConstantesDAO.LIKE, "@Email");
 
-                var comando = new SqlCommand(sql,Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + contato.Nome + "%");
                 comando.Parameters.AddWithValue("@Email", "%" + contato.Email + "%");
 
@@ -111,10 +115,11 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = AccessObject<ContatoModel>.CreateSelectAll();
-                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.WHERE, "Id_Contato");
-                sql = AccessObject<ContatoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id");
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato");
+                AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id", id);
 
                 return CarregaContato(Connection.getDataTable(comando));

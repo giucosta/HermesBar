@@ -18,8 +18,9 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<ConfigEstabelecimentoModel>.CreateDataInsert();
-                var comando = new SqlCommand(sql,Connection.GetConnection());
+                AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
+                AO.CreateDataInsert();
+                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@AgruparItensQuantidade",ConfigEstabelecimento.AgruparItensQuantidade);
                 comando.Parameters.AddWithValue("@TipoSistema",ConfigEstabelecimento.TipoSistema);
                 comando.Parameters.AddWithValue("@QuantidadeMesa",ConfigEstabelecimento.QuantidadeMesas);
@@ -39,11 +40,13 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter("",ConstantesDAO.SELECT,ConstantesDAO.MAX);
-                sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql,"(Id_ConfigEstabelecimento)",ConstantesDAO.AS);
-                sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql, "Id_ConfigEstabelecimento",ConstantesDAO.FROM);
-                sql = AccessObject<ConfigEstabelecimentoModel>.InsertSimpleParameter(sql,"ConfigEstabelecimento");
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                //TODO - Verificar isso aqui
+                AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
+                AO.InsertParameter(ConstantesDAO.SELECT,ConstantesDAO.MAX);
+                AO.InsertParameter("(Id_ConfigEstabelecimento)",ConstantesDAO.AS);
+                AO.InsertParameter("Id_ConfigEstabelecimento",ConstantesDAO.FROM);
+                AO.InsertSimpleParameter(AO.ReturnQuery(),"ConfigEstabelecimento");
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
 
                 return (int)Connection.getDataTable(comando).Rows[0]["Id_ConfigEstabelecimento"];
             }
@@ -55,10 +58,11 @@ namespace DAO.Estabelecimento
         }
         private ConfigEstabelecimentoModel RecuperaConfigEstabelecimentoPeloId(int id)
         {
-            var sql = AccessObject<ConfigEstabelecimentoModel>.CreateSelectAll();
-            sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.WHERE, "Id_ConfigEstabelecimento");
-            sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "id");
-            var comando = new SqlCommand(sql, Connection.GetConnection());
+            AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
+            AO.CreateSelectAll();
+            AO.InsertParameter(ConstantesDAO.WHERE, "Id_ConfigEstabelecimento");
+            AO.InsertParameter(ConstantesDAO.EQUAL, "id");
+            var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
             comando.Parameters.AddWithValue("@id",id);
 
             return CarregaConfigEstabelecimento(Connection.getDataTable(comando));

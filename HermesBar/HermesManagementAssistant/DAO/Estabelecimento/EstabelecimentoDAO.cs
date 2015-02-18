@@ -39,8 +39,9 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<EstabelecimentoModel>.CreateDataInsert();
-                var comando = new SqlCommand(sql,Connection.GetConnection());
+                AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
+                AO.CreateDataInsert();
+                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@RazaoSocial",estabelecimento.RazaoSocial);
                 comando.Parameters.AddWithValue("@NomeFantasia",estabelecimento.NomeFantasia);
                 comando.Parameters.AddWithValue("@Cnpj",estabelecimento.Cnpj);
@@ -61,12 +62,13 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<EstabelecimentoModel>.InsertParameter("",ConstantesDAO.SELECT,ConstantesDAO.MAX);
-                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(sql,"(Id_Estabelecimento)");
-                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.AS,"Id");
-                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.FROM, "Estabelecimento");
+                AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
+                AO.InsertParameter(ConstantesDAO.SELECT,ConstantesDAO.MAX);
+                AO.InsertSimpleParameter(AO.ReturnQuery(),"(Id_Estabelecimento)");
+                AO.InsertParameter(ConstantesDAO.AS,"Id");
+                AO.InsertParameter(ConstantesDAO.FROM, "Estabelecimento");
                 
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 var dataTable = Connection.getDataTable(comando);
                 if(dataTable != null)
                     return (int)dataTable.Rows[0]["Id"];
@@ -84,12 +86,13 @@ namespace DAO.Estabelecimento
             var idEstabelecimento = RetornaUltimoId();
             if (idEstabelecimento == 0)
                 return null;
+
+            AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
+            AO.CreateSelectAll();
+            AO.InsertParameter(ConstantesDAO.WHERE,"Id_Estabelecimento");
+            AO.InsertParameter(ConstantesDAO.EQUAL, "@Id_Estabelecimento");
             
-            var sql = AccessObject<EstabelecimentoModel>.CreateSelectAll();
-            sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.WHERE,"Id_Estabelecimento");
-            sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "@Id_Estabelecimento");
-            
-            var comando = new SqlCommand(sql,Connection.GetConnection());
+            var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
             comando.Parameters.AddWithValue("Id_Estabelecimento",idEstabelecimento);
 
             return PreencheEstabelecimento(Connection.getDataTable(comando));
