@@ -61,9 +61,8 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(ConstantesDAO.SELECT);
-                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(ConstantesDAO.MAX);
-                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter("(Id_Estabelecimento)");
+                var sql = AccessObject<EstabelecimentoModel>.InsertParameter("",ConstantesDAO.SELECT,ConstantesDAO.MAX);
+                sql = AccessObject<EstabelecimentoModel>.InsertSimpleParameter(sql,"(Id_Estabelecimento)");
                 sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.AS,"Id");
                 sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.FROM, "Estabelecimento");
                 

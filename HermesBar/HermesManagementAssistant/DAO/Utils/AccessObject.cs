@@ -81,9 +81,12 @@ namespace DAO.Utils
 
             return stb.ToString();
         }
-        public static String InsertSimpleParameter(String parameter)
+        public static String InsertSimpleParameter(String command, String parameter)
         {
-            return new StringBuilder().Append(parameter).ToString();
+            var stb = new StringBuilder();
+            stb.Append(command);
+            stb.Append(parameter);
+            return stb.ToString();
         }
         public static String CreateSelectWithSimpleParameter(String parameter)
         {

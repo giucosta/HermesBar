@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using DAO.Utils;
 
 namespace DAO.Estabelecimento
 {
@@ -17,7 +18,7 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = @"INSERT INTO ConfigEstabelecimento VALUES(@AgruparItensQuantidade,@TipoSistema,@QuantidadeMesa,@TaxaServico)";
+                var sql = AccessObject<ConfigEstabelecimentoModel>.CreateDataInsert();
                 var comando = new SqlCommand(sql,Connection.GetConnection());
                 comando.Parameters.AddWithValue("@AgruparItensQuantidade",ConfigEstabelecimento.AgruparItensQuantidade);
                 comando.Parameters.AddWithValue("@TipoSistema",ConfigEstabelecimento.TipoSistema);
@@ -38,7 +39,10 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = "SELECT MAX(Id_ConfigEstabelecimento) as Id_ConfigEstabelecimento FROM ConfigEstabelecimento";
+                var sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter("",ConstantesDAO.SELECT,ConstantesDAO.MAX);
+                sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql,"(Id_ConfigEstabelecimento)",ConstantesDAO.AS);
+                sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql, "Id_ConfigEstabelecimento",ConstantesDAO.FROM);
+                sql = AccessObject<ConfigEstabelecimentoModel>.InsertSimpleParameter(sql,"ConfigEstabelecimento");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
 
                 return (int)Connection.getDataTable(comando).Rows[0]["Id_ConfigEstabelecimento"];
@@ -51,7 +55,9 @@ namespace DAO.Estabelecimento
         }
         private ConfigEstabelecimentoModel RecuperaConfigEstabelecimentoPeloId(int id)
         {
-            var sql = "SELECT * FROM ConfigEstabelecimento WHERE Id_ConfigEstabelecimento = @id";
+            var sql = AccessObject<ConfigEstabelecimentoModel>.CreateSelectAll();
+            sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql,ConstantesDAO.WHERE, "Id_ConfigEstabelecimento");
+            sql = AccessObject<ConfigEstabelecimentoModel>.InsertParameter(sql, ConstantesDAO.EQUAL, "id");
             var comando = new SqlCommand(sql, Connection.GetConnection());
             comando.Parameters.AddWithValue("@id",id);
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using DAO.Utils;
 
 namespace DAO.Estabelecimento
 {
@@ -16,7 +17,9 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                var sql = "INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES(@idEstabelecimento, @idConfigEstabelecimento)";
+                var sql = AccessObject<EstabelecimentoModel>.InsertParameter("",ConstantesDAO.INSERT,ConstantesDAO.INTO);
+                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql, "ConfigEstabelecimento_Estabelecimento",ConstantesDAO.VALUES);
+                sql = AccessObject<EstabelecimentoModel>.InsertParameter(sql,"(@idEstabelecimento", " @idConfigEstabelecimento)");
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
                 comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);

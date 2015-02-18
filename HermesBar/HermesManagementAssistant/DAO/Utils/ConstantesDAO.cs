@@ -23,5 +23,8 @@ namespace DAO.Utils
         public const string EQUAL = "=";
         public const string MAX = "MAX";
         public const string AS = "AS";
+        public const string INTO = "INTO";
+        public const string VALUES = "VALUES";
+        public const string SET = "SET";
     }
 }
