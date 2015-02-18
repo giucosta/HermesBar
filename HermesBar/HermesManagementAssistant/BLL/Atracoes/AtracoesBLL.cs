@@ -7,7 +7,7 @@ using DAO.Atracoes;
 using System.Data;
 using MODEL;
 using BLL.Comum;
-using DAO;
+using UTILS;
 
 namespace BLL.Atracoes
 {
@@ -36,7 +36,7 @@ namespace BLL.Atracoes
 
         public List<AtracoesModel> Pesquisa(AtracoesModel atracoes)
         {
-            return Conversores.DataTableToList<AtracoesModel>(AtracoesDAO.Pesquisa(atracoes));
+            return AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
         }
         public List<String> RecuperaEstilos()
         {

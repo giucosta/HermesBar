@@ -16,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DAO;
-using DAO;
 
 namespace HermesManagementAssistant.View.Usuario
 {

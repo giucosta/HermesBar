@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BLL.Fornecedor;
+using MODEL.Fornecedor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,27 @@ namespace HermesManagementAssistant.View.Fornecedor
     /// </summary>
     public partial class Fornecedor : Window
     {
+        private FornecedorBLL _fornecedorBLL = null;
+        public FornecedorBLL FornecedorBLL
+        {
+            get
+            {
+                if (_fornecedorBLL == null)
+                    _fornecedorBLL = new FornecedorBLL();
+                return _fornecedorBLL;
+            }
+        }
         public Fornecedor()
         {
             InitializeComponent();
+            gridPesquisa.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel() { RazaoSocial = "" });
+        }
+        public void Pesquisar(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(tbCodigo.Text))
+                gridPesquisa.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel() { Id = int.Parse(tbCodigo.Text), RazaoSocial = tbRazaoSocial.Text });
+            else
+                gridPesquisa.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel() { RazaoSocial = tbRazaoSocial.Text });
         }
     }
 }

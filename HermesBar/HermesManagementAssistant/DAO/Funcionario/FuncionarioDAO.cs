@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using DAO.Utils;
 
 namespace DAO.Funcionario
 {
@@ -61,13 +62,17 @@ namespace DAO.Funcionario
         {
             try
             {
-                var stb = new StringBuilder();
-                stb.Append("SELECT * FROM FUNCIONARIO ");
-                stb.Append("WHERE NOME LIKE @Nome ");
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome");
+                AO.InsertParameter(ConstantesDAO.LIKE, "@Nome");
                 if (funcionario.Id != 0)
-                    stb.Append("AND Id_Funcionario = @Codigo");
+                {
+                    AO.InsertParameter(ConstantesDAO.AND, "Id_Funcionario");
+                    AO.InsertParameter(ConstantesDAO.EQUAL, "@Codigo");
+                }
 
-                var comando = new SqlCommand(stb.ToString(), Connection.GetConnection());
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");
                 comando.Parameters.AddWithValue("@Codigo", funcionario.Id);
                 
