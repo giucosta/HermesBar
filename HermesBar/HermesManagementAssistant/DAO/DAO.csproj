@@ -55,6 +55,7 @@
     <Compile Include="Estabelecimento\ConfigEstabelecimentoDAO.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoDAO.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoDAO.cs" />
+    <Compile Include="Fornecedor\FornecedorDAO.cs" />
     <Compile Include="Funcionario\FuncionarioDAO.cs" />
     <Compile Include="Login\LoginDAO.cs" />
     <Compile Include="Log\Log.cs" />
