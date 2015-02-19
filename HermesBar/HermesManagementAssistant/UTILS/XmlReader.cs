@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MODEL.Estabelecimento;
+using MODEL.Fornecedor;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace UTILS
 {
@@ -22,12 +25,10 @@ namespace UTILS
             {
                 var path = ImportXmlFromPath(filename, Data);
                 if (path != string.Empty)
-                {
                     ReadEmitter(path);
-                }
             }
             catch (Exception)
-            {   
+            {
                 throw;
             }
         }
@@ -50,7 +51,7 @@ namespace UTILS
                     Directory.CreateDirectory(directory);
 
                 BinaryReader reader = new BinaryReader(Data);
-                string path = directory + "\\" + NfeDateEmission(filename)+".xml";
+                string path = directory + "\\" + NfeDateEmission(filename) + ".xml";
                 FileStream fstream = new FileStream(path, FileMode.CreateNew);
                 BinaryWriter wr = new BinaryWriter(fstream);
                 wr.Write(reader.ReadBytes((int)Data.Length));
@@ -59,22 +60,28 @@ namespace UTILS
                 return path;
             }
             catch (Exception)
-            {  
-                throw;
+            {
                 return string.Empty;
             }
         }
         private void ReadEmitter(string filename)
         {
-            var doc = LoadXml(filename);
-            var emitente = doc.GetElementsByTagName("emit");
-            var listEmitente = new List<KeyValuePair<string, string>>();
-            foreach (XmlElement element in emitente)
+            try
             {
-                listEmitente.Add(new KeyValuePair<string, string>("RazaoSocial", element.GetElementsByTagName("xNome")[0].InnerText));
-                listEmitente.Add(new KeyValuePair<string, string>("Cnpj", element.GetElementsByTagName("CNPJ")[0].InnerText));
-                listEmitente.Add(new KeyValuePair<string, string>("Fantasia", element.GetElementsByTagName("xFant")[0].InnerText));
-                listEmitente.Add(new KeyValuePair<string, string>("InscricaoEstadual", element.GetElementsByTagName("IE")[0].InnerText));
+                var doc = LoadXml(filename);
+                var emitente = doc.GetElementsByTagName("emit");
+                FornecedorModel fornecedor = new FornecedorModel();
+
+                foreach (XmlElement element in emitente)
+                {
+                    fornecedor.RazaoSocial = element.GetElementsByTagName("xNome")[0].InnerText;
+                    fornecedor.Cnpj = element.GetElementsByTagName("CNPJ")[0].InnerText;
+                    fornecedor.InscricaoEstadual = element.GetElementsByTagName("IE")[0].InnerText;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

@@ -79,7 +79,6 @@ namespace HermesManagementAssistant
                 XmlReader xmlReader = new XmlReader();
                 xmlReader.ImportXml(open.FileName, open.OpenFile());
             }
-                
         }
     }
 }
