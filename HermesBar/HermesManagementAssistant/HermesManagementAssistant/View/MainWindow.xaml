@@ -17,5 +17,6 @@
                 <MenuItem x:Name="mniFornecedor" Header="Fornecedor" HorizontalAlignment="Left" Width="176" Click="PesquisaFornecedor"/>
             </MenuItem>
         </Menu>
+        <Button Content="Importar NFE" HorizontalAlignment="Left" VerticalAlignment="Top" Width="245" Margin="27,275,0,0" Height="48" Click="UploadNfe"/>
     </Grid>
 </Window>

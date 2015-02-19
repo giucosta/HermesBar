@@ -21,6 +21,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAO;
 using HermesManagementAssistant.View.Fornecedor;
+using UTILS;
+using Microsoft.Win32;
+using System.IO;
 
 namespace HermesManagementAssistant
 {
@@ -63,6 +66,20 @@ namespace HermesManagementAssistant
         private void PesquisaFornecedor(object sender, RoutedEventArgs e)
         {
             new Fornecedor().Show();
+        }
+
+        private void UploadNfe(Object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Multiselect = false;
+            open.Filter = "XML|*.xml";
+
+            if ((bool)open.ShowDialog())
+            {
+                XmlReader xmlReader = new XmlReader();
+                xmlReader.ImportXml(open.FileName, open.OpenFile());
+            }
+                
         }
     }
 }
