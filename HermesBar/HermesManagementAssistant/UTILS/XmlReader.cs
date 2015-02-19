@@ -1,4 +1,5 @@
-﻿using MODEL.Estabelecimento;
+﻿using MODEL;
+using MODEL.Estabelecimento;
 using MODEL.Fornecedor;
 using System;
 using System.Collections.Generic;
@@ -64,20 +65,54 @@ namespace UTILS
                 return string.Empty;
             }
         }
+        public void DeletePathXml(string directory)
+        {
+            Directory.Delete(directory, true);
+        }
         private void ReadEmitter(string filename)
         {
             try
             {
                 var doc = LoadXml(filename);
-                var emitente = doc.GetElementsByTagName("emit");
                 FornecedorModel fornecedor = new FornecedorModel();
-
-                foreach (XmlElement element in emitente)
+                foreach (XmlNode emit in doc.GetElementsByTagName("emit"))
                 {
-                    fornecedor.RazaoSocial = element.GetElementsByTagName("xNome")[0].InnerText;
-                    fornecedor.Cnpj = element.GetElementsByTagName("CNPJ")[0].InnerText;
-                    fornecedor.InscricaoEstadual = element.GetElementsByTagName("IE")[0].InnerText;
+                    foreach (XmlNode node1 in emit.ChildNodes)
+                    {
+                        if (node1.Name.Equals("xNome"))
+                            fornecedor.RazaoSocial = node1.InnerText;
+                        if (node1.Name.Equals("CNPJ"))
+                            fornecedor.Cnpj = node1.InnerText;
+                        if (node1.Name.Equals("IE"))
+                            fornecedor.InscricaoEstadual = node1.InnerText;
+
+                        if (node1.Name.Equals("enderEmit"))
+                        {
+                            var endereco = new EnderecoModel();
+                            foreach (XmlNode enderEmit in node1.ChildNodes)
+                            {
+                                if (enderEmit.Name.Equals("xLgr"))
+                                    endereco.Rua = enderEmit.InnerText;
+                                if (enderEmit.Name.Equals("nro"))
+                                    endereco.Numero = enderEmit.InnerText;
+                            }
+                            fornecedor.Endereco = endereco;
+                        }
+                    }
                 }
+
+                //var emitente = LoadXml(filename).GetElementsByTagName("emit");
+                //FornecedorModel fornecedor = new FornecedorModel();
+
+                //if (emitente.Count > 0)
+                //{
+                //    foreach (XmlElement element in emitente)
+                //    {
+                //        fornecedor.RazaoSocial = element.GetElementsByTagName("xNome")[0].InnerText;
+                //        fornecedor.Cnpj = element.GetElementsByTagName("CNPJ")[0].InnerText;
+                //        fornecedor.InscricaoEstadual = element.GetElementsByTagName("IE")[0].InnerText;
+                //    }
+                //}
             }
             catch (Exception)
             {
