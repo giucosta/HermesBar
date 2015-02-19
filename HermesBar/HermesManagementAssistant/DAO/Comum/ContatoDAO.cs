@@ -130,5 +130,11 @@ namespace DAO.Comum
                 return null;
             }
         }
+        public int RecuperaProximoId()
+        {
+            var sql = "SELECT MAX(Id_Contato) + 1 as Proximo FROM Contato";
+            var comando = new SqlCommand(sql, Connection.GetConnection());
+            return (int)Connection.getDataTable(comando).Rows[0]["Proximo"];
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace DAO.Comum
                 comando.Parameters.AddWithValue("@Cep", endereco.Cep);
                 comando.Parameters.AddWithValue("@Cidade", endereco.Cidade);
                 comando.Parameters.AddWithValue("@Estado", endereco.Estado);
-                comando.Parameters.AddWithValue("@TipoEndereco", endereco.Tipo.Tipo);
+                comando.Parameters.AddWithValue("@Tipo", endereco.Tipo.Tipo);
 
                 Connection.ExecutarComando(comando);
                 return RecuperaUltimoEndereco();

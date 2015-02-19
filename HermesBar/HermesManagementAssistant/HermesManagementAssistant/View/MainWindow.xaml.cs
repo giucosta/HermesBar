@@ -24,6 +24,7 @@ using HermesManagementAssistant.View.Fornecedor;
 using UTILS;
 using Microsoft.Win32;
 using System.IO;
+using BLL.Fornecedor;
 
 namespace HermesManagementAssistant
 {
@@ -77,7 +78,10 @@ namespace HermesManagementAssistant
             if ((bool)open.ShowDialog())
             {
                 XmlReader xmlReader = new XmlReader();
-                xmlReader.ImportXml(open.FileName, open.OpenFile());
+                if (new FornecedorBLL().Salvar(xmlReader.ImportXml(open.FileName, open.OpenFile())))
+                    MessageBox.Show("NFe Importada com sucesso");
+                else
+                    MessageBox.Show("Erro ao importar NFe");
             }
         }
     }

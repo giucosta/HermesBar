@@ -28,5 +28,9 @@ namespace BLL.Comum
                 return DAO.Salvar(contato);
             return null;
         }
+        public int RecuperaProximoId()
+        {
+            return DAO.RecuperaProximoId();
+        }
     }
 }

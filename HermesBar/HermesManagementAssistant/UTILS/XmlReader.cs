@@ -1,4 +1,5 @@
-﻿using MODEL;
+﻿using DAO;
+using MODEL;
 using MODEL.Estabelecimento;
 using MODEL.Fornecedor;
 using System;
@@ -20,13 +21,14 @@ namespace UTILS
             doc.Load(caminhoXml);
             return doc;
         }
-        public void ImportXml(string filename, Stream Data)
+        public FornecedorModel ImportXml(string filename, Stream Data)
         {
             try
             {
                 var path = ImportXmlFromPath(filename, Data);
                 if (path != string.Empty)
-                    ReadEmitter(path);
+                    return ReadEmitter(path);
+                return null;
             }
             catch (Exception)
             {
@@ -65,11 +67,7 @@ namespace UTILS
                 return string.Empty;
             }
         }
-        public void DeletePathXml(string directory)
-        {
-            Directory.Delete(directory, true);
-        }
-        private void ReadEmitter(string filename)
+        private FornecedorModel ReadEmitter(string filename)
         {
             try
             {
@@ -95,24 +93,21 @@ namespace UTILS
                                     endereco.Rua = enderEmit.InnerText;
                                 if (enderEmit.Name.Equals("nro"))
                                     endereco.Numero = enderEmit.InnerText;
+                                if (enderEmit.Name.Equals("xBairro"))
+                                    endereco.Bairro = enderEmit.InnerText;
+                                if (enderEmit.Name.Equals("xMun"))
+                                    endereco.Bairro = enderEmit.InnerText;
+                                if (enderEmit.Name.Equals("CEP"))
+                                    endereco.Cep = enderEmit.InnerText;
+                                if (enderEmit.Name.Equals("UF"))
+                                    endereco.Estado = enderEmit.InnerText;
                             }
+                            endereco.Tipo = new TipoEnderecoModel() { Tipo = Constantes.ATipoEndereco.MATRIZ };
                             fornecedor.Endereco = endereco;
                         }
                     }
                 }
-
-                //var emitente = LoadXml(filename).GetElementsByTagName("emit");
-                //FornecedorModel fornecedor = new FornecedorModel();
-
-                //if (emitente.Count > 0)
-                //{
-                //    foreach (XmlElement element in emitente)
-                //    {
-                //        fornecedor.RazaoSocial = element.GetElementsByTagName("xNome")[0].InnerText;
-                //        fornecedor.Cnpj = element.GetElementsByTagName("CNPJ")[0].InnerText;
-                //        fornecedor.InscricaoEstadual = element.GetElementsByTagName("IE")[0].InnerText;
-                //    }
-                //}
+                return fornecedor;
             }
             catch (Exception)
             {
