@@ -6,8 +6,8 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAO;
 using DAO.Utils;
+using UTILS;
 
 namespace DAO.Estabelecimento
 {

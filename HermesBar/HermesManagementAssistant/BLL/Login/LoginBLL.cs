@@ -9,7 +9,7 @@ using System.Net;
 using DAO.Usuario;
 using DAO.Encript;
 using MODEL;
-using DAO;
+using UTILS;
 
 namespace BLL.Login
 {

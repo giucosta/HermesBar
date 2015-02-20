@@ -8,6 +8,7 @@ using DAO.Utils;
 using DAO.Connections;
 using System.Data.SqlClient;
 using System.Data;
+using UTILS;
 
 namespace DAO.Fornecedor
 {
@@ -41,8 +42,11 @@ namespace DAO.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE,"Id_Fornecedor");
-                AO.InsertParameter(ConstantesDAO.EQUAL,"@Id");
+                if (fornecedor.Id != 0)
+                {
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor");
+                    AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                }
                 AO.InsertParameter(ConstantesDAO.OR, "RazaoSocial");
                 AO.InsertParameter(ConstantesDAO.LIKE,"@RazaoSocial");
 

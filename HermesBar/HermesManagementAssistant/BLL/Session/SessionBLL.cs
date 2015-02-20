@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace BLL.Session
 {
@@ -12,7 +13,7 @@ namespace BLL.Session
     {
         public void CarregaSession(LoginModel login)
         {
-            DAO.Session.Usuario = new UsuarioDAO().RetornaUsuario(login);
+            UTILS.Session.Usuario = new UsuarioDAO().RetornaUsuario(login);
         }
     }
 }

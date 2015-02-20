@@ -19,12 +19,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using DAO;
+using Utils.Mensagens;
 using HermesManagementAssistant.View.Fornecedor;
-using UTILS;
 using Microsoft.Win32;
 using System.IO;
 using BLL.Fornecedor;
+using UTILS;
 
 namespace HermesManagementAssistant
 {
@@ -69,7 +69,7 @@ namespace HermesManagementAssistant
             new Fornecedor().Show();
         }
 
-        private void UploadNfe(Object sender, RoutedEventArgs e)
+        private void ImportarNFe(Object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.Multiselect = false;
@@ -78,10 +78,22 @@ namespace HermesManagementAssistant
             if ((bool)open.ShowDialog())
             {
                 XmlReader xmlReader = new XmlReader();
-                if (new FornecedorBLL().Salvar(xmlReader.ImportXml(open.FileName, open.OpenFile())))
-                    MessageBox.Show("NFe Importada com sucesso");
+                var fornecedor = xmlReader.ImportXml(open.FileName,open.OpenFile());
+                if (fornecedor != null)
+                {
+                    FornecedorCadastro view = new FornecedorCadastro();
+                    view.tbRazaoSocial.Text = fornecedor.RazaoSocial;
+                    view.tbCpfCnpj.Text = fornecedor.Cnpj;
+                    view.tbInscricaoEstadual.Text = fornecedor.InscricaoEstadual;
+                    view.tbRua.Text = fornecedor.Endereco.Rua;
+                    view.tbNumero.Text = fornecedor.Endereco.Numero;
+                    view.tbBairro.Text = fornecedor.Endereco.Bairro;
+                    view.tbCidade.Text = fornecedor.Endereco.Cidade;
+                    view.tbCep.Text = fornecedor.Endereco.Cep;
+                    view.Show();
+                }
                 else
-                    MessageBox.Show("Erro ao importar NFe");
+                    Mensagens.GeraMensagens("Importar XML",MENSAGEM.ARQUIVO_JA_EXPORTADO,null,TIPOS_MENSAGENS.ALERTA);
             }
         }
     }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace DAO
+namespace Utils.Mensagens
 {
     public static class Mensagens
     {
@@ -61,5 +61,7 @@ namespace DAO
         //CADASTRO ESTABELECIMENTO
         public const string ESTABELECIMENTO_CADASTRO_SUCESSO = "Estabelecimento salvo com sucesso!";
         public const string ESTABELECIMENTO_CADASTRO_ERRO = "Erro ao salvar o estabelecimento!";
+        //IMPORTACAO XML
+        public const string ARQUIVO_JA_EXPORTADO = "Arquivo já exportado!";
     }
 }

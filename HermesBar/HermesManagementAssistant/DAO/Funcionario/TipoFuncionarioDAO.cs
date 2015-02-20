@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DAO;
+using UTILS;
 
 namespace DAO.Funcionario
 {

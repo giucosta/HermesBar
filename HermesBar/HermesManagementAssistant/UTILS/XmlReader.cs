@@ -1,5 +1,4 @@
-﻿using DAO;
-using MODEL;
+﻿using MODEL;
 using MODEL.Estabelecimento;
 using MODEL.Fornecedor;
 using System;
@@ -51,20 +50,24 @@ namespace UTILS
             {
                 var directory = "C:\\HermesManagementAssistant\\Xml\\" + NfeEmitterName(filename);
                 if (!Directory.Exists(directory))
+                {
                     Directory.CreateDirectory(directory);
 
-                BinaryReader reader = new BinaryReader(Data);
-                string path = directory + "\\" + NfeDateEmission(filename) + ".xml";
-                FileStream fstream = new FileStream(path, FileMode.CreateNew);
-                BinaryWriter wr = new BinaryWriter(fstream);
-                wr.Write(reader.ReadBytes((int)Data.Length));
-                wr.Close();
-                fstream.Close();
-                return path;
+                    BinaryReader reader = new BinaryReader(Data);
+                    string path = directory + "\\" + NfeDateEmission(filename) + ".xml";
+                    FileStream fstream = new FileStream(path, FileMode.CreateNew);
+                    BinaryWriter wr = new BinaryWriter(fstream);
+                    wr.Write(reader.ReadBytes((int)Data.Length));
+                    wr.Close();
+                    fstream.Close();
+                    return path;
+                }
+                else
+                    return string.Empty;
             }
             catch (Exception)
             {
-                return string.Empty;
+                throw;
             }
         }
         private FornecedorModel ReadEmitter(string filename)

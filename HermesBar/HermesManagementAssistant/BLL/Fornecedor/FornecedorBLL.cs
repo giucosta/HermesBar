@@ -1,5 +1,4 @@
 ﻿using BLL.Comum;
-using DAO.Comum;
 using DAO.Fornecedor;
 using MODEL;
 using MODEL.Fornecedor;
@@ -51,8 +50,7 @@ namespace BLL.Fornecedor
             var enderecoSalvo = EnderecoBLL.Salvar(fornecedor.Endereco);
             if (enderecoSalvo != null)
             {
-                var contato = new ContatoModel() { Nome = "", Celular = "", Email = "", Site = "", Telefone = "" };
-                var contatoSalvo = ContatoBLL.Salvar(contato);
+                var contatoSalvo = ContatoBLL.Salvar(fornecedor.Contato);
                 if (contatoSalvo != null)
                 {
                     fornecedor.Contato = contatoSalvo;
