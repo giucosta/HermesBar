@@ -23,8 +23,7 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
                 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Login",login.Login);
@@ -49,8 +48,7 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
                 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Login",login.Login);
@@ -83,14 +81,10 @@ namespace DAO.Login
             try
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
-                AO.InsertParameter(ConstantesDAO.UPDATE,"login");
-                AO.InsertParameter(ConstantesDAO.SET, "DataUltimoLogin");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@UltimoLogin");
-                AO.InsertParameter(ConstantesDAO.WHERE, "Login");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Login");
+                AO.CreateUpdate("DataUltimoLogin", "Login");
 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.Add(new SqlParameter("@UltimoLogin", DateTime.Now));
+                comando.Parameters.Add(new SqlParameter("@DataUltimoLogin", DateTime.Now));
                 comando.Parameters.Add(new SqlParameter("@Login", login.Login));
 
                 Connection.ExecutarComando(comando);

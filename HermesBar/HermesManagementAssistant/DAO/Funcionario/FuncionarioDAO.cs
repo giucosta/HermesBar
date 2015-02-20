@@ -64,13 +64,9 @@ namespace DAO.Funcionario
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome");
-                AO.InsertParameter(ConstantesDAO.LIKE, "@Nome");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
                 if (funcionario.Id != 0)
-                {
-                    AO.InsertParameter(ConstantesDAO.AND, "Id_Funcionario");
-                    AO.InsertParameter(ConstantesDAO.EQUAL, "@Codigo");
-                }
+                    AO.InsertParameter(ConstantesDAO.AND, "Id_Funcionario", ConstantesDAO.EQUAL, "@Codigo");
 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");

@@ -63,10 +63,7 @@ namespace DAO.Estabelecimento
             try
             {
                 AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
-                AO.InsertParameter(ConstantesDAO.SELECT,ConstantesDAO.MAX);
-                AO.InsertSimpleParameter(AO.ReturnQuery(),"(Id_Estabelecimento)");
-                AO.InsertParameter(ConstantesDAO.AS,"Id");
-                AO.InsertParameter(ConstantesDAO.FROM, "Estabelecimento");
+                AO.CreateSpecificQuery("SELECT MAX(Id_Estabelecimento) AS Id FROM Estabelecimento");
                 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 var dataTable = Connection.getDataTable(comando);
@@ -89,8 +86,7 @@ namespace DAO.Estabelecimento
 
             AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
             AO.CreateSelectAll();
-            AO.InsertParameter(ConstantesDAO.WHERE,"Id_Estabelecimento");
-            AO.InsertParameter(ConstantesDAO.EQUAL, "@Id_Estabelecimento");
+            AO.InsertParameter(ConstantesDAO.WHERE, "Id_Estabelecimento", ConstantesDAO.EQUAL, "@Id_Estabelecimento");
             
             var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
             comando.Parameters.AddWithValue("Id_Estabelecimento",idEstabelecimento);

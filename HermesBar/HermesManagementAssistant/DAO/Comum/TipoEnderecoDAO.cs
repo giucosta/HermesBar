@@ -20,8 +20,8 @@ namespace DAO.Comum
             {
                 AccessObject<TipoEnderecoModel> AO = new AccessObject<TipoEnderecoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Tipo");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL,"@Tipo");
+                
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Tipo", endereco.Tipo);
 

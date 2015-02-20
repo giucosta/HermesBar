@@ -62,14 +62,10 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE,"1=1");
-                AO.InsertParameter(ConstantesDAO.AND, "Nome");
-                AO.InsertParameter(ConstantesDAO.LIKE, "@Nome");
-                AO.InsertParameter(ConstantesDAO.AND,"Estilo");
-                AO.InsertParameter(ConstantesDAO.LIKE,"@Estilo");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
+                AO.InsertParameter(ConstantesDAO.AND, "Estilo", ConstantesDAO.LIKE, "@Estilo");
 
                 var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
-
                 comando.Parameters.AddWithValue("@Nome", "%" + atracoes.Nome + "%");
                 comando.Parameters.AddWithValue("@Estilo", "%" + atracoes.Estilo + "%");
 

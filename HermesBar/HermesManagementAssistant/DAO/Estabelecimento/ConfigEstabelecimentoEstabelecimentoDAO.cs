@@ -18,9 +18,7 @@ namespace DAO.Estabelecimento
             try
             {
                 AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
-                AO.InsertParameter(ConstantesDAO.INSERT,ConstantesDAO.INTO);
-                AO.InsertParameter("ConfigEstabelecimento_Estabelecimento",ConstantesDAO.VALUES);
-                AO.InsertParameter("(@idEstabelecimento", " @idConfigEstabelecimento)");
+                AO.CreateSpecificQuery("INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES (@idEstabelecimento , @idConfigEstabelecimento)");
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
                 comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);

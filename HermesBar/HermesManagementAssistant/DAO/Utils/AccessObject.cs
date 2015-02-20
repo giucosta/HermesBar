@@ -76,19 +76,23 @@ namespace DAO.Utils
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
         }
-        public void InsertParameter(String sqlCommand,String atributo)
+        public void InsertParameter(String sqlCommand,String attribute, String condition, String comparisionAttribute )
         {
             var stb = new StringBuilder();
             stb.Append(" " + sqlCommand);
-            stb.Append(" " + atributo);
+            stb.Append(" " + attribute);
+            stb.Append(" " + condition);
+            stb.Append(" " + comparisionAttribute);
             sql += FormatSql(stb.ToString());
         }
-        public void InsertSimpleParameter(String command, String parameter)
+        /// <summary>
+        /// Utilizar quando necessitar criar uma Query específica, passando 2 parametros de cada vez
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="parameter"></param>
+        public void CreateSpecificQuery(String query)
         {
-            var stb = new StringBuilder();
-            stb.Append(command);
-            stb.Append(parameter);
-            sql += FormatSql(stb.ToString());
+            sql += query;
         }
         public void CreateSelectWithSimpleParameter(String parameter)
         {
@@ -98,6 +102,22 @@ namespace DAO.Utils
             stb.Append(ConstantesDAO.FROM);
             stb.Append(" " + RetornaNomeClasse());
             sql+= FormatSql(stb.ToString());
+        }
+
+        public void CreateUpdate(String attribute, String parameter)
+        {
+            var stb = new StringBuilder();
+            var table = RetornaNomeClasse();
+            stb.Append(ConstantesDAO.UPDATE);
+            stb.Append(" " + ConstantesDAO.SET);
+            stb.Append(" " + attribute);
+            stb.Append(" " + ConstantesDAO.EQUAL);
+            stb.Append(" " + "@" + attribute);
+            stb.Append(" " + ConstantesDAO.WHERE);
+            stb.Append(" " + parameter);
+            stb.Append(" " + ConstantesDAO.EQUAL);
+            stb.Append(" " + "@" + parameter);
+            sql += FormatSql(stb.ToString());
         }
         private string FormatSql(string command)
         {

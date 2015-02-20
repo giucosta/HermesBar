@@ -85,8 +85,7 @@ namespace DAO.Comum
             {
                 var AO = new AccessObject<EnderecoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, "@Id");
                 
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id",id);

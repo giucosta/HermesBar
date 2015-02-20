@@ -61,10 +61,8 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE,"Nome");
-                AO.InsertParameter(ConstantesDAO.LIKE, "@Nome");
-                AO.InsertParameter(ConstantesDAO.AND, "Email");
-                AO.InsertParameter(ConstantesDAO.LIKE, "@Email");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
+                AO.InsertParameter(ConstantesDAO.AND, "Email", ConstantesDAO.LIKE, "@Email");
 
                 var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Nome", "%" + contato.Nome + "%");
@@ -117,8 +115,7 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato");
-                AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, "@Id");
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id", id);
 
@@ -132,8 +129,10 @@ namespace DAO.Comum
         }
         public int RecuperaProximoId()
         {
-            var sql = "SELECT MAX(Id_Contato) + 1 as Proximo FROM Contato";
-            var comando = new SqlCommand(sql, Connection.GetConnection());
+            AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+            AO.CreateSpecificQuery("SELECT MAX(Id_Contato) + 1 as Proximo FROM Contato");
+
+            var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
             return (int)Connection.getDataTable(comando).Rows[0]["Proximo"];
         }
     }
