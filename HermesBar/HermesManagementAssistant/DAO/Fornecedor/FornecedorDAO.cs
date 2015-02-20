@@ -44,12 +44,11 @@ namespace DAO.Fornecedor
                 AO.CreateSelectAll();
                 if (fornecedor.Id != 0)
                 {
-                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor");
-                    AO.InsertParameter(ConstantesDAO.EQUAL, "@Id");
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, "@Id");
+                    AO.InsertParameter(ConstantesDAO.OR, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
                 }
-                AO.InsertParameter(ConstantesDAO.OR, "RazaoSocial");
-                AO.InsertParameter(ConstantesDAO.LIKE,"@RazaoSocial");
-
+                AO.InsertParameter(ConstantesDAO.WHERE, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
+                
                 var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id",fornecedor.Id);
                 comando.Parameters.AddWithValue("@RazaoSocial", fornecedor.RazaoSocial);
