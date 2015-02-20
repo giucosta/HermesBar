@@ -109,6 +109,7 @@ namespace DAO.Utils
             var stb = new StringBuilder();
             var table = RetornaNomeClasse();
             stb.Append(ConstantesDAO.UPDATE);
+            stb.Append(" " + table);
             stb.Append(" " + ConstantesDAO.SET);
             stb.Append(" " + attribute);
             stb.Append(" " + ConstantesDAO.EQUAL);

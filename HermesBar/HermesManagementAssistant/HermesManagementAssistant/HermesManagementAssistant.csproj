@@ -197,6 +197,15 @@
     <SplashScreen Include="images\LOGO_GENERICA 04.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\login12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\settings48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\businessman1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
       <Name>BLL</Name>
@@ -209,15 +218,6 @@
       <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
       <Name>UTILS</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\login12.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\settings48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="images\businessman1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
