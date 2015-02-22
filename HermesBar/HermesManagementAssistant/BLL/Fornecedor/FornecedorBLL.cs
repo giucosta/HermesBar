@@ -47,15 +47,18 @@ namespace BLL.Fornecedor
 
         public bool Salvar(FornecedorModel fornecedor)
         {
-            var enderecoSalvo = EnderecoBLL.Salvar(fornecedor.Endereco);
-            if (enderecoSalvo != null)
+            if (Validacoes.ValidaCNPJ(fornecedor.Cnpj))
             {
-                var contatoSalvo = ContatoBLL.Salvar(fornecedor.Contato);
-                if (contatoSalvo != null)
+                var enderecoSalvo = EnderecoBLL.Salvar(fornecedor.Endereco);
+                if (enderecoSalvo != null)
                 {
-                    fornecedor.Contato = contatoSalvo;
-                    fornecedor.Endereco = enderecoSalvo;
-                    return FornecedorDAO.Salvar(fornecedor);
+                    var contatoSalvo = ContatoBLL.Salvar(fornecedor.Contato);
+                    if (contatoSalvo != null)
+                    {
+                        fornecedor.Contato = contatoSalvo;
+                        fornecedor.Endereco = enderecoSalvo;
+                        return FornecedorDAO.Salvar(fornecedor);
+                    }
                 }
             }
             return false;

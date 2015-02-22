@@ -23,7 +23,7 @@
                     <Label HorizontalAlignment="Right" Margin="0,5,0,7" Width="77" Grid.Column="0">Razão Social</Label>
                     <TextBox Name="tbRazaoSocial" Grid.Column="1" Margin="22,7,20,6" Grid.ColumnSpan="2" MaxLength="100"/>
                     <Label Grid.Row="1" HorizontalAlignment="Right" Margin="0,8,1,1" Width="70">CPF / CNPJ</Label>
-                    <TextBox Name="tbCpfCnpj" Grid.Column="1" Grid.Row="1" Margin="22,5,10,5" MaxLength="11"/>
+                    <TextBox Name="tbCpfCnpj" Grid.Column="1" Grid.Row="1" Margin="22,5,10,5" MaxLength="13"/>
                     <Label Name="lbInscEstadual" HorizontalAlignment="Right" Margin="0,9,3,28" Grid.Row="2" Grid.RowSpan="2" Width="85">Inscr. Estadual</Label>
                     <TextBox Name="tbInscricaoEstadual" Grid.Column="1" Grid.Row="2" Margin="22,8,8,5" MaxLength="15"/>
                 </Grid>
@@ -81,6 +81,6 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="41,340,0,0"/>
+        <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="41,340,0,0" Click="Salvar"/>
     </Grid>
 </Window>

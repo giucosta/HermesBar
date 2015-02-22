@@ -43,5 +43,9 @@ namespace HermesManagementAssistant.View.Fornecedor
             else
                 gridPesquisa.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel() { RazaoSocial = tbRazaoSocial.Text });
         }
+        public void CadastrarFornecedor(object sender, RoutedEventArgs e)
+        {
+            new FornecedorCadastro().Show();
+        }
     }
 }

@@ -23,5 +23,9 @@ namespace HermesManagementAssistant.View.Fornecedor
         {
             InitializeComponent();
         }
+        public void Salvar(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
