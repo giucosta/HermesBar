@@ -27,5 +27,9 @@ namespace HermesManagementAssistant.View.Fornecedor
         {
 
         }
+        private List<String> VerificaCamposObrigatorios()
+        {
+
+        }
     }
 }
