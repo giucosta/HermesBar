@@ -14,6 +14,11 @@ namespace DAO.Fornecedor
 {
     public class FornecedorDAO
     {
+        public FornecedorDAO()
+        {
+            var comando = new SqlCommand();
+            var connection = new SqlConnection(Connection.GetConnection());
+        }
         public bool Salvar(FornecedorModel fornecedor)
         {
             try
@@ -29,10 +34,14 @@ namespace DAO.Fornecedor
                 Connection.ExecutarComando(comando);
                 return true;
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 Log.Log.GravarLog("Salvar","FornecedorDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
                 return false;
+            }
+            catch (Exception e)
+            {
+
             }
         }
 

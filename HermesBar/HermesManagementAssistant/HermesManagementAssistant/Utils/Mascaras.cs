@@ -97,10 +97,8 @@ namespace HermesManagementAssistant.Utils
         {
             if (textBox.Text.Length == 11)
                 return CpfMasked(textBox, e);
-            else
-                return CnpjMasked(RetiraElementos(textBox), e);
-            
-            return textBox;
+
+            return CnpjMasked(RetiraElementos(textBox), e);
         }
         private static TextBox RetiraElementos(TextBox textBox)
         {

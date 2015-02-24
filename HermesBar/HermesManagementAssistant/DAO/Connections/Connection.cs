@@ -22,6 +22,7 @@ namespace DAO.Connections
             }
             catch(SqlException)
             {
+                Log.Log.GravarLog("GetConnection", "Connection", "Falha ao conectar na base de dados", "");
                 _connection = null;
             }
             return _connection;
