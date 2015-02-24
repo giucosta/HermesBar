@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HermesManagementAssistant.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +28,10 @@ namespace HermesManagementAssistant.View.Fornecedor
         {
 
         }
-        private List<String> VerificaCamposObrigatorios()
+        private void CpfCnpjMasked(object sender, KeyEventArgs e)
         {
-
+            Mascaras.CnpjCpfMasked(tbCpfCnpj, e);
+            tbCpfCnpj.SelectionStart = tbCpfCnpj.Text.Length + 1;
         }
     }
 }

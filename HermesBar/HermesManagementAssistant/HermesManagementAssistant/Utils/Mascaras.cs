@@ -93,5 +93,21 @@ namespace HermesManagementAssistant.Utils
             textBox.Text = "";
             return textBox;
         }
+        public static TextBox CnpjCpfMasked(TextBox textBox, KeyEventArgs e)
+        {
+            if (textBox.Text.Length == 11)
+                return CpfMasked(textBox, e);
+            else
+                return CnpjMasked(RetiraElementos(textBox), e);
+            
+            return textBox;
+        }
+        private static TextBox RetiraElementos(TextBox textBox)
+        {
+            var elementos = textBox.Text.Replace(".", "");
+            elementos = elementos.Replace("-", "");
+            textBox.Text = elementos;
+            return textBox;
+        }
     }
 }
