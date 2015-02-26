@@ -21,8 +21,9 @@ namespace DAO.Funcionario
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@TipoFuncionario", tipoFuncionario.TipoFuncionario);
 
-                Connection.ExecutarComando(comando);
-                return RetornaTipo(tipoFuncionario);
+                if(Connection.ExecutarComando(comando))
+                    return RetornaTipo(tipoFuncionario);
+                return null;
             }
             catch (Exception e)
             {

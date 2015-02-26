@@ -49,8 +49,9 @@ namespace DAO.Estabelecimento
                 comando.Parameters.AddWithValue("@Endereco",estabelecimento.Endereco.Id);
                 comando.Parameters.AddWithValue("@Contato",estabelecimento.Contato.Id);
 
-                Connection.ExecutarComando(comando);
-                return RetornaUltimoEstabelecimentoSalvo();
+                if(Connection.ExecutarComando(comando))
+                    return RetornaUltimoEstabelecimentoSalvo();
+                return null;
             }
             catch (Exception e)
             {

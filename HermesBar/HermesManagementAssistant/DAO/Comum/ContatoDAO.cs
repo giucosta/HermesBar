@@ -28,8 +28,9 @@ namespace DAO.Comum
                 comando.Parameters.AddWithValue("@Email",contato.Email);
                 comando.Parameters.AddWithValue("@Site",contato.Site);
 
-                Connection.ExecutarComando(comando);
-                return Pesquisa(contato);
+                if (Connection.ExecutarComando(comando))
+                    return Pesquisa(contato);
+                return null;
             }
             catch (Exception e)
             {
@@ -46,8 +47,7 @@ namespace DAO.Comum
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id_Contato", contato.Id);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando)
             }
             catch (Exception e)
             {

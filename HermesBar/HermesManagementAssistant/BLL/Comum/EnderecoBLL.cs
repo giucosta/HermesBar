@@ -53,7 +53,9 @@ namespace BLL.Comum
         }
         public bool Excluir(EnderecoModel endereco)
         {
-            return DAO.Excluir(endereco);
+            if(endereco.Id != 0)
+                return DAO.Excluir(endereco);
+            return false;
         }
     }
 }

@@ -27,9 +27,7 @@ namespace DAO.Fornecedor
                 comando.Parameters.AddWithValue("@InscricaoEstadual", fornecedor.InscricaoEstadual);
                 comando.Parameters.AddWithValue("@Contato", fornecedor.Contato.Id);
                 comando.Parameters.AddWithValue("@Endereco", fornecedor.Endereco.Id);
-                Connection.ExecutarComando(comando);
-
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

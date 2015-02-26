@@ -31,8 +31,9 @@ namespace DAO.Comum
                 comando.Parameters.AddWithValue("@Estado", endereco.Estado);
                 comando.Parameters.AddWithValue("@Tipo", endereco.Tipo.Tipo);
 
-                Connection.ExecutarComando(comando);
-                return RecuperaUltimoEndereco();
+                if(Connection.ExecutarComando(comando))
+                    return RecuperaUltimoEndereco();
+                return null;
             }
             catch (Exception e)
             {
@@ -102,8 +103,8 @@ namespace DAO.Comum
                 var AO = new AccessObject<EnderecoModel>();
                 AO.DeleteFromId();
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                Connection.ExecutarComando(comando);
-                return true;
+                comando.Parameters.AddWithValue("@Id_Endereco",endereco.Id);
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

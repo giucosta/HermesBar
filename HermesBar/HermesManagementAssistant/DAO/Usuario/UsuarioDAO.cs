@@ -16,11 +16,6 @@ namespace DAO.Usuario
 {
     public class UsuarioDAO : IUsuario
     {
-        /// <summary>
-        /// Recupera no banco o email do usuario
-        /// </summary>
-        /// <param name="login">LoginModel</param>
-        /// <returns>Email</returns>
         public string RecuperaEmailUsuario(LoginModel login)
         {
             try
@@ -44,11 +39,6 @@ namespace DAO.Usuario
             }
         }
 
-        /// <summary>
-        /// Grava a nova senha do usuario no banco
-        /// </summary>
-        /// <param name="login">LoginModel login</param>
-        /// <returns>boolean</returns>
         public bool GravaNovaSenha(LoginModel login)
         {
             try
@@ -58,8 +48,7 @@ namespace DAO.Usuario
                 comando.Parameters.AddWithValue("@Senha",Encript.EncriptMd5.Criptografar(login.Senha));
                 comando.Parameters.AddWithValue("@Login",login.Login);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {
@@ -68,12 +57,6 @@ namespace DAO.Usuario
             }
         }
 
-        /// <summary>
-        /// Carrega todos os dados do usuario
-        /// Metodo utilizado principalmente pra carregar a Session
-        /// </summary>
-        /// <param name="login">LoginModel login</param>
-        /// <returns>UsuarioModel</returns>
         public UsuarioModel RetornaUsuario(LoginModel login)
         {
             try
@@ -170,8 +153,7 @@ namespace DAO.Usuario
                 comando.Parameters.AddWithValue("@Status", usuario.Status);
                 comando.Parameters.AddWithValue("@Email", usuario.Email);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {
@@ -188,9 +170,7 @@ namespace DAO.Usuario
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
 
-                Connection.ExecutarComando(comando);
-                return true;
-
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

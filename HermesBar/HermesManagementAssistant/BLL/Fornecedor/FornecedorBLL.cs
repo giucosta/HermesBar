@@ -49,18 +49,17 @@ namespace BLL.Fornecedor
         {
             if (Validacoes.ValidaCNPJ(fornecedor.Cnpj))
             {
-                var enderecoSalvo = EnderecoBLL.Salvar(fornecedor.Endereco);
-                if (enderecoSalvo != null)
+                fornecedor.Endereco = SaveAddress(fornecedor.Endereco);
+                if (fornecedor.Endereco != null)
                 {
                     var contatoSalvo = ContatoBLL.Salvar(fornecedor.Contato);
                     if (contatoSalvo != null)
                     {
                         fornecedor.Contato = contatoSalvo;
-                        fornecedor.Endereco = enderecoSalvo;
                         return FornecedorDAO.Salvar(fornecedor);
                     }
                     else
-                        EnderecoBLL.Excluir(fornecedor.Endereco);
+                        DeleteAddress(fornecedor.Endereco);
                 }
             }
             return false;
@@ -69,5 +68,19 @@ namespace BLL.Fornecedor
         {
             return FornecedorDAO.Pesquisar(fornecedor).DataTableToList<FornecedorModel>();
         }
+
+        #region EnderecoFornecedor
+        private EnderecoModel SaveAddress(EnderecoModel endereco)
+        {
+            if (!string.IsNullOrWhiteSpace(endereco.Rua) && !string.IsNullOrWhiteSpace(endereco.Numero))
+                return EnderecoBLL.Salvar(endereco);
+            return null;
+        }
+        private bool DeleteAddress(EnderecoModel endereco){
+            if (endereco.Id != 0)
+                return EnderecoBLL.Excluir(endereco);
+            return false;
+        }
+        #endregion
     }
 }

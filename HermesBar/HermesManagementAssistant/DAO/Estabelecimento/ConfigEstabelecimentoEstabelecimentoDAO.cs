@@ -23,8 +23,7 @@ namespace DAO.Estabelecimento
                 comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
                 comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

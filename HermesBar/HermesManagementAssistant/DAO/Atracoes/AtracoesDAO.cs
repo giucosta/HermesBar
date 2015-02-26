@@ -30,8 +30,7 @@ namespace DAO.Atracoes
                 comando.Parameters.AddWithValue("@Tempo_Show", atracoes.Tempo_Show);
                 comando.Parameters.AddWithValue("@Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {
@@ -47,8 +46,7 @@ namespace DAO.Atracoes
                 AO.DeleteFromId();
                 var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id_Atracoes",atracoes.Id);
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

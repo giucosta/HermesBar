@@ -27,17 +27,19 @@ namespace DAO.Connections
             }
             return _connection;
         }
-        public static void ExecutarComando(SqlCommand command)
+        public static bool ExecutarComando(SqlCommand command)
         {
             try
             {
                 command.ExecuteNonQuery();
                 OutConnection();
+                return true;
             }
             catch(SqlException e)
             {
                 Log.Log.GravarLog("ExecutarComando","Connection",command.CommandText,"");
                 OutConnection();
+                return false;
             }
         }
         public static DataTable getDataTable(SqlCommand command)

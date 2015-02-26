@@ -26,9 +26,9 @@ namespace DAO.Estabelecimento
                 comando.Parameters.AddWithValue("@QuantidadeMesa",ConfigEstabelecimento.QuantidadeMesas);
                 comando.Parameters.AddWithValue("@TaxaServico",ConfigEstabelecimento.TaxaServico);
 
-                Connection.ExecutarComando(comando);
-
-                return RecuperaConfigEstabelecimentoPeloId(RecuperaUltimoIdCadastrado());
+                if(Connection.ExecutarComando(comando))
+                    return RecuperaConfigEstabelecimentoPeloId(RecuperaUltimoIdCadastrado());
+                return null;
             }
             catch (Exception e)
             {

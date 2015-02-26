@@ -65,8 +65,8 @@ namespace DAO.Utils
             var nomeClasse = RetornaNomeClasse();
             var stb = new StringBuilder();
             stb.Append("DELETE FROM " + nomeClasse);
-            stb.Append("WHERE ");
-            stb.Append("Id_" + nomeClasse);
+            stb.Append(" " + "WHERE");
+            stb.Append(" " + "Id_" + nomeClasse);
             stb.Append("=");
             stb.Append("@Id_" + nomeClasse);
             sql += FormatSql(stb.ToString());

@@ -130,8 +130,7 @@ namespace DAO.Login
                 var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
                 comando.Parameters.AddWithValue("@IdLogin",login.Id);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

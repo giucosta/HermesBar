@@ -32,8 +32,7 @@ namespace DAO.Funcionario
                 comando.Parameters.AddWithValue("@Id_Contato", funcionario.Contato.Id);
                 comando.Parameters.AddWithValue("@DataAdmissao",funcionario.DataAdmissao);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {
@@ -49,8 +48,7 @@ namespace DAO.Funcionario
                 var comando = new SqlCommand(sql, Connection.GetConnection());
                 comando.Parameters.AddWithValue("@IdFuncionario", funcionario.Id);
                 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {
