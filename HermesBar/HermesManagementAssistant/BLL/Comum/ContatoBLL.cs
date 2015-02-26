@@ -24,8 +24,11 @@ namespace BLL.Comum
 
         public ContatoModel Salvar(ContatoModel contato)
         {
-            if(Validacoes.ValidarEmail(contato.Email))
-                return DAO.Salvar(contato);
+            if (Validacoes.ValidarEmail(contato.Email))
+            {
+                if(!string.IsNullOrWhiteSpace(contato.Nome))
+                    return DAO.Salvar(contato);
+            }  
             return null;
         }
         public int RecuperaProximoId()

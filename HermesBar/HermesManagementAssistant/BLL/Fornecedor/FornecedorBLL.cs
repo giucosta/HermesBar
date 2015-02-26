@@ -59,6 +59,8 @@ namespace BLL.Fornecedor
                         fornecedor.Endereco = enderecoSalvo;
                         return FornecedorDAO.Salvar(fornecedor);
                     }
+                    else
+                        EnderecoBLL.Excluir(fornecedor.Endereco);
                 }
             }
             return false;
