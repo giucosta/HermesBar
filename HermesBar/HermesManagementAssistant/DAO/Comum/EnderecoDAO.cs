@@ -39,9 +39,7 @@ namespace DAO.Comum
                 Log.Log.GravarLog("Salvar","EnderecoDAO",e.StackTrace.ToString(),Constantes.ATipoMetodo.INSERT);
                 return null;
             }
-            
         }
-
         public TipoEnderecoModel RetornaTipoEndereco(EnderecoModel endereco)
         {
             return new TipoEnderecoDAO().RetornaTipoEndereco(endereco);
@@ -78,7 +76,6 @@ namespace DAO.Comum
             }
             return null;
         }
-
         public EnderecoModel RecuperaEnderecoPeloId(int id)
         {
             try
@@ -96,6 +93,22 @@ namespace DAO.Comum
             {
                 Log.Log.GravarLog("RecuperaEnderecoPeloId","EnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 return null;
+            }
+        }
+        public bool Excluir(EnderecoModel endereco)
+        {
+            try
+            {
+                var AO = new AccessObject<EnderecoModel>();
+                AO.DeleteFromId();
+                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
+                Connection.ExecutarComando(comando);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Excluir","EnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.DELETE);
+                return false;
             }
         }
     }

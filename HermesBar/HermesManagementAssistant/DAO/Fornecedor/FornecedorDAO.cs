@@ -9,16 +9,12 @@ using DAO.Connections;
 using System.Data.SqlClient;
 using System.Data;
 using UTILS;
+using DAO.Comum;
 
 namespace DAO.Fornecedor
 {
     public class FornecedorDAO
     {
-        public FornecedorDAO()
-        {
-            var comando = new SqlCommand();
-            var connection = new SqlConnection(Connection.GetConnection());
-        }
         public bool Salvar(FornecedorModel fornecedor)
         {
             try
@@ -32,16 +28,15 @@ namespace DAO.Fornecedor
                 comando.Parameters.AddWithValue("@Contato", fornecedor.Contato.Id);
                 comando.Parameters.AddWithValue("@Endereco", fornecedor.Endereco.Id);
                 Connection.ExecutarComando(comando);
+
                 return true;
-            }
-            catch (SqlException e)
-            {
-                Log.Log.GravarLog("Salvar","FornecedorDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
-                return false;
             }
             catch (Exception e)
             {
-
+                new ContatoDAO().Excluir(fornecedor.Contato);
+                new EnderecoDAO().Excluir(fornecedor.Endereco);
+                Log.Log.GravarLog("Salvar","FornecedorDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
+                return false;
             }
         }
 
