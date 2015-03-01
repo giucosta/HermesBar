@@ -55,32 +55,45 @@ namespace HermesManagementAssistant.View.Fornecedor
             if (FornecedorBLL.Salvar(CarregaFornecedor()))
                 MessageBox.Show("Gravou");
         }
+        
+        #region Preenche Model
         private FornecedorModel CarregaFornecedor()
         {
             var fornecedor = new FornecedorModel();
-            fornecedor.Cnpj = tbCpfCnpj.Text;
-            fornecedor.Contato = new ContatoModel() { 
-                Nome = tbNome.Text,
-                Telefone = tbTelefone.Text, 
-                Celular = tbCelular.Text, 
-                Email = tbEmail.Text 
-            };
-            fornecedor.Endereco = new EnderecoModel() { 
-                Rua = tbRua.Text, 
-                Cep = tbCep.Text, 
-                Bairro = tbBairro.Text, 
-                Cidade = tbCidade.Text, 
-                Estado = cbEstado.SelectionBoxItem.ToString(), 
-                Numero = tbNumero.Text, 
-                Tipo = new TipoEnderecoModel(){
-                    Tipo = Constantes.ATipoEndereco.MATRIZ
-                }
-            };
-            fornecedor.InscricaoEstadual = tbInscricaoEstadual.Text;
             fornecedor.RazaoSocial = tbRazaoSocial.Text;
+            fornecedor.Cnpj = tbCpfCnpj.Text;
+            fornecedor.InscricaoEstadual = tbInscricaoEstadual.Text;
+            fornecedor.Contato = CarregaContatoFornecedor();
+            fornecedor.Endereco = CarregaEnderecoFornecedor();
 
             return fornecedor;
         }
+        private ContatoModel CarregaContatoFornecedor()
+        {
+            var contato = new ContatoModel();
+            contato.Nome = tbNome.Text;
+            contato.Telefone = tbTelefone.Text;
+            contato.Celular = tbCelular.Text;
+            contato.Email = tbEmail.Text;
+
+            return contato;
+        }
+        private EnderecoModel CarregaEnderecoFornecedor()
+        {
+            var endereco = new EnderecoModel();
+            endereco.Rua = tbRua.Text;
+            endereco.Cep = tbCep.Text;
+            endereco.Bairro = tbBairro.Tex; 
+            endereco.Cidade = tbCidade.Text;
+            endereco.Estado = cbEstado.SelectionBoxItem.ToString();
+            endereco.Numero = tbNumero.Text;
+            endereco.Tipo = new TipoEnderecoModel(){
+                Tipo = Constantes.ATipoEndereco.MATRIZ
+            };
+        }
+        #endregion
+
+        #region Masked
         private void CpfCnpjMasked(object sender, KeyEventArgs e)
         {
             Mascaras.CnpjCpfMasked(tbCpfCnpj, e);
@@ -93,5 +106,6 @@ namespace HermesManagementAssistant.View.Fornecedor
         private void CelularMasked(object sender, KeyEventArgs e){
             Mascaras.PhoneMasked(tbCelular, e);
         }
+        #endregion
     }
 }
