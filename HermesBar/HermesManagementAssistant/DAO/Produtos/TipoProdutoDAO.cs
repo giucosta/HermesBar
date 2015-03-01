@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using DAO.Connections;
 using System.Data;
 using UTILS;
+using DAO.Utils;
 
 namespace DAO.Produtos
 {
@@ -19,13 +20,14 @@ namespace DAO.Produtos
         {
             try
             {
-                var sql = "INSERT INTO TipoProduto VALUES @Tipo, @Descricao";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Tipo",tipoProduto.Tipo);
-                comando.Parameters.AddWithValue("@Descricao", tipoProduto.Descricao);
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateDataInsert();
+                //var sql = "INSERT INTO TipoProduto VALUES @Tipo, @Descricao";
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Tipo", tipoProduto.Tipo);
+                Connection.AddParameter("@Descricao", tipoProduto.Descricao);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -37,12 +39,12 @@ namespace DAO.Produtos
         {
             try
             {
-                var sql = "DELETE TipoProduto WHERE Tipo = @Tipo";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Tipo", tipoProduto.Tipo);
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateSpecificQuery(@"DELETE TipoProduto WHERE Tipo = @Tipo");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Tipo",tipoProduto.Tipo);
 
-                Connection.ExecutarComando(comando);
-                return true;
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {

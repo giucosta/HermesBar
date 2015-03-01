@@ -20,8 +20,9 @@ namespace DAO.Comum
             {
                 var AO = new AccessObject<EnderecoModel>();
                 AO.CreateDataInsert();
-                
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
+
+                var comando = Connection.GetCommand(AO.ReturnQuery());
+                //var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Rua", endereco.Rua);
                 comando.Parameters.AddWithValue("@Numero", endereco.Numero);
                 comando.Parameters.AddWithValue("@Complemento", endereco.Complemento);
@@ -50,7 +51,8 @@ namespace DAO.Comum
             try
             {
                 var sql = "SELECT TOP 1 * FROM Endereco ORDER BY Id_Endereco DESC";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
+                var comando = Connection.GetCommand(sql);
+                //var comando = new SqlCommand(sql, Connection.GetConnection());
                 return CarregaEndereco(Connection.getDataTable(comando));
             }
             catch (Exception)

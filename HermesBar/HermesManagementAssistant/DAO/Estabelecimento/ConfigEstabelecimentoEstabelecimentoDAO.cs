@@ -19,11 +19,11 @@ namespace DAO.Estabelecimento
             {
                 AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
                 AO.CreateSpecificQuery("INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES (@idEstabelecimento , @idConfigEstabelecimento)");
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@idEstabelecimento", estabelecimento.Id);
-                comando.Parameters.AddWithValue("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@idEstabelecimento", estabelecimento.Id);
+                Connection.AddParameter("@idConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {

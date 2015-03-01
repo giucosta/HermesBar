@@ -12,44 +12,49 @@ namespace DAO.Connections
     public class Connection
     {
         private static string _connectionString = Constantes.AConexaoBanco.SERVER + Constantes.AConexaoBanco.DATABASE + Constantes.AConexaoBanco.SEGURANCA;
-        private static SqlConnection _connection = null;   
+        private static SqlConnection _connection = null;
+        private static SqlTransaction _transaction = null;
+        private static SqlParameter _parameter = null;
+        private static SqlCommand _command = null;
 
         public static SqlConnection GetConnection(){
-            _connection = new SqlConnection(_connectionString);
-            try
+            if (_connection == null)
             {
-                _connection.Open();
-            }
-            catch(SqlException)
-            {
-                Log.Log.GravarLog("GetConnection", "Connection", "Falha ao conectar na base de dados", "");
-                _connection = null;
+                _connection = new SqlConnection(_connectionString);
+                try
+                {
+                    _connection.Open();
+                }
+                catch (SqlException)
+                {
+                    Log.Log.GravarLog("GetConnection", "Connection", "Falha ao conectar na base de dados", "");
+                    _connection = null;
+                }
             }
             return _connection;
         }
-        public static bool ExecutarComando(SqlCommand command)
+        public static bool ExecutarComando()
         {
             try
             {
-                command.ExecuteNonQuery();
-                OutConnection();
+                _command.ExecuteNonQuery();
                 return true;
             }
             catch(SqlException e)
             {
-                Log.Log.GravarLog("ExecutarComando","Connection",command.CommandText,"");
+                Log.Log.GravarLog("ExecutarComando","Connection",_command.CommandText,"");
                 OutConnection();
                 return false;
             }
         }
-        public static DataTable getDataTable(SqlCommand command)
+        public static DataTable getDataTable()
         {
             try
             {
                 var dataTable = new DataTable();
-                dataTable.Load(command.ExecuteReader());
+                dataTable.Load(_command.ExecuteReader());
+                _command = null;
 
-                OutConnection();
                 return dataTable;
             }
             catch(SqlException)
@@ -61,6 +66,31 @@ namespace DAO.Connections
         public static void OutConnection(){
             if (_connection != null)
                 _connection.Close();
+            _connection = null;
+            _transaction = null;
+        }
+        public static SqlCommand GetCommand(string AO)
+        {
+            _parameter = null;
+            return new SqlCommand(AO, GetConnection(), _transaction);
+        }
+        public static void GetTransaction()
+        {
+            _transaction = GetConnection().BeginTransaction();
+        }
+        public static void Commit()
+        {
+            _transaction.Commit();
+            OutConnection();
+        }
+        public static void Rollback()
+        {
+            _transaction.Rollback();
+            OutConnection();
+        }
+        public static void AddParameter(string attribute, Object attributeModel)
+        {
+            _command.Parameters.AddWithValue(attribute, attributeModel);
         }
     }
 }

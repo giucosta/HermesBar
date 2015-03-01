@@ -83,13 +83,14 @@ namespace HermesManagementAssistant.View.Fornecedor
             var endereco = new EnderecoModel();
             endereco.Rua = tbRua.Text;
             endereco.Cep = tbCep.Text;
-            endereco.Bairro = tbBairro.Tex; 
+            endereco.Bairro = tbBairro.Text; 
             endereco.Cidade = tbCidade.Text;
             endereco.Estado = cbEstado.SelectionBoxItem.ToString();
             endereco.Numero = tbNumero.Text;
             endereco.Tipo = new TipoEnderecoModel(){
                 Tipo = Constantes.ATipoEndereco.MATRIZ
             };
+            return endereco;
         }
         #endregion
 

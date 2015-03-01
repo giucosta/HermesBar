@@ -1,4 +1,5 @@
 ﻿using BLL.Comum;
+using DAO.Connections;
 using DAO.Fornecedor;
 using MODEL;
 using MODEL.Fornecedor;
@@ -49,6 +50,7 @@ namespace BLL.Fornecedor
         {
             if (Validacoes.ValidaCNPJ(fornecedor.Cnpj))
             {
+                Connection.GetTransaction();
                 fornecedor.Endereco = SaveAddress(fornecedor.Endereco);
                 if (fornecedor.Endereco != null)
                 {
@@ -56,10 +58,12 @@ namespace BLL.Fornecedor
                     if (contatoSalvo != null)
                     {
                         fornecedor.Contato = contatoSalvo;
-                        return FornecedorDAO.Salvar(fornecedor);
+                        FornecedorDAO.Salvar(fornecedor);
+                        Connection.Commit();
+                        return true;
                     }
                     else
-                        DeleteAddress(fornecedor.Endereco);
+                        Connection.Rollback();
                 }
             }
             return false;

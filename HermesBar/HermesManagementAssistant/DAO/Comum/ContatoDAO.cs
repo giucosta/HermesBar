@@ -47,7 +47,7 @@ namespace DAO.Comum
                 var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@Id_Contato", contato.Id);
 
-                return Connection.ExecutarComando(comando)
+                return Connection.ExecutarComando(comando);
             }
             catch (Exception e)
             {

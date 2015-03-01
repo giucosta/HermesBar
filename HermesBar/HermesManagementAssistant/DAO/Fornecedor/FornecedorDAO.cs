@@ -21,7 +21,8 @@ namespace DAO.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.CreateDataInsert();
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
+                var comando = Connection.GetCommand(AO.ReturnQuery());
+                //var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
                 comando.Parameters.AddWithValue("@RazaoSocial", fornecedor.RazaoSocial);
                 comando.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);
                 comando.Parameters.AddWithValue("@InscricaoEstadual", fornecedor.InscricaoEstadual);

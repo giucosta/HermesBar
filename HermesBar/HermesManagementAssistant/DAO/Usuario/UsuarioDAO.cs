@@ -2,6 +2,7 @@
 using DAO.Connections;
 using DAO.Login;
 using DAO.Perfil;
+using DAO.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,12 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = @"
-                            SELECT 
-                                Email 
-                            FROM Usuario U
-                            INNER JOIN Login L ON L.Id_Login = U.Id_Login 
-                            WHERE L.Login = @Login";
-
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Login",login.Login);
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateSpecificQuery(@"SELECT Email FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Login", login.Login);
                 
-                return Connection.getDataTable(comando).Rows[0]["Email"].ToString();
+                return Connection.getDataTable().Rows[0]["Email"].ToString();
             }
             catch (Exception e)
             {
@@ -43,12 +39,13 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = "UPDATE Login SET Senha = @Senha WHERE Login = @Login";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Senha",Encript.EncriptMd5.Criptografar(login.Senha));
-                comando.Parameters.AddWithValue("@Login",login.Login);
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateUpdate("Senha", "Login");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha));
+                Connection.AddParameter("@Login", login.Login);
 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -61,11 +58,12 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = @"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Login",login.Login);
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateSpecificQuery(@"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Login", login.Login);
                 
-                var dataTable = Connection.getDataTable(comando);
+                var dataTable = Connection.getDataTable();
 
                 return new UsuarioModel()
                 {
@@ -88,26 +86,25 @@ namespace DAO.Usuario
         {
             try
             {
-                string sql = @"
-                                SELECT 
-                                    Id_Usuario,
-	                                Nome, 
-	                                Email,
-	                                CASE Status
-		                                WHEN 'A' THEN 'Ativo'
-		                                WHEN 'C' THEN 'Cancelado'
-	                                END Status
-                                FROM Usuario
-                                INNER JOIN Perfil ON Perfil.Id_Perfil = Usuario.Id_Perfil
-                                WHERE 1=1
-                                AND Nome LIKE @Nome
-                                AND Email LIKE @Email";
+                AccessObject<UsuarioModel> AO = new AccessObject<UsuarioModel>();
+                AO.CreateSpecificQuery(@"SELECT 
+                                            Id_Usuario,
+	                                        Nome, 
+	                                        Email,
+	                                        CASE Status
+		                                        WHEN 'A' THEN 'Ativo'
+		                                        WHEN 'C' THEN 'Cancelado'
+	                                        END Status
+                                        FROM Usuario
+                                        INNER JOIN Perfil ON Perfil.Id_Perfil = Usuario.Id_Perfil
+                                        WHERE 1=1
+                                        AND Nome LIKE @Nome
+                                        AND Email LIKE @Email");
 
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", "%" + usuario.Nome + "%");
-                comando.Parameters.AddWithValue("@Email", "%" + usuario.Email + "%");
-                
-                var dataTable = Connection.getDataTable(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", "%" + usuario.Nome + "%");
+                Connection.AddParameter("@Email", "%" + usuario.Email + "%");
+                var dataTable = Connection.getDataTable();
 
                 if (dataTable.Rows.Count == 0)
                     return null;
@@ -125,11 +122,12 @@ namespace DAO.Usuario
         {
             try
             {
-                var sql = "SELECT Count(Nome) AS Quantidade FROM Usuario WHERE Nome = @Nome";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", nome);
+                AccessObject<UsuarioModel> AO = new AccessObject<UsuarioModel>();
+                AO.CreateSpecificQuery(@"SELECT Count(Nome) AS Quantidade FROM Usuario WHERE Nome = @Nome");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", nome);
                 
-                if ((int)Connection.getDataTable(comando).Rows[0]["Quantidade"] > 0)
+                if ((int)Connection.getDataTable().Rows[0]["Quantidade"] > 0)
                     return true;
 
                 return false;
@@ -145,15 +143,16 @@ namespace DAO.Usuario
         {
             try
             {
-                var sql = @"INSERT INTO Usuario VALUES ( @IdLogin, @IdPerfil, @Nome, @Status, @Email )";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("IdLogin", usuario.Login.Id);
-                comando.Parameters.AddWithValue("@IdPerfil", usuario.Perfil.IdPerfil);
-                comando.Parameters.AddWithValue("@Nome", usuario.Nome);
-                comando.Parameters.AddWithValue("@Status", usuario.Status);
-                comando.Parameters.AddWithValue("@Email", usuario.Email);
+                AccessObject<UsuarioModel> AO = new AccessObject<UsuarioModel>();
+                AO.CreateDataInsert();
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("IdLogin", usuario.Login.Id);
+                Connection.AddParameter("@IdPerfil", usuario.Perfil.IdPerfil);
+                Connection.AddParameter("@Nome", usuario.Nome);
+                Connection.AddParameter("@Status", usuario.Status);
+                Connection.AddParameter("@Email", usuario.Email);
 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -166,11 +165,12 @@ namespace DAO.Usuario
         {
             try
             {
-                var sql = @"DELETE FROM Usuario WHERE Id_Usuario = @IdUsuario";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@IdUsuario", usuario.IdUsuario);
+                AccessObject<UsuarioModel> AO = new AccessObject<UsuarioModel>();
+                AO.DeleteFromId();
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id_Usuario", usuario.IdUsuario);
 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {

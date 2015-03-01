@@ -1,4 +1,5 @@
 ﻿using DAO.Connections;
+using DAO.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,12 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = @"INSERT INTO TipoFuncionario VALUES (@TipoFuncionario)";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@TipoFuncionario", tipoFuncionario.TipoFuncionario);
+                AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
+                AO.CreateSpecificQuery(@"INSERT INTO TipoFuncionario VALUES (@TipoFuncionario)");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@TipoFuncionario", tipoFuncionario.TipoFuncionario);
 
-                if(Connection.ExecutarComando(comando))
+                if(Connection.ExecutarComando())
                     return RetornaTipo(tipoFuncionario);
                 return null;
             }
@@ -35,11 +37,13 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = "SELECT * FROM TipoFuncionario WHERE Tipo = @TipoFuncionario";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@TipoFuncionario", tipoFuncionario.TipoFuncionario);
-
-                return CarregaTipoFuncionario(Connection.getDataTable(comando));
+                AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL, "@TipoFuncionario");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@TipoFuncionario",tipoFuncionario.TipoFuncionario);
+                
+                return CarregaTipoFuncionario(Connection.getDataTable());
             }
             catch (Exception e)
             {
@@ -67,14 +71,14 @@ namespace DAO.Funcionario
                 return null;
             }   
         }
-
         public List<String> TiposFuncionarios()
         {
             try
             {
-                var sql = @"SELECT Tipo FROM TipoFuncionario";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                var dataTable = Connection.getDataTable(comando);
+                AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
+                AO.CreateSelectWithSimpleParameter("Tipo");
+                Connection.GetCommand(AO.ReturnQuery());
+                var dataTable = Connection.getDataTable();
                 var listaTipos = new List<String>();
 
                 for (int i = 0; i < dataTable.Rows.Count; i++)
