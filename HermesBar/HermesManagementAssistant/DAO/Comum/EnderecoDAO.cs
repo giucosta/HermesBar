@@ -21,18 +21,17 @@ namespace DAO.Comum
                 var AO = new AccessObject<EnderecoModel>();
                 AO.CreateDataInsert();
 
-                var comando = Connection.GetCommand(AO.ReturnQuery());
-                //var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Rua", endereco.Rua);
-                comando.Parameters.AddWithValue("@Numero", endereco.Numero);
-                comando.Parameters.AddWithValue("@Complemento", endereco.Complemento);
-                comando.Parameters.AddWithValue("@Bairro", endereco.Bairro);
-                comando.Parameters.AddWithValue("@Cep", endereco.Cep);
-                comando.Parameters.AddWithValue("@Cidade", endereco.Cidade);
-                comando.Parameters.AddWithValue("@Estado", endereco.Estado);
-                comando.Parameters.AddWithValue("@Tipo", endereco.Tipo.Tipo);
-
-                if(Connection.ExecutarComando(comando))
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Rua", endereco.Rua);
+                Connection.AddParameter("@Numero", endereco.Numero);
+                Connection.AddParameter("@Complemento", endereco.Complemento);
+                Connection.AddParameter("@Bairro", endereco.Bairro);
+                Connection.AddParameter("@Cep", endereco.Cep);
+                Connection.AddParameter("@Cidade", endereco.Cidade);
+                Connection.AddParameter("@Estado", endereco.Estado);
+                Connection.AddParameter("@Tipo", endereco.Tipo.Tipo);
+                
+                if(Connection.ExecutarComando())
                     return RecuperaUltimoEndereco();
                 return null;
             }
@@ -50,10 +49,10 @@ namespace DAO.Comum
         {
             try
             {
-                var sql = "SELECT TOP 1 * FROM Endereco ORDER BY Id_Endereco DESC";
-                var comando = Connection.GetCommand(sql);
-                //var comando = new SqlCommand(sql, Connection.GetConnection());
-                return CarregaEndereco(Connection.getDataTable(comando));
+                AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
+                AO.CreateSpecificQuery(@"SELECT TOP 1 * FROM Endereco ORDER BY Id_Endereco DESC");
+                Connection.GetCommand(AO.ReturnQuery());
+                return CarregaEndereco(Connection.getDataTable());
             }
             catch (Exception)
             {   
@@ -86,11 +85,10 @@ namespace DAO.Comum
                 var AO = new AccessObject<EnderecoModel>();
                 AO.CreateSelectAll();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, "@Id");
-                
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id",id);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id", id);
 
-                return CarregaEndereco(Connection.getDataTable(comando));
+                return CarregaEndereco(Connection.getDataTable());
             }
             catch (Exception e)
             {
@@ -104,9 +102,9 @@ namespace DAO.Comum
             {
                 var AO = new AccessObject<EnderecoModel>();
                 AO.DeleteFromId();
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id_Endereco",endereco.Id);
-                return Connection.ExecutarComando(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id_Endereco", endereco.Id);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {

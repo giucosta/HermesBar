@@ -21,19 +21,16 @@ namespace DAO.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.CreateDataInsert();
-                var comando = Connection.GetCommand(AO.ReturnQuery());
-                //var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@RazaoSocial", fornecedor.RazaoSocial);
-                comando.Parameters.AddWithValue("@Cnpj", fornecedor.Cnpj);
-                comando.Parameters.AddWithValue("@InscricaoEstadual", fornecedor.InscricaoEstadual);
-                comando.Parameters.AddWithValue("@Contato", fornecedor.Contato.Id);
-                comando.Parameters.AddWithValue("@Endereco", fornecedor.Endereco.Id);
-                return Connection.ExecutarComando(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@RazaoSocial", fornecedor.RazaoSocial);
+                Connection.AddParameter("@Cnpj", fornecedor.Cnpj);
+                Connection.AddParameter("@InscricaoEstadual", fornecedor.InscricaoEstadual);
+                Connection.AddParameter("@Contato", fornecedor.Contato.Id);
+                Connection.AddParameter("@Endereco", fornecedor.Endereco.Id);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
-                new ContatoDAO().Excluir(fornecedor.Contato);
-                new EnderecoDAO().Excluir(fornecedor.Endereco);
                 Log.Log.GravarLog("Salvar","FornecedorDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
                 return false;
             }
@@ -51,12 +48,12 @@ namespace DAO.Fornecedor
                     AO.InsertParameter(ConstantesDAO.AND, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
                 }else
                     AO.InsertParameter(ConstantesDAO.WHERE, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
-                
-                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id",fornecedor.Id);
-                comando.Parameters.AddWithValue("@RazaoSocial", "%" + fornecedor.RazaoSocial + "%");
 
-                return Connection.getDataTable(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id", fornecedor.Id);
+                Connection.AddParameter("@RazaoSocial", "%" + fornecedor.RazaoSocial + "%");
+                
+                return Connection.getDataTable();
             }
             catch (Exception e)
             {

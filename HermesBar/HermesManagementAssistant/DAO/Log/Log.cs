@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAO;
 using UTILS;
+using DAO.Utils;
 
 namespace DAO.Log
 {
@@ -16,16 +17,17 @@ namespace DAO.Log
         {
             try
             {
-                var sql = @"INSERT INTO Logs VALUES(@Metodo, @Classe, @Data, @Usuario, @Erro, @Tipo)";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Metodo", Metodo);
-                comando.Parameters.AddWithValue("@Classe", Classe);
-                comando.Parameters.AddWithValue("@Data",DateTime.Now);
-                comando.Parameters.AddWithValue("@Usuario",Session.Usuario.Nome);
-                comando.Parameters.AddWithValue("@Erro",Erro);
-                comando.Parameters.AddWithValue("@Tipo",Tipo);
+                AccessObject<Object> AO = new AccessObject<Object>();
+                AO.CreateSpecificQuery(@"INSERT INTO Logs VALUES(@Metodo, @Classe, @Data, @Usuario, @Erro, @Tipo)");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Metodo", Metodo);
+                Connection.AddParameter("@Classe", Classe);
+                Connection.AddParameter("@Data", DateTime.Now);
+                Connection.AddParameter("@Usuario", Session.Usuario.Nome);
+                Connection.AddParameter("@Erro", Erro);
+                Connection.AddParameter("@Tipo", Tipo);
                 
-                Connection.ExecutarComando(comando);
+                Connection.ExecutarComando();
             }
             catch (Exception e)
             {

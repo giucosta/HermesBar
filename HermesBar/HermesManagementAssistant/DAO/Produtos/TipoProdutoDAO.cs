@@ -56,12 +56,15 @@ namespace DAO.Produtos
         {
             try
             {
-                var sql = @"SELECT * FROM TipoProduto WHERE Tipo LIKE @Tipo OR Descricao LIKE @Descricao";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Tipo", "%" + tipoProduto.Tipo + "%");
-                comando.Parameters.AddWithValue("@Descricao", "%" + tipoProduto.Descricao + "%");
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateSelectAll();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.LIKE,"@Tipo");
+                AO.InsertParameter(ConstantesDAO.OR,"Descricao",ConstantesDAO.LIKE,"@Descricao");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Tipo", "%" + tipoProduto.Tipo + "%");
+                Connection.AddParameter("@Descricao", "%" + tipoProduto.Descricao + "%");
 
-                var dataTable = Connection.getDataTable(comando);
+                var dataTable = Connection.getDataTable();
                 var tipoProdutoTabela = CriaTabelaTipoProduto();
 
                 for (int i = 0; i < dataTable.Rows.Count; i++)

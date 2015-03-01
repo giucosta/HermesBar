@@ -21,14 +21,14 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateDataInsert();
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome",contato.Nome);
-                comando.Parameters.AddWithValue("@Telefone",contato.Telefone);
-                comando.Parameters.AddWithValue("@Celular", contato.Celular);
-                comando.Parameters.AddWithValue("@Email",contato.Email);
-                comando.Parameters.AddWithValue("@Site",contato.Site);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", contato.Nome);
+                Connection.AddParameter("@Telefone", contato.Telefone);
+                Connection.AddParameter("@Celular", contato.Celular);
+                Connection.AddParameter("@Email", contato.Email);
+                Connection.AddParameter("@Site", contato.Site);
 
-                if (Connection.ExecutarComando(comando))
+                if (Connection.ExecutarComando())
                     return Pesquisa(contato);
                 return null;
             }
@@ -44,10 +44,10 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.DeleteFromId();
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id_Contato", contato.Id);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id_Contato", contato.Id);
 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -64,11 +64,11 @@ namespace DAO.Comum
                 AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
                 AO.InsertParameter(ConstantesDAO.AND, "Email", ConstantesDAO.LIKE, "@Email");
 
-                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", "%" + contato.Nome + "%");
-                comando.Parameters.AddWithValue("@Email", "%" + contato.Email + "%");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", "%" + contato.Nome + "%");
+                Connection.AddParameter("@Email", "%" + contato.Email + "%");
 
-                return CarregaContato(Connection.getDataTable(comando));
+                return CarregaContato(Connection.getDataTable());
             }
             catch (Exception e)
             {
@@ -116,10 +116,10 @@ namespace DAO.Comum
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateSelectAll();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, "@Id");
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id", id);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id", id);
 
-                return CarregaContato(Connection.getDataTable(comando));
+                return CarregaContato(Connection.getDataTable());
             }
             catch (Exception e)
             {
@@ -132,8 +132,8 @@ namespace DAO.Comum
             AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
             AO.CreateSpecificQuery("SELECT MAX(Id_Contato) + 1 as Proximo FROM Contato");
 
-            var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-            return (int)Connection.getDataTable(comando).Rows[0]["Proximo"];
+            Connection.GetCommand(AO.ReturnQuery());
+            return (int)Connection.getDataTable().Rows[0]["Proximo"];
         }
     }
 }

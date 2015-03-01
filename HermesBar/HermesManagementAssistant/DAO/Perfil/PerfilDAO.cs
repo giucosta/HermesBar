@@ -1,4 +1,5 @@
 ﻿using DAO.Connections;
+using DAO.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -17,17 +18,12 @@ namespace DAO.Perfil
         {
             try
             {
-                var sql = @"SELECT 
-                                P.Id_Perfil,
-                                P.Perfil 
-                            FROM Usuario U 
-                            INNER JOIN Perfil P ON P.Id_Perfil = U.Id_Perfil
-                            INNER JOIN Login L ON L.Id_Login = U.Id_Login
-                            WHERE L.Login = @Login";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Login", login.Login);
+                AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
+                AO.CreateSpecificQuery(@"SELECT P.Id_Perfil, P.Perfil FROM Usuario U INNER JOIN Perfil P ON P.Id_Perfil = U.Id_Perfil INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Login", login.Login);
                 
-                var dataTable = Connection.getDataTable(comando);
+                var dataTable = Connection.getDataTable();
 
                 if (dataTable.Rows.Count == 0)
                     return null;
@@ -49,10 +45,10 @@ namespace DAO.Perfil
         {
             try
             {
-                var sql = "SELECT Perfil FROM Perfil";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-
-                var dataTable = Connection.getDataTable(comando);
+                AccessObject<PerfilModel> AO = new AccessObject<PerfilModel>();
+                AO.CreateSelectWithSimpleParameter("Perfil");
+                Connection.GetCommand(AO.ReturnQuery());
+                var dataTable = Connection.getDataTable();
 
                 var lista = new List<String>();
                 for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -71,11 +67,13 @@ namespace DAO.Perfil
         {
             try
             {
+                AccessObject<PerfilModel> AO = new AccessObject<PerfilModel>();
+                AO.CreateSelectWithSimpleParameter("Id_Perfil");
                 var sql = @"SELECT Id_Perfil FROM Perfil WHERE Perfil = @Perfil";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Perfil",perfil.Perfil);
+                AO.InsertParameter(ConstantesDAO.WHERE, "Perfil",ConstantesDAO.EQUAL,"@Perfil");
+                Connection.GetCommand(AO.ReturnQuery());
                 
-                var dataTable = Connection.getDataTable(comando);
+                var dataTable = Connection.getDataTable();
                 return (int)dataTable.Rows[0]["Id_Perfil"];
             }
             catch (Exception e)

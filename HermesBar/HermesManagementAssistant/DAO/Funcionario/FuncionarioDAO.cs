@@ -19,20 +19,22 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = @"INSERT INTO Funcionario VALUES(@Nome, @Cpf, @Rg, @DataNascimento,@CarteiraTrabalho,@Serie, @Id_Endereco, @Id_TipoFuncionario, @Id_Contato,@DataAdmissao)";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", funcionario.Nome);
-                comando.Parameters.AddWithValue("@Cpf", funcionario.Cpf);
-                comando.Parameters.AddWithValue("@Rg", funcionario.Rg);
-                comando.Parameters.AddWithValue("@DataNascimento", funcionario.DataNascimento);
-                comando.Parameters.AddWithValue("@CarteiraTrabalho", funcionario.CarteiraTrabalho);
-                comando.Parameters.AddWithValue("@Serie", funcionario.Serie);
-                comando.Parameters.AddWithValue("@Id_Endereco", funcionario.Endereco.Id);
-                comando.Parameters.AddWithValue("@Id_TipoFuncionario", funcionario.Tipo.Id);
-                comando.Parameters.AddWithValue("@Id_Contato", funcionario.Contato.Id);
-                comando.Parameters.AddWithValue("@DataAdmissao",funcionario.DataAdmissao);
-
-                return Connection.ExecutarComando(comando);
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateDataInsert();
+                //var sql = @"INSERT INTO Funcionario VALUES(@Nome, @Cpf, @Rg, @DataNascimento,@CarteiraTrabalho,@Serie, @Id_Endereco, @Id_TipoFuncionario, @Id_Contato,@DataAdmissao)";
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", funcionario.Nome);
+                Connection.AddParameter("@Cpf", funcionario.Cpf);
+                Connection.AddParameter("@Rg", funcionario.Rg);
+                Connection.AddParameter("@DataNascimento", funcionario.DataNascimento);
+                Connection.AddParameter("@CarteiraTrabalho", funcionario.CarteiraTrabalho);
+                Connection.AddParameter("@Serie", funcionario.Serie);
+                Connection.AddParameter("@Id_Endereco", funcionario.Endereco.Id);
+                Connection.AddParameter("@Id_TipoFuncionario", funcionario.Tipo.Id);
+                Connection.AddParameter("@Id_Contato", funcionario.Contato.Id);
+                Connection.AddParameter("@DataAdmissao", funcionario.DataAdmissao);
+                
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -44,11 +46,12 @@ namespace DAO.Funcionario
         {
             try
             {
-                var sql = @"DELETE Funcionario WHERE Id_Funcionario = @IdFuncionario";
-                var comando = new SqlCommand(sql, Connection.GetConnection());
-                comando.Parameters.AddWithValue("@IdFuncionario", funcionario.Id);
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.DeleteFromId();
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id_Funcionario", funcionario.Id);
                 
-                return Connection.ExecutarComando(comando);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -66,11 +69,11 @@ namespace DAO.Funcionario
                 if (funcionario.Id != 0)
                     AO.InsertParameter(ConstantesDAO.AND, "Id_Funcionario", ConstantesDAO.EQUAL, "@Codigo");
 
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", "%" + funcionario.Nome + "%");
-                comando.Parameters.AddWithValue("@Codigo", funcionario.Id);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", "%" + funcionario.Nome + "%");
+                Connection.AddParameter("@Codigo", funcionario.Id);
                 
-                return Connection.getDataTable(comando);
+                return Connection.getDataTable();
             }
             catch (Exception e)
             {

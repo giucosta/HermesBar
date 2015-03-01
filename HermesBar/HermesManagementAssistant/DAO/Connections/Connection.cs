@@ -18,8 +18,10 @@ namespace DAO.Connections
         private static SqlCommand _command = null;
 
         public static SqlConnection GetConnection(){
-            if (_connection == null)
+            if (_transaction == null)
             {
+                if (_connection != null)
+                    OutConnection();
                 _connection = new SqlConnection(_connectionString);
                 try
                 {
@@ -71,8 +73,10 @@ namespace DAO.Connections
         }
         public static SqlCommand GetCommand(string AO)
         {
+
             _parameter = null;
-            return new SqlCommand(AO, GetConnection(), _transaction);
+            _command = new SqlCommand(AO,GetConnection(),_transaction);
+            return _command;
         }
         public static void GetTransaction()
         {
@@ -91,6 +95,14 @@ namespace DAO.Connections
         public static void AddParameter(string attribute, Object attributeModel)
         {
             _command.Parameters.AddWithValue(attribute, attributeModel);
+        }
+
+        private static void ResetParameters()
+        {
+            _command = null;
+            _connection = null;
+            _transaction = null;
+            _parameter = null;
         }
     }
 }

@@ -23,14 +23,14 @@ namespace DAO.Atracoes
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateDataInsert();
 
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome",atracoes.Nome);
-                comando.Parameters.AddWithValue("@Estilo", atracoes.Estilo);
-                comando.Parameters.AddWithValue("@Contato", atracoes.Contato.Id);
-                comando.Parameters.AddWithValue("@Tempo_Show", atracoes.Tempo_Show);
-                comando.Parameters.AddWithValue("@Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
-
-                return Connection.ExecutarComando(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", atracoes.Nome);
+                Connection.AddParameter("@Estilo", atracoes.Estilo);
+                Connection.AddParameter("@Contato", atracoes.Contato.Id);
+                Connection.AddParameter("@Tempo_Show", atracoes.Tempo_Show);
+                Connection.AddParameter("@Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
+                
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -44,9 +44,9 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.DeleteFromId();
-                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Id_Atracoes",atracoes.Id);
-                return Connection.ExecutarComando(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Id_Atracoes", atracoes.Id);
+                return Connection.ExecutarComando();
             }
             catch (Exception e)
             {
@@ -63,11 +63,11 @@ namespace DAO.Atracoes
                 AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
                 AO.InsertParameter(ConstantesDAO.AND, "Estilo", ConstantesDAO.LIKE, "@Estilo");
 
-                var comando = new SqlCommand(AO.ReturnQuery(),Connection.GetConnection());
-                comando.Parameters.AddWithValue("@Nome", "%" + atracoes.Nome + "%");
-                comando.Parameters.AddWithValue("@Estilo", "%" + atracoes.Estilo + "%");
+                Connection.GetCommand(AO.ReturnQuery());
+                Connection.AddParameter("@Nome", "%" + atracoes.Nome + "%");
+                Connection.AddParameter("@Estilo", "%" + atracoes.Estilo + "%");
 
-                return Connection.getDataTable(comando);
+                return Connection.getDataTable();
             }
             catch (Exception e)
             {
@@ -81,9 +81,9 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSelectWithSimpleParameter("Estilo");
-                var comando = new SqlCommand(AO.ReturnQuery(), Connection.GetConnection());
-
-                return Connection.getDataTable(comando);
+                Connection.GetCommand(AO.ReturnQuery());
+                
+                return Connection.getDataTable();
             }
             catch (Exception e)
             {
