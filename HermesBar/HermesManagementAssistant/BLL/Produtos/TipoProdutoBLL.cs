@@ -1,5 +1,5 @@
 ﻿using DAO.Produtos;
-using MODEL.Produtos;
+using MODEL.Produto;
 using System;
 using System.Collections.Generic;
 using System.Data;

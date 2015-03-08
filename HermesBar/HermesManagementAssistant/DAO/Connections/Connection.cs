@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DAO.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UTILS;
@@ -42,7 +44,7 @@ namespace DAO.Connections
                 _command.ExecuteNonQuery();
                 return true;
             }
-            catch(SqlException e)
+            catch(SqlException)
             {
                 Log.Log.GravarLog("ExecutarComando","Connection",_command.CommandText,"");
                 OutConnection();
@@ -68,8 +70,7 @@ namespace DAO.Connections
         public static void OutConnection(){
             if (_connection != null)
                 _connection.Close();
-            _connection = null;
-            _transaction = null;
+            ResetParameters();
         }
         public static SqlCommand GetCommand(string AO)
         {

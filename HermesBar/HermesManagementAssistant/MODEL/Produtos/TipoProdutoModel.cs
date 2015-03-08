@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MODEL.Produtos
+namespace MODEL.Produto
 {
     public class TipoProdutoModel : IModel
     {

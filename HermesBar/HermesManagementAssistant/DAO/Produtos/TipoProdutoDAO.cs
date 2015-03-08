@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO.Abstract;
-using MODEL.Produtos;
+using MODEL.Produto;
 using DAO;
 using System.Data.SqlClient;
 using DAO.Connections;

@@ -69,7 +69,6 @@ namespace DAO.Perfil
             {
                 AccessObject<PerfilModel> AO = new AccessObject<PerfilModel>();
                 AO.CreateSelectWithSimpleParameter("Id_Perfil");
-                var sql = @"SELECT Id_Perfil FROM Perfil WHERE Perfil = @Perfil";
                 AO.InsertParameter(ConstantesDAO.WHERE, "Perfil",ConstantesDAO.EQUAL,"@Perfil");
                 Connection.GetCommand(AO.ReturnQuery());
                 

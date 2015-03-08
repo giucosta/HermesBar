@@ -34,7 +34,6 @@ namespace BLL.Estabelecimento
                 return _enderecoBLL;
             }
         }
-        private ContatoDAO _contatoDAO = null;
         private ContatoBLL _contatoBLL = null;
         public ContatoBLL ContatoBLL
         {

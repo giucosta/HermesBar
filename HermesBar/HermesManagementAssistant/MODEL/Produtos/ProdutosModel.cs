@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MODEL.Fornecedor;
 
-namespace MODEL.Produtos
+namespace MODEL.Produto
 {
-    public class ProdutosModel : IModel
+    public class ProdutoModel : IModel
     {
         public string CodigoOriginal { get; set; }
         public string CodigoBarras { get; set; }
