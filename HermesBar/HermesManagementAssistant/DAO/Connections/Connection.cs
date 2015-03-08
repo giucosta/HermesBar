@@ -97,7 +97,6 @@ namespace DAO.Connections
         {
             _command.Parameters.AddWithValue(attribute, attributeModel);
         }
-
         private static void ResetParameters()
         {
             _command = null;

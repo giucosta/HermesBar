@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace BLL.Produtos
 {
@@ -23,6 +24,10 @@ namespace BLL.Produtos
         public bool Salvar(ProdutoModel produto)
         {
             return ProdutoDAO.Salvar(produto);
+        }
+        public List<ProdutoModel> RetornaProdutos()
+        {
+            return ProdutoDAO.RetornaProdutos().DataTableToList<ProdutoModel>();
         }
     }
 }

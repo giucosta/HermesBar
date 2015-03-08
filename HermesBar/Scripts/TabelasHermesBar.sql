@@ -145,7 +145,7 @@ CREATE TABLE Fornecedor(
 	FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco)
 )
 
-CREATE TABLE Produtos(
+CREATE TABLE Produto(
 	Id_Produto INT IDENTITY(1,1) PRIMARY KEY,
 	CodigoOriginal VARCHAR(20),
 	CodigoBarras VARCHAR(50),

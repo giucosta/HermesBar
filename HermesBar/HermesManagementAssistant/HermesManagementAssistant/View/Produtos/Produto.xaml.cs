@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Produtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,20 @@ namespace HermesManagementAssistant.View.Produtos
     /// </summary>
     public partial class Produto : Window
     {
+        private ProdutoBLL _produtoBLL = null;
+        public ProdutoBLL ProdutoBLL
+        {
+            get
+            {
+                if (_produtoBLL == null)
+                    _produtoBLL = new ProdutoBLL();
+                return _produtoBLL;
+            }
+        }
         public Produto()
         {
             InitializeComponent();
+            gridPesquisa.ItemsSource = ProdutoBLL.RetornaProdutos();
         }
     }
 }

@@ -77,5 +77,20 @@ namespace DAO.Produtos
                 return null;
             }
         }
+        public DataTable RetornaProdutos()
+        {
+            try
+            {
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.CreateSelectAll();
+                Connection.GetCommand(AO.ReturnQuery());
+                return Connection.getDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RetornaProdutos","ProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
+        }
     }
 }

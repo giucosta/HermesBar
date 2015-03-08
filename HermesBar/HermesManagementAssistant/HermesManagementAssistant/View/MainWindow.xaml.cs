@@ -3,6 +3,7 @@ using HermesManagementAssistant.View.Estabelecimento;
 using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Login;
 using HermesManagementAssistant.View.Usuario;
+using HermesManagementAssistant.View.Produtos;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ using Microsoft.Win32;
 using System.IO;
 using BLL.Fornecedor;
 using UTILS;
+
 
 namespace HermesManagementAssistant
 {
@@ -62,7 +64,7 @@ namespace HermesManagementAssistant
 
         private void PesquisaProdutos(object sender, RoutedEventArgs e)
         {
-
+            new Produto().Show();
         }
         private void PesquisaFornecedor(object sender, RoutedEventArgs e)
         {
