@@ -41,14 +41,11 @@ namespace UTILS
                 return null;
             }
         }
-        public static List<String> DataTableToListString(this DataTable table, List<String> atributos)
+        public static List<String> DataTableToListString(this DataTable table, string attribute)
         {
             var lista = new List<String>();
             for (int i = 0; i < table.Rows.Count; i++)
-            {
-                foreach (String x in atributos)
-                    lista.Add(table.Rows[i][x].ToString());    
-            }
+                lista.Add(table.Rows[i][attribute].ToString());
             return lista;
         } 
     }

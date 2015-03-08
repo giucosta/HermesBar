@@ -43,7 +43,7 @@ namespace BLL.Atracoes
             var atributos = new List<String>();
             atributos.Add("Estilo");
 
-            return AtracoesDAO.RecuperaEstilos().DataTableToListString(atributos);
+            return AtracoesDAO.RecuperaEstilos().DataTableToListString("Estilo");
         }
 
         public bool Salvar(AtracoesModel atracoes)
