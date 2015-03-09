@@ -17,7 +17,7 @@ namespace DAO.Connections
         private static SqlConnection _connection = null;
         private static SqlTransaction _transaction = null;
         private static SqlParameter _parameter = null;
-        private static SqlCommand _command = null;
+        public static SqlCommand _command = null;
 
         public static SqlConnection GetConnection(){
             if (_transaction == null)

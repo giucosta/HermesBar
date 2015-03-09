@@ -78,14 +78,23 @@ namespace DAO.Utils
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
         }
-        public void InsertParameter(String sqlCommand,String attribute, String condition, String comparisionAttribute )
+        public void InsertParameter(String sqlCommand,String attribute, String condition, Object comparisionAttribute )
         {
+            var attr = AttributeFormat(attribute);
             var stb = new StringBuilder();
             stb.Append(" " + sqlCommand);
             stb.Append(" " + attribute);
             stb.Append(" " + condition);
-            stb.Append(" " + comparisionAttribute);
+            stb.Append(" " + attr);
             sql += FormatSql(stb.ToString());
+
+            Connection._command.CommandText = ReturnQuery();
+            AddParameter(attribute,comparisionAttribute);
+        }
+        public void InsertParameter(String attribute, Object attributeModel)
+        {
+            Connection._command.CommandText = ReturnQuery();
+            AddParameter(attribute,attributeModel);
         }
         
         public void CreateSpecificQuery(String query)
@@ -159,9 +168,13 @@ namespace DAO.Utils
         {
             Connection.Rollback();
         }
-        public void AddParameter(string attribute, Object attributeModel)
+        private void AddParameter(string attribute, Object attributeModel)
         {
-            Connection.AddParameter(attribute,attributeModel);
+            Connection.AddParameter(AttributeFormat(attribute),attributeModel);
+        }
+        private string AttributeFormat(string attribute)
+        {
+            return "@" + attribute;
         }
     }
 }

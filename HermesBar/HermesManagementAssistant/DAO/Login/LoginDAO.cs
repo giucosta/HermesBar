@@ -22,12 +22,10 @@ namespace DAO.Login
             try
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
-                AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
-
                 AO.GetTransaction();
+                AO.CreateSelectAll();
                 AO.GetCommand();
-                AO.AddParameter("@Login", login.Login);
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, login.Login);
                 
                 if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(AO.GetDataTable().Rows[0]["Senha"].ToString())))
                 {
@@ -51,10 +49,9 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
                 AO.GetCommand();
-                AO.AddParameter("@Login", login.Login);
-
+                AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, login.Login);
+                
                 var dataTable = AO.GetDataTable();
 
                 if (dataTable.Rows.Count == 0)
@@ -85,8 +82,8 @@ namespace DAO.Login
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateUpdate("DataUltimoLogin", "Login");
                 AO.GetCommand();
-                AO.AddParameter("@DataUltimoLogin",DateTime.Now);
-                AO.AddParameter("@Login",login.Login);
+                AO.InsertParameter("DataUltimoLogin", DateTime.Now);
+                AO.InsertParameter("Login", login.Login);
                 AO.ExecuteCommand();
             }
             catch (Exception e)
@@ -103,8 +100,8 @@ namespace DAO.Login
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateDataInsert();
                 AO.GetCommand();
-                AO.AddParameter("@Login", login.Login);
-                AO.AddParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha));
+                AO.InsertParameter("Login", login.Login);
+                AO.InsertParameter("Senha", Encript.EncriptMd5.Criptografar(login.Senha));
                 AO.ExecuteCommand();
                 return RecuperaLogin(login);
             }
@@ -123,7 +120,7 @@ namespace DAO.Login
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.DeleteFromId();
                 AO.GetCommand();
-                AO.AddParameter("@IdLogin", login.Id);
+                AO.InsertParameter("IdLogin", login.Id);
                 return AO.ExecuteCommand();
             }
             catch (Exception e)

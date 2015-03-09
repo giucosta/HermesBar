@@ -20,10 +20,10 @@ namespace DAO.Perfil
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateSpecificQuery(@"SELECT P.Id_Perfil, P.Perfil FROM Usuario U INNER JOIN Perfil P ON P.Id_Perfil = U.Id_Perfil INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Login", login.Login);
-                
-                var dataTable = Connection.getDataTable();
+                AO.GetCommand();
+                AO.InsertParameter("Login", login.Login);
+
+                var dataTable = AO.GetDataTable();
 
                 if (dataTable.Rows.Count == 0)
                     return null;
@@ -47,8 +47,8 @@ namespace DAO.Perfil
             {
                 AccessObject<PerfilModel> AO = new AccessObject<PerfilModel>();
                 AO.CreateSelectWithSimpleParameter("Perfil");
-                Connection.GetCommand(AO.ReturnQuery());
-                var dataTable = Connection.getDataTable();
+                AO.GetCommand();
+                var dataTable = AO.GetDataTable();
 
                 var lista = new List<String>();
                 for (int i = 0; i < dataTable.Rows.Count; i++)
@@ -69,10 +69,10 @@ namespace DAO.Perfil
             {
                 AccessObject<PerfilModel> AO = new AccessObject<PerfilModel>();
                 AO.CreateSelectWithSimpleParameter("Id_Perfil");
-                AO.InsertParameter(ConstantesDAO.WHERE, "Perfil",ConstantesDAO.EQUAL,"@Perfil");
-                Connection.GetCommand(AO.ReturnQuery());
-                
-                var dataTable = Connection.getDataTable();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Perfil",ConstantesDAO.EQUAL,perfil.Perfil);
+                AO.GetCommand();
+
+                var dataTable = AO.GetDataTable();
                 return (int)dataTable.Rows[0]["Id_Perfil"];
             }
             catch (Exception e)
