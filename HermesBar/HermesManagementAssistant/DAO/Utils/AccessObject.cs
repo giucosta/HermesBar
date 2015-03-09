@@ -1,6 +1,7 @@
 ﻿using DAO.Connections;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
@@ -19,7 +20,7 @@ namespace DAO.Utils
         public void CreateDataInsert()
         {
             Type myType = typeof(T);
-            var nomeClasse = RetornaNomeClasse();
+            var nomeClasse = ReturnClassName();
             var stb = new StringBuilder();
             stb.Append("INSERT INTO " + nomeClasse);
             stb.Append(" VALUES");
@@ -55,7 +56,7 @@ namespace DAO.Utils
         }
         public void CreateSelectAll()
         {
-            var nomeClasse = RetornaNomeClasse();
+            var nomeClasse = ReturnClassName();
             var stb = new StringBuilder();
             stb.Append("SELECT * FROM " + nomeClasse);
 
@@ -63,7 +64,7 @@ namespace DAO.Utils
         }
         public void DeleteFromId()
         {
-            var nomeClasse = RetornaNomeClasse();
+            var nomeClasse = ReturnClassName();
             var stb = new StringBuilder();
             stb.Append("DELETE FROM " + nomeClasse);
             stb.Append(" " + "WHERE");
@@ -72,7 +73,7 @@ namespace DAO.Utils
             stb.Append("@Id_" + nomeClasse);
             sql += FormatSql(stb.ToString());
         }
-        private String RetornaNomeClasse()
+        private String ReturnClassName()
         {
             Type type = typeof(T);
             return type.Name.ToString().Replace("Model","");
@@ -86,11 +87,7 @@ namespace DAO.Utils
             stb.Append(" " + comparisionAttribute);
             sql += FormatSql(stb.ToString());
         }
-        /// <summary>
-        /// Utilizar quando necessitar criar uma Query específica, passando 2 parametros de cada vez
-        /// </summary>
-        /// <param name="parameter"></param>
-        /// <param name="parameter"></param>
+        
         public void CreateSpecificQuery(String query)
         {
             sql += query;
@@ -101,14 +98,14 @@ namespace DAO.Utils
             stb.Append(ConstantesDAO.SELECT);
             stb.Append(" " + parameter + " ");
             stb.Append(ConstantesDAO.FROM);
-            stb.Append(" " + RetornaNomeClasse());
+            stb.Append(" " + ReturnClassName());
             sql+= FormatSql(stb.ToString());
         }
 
         public void CreateUpdate(String attribute, String parameter)
         {
             var stb = new StringBuilder();
-            var table = RetornaNomeClasse();
+            var table = ReturnClassName();
             stb.Append(ConstantesDAO.UPDATE);
             stb.Append(" " + table);
             stb.Append(" " + ConstantesDAO.SET);
@@ -128,6 +125,43 @@ namespace DAO.Utils
         public String ReturnQuery()
         {
             return sql;
+        }
+
+        public void GetConnection()
+        {
+            Connection.GetConnection();
+        }
+        public bool ExecuteCommand()
+        {
+            return Connection.ExecutarComando();
+        }
+        public DataTable GetDataTable()
+        {
+            return Connection.getDataTable();
+        }
+        public void OutConnection()
+        {
+            Connection.OutConnection();
+        }
+        public SqlCommand GetCommand()
+        {
+            return Connection.GetCommand(ReturnQuery());
+        }
+        public void GetTransaction()
+        {
+            Connection.GetTransaction();
+        }
+        public void Commit()
+        {
+            Connection.Commit();
+        }
+        public void Rollback()
+        {
+            Connection.Rollback();
+        }
+        public void AddParameter(string attribute, Object attributeModel)
+        {
+            Connection.AddParameter(attribute,attributeModel);
         }
     }
 }

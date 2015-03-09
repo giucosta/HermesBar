@@ -25,17 +25,17 @@ namespace DAO.Login
                 AO.CreateSelectAll();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
 
-                Connection.GetTransaction();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Login", login.Login);
+                AO.GetTransaction();
+                AO.GetCommand();
+                AO.AddParameter("@Login", login.Login);
                 
-                if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(Connection.getDataTable().Rows[0]["Senha"].ToString())))
+                if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(AO.GetDataTable().Rows[0]["Senha"].ToString())))
                 {
                     AlteraUltimaDataAcesso(login);
-                    Connection.Commit();
+                    AO.Commit();
                     return true;
                 }
-                Connection.Rollback();
+                AO.Rollback();
                 return false;
             }
             catch (Exception e)
@@ -52,11 +52,10 @@ namespace DAO.Login
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateSelectAll();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, "@Login");
+                AO.GetCommand();
+                AO.AddParameter("@Login", login.Login);
 
-                var comando = Connection.GetCommand(AO.ReturnQuery());
-                comando.Parameters.AddWithValue("@Login",login.Login);
-
-                var dataTable = Connection.getDataTable();
+                var dataTable = AO.GetDataTable();
 
                 if (dataTable.Rows.Count == 0)
                     return null;
@@ -85,11 +84,10 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateUpdate("DataUltimoLogin", "Login");
-
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@DataUltimoLogin",DateTime.Now);
-                Connection.AddParameter("@Login",login.Login);
-                Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.AddParameter("@DataUltimoLogin",DateTime.Now);
+                AO.AddParameter("@Login",login.Login);
+                AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -104,11 +102,10 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Login", login.Login);
-                Connection.AddParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha));
-                Connection.ExecutarComando();
-                Connection.Commit();
+                AO.GetCommand();
+                AO.AddParameter("@Login", login.Login);
+                AO.AddParameter("@Senha", Encript.EncriptMd5.Criptografar(login.Senha));
+                AO.ExecuteCommand();
                 return RecuperaLogin(login);
             }
             catch (Exception e)
@@ -125,9 +122,9 @@ namespace DAO.Login
             {
                 AccessObject<LoginModel> AO = new AccessObject<LoginModel>();
                 AO.DeleteFromId();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@IdLogin", login.Id);
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.AddParameter("@IdLogin", login.Id);
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
