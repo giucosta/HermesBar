@@ -92,5 +92,6 @@
             </TabItem>
         </TabControl>
         <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="41,340,0,0" Click="btSalvar_Click"/>
+        <Button Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="125,339,0,0" Click="ExcluirFuncionario" Background="#FFDA4848"/>
     </Grid>
 </Window>

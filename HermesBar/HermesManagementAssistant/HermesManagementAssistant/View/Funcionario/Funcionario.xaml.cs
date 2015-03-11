@@ -36,7 +36,6 @@ namespace HermesManagementAssistant.View.Funcionario
             InitializeComponent();
             gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
         }
-
         private void PesquisarFuncionario(object sender, RoutedEventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(tbCodigo.Text))
@@ -44,13 +43,11 @@ namespace HermesManagementAssistant.View.Funcionario
             else
                 gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
         }
-
         private void NovoFuncionario(object sender, RoutedEventArgs e)
         {
             new FuncionarioCadastro().Show();
             this.Close();
         }
-
         private void Editar(object sender, SelectionChangedEventArgs e)
         {
             DataGrid data  = (DataGrid)sender;

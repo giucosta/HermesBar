@@ -9,7 +9,7 @@ namespace Utils.Mensagens
 {
     public static class Mensagens
     {
-        public static void GeraMensagens(string titulo, string mensagemErro, List<String> erros, string tipo)
+        public static bool GeraMensagens(string titulo, string mensagemErro, List<String> erros, string tipo)
         {
             var msg = "";
             if (erros == null)
@@ -23,6 +23,14 @@ namespace Utils.Mensagens
                 MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Warning);
             if (tipo == TIPOS_MENSAGENS.ERRO)
                 MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.OK, MessageBoxImage.Error);
+            if (tipo == TIPOS_MENSAGENS.QUESTAO)
+            {
+                MessageBoxResult result = MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + msg, titulo, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                if (result == MessageBoxResult.Yes)
+                    return true;
+            }
+            return false;
+                
         }
     }
     public static class TIPOS_MENSAGENS
@@ -30,6 +38,7 @@ namespace Utils.Mensagens
         public const string ERRO = "Erro";
         public const string ALERTA = "Alerta";
         public const string SUCESSO = "Sucesso";
+        public const string QUESTAO = "Questão";
     }
 
     public static class MENSAGEM
@@ -63,5 +72,9 @@ namespace Utils.Mensagens
         public const string ESTABELECIMENTO_CADASTRO_ERRO = "Erro ao salvar o estabelecimento!";
         //IMPORTACAO XML
         public const string ARQUIVO_JA_EXPORTADO = "Arquivo já exportado!";
+        //EXCLUIR FUNCIONARIO
+        public const string CERTEZA_EXCLUIR_FUNCIONARIO = "Confirma exclusão do funcionário?";
+        public const string FUNCIONARIO_EXCLUIR_SUCESSO= "Funcionário excluído com sucesso!";
+        public const string FUNCIONARIO_EXCLUIR_ERRO = "Erro ao excluir funcionário!";
     }
 }

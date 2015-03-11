@@ -67,6 +67,7 @@ namespace HermesManagementAssistant.View.Funcionario
             }
         }
         #endregion
+        private static int _idFuncionario;
         public FuncionarioCadastro()
         {
             InitializeComponent();
@@ -181,8 +182,40 @@ namespace HermesManagementAssistant.View.Funcionario
         }
         private void CarregaFuncionario(FuncionarioModel func)
         {
-            var data = FuncionarioBLL.PesquisaFuncionarioId(func);
+            CarregaCamposEdicao(FuncionarioBLL.PesquisaFuncionarioId(func));
         }
+        private void CarregaCamposEdicao(FuncionarioModel func)
+        {
+            _idFuncionario = func.Id;
+            tbBairro.Text = func.Endereco.Bairro;
+            tbCartTrabalho.Text = func.CarteiraTrabalho;
+            tbCelular.Text = func.Contato.Celular;
+            tbCep.Text = func.Endereco.Cep;
+            tbCidade.Text = func.Endereco.Cidade;
+            tbComplemento.Text = func.Endereco.Complemento;
+            tbCpf.Text = func.Cpf;
+            tbDataAdmissao.Text = func.DataAdmissao.ToShortDateString();
+            tbDataNascimento.Text = func.DataNascimento.ToShortDateString();
+            tbEmail.Text = func.Contato.Email;
+            tbNome.Text = func.Nome;
+            tbNumero.Text = func.Endereco.Numero;
+            tbRg.Text = func.Rg;
+            tbRua.Text = func.Endereco.Rua;
+            tbSerie.Text = func.Serie;
+            tbTelefone.Text = func.Contato.Telefone;
+        }
+        private void ExcluirFuncionario(object sender, RoutedEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.CERTEZA_EXCLUIR_FUNCIONARIO, null, TIPOS_MENSAGENS.QUESTAO)){
+                if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario }))
+                    Mensagens.GeraMensagens("Funcionário Excluído",MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO,null,TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro!", MENSAGEM.FUNCIONARIO_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                return;
+        }
+
         #region Masked
         private void CpfMasked(Object sender, KeyEventArgs e)
         {
