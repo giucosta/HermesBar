@@ -76,6 +76,21 @@ namespace DAO.Comum
                 return null;
             }
         }
+        public ContatoModel PesquisaContatoId(int id)
+        {
+            try
+            {
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, id);
+                return CarregaContato(AO.GetDataTable());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<ContatoModel> CarregaListModel(DataTable data)
         {
             var contatoList = new List<ContatoModel>();

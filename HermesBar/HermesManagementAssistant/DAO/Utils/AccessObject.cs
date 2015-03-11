@@ -89,7 +89,10 @@ namespace DAO.Utils
             sql += FormatSql(stb.ToString());
 
             Connection._command.CommandText = ReturnQuery();
-            AddParameter(attribute,comparisionAttribute);
+            if (condition == ConstantesDAO.LIKE)
+                AddParameter(attribute, "%" + comparisionAttribute + "%");
+            else
+                AddParameter(attribute, comparisionAttribute);
         }
         public void InsertParameter(String attribute, Object attributeModel)
         {

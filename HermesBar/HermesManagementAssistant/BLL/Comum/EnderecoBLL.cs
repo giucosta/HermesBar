@@ -30,6 +30,12 @@ namespace BLL.Comum
             string[] ufs = {"AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA","PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO" };
             return ufs.ToList();
         }
+        public EnderecoModel RecuperaEnderecoId(int id)
+        {
+            if (id != 0)
+                return DAO.RecuperaEnderecoPeloId(id);
+            return null;
+        }
         private EnderecoModel VerificaCamposNulos(EnderecoModel endereco)
         {
             if (endereco.Bairro == null)

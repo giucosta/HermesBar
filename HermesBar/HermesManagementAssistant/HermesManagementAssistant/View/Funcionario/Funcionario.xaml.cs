@@ -22,7 +22,7 @@ namespace HermesManagementAssistant.View.Funcionario
     public partial class Funcionario : Window
     {
         private FuncionarioBLL _funcionarioBLL = null;
-        public FuncionarioBLL BLL
+        public FuncionarioBLL FuncionarioBLL
         {
             get
             {
@@ -34,21 +34,27 @@ namespace HermesManagementAssistant.View.Funcionario
         public Funcionario()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = "" });
+            gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
         }
 
         private void PesquisarFuncionario(object sender, RoutedEventArgs e)
         {
             if(!string.IsNullOrWhiteSpace(tbCodigo.Text))
-                gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text , Id = int.Parse(tbCodigo.Text) });
+                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
             else
-                gridPesquisa.ItemsSource = BLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text });
+                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
         }
 
         private void NovoFuncionario(object sender, RoutedEventArgs e)
         {
             new FuncionarioCadastro().Show();
             this.Close();
+        }
+
+        private void Editar(object sender, SelectionChangedEventArgs e)
+        {
+            DataGrid data  = (DataGrid)sender;
+            new FuncionarioCadastro((FuncionarioModel)data.SelectedItems[0]).Show();
         }
     }
 }

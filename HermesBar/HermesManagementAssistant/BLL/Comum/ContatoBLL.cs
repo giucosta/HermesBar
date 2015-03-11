@@ -2,6 +2,7 @@
 using MODEL;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace BLL.Comum
                 return _contatoDAO;
             }
         }
-
         public ContatoModel Salvar(ContatoModel contato)
         {
             if (Validacoes.ValidarEmail(contato.Email))
@@ -31,7 +31,6 @@ namespace BLL.Comum
             }  
             return null;
         }
-
         private ContatoModel VerifyNullValues(ContatoModel contato)
         {
             if (string.IsNullOrEmpty(contato.Celular))
@@ -49,6 +48,12 @@ namespace BLL.Comum
         public int RecuperaProximoId()
         {
             return DAO.RecuperaProximoId();
+        }
+        public ContatoModel RecuperaContatoId(int id)
+        {
+            if(id != 0)
+                return DAO.PesquisaContatoId(id);
+            return null;
         }
     }
 }

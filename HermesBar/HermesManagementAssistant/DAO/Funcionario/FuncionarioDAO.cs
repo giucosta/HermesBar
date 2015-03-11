@@ -21,20 +21,19 @@ namespace DAO.Funcionario
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
                 AO.CreateDataInsert();
-                //var sql = @"INSERT INTO Funcionario VALUES(@Nome, @Cpf, @Rg, @DataNascimento,@CarteiraTrabalho,@Serie, @Id_Endereco, @Id_TipoFuncionario, @Id_Contato,@DataAdmissao)";
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", funcionario.Nome);
-                Connection.AddParameter("@Cpf", funcionario.Cpf);
-                Connection.AddParameter("@Rg", funcionario.Rg);
-                Connection.AddParameter("@DataNascimento", funcionario.DataNascimento);
-                Connection.AddParameter("@CarteiraTrabalho", funcionario.CarteiraTrabalho);
-                Connection.AddParameter("@Serie", funcionario.Serie);
-                Connection.AddParameter("@Id_Endereco", funcionario.Endereco.Id);
-                Connection.AddParameter("@Id_TipoFuncionario", funcionario.Tipo.Id);
-                Connection.AddParameter("@Id_Contato", funcionario.Contato.Id);
-                Connection.AddParameter("@DataAdmissao", funcionario.DataAdmissao);
-                
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("Nome",funcionario.Nome);
+                AO.InsertParameter("Cpf",funcionario.Cpf);
+                AO.InsertParameter("Rg",funcionario.Rg);
+                AO.InsertParameter("DataNascimento",funcionario.DataNascimento);
+                AO.InsertParameter("CarteiraTrabalho",funcionario.CarteiraTrabalho);
+                AO.InsertParameter("Serie",funcionario.Serie);
+                AO.InsertParameter("Id_Endereco",funcionario.Endereco.Id);
+                AO.InsertParameter("Id_TipoFuncionario",funcionario.Tipo.Id);
+                AO.InsertParameter("Id_Contato",funcionario.Contato.Id);
+                AO.InsertParameter("DataAdmissao",funcionario.DataAdmissao);
+
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -48,10 +47,10 @@ namespace DAO.Funcionario
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
                 AO.DeleteFromId();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id_Funcionario", funcionario.Id);
-                
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("Id_Funcionario",funcionario.Id);
+
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -59,26 +58,66 @@ namespace DAO.Funcionario
                 return false;
             }
         }
-        public DataTable Pesquisa(FuncionarioModel funcionario)
+        public DataTable Pesquisa()
         {
             try
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
-                if (funcionario.Id != 0)
-                    AO.InsertParameter(ConstantesDAO.AND, "Id_Funcionario", ConstantesDAO.EQUAL, "@Codigo");
-
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", "%" + funcionario.Nome + "%");
-                Connection.AddParameter("@Codigo", funcionario.Id);
+                AO.GetCommand();
                 
-                return Connection.getDataTable();
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("Pesquisa", "FuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
                 return null;
+            }
+        }
+        public DataTable PesquisaPorId(int id)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE,"Id_Funcionario",ConstantesDAO.EQUAL, id);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("PesquisaPorId","FuncionarioDAO",e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
+        }
+        public int RetornaIdEndereco(FuncionarioModel funcionario)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectWithSimpleParameter("Id_Endereco");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario",ConstantesDAO.EQUAL,funcionario.Id);
+                return (int)AO.GetDataTable().Rows[0]["Id_Endereco"];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public int RetornaIdContato(FuncionarioModel funcionario)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectWithSimpleParameter("Id_Contato");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario", ConstantesDAO.EQUAL, funcionario.Id);
+                return (int)AO.GetDataTable().Rows[0]["Id_Contato"];
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

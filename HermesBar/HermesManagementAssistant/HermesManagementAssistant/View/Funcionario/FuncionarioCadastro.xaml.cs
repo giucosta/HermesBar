@@ -72,6 +72,11 @@ namespace HermesManagementAssistant.View.Funcionario
             InitializeComponent();
             CarregaCombos();
         }
+        public FuncionarioCadastro(FuncionarioModel funcionario)
+        {
+            InitializeComponent();
+            CarregaFuncionario(funcionario);
+        }
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
             var camposObrigatorios = VerificaCamposObrigatorios();
@@ -174,7 +179,10 @@ namespace HermesManagementAssistant.View.Funcionario
 
             return campos;
         }
-
+        private void CarregaFuncionario(FuncionarioModel func)
+        {
+            var data = FuncionarioBLL.PesquisaFuncionarioId(func);
+        }
         #region Masked
         private void CpfMasked(Object sender, KeyEventArgs e)
         {

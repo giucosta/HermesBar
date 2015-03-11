@@ -20,12 +20,18 @@ namespace UTILS
                 {
                     var obj = new T();
 
+                    Type type = typeof(T);
+                    var nameModel = type.Name.ToString().Replace("Model", "");
+
                     foreach (var prop in obj.GetType().GetProperties())
                     {
                         try
                         {
                             PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                            propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                            if (propertyInfo.Name.Equals("Id"))
+                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name + "_" + nameModel], propertyInfo.PropertyType), null);
+                            else
+                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
                         }
                         catch
                         {
@@ -47,6 +53,39 @@ namespace UTILS
             for (int i = 0; i < table.Rows.Count; i++)
                 lista.Add(table.Rows[i][attribute].ToString());
             return lista;
-        } 
+        }
+        public static T DataTableToSimpleObject<T>(this DataTable table) where T : class, new()
+        {
+            try
+            {
+                var obj = new T();
+                foreach (var row in table.AsEnumerable())
+                {
+                    Type type = typeof(T);
+                    var nameModel = type.Name.ToString().Replace("Model", "");
+
+                    foreach (var prop in obj.GetType().GetProperties())
+                    {
+                        try
+                        {
+                            PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
+                            if (propertyInfo.Name.Equals("Id"))
+                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name + "_" + nameModel], propertyInfo.PropertyType), null);
+                            else 
+                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+                return obj;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

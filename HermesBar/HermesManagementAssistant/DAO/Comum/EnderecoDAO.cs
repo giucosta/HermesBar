@@ -18,20 +18,19 @@ namespace DAO.Comum
         {
             try
             {
-                var AO = new AccessObject<EnderecoModel>();
+                AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
                 AO.CreateDataInsert();
-
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Rua", endereco.Rua);
-                Connection.AddParameter("@Numero", endereco.Numero);
-                Connection.AddParameter("@Complemento", endereco.Complemento);
-                Connection.AddParameter("@Bairro", endereco.Bairro);
-                Connection.AddParameter("@Cep", endereco.Cep);
-                Connection.AddParameter("@Cidade", endereco.Cidade);
-                Connection.AddParameter("@Estado", endereco.Estado);
-                Connection.AddParameter("@Tipo", endereco.Tipo.Tipo);
+                AO.GetCommand();
+                AO.InsertParameter("Rua",endereco.Rua);
+                AO.InsertParameter("Numero",endereco.Numero);
+                AO.InsertParameter("Complemento",endereco.Complemento);
+                AO.InsertParameter("Bairro",endereco.Bairro);
+                AO.InsertParameter("Cep",endereco.Cep);
+                AO.InsertParameter("Cidade",endereco.Cidade);
+                AO.InsertParameter("Estado",endereco.Estado);
+                AO.InsertParameter("Tipo", endereco.Tipo);
                 
-                if(Connection.ExecutarComando())
+                if(AO.ExecuteCommand())
                     return RecuperaUltimoEndereco();
                 return null;
             }
@@ -51,11 +50,12 @@ namespace DAO.Comum
             {
                 AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
                 AO.CreateSpecificQuery(@"SELECT TOP 1 * FROM Endereco ORDER BY Id_Endereco DESC");
-                Connection.GetCommand(AO.ReturnQuery());
-                return CarregaEndereco(Connection.getDataTable());
+                AO.GetCommand();
+                return CarregaEndereco(AO.GetDataTable());
             }
-            catch (Exception)
-            {   
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaUltimoEndereco","EnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 throw;
             }
         }
@@ -82,13 +82,12 @@ namespace DAO.Comum
         {
             try
             {
-                var AO = new AccessObject<EnderecoModel>();
+                AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, "@Id");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id", id);
-
-                return CarregaEndereco(Connection.getDataTable());
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, id);
+                
+                return CarregaEndereco(AO.GetDataTable());
             }
             catch (Exception e)
             {
@@ -102,9 +101,9 @@ namespace DAO.Comum
             {
                 var AO = new AccessObject<EnderecoModel>();
                 AO.DeleteFromId();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id_Endereco", endereco.Id);
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("Id_Endereco", endereco.Id);
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {

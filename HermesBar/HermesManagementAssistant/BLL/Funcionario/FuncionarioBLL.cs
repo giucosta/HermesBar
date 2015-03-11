@@ -1,4 +1,6 @@
-﻿using DAO.Funcionario;
+﻿using BLL.Comum;
+using DAO.Comum;
+using DAO.Funcionario;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,37 @@ namespace BLL.Funcionario
                 return _funcionarioDAO;
             }
         }
+        private EnderecoDAO _enderecoDAO = null;
+        public EnderecoDAO EnderecoDAO
+        {
+            get
+            {
+                if (_enderecoDAO == null)
+                    _enderecoDAO = new EnderecoDAO();
+                return _enderecoDAO;
+            }
+        }
+        private EnderecoBLL _enderecoBLL = null;
+        public EnderecoBLL EnderecoBLL
+        {
+            get
+            {
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
+            }
+        }
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatoBLL
+        {
+            get
+            {
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
+                       
+            }
+        }
 
         public bool Salvar(FuncionarioModel funcionario)
         {
@@ -32,14 +65,21 @@ namespace BLL.Funcionario
             }
             return false;
         }
-
         public bool Excluir(FuncionarioModel funcionario)
         {
             return FuncionarioDAO.Excluir(funcionario);
         }
-        public List<FuncionarioModel> Pesquisa(FuncionarioModel funcionario)
+        public List<FuncionarioModel> Pesquisa()
         {
-            return FuncionarioDAO.Pesquisa(funcionario).DataTableToList<FuncionarioModel>();
+            return FuncionarioDAO.Pesquisa().DataTableToList<FuncionarioModel>();
+        }
+        public FuncionarioModel PesquisaFuncionarioId(FuncionarioModel func)
+        {
+            var funcionario = FuncionarioDAO.PesquisaPorId(func.Id).DataTableToSimpleObject<FuncionarioModel>();
+            funcionario.Endereco = EnderecoBLL.RecuperaEnderecoId(FuncionarioDAO.RetornaIdEndereco(funcionario));
+            funcionario.Contato = ContatoBLL.RecuperaContatoId(FuncionarioDAO.RetornaIdContato(funcionario));
+            
+            return funcionario;
         }
         private bool VerificaIdadeFuncionario(FuncionarioModel funcionario)
         {
