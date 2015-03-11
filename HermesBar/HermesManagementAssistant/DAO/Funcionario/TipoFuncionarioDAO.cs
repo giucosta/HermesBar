@@ -39,11 +39,10 @@ namespace DAO.Funcionario
             {
                 AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL, "@TipoFuncionario");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@TipoFuncionario",tipoFuncionario.TipoFuncionario);
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL, tipoFuncionario.TipoFuncionario);
                 
-                return CarregaTipoFuncionario(Connection.getDataTable());
+                return CarregaTipoFuncionario(AO.GetDataTable());
             }
             catch (Exception e)
             {

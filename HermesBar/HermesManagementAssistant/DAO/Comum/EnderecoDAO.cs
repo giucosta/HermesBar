@@ -28,7 +28,7 @@ namespace DAO.Comum
                 AO.InsertParameter("Cep",endereco.Cep);
                 AO.InsertParameter("Cidade",endereco.Cidade);
                 AO.InsertParameter("Estado",endereco.Estado);
-                AO.InsertParameter("Tipo", endereco.Tipo);
+                AO.InsertParameter("Tipo", endereco.Tipo.Tipo);
                 
                 if(AO.ExecuteCommand())
                     return RecuperaUltimoEndereco();

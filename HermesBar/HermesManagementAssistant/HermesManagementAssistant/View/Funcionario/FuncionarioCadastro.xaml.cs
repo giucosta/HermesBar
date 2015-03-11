@@ -68,6 +68,8 @@ namespace HermesManagementAssistant.View.Funcionario
         }
         #endregion
         private static int _idFuncionario;
+        private static int _idEndereco;
+        private static int _idContato;
         public FuncionarioCadastro()
         {
             InitializeComponent();
@@ -83,30 +85,17 @@ namespace HermesManagementAssistant.View.Funcionario
             var camposObrigatorios = VerificaCamposObrigatorios();
             if (camposObrigatorios.Count == 0)
             {
-                var funcionario = new FuncionarioModel();
+                var funcionario = SalvarFuncionario();
+                funcionario.Endereco = SalvarEndereco();
+                funcionario.Contato = SalvarContato();
 
-                var endereco = SalvarEndereco();
-                if (endereco != null)
-                {
-                    funcionario.Endereco = endereco;
-                    var contato = SalvarContato();
-                    if (contato != null)
-                    {
-                        funcionario.Contato = contato;
-                        if (SalvarFuncionario(funcionario))
-                        {
-                            Mensagens.GeraMensagens("Registro Salvo", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                            new Funcionario().Show();
-                            this.Close();
-                        }
-                        else
-                            Mensagens.GeraMensagens("Erro ao salvar registro", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
-                    }
-                    else
-                        Mensagens.GeraMensagens("Cadastro contato",MENSAGEM.CONTATO_CADASTRO_ERRO,null,TIPOS_MENSAGENS.ERRO);
-                }
-                else
-                    Mensagens.GeraMensagens("Cadastro endereço", MENSAGEM.ENDERECO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                if(FuncionarioBLL.Salvar(funcionario)){
+                    Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Funcionario().Show();
+                    this.Close();
+                }else
+                    Mensagens.GeraMensagens("Erro ao salvar o funcionário", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    
             }
         }
         private ContatoModel SalvarContato()
@@ -118,7 +107,7 @@ namespace HermesManagementAssistant.View.Funcionario
             contato.Celular = tbCelular.Text;
             contato.Email = tbEmail.Text;
 
-            return ContatoBLL.Salvar(contato);
+            return contato;
         }
         private EnderecoModel SalvarEndereco()
         {
@@ -132,10 +121,11 @@ namespace HermesManagementAssistant.View.Funcionario
             endereco.Estado = tbEstado.Text;
             endereco.Tipo = new TipoEnderecoModel() { Tipo = Constantes.ATipoEndereco.PESSOAL };
 
-            return EnderecoBLL.Salvar(endereco);
+            return endereco;
         }
-        private bool SalvarFuncionario(FuncionarioModel funcionario)
+        private FuncionarioModel SalvarFuncionario()
         {
+            var funcionario = new FuncionarioModel();
             funcionario.Nome = tbNome.Text;
             funcionario.Rg = tbRg.Text;
             funcionario.Serie = tbSerie.Text;
@@ -146,8 +136,9 @@ namespace HermesManagementAssistant.View.Funcionario
             funcionario.Serie = tbSerie.Text;
             funcionario.Tipo = TipoFuncionarioBLL.RetornaTipo(new TipoFuncionarioModel() { TipoFuncionario = cbTipo.SelectionBoxItem.ToString() });
 
-            return FuncionarioBLL.Salvar(funcionario);
+            return funcionario;
         }
+
         private void CarregaCombos()
         {
             cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();
@@ -187,6 +178,8 @@ namespace HermesManagementAssistant.View.Funcionario
         private void CarregaCamposEdicao(FuncionarioModel func)
         {
             _idFuncionario = func.Id;
+            _idEndereco = func.Endereco.Id;
+            _idContato = func.Contato.Id;
             tbBairro.Text = func.Endereco.Bairro;
             tbCartTrabalho.Text = func.CarteiraTrabalho;
             tbCelular.Text = func.Contato.Celular;
@@ -207,8 +200,8 @@ namespace HermesManagementAssistant.View.Funcionario
         private void ExcluirFuncionario(object sender, RoutedEventArgs e)
         {
             if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.CERTEZA_EXCLUIR_FUNCIONARIO, null, TIPOS_MENSAGENS.QUESTAO)){
-                if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario }))
-                    Mensagens.GeraMensagens("Funcionário Excluído",MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO,null,TIPOS_MENSAGENS.SUCESSO);
+                if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario, Endereco = new EnderecoModel() { Id = _idEndereco }, Contato = new ContatoModel() {Id = _idContato } }))
+                    Mensagens.GeraMensagens("Funcionário Excluído", MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
                 else
                     Mensagens.GeraMensagens("Erro!", MENSAGEM.FUNCIONARIO_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }

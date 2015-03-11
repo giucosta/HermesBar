@@ -21,14 +21,14 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", contato.Nome);
-                Connection.AddParameter("@Telefone", contato.Telefone);
-                Connection.AddParameter("@Celular", contato.Celular);
-                Connection.AddParameter("@Email", contato.Email);
-                Connection.AddParameter("@Site", contato.Site);
-
-                if (Connection.ExecutarComando())
+                AO.GetCommand();
+                AO.InsertParameter("Nome",contato.Nome);
+                AO.InsertParameter("Telefone",contato.Telefone);
+                AO.InsertParameter("Celular",contato.Celular);
+                AO.InsertParameter("Email",contato.Email);
+                AO.InsertParameter("Site",contato.Site);
+                
+                if (AO.ExecuteCommand())
                     return Pesquisa(contato);
                 return null;
             }
@@ -44,10 +44,10 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.DeleteFromId();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id_Contato", contato.Id);
+                AO.GetCommand();
+                AO.InsertParameter("Id_Contato", contato.Id);
 
-                return Connection.ExecutarComando();
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -61,14 +61,11 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
-                AO.InsertParameter(ConstantesDAO.AND, "Email", ConstantesDAO.LIKE, "@Email");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, contato.Nome);
+                AO.InsertParameter(ConstantesDAO.AND, "Email", ConstantesDAO.LIKE, contato.Email);
 
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", "%" + contato.Nome + "%");
-                Connection.AddParameter("@Email", "%" + contato.Email + "%");
-
-                return CarregaContato(Connection.getDataTable());
+                return CarregaContato(AO.GetDataTable());
             }
             catch (Exception e)
             {

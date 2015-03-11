@@ -31,6 +31,12 @@ namespace BLL.Comum
             }  
             return null;
         }
+        public bool Excluir(ContatoModel contato)
+        {
+            if (contato.Id != 0)
+                return DAO.Excluir(contato);
+            return false;
+        }
         private ContatoModel VerifyNullValues(ContatoModel contato)
         {
             if (string.IsNullOrEmpty(contato.Celular))

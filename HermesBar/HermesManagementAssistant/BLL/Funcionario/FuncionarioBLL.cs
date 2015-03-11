@@ -1,6 +1,7 @@
 ﻿using BLL.Comum;
 using DAO.Comum;
 using DAO.Funcionario;
+using DAO.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -60,14 +61,55 @@ namespace BLL.Funcionario
         {
             if (VerificaIdadeFuncionario(funcionario))
             {
-                if(Validacoes.ValidaCPF(funcionario.Cpf))
-                    return FuncionarioDAO.Salvar(funcionario);
+                if (Validacoes.ValidaCPF(funcionario.Cpf))
+                {
+                    AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                    AO.GetTransaction();
+                    var endereco = EnderecoBLL.Salvar(funcionario.Endereco);
+                    if (endereco != null)
+                    {
+                        funcionario.Endereco = endereco;
+                        var contato = ContatoBLL.Salvar(funcionario.Contato);
+                        if (contato != null)
+                            funcionario.Contato = contato;
+                        else
+                            AO.Rollback();
+
+                        if (FuncionarioDAO.Salvar(funcionario)){
+                            AO.Commit();
+                            return true;
+                        }
+                            
+                        else
+                            AO.Rollback();
+                    }
+                    else
+                        AO.Rollback();
+                }
             }
             return false;
         }
         public bool Excluir(FuncionarioModel funcionario)
         {
-            return FuncionarioDAO.Excluir(funcionario);
+            AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+            AO.GetTransaction();
+            if (FuncionarioDAO.Excluir(funcionario))
+            {
+                if (ContatoBLL.Excluir(funcionario.Contato)){
+                    if (EnderecoBLL.Excluir(funcionario.Endereco)){
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
+                }
+                else
+                    AO.Rollback();
+            }
+            else
+                AO.Rollback();
+            return false;
+            
         }
         public List<FuncionarioModel> Pesquisa()
         {
@@ -83,7 +125,7 @@ namespace BLL.Funcionario
         }
         private bool VerificaIdadeFuncionario(FuncionarioModel funcionario)
         {
-            if ((funcionario.DataNascimento.Year - DateTime.Now.Year) < 18)
+            if ((DateTime.Now.Year - funcionario.DataNascimento.Year) < 18)
                 return false;
             return true;
         }

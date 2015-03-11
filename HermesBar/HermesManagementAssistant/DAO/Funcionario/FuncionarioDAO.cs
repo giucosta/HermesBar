@@ -28,9 +28,9 @@ namespace DAO.Funcionario
                 AO.InsertParameter("DataNascimento",funcionario.DataNascimento);
                 AO.InsertParameter("CarteiraTrabalho",funcionario.CarteiraTrabalho);
                 AO.InsertParameter("Serie",funcionario.Serie);
-                AO.InsertParameter("Id_Endereco",funcionario.Endereco.Id);
-                AO.InsertParameter("Id_TipoFuncionario",funcionario.Tipo.Id);
-                AO.InsertParameter("Id_Contato",funcionario.Contato.Id);
+                AO.InsertParameter("Endereco",funcionario.Endereco.Id);
+                AO.InsertParameter("Tipo",funcionario.Tipo.Id);
+                AO.InsertParameter("Contato",funcionario.Contato.Id);
                 AO.InsertParameter("DataAdmissao",funcionario.DataAdmissao);
 
                 return AO.ExecuteCommand();
