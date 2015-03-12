@@ -22,15 +22,14 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateDataInsert();
+                AO.GetCommand();
+                AO.InsertParameter("Nome",atracoes.Nome);
+                AO.InsertParameter("Estilo", atracoes.Estilo);
+                AO.InsertParameter("Contato", atracoes.Contato.Id);
+                AO.InsertParameter("Tempo_Show", atracoes.Tempo_Show);
+                AO.InsertParameter("Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
 
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", atracoes.Nome);
-                Connection.AddParameter("@Estilo", atracoes.Estilo);
-                Connection.AddParameter("@Contato", atracoes.Contato.Id);
-                Connection.AddParameter("@Tempo_Show", atracoes.Tempo_Show);
-                Connection.AddParameter("@Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
-                
-                return Connection.ExecutarComando();
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -44,9 +43,9 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.DeleteFromId();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id_Atracoes", atracoes.Id);
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("Id_Atracoes",atracoes.Id);
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -60,19 +59,31 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, "@Nome");
-                AO.InsertParameter(ConstantesDAO.AND, "Estilo", ConstantesDAO.LIKE, "@Estilo");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, atracoes.Nome);
+                AO.InsertParameter(ConstantesDAO.AND, "Estilo", ConstantesDAO.LIKE, atracoes.Estilo);
 
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Nome", "%" + atracoes.Nome + "%");
-                Connection.AddParameter("@Estilo", "%" + atracoes.Estilo + "%");
-
-                return Connection.getDataTable();
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("Pesquisa","AtracoesDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 return null;
+            }
+        }
+        public DataTable RetornaTodasAtracoes()
+        {
+            try
+            {
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RetornaTodasAtracoes", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                throw;
             }
         }
         public DataTable RecuperaEstilos()
@@ -81,9 +92,9 @@ namespace DAO.Atracoes
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSelectWithSimpleParameter("Estilo");
-                Connection.GetCommand(AO.ReturnQuery());
-                
-                return Connection.getDataTable();
+                AO.GetCommand();
+
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {

@@ -12,15 +12,15 @@
         <Label x:Name="lbNomeContato" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,137,0,0" FontWeight="Bold"/>
         <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Margin="120,137,0,0"/>
         <Label x:Name="lbTelefone" Content="Telefone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,172,0,0" FontWeight="Bold"/>
-        <TextBox x:Name="tbTelefone" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,172,0,0"/>
+        <TextBox x:Name="tbTelefone" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,172,0,0" KeyDown="PhoneMasked"/>
         <Label x:Name="lbCelular" Content="Celular" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,203,0,0"/>
-        <TextBox x:Name="tbCelular" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,203,0,0"/>
+        <TextBox x:Name="tbCelular" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,203,0,0" KeyDown="CelularMasked"/>
         <Label x:Name="lbEmail" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,234,0,0"/>
         <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Margin="120,234,0,0"/>
         <Label x:Name="lbSite" Content="Site" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,265,0,0"/>
         <TextBox x:Name="tbSite" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Margin="120,265,0,0"/>
         <Label x:Name="lbValor" Content="Valor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,89,0,0" FontWeight="Bold"/>
-        <TextBox x:Name="tbValor" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,88,0,0"/>
+        <TextBox x:Name="tbValor" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,88,0,0" KeyDown="SomenteNumeros"/>
         <Label x:Name="lbTempo" Content="Tempo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,88,0,0" FontWeight="Bold"/>
         <TextBox x:Name="tbTempo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="324,89,0,0"/>
     </Grid>

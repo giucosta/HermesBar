@@ -8,6 +8,7 @@ using System.Data;
 using MODEL;
 using BLL.Comum;
 using UTILS;
+using DAO.Utils;
 
 namespace BLL.Atracoes
 {
@@ -38,6 +39,10 @@ namespace BLL.Atracoes
         {
             return AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
         }
+        public List<AtracoesModel> ListarAtracoes()
+        {
+            return AtracoesDAO.RetornaTodasAtracoes().DataTableToList<AtracoesModel>();
+        }
         public List<String> RecuperaEstilos()
         {
             var atributos = new List<String>();
@@ -45,14 +50,25 @@ namespace BLL.Atracoes
 
             return AtracoesDAO.RecuperaEstilos().DataTableToListString("Estilo");
         }
-
         public bool Salvar(AtracoesModel atracoes)
         {
-            atracoes.Contato = ContatoBLL.Salvar(atracoes.Contato);
-            if (atracoes.Contato != null)
-                return AtracoesDAO.Salvar(atracoes);
+            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+            AO.GetTransaction();
+            var contato = ContatoBLL.Salvar(atracoes.Contato);
+            if (contato != null)
+            {
+                atracoes.Contato = contato;
+                if (AtracoesDAO.Salvar(atracoes))
+                {
+                    AO.Commit();
+                    return true;
+                }
+                else
+                    AO.Rollback();
+            }
             else
-                return false;
+                AO.Rollback();
+            return false;
         }
     }
 }

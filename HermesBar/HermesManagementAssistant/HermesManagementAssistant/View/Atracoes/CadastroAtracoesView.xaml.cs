@@ -1,5 +1,6 @@
 ﻿using BLL.Atracoes;
 using BLL.Comum;
+using HermesManagementAssistant.Utils;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -91,6 +92,18 @@ namespace HermesManagementAssistant.View.Atracoes
         {
             cbEstilo.ItemsSource = new AtracoesBLL().RecuperaEstilos();
             cbEstilo.SelectedIndex = 0;
+        }
+        private void SomenteNumeros(Object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbValor, e);
+        }
+        private void PhoneMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbTelefone,e);
+        }
+        private void CelularMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbCelular, e);
         }
     }
 

@@ -36,7 +36,7 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
         {
-            dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa(atracoes);
+            dgPesquisa.ItemsSource = AtracoesBLL.ListarAtracoes();
         }
         private void CarregaComboBox()
         {
@@ -58,6 +58,10 @@ namespace HermesManagementAssistant.View.Atracoes
         private void btNovo_Click(object sender, RoutedEventArgs e)
         {
             new CadastroAtracoesView().Show();
+        }
+        private void Editar(Object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
