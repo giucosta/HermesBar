@@ -126,7 +126,7 @@ namespace HermesManagementAssistant.View.Funcionario
             endereco.Cep = tbCep.Text;
             endereco.Cidade = tbCidade.Text;
             endereco.Complemento = tbComplemento.Text;
-            endereco.Estado = tbEstado.Text;
+            endereco.Estado = cbEstado.SelectionBoxItem.ToString();
             endereco.Tipo = new TipoEnderecoModel() { Tipo = Constantes.ATipoEndereco.PESSOAL };
 
             return endereco;
@@ -152,6 +152,8 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();
             cbTipo.SelectedIndex = 0;
+            cbEstado.ItemsSource = EnderecoBLL.CarregaEstados();
+            cbEstado.SelectedIndex = 0;
         }
         private List<String> VerificaCamposObrigatorios()
         {
@@ -236,6 +238,16 @@ namespace HermesManagementAssistant.View.Funcionario
             else
                 Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.FUNCIONARIO_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
+        private void LimparCamposEndereco()
+        {
+            tbRua.Clear();
+            tbNumero.Clear();
+            tbBairro.Clear();
+            tbCep.Clear();
+            tbCidade.Clear();
+            tbComplemento.Clear();
+            cbEstado.SelectedIndex = 0;
+        }
         #region Masked
         private void CpfMasked(Object sender, KeyEventArgs e)
         {
@@ -252,6 +264,14 @@ namespace HermesManagementAssistant.View.Funcionario
         private void SomenteNumeros(Object sender, KeyEventArgs e)
         {
             Mascaras.SomenteNumeros(tbRg, e);
+        }
+        private void ConsultarCep(Object sender, RoutedEventArgs e)
+        {
+            if (!ConsultaCeps.ConsultarCep(tbRua, tbCidade, tbBairro, cbEstado, tbCep))
+            {
+                lbCepNaoExistente.Visibility = System.Windows.Visibility.Visible;
+                LimparCamposEndereco();
+            }
         }
         #endregion
     }
