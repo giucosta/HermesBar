@@ -15,6 +15,7 @@ namespace BLL.Funcionario
 {
     public class FuncionarioBLL
     {
+        #region AccessMethod
         private FuncionarioDAO _funcionarioDAO = null;
         public FuncionarioDAO FuncionarioDAO
         {
@@ -56,6 +57,7 @@ namespace BLL.Funcionario
                        
             }
         }
+        #endregion
 
         public bool Salvar(FuncionarioModel funcionario)
         {
@@ -92,8 +94,10 @@ namespace BLL.Funcionario
             AO.GetTransaction();
             if (FuncionarioDAO.Excluir(funcionario))
             {
-                if (ContatoBLL.Excluir(funcionario.Contato)){
-                    if (EnderecoBLL.Excluir(funcionario.Endereco)){
+                if (ContatoBLL.Excluir(funcionario.Contato))
+                {
+                    if (EnderecoBLL.Excluir(funcionario.Endereco))
+                    {
                         AO.Commit();
                         return true;
                     }

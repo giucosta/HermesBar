@@ -210,7 +210,11 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.CERTEZA_EXCLUIR_FUNCIONARIO, null, TIPOS_MENSAGENS.QUESTAO)){
                 if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario, Endereco = new EnderecoModel() { Id = _idEndereco }, Contato = new ContatoModel() {Id = _idContato } }))
+                {
                     Mensagens.GeraMensagens("Funcionário Excluído", MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Funcionario().Show();
+                    this.Close();
+                }    
                 else
                     Mensagens.GeraMensagens("Erro!", MENSAGEM.FUNCIONARIO_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }
