@@ -64,7 +64,6 @@ namespace BLL.Funcionario
                 if (Validacoes.ValidaCPF(funcionario.Cpf))
                 {
                     AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
-                    AO.GetTransaction();
                     var endereco = EnderecoBLL.Salvar(funcionario.Endereco);
                     if (endereco != null)
                     {
@@ -73,18 +72,11 @@ namespace BLL.Funcionario
                         if (contato != null)
                             funcionario.Contato = contato;
                         else
-                            AO.Rollback();
-
-                        if (FuncionarioDAO.Salvar(funcionario)){
-                            AO.Commit();
-                            return true;
-                        }
-                            
-                        else
-                            AO.Rollback();
+                            return false;
+                        return FuncionarioDAO.Salvar(funcionario);
                     }
                     else
-                        AO.Rollback();
+                        return false;
                 }
             }
             return false;
@@ -108,8 +100,7 @@ namespace BLL.Funcionario
             }
             else
                 AO.Rollback();
-            return false;
-            
+            return false;   
         }
         public List<FuncionarioModel> Pesquisa()
         {
@@ -128,6 +119,14 @@ namespace BLL.Funcionario
             if ((DateTime.Now.Year - funcionario.DataNascimento.Year) < 18)
                 return false;
             return true;
+        }
+        public FuncionarioModel PesquisaFuncionarioCpf(FuncionarioModel func)
+        {
+            var funcionario = FuncionarioDAO.PesquisaFuncionarioCpf(func.Cpf).DataTableToSimpleObject<FuncionarioModel>();
+            funcionario.Endereco = EnderecoBLL.RecuperaEnderecoId(FuncionarioDAO.RetornaIdEndereco(funcionario));
+            funcionario.Contato = ContatoBLL.RecuperaContatoId(FuncionarioDAO.RetornaIdContato(funcionario));
+
+            return funcionario;
         }
     }
 }

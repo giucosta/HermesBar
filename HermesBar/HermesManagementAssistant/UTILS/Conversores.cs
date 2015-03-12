@@ -87,5 +87,13 @@ namespace UTILS
                 return null;
             }
         }
+        public static int DateTimeToInt(DateTime theDate)
+        {
+            return (int)(theDate.Date - new DateTime(1900, 1, 1)).TotalDays + 2;
+        }
+        public static DateTime IntToDateTime(int intDate)
+        {
+            return new DateTime(1900, 1, 1).AddDays(intDate - 2);
+        }
     }
 }

@@ -67,35 +67,41 @@ namespace HermesManagementAssistant.View.Funcionario
             }
         }
         #endregion
-        private static int _idFuncionario;
-        private static int _idEndereco;
-        private static int _idContato;
+        private static int _idFuncionario = 0;
+        private static int _idEndereco = 0;
+        private static int _idContato = 0;
         public FuncionarioCadastro()
         {
             InitializeComponent();
             CarregaCombos();
+            btExcluir.Visibility = System.Windows.Visibility.Hidden;
         }
         public FuncionarioCadastro(FuncionarioModel funcionario)
         {
             InitializeComponent();
             CarregaFuncionario(funcionario);
+            btExcluir.Visibility = System.Windows.Visibility.Visible;
         }
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            var camposObrigatorios = VerificaCamposObrigatorios();
-            if (camposObrigatorios.Count == 0)
+            if (_idFuncionario == 0)
             {
-                var funcionario = SalvarFuncionario();
-                funcionario.Endereco = SalvarEndereco();
-                funcionario.Contato = SalvarContato();
+                var camposObrigatorios = VerificaCamposObrigatorios();
+                if (camposObrigatorios.Count == 0)
+                {
+                    var funcionario = SalvarFuncionario();
+                    funcionario.Endereco = SalvarEndereco();
+                    funcionario.Contato = SalvarContato();
 
-                if(FuncionarioBLL.Salvar(funcionario)){
-                    Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                    new Funcionario().Show();
-                    this.Close();
-                }else
-                    Mensagens.GeraMensagens("Erro ao salvar o funcionário", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
-                    
+                    if (FuncionarioBLL.Salvar(funcionario))
+                    {
+                        Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                        new Funcionario().Show();
+                        this.Close();
+                    }
+                    else
+                        Mensagens.GeraMensagens("Erro ao salvar o funcionário", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                }
             }
         }
         private ContatoModel SalvarContato()
@@ -138,7 +144,6 @@ namespace HermesManagementAssistant.View.Funcionario
 
             return funcionario;
         }
-
         private void CarregaCombos()
         {
             cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();

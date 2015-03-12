@@ -20,19 +20,20 @@ namespace DAO.Funcionario
             try
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                //AO.CreateSpecificQuery("INSERT INTO Funcionario VALUES (@Nome, @Cpf, @Rg, @DataNascimento, @CarteiraTrabalho, @Serie, @Endereco, @Tipo, @Contato, @DataAdmissao)");
                 AO.CreateDataInsert();
                 AO.GetCommand();
-                AO.InsertParameter("Nome",funcionario.Nome);
-                AO.InsertParameter("Cpf",funcionario.Cpf);
-                AO.InsertParameter("Rg",funcionario.Rg);
-                AO.InsertParameter("DataNascimento",funcionario.DataNascimento);
-                AO.InsertParameter("CarteiraTrabalho",funcionario.CarteiraTrabalho);
-                AO.InsertParameter("Serie",funcionario.Serie);
-                AO.InsertParameter("Endereco",funcionario.Endereco.Id);
-                AO.InsertParameter("Tipo",funcionario.Tipo.Id);
-                AO.InsertParameter("Contato",funcionario.Contato.Id);
-                AO.InsertParameter("DataAdmissao",funcionario.DataAdmissao);
-
+                AO.InsertParameter("Nome", funcionario.Nome);
+                AO.InsertParameter("Cpf", funcionario.Cpf);
+                AO.InsertParameter("Rg", funcionario.Rg);
+                AO.InsertParameter("DataNascimento", Conversores.DateTimeToInt(funcionario.DataNascimento));
+                AO.InsertParameter("CarteiraTrabalho", funcionario.CarteiraTrabalho);
+                AO.InsertParameter("Serie", funcionario.Serie);
+                AO.InsertParameter("DataAdmissao", Conversores.DateTimeToInt(funcionario.DataAdmissao));
+                AO.InsertParameter("Endereco", funcionario.Endereco.Id);
+                AO.InsertParameter("Tipo", funcionario.Tipo.Id);
+                AO.InsertParameter("Contato", funcionario.Contato.Id);
+                
                 return AO.ExecuteCommand();
             }
             catch (Exception e)
@@ -118,6 +119,22 @@ namespace DAO.Funcionario
             catch (Exception)
             {
                 throw;
+            }
+        }
+        public DataTable PesquisaFuncionarioCpf(string cpf)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Cpf", ConstantesDAO.EQUAL, cpf);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("PesqusiaFuncionarioCpf","FuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
+                return null;
             }
         }
     }

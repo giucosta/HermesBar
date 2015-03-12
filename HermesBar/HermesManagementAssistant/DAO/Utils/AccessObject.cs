@@ -21,6 +21,7 @@ namespace DAO.Utils
         {
             Type myType = typeof(T);
             var nomeClasse = ReturnClassName();
+            
             var stb = new StringBuilder();
             stb.Append("INSERT INTO " + nomeClasse);
             stb.Append(" VALUES");
