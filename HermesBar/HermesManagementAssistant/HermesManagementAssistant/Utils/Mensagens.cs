@@ -76,5 +76,8 @@ namespace Utils.Mensagens
         public const string CERTEZA_EXCLUIR_FUNCIONARIO = "Confirma exclusão do funcionário?";
         public const string FUNCIONARIO_EXCLUIR_SUCESSO= "Funcionário excluído com sucesso!";
         public const string FUNCIONARIO_EXCLUIR_ERRO = "Erro ao excluir funcionário!";
+        //EDITAR FUNCIONARIO
+        public const string FUNCIONARIO_EDITAR_SUCESSO = "Funcionário editado com sucesso!";
+        public const string FUNCIONARIO_EDITAR_ERRO = "Erro ao editar funcionário!";
     }
 }

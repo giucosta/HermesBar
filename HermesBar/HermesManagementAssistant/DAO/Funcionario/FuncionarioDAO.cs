@@ -59,6 +59,37 @@ namespace DAO.Funcionario
                 return false;
             }
         }
+        public bool Editar(FuncionarioModel funcionario)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSpecificQuery(@"UPDATE Funcionario SET 
+                                                    Nome = @Nome,
+                                                    Cpf = @Cpf,
+                                                    Rg = @Rg,
+                                                    DataNascimento = @DataNascimento,
+                                                    CarteiraTrabalho = @CarteiraTrabalho,
+                                                    Serie = @Serie,
+                                                    DataAdmissao = @DataAdmissao WHERE Id_Funcionario = @Id_Funcionario");
+                AO.GetCommand();
+                AO.InsertParameter("Nome", funcionario.Nome);
+                AO.InsertParameter("Cpf", funcionario.Cpf);
+                AO.InsertParameter("Rg", funcionario.Rg);
+                AO.InsertParameter("DataNascimento", Conversores.DateTimeToInt(funcionario.DataNascimento));
+                AO.InsertParameter("CarteiraTrabalho", funcionario.CarteiraTrabalho);
+                AO.InsertParameter("Serie", funcionario.Serie);
+                AO.InsertParameter("DataAdmissao", Conversores.DateTimeToInt(funcionario.DataAdmissao));
+                AO.InsertParameter("Id_funcionario", funcionario.Id);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Editar","FuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.UPDATE);
+                return false;
+            }
+        }
         public DataTable Pesquisa()
         {
             try

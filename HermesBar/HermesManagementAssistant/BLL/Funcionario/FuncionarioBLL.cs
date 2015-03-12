@@ -64,6 +64,7 @@ namespace BLL.Funcionario
                 if (Validacoes.ValidaCPF(funcionario.Cpf))
                 {
                     AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                    AO.GetTransaction();
                     var endereco = EnderecoBLL.Salvar(funcionario.Endereco);
                     if (endereco != null)
                     {
@@ -72,11 +73,15 @@ namespace BLL.Funcionario
                         if (contato != null)
                             funcionario.Contato = contato;
                         else
-                            return false;
-                        return FuncionarioDAO.Salvar(funcionario);
+                            AO.Rollback();
+                        if (FuncionarioDAO.Salvar(funcionario))
+                        {
+                            AO.Commit();
+                            return true;
+                        }
                     }
                     else
-                        return false;
+                        AO.Rollback();
                 }
             }
             return false;
@@ -101,6 +106,10 @@ namespace BLL.Funcionario
             else
                 AO.Rollback();
             return false;   
+        }
+        public bool Editar(FuncionarioModel funcionario)
+        {
+            return FuncionarioDAO.Editar(funcionario);
         }
         public List<FuncionarioModel> Pesquisa()
         {

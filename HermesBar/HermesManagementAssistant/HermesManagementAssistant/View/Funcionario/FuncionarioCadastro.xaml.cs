@@ -103,6 +103,8 @@ namespace HermesManagementAssistant.View.Funcionario
                         Mensagens.GeraMensagens("Erro ao salvar o funcionário", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
                 }
             }
+            else
+                EditarFuncionario();
         }
         private ContatoModel SalvarContato()
         {
@@ -132,6 +134,8 @@ namespace HermesManagementAssistant.View.Funcionario
         private FuncionarioModel SalvarFuncionario()
         {
             var funcionario = new FuncionarioModel();
+            if (_idFuncionario != 0)
+                funcionario.Id = _idFuncionario;
             funcionario.Nome = tbNome.Text;
             funcionario.Rg = tbRg.Text;
             funcionario.Serie = tbSerie.Text;
@@ -213,7 +217,21 @@ namespace HermesManagementAssistant.View.Funcionario
             else
                 return;
         }
+        private void EditarFuncionario()
+        {
+            var func = SalvarFuncionario();
+            func.Endereco = SalvarEndereco();
+            func.Contato = SalvarContato();
 
+            if (FuncionarioBLL.Editar(func))
+            {
+                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.FUNCIONARIO_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new Funcionario().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.FUNCIONARIO_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+        }
         #region Masked
         private void CpfMasked(Object sender, KeyEventArgs e)
         {
