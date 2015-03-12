@@ -249,6 +249,10 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             Mascaras.PhoneMasked(tbCelular, e);
         }
+        private void SomenteNumeros(Object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbRg, e);
+        }
         #endregion
     }
 }

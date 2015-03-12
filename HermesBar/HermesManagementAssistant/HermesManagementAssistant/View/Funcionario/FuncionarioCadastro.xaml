@@ -25,7 +25,7 @@
                     <Label Grid.Row="1" HorizontalAlignment="Right" Margin="0,8,177,1" Width="40" Grid.ColumnSpan="2">CPF</Label>
                     <TextBox Name="tbCpf" Grid.Column="1" Grid.Row="1" Margin="22,5,10,5" MaxLength="11" KeyDown="CpfMasked"/>
                     <Label Name="lbRg" HorizontalAlignment="Right" Margin="0,8,3,29" Grid.Row="2" Grid.RowSpan="2" Width="25">RG</Label>
-                    <TextBox Name="tbRg" Grid.Column="1" Grid.Row="2" Margin="22,8,8,5" MaxLength="15"/>
+                    <TextBox Name="tbRg" Grid.Column="1" Grid.Row="2" Margin="22,8,8,5" MaxLength="15" KeyDown="SomenteNumeros"/>
                     <Label Name="lbCartTrabalho" HorizontalAlignment="Left" Margin="17,7,0,30" Grid.Row="3" Grid.RowSpan="2" Width="90" Grid.ColumnSpan="2">Cart. Trabalho</Label>
                     <TextBox Name="tbCartTrabalho" Grid.Column="1" Grid.Row="3" Margin="22,9,9,5" MaxLength="20"/>
                     <Label Name="lbSerie" HorizontalAlignment="Left" Margin="5,6,0,0" Grid.Row="3" Width="38" Grid.Column="2">Série</Label>
