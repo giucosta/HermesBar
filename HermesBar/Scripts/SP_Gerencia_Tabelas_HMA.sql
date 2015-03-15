@@ -45,11 +45,11 @@ END
 IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Usuario')
 BEGIN
 	DROP TABLE Usuario;
-	CREATE TABLE Usuario(Id_Usuario INT IDENTITY(1,1) PRIMARY KEY,Id_Login INT,Id_Perfil INT,Nome varchar(100) not null,Status varchar(1) not null, Email varchar(100), FOREIGN KEY(Id_Login)REFERENCES Login(Id_Login),FOREIGN KEY(Id_Perfil)REFERENCES Perfil(Id_Perfil));
+	CREATE TABLE Usuario(Id_Usuario INT IDENTITY(1,1) PRIMARY KEY,Id_Login INT,Id_Perfil INT,Nome varchar(100) not null,Status varchar(1) not null, Email VARCHAR(100) NULL, FOREIGN KEY(Id_Login)REFERENCES Login(Id_Login),FOREIGN KEY(Id_Perfil)REFERENCES Perfil(Id_Perfil));
 END
 ELSE 
 BEGIN
-	CREATE TABLE Usuario(Id_Usuario INT IDENTITY(1,1) PRIMARY KEY,Id_Login INT,Id_Perfil INT,Nome varchar(100) not null,Status varchar(1) not null,FOREIGN KEY(Id_Login)REFERENCES Login(Id_Login),FOREIGN KEY(Id_Perfil)REFERENCES Perfil(Id_Perfil));
+	CREATE TABLE Usuario(Id_Usuario INT IDENTITY(1,1) PRIMARY KEY,Id_Login INT,Id_Perfil INT,Nome varchar(100) not null,Status varchar(1) not null, Email VARCHAR(100) NULL, FOREIGN KEY(Id_Login)REFERENCES Login(Id_Login),FOREIGN KEY(Id_Perfil)REFERENCES Perfil(Id_Perfil));
 END
 --
 IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Contato')
