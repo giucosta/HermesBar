@@ -61,7 +61,8 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void Editar(Object sender, SelectionChangedEventArgs e)
         {
-
+            DataGrid data = (DataGrid)sender;
+            new CadastroAtracoesView((AtracoesModel)data.SelectedItems[0]).Show();
         }
     }
 }

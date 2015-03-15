@@ -44,9 +44,6 @@ namespace BLL.Atracoes
         }
         public List<String> RecuperaEstilos()
         {
-            var atributos = new List<String>();
-            atributos.Add("Estilo");
-
             return AtracoesDAO.RecuperaEstilos().DataTableToListString("Estilo");
         }
         public bool Salvar(AtracoesModel atracoes)
@@ -87,6 +84,10 @@ namespace BLL.Atracoes
         public bool Editar(AtracoesModel atracoes)
         {
             return AtracoesDAO.Editar(atracoes);
+        }
+        public int RecuperaIdContato(AtracoesModel atracao)
+        {
+            return (int)AtracoesDAO.RecuperaIdContato(atracao).Rows[0]["Id_Contato"];
         }
     }
 }

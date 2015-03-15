@@ -102,6 +102,22 @@ namespace DAO.Atracoes
                 return null;
             }
         }
+        public DataTable RecuperaIdContato(AtracoesModel atracao)
+        {
+            try
+            {
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.CreateSelectWithSimpleParameter("Id_Contato");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Atracoes", ConstantesDAO.EQUAL, atracao.Id);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaIdContato", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
+        }
         public bool Editar(AtracoesModel atracao)
         {
             try

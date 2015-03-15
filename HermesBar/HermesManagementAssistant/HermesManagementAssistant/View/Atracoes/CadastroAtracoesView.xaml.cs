@@ -35,12 +35,28 @@ namespace HermesManagementAssistant.View.Atracoes
                 return _atracoesBLL;
             }
         }
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatoBLL
+        {
+            get
+            {
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
+            }
+        }
         private int _idAtracao = 0;
         private int _idContato = 0;
         public CadastroAtracoesView()
         {
             InitializeComponent();
             CarregaComboEstilos();
+        }
+        public CadastroAtracoesView(AtracoesModel atracao)
+        {
+            InitializeComponent();
+            CarregaComboEstilos();
+            CarregaAtracaoEdicao(atracao);
         }
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
@@ -103,7 +119,7 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaComboEstilos()
         {
-            cbEstilo.ItemsSource = new AtracoesBLL().RecuperaEstilos();
+            cbEstilo.ItemsSource =  AtracoesBLL.RecuperaEstilos();
             cbEstilo.SelectedIndex = 0;
         }
         private void SomenteNumeros(Object sender, KeyEventArgs e)
@@ -147,6 +163,19 @@ namespace HermesManagementAssistant.View.Atracoes
             }
             else
                 Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+        }
+        private void CarregaAtracaoEdicao(AtracoesModel atracao)
+        {
+            tbAtracao.Text = atracao.Nome;
+            tbTempo.Text = atracao.Tempo_Show;
+            tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString();
+
+            var contato = ContatoBLL.RecuperaContatoId(AtracoesBLL.RecuperaIdContato(atracao));
+            tbCelular.Text = contato.Celular;
+            tbEmail.Text = contato.Email;
+            tbNome.Text = contato.Nome;
+            tbSite.Text = contato.Site;
+            tbTelefone.Text = contato.Telefone;
         }
     }
 
