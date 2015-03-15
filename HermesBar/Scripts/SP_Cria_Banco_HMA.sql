@@ -1,7 +1,7 @@
 --use master;
---EXEC GerenciaBancoHMA;
--- DROP PROCEDURE GerenciaBancoHMA;
-CREATE PROCEDURE GerenciaBancoHMA
+--EXEC SP_Cria_Banco_HMA;
+-- DROP SP_Cria_Banco_HMA;
+CREATE PROCEDURE SP_Cria_Banco_HMA
 AS
 	IF EXISTS(SELECT * FROM sys.databases WHERE name = 'HermesBar')
 	BEGIN

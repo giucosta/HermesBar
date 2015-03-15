@@ -42,18 +42,16 @@ namespace DAO.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.CreateSelectAll();
+                AO.GetCommand();
                 if (fornecedor.Id != 0)
                 {
-                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, "@Id");
-                    AO.InsertParameter(ConstantesDAO.AND, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
-                }else
-                    AO.InsertParameter(ConstantesDAO.WHERE, "RazaoSocial", ConstantesDAO.LIKE, "@RazaoSocial");
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, fornecedor.Id);
+                    AO.InsertParameter(ConstantesDAO.AND, "RazaoSocial", ConstantesDAO.LIKE, fornecedor.RazaoSocial);
+                }
+                else
+                    AO.InsertParameter(ConstantesDAO.WHERE, "RazaoSocial", ConstantesDAO.LIKE, fornecedor.RazaoSocial);
 
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id", fornecedor.Id);
-                Connection.AddParameter("@RazaoSocial", "%" + fornecedor.RazaoSocial + "%");
-                
-                return Connection.getDataTable();
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {

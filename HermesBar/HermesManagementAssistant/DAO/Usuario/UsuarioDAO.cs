@@ -62,8 +62,8 @@ namespace DAO.Usuario
                 AO.CreateSpecificQuery(@"SELECT * FROM Usuario U INNER JOIN Login L ON L.Id_Login = U.Id_Login WHERE L.Login = @Login ");
                 AO.GetCommand();
                 AO.InsertParameter("Login", login.Login);
-                
-                var dataTable = Connection.getDataTable();
+
+                var dataTable = AO.GetDataTable();
 
                 return new UsuarioModel()
                 {

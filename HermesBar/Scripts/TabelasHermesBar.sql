@@ -96,13 +96,6 @@ CREATE TABLE ConfigEstabelecimento(
 	TaxaServico varchar(2)
 )
 
-CREATE TABLE ConfigEstabelecimento_Estabelecimento(
-	Id_Estabelecimento int,
-	Id_ConfigEstabelecimento int,
-	FOREIGN KEY(Id_Estabelecimento)REFERENCES Estabelecimento(Id_Estabelecimento),
-	FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento)
-)
-
 CREATE TABLE Estabelecimento(
 	Id_Estabelecimento int IDENTITY(1,1) PRIMARY KEY,
 	RazaoSocial VARCHAR(100),
@@ -113,6 +106,13 @@ CREATE TABLE Estabelecimento(
 	Id_Contato int,
 	FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco),
 	FOREIGN KEY(Id_Contato)REFERENCES Contato(Id_Contato)
+)
+
+CREATE TABLE ConfigEstabelecimento_Estabelecimento(
+	Id_Estabelecimento int,
+	Id_ConfigEstabelecimento int,
+	FOREIGN KEY(Id_Estabelecimento)REFERENCES Estabelecimento(Id_Estabelecimento),
+	FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento)
 )
 
 INSERT INTO Funcionario VALUES(
