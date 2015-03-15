@@ -90,13 +90,19 @@ namespace DAO.Funcionario
                 return false;
             }
         }
-        public DataTable Pesquisa()
+        public DataTable Pesquisa(FuncionarioModel func)
         {
             try
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
+                if (func.Id != 0)
+                {
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario", ConstantesDAO.EQUAL, func.Id);
+                    AO.InsertParameter(ConstantesDAO.AND, "Nome", ConstantesDAO.LIKE, func.Nome);
+                }else
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, func.Nome);
                 
                 return AO.GetDataTable();
             }

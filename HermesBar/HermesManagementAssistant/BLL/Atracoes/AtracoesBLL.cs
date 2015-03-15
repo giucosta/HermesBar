@@ -34,7 +34,6 @@ namespace BLL.Atracoes
                 return _contatoBLL;
             }
         }
-
         public List<AtracoesModel> Pesquisa(AtracoesModel atracoes)
         {
             return AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
@@ -69,6 +68,25 @@ namespace BLL.Atracoes
             else
                 AO.Rollback();
             return false;
+        }
+        public bool Excluir(AtracoesModel atracoes)
+        {
+            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+            AO.GetTransaction();
+            if (ContatoBLL.Excluir(atracoes.Contato)){
+                if (AtracoesDAO.Excluir(atracoes))
+                {
+                    AO.Commit();
+                    return true;
+                }
+            }
+            else
+                AO.Rollback();
+            return false;
+        }
+        public bool Editar(AtracoesModel atracoes)
+        {
+            return AtracoesDAO.Editar(atracoes);
         }
     }
 }

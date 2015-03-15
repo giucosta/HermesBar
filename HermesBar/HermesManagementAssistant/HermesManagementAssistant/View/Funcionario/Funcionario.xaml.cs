@@ -34,14 +34,14 @@ namespace HermesManagementAssistant.View.Funcionario
         public Funcionario()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
+            gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa(new FuncionarioModel());
         }
         private void PesquisarFuncionario(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrWhiteSpace(tbCodigo.Text))
-                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
+            if (!string.IsNullOrEmpty(tbCodigo.Text))
+                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa(new FuncionarioModel() { Id = int.Parse(tbCodigo.Text), Nome = tbNome.Text });
             else
-                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa();
+                gridPesquisa.ItemsSource = FuncionarioBLL.Pesquisa(new FuncionarioModel() { Nome = tbNome.Text });
         }
         private void NovoFuncionario(object sender, RoutedEventArgs e)
         {

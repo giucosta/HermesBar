@@ -115,9 +115,9 @@ namespace BLL.Funcionario
         {
             return FuncionarioDAO.Editar(funcionario);
         }
-        public List<FuncionarioModel> Pesquisa()
+        public List<FuncionarioModel> Pesquisa(FuncionarioModel func)
         {
-            return FuncionarioDAO.Pesquisa().DataTableToList<FuncionarioModel>();
+            return FuncionarioDAO.Pesquisa(func).DataTableToList<FuncionarioModel>();
         }
         public FuncionarioModel PesquisaFuncionarioId(FuncionarioModel func)
         {

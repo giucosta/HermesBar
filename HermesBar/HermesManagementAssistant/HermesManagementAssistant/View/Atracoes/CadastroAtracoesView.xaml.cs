@@ -25,6 +25,18 @@ namespace HermesManagementAssistant.View.Atracoes
     /// </summary>
     public partial class CadastroAtracoesView : Window
     {
+        private AtracoesBLL _atracoesBLL = null;
+        public AtracoesBLL AtracoesBLL
+        {
+            get
+            {
+                if (_atracoesBLL == null)
+                    _atracoesBLL = new AtracoesBLL();
+                return _atracoesBLL;
+            }
+        }
+        private int _idAtracao = 0;
+        private int _idContato = 0;
         public CadastroAtracoesView()
         {
             InitializeComponent();
@@ -32,20 +44,25 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            var obrigatorios = ValidarCampos();
-            if (obrigatorios.Count == 0)
+            if (_idAtracao != 0)
             {
-                var contato = CarregaContato();
-                var atracoes = CarregaAtracoes();
-                atracoes.Contato = contato;
+                var obrigatorios = ValidarCampos();
+                if (obrigatorios.Count == 0)
+                {
+                    var contato = CarregaContato();
+                    var atracoes = CarregaAtracoes();
+                    atracoes.Contato = contato;
 
-                if (new AtracoesBLL().Salvar(atracoes))
-                    Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ATRACOES_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    if (AtracoesBLL.Salvar(atracoes))
+                        Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ATRACOES_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    else
+                        Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                }
                 else
-                    Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
             }
             else
-                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
+                Editar();
         }
         private ContatoModel CarregaContato()
         {
@@ -57,10 +74,6 @@ namespace HermesManagementAssistant.View.Atracoes
             contato.Site = tbSite.Text;
 
             return contato;
-        }
-        private ContatoModel SalvaContato(ContatoModel contato)
-        {
-            return new ContatoBLL().Salvar(contato);
         }
         private AtracoesModel CarregaAtracoes()
         {
@@ -104,6 +117,36 @@ namespace HermesManagementAssistant.View.Atracoes
         private void CelularMasked(Object sender, KeyEventArgs e)
         {
             Mascaras.PhoneMasked(tbCelular, e);
+        }
+        private void ExcluirAtracao(Object sender, RoutedEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.ATRACOES_EXCLUIR_CERTEZA, null, TIPOS_MENSAGENS.QUESTAO))
+            {
+                if (AtracoesBLL.Excluir(new AtracoesModel() { Id = _idAtracao, Contato = new ContatoModel() { Id = _idContato } }))
+                {
+                    Mensagens.GeraMensagens("Atração excluída", MENSAGEM.ATRACOES_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new AtracoesView().Show();
+                    this.Close();
+                }
+                else
+                    Mensagens.GeraMensagens("Erro!", MENSAGEM.ATRACOES_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                return;
+        }
+        private void Editar()
+        {
+            var atracao = CarregaAtracoes();
+            atracao.Contato = CarregaContato();
+
+            if(AtracoesBLL.Editar(atracao))
+            {
+                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.ATRACOES_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new AtracoesView().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
     }
 

@@ -23,5 +23,6 @@
         <TextBox x:Name="tbValor" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,88,0,0" KeyDown="SomenteNumeros"/>
         <Label x:Name="lbTempo" Content="Tempo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,88,0,0" FontWeight="Bold"/>
         <TextBox x:Name="tbTempo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="324,89,0,0"/>
+        <Button Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" Margin="121,295,0,0" VerticalAlignment="Top" Width="75" Background="Red" Click="ExcluirAtracao"/>
     </Grid>
 </Window>

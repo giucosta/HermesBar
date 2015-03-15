@@ -102,5 +102,24 @@ namespace DAO.Atracoes
                 return null;
             }
         }
+        public bool Editar(AtracoesModel atracao)
+        {
+            try
+            {
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.CreateSpecificQuery("UPDATE Atracoes SET Nome = @Nome, SET Estilo = @Estilo, SET Ultimo_Valor_Cobrado = @Ultimo_Valor_Cobrado, SET Tempo_Show = @Tempo_Show");
+                AO.GetCommand();
+                AO.InsertParameter("Nome",atracao.Nome);
+                AO.InsertParameter("Estilo", atracao.Estilo);
+                AO.InsertParameter("Ultimo_Valor_Cobrado", atracao.Ultimo_Valor_Cobrado);
+                AO.InsertParameter("Tempo_Show", atracao.Tempo_Show);
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Editar", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.UPDATE);
+                return false;
+            }
+        }
     }
 }

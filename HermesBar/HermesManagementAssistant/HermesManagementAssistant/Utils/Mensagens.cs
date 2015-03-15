@@ -60,9 +60,19 @@ namespace Utils.Mensagens
         //CADASTRO ATRACOES
         public const string ATRACOES_CADASTRO_SUCESSO = "Atração cadastrada com sucesso!";
         public const string ATRACOES_CADASTRO_ERRO = "Erro ao cadastrar atração";
+        public const string ATRACOES_EXCLUIR_CERTEZA = "Confirma exclusão da atração?";
+        public const string ATRACOES_EXCLUIR_SUCESSO = "Atração excluida com sucesso!";
+        public const string ATRACOES_EXCLUIR_ERRO = "Erro ao excluir atração";
+        public const string ATRACOES_EDITAR_SUCESSO = "Atração editada com sucesso!";
+        public const string ATRACOES_EDITAR_ERRO = "Erro ao editar atração";
         //CADASTRO FUNCIONARIO
         public const string FUNCIONARIO_CADASTRO_SUCESSO = "Funcionário cadastrado com sucesso!";
         public const string FUNCIONARIO_CADASTRO_ERRO = "Erro ao cadastrar funcionário";
+        public const string CERTEZA_EXCLUIR_FUNCIONARIO = "Confirma exclusão do funcionário?";
+        public const string FUNCIONARIO_EXCLUIR_SUCESSO= "Funcionário excluído com sucesso!";
+        public const string FUNCIONARIO_EXCLUIR_ERRO = "Erro ao excluir funcionário!";
+        public const string FUNCIONARIO_EDITAR_SUCESSO = "Funcionário editado com sucesso!";
+        public const string FUNCIONARIO_EDITAR_ERRO = "Erro ao editar funcionário!";
         //CADASTRO ENDEREÇO
         public const string ENDERECO_CADASTRO_ERRO = "Erro ao cadastrar endereço";
         //CADASTRO CONTATO
@@ -72,12 +82,5 @@ namespace Utils.Mensagens
         public const string ESTABELECIMENTO_CADASTRO_ERRO = "Erro ao salvar o estabelecimento!";
         //IMPORTACAO XML
         public const string ARQUIVO_JA_EXPORTADO = "Arquivo já exportado!";
-        //EXCLUIR FUNCIONARIO
-        public const string CERTEZA_EXCLUIR_FUNCIONARIO = "Confirma exclusão do funcionário?";
-        public const string FUNCIONARIO_EXCLUIR_SUCESSO= "Funcionário excluído com sucesso!";
-        public const string FUNCIONARIO_EXCLUIR_ERRO = "Erro ao excluir funcionário!";
-        //EDITAR FUNCIONARIO
-        public const string FUNCIONARIO_EDITAR_SUCESSO = "Funcionário editado com sucesso!";
-        public const string FUNCIONARIO_EDITAR_ERRO = "Erro ao editar funcionário!";
     }
 }
