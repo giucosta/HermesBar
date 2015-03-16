@@ -50,11 +50,13 @@ namespace HermesManagementAssistant.View.Atracoes
         public CadastroAtracoesView()
         {
             InitializeComponent();
+            btExcluir.Visibility = System.Windows.Visibility.Hidden;
             CarregaComboEstilos();
         }
         public CadastroAtracoesView(AtracoesModel atracao)
         {
             InitializeComponent();
+            btExcluir.Visibility = System.Windows.Visibility.Visible;
             CarregaComboEstilos();
             CarregaAtracaoEdicao(atracao);
         }
