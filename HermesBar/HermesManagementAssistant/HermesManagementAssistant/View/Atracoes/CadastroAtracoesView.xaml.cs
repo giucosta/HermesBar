@@ -82,10 +82,42 @@ namespace HermesManagementAssistant.View.Atracoes
             else
                 Editar();
         }
+        private void ExcluirAtracao(Object sender, RoutedEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.ATRACOES_EXCLUIR_CERTEZA, null, TIPOS_MENSAGENS.QUESTAO))
+            {
+                if (AtracoesBLL.Excluir(new AtracoesModel() { Id = _idAtracao, Contato = new ContatoModel() { Id = _idContato } }))
+                {
+                    Mensagens.GeraMensagens("Atração excluída", MENSAGEM.ATRACOES_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new AtracoesView().Show();
+                    this.Close();
+                }
+                else
+                    Mensagens.GeraMensagens("Erro!", MENSAGEM.ATRACOES_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                return;
+        }
+        private void Editar()
+        {
+            var atracao = CarregaAtracoes();
+            atracao.Contato = CarregaContato();
+
+            if(AtracoesBLL.Editar(atracao))
+            {
+                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.ATRACOES_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new AtracoesView().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+        }
+        
+        #region Utils
         private ContatoModel CarregaContato()
         {
             var contato = new ContatoModel();
-            if(_idContato != 0)
+            if (_idContato != 0)
                 contato.Id = _idContato;
             contato.Nome = tbNome.Text;
             contato.Telefone = tbTelefone.Text;
@@ -125,50 +157,8 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaComboEstilos()
         {
-            cbEstilo.ItemsSource =  AtracoesBLL.RecuperaEstilos();
+            cbEstilo.ItemsSource = AtracoesBLL.RecuperaEstilos();
             cbEstilo.SelectedIndex = 0;
-        }
-        private void SomenteNumeros(Object sender, KeyEventArgs e)
-        {
-            Mascaras.SomenteNumeros(tbValor, e);
-        }
-        private void PhoneMasked(Object sender, KeyEventArgs e)
-        {
-            Mascaras.PhoneMasked(tbTelefone,e);
-        }
-        private void CelularMasked(Object sender, KeyEventArgs e)
-        {
-            Mascaras.PhoneMasked(tbCelular, e);
-        }
-        private void ExcluirAtracao(Object sender, RoutedEventArgs e)
-        {
-            if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.ATRACOES_EXCLUIR_CERTEZA, null, TIPOS_MENSAGENS.QUESTAO))
-            {
-                if (AtracoesBLL.Excluir(new AtracoesModel() { Id = _idAtracao, Contato = new ContatoModel() { Id = _idContato } }))
-                {
-                    Mensagens.GeraMensagens("Atração excluída", MENSAGEM.ATRACOES_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                    new AtracoesView().Show();
-                    this.Close();
-                }
-                else
-                    Mensagens.GeraMensagens("Erro!", MENSAGEM.ATRACOES_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
-            }
-            else
-                return;
-        }
-        private void Editar()
-        {
-            var atracao = CarregaAtracoes();
-            atracao.Contato = CarregaContato();
-
-            if(AtracoesBLL.Editar(atracao))
-            {
-                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.ATRACOES_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                new AtracoesView().Show();
-                this.Close();
-            }
-            else
-                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
         private void CarregaAtracaoEdicao(AtracoesModel atracao)
         {
@@ -185,6 +175,22 @@ namespace HermesManagementAssistant.View.Atracoes
             tbSite.Text = contato.Site;
             tbTelefone.Text = contato.Telefone;
         }
+        #endregion
+
+        #region Mascaras
+        private void SomenteNumeros(Object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbValor, e);
+        }
+        private void PhoneMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbTelefone, e);
+        }
+        private void CelularMasked(Object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbCelular, e);
+        }
+        #endregion
     }
 
 }
