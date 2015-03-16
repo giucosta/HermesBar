@@ -60,7 +60,7 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void btSalvar_Click(object sender, RoutedEventArgs e)
         {
-            if (_idAtracao != 0)
+            if (_idAtracao == 0)
             {
                 var obrigatorios = ValidarCampos();
                 if (obrigatorios.Count == 0)
@@ -83,6 +83,8 @@ namespace HermesManagementAssistant.View.Atracoes
         private ContatoModel CarregaContato()
         {
             var contato = new ContatoModel();
+            if(_idContato != 0)
+                contato.Id = _idContato;
             contato.Nome = tbNome.Text;
             contato.Telefone = tbTelefone.Text;
             contato.Celular = tbCelular.Text;
@@ -94,6 +96,8 @@ namespace HermesManagementAssistant.View.Atracoes
         private AtracoesModel CarregaAtracoes()
         {
             var atracoes = new AtracoesModel();
+            if (_idAtracao != 0)
+                atracoes.Id = _idAtracao;
             atracoes.Nome = tbAtracao.Text;
             atracoes.Tempo_Show = tbTempo.Text;
             atracoes.Ultimo_Valor_Cobrado = Double.Parse(tbValor.Text);
@@ -166,11 +170,13 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaAtracaoEdicao(AtracoesModel atracao)
         {
+            _idAtracao = atracao.Id;
             tbAtracao.Text = atracao.Nome;
             tbTempo.Text = atracao.Tempo_Show;
             tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString();
 
             var contato = ContatoBLL.RecuperaContatoId(AtracoesBLL.RecuperaIdContato(atracao));
+            _idContato = contato.Id;
             tbCelular.Text = contato.Celular;
             tbEmail.Text = contato.Email;
             tbNome.Text = contato.Nome;

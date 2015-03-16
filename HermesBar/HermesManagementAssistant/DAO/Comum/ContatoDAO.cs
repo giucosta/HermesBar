@@ -147,5 +147,26 @@ namespace DAO.Comum
             Connection.GetCommand(AO.ReturnQuery());
             return (int)Connection.getDataTable().Rows[0]["Proximo"];
         }
+        public bool Editar(ContatoModel contato)
+        {
+            try
+            {
+                AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
+                AO.CreateSpecificQuery("UPDATE CONTATO Set Nome = @Nome, Telefone = @Telefone, Celular = @Celular, Email = @Email, Site = @Site");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, contato.Id);
+                AO.InsertParameter("Nome", contato.Nome);
+                AO.InsertParameter("Telefone", contato.Telefone);
+                AO.InsertParameter("Celular", contato.Celular);
+                AO.InsertParameter("Email", contato.Email);
+                AO.InsertParameter("Site", contato.Site);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

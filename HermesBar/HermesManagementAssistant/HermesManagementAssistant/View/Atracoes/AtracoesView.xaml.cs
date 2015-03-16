@@ -36,7 +36,10 @@ namespace HermesManagementAssistant.View.Atracoes
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
         {
-            dgPesquisa.ItemsSource = AtracoesBLL.ListarAtracoes();
+            if (string.IsNullOrEmpty(atracoes.Nome) && string.IsNullOrEmpty(atracoes.Estilo))
+                dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa();
+            else
+                dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa(atracoes);
         }
         private void CarregaComboBox()
         {
@@ -49,9 +52,10 @@ namespace HermesManagementAssistant.View.Atracoes
 
             if (string.IsNullOrWhiteSpace(cbTipo.SelectionBoxItem.ToString()))
                 atracoes.Estilo = "";
+            else
+                atracoes.Estilo = cbTipo.SelectionBoxItem.ToString();
 
-            atracoes.Nome = tbNome.Text != null ? tbNome.Text : null;
-            atracoes.Estilo = cbTipo.SelectionBoxItem.ToString();
+            atracoes.Nome = tbNome.Text;
             
             CarregaDataGrid(atracoes);
         }

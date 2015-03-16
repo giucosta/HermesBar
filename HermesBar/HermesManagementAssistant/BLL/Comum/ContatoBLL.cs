@@ -61,5 +61,11 @@ namespace BLL.Comum
                 return DAO.PesquisaContatoId(id);
             return null;
         }
+        public bool Editar(ContatoModel contato)
+        {
+            if (contato.Id != 0)
+                return DAO.Editar(contato);
+            return false;
+        }
     }
 }

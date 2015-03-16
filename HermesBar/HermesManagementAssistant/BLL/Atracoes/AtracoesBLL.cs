@@ -38,7 +38,7 @@ namespace BLL.Atracoes
         {
             return AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
         }
-        public List<AtracoesModel> ListarAtracoes()
+        public List<AtracoesModel> Pesquisa()
         {
             return AtracoesDAO.RetornaTodasAtracoes().DataTableToList<AtracoesModel>();
         }
@@ -83,7 +83,21 @@ namespace BLL.Atracoes
         }
         public bool Editar(AtracoesModel atracoes)
         {
-            return AtracoesDAO.Editar(atracoes);
+            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+            AO.GetTransaction();
+            if (ContatoBLL.Editar(atracoes.Contato))
+            {
+                if (AtracoesDAO.Editar(atracoes))
+                {
+                    AO.Commit();
+                    return true;
+                }
+                else
+                    AO.Rollback();
+            }
+            else
+                AO.Rollback();
+            return false;
         }
         public int RecuperaIdContato(AtracoesModel atracao)
         {
