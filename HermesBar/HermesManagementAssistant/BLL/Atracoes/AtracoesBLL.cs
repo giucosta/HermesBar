@@ -70,8 +70,9 @@ namespace BLL.Atracoes
         {
             AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
             AO.GetTransaction();
-            if (ContatoBLL.Excluir(atracoes.Contato)){
-                if (AtracoesDAO.Excluir(atracoes))
+            if (AtracoesDAO.Excluir(atracoes))
+            {
+                if (ContatoBLL.Excluir(atracoes.Contato))
                 {
                     AO.Commit();
                     return true;
