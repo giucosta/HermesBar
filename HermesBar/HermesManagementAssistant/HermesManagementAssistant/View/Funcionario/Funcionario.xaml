@@ -34,5 +34,6 @@
         </DataGrid>
         <Button x:Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="44,138,0,0" VerticalAlignment="Top" Width="75" Click="NovoFuncionario"/>
         <Button x:Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="41,88,0,0" Click="PesquisarFuncionario"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="128,138,0,0" VerticalAlignment="Top" Width="75" Click="GerarRelatorio"/>
     </Grid>
 </Window>

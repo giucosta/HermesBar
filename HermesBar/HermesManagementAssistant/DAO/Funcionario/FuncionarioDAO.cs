@@ -174,5 +174,13 @@ namespace DAO.Funcionario
                 return null;
             }
         }
+
+        public List<FuncionarioModel> GeraRelatorio()
+        {
+            AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+            AO.CreateSelectAll();
+            AO.GetCommand();
+            return AO.GetDataTable().DataTableToList<FuncionarioModel>();
+        }
     }
 }

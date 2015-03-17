@@ -1,5 +1,6 @@
 ﻿using BLL.Funcionario;
 using MODEL;
+using REPORTS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,11 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             DataGrid data  = (DataGrid)sender;
             new FuncionarioCadastro((FuncionarioModel)data.SelectedItems[0]).Show();
+        }
+        private void GerarRelatorio(object sender, RoutedEventArgs e)
+        {
+            ListarFuncionarios f = new ListarFuncionarios();
+            f.Show();
         }
     }
 }
