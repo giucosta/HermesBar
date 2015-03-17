@@ -125,6 +125,7 @@ namespace DAO.Atracoes
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSpecificQuery("UPDATE Atracoes SET Nome = @Nome, Estilo = @Estilo, Ultimo_Valor_Cobrado = @Ultimo_Valor_Cobrado, Tempo_Show = @Tempo_Show");
                 AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Atracoes", ConstantesDAO.EQUAL, atracao.Id);
                 AO.InsertParameter("Nome",atracao.Nome);
                 AO.InsertParameter("Estilo", atracao.Estilo);
                 AO.InsertParameter("Ultimo_Valor_Cobrado", atracao.Ultimo_Valor_Cobrado);

@@ -33,10 +33,5 @@ namespace REPORTS
             reportViewer1.LocalReport.Refresh();
             reportViewer1.RefreshReport();
         }
-
-        public void GerenciaRelatorio(object reportModel, string reportName, string dataSetName)
-        {
-               
-        }
     }
 }
