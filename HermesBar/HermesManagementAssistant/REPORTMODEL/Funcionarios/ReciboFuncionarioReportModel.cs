@@ -17,5 +17,7 @@ namespace REPORTMODEL.Funcionarios
                 return DateTime.Now;
             }
         }
+        public double Valor { get; set; }
+        public string Descricao { get; set; }
     }
 }
