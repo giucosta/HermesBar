@@ -44,7 +44,7 @@ namespace Utils.Mensagens
     public static class MENSAGEM
     {
         public const string USUARIO_CADASTRADO = "Usuário já cadastrado";
-        public const string SENHA_IDENTICA = "A senha e a confirmação devem ser identicas";
+        public const string SENHA_IDENTICA = "A senha e a confirmação devem ser idênticas";
         public const string CAMPOS_OBRIGATORIOS = "Campos obrigatórios não preenchidos";
         public const string LOGIN_INVALIDO = "Login e/ou senha inválido";
         public const string NOVA_SENHA_EMAIL = "Sua nova senha foi enviada para o email cadastrado!";
@@ -82,5 +82,8 @@ namespace Utils.Mensagens
         public const string ESTABELECIMENTO_CADASTRO_ERRO = "Erro ao salvar o estabelecimento!";
         //IMPORTACAO XML
         public const string ARQUIVO_JA_EXPORTADO = "Arquivo já exportado!";
+        //TIPO PRODUTO
+        public const string TIPOPRODUTO_CADASTRO_SUCESSO = "Tipo de produto cadastrado com sucesso!";
+        public const string TIPOPRODUTO_CADASTRO_ERRO = "Erro ao cadastrar o tipo de produto";
     }
 }

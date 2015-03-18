@@ -92,6 +92,9 @@
     <Compile Include="View\Produtos\TipoProduto.xaml.cs">
       <DependentUpon>TipoProduto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Produtos\TipoProdutoCadastro.xaml.cs">
+      <DependentUpon>TipoProdutoCadastro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Usuario\Usuario.xaml.cs">
       <DependentUpon>Usuario.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Produtos\TipoProduto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Produtos\TipoProdutoCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

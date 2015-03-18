@@ -47,12 +47,10 @@ namespace HermesManagementAssistant
         {
             new Usuario().Show();
         }
-
         private void PesquisaAtracoes(object sender, RoutedEventArgs e)
         {
             new AtracoesView().Show();
         }
-
         private void PesquisaFuncionarios(object sender, RoutedEventArgs e)
         {
             new Funcionario().Show();
@@ -61,16 +59,18 @@ namespace HermesManagementAssistant
         {
             new Estabelecimento().Show();
         }
-
         private void PesquisaProdutos(object sender, RoutedEventArgs e)
         {
             new Produto().Show();
+        }
+        private void PesquisaTipoProduto(object sender, RoutedEventArgs e)
+        {
+            new TipoProduto().Show();
         }
         private void PesquisaFornecedor(object sender, RoutedEventArgs e)
         {
             new Fornecedor().Show();
         }
-
         private void ImportarNFe(Object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
