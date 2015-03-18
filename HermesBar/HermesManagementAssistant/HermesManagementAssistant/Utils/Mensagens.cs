@@ -85,5 +85,10 @@ namespace Utils.Mensagens
         //TIPO PRODUTO
         public const string TIPOPRODUTO_CADASTRO_SUCESSO = "Tipo de produto cadastrado com sucesso!";
         public const string TIPOPRODUTO_CADASTRO_ERRO = "Erro ao cadastrar o tipo de produto";
+        public const string TIPOPRODUTO_EXCLUIR_ERRO = "Erro ao excluir o tipo de produto";
+        public const string TIPOPRODUTO_EXCLUIR_SUCESSO = "Tipo de produto excluído com sucesso!";
+        public const string TIPOPRODUTO_EXCLUIR_CONFIRMA = "Confirma exclusão do tipo de produto?";
+        public const string TIPOPRODUTO_EDITAR_SUCESSO = "Tipo de produto editado com sucesso!";
+        public const string TIPOPRODUTO_EDITAR_ERRO = "Erro ao editar o tipo de produto";
     }
 }

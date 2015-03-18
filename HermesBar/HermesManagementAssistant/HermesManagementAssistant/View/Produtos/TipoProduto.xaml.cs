@@ -52,5 +52,10 @@ namespace HermesManagementAssistant.View.Produtos
         {
 
         }
+        private void EditarTipoProduto(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid data = (DataGrid)sender;
+            new TipoProdutoCadastro((TipoProdutoModel)data.SelectedItems[0]).Show();
+        }
     }
 }

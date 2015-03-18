@@ -30,13 +30,15 @@ namespace BLL.Produtos
         }
         public bool Excluir(TipoProdutoModel tipoProduto)
         {
-            if(!string.IsNullOrEmpty(tipoProduto.Tipo))
-                return TipoProdutoDAO.Excluir(tipoProduto);
-            return false;
+            return TipoProdutoDAO.Excluir(tipoProduto);
         }
         public List<TipoProdutoModel> Pesquisa(TipoProdutoModel tipoProduto)
         {
             return TipoProdutoDAO.Pesquisa(tipoProduto).DataTableToList<TipoProdutoModel>();
+        }
+        public bool Editar(TipoProdutoModel tipo)
+        {
+            return TipoProdutoDAO.Editar(tipo);
         }
     }
 }

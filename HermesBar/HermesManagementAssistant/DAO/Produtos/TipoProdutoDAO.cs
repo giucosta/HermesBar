@@ -39,9 +39,9 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
-                AO.CreateSpecificQuery(@"DELETE TipoProduto WHERE Tipo = @Tipo");
+                AO.DeleteFromId();
                 AO.GetCommand();
-                AO.InsertParameter("Tipo", tipoProduto.Tipo);
+                AO.InsertParameter("Id_TipoProduto", tipoProduto.Id);
 
                 return AO.ExecuteCommand();
             }
@@ -66,6 +66,24 @@ namespace DAO.Produtos
             {
                 Log.Log.GravarLog("Pesquisar","TipoProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 return null;
+            }
+        }
+        public bool Editar(TipoProdutoModel tipo)
+        {
+            try
+            {
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateSpecificQuery("UPDATE TipoProduto SET Tipo = @Tipo, Descricao = @Descricao");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoProduto", ConstantesDAO.EQUAL, tipo.Id);
+                AO.InsertParameter("Tipo", tipo.Tipo);
+                AO.InsertParameter("Descricao", tipo.Descricao);
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Editar", "TipoProdutoDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
+                return false;
             }
         }
     }
