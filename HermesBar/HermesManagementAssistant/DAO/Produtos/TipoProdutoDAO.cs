@@ -22,12 +22,11 @@ namespace DAO.Produtos
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
                 AO.CreateDataInsert();
-                //var sql = "INSERT INTO TipoProduto VALUES @Tipo, @Descricao";
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Tipo", tipoProduto.Tipo);
-                Connection.AddParameter("@Descricao", tipoProduto.Descricao);
+                AO.GetCommand();
+                AO.InsertParameter("Tipo", tipoProduto.Tipo);
+                AO.InsertParameter("Descricao", tipoProduto.Descricao);
 
-                return Connection.ExecutarComando();
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -41,10 +40,10 @@ namespace DAO.Produtos
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
                 AO.CreateSpecificQuery(@"DELETE TipoProduto WHERE Tipo = @Tipo");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Tipo",tipoProduto.Tipo);
+                AO.GetCommand();
+                AO.InsertParameter("Tipo", tipoProduto.Tipo);
 
-                return Connection.ExecutarComando();
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -58,39 +57,16 @@ namespace DAO.Produtos
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.LIKE,"@Tipo");
-                AO.InsertParameter(ConstantesDAO.OR,"Descricao",ConstantesDAO.LIKE,"@Descricao");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Tipo", "%" + tipoProduto.Tipo + "%");
-                Connection.AddParameter("@Descricao", "%" + tipoProduto.Descricao + "%");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.LIKE,"Tipo");
 
-                var dataTable = Connection.getDataTable();
-                var tipoProdutoTabela = CriaTabelaTipoProduto();
-
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    tipoProdutoTabela.Rows.Add(
-                        dataTable.Rows[i]["Id_TipoProduto"],
-                        dataTable.Rows[i]["Tipo"],
-                        dataTable.Rows[i]["Descricao"]
-                    );
-                }
-                return tipoProdutoTabela;
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("Pesquisar","TipoProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
                 return null;
             }
-        }
-        public DataTable CriaTabelaTipoProduto()
-        {
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("Id",typeof(int));
-            dataTable.Columns.Add("Tipo", typeof(string));
-            dataTable.Columns.Add("Descrição", typeof(string));
-
-            return dataTable;
         }
     }
 }

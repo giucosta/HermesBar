@@ -24,7 +24,6 @@
         <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="379" Margin="117,62,0,0"/>
         <DataGrid x:Name="gridPesquisa" HorizontalAlignment="Left" VerticalAlignment="Top" Height="223" Width="462" Margin="39,161,0,0" AlternationCount="2" RowBackground="Beige" AlternatingRowBackground="LightBlue" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" HeadersVisibility="All" HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD" ColumnWidth="SizeToCells" AutoGenerateColumns="False" SelectionChanged="Editar" SelectedValuePath="Id">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Sel."></DataGridTextColumn>
                 <DataGridTextColumn Header="Código" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Nome" Binding="{Binding Path=Nome}"/>
                 <DataGridTextColumn Header="Cpf" Binding="{Binding Path=Cpf}"/>

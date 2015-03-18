@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTILS;
 
 namespace BLL.Produtos
 {
@@ -29,11 +30,13 @@ namespace BLL.Produtos
         }
         public bool Excluir(TipoProdutoModel tipoProduto)
         {
-            return TipoProdutoDAO.Excluir(tipoProduto);
+            if(!string.IsNullOrEmpty(tipoProduto.Tipo))
+                return TipoProdutoDAO.Excluir(tipoProduto);
+            return false;
         }
-        public DataTable Pesquisa(TipoProdutoModel tipoProduto)
+        public List<TipoProdutoModel> Pesquisa(TipoProdutoModel tipoProduto)
         {
-            return TipoProdutoDAO.Pesquisa(tipoProduto);
+            return TipoProdutoDAO.Pesquisa(tipoProduto).DataTableToList<TipoProdutoModel>();
         }
     }
 }
