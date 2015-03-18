@@ -25,7 +25,7 @@ namespace GerenciadorBancoHMA
             try
             {
                 StoredProcedureCriarBanco(nomeServidor);
-                conn = new SqlConnection(@"Data Source="+nomeServidor+@"\SQLEXPRESS ;Integrated Security=True");
+                conn = new SqlConnection(@"Data Source=" + nomeServidor + @"; Integrated Security=True");
                 SqlCommand cmd = new SqlCommand("SP_Cria_Banco_HMA", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -47,7 +47,7 @@ namespace GerenciadorBancoHMA
             try
             {
                 StoredProcedureResetarBanco();
-                conn = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True");
+                conn = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True");
                 SqlCommand cmd = new SqlCommand("SP_Resetar_Banco_HMA", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -69,7 +69,7 @@ namespace GerenciadorBancoHMA
             try
             {
                 StoredProcedureCriarBancoTeste();
-                conn = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True");
+                conn = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True");
                 SqlCommand cmd = new SqlCommand("SP_Carrega_Valores_Teste", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -91,7 +91,7 @@ namespace GerenciadorBancoHMA
             try
             {
                 StoredProcedureCriarTabelas();
-                conn = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True");
+                conn = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True");
                 SqlCommand cmd = new SqlCommand("SP_Gerencia_Tabelas_HMA", conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -113,7 +113,7 @@ namespace GerenciadorBancoHMA
             sbSP.AppendLine("CREATE PROCEDURE SP_Cria_Banco_HMA AS IF EXISTS(SELECT * FROM sys.databases WHERE name = 'HermesBar') BEGIN DROP DATABASE HermesBar; CREATE DATABASE HermesBar; PRINT('Banco criado com sucesso!'); END ELSE BEGIN CREATE DATABASE HermesBar; PRINT('Banco criado com sucesso!'); END");
             try
             {
-                using (SqlConnection connection = new SqlConnection(@"Data Source=" + nomeServidor + @"\SQLEXPRESS ;Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection(@"Data Source=" + nomeServidor + @"; Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(sbSP.ToString(), connection))
                     {
@@ -145,7 +145,7 @@ namespace GerenciadorBancoHMA
 	                                EXEC sp_MSForEachTable 'ALTER TABLE ? CHECK CONSTRAINT ALL'");
             try
             {
-                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(sbSP.ToString(), connection))
                     {
@@ -220,7 +220,7 @@ namespace GerenciadorBancoHMA
                             INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES(1,1);");
             try
             {
-                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(sbSP.ToString(), connection))
                     {
@@ -401,7 +401,7 @@ namespace GerenciadorBancoHMA
                             END");
             try
             {
-                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"\SQLEXPRESS; Database=HermesBar; Integrated Security=True"))
+                using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True"))
                 {
                     using (SqlCommand cmd = new SqlCommand(sbSP.ToString(), connection))
                     {
