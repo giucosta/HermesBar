@@ -67,6 +67,7 @@ namespace HermesManagementAssistant.View.Atracoes
         {
             DataGrid data = (DataGrid)sender;
             new CadastroAtracoesView((AtracoesModel)data.SelectedItems[0]).Show();
+            this.Close();
         }
     }
 }

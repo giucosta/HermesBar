@@ -38,7 +38,7 @@ namespace BLL.Produtos
         public List<ProdutoModel> Pesquisa(ProdutoModel produto)
         {
             if (produto.Tipo != null) 
-                produto.Tipo = TipoProdutoBLL.PesquisaTipo(produto.Tipo);
+                produto.Tipo = (TipoProdutoModel)TipoProdutoBLL.Pesquisa(produto.Tipo).Where(x => x.Id == produto.Tipo.Id);
 
             return ProdutoDAO.PesquisaGrid(produto).DataTableToList<ProdutoModel>();
         }

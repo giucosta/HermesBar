@@ -36,10 +36,6 @@ namespace BLL.Produtos
         {
             return TipoProdutoDAO.Pesquisa(tipoProduto).DataTableToList<TipoProdutoModel>();
         }
-        public TipoProdutoModel PesquisaTipo(TipoProdutoModel tipo)
-        {
-            return CarregaModel(TipoProdutoDAO.Pesquisa(tipo));
-        }
         public bool Editar(TipoProdutoModel tipo)
         {
             return TipoProdutoDAO.Editar(tipo);
@@ -47,16 +43,6 @@ namespace BLL.Produtos
         public List<string> RetornaTipos()
         {
             return TipoProdutoDAO.RetornaTipos().DataTableToListString("Tipo");
-        }
-
-        public TipoProdutoModel CarregaModel(DataTable data)
-        {
-            var tipo = new TipoProdutoModel();
-            tipo.Descricao = data.Rows[0]["Descricao"].ToString();
-            tipo.Tipo = data.Rows[0]["Tipo"].ToString();
-            tipo.Id = (int)data.Rows[0]["Id_TipoProduto"];
-
-            return tipo;
         }
     }
 }

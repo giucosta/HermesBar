@@ -13,6 +13,7 @@ namespace DAO.Utils
     public class AccessObject<T>
     {
         private static string sql;
+        private static string inner_join;
         public AccessObject()
         {
             sql = string.Empty;
@@ -83,10 +84,22 @@ namespace DAO.Utils
         {
             var attr = AttributeFormat(attribute);
             var stb = new StringBuilder();
-            stb.Append(" " + sqlCommand);
-            stb.Append(" " + attribute);
-            stb.Append(" " + condition);
-            stb.Append(" " + attr);
+            
+            if (inner_join != string.Empty)
+            {
+                stb.Append(" " + sqlCommand);
+                stb.Append(" " + ReturnClassName() + "." + attribute);
+                stb.Append(" " + condition);
+                stb.Append(" " + attr);
+            }
+            else
+            {
+                stb.Append(" " + sqlCommand);
+                stb.Append(" " + attribute);
+                stb.Append(" " + condition);
+                stb.Append(" " + attr);
+            }
+            
             sql += FormatSql(stb.ToString());
 
             Connection._command.CommandText = ReturnQuery();
@@ -140,7 +153,8 @@ namespace DAO.Utils
             stb.Append(" " + "=");
             stb.Append(" " + tabelaAssociada + "." + attribute);
 
-            sql = FormatSql(stb.ToString());
+            inner_join = stb.ToString();
+            sql += stb.ToString();
         }
         private string FormatSql(string command)
         {

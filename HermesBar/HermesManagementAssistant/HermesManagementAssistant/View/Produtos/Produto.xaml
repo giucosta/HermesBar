@@ -31,9 +31,12 @@
                   ColumnWidth="SizeToCells" AutoGenerateColumns="False" SelectedValuePath="Id" MouseDoubleClick="Editar" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Cód." Width="40" Binding="{Binding Path=CodigoOriginal}"/>
-                <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Path=Nome}"/>
-                <DataGridTextColumn Header="Tipo" Width="100" Binding="{Binding Path=Tipo}"/>
-                <DataGridTextColumn Header="Marca" Width="200" Binding="{Binding Path=Marca}"/>
+                <DataGridTextColumn Header="Nome" Width="200" Binding="{Binding Path=Nome}"/>
+                <DataGridTextColumn Header="Marca" Width="100" Binding="{Binding Path=Marca}"/>
+                <DataGridTextColumn Header="Unidade" Width="100" Binding="{Binding Path=Unidade}"/>
+                <DataGridTextColumn Header="Quant. Estoque" Width="100" Binding="{Binding Path=QuantidadeEstoque}"/>
+                <DataGridTextColumn Header="Valor Venda" Width="100" Binding="{Binding Path=ValorVenda}"/>
+                <DataGridTextColumn Header="Tipo" Width="50" Binding="{Binding Path=Tipo}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="37,252,0,0" VerticalAlignment="Top" Width="75"/>

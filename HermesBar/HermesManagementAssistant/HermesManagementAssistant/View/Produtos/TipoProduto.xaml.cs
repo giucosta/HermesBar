@@ -34,7 +34,7 @@ namespace HermesManagementAssistant.View.Produtos
         public TipoProduto()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = TipoProdutoBLL.PesquisaTipo(new TipoProdutoModel());
+            gridPesquisa.ItemsSource = TipoProdutoBLL.Pesquisa(new TipoProdutoModel());
         }
         private void EditarTipoProduto(object sender, RoutedEventArgs e)
         {
@@ -46,7 +46,7 @@ namespace HermesManagementAssistant.View.Produtos
         }
         private void PesquisaTipoProduto(object sender, RoutedEventArgs e)
         {
-            gridPesquisa.ItemsSource = TipoProdutoBLL.PesquisaTipo(new TipoProdutoModel() { Tipo = tbTipo.Text });
+            gridPesquisa.ItemsSource = TipoProdutoBLL.Pesquisa(new TipoProdutoModel() { Tipo = tbTipo.Text });
         }
         private void Editar(object sender, RoutedEventArgs e)
         {
