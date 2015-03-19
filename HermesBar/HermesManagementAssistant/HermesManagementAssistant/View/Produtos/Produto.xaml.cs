@@ -2,6 +2,7 @@
 using MODEL.Produto;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace HermesManagementAssistant.View.Produtos
         public Produto()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel());
+            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel()).AsDataView();
             cbTipoProduto.ItemsSource = TipoProdutoBLL.RetornaTipos();
         }
         private void Editar(object sender, MouseButtonEventArgs e)
@@ -53,7 +54,7 @@ namespace HermesManagementAssistant.View.Produtos
         }
         private void Pesquisar(object sender, RoutedEventArgs e)
         {
-            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel() { Nome = tbNome.Text, CodigoOriginal = tbCodigo.Text, Tipo = new TipoProdutoModel() { Tipo = cbTipoProduto.SelectedIndex.ToString() } });
+            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel() { Nome = tbNome.Text, CodigoOriginal = tbCodigo.Text, Tipo = new TipoProdutoModel() { Tipo = cbTipoProduto.SelectionBoxItem.ToString() } }).AsDataView();
         }
     }
 }

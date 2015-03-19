@@ -2,6 +2,7 @@
 using MODEL.Produto;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,12 +36,12 @@ namespace BLL.Produtos
         {
             return ProdutoDAO.Salvar(produto);
         }
-        public List<ProdutoModel> Pesquisa(ProdutoModel produto)
+        public DataTable Pesquisa(ProdutoModel produto)
         {
             if (produto.Tipo != null) 
-                produto.Tipo = (TipoProdutoModel)TipoProdutoBLL.Pesquisa(produto.Tipo).Where(x => x.Id == produto.Tipo.Id);
+                produto.Tipo = (TipoProdutoModel)TipoProdutoBLL.Pesquisa(produto.Tipo).Where(x => x.Tipo == produto.Tipo.Tipo);
 
-            return ProdutoDAO.PesquisaGrid(produto).DataTableToList<ProdutoModel>();
+            return ProdutoDAO.PesquisaGrid(produto);
         }
     }
 }
