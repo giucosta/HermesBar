@@ -26,12 +26,16 @@ namespace DAO.Login
                 AO.CreateSelectAll();
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Login", ConstantesDAO.EQUAL, login.Login);
-                
-                if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(AO.GetDataTable().Rows[0]["Senha"].ToString())))
+
+                var loginDataTable = AO.GetDataTable();
+                if (loginDataTable.Rows.Count > 0)
                 {
-                    AlteraUltimaDataAcesso(login);
-                    AO.Commit();
-                    return true;
+                    if (login.Senha.Equals(Encript.EncriptMd5.Descriptografar(loginDataTable.Rows[0]["Senha"].ToString())))
+                    {
+                        AlteraUltimaDataAcesso(login);
+                        AO.Commit();
+                        return true;
+                    }
                 }
                 AO.Rollback();
                 return false;
