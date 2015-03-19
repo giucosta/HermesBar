@@ -114,7 +114,6 @@ namespace DAO.Utils
             stb.Append(" " + ReturnClassName());
             sql+= FormatSql(stb.ToString());
         }
-
         public void CreateUpdate(String attribute, String parameter)
         {
             var stb = new StringBuilder();
@@ -131,6 +130,18 @@ namespace DAO.Utils
             stb.Append(" " + "@" + parameter);
             sql += FormatSql(stb.ToString());
         }
+        public void CreateInnerJoin(string tabelaAssociada, string attribute)
+        {
+            var stb = new StringBuilder();
+            stb.Append(" INNER JOIN");
+            stb.Append(" " + tabelaAssociada);
+            stb.Append(" ON");
+            stb.Append(" " + ReturnClassName() + "." + attribute);
+            stb.Append(" " + "=");
+            stb.Append(" " + tabelaAssociada + "." + attribute);
+
+            sql = FormatSql(stb.ToString());
+        }
         private string FormatSql(string command)
         {
             return sql = " " + command;
@@ -139,7 +150,6 @@ namespace DAO.Utils
         {
             return sql;
         }
-
         public void GetConnection()
         {
             Connection.GetConnection();

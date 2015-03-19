@@ -1,4 +1,5 @@
 ﻿using BLL.Produtos;
+using MODEL.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,29 @@ namespace HermesManagementAssistant.View.Produtos
                 return _produtoBLL;
             }
         }
+        private TipoProdutoBLL _tipoProdutoBLL = null;
+        public TipoProdutoBLL TipoProdutoBLL
+        {
+            get
+            {
+                if (_tipoProdutoBLL == null)
+                    _tipoProdutoBLL = new TipoProdutoBLL();
+                return _tipoProdutoBLL;
+            }
+        }
         public Produto()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = ProdutoBLL.RetornaProdutos();
+            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel());
+            cbTipoProduto.ItemsSource = TipoProdutoBLL.RetornaTipos();
+        }
+        private void Editar(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        private void Pesquisar(object sender, RoutedEventArgs e)
+        {
+            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel() { Nome = tbNome.Text, CodigoOriginal = tbCodigo.Text, Tipo = new TipoProdutoModel() { Tipo = cbTipoProduto.SelectedIndex.ToString() } });
         }
     }
 }

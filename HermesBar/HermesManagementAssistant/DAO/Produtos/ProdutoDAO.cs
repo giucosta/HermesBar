@@ -43,54 +43,23 @@ namespace DAO.Produtos
                 return false;
             }
         }
-        public DataTable PesquisarProdutoCodigo(ProdutoModel produto)
+        public DataTable PesquisaGrid(ProdutoModel produto)
         {
             try
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "CodigoOriginal", ConstantesDAO.EQUAL, "@CodigoOriginal");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@CodigoOriginal",produto.CodigoOriginal);
-                return Connection.getDataTable();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, produto.Nome);
+                AO.InsertParameter(ConstantesDAO.AND, "CodigoOriginal", ConstantesDAO.LIKE, produto.CodigoOriginal);
+
+                return AO.GetDataTable();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Log.Log.GravarLog("PesquisarProdutoCodigo", "ProdutoDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
-                return null;
-            }
-        }
-        public DataTable PesquisarProdutoNomeReduzido(ProdutoModel produto)
-        {
-            try
-            {
-                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "NomeReduzido", ConstantesDAO.LIKE, "@NomeReduzido");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@NomeReduzido", produto.NomeReduzido);
-                return Connection.getDataTable();
-            }
-            catch (Exception e)
-            {
-                Log.Log.GravarLog("PesquisarProdutoNomeReduzido", "ProdutoDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
-                return null;
-            }
-        }
-        public DataTable RetornaProdutos()
-        {
-            try
-            {
-                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSelectAll();
-                Connection.GetCommand(AO.ReturnQuery());
-                return Connection.getDataTable();
-            }
-            catch (Exception e)
-            {
-                Log.Log.GravarLog("RetornaProdutos","ProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                throw;
             }
         }
     }
+
 }

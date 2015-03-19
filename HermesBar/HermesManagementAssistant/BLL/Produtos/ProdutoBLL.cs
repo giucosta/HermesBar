@@ -21,13 +21,26 @@ namespace BLL.Produtos
                 return _produtoDAO;
             }
         }
+        private TipoProdutoBLL _tipoProdutoBLL = null;
+        public TipoProdutoBLL TipoProdutoBLL
+        {
+            get
+            {
+                if (_tipoProdutoBLL == null)
+                    _tipoProdutoBLL = new TipoProdutoBLL();
+                return _tipoProdutoBLL;
+            }
+        }
         public bool Salvar(ProdutoModel produto)
         {
             return ProdutoDAO.Salvar(produto);
         }
-        public List<ProdutoModel> RetornaProdutos()
+        public List<ProdutoModel> Pesquisa(ProdutoModel produto)
         {
-            return ProdutoDAO.RetornaProdutos().DataTableToList<ProdutoModel>();
+            if (produto.Tipo != null) 
+                produto.Tipo = TipoProdutoBLL.PesquisaTipo(produto.Tipo);
+
+            return ProdutoDAO.PesquisaGrid(produto).DataTableToList<ProdutoModel>();
         }
     }
 }

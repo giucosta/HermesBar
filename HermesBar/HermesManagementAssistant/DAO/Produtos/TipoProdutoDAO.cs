@@ -86,5 +86,19 @@ namespace DAO.Produtos
                 return false;
             }
         }
+        public DataTable RetornaTipos()
+        {
+            try
+            {
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateSelectWithSimpleParameter("Tipo");
+                AO.GetCommand();
+                return AO.GetDataTable();
+            }
+            catch (Exception)
+            {   
+                throw;
+            }
+        }
     }
 }
