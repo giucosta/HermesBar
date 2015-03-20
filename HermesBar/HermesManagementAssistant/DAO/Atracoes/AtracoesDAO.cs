@@ -24,7 +24,7 @@ namespace DAO.Atracoes
                 AO.CreateDataInsert();
                 AO.GetCommand();
                 AO.InsertParameter("Nome",atracoes.Nome);
-                AO.InsertParameter("Estilo", atracoes.Estilo);
+                AO.InsertParameter("Estilo", atracoes.Estilo.Id);
                 AO.InsertParameter("Contato", atracoes.Contato.Id);
                 AO.InsertParameter("Tempo_Show", atracoes.Tempo_Show);
                 AO.InsertParameter("Ultimo_Valor_Cobrado", atracoes.Ultimo_Valor_Cobrado);
@@ -61,7 +61,8 @@ namespace DAO.Atracoes
                 AO.CreateSelectAll();
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, atracoes.Nome);
-                AO.InsertParameter(ConstantesDAO.AND, "Estilo", ConstantesDAO.LIKE, atracoes.Estilo);
+                if(atracoes.Estilo.Id != 0)
+                    AO.InsertParameter(ConstantesDAO.AND, "Id_EstiloAtracoes", ConstantesDAO.LIKE, atracoes.Estilo.Id);
 
                 return AO.GetDataTable();
             }
@@ -114,7 +115,23 @@ namespace DAO.Atracoes
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("RecuperaIdContato", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
+                Log.Log.GravarLog("RecuperaIdContato", "AtracoesDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                return null;
+            }
+        }
+        public DataTable RecuperaIdEstilo(AtracoesModel atracao)
+        {
+            try
+            {
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.CreateSelectWithSimpleParameter("Id_EstiloAtracoes");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Atracoes", ConstantesDAO.EQUAL, atracao.Id);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaIdEstilo", "AtracoesDAO", e.Message, Constantes.ATipoMetodo.SELECT);
                 return null;
             }
         }
@@ -123,11 +140,11 @@ namespace DAO.Atracoes
             try
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
-                AO.CreateSpecificQuery("UPDATE Atracoes SET Nome = @Nome, Estilo = @Estilo, Ultimo_Valor_Cobrado = @Ultimo_Valor_Cobrado, Tempo_Show = @Tempo_Show");
+                AO.CreateSpecificQuery("UPDATE Atracoes SET Nome = @Nome, Id_EstiloAtracoes = @Estilo, Ultimo_Valor_Cobrado = @Ultimo_Valor_Cobrado, Tempo_Show = @Tempo_Show");
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Atracoes", ConstantesDAO.EQUAL, atracao.Id);
                 AO.InsertParameter("Nome",atracao.Nome);
-                AO.InsertParameter("Estilo", atracao.Estilo);
+                AO.InsertParameter("Estilo", atracao.Estilo.Id);
                 AO.InsertParameter("Ultimo_Valor_Cobrado", atracao.Ultimo_Valor_Cobrado);
                 AO.InsertParameter("Tempo_Show", atracao.Tempo_Show);
                 return AO.ExecuteCommand();

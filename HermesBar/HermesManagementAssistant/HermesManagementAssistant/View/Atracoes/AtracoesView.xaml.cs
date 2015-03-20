@@ -1,5 +1,6 @@
 ﻿using BLL.Atracoes;
 using MODEL;
+using MODEL.Atracoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,29 +32,25 @@ namespace HermesManagementAssistant.View.Atracoes
         public AtracoesView()
         {
             InitializeComponent();
-            CarregaDataGrid(new AtracoesModel() { Nome = "", Estilo = "" });
+            CarregaDataGrid(new AtracoesModel() { Nome = "", Estilo = new EstiloAtracoesModel() });
             CarregaComboBox();
         }
         private void CarregaDataGrid(AtracoesModel atracoes)
         {
-            if (string.IsNullOrEmpty(atracoes.Nome) && string.IsNullOrEmpty(atracoes.Estilo))
-                dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa();
-            else
-                dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa(atracoes);
+            dgPesquisa.ItemsSource = AtracoesBLL.Pesquisa(atracoes);    
         }
         private void CarregaComboBox()
         {
             cbTipo.ItemsSource = AtracoesBLL.RecuperaEstilos();
-            cbTipo.SelectedIndex = 0;
         }
         private void btPesquisar_Click(object sender, RoutedEventArgs e)
         {
             var atracoes = new AtracoesModel();
 
-            if (string.IsNullOrWhiteSpace(cbTipo.SelectionBoxItem.ToString()))
-                atracoes.Estilo = "";
+            if (cbTipo.SelectedValue == null)
+                atracoes.Estilo = new EstiloAtracoesModel();
             else
-                atracoes.Estilo = cbTipo.SelectionBoxItem.ToString();
+                atracoes.Estilo = new EstiloAtracoesModel() { Id = (int)cbTipo.SelectedValue };
 
             atracoes.Nome = tbNome.Text;
             
@@ -63,7 +60,7 @@ namespace HermesManagementAssistant.View.Atracoes
         {
             new CadastroAtracoesView().Show();
         }
-        private void Editar(Object sender, SelectionChangedEventArgs e)
+        private void Editar(Object sender, MouseButtonEventArgs e)
         {
             DataGrid data = (DataGrid)sender;
             new CadastroAtracoesView((AtracoesModel)data.SelectedItems[0]).Show();

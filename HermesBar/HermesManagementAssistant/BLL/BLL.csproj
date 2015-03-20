@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atracoes\AtracoesBLL.cs" />
+    <Compile Include="Atracoes\EstiloAtracoesBLL.cs" />
     <Compile Include="Comum\ContatoBLL.cs" />
     <Compile Include="Comum\EnderecoBLL.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />

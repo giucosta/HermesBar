@@ -9,6 +9,7 @@ using MODEL;
 using BLL.Comum;
 using UTILS;
 using DAO.Utils;
+using MODEL.Atracoes;
 
 namespace BLL.Atracoes
 {
@@ -34,17 +35,33 @@ namespace BLL.Atracoes
                 return _contatoBLL;
             }
         }
+        private EstiloAtracoesBLL _estiloAtracoesBLL = null;
+        public EstiloAtracoesBLL EstiloAtracoesBLL
+        {
+            get
+            {
+                if (_estiloAtracoesBLL == null)
+                    _estiloAtracoesBLL = new EstiloAtracoesBLL();
+                return _estiloAtracoesBLL;
+            }
+        }
         public List<AtracoesModel> Pesquisa(AtracoesModel atracoes)
         {
-            return AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
+            var atracoesList = AtracoesDAO.Pesquisa(atracoes).DataTableToList<AtracoesModel>();
+            foreach (var x in atracoesList)
+            {
+                x.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(x));
+                x.Estilo = EstiloAtracoesBLL.RecuperaEstiloId(RecuperaIdAtracoes(x));
+            }
+            return atracoesList;
         }
         public List<AtracoesModel> Pesquisa()
         {
             return AtracoesDAO.RetornaTodasAtracoes().DataTableToList<AtracoesModel>();
         }
-        public List<String> RecuperaEstilos()
+        public List<EstiloAtracoesModel> RecuperaEstilos()
         {
-            return AtracoesDAO.RecuperaEstilos().DataTableToListString("Estilo");
+            return EstiloAtracoesBLL.RetornaEstilos();
         }
         public bool Salvar(AtracoesModel atracoes)
         {
@@ -103,6 +120,10 @@ namespace BLL.Atracoes
         public int RecuperaIdContato(AtracoesModel atracao)
         {
             return (int)AtracoesDAO.RecuperaIdContato(atracao).Rows[0]["Id_Contato"];
+        }
+        public int RecuperaIdAtracoes(AtracoesModel atracao)
+        {
+            return (int)AtracoesDAO.RecuperaIdEstilo(atracao).Rows[0]["Id_EstiloAtracoes"];
         }
     }
 }

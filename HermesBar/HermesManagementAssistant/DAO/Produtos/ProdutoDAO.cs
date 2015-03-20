@@ -51,8 +51,10 @@ namespace DAO.Produtos
                 AO.CreateSpecificQuery("SELECT Produto.CodigoOriginal, Produto.Nome, Produto.Marca, Produto.Unidade, Produto.QuantidadeEstoque, Produto.ValorVenda, TipoProduto.Tipo FROM Produto");
                 AO.GetCommand();
                 AO.CreateInnerJoin("TipoProduto", "Id_TipoProduto");
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, produto.Nome);
-                AO.InsertParameter(ConstantesDAO.AND, "CodigoOriginal", ConstantesDAO.LIKE, produto.CodigoOriginal);
+                AO.InsertParameter(ConstantesDAO.WHERE, "Produto.Nome", ConstantesDAO.LIKE, produto.Nome);
+                AO.InsertParameter(ConstantesDAO.AND, "Produto.CodigoOriginal", ConstantesDAO.LIKE, produto.CodigoOriginal);
+                if(produto.Tipo != null)
+                    AO.InsertParameter(ConstantesDAO.AND, "TipoProduto.Tipo", ConstantesDAO.LIKE, produto.Tipo.Tipo);
 
                 return AO.GetDataTable();
             }

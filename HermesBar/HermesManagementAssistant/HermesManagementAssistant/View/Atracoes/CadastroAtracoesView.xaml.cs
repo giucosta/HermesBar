@@ -2,6 +2,7 @@
 using BLL.Comum;
 using HermesManagementAssistant.Utils;
 using MODEL;
+using MODEL.Atracoes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,7 @@ namespace HermesManagementAssistant.View.Atracoes
                 return _contatoBLL;
             }
         }
+        
         private int _idAtracao = 0;
         private int _idContato = 0;
         public CadastroAtracoesView()
@@ -72,7 +74,11 @@ namespace HermesManagementAssistant.View.Atracoes
                     atracoes.Contato = contato;
 
                     if (AtracoesBLL.Salvar(atracoes))
+                    {
                         Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ATRACOES_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                        new AtracoesView().Show();
+                        this.Close();
+                    }
                     else
                         Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
                 }
@@ -135,7 +141,7 @@ namespace HermesManagementAssistant.View.Atracoes
             atracoes.Nome = tbAtracao.Text;
             atracoes.Tempo_Show = tbTempo.Text;
             atracoes.Ultimo_Valor_Cobrado = Double.Parse(tbValor.Text);
-            atracoes.Estilo = cbEstilo.SelectionBoxItem.ToString();
+            atracoes.Estilo = new EstiloAtracoesModel(){Id = (int)cbEstilo.SelectedValue};
 
             return atracoes;
         }
@@ -166,6 +172,7 @@ namespace HermesManagementAssistant.View.Atracoes
             tbAtracao.Text = atracao.Nome;
             tbTempo.Text = atracao.Tempo_Show;
             tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString();
+            cbEstilo.SelectedValue = atracao.Estilo.Id;
 
             var contato = ContatoBLL.RecuperaContatoId(AtracoesBLL.RecuperaIdContato(atracao));
             _idContato = contato.Id;

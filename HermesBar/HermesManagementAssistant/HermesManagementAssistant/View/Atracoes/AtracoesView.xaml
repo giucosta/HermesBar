@@ -21,8 +21,8 @@
         <Label x:Name="lbNome" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,15,0,0"/>
         <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Margin="107,10,0,0"/>
         <Label x:Name="lbEstilo" Content="Estilo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,58,0,0"/>
-        <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="370" Margin="107,62,0,0"/>
-        <DataGrid x:Name="dgPesquisa" HorizontalAlignment="Left" Margin="32,190,0,0" VerticalAlignment="Top" Height="125" Width="445" AlternationCount="2" RowBackground="Beige" AlternatingRowBackground="LightBlue" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" HeadersVisibility="All" HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD" ColumnWidth="SizeToCells" AutoGenerateColumns="False" SelectionChanged="Editar" SelectedValuePath="Id">
+        <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="370" Margin="107,62,0,0" SelectedValuePath="Id" DisplayMemberPath="Estilo"/>
+        <DataGrid x:Name="dgPesquisa" HorizontalAlignment="Left" Margin="32,190,0,0" VerticalAlignment="Top" Height="125" Width="445" AlternationCount="2" RowBackground="Beige" AlternatingRowBackground="LightBlue" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" HeadersVisibility="All" HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD" ColumnWidth="SizeToCells" AutoGenerateColumns="False" MouseDoubleClick="Editar" SelectedValuePath="Id">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Cód." Width="40" Binding="{Binding Path=Id}"/>
                 <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Path=Nome}"/>

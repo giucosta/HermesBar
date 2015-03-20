@@ -6,7 +6,7 @@
         <Label x:Name="lbNome" Content="Atração" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,27,0,0" FontWeight="Bold"/>
         <TextBox x:Name="tbAtracao" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="324" Margin="120,27,0,0"/>
         <Label x:Name="lbEstilo" Content="Estilo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,58,0,0" FontWeight="Bold"/>
-        <ComboBox x:Name="cbEstilo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="265" Margin="120,58,0,0"/>
+        <ComboBox x:Name="cbEstilo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="265" Margin="120,58,0,0" SelectedValuePath="Id" DisplayMemberPath="Estilo"/>
         <Button x:Name="tbNovoEstilo" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Margin="390,58,0,0" Height="22" FontWeight="Bold" FontSize="16"/>
         <Button x:Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="30,296,0,0" Click="btSalvar_Click" FontWeight="Bold"/>
         <Label x:Name="lbNomeContato" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,137,0,0" FontWeight="Bold"/>

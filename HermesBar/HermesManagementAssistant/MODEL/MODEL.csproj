@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Abstract\IModel.cs" />
     <Compile Include="Atracoes\AtracoesModel.cs" />
+    <Compile Include="Atracoes\EstiloAtracoesModel.cs" />
     <Compile Include="Comum\ContatoModel.cs" />
     <Compile Include="Comum\EnderecoModel.cs" />
     <Compile Include="Comum\TipoEnderecoModel.cs" />

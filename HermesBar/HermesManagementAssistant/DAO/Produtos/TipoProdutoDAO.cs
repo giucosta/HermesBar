@@ -91,7 +91,7 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
-                AO.CreateSelectWithSimpleParameter("Tipo");
+                AO.CreateSelectWithSimpleParameter(ConstantesDAO.DISTINCT + " Tipo");
                 AO.GetCommand();
                 return AO.GetDataTable();
             }

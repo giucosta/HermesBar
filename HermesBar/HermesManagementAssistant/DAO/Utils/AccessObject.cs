@@ -84,21 +84,11 @@ namespace DAO.Utils
         {
             var attr = AttributeFormat(attribute);
             var stb = new StringBuilder();
-            
-            if (inner_join != string.Empty)
-            {
-                stb.Append(" " + sqlCommand);
-                stb.Append(" " + ReturnClassName() + "." + attribute);
-                stb.Append(" " + condition);
-                stb.Append(" " + attr);
-            }
-            else
-            {
+           
                 stb.Append(" " + sqlCommand);
                 stb.Append(" " + attribute);
                 stb.Append(" " + condition);
                 stb.Append(" " + attr);
-            }
             
             sql += FormatSql(stb.ToString());
 
@@ -202,6 +192,11 @@ namespace DAO.Utils
         }
         private string AttributeFormat(string attribute)
         {
+            if (inner_join != null)
+            {
+                var attrSplit = attribute.Split('.');
+                return "@" + attrSplit[1];
+            }
             return "@" + attribute;
         }
     }
