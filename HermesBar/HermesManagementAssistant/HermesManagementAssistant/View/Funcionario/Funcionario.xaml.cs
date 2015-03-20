@@ -53,6 +53,7 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             DataGrid data  = (DataGrid)sender;
             new FuncionarioCadastro((FuncionarioModel)data.SelectedItems[0]).Show();
+            this.Close();
         }
         private void GerarRelatorio(object sender, RoutedEventArgs e)
         {
