@@ -26,5 +26,6 @@ namespace DAO.Utils
         public const string INTO = "INTO";
         public const string VALUES = "VALUES";
         public const string SET = "SET";
+        public const string DISTINCT = "DISTINCT";
     }
 }

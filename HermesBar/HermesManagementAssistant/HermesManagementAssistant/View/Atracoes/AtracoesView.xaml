@@ -24,11 +24,11 @@
         <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="370" Margin="107,62,0,0"/>
         <DataGrid x:Name="dgPesquisa" HorizontalAlignment="Left" Margin="32,190,0,0" VerticalAlignment="Top" Height="125" Width="445" AlternationCount="2" RowBackground="Beige" AlternatingRowBackground="LightBlue" ColumnHeaderStyle="{StaticResource columnHeaderStyle}" HeadersVisibility="All" HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD" ColumnWidth="SizeToCells" AutoGenerateColumns="False" SelectionChanged="Editar" SelectedValuePath="Id">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Código" Binding="{Binding Path=Id}"/>
-                <DataGridTextColumn Header="Nome" Binding="{Binding Path=Nome}"/>
-                <DataGridTextColumn Header="Tempo" Binding="{Binding Path=Tempo}"/>
-                <DataGridTextColumn Header="Valor" Binding="{Binding Path=Valor}"/>
-                <DataGridTextColumn Header="Estilo" Binding="{Binding Path=Estilo}"/>
+                <DataGridTextColumn Header="Cód." Width="40" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Path=Nome}"/>
+                <DataGridTextColumn Header="Tempo" Width="50" Binding="{Binding Path=Tempo_Show}"/>
+                <DataGridTextColumn Header="Valor" Width="50" Binding="{Binding Path=Ultimo_Valor_Cobrado}"/>
+                <DataGridTextColumn Header="Estilo" Width="100" Binding="{Binding Path=Estilo}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" Margin="32,103,0,0" VerticalAlignment="Top" Width="75" Click="btPesquisar_Click"/>

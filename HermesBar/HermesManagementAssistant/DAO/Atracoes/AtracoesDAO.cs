@@ -91,7 +91,7 @@ namespace DAO.Atracoes
             try
             {
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
-                AO.CreateSelectWithSimpleParameter("Estilo");
+                AO.CreateSelectWithSimpleParameter(ConstantesDAO.DISTINCT + " Estilo");
                 AO.GetCommand();
 
                 return AO.GetDataTable();
