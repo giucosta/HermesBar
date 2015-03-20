@@ -274,5 +274,10 @@ namespace HermesManagementAssistant.View.Funcionario
             }
         }
         #endregion
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            new Funcionario().Show();
+        }
     }
 }
