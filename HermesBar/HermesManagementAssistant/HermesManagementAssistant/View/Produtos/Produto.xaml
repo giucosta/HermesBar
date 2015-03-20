@@ -42,6 +42,6 @@
         <Button x:Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="37,252,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="40,197,0,0" Click="Pesquisar"/>
         <Label Content="Tipo de produto" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="40,97,0,0"/>
-        <ComboBox Name="cbTipoProduto" HorizontalAlignment="Left" Margin="162,97,0,0" VerticalAlignment="Top" Width="160"/>
+        <ComboBox Name="cbTipoProduto" HorizontalAlignment="Left" Margin="162,97,0,0" VerticalAlignment="Top" Width="160" SelectedValuePath="Id" DisplayMemberPath="Tipo"/>
     </Grid>
 </Window>

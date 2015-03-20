@@ -58,7 +58,7 @@ namespace DAO.Produtos
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo", ConstantesDAO.LIKE, tipoProduto.Tipo);
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoProduto", ConstantesDAO.LIKE, tipoProduto.Id);
 
                 return AO.GetDataTable();
             }
@@ -91,7 +91,7 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
-                AO.CreateSelectWithSimpleParameter(ConstantesDAO.DISTINCT + " Tipo");
+                AO.CreateSelectAll();
                 AO.GetCommand();
                 return AO.GetDataTable();
             }

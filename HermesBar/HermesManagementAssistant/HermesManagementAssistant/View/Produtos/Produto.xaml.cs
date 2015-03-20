@@ -54,7 +54,25 @@ namespace HermesManagementAssistant.View.Produtos
         }
         private void Pesquisar(object sender, RoutedEventArgs e)
         {
-            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel() { Nome = tbNome.Text, CodigoOriginal = tbCodigo.Text, Tipo = new TipoProdutoModel() { Tipo = cbTipoProduto.SelectionBoxItem.ToString() } }).AsDataView();
+            if(cbTipoProduto.SelectedValue == null){
+                gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(
+                    new ProdutoModel()
+                    {
+                        Nome = tbNome.Text,
+                        CodigoOriginal = tbCodigo.Text,
+                        Tipo = new TipoProdutoModel()
+                    }).AsDataView();
+            }
+            else
+            {
+                gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(
+                    new ProdutoModel()
+                    {
+                        Nome = tbNome.Text,
+                        CodigoOriginal = tbCodigo.Text,
+                        Tipo = new TipoProdutoModel() { Id = (int)cbTipoProduto.SelectedValue }
+                    }).AsDataView();
+            }
         }
     }
 }

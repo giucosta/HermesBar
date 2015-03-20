@@ -40,9 +40,9 @@ namespace BLL.Produtos
         {
             return TipoProdutoDAO.Editar(tipo);
         }
-        public List<string> RetornaTipos()
+        public List<TipoProdutoModel> RetornaTipos()
         {
-            return TipoProdutoDAO.RetornaTipos().DataTableToListString("Tipo");
+            return TipoProdutoDAO.RetornaTipos().DataTableToList<TipoProdutoModel>();
         }
     }
 }
