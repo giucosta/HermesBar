@@ -26,10 +26,10 @@ namespace DAO.Funcionario
                 AO.InsertParameter("Nome", funcionario.Nome);
                 AO.InsertParameter("Cpf", funcionario.Cpf);
                 AO.InsertParameter("Rg", funcionario.Rg);
-                AO.InsertParameter("DataNascimento", Conversores.DateTimeToInt(funcionario.DataNascimento));
+                AO.InsertParameter("DataNascimento", funcionario.DataNascimento);
                 AO.InsertParameter("CarteiraTrabalho", funcionario.CarteiraTrabalho);
                 AO.InsertParameter("Serie", funcionario.Serie);
-                AO.InsertParameter("DataAdmissao", Conversores.DateTimeToInt(funcionario.DataAdmissao));
+                AO.InsertParameter("DataAdmissao", funcionario.DataAdmissao);
                 AO.InsertParameter("Endereco", funcionario.Endereco.Id);
                 AO.InsertParameter("Tipo", funcionario.Tipo.Id);
                 AO.InsertParameter("Contato", funcionario.Contato.Id);
