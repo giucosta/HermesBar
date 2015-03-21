@@ -1,5 +1,6 @@
 ﻿using BLL.Fornecedor;
 using BLL.Produtos;
+using HermesManagementAssistant.Utils;
 using MODEL.Fornecedor;
 using MODEL.Produto;
 using System;
@@ -24,6 +25,7 @@ namespace HermesManagementAssistant.View.Produtos
     /// </summary>
     public partial class ProdutoCadastro : Window
     {
+        #region AccessMethod
         private ProdutoBLL _produtoBLL = null;
         public ProdutoBLL ProdutoBLL
         {
@@ -64,13 +66,16 @@ namespace HermesManagementAssistant.View.Produtos
                 return _marcaProdutoBLL;
             }
         }
+        #endregion
         public ProdutoCadastro()
         {
             InitializeComponent();
             CarregaCombos();
+            tbCodigo.Text = ProdutoBLL.SugereProximoCodigo().ToString();
         }
         public ProdutoCadastro(ProdutoModel produto)
         {
+            InitializeComponent();
             CarregaCombos();
         }
         public void CarregaCombos()
@@ -130,5 +135,12 @@ namespace HermesManagementAssistant.View.Produtos
             else
                 Mensagens.GeraMensagens("Campos obrigatórios!", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
         }
+
+        #region Masked
+        private void NumberMasked(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbCodigo, e);
+        }
+        #endregion
     }
 }

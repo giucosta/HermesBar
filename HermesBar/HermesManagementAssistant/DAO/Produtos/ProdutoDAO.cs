@@ -80,6 +80,20 @@ namespace DAO.Produtos
                 return null;
 	        }
         }
+        public DataTable SugereProximoCodigo()
+        {
+            try
+            {
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.CreateSpecificQuery("SELECT MAX(CodigoOriginal) As CodigoOriginal FROM Produto");
+                AO.GetCommand();
+                return AO.GetDataTable();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 }

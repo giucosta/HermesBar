@@ -68,5 +68,9 @@ namespace BLL.Produtos
         {
             return ProdutoDAO.PesquisaProdutoCodigo(produto).DataTableToList<ProdutoModel>();
         }
+        public int SugereProximoCodigo()
+        {
+            return int.Parse(ProdutoDAO.SugereProximoCodigo().DataTableToString()) + 1;
+        }
     }
 }

@@ -95,5 +95,16 @@ namespace UTILS
         {
             return new DateTime(1900, 1, 1).AddDays(intDate - 2);
         }
+        public static string DataTableToString(this DataTable dataTable)
+        {
+            var retorno = new StringBuilder();
+            
+            foreach (DataRow row in dataTable.Rows)
+            {
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                    retorno.Append(row[i].ToString());
+            }
+            return retorno.ToString();
+        }
     }
 }

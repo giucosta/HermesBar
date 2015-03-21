@@ -107,7 +107,6 @@ namespace HermesManagementAssistant.Utils
             textBox.Text = elementos;
             return textBox;
         }
-
         public static void SomenteNumeros(TextBox textBox, KeyEventArgs e)
         {
             KeyConverter key = new KeyConverter();

@@ -8,17 +8,19 @@
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Nome" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,27,0,0" Height="26" Width="44"/>
-        <TextBox Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="413" Margin="145,24,0,0"/>
+        <TextBox Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="413" Margin="145,24,0,0" TabIndex="1"/>
         <Label Content="Nome Reduzido" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,59,0,0" Height="26" Width="100"/>
-        <TextBox x:Name="tbNomeReduzido" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="413" Margin="145,62,0,0"/>
+        <TextBox x:Name="tbNomeReduzido" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="413" Margin="145,62,0,0" TabIndex="2"/>
         <Label Content="Código" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18,92,0,0" Height="26" Width="50"/>
-        <TextBox x:Name="tbCodigo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Margin="145,92,0,0"/>
+        <TextBox x:Name="tbCodigo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="95" Margin="145,92,0,0" TabIndex="3" KeyDown="NumberMasked"/>
         <Label Content="Tipo" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="275,93,0,0" Height="26" Width="35"/>
-        <ComboBox Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="236" Margin="323,94,0,0" SelectedValuePath="Id" DisplayMemberPath="Tipo" Height="22"/>
+        <ComboBox Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="236" Margin="323,94,0,0" SelectedValuePath="Id" DisplayMemberPath="Tipo" Height="22" TabIndex="4"/>
         <Label Content="Unidade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="19,129,0,0" FontWeight="Bold" Height="26" Width="57"/>
-        <ComboBox Name="cbUnidade" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="145,131,0,0" Height="22" />
+        <ComboBox Name="cbUnidade" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="145,131,0,0" Height="22"  TabIndex="5"/>
+        <Label Content="Marca" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="277,128,0,0" FontWeight="Bold" Height="26" Width="57"/>
+        <ComboBox x:Name="cbMarca" HorizontalAlignment="Left" VerticalAlignment="Top" Width="236" Margin="325,131,0,0" SelectedValuePath="Id" DisplayMemberPath="Marca" Height="22" TabIndex="6"/>
         <Label Content="Fornecedor" HorizontalAlignment="Left" Margin="18,161,0,0" VerticalAlignment="Top" FontWeight="Bold" Height="26" Width="74"/>
-        <ComboBox x:Name="cbFornecedor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="413" Margin="146,164,0,0" SelectedValuePath="Id" DisplayMemberPath="RazaoSocial" Height="22"/>
+        <ComboBox x:Name="cbFornecedor" HorizontalAlignment="Left" VerticalAlignment="Top" Width="413" Margin="146,164,0,0" SelectedValuePath="Id" DisplayMemberPath="RazaoSocial" Height="22" TabIndex="7"/>
         <Label Content="Quant. Estoque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,194,0,0" Height="26" Width="91"/>
         <TextBox Name="tbQuantEstoque" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="145,195,0,0" IsReadOnly="True"/>
         <Label Content="Estoque Mínimo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="318,193,0,0" Height="26" Width="96"/>
@@ -26,14 +28,12 @@
         <Label Content="Estoque Ideal" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,228,0,0" Height="26" Width="81"/>
         <TextBox x:Name="tbEstoqueIdeal" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="145,229,0,0" IsReadOnly="True"/>
         <Label Content="Valor Custo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="25,260,0,0" Height="26" Width="71"/>
-        <TextBox x:Name="tbValorCusto" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="146,261,0,0"/>
+        <TextBox x:Name="tbValorCusto" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="146,261,0,0" TabIndex="8"/>
         <Label Content="Valor Venda" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="319,258,0,0" Height="26" Width="75"/>
-        <TextBox x:Name="tbValorVenda" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="440,259,0,0"/>
+        <TextBox x:Name="tbValorVenda" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="440,259,0,0" TabIndex="9"/>
         <Label Content="Observação" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="26,297,0,0" Height="26" Width="72"/>
-        <TextBox Name="tbObservacao" HorizontalAlignment="Left" Height="90" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" Width="411" Margin="148,299,0,0"/>
-        <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="34,413,0,0" FontWeight="Bold" Height="20" Click="Salvar"/>
-        <Button Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="125,414,0,0" Background="Red" Height="20"/>
-        <Label Content="Marca" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="277,128,0,0" FontWeight="Bold" Height="26" Width="57"/>
-        <ComboBox x:Name="cbMarca" HorizontalAlignment="Left" VerticalAlignment="Top" Width="236" Margin="325,131,0,0" SelectedValuePath="Id" DisplayMemberPath="Marca" Height="22"/>
+        <TextBox Name="tbObservacao" HorizontalAlignment="Left" Height="90" TextWrapping="Wrap" AcceptsReturn="True" VerticalAlignment="Top" Width="411" Margin="148,299,0,0" TabIndex="10"/>
+        <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="34,413,0,0" FontWeight="Bold" Height="20" Click="Salvar" TabIndex="11"/>
+        <Button Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="125,414,0,0" Background="Red" Height="20" TabIndex="12"/>
     </Grid>
 </Window>
