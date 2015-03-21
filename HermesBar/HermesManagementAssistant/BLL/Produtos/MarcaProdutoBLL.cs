@@ -26,9 +26,9 @@ namespace BLL.Produtos
         {
             return MarcaProdutoDAO.Salvar(marca);
         }
-        public List<String> RetonaMarca()
+        public List<MarcaProdutoModel> RetonaMarca()
         {
-            return MarcaProdutoDAO.RetornaMarcas().DataTableToListString("Marca");
+            return MarcaProdutoDAO.RetornaMarcas().DataTableToList<MarcaProdutoModel>();
         }
     }
 }

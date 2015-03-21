@@ -57,6 +57,11 @@ namespace UTILS
             public const string GRAMA = "GR";
             public const string ML = "ML";
             public const string LATA = "LATA";
+            public const string UNIDADE = "UNIDADE";
+            public const string PORCAO = "PORÇÃO";
+            public const string GARRAFA = "GARRAFA";
+            public const string FARDO = "FARDO";
+            public const string FRASCO = "FRASCO";
         }
 
         public static class AConexaoBanco

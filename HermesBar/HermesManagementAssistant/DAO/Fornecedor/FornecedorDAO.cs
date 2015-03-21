@@ -35,7 +35,6 @@ namespace DAO.Fornecedor
                 return false;
             }
         }
-
         public DataTable Pesquisar(FornecedorModel fornecedor)
         {
             try

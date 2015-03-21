@@ -19,11 +19,11 @@ namespace DAO.Produtos
             {
                 AccessObject<MarcaProdutoModel> AO = new AccessObject<MarcaProdutoModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Marca", marca.Marca);
-                Connection.AddParameter("@Id_Fornecedor", marca.Fornecedor.Id);
+                AO.GetCommand();
+                AO.InsertParameter("Marca", marca.Marca);
+                AO.InsertParameter("Id_Fornecedor", marca.Fornecedor.Id);
 
-                return Connection.ExecutarComando();
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
@@ -36,10 +36,9 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<MarcaProdutoModel> AO = new AccessObject<MarcaProdutoModel>();
-                AO.CreateSelectWithSimpleParameter("Marca");
-                Connection.GetCommand(AO.ReturnQuery());
-
-                return Connection.getDataTable();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {

@@ -63,6 +63,22 @@ namespace DAO.Produtos
                 throw;
             }
         }
+        public DataTable PesquisaProdutoCodigo(ProdutoModel produto)
+        {
+            try 
+	        {
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "CodigoOriginal", ConstantesDAO.EQUAL, produto.CodigoOriginal);
+                return AO.GetDataTable();
+	        }
+	        catch (Exception e)
+	        {
+                Log.Log.GravarLog("PesquisaProdutoCodigo", "ProdutoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                return null;
+	        }
+        }
     }
 
 }
