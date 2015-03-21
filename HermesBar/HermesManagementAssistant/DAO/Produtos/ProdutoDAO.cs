@@ -19,22 +19,22 @@ namespace DAO.Produtos
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@CodigoOriginal",produto.CodigoOriginal);
-                Connection.AddParameter("@CodigoBarras",produto.CodigoBarras);
-                Connection.AddParameter("@Nome",produto.Nome);
-                Connection.AddParameter("@NomeReduzido",produto.NomeReduzido);
-                Connection.AddParameter("@Id_TipoProduto",produto.Tipo.Id);
-                Connection.AddParameter("@Marca",produto.Marca);
-                Connection.AddParameter("@Unidade",produto.Unidade);
-                Connection.AddParameter("@Id_Fornecedor",produto.Fornecedor.Id);
-                Connection.AddParameter("@QuantidadeEstoque",produto.QuantidadeEstoque);
-                Connection.AddParameter("@EstoqueMinimo",produto.EstoqueMinimo);
-                Connection.AddParameter("@EstoqueIdeal", produto.EstoqueIdeal);
-                Connection.AddParameter("@ValorCusto",produto.ValorCusto);
-                Connection.AddParameter("@ValorVenda", produto.ValorVenda);
-                Connection.AddParameter("@Observacao",produto.Observacao);
-
+                AO.GetCommand();
+                AO.InsertParameter("CodigoOriginal", produto.CodigoOriginal);
+                AO.InsertParameter("CodigoBarras", produto.CodigoBarras);
+                AO.InsertParameter("Nome", produto.Nome);
+                AO.InsertParameter("NomeReduzido", produto.NomeReduzido);
+                AO.InsertParameter("Tipo", produto.Tipo.Id);
+                AO.InsertParameter("Marca", produto.Marca.Id);
+                AO.InsertParameter("Unidade", produto.Unidade);
+                AO.InsertParameter("Fornecedor", produto.Fornecedor.Id);
+                AO.InsertParameter("QuantidadeEstoque", produto.QuantidadeEstoque);
+                AO.InsertParameter("EstoqueMinimo", produto.EstoqueMinimo);
+                AO.InsertParameter("EstoqueIdeal", produto.EstoqueIdeal);
+                AO.InsertParameter("ValorCusto", produto.ValorCusto);
+                AO.InsertParameter("ValorVenda", produto.ValorVenda);
+                AO.InsertParameter("Observacao", produto.Observacao);
+                
                 return Connection.ExecutarComando();
             }
             catch (Exception e)
@@ -48,9 +48,10 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSpecificQuery("SELECT Produto.CodigoOriginal, Produto.Nome, Produto.Marca, Produto.Unidade, Produto.QuantidadeEstoque, Produto.ValorVenda, TipoProduto.Tipo FROM Produto");
+                AO.CreateSpecificQuery("SELECT Produto.CodigoOriginal, Produto.Nome, Marca.Marca, Produto.Unidade, Produto.QuantidadeEstoque, Produto.ValorVenda, TipoProduto.Tipo FROM Produto");
                 AO.GetCommand();
                 AO.CreateInnerJoin("TipoProduto", "Id_TipoProduto");
+                AO.CreateInnerJoin("Marca", "Id_Marca");
                 AO.InsertParameter(ConstantesDAO.WHERE, "Produto.Nome", ConstantesDAO.LIKE, produto.Nome);
                 AO.InsertParameter(ConstantesDAO.AND, "Produto.CodigoOriginal", ConstantesDAO.LIKE, produto.CodigoOriginal);
                 if(produto.Tipo != null)

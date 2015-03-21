@@ -83,18 +83,18 @@ namespace HermesManagementAssistant.View.Produtos
         {
             var produto = new ProdutoModel();
             produto.CodigoOriginal = tbCodigo.Text;
-            produto.EstoqueIdeal = int.Parse(tbEstoqueIdeal.Text);
-            produto.EstoqueMinimo = int.Parse(tbEstoqueMinimo.Text);
+            //produto.EstoqueIdeal = int.Parse(tbEstoqueIdeal.Text);
+            //produto.EstoqueMinimo = int.Parse(tbEstoqueMinimo.Text);
             produto.Fornecedor = new FornecedorModel() { Id = (int)cbFornecedor.SelectedValue };
             produto.Nome = tbNome.Text;
             produto.NomeReduzido = tbNomeReduzido.Text;
             produto.Observacao = tbObservacao.Text;
-            produto.QuantidadeEstoque = int.Parse(tbQuantEstoque.Text);
+            //produto.QuantidadeEstoque = int.Parse(tbQuantEstoque.Text);
             produto.Tipo = new TipoProdutoModel() { Id = (int)cbTipo.SelectedValue };
             produto.Unidade = cbUnidade.SelectionBoxItem.ToString();
             produto.ValorCusto = double.Parse(tbValorCusto.Text);
             produto.ValorVenda = double.Parse(tbValorVenda.Text);
-            produto.Marca = new MarcaProdutoModel() { Id = (int)cbMarca.SelectedValue };
+            produto.Marca = new MarcaModel() { Id = (int)cbMarca.SelectedValue };
 
             return produto;
         }
@@ -121,7 +121,7 @@ namespace HermesManagementAssistant.View.Produtos
         private void Salvar(object sender, RoutedEventArgs e)
         {
             var obrigatorios = VerificaCamposObrigatorios();
-            if (obrigatorios == null)
+            if (obrigatorios.Count == 0)
                 ProdutoBLL.Salvar(CarregaProdutos());
         }
     }

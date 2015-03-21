@@ -160,10 +160,12 @@ namespace DAO.Utils
         }
         public bool ExecuteCommand()
         {
+            inner_join = null;
             return Connection.ExecutarComando();
         }
         public DataTable GetDataTable()
         {
+            inner_join = null;
             return Connection.getDataTable();
         }
         public void OutConnection()

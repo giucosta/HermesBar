@@ -22,13 +22,13 @@ namespace BLL.Produtos
             }
         }
 
-        public bool Salvar(MarcaProdutoModel marca)
+        public bool Salvar(MarcaModel marca)
         {
             return MarcaProdutoDAO.Salvar(marca);
         }
-        public List<MarcaProdutoModel> RetonaMarca()
+        public List<MarcaModel> RetonaMarca()
         {
-            return MarcaProdutoDAO.RetornaMarcas().DataTableToList<MarcaProdutoModel>();
+            return MarcaProdutoDAO.RetornaMarcas().DataTableToList<MarcaModel>();
         }
     }
 }

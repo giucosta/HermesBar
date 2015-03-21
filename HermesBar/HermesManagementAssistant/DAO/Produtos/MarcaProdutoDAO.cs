@@ -13,11 +13,11 @@ namespace DAO.Produtos
 {
     public class MarcaProdutoDAO
     {
-        public bool Salvar(MarcaProdutoModel marca)
+        public bool Salvar(MarcaModel marca)
         {
             try
             {
-                AccessObject<MarcaProdutoModel> AO = new AccessObject<MarcaProdutoModel>();
+                AccessObject<MarcaModel> AO = new AccessObject<MarcaModel>();
                 AO.CreateDataInsert();
                 AO.GetCommand();
                 AO.InsertParameter("Marca", marca.Marca);
@@ -35,14 +35,14 @@ namespace DAO.Produtos
         {
             try
             {
-                AccessObject<MarcaProdutoModel> AO = new AccessObject<MarcaProdutoModel>();
+                AccessObject<MarcaModel> AO = new AccessObject<MarcaModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
                 return AO.GetDataTable();
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("ReotnaMarcas", "MarcaProdutoDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
+                Log.Log.GravarLog("RetornaMarcas", "MarcaProdutoDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
                 return null;
             }
         }

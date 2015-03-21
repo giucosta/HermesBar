@@ -15,7 +15,7 @@ namespace MODEL.Produto
         public string Nome { get; set; }
         public string NomeReduzido { get; set; }
         public TipoProdutoModel Tipo { get; set; }
-        public MarcaProdutoModel Marca { get; set; }
+        public MarcaModel Marca { get; set; }
         public string Unidade { get; set; }
         public FornecedorModel Fornecedor { get; set; }
         public int QuantidadeEstoque { get; set; }

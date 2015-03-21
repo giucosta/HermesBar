@@ -8,7 +8,7 @@ using MODEL.Fornecedor;
 
 namespace MODEL.Produto
 {
-    public class MarcaProdutoModel : IModel
+    public class MarcaModel : IModel
     {   
         public string Marca { get; set; }
         public FornecedorModel Fornecedor { get; set; }
