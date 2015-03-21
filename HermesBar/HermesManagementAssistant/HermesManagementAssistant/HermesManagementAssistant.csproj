@@ -89,6 +89,9 @@
     <Compile Include="View\Produtos\Produto.xaml.cs">
       <DependentUpon>Produto.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Produtos\ProdutoCadastro.xaml.cs">
+      <DependentUpon>ProdutoCadastro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Produtos\TipoProduto.xaml.cs">
       <DependentUpon>TipoProduto.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\Produtos\Produto.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Produtos\ProdutoCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

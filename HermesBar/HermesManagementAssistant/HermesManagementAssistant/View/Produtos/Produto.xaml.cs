@@ -74,5 +74,10 @@ namespace HermesManagementAssistant.View.Produtos
                     }).AsDataView();
             }
         }
+        public void NovoProduto(object sender, RoutedEventArgs e)
+        {
+            new ProdutoCadastro().Show();
+            this.Close();
+        }
     }
 }
