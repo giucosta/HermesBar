@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Utils.Mensagens;
 
 namespace HermesManagementAssistant.View.Produtos
 {
@@ -83,13 +84,11 @@ namespace HermesManagementAssistant.View.Produtos
         {
             var produto = new ProdutoModel();
             produto.CodigoOriginal = tbCodigo.Text;
-            //produto.EstoqueIdeal = int.Parse(tbEstoqueIdeal.Text);
-            //produto.EstoqueMinimo = int.Parse(tbEstoqueMinimo.Text);
+            produto.CodigoBarras = "";
             produto.Fornecedor = new FornecedorModel() { Id = (int)cbFornecedor.SelectedValue };
             produto.Nome = tbNome.Text;
             produto.NomeReduzido = tbNomeReduzido.Text;
             produto.Observacao = tbObservacao.Text;
-            //produto.QuantidadeEstoque = int.Parse(tbQuantEstoque.Text);
             produto.Tipo = new TipoProdutoModel() { Id = (int)cbTipo.SelectedValue };
             produto.Unidade = cbUnidade.SelectionBoxItem.ToString();
             produto.ValorCusto = double.Parse(tbValorCusto.Text);
@@ -122,7 +121,14 @@ namespace HermesManagementAssistant.View.Produtos
         {
             var obrigatorios = VerificaCamposObrigatorios();
             if (obrigatorios.Count == 0)
-                ProdutoBLL.Salvar(CarregaProdutos());
+            {
+                if (ProdutoBLL.Salvar(CarregaProdutos()))
+                    Mensagens.GeraMensagens("Produto Cadastrado!", MENSAGEM.PRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.PRODUTO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                Mensagens.GeraMensagens("Campos obrigatórios!", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
         }
     }
 }

@@ -35,7 +35,10 @@ namespace BLL.Produtos
         public bool Salvar(ProdutoModel produto)
         {
             if (PesquisaProdutoCodigo(produto).Count == 0)
-                return ProdutoDAO.Salvar(produto);
+            {
+                if (produto.ValorCusto < produto.ValorVenda)
+                    return ProdutoDAO.Salvar(produto);
+            }
             return false;
         }
         public DataTable Pesquisa(ProdutoModel produto)

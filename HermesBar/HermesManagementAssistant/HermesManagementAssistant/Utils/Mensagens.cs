@@ -50,7 +50,6 @@ namespace Utils.Mensagens
         public const string NOVA_SENHA_EMAIL = "Sua nova senha foi enviada para o email cadastrado!";
         public const string ERRO_ENVIA_EMAIL = "Ocorreu um erro ao enviar email, favor consultar o administrador do sistema";
         public const string PREENCHE_CAMPO_LOGIN = "Favor preencher o campo LOGIN";
-
         //Login
         public const string ERRO_GRAVAR_LOGIN = "Erro ao gravar o login";
         public const string SEM_PERMISSAO = "PERMISSÃO INVÁLIDA";
@@ -90,5 +89,13 @@ namespace Utils.Mensagens
         public const string TIPOPRODUTO_EXCLUIR_CONFIRMA = "Confirma exclusão do tipo de produto?";
         public const string TIPOPRODUTO_EDITAR_SUCESSO = "Tipo de produto editado com sucesso!";
         public const string TIPOPRODUTO_EDITAR_ERRO = "Erro ao editar o tipo de produto";
+        //PRODUTO
+        public const string PRODUTO_CADASTRO_SUCESSO = "Produto cadastrado com sucesso!!";
+        public const string PRODUTO_CADASTRO_ERRO = "Erro ao cadastrar produto!";
+        public const string PRODUTO_EXCLUIR_SUCESSO = "Produto excluído com sucesso!";
+        public const string PRODUTO_EXCLUIR_ERRO = "Erro ao excluir produto";
+        public const string PRODUTO_EXCLUIR_CONFIRMA = "Confirma a exclusão do produto?";
+        public const string PRODUTO_EDITAR_SUCESSO = "Produto editado com sucesso!";
+        public const string PRODUTO_EDITAR_ERRO = "Erro ao editar produto!";
     }
 }
