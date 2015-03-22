@@ -195,10 +195,14 @@ namespace HMAViews.View.Atracoes
         }
         private void Fechando(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Mensagens.GeraMensagens("Fechar janela!", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
-                e.Cancel = false;
-            else
-                e.Cancel = true;
+            if (_idAtracao == 0)
+            {
+                if (Mensagens.GeraMensagens("Fechar janela!", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
+                    e.Cancel = false;
+                else
+                    e.Cancel = true;
+            }
+            e.Cancel = false;
         }
     }
 }
