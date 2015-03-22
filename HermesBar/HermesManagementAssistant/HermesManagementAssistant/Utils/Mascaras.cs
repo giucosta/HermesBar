@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace HermesManagementAssistant.Utils
 {
-    class Mascaras : Window
+    public class Mascaras : Window
     {
         public static TextBox CnpjMasked(TextBox textBox, KeyEventArgs e){
             if (Verificadores.VerificaNumero(textBox.Text))

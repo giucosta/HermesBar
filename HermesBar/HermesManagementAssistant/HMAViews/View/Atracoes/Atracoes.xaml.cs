@@ -65,7 +65,8 @@ namespace HMAViews.View.Atracoes
         }
         private void Novo(object sender, RoutedEventArgs e)
         {
-            new CadastroAtracoesView().Show();
+            new AtracoesCadastro().Show();
+            this.Close();
         }
         private void Editar(Object sender, MouseButtonEventArgs e)
         {

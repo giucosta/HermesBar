@@ -50,6 +50,7 @@ namespace Utils.Mensagens
         public const string NOVA_SENHA_EMAIL = "Sua nova senha foi enviada para o email cadastrado!";
         public const string ERRO_ENVIA_EMAIL = "Ocorreu um erro ao enviar email, favor consultar o administrador do sistema";
         public const string PREENCHE_CAMPO_LOGIN = "Favor preencher o campo LOGIN";
+        public const string FECHAR_TELA_CONFIRMA = "Deseja fechar esta janela?";
         //Login
         public const string ERRO_GRAVAR_LOGIN = "Erro ao gravar o login";
         public const string SEM_PERMISSAO = "PERMISSÃO INVÁLIDA";
