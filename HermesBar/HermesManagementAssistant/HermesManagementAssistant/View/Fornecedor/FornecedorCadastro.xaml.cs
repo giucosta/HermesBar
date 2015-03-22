@@ -50,6 +50,12 @@ namespace HermesManagementAssistant.View.Fornecedor
             InitializeComponent();
             cbEstado.ItemsSource = EnderecoBLL.CarregaEstados();
         }
+        public FornecedorCadastro(FornecedorModel forn)
+        {
+            InitializeComponent();
+            cbEstado.ItemsSource = EnderecoBLL.CarregaEstados();
+            PreencheTelaFornecedor(forn);
+        }
         public void Salvar(object sender, RoutedEventArgs e)
         {
             if (FornecedorBLL.Salvar(CarregaFornecedor()))
@@ -91,6 +97,16 @@ namespace HermesManagementAssistant.View.Fornecedor
                 Tipo = Constantes.ATipoEndereco.MATRIZ
             };
             return endereco;
+        }
+        private void PreencheTelaFornecedor(FornecedorModel forn)
+        {
+            tbBairro.Text = forn.Endereco.Bairro;
+            tbCep.Text = forn.Endereco.Cep;
+            tbCidade.Text = forn.Endereco.Cidade;
+            tbCpfCnpj.Text = forn.Cnpj;
+            tbInscricaoEstadual.Text = forn.InscricaoEstadual;
+            tbRazaoSocial.Text = forn.RazaoSocial;
+            tbRua.Text = forn.Endereco.Rua;
         }
         #endregion
 

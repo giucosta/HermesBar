@@ -11,9 +11,27 @@
                 <MenuItem Name="mnConfiguracoes" Header="_Configurações"/>
                 <MenuItem Name="mnGestao" Header="_Gestão">
                     <MenuItem Name="mniAtracoes" Header="_Atracoes" Click="Atracoes"/>
+                    <MenuItem Name="mniEstabelecimento" Header="Estabelecimento" Click="Estabelecimento"/>
+                    <MenuItem Name="mniEstoque" Header="Estoque">
+                        <MenuItem Name="mniConsultarEstoque" Header="Consultar Estoque"/>
+                        <MenuItem Name="mniAtualizarEstoque" Header="Atualizar Estoque"/>
+                    </MenuItem>
+                    <MenuItem x:Name="mniFornecedor" Header="_Fornecedor" Click="Fornecedor"/>
+                    <MenuItem Name="mnFuncionarios" Header="_Funcionários">
+                        <MenuItem Name="mniFuncionarios" Header="Funcionários" Click="Funcionarios"/>
+                        <MenuItem Name="mniEmitirRecibo" Header="Emitir Recibo"/>
+                    </MenuItem>
+                    <MenuItem x:Name="mnProdutos" Header="_Produtos">
+                        <MenuItem x:Name="mniProdutos" Header="Produtos" Click="Produtos"/>
+                        <MenuItem x:Name="mniTipoProduto" Header="Tipos de Produtos" Click="TipoProduto"/>
+                    </MenuItem>
+                    <MenuItem x:Name="mniImportarNFe" Header="_Importar NFe" Click="ImportarNfe"/>
+                </MenuItem>
+                <MenuItem Name="mnCaixa" Header="_Caixa">
+                    <MenuItem Name="mniAbrirCaixa" Header="Abrir Caixa"/>
+                    <MenuItem Name="mniFecharCaixa" Header="Fechar Caixa"/>
                 </MenuItem>
             </Menu>
-
         </StackPanel>
     </ScrollViewer>
 </mui:ModernWindow>
