@@ -15,15 +15,16 @@
         <StackPanel>
             <Grid Margin="11,14,0,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="166*"/>
+                    <ColumnDefinition Width="161*"/>
                     <ColumnDefinition Width="0*"/>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="lbLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="37,65,0,0" FontWeight="Bold" Height="16" Width="47"/>
-                <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" Margin="36,89,0,0" TabIndex="20"/>
+                <TextBox x:Name="tbLogin" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" Margin="36,89,0,0" TabIndex="1" Grid.ColumnSpan="2"/>
                 <Label x:Name="lbSenha" Content="Senha" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,126,0,0" FontWeight="Bold" Height="16" Width="44"/>
-                <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" Margin="36,150,0,0" VerticalAlignment="Top" Width="235" Height="25" MaxLength="16" PasswordChar="*"/>
-                <TextBlock Margin="161,182,-35,77" Grid.ColumnSpan="2"><Hyperlink Click="EsqueceuSenha"><Run Text="Esqueceu sua senha?"/></Hyperlink></TextBlock>
-                <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="36,212,0,0" Height="26" FontWeight="Bold" Click="Entrar"/>
+                <PasswordBox x:Name="tbSenha" HorizontalAlignment="Left" Margin="36,150,0,0" VerticalAlignment="Top" Width="235" Height="25" MaxLength="16" PasswordChar="*" TabIndex="2" Grid.ColumnSpan="2"/>
+                <TextBlock Margin="161,182,-35,77" Grid.ColumnSpan="3"><Hyperlink Click="EsqueceuSenha"><Run Text="Esqueceu sua senha?"/></Hyperlink></TextBlock>
+                <Button x:Name="btEntrar" Content="Entrar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="36,212,0,0" Height="26" FontWeight="Bold" Click="Entrar" TabIndex="3"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

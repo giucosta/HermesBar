@@ -34,6 +34,7 @@ namespace HMAViews.View.Login
             splash.Close(new TimeSpan(0, 0, 5));
 
             InitializeComponent();
+            tbLogin.Focus();
         }
         private void Entrar(object sender, RoutedEventArgs e)
         {
