@@ -83,6 +83,7 @@ namespace HermesManagementAssistant.View.Estabelecimento
                 lbCepNaoExistente.Visibility = System.Windows.Visibility.Visible;
                 LimparCamposEndereco();
             }
+            tbNumero.Focus();
         }
         private void GravarEstabelecimento(object sender, RoutedEventArgs e)
         {
@@ -117,7 +118,7 @@ namespace HermesManagementAssistant.View.Estabelecimento
             estabelecimento.RazaoSocial = tbRazaoSocial.Text;
             estabelecimento.NomeFantasia = tbNomeFantasia.Text;
             estabelecimento.Cnpj = tbCnpj.Text;
-            estabelecimento.InscEstadual = tbInscEstadual.Text;
+            estabelecimento.InscricaoEstadual = tbInscEstadual.Text;
             estabelecimento.Endereco = CarregaEnderecoEstabelecimento();
             estabelecimento.Contato = CarregaContatoEstabelecimento();
             estabelecimento.ConfigEstabelecimento = CarregaConfiguracaoEstabelecimento();

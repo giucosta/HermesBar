@@ -45,7 +45,7 @@ namespace DAO.Estabelecimento
                 AO.InsertParameter("RazaoSocial", estabelecimento.RazaoSocial);
                 AO.InsertParameter("NomeFantasia", estabelecimento.NomeFantasia);
                 AO.InsertParameter("Cnpj", estabelecimento.Cnpj);
-                AO.InsertParameter("InscricaoEstadual", estabelecimento.InscEstadual);
+                AO.InsertParameter("InscricaoEstadual", estabelecimento.InscricaoEstadual);
                 AO.InsertParameter("Endereco", estabelecimento.Endereco.Id);
                 AO.InsertParameter("Contato", estabelecimento.Contato.Id);
                 
@@ -101,7 +101,7 @@ namespace DAO.Estabelecimento
                 estabelecimento.RazaoSocial = data.Rows[0]["RazaoSocial"].ToString();
                 estabelecimento.NomeFantasia = data.Rows[0]["NomeFantasia"].ToString();
                 estabelecimento.Cnpj = data.Rows[0]["Cnpj"].ToString();
-                estabelecimento.InscEstadual = data.Rows[0]["InscricaoEstadual"].ToString();
+                estabelecimento.InscricaoEstadual = data.Rows[0]["InscricaoEstadual"].ToString();
                 estabelecimento.Endereco = EnderecoDAO.RecuperaEnderecoPeloId((int)data.Rows[0]["Id_Endereco"]);
                 estabelecimento.Contato = ContatoDAO.RecuperaContatoPeloId((int)data.Rows[0]["Id_Contato"]);
                 

@@ -225,9 +225,7 @@ namespace GerenciadorBancoHMA
     INSERT INTO Produto VALUES('0002','011123123231414114','Skol lata 350ML','Skol lata',3,2,'Lata',			1,120,100,150,'1,80','4,00','');
     INSERT INTO Produto VALUES('0003','3123231414114','Skol Garrafa 600ML','Skol Garrafa',	2,2,'Garrafa',		1,120,100,150,'1,80','4,00','');
     --
-    INSERT INTO Estabelecimento VALUES('Hermes Bar e Restaurante','Hermes Bar','96.541.733/0001-02','ISENTO',1,1);
-    --
-    INSERT INTO ConfigEstabelecimento_Estabelecimento VALUES(1,1);");
+    INSERT INTO Estabelecimento VALUES('Hermes Bar e Restaurante','Hermes Bar','96.541.733/0001-02','ISENTO',1,1,1);");
             try
             {
                 using (SqlConnection connection = new SqlConnection(@"Data Source= " + servidor + @"; Database=HermesBar; Integrated Security=True"))
@@ -254,20 +252,19 @@ namespace GerenciadorBancoHMA
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Login')
         BEGIN
 	        EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL';
+			DROP TABLE Endereco;
+	        DROP TABLE Contato;
 	        DROP TABLE Usuario;
 	        DROP TABLE Login;
 	        DROP TABLE Perfil;
 	        DROP TABLE Atracoes;
 	        DROP TABLE Funcionario;
-	        DROP TABLE ConfigEstabelecimento_Estabelecimento;
-	        DROP TABLE ConfigEstabelecimento;
 	        DROP TABLE Estabelecimento;
+			DROP TABLE ConfigEstabelecimento;
 	        DROP TABLE TipoFuncionario;
+			DROP TABLE Fornecedor;
 	        DROP TABLE Produto;
 	        DROP TABLE TipoProduto;
-	        DROP TABLE Fornecedor;
-	        DROP TABLE Endereco;
-	        DROP TABLE Contato;
 		    DROP TABLE EstiloAtracoes;
 			DROP TABLE Marca
         END
@@ -375,21 +372,11 @@ namespace GerenciadorBancoHMA
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Estabelecimento')
         BEGIN
 	        DROP TABLE Estabelecimento;
-	        CREATE TABLE Estabelecimento(Id_Estabelecimento int IDENTITY(1,1) PRIMARY KEY,RazaoSocial VARCHAR(100),NomeFantasia VARCHAR(100),Cnpj VARCHAR(30),InscricaoEstadual VARCHAR(30),Id_Endereco int,Id_Contato int,FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco),FOREIGN KEY(Id_Contato)REFERENCES Contato(Id_Contato));
+	        CREATE TABLE Estabelecimento(Id_Estabelecimento int IDENTITY(1,1) PRIMARY KEY,RazaoSocial VARCHAR(100),NomeFantasia VARCHAR(100),Cnpj VARCHAR(30),InscricaoEstadual VARCHAR(30),Id_Endereco int,Id_Contato INT, Id_ConfigEstabelecimento INT ,FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco),FOREIGN KEY(Id_Contato)REFERENCES Contato(Id_Contato), FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento));
         END
         ELSE 
         BEGIN
-	        CREATE TABLE Estabelecimento(Id_Estabelecimento int IDENTITY(1,1) PRIMARY KEY,RazaoSocial VARCHAR(100),NomeFantasia VARCHAR(100),Cnpj VARCHAR(30),InscricaoEstadual VARCHAR(30),Id_Endereco int,Id_Contato int,FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco),FOREIGN KEY(Id_Contato)REFERENCES Contato(Id_Contato));
-        END
-        --
-        IF EXISTS(SELECT name FROM sysobjects WHERE name = 'ConfigEstabelecimento_Estabelecimento')
-        BEGIN
-	        DROP TABLE ConfigEstabelecimento_Estabelecimento;
-	        CREATE TABLE ConfigEstabelecimento_Estabelecimento(Id_Estabelecimento int,Id_ConfigEstabelecimento int,FOREIGN KEY(Id_Estabelecimento)REFERENCES Estabelecimento(Id_Estabelecimento),FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento));
-        END
-        ELSE 
-        BEGIN
-	        CREATE TABLE ConfigEstabelecimento_Estabelecimento(Id_Estabelecimento int,Id_ConfigEstabelecimento int,FOREIGN KEY(Id_Estabelecimento)REFERENCES Estabelecimento(Id_Estabelecimento),FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento));
+	        CREATE TABLE Estabelecimento(Id_Estabelecimento int IDENTITY(1,1) PRIMARY KEY,RazaoSocial VARCHAR(100),NomeFantasia VARCHAR(100),Cnpj VARCHAR(30),InscricaoEstadual VARCHAR(30),Id_Endereco int,Id_Contato INT, Id_ConfigEstabelecimento INT ,FOREIGN KEY(Id_Endereco)REFERENCES Endereco(Id_Endereco),FOREIGN KEY(Id_Contato)REFERENCES Contato(Id_Contato), FOREIGN KEY(Id_ConfigEstabelecimento)REFERENCES ConfigEstabelecimento(Id_ConfigEstabelecimento));
         END
         --
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'TipoProduto')

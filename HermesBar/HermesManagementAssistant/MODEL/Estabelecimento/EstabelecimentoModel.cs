@@ -12,7 +12,7 @@ namespace MODEL.Estabelecimento
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
         public string Cnpj { get; set; }
-        public string InscEstadual { get; set; }
+        public string InscricaoEstadual { get; set; }
         public EnderecoModel Endereco { get; set; }
         public ContatoModel Contato { get; set; }
         public ConfigEstabelecimentoModel ConfigEstabelecimento { get; set; }

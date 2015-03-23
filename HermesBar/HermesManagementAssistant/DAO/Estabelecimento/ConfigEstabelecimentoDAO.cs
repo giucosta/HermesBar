@@ -20,13 +20,13 @@ namespace DAO.Estabelecimento
             {
                 AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@AgruparItensQuantidade", ConfigEstabelecimento.AgruparItensQuantidade);
-                Connection.AddParameter("@TipoSistema", ConfigEstabelecimento.TipoSistema);
-                Connection.AddParameter("@QuantidadeMesa", ConfigEstabelecimento.QuantidadeMesas);
-                Connection.AddParameter("@TaxaServico", ConfigEstabelecimento.TaxaServico);
-
-                if(Connection.ExecutarComando())
+                AO.GetCommand();
+                AO.InsertParameter("AgruparItensQuantidade", ConfigEstabelecimento.AgruparItensQuantidade);
+                AO.InsertParameter("TipoSistema", ConfigEstabelecimento.TipoSistema);
+                AO.InsertParameter("QuantidadeMesas", ConfigEstabelecimento.QuantidadeMesas);
+                AO.InsertParameter("TaxaServico", ConfigEstabelecimento.TaxaServico);
+                
+                if(AO.ExecuteCommand())
                     return RecuperaConfigEstabelecimentoPeloId(RecuperaUltimoIdCadastrado());
                 return null;
             }
@@ -40,12 +40,11 @@ namespace DAO.Estabelecimento
         {
             try
             {
-                //TODO - Verificar isso aqui
                 AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
                 AO.CreateSpecificQuery("SELECT MAX(Id_ConfigEstabelecimento) AS Id_ConfigEstabelecimento FROM ConfigEstabelecimento");
-                Connection.GetCommand(AO.ReturnQuery());
+                AO.GetCommand();
 
-                return (int)Connection.getDataTable().Rows[0]["Id_ConfigEstabelecimento"];
+                return (int)AO.GetDataTable().Rows[0]["Id_ConfigEstabelecimento"];
             }
             catch (Exception e)
             {
@@ -57,12 +56,10 @@ namespace DAO.Estabelecimento
         {
             AccessObject<ConfigEstabelecimentoModel> AO = new AccessObject<ConfigEstabelecimentoModel>();
             AO.CreateSelectAll();
-            AO.InsertParameter(ConstantesDAO.WHERE, "Id_ConfigEstabelecimento", ConstantesDAO.EQUAL, "id");
+            AO.GetCommand();
+            AO.InsertParameter(ConstantesDAO.WHERE, "Id_ConfigEstabelecimento", ConstantesDAO.EQUAL, id);
 
-            Connection.GetCommand(AO.ReturnQuery());
-            Connection.AddParameter("@id", id);
-
-            return CarregaConfigEstabelecimento(Connection.getDataTable());
+            return CarregaConfigEstabelecimento(AO.GetDataTable());
         }
         private ConfigEstabelecimentoModel CarregaConfigEstabelecimento(DataTable dataTable)
         {
@@ -80,10 +77,6 @@ namespace DAO.Estabelecimento
                 return configEstabelecimento;
             }
             return null;
-        }
-        public bool SalvarConfigEstabelecimentoEstabelecimento(EstabelecimentoModel estabelecimento)
-        {
-            return new ConfigEstabelecimentoEstabelecimentoDAO().Salvar(estabelecimento);
         }
     }
 }

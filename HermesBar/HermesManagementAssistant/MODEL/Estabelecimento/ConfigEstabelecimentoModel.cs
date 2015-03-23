@@ -13,6 +13,5 @@ namespace MODEL.Estabelecimento
         public String TipoSistema { get; set; }
         public int QuantidadeMesas { get; set; }
         public int TaxaServico { get; set; }
-        public EstabelecimentoModel Estabelecimento { get; set; }
     }
 }
