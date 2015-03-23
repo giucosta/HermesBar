@@ -1,4 +1,5 @@
 ﻿using BLL.Funcionario;
+using HermesManagementAssistant.Utils;
 using MODEL;
 using REPORTS;
 using System;
@@ -59,6 +60,10 @@ namespace HermesManagementAssistant.View.Funcionario
         {
             ListarFuncionarios f = new ListarFuncionarios();
             f.Show();
+        }
+        private void MascaraCodigo(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbCodigo, e);
         }
     }
 }

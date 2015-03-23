@@ -1,4 +1,5 @@
 ﻿using BLL.Fornecedor;
+using HermesManagementAssistant.Utils;
 using MODEL.Fornecedor;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,10 @@ namespace HermesManagementAssistant.View.Fornecedor
         public void CadastrarFornecedor(object sender, RoutedEventArgs e)
         {
             new FornecedorCadastro().Show();
+        }
+        private void MascaraCodigo(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbCodigo, e);
         }
     }
 }
