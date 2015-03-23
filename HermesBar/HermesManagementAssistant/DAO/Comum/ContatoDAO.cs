@@ -127,11 +127,10 @@ namespace DAO.Comum
             {
                 AccessObject<ContatoModel> AO = new AccessObject<ContatoModel>();
                 AO.CreateSelectAll();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, "@Id");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Id", id);
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, id);
 
-                return CarregaContato(Connection.getDataTable());
+                return CarregaContato(AO.GetDataTable());
             }
             catch (Exception e)
             {

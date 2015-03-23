@@ -91,7 +91,7 @@ namespace BLL.Estabelecimento
                     return false;
                 }
 
-                var config = ConfigEstabelecimentoBLL.Salvar(estabelecimento.ConfigEsstabelecimento);
+                var config = ConfigEstabelecimentoBLL.Salvar(estabelecimento.ConfigEstabelecimento);
                 if (config != null)
                     estabelecimento.ConfigEstabelecimento = config;
                 else

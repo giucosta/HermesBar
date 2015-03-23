@@ -48,6 +48,7 @@ namespace DAO.Estabelecimento
                 AO.InsertParameter("InscricaoEstadual", estabelecimento.InscricaoEstadual);
                 AO.InsertParameter("Endereco", estabelecimento.Endereco.Id);
                 AO.InsertParameter("Contato", estabelecimento.Contato.Id);
+                AO.InsertParameter("ConfigEstabelecimento", estabelecimento.ConfigEstabelecimento.Id);
                 
                 if(AO.ExecuteCommand())
                     return RetornaUltimoEstabelecimentoSalvo();

@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConsultaCep">
+    <Reference Include="ConsultaCep, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>.\ConsultaCep.dll</HintPath>
     </Reference>
     <Reference Include="System" />
