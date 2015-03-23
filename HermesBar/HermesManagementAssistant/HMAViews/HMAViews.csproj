@@ -65,6 +65,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Estabelecimento\Estabelecimento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +82,9 @@
     </Compile>
     <Compile Include="View\Atracoes\AtracoesCadastro.xaml.cs">
       <DependentUpon>AtracoesCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Estabelecimento\Estabelecimento.xaml.cs">
+      <DependentUpon>Estabelecimento.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

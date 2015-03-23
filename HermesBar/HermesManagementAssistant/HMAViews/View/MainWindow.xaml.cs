@@ -1,9 +1,9 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
-using HermesManagementAssistant.View.Estabelecimento;
 using HermesManagementAssistant.View.Fornecedor;
 using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Produtos;
 using HMAViews.View.Atracoes;
+using HMAViews.View.Estabelecimento;
 using Microsoft.Win32;
 using MODEL;
 using MODEL.Fornecedor;
