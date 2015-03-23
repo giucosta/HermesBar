@@ -41,15 +41,15 @@ namespace DAO.Estabelecimento
             {
                 AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@RazaoSocial", estabelecimento.RazaoSocial);
-                Connection.AddParameter("@NomeFantasia", estabelecimento.NomeFantasia);
-                Connection.AddParameter("@Cnpj", estabelecimento.Cnpj);
-                Connection.AddParameter("@InscricaoEstadual", estabelecimento.InscEstadual);
-                Connection.AddParameter("@Endereco", estabelecimento.Endereco.Id);
-                Connection.AddParameter("@Contato", estabelecimento.Contato.Id);
-
-                if(Connection.ExecutarComando())
+                AO.GetCommand();
+                AO.InsertParameter("RazaoSocial", estabelecimento.RazaoSocial);
+                AO.InsertParameter("NomeFantasia", estabelecimento.NomeFantasia);
+                AO.InsertParameter("Cnpj", estabelecimento.Cnpj);
+                AO.InsertParameter("InscricaoEstadual", estabelecimento.InscEstadual);
+                AO.InsertParameter("Endereco", estabelecimento.Endereco.Id);
+                AO.InsertParameter("Contato", estabelecimento.Contato.Id);
+                
+                if(AO.ExecuteCommand())
                     return RetornaUltimoEstabelecimentoSalvo();
                 return null;
             }
@@ -65,9 +65,9 @@ namespace DAO.Estabelecimento
             {
                 AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
                 AO.CreateSpecificQuery("SELECT MAX(Id_Estabelecimento) AS Id FROM Estabelecimento");
-                Connection.GetCommand(AO.ReturnQuery());
-                
-                var dataTable = Connection.getDataTable();
+                AO.GetCommand();
+
+                var dataTable = AO.GetDataTable();
                 if(dataTable != null)
                     return (int)dataTable.Rows[0]["Id"];
                 return 0;
@@ -87,11 +87,10 @@ namespace DAO.Estabelecimento
 
             AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
             AO.CreateSelectAll();
-            AO.InsertParameter(ConstantesDAO.WHERE, "Id_Estabelecimento", ConstantesDAO.EQUAL, "@Id_Estabelecimento");
-            Connection.GetCommand(AO.ReturnQuery());
-            Connection.AddParameter("Id_Estabelecimento", idEstabelecimento);
-
-            return PreencheEstabelecimento(Connection.getDataTable());
+            AO.GetCommand();
+            AO.InsertParameter(ConstantesDAO.WHERE, "Id_Estabelecimento", ConstantesDAO.EQUAL, idEstabelecimento);
+            
+            return PreencheEstabelecimento(AO.GetDataTable());
         }
         private EstabelecimentoModel PreencheEstabelecimento(DataTable data)
         {

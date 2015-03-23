@@ -20,10 +20,11 @@ namespace BLL.Comum
                 return _enderecoDAO;
             }
         }
-
         public EnderecoModel Salvar(EnderecoModel endereco)
         {
-            return DAO.Salvar(VerificaCamposNulos(endereco));
+            if(!string.IsNullOrEmpty(endereco.Cep))
+                return DAO.Salvar(VerificaCamposNulos(endereco));
+            return null;
         }
         public List<String> CarregaEstados()
         {
@@ -40,8 +41,6 @@ namespace BLL.Comum
         {
             if (endereco.Bairro == null)
                 endereco.Bairro = "";
-            if (endereco.Cep == null)
-                endereco.Cep = "";
             if (endereco.Cidade == null)
                 endereco.Cidade = "";
             if (endereco.Complemento == null)

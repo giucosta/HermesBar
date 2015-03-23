@@ -27,14 +27,14 @@
                             <Label Name="lbFantasia" Content="Nome Fantasia" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,76,0,0" FontWeight="Bold" Grid.Column="1"/>
                             <TextBox Name="tbNomeFantasia" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="462" Margin="0,73,0,0" Grid.Column="2" Grid.ColumnSpan="3" TabIndex="2" ToolTip="Insira o Nome Fantasia do estabelecimento"/>
                             <Label Name="lbCnpj" Content="Cnpj" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,109,0,0" FontWeight="Bold" Grid.Column="1"/>
-                            <TextBox Name="tbCnpj" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Margin="0,105,0,0" Grid.Column="2" TabIndex="3" ToolTip="Insira o CNPJ do estabelecimento"/>
+                            <TextBox Name="tbCnpj" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Margin="0,105,0,0" Grid.Column="2" TabIndex="3" ToolTip="Insira o CNPJ do estabelecimento" KeyDown="MascaraCnpj"/>
                             <Label Name="lbInscEstadual" Content="Insc. Estadual" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="172,108,0,0" FontWeight="Bold" Grid.Column="2"/>
                             <TextBox Name="tbInscEstadual" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="0,103,0,0" Grid.Column="3" Grid.ColumnSpan="2" TabIndex="4" ToolTip="Insira a Inscrição Estadual do estabelecimento"/>
                             
                             <GroupBox Header="Endereço" HorizontalAlignment="Left" Margin="31,172,0,0" VerticalAlignment="Top" Height="214" Width="591" Grid.ColumnSpan="5"/>
-                            <Label Name="lbCep" Content="Cep" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,194,0,0" FontWeight="Bold" Grid.Column="1"/>
+                            <Label Name="lbCep" Content="Cep" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,194,0,0" FontWeight="Bold" Grid.Column="1" KeyDown="MascaraCep"/>
                             <TextBox Name="tbCep" MaxLength="8" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="0,191,0,0" Grid.Column="2" TabIndex="5" ToolTip="Insira o CEP do estabelecimento"/>
-                            <Button Name="btConsultaCep" Content="Consultar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Margin="131,189,0,0" Grid.Column="2" TabIndex="6" ToolTip="Clique para pesquisar endereço pelo CEP"/>
+                            <Button Name="btConsultaCep" Content="Consultar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="93" Margin="131,189,0,0" Grid.Column="2" TabIndex="6" ToolTip="Clique para pesquisar endereço pelo CEP" Click="ConsultarCep"/>
                             <Label Name="lbRua" Content="Rua" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,225,0,0" Grid.Column="1"/>
                             <TextBox Name="tbRua" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="458" Margin="1,221,0,0" IsReadOnly="True" Background="LightGray" Grid.Column="2" Grid.ColumnSpan="2" TabIndex="7" ToolTip="Insira a rua do estabelecimento"/>
                             <Label Name="lbNumero" Content="Número" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,257,0,0" Grid.Column="1"/>
@@ -44,20 +44,20 @@
                             <Label Name="lbCidade" Content="Cidade" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,320,0,0" Grid.Column="1"/>
                             <TextBox Name="tbCidade" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="458" Margin="0,316,0,0" IsReadOnly="True" Background="LightGray" Grid.ColumnSpan="2" Grid.Column="2" TabIndex="10" ToolTip="Insira a cidade do estabelecimento"/>
                             <Label Name="lbCepNaoExistente" Content="Cep não existente !" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,187,0,0" Width="243" Foreground="#FFF90F0F" Visibility="Hidden" Grid.Column="2" Grid.ColumnSpan="2"/>
+                            <Label Name="lbEstado" Content="UF" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,355,0,0" Grid.Column="1"/>
                             <ComboBox Name="cbEstado" HorizontalAlignment="Left" Height="27" Margin="0,349,0,0" VerticalAlignment="Top" Width="102" Grid.Column="2" TabIndex="11" ToolTip="Selecione o estado do estabelecimento"/>
                             
                             <GroupBox Header="Contato" HorizontalAlignment="Left" Margin="33,394,0,0" VerticalAlignment="Top" Height="167" Width="591" Grid.ColumnSpan="5"/>
                             <Label Name="lbNome" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,419,0,0" FontWeight="Bold" Grid.Column="1"/>
                             <TextBox Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="459" Margin="0,415,0,0" Grid.ColumnSpan="2" Grid.Column="2" TabIndex="12" ToolTip="Insira o nome do contato"/>
                             <Label Name="lbTelefone" Content="Telefone" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,454,0,0" FontWeight="Bold" Grid.Column="1"/>
-                            <TextBox Name="tbTelefone" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Margin="0,450,0,0" Grid.Column="2" TabIndex="13" ToolTip="Insira o telefone do contato"/>
+                            <TextBox Name="tbTelefone" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Margin="0,451,0,0" Grid.Column="2" TabIndex="13" ToolTip="Insira o telefone do contato" KeyDown="MascaraTelefone"/>
                             <Label Name="lbCelular" Content="Celular" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="212,453,0,0" FontWeight="Bold" Grid.Column="2"/>
-                            <TextBox Name="tbCelular" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Margin="0,450,0,0" Grid.Column="3" TabIndex="14" ToolTip="Insira o celular do contato"/>
+                            <TextBox Name="tbCelular" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="197" Margin="0,450,0,0" Grid.Column="3" TabIndex="14" ToolTip="Insira o celular do contato" KeyDown="MascaraCelular"/>
                             <Label Name="lbEmail" Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,485,0,0" FontWeight="Bold" Grid.Column="1"/>
                             <TextBox Name="tbEmail" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" Margin="0,482,0,0" Grid.ColumnSpan="3" Grid.Column="2" TabIndex="15" ToolTip="Insira o e-mail do contato"/>
                             <Label Name="lbSite" Content="Site" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,517,0,0" Grid.Column="1"/>
                             <TextBox Name="tbSite" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="461" Margin="0,513,0,0" Grid.ColumnSpan="3" Grid.Column="2" TabIndex="15" ToolTip="Insira o site da atração"/>
-                            <Label Name="lbEstado" Content="UF" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,355,0,0" Grid.Column="1"/>
                         </Grid>
                     </TabItem>
                     <TabItem Header="Outras Configurações">
@@ -67,11 +67,11 @@
                             <RadioButton Name="rbMesa" Content="Mesa" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="116,60,0,0" Height="20" Width="59" TabIndex="16" ToolTip="Selecione caso seu estabelecimento funcione com sistema de mesas"/>
                             <RadioButton Name="rbComanda" Content="Comanda" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="180,61,0,0" IsChecked="True" Height="20" Width="89" TabIndex="17" ToolTip="Selecione caso seu estabelecimento funcione com sistema de comandas"/>
                             <Label Content="Quant. Mesas" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.485,0.541" Margin="27,88,0,0" Grid.Column="2" Height="26" Width="82"/>
-                            <TextBox Name="tbQuantMesa" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="117,86,0,0" MaxLength="3" TabIndex="18" ToolTip="Insira a quantidade de mesas disponíveis"/>
+                            <TextBox Name="tbQuantMesa" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="117,86,0,0" MaxLength="3" TabIndex="18" ToolTip="Insira a quantidade de mesas disponíveis" KeyDown="MascaraQuantidadeMesa"/>
                             <CheckBox Name="cbItensIguais" Content="Agrupar itens iguais no pedido" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="117,118,0,0" Height="20" Width="203" TabIndex="19" ToolTip="Selecione se deseja agrupar os itens iguais no fechamento da conta do cliente"/>
                             <Label Content="Taxa Serviço" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,149,0,0" Grid.Column="2" Height="26" Width="75"/>
-                            <TextBox Name="tbTaxaServico" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="120" Margin="117,146,0,0" MaxLength="3" TabIndex="20" ToolTip="Insira a taxa de serviço"/>
-                            <Button Name="btGravar" Content="Gravar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="31,203,0,0" TabIndex="21" ToolTip="Clique para gravar o seu estabelecimento" FontWeight="Bold"/>
+                            <TextBox Name="tbTaxaServico" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="120" Margin="117,146,0,0" MaxLength="3" TabIndex="20" ToolTip="Insira a taxa de serviço" KeyDown="MascaraTaxaServico"/>
+                            <Button Name="btGravar" Content="Gravar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="31,203,0,0" TabIndex="21" ToolTip="Clique para gravar o seu estabelecimento" FontWeight="Bold" Click="Gravar"/>
                         </Grid>
                     </TabItem>
                 </TabControl>

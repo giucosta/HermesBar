@@ -1,6 +1,7 @@
 ﻿using BLL.Comum;
 using DAO.Comum;
 using DAO.Estabelecimento;
+using DAO.Utils;
 using MODEL.Estabelecimento;
 using System;
 using System.Collections.Generic;
@@ -69,17 +70,43 @@ namespace BLL.Estabelecimento
         {
             if (Validacoes.ValidaCNPJ(estabelecimento.Cnpj))
             {
-                estabelecimento.Endereco = EnderecoBLL.Salvar(estabelecimento.Endereco);
-                estabelecimento.Contato = ContatoBLL.Salvar(estabelecimento.Contato);
-                estabelecimento.ConfigEstabelecimento = ConfigEstabelecimentoBLL.Salvar(estabelecimento.ConfigEstabelecimento);
+                AccessObject<EstabelecimentoModel> AO = new AccessObject<EstabelecimentoModel>();
+                AO.GetTransaction();
 
-                var estabelecimentoSalvo = EstabelecimentoDAO.Salvar(estabelecimento);
-                if (estabelecimentoSalvo != null)
+                var endereco = EnderecoBLL.Salvar(estabelecimento.Endereco);
+                if (endereco != null)
+                    estabelecimento.Endereco = endereco;
+                else
                 {
-                    estabelecimentoSalvo.ConfigEstabelecimento = new ConfigEstabelecimentoModel();
-                    estabelecimentoSalvo.ConfigEstabelecimento = estabelecimentoSalvo.ConfigEstabelecimento;
-                    return ConfigEstabelecimentoEstabelecimentoBLL.Salvar(estabelecimentoSalvo);
+                    AO.Rollback();
+                    return false;
                 }
+
+                var contato = ContatoBLL.Salvar(estabelecimento.Contato);
+                if (contato != null)
+                    estabelecimento.Contato = contato;
+                else
+                {
+                    AO.Rollback();
+                    return false;
+                }
+
+                var config = ConfigEstabelecimentoBLL.Salvar(estabelecimento.ConfigEstabelecimento);
+                if (config != null)
+                    estabelecimento.ConfigEstabelecimento = config;
+                else
+                {
+                    AO.Rollback();
+                    return false;
+                }
+
+                if (EstabelecimentoDAO.Salvar(estabelecimento) != null)
+                {
+                    AO.Commit();
+                    return true;
+                }
+                else
+                    AO.Rollback();
             }
             return false;
         }

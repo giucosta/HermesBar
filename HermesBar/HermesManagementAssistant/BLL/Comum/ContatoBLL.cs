@@ -41,14 +41,10 @@ namespace BLL.Comum
         {
             if (string.IsNullOrEmpty(contato.Celular))
                 contato.Celular = "";
-            if (string.IsNullOrEmpty(contato.Email))
-                contato.Email = "";
-            if (string.IsNullOrEmpty(contato.Nome))
-                contato.Nome = "";
             if (string.IsNullOrEmpty(contato.Site))
                 contato.Site = "";
             if (string.IsNullOrEmpty(contato.Telefone))
-                contato.Site = "";
+                contato.Telefone = "";
             return contato;
         }
         public int RecuperaProximoId()

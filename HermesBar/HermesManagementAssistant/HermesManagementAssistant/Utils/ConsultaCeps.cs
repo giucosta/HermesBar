@@ -18,7 +18,7 @@ namespace HermesManagementAssistant.Utils
         /// <param name="tbCidade"></param>
         /// <param name="tbBairro"></param>
         /// <param name="cbEstado"></param>
-        /// <param name="cep"></param>
+        /// <param name="tbCep"></param>
         public static bool ConsultarCep(TextBox rua, TextBox cidade, TextBox bairro, ComboBox uf, TextBox cep){
             List<ConsultaCep.Endereco> enderecos = null;
             enderecos = ConsultaCep.ConsultaCep.GetEnderecos(cep.Text);
