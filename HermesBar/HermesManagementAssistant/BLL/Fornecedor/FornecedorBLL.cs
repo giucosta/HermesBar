@@ -45,7 +45,6 @@ namespace BLL.Fornecedor
                 return _contatoBLL;
             }
         }
-
         public bool Salvar(FornecedorModel fornecedor)
         {
             if (Validacoes.ValidaCNPJ(fornecedor.Cnpj))

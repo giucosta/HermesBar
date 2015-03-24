@@ -23,7 +23,7 @@ namespace DAO.Fornecedor
                 AO.CreateDataInsert();
                 Connection.GetCommand(AO.ReturnQuery());
                 Connection.AddParameter("@RazaoSocial", fornecedor.RazaoSocial);
-                Connection.AddParameter("@Cnpj", fornecedor.Cnpj);
+                Connection.AddParameter("@Cnpj", fornecedor.Cpj);
                 Connection.AddParameter("@InscricaoEstadual", fornecedor.InscricaoEstadual);
                 Connection.AddParameter("@Contato", fornecedor.Contato.Id);
                 Connection.AddParameter("@Endereco", fornecedor.Endereco.Id);

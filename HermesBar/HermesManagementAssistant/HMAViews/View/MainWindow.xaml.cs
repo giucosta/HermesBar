@@ -4,6 +4,7 @@ using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Produtos;
 using HMAViews.View.Atracoes;
 using HMAViews.View.Estabelecimento;
+using HMAViews.View.Fornecedor;
 using Microsoft.Win32;
 using MODEL;
 using MODEL.Fornecedor;
@@ -46,7 +47,7 @@ namespace HMAViews
         }
         public void Fornecedor(object sender, RoutedEventArgs e)
         {
-            new Fornecedor().Show();
+            new HMAViews.View.Fornecedor.Fornecedor().Show();
         }
         public void Funcionarios(object sender, RoutedEventArgs e)
         {
@@ -74,7 +75,7 @@ namespace HMAViews
                 {
                     var forn = new FornecedorModel();
                     forn.RazaoSocial = fornecedor.RazaoSocial;
-                    forn.Cnpj = fornecedor.Cnpj;
+                    forn.Cpj = fornecedor.Cpj;
                     forn.InscricaoEstadual = fornecedor.InscricaoEstadual;
                     forn.Endereco = new EnderecoModel() { 
                         Rua = fornecedor.Endereco.Rua, 

@@ -10,7 +10,7 @@ namespace MODEL.Fornecedor
     public class FornecedorModel : IModel
     {
         public string RazaoSocial { get; set; }
-        public string Cnpj { get; set; }
+        public string Cpj { get; set; }
         public string InscricaoEstadual { get; set; }
         public ContatoModel Contato { get; set; }
         public EnderecoModel Endereco { get; set; }

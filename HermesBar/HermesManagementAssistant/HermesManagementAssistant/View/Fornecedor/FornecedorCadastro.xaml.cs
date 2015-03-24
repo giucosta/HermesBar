@@ -67,7 +67,7 @@ namespace HermesManagementAssistant.View.Fornecedor
         {
             var fornecedor = new FornecedorModel();
             fornecedor.RazaoSocial = tbRazaoSocial.Text;
-            fornecedor.Cnpj = tbCpfCnpj.Text;
+            fornecedor.Cpj = tbCpfCnpj.Text;
             fornecedor.InscricaoEstadual = tbInscricaoEstadual.Text;
             fornecedor.Contato = CarregaContatoFornecedor();
             fornecedor.Endereco = CarregaEnderecoFornecedor();
@@ -103,7 +103,7 @@ namespace HermesManagementAssistant.View.Fornecedor
             tbBairro.Text = forn.Endereco.Bairro;
             tbCep.Text = forn.Endereco.Cep;
             tbCidade.Text = forn.Endereco.Cidade;
-            tbCpfCnpj.Text = forn.Cnpj;
+            tbCpfCnpj.Text = forn.Cpj;
             tbInscricaoEstadual.Text = forn.InscricaoEstadual;
             tbRazaoSocial.Text = forn.RazaoSocial;
             tbRua.Text = forn.Endereco.Rua;

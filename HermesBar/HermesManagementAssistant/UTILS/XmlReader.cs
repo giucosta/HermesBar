@@ -83,7 +83,7 @@ namespace UTILS
                         if (node1.Name.Equals("xNome"))
                             fornecedor.RazaoSocial = node1.InnerText;
                         if (node1.Name.Equals("CNPJ"))
-                            fornecedor.Cnpj = node1.InnerText;
+                            fornecedor.Cpj = node1.InnerText;
                         if (node1.Name.Equals("IE"))
                             fornecedor.InscricaoEstadual = node1.InnerText;
 

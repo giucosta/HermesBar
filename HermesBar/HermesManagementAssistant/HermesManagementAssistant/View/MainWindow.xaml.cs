@@ -85,7 +85,7 @@ namespace HermesManagementAssistant
                 {
                     FornecedorCadastro view = new FornecedorCadastro();
                     view.tbRazaoSocial.Text = fornecedor.RazaoSocial;
-                    view.tbCpfCnpj.Text = fornecedor.Cnpj;
+                    view.tbCpfCnpj.Text = fornecedor.Cpj;
                     view.tbInscricaoEstadual.Text = fornecedor.InscricaoEstadual;
                     view.tbRua.Text = fornecedor.Endereco.Rua;
                     view.tbNumero.Text = fornecedor.Endereco.Numero;
