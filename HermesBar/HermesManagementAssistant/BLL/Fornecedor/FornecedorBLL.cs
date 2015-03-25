@@ -47,7 +47,7 @@ namespace BLL.Fornecedor
         }
         public bool Salvar(FornecedorModel fornecedor)
         {
-            if (Validacoes.ValidaCNPJ(fornecedor.Cnpj))
+            if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
             {
                 Connection.GetTransaction();
                 fornecedor.Endereco = SaveAddress(fornecedor.Endereco);
