@@ -49,6 +49,13 @@ namespace HMAViews.View.Fornecedor
         private void Novo(object sender, RoutedEventArgs e)
         {
             new FornecedorCadastro().Show();
+            this.Close();
+        }
+        private void Editar(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid data = (DataGrid)sender;
+            new FornecedorCadastro((FornecedorModel)data.SelectedItems[0]).Show();
+            this.Close();
         }
     }
 }

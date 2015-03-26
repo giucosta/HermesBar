@@ -3,6 +3,7 @@ using DAO.Connections;
 using DAO.Fornecedor;
 using MODEL;
 using MODEL.Fornecedor;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,7 +70,21 @@ namespace BLL.Fornecedor
         }
         public List<FornecedorModel> Pesquisar(FornecedorModel fornecedor)
         {
-            return FornecedorDAO.Pesquisar(fornecedor).DataTableToList<FornecedorModel>();
+            var listFornecedor = FornecedorDAO.Pesquisar(fornecedor).DataTableToList<FornecedorModel>();
+            foreach (var item in listFornecedor)
+            {
+                item.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(item));
+                item.Endereco = EnderecoBLL.RecuperaEnderecoId(RecuperaIdEndereco(item));
+            }
+            return listFornecedor;
+        }
+        public int RecuperaIdContato(FornecedorModel fornecedor)
+        {
+            return FornecedorDAO.RetornaIdContato(fornecedor);
+        }
+        public int RecuperaIdEndereco(FornecedorModel fornecedor)
+        {
+            return FornecedorDAO.RetornaIdEndereco(fornecedor);
         }
 
         #region EnderecoFornecedor

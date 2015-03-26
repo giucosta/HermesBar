@@ -58,5 +58,35 @@ namespace DAO.Fornecedor
                 return null;
             }
         }
+        public int RetornaIdContato(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.CreateSpecificQuery("SELECT Id_Contato as Id FROM Fornecedor");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, fornecedor.Id);
+                return (int)AO.GetDataTable().Rows[0]["Id"];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public int RetornaIdEndereco(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.CreateSpecificQuery("SELECT Id_Endereco AS Id FROM FOrnecedor");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, fornecedor.Id);
+                return (int)AO.GetDataTable().Rows[0]["Id"];
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

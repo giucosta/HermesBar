@@ -17,40 +17,23 @@
                         <ColumnDefinition Width="100"/>
                         <ColumnDefinition Width="290"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Razão Social" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbRazaoSocial" Margin="1,13,6,267" MaxLength="100" TabIndex="1" ToolTip="Insira a razão social do fornecedor" Grid.Column="2"/>
-                    <Label Content="CNPJ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="37" Margin="0,48,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbCnpj" Margin="1,45,182,235" MaxLength="18" TabIndex="2" ToolTip="Insira o CNPJ do fornecedor" Grid.Column="2"/>
-                    <Label Content="Insc. Estadual" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,80,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbInscEstadual" Margin="1,76,182,204" MaxLength="18" TabIndex="3" ToolTip="Insira a Inscrição Estadual do fornecedor" Grid.Column="2"/>
-                    <CheckBox Content="Isento" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="7.638,5.383" Height="23" Width="66" Margin="154,75,0,0" TabIndex="4" ToolTip="Selecione caso a Inscr. Estadual seja isenta" Grid.Column="2"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Razão Social"   Grid.Column="1"     Grid.Row="1"    HorizontalAlignment="Left"  VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="CNPJ"           Grid.Column="1"     Grid.Row="2"    HorizontalAlignment="Left"  VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Insc. Estadual" Grid.Column="1"     Grid.Row="3"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+
+                    <TextBox Name="tbRazaoSocial"   Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280"  MaxLength="100" TabIndex="1"/>
+                    <TextBox Name="tbCnpj"          Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150"  MaxLength="20"  TabIndex="2" KeyDown="MascaraCnpj"/>
+                    <TextBox Name="tbInscEstadual"  Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150"  MaxLength="20"  TabIndex="3" KeyDown="MascaraInscEstadual"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Endereço">
-                <Grid Height="300" Width="450">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="290"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="CEP" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,15,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbCep" Margin="0,13,138,267" MaxLength="8" TabIndex="1" ToolTip="Insira o CEP" Grid.Column="2"/>
-                    <Button Name="tbConsultar" Content="Consultar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Grid.Column="2" Margin="172,13,0,0" Height="23" TabIndex="4" ToolTip="Clique para consultar o CEP"/>
-                    <Label Content="Rua" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,46,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbRua" Margin="0,44,12,236" MaxLength="8" TabIndex="1" ToolTip="Insira a rua" Grid.Column="2"/>
-                    <Label Content="Número" HorizontalAlignment="Left" VerticalAlignment="Top" Width="57" Margin="0,79,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbNumero" Margin="0,76,138,204" MaxLength="8" TabIndex="2" ToolTip="Insira o número" Grid.Column="2"/>
-                    <Label Content="Bairro" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,111,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbBairro" Margin="0,107,138,173" MaxLength="50" TabIndex="3" ToolTip="Insira o bairro" Grid.Column="2"/>
-                    <Label Content="Complemento" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,143,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbComplemento" Margin="0,139,137,141" MaxLength="50" TabIndex="3" ToolTip="Insira o bairro" Grid.Column="2"/>
-                    <Label Content="Cidade" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,172,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <TextBox Name="tbCidade" Margin="0,168,12,112" MaxLength="50" TabIndex="3" ToolTip="Insira o bairro" Grid.Column="2"/>
-                    <Label Content="UF" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="0,201,0,0" FontWeight="Bold" Grid.Column="1"/>
-                    <ComboBox Name="cbEstado" HorizontalAlignment="Left" VerticalAlignment="Top" Width="153" Grid.Column="2" Margin="0,201,0,0"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Contato">
+            <TabItem Header="Endereço" TabIndex="4">
                 <Grid Height="300" Width="450">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
@@ -64,17 +47,58 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
-                    <TextBox Name="tbNome" Grid.Column="2" Grid.Row="1" MaxLength="100" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280"/>
-                    <Label Content="Telefone" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBox Name="tbTelefone" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150"/>
-                    <Label Content="Celular" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <TextBox Name="tbCelular" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="150"/>
-                    <Label Content="E-mail" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4"/>
-                    <TextBox Name="tbEmail" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Width="280"/>
-                    <Label Content="Site" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="5"/>
-                    <TextBox Name="tbSite" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280"/>
+                    <Label Content="CEP"            Grid.Column="1"     Grid.Row="1"    HorizontalAlignment="Left"  VerticalAlignment="Center"      FontWeight="Bold"/>
+                    <Label Content="Rua"            Grid.Column="1"     Grid.Row="2"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                    <Label Content="Número"         Grid.Column="1"     Grid.Row="3"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                    <Label Content="Bairro"         Grid.Column="1"     Grid.Row="4"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                    <Label Content="Complemento"    Grid.Column="1"     Grid.Row="5"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                    <Label Content="Cidade"         Grid.Column="1"     Grid.Row="6"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+                    <Label Content="UF"             Grid.Column="1"     Grid.Row="7"    HorizontalAlignment="Left"  VerticalAlignment="Center"/>
+
+                    <Button Name="btConsultar"  Content="Consultar" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,3,13,2" Click="ConsultarCep" TabIndex="6"/>
+
+                    <TextBox Name="tbCep"           Grid.Column="2"     Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" MaxLength="8"    TabIndex="5" KeyDown="MascaraCep" />
+                    <TextBox Name="tbRua"           Grid.Column="2"     Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="280" MaxLength="100"  TabIndex="7"/>
+                    <TextBox Name="tbNumero"        Grid.Column="2"     Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" MaxLength="8"    TabIndex="8"/>
+                    <TextBox Name="tbBairro"        Grid.Column="2"     Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" MaxLength="50"   TabIndex="9"/>
+                    <TextBox Name="tbComplemento"   Grid.Column="2"     Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" MaxLength="50"   TabIndex="10"/>
+                    <TextBox Name="tbCidade"        Grid.Column="2"     Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" MaxLength="100"  TabIndex="11"/>
+                    <ComboBox Name="cbEstado"       Grid.Column="2"     Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150"                  TabIndex="12"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Contato" TabIndex="13">
+                <Grid Height="300" Width="450">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="290"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Nome"       Grid.Column="1" Grid.Row="1"    HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                    <Label Content="Telefone"   Grid.Column="1" Grid.Row="2"    HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Label Content="Celular"    Grid.Column="1" Grid.Row="3"    HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <Label Content="E-mail"     Grid.Column="1" Grid.Row="4"    HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Content="Site"       Grid.Column="1" Grid.Row="5"    HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+                    <TextBox Name="tbNome"      Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="280" MaxLength="100" TabIndex="14"/>
+                    <TextBox Name="tbTelefone"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="150" MaxLength="15"  TabIndex="15"    KeyDown="MascaraTelefone"/>
+                    <TextBox Name="tbCelular"   Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="150" MaxLength="15"  TabIndex="16"    KeyDown="MascaraCelular"/>
+                    <TextBox Name="tbEmail"     Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="280" MaxLength="100" TabIndex="17"/>
+                    <TextBox Name="tbSite"      Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center"  Width="280" MaxLength="100" TabIndex="18"/>
+                    <Button Name="btSalvar" Content="Salvar" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90" FontWeight="Bold" Click="Salvar"/>
+                    <Button Name="btExcluir" Content="Excluir" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="90"/>
                 </Grid>
             </TabItem>
         </TabControl>

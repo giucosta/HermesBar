@@ -98,5 +98,15 @@ namespace Utils.Mensagens
         public const string PRODUTO_EXCLUIR_CONFIRMA = "Confirma a exclusão do produto?";
         public const string PRODUTO_EDITAR_SUCESSO = "Produto editado com sucesso!";
         public const string PRODUTO_EDITAR_ERRO = "Erro ao editar produto!";
+        //FORNECEDOR
+        public const string FORNECEDOR_CADASTRO_SUCESSO = "Fornecedor cadastrado com sucesso!";
+        public const string FORNECEDOR_CADASTRO_ERRO = "Erro ao cadastrar Fornecedor";
+        public const string CERTEZA_EXCLUIR_FORNECEDOR = "Confirma exclusão do Fornecedor?";
+        public const string FORNECEDOR_EXCLUIR_SUCESSO = "Fornecedor excluído com sucesso!";
+        public const string FORNECEDOR_EXCLUIR_ERRO = "Erro ao excluir Fornecedor!";
+        public const string FORNECEDOR_EDITAR_SUCESSO = "Fornecedor editado com sucesso!";
+        public const string FORNECEDOR_EDITAR_ERRO = "Erro ao editar fornecedor!";
+        //CONSULTA CEP
+        public const string CONSULTACEP_TAMANHO_ERRO = "Insira um CEP válido";
     }
 }

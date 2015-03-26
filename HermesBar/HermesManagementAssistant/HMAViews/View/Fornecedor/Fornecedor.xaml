@@ -21,7 +21,7 @@
                 <TextBox Name="tbRazaoSocial" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Margin="0,55,0,0" Grid.Column="2"/>
                 <Label Name="lbCodigo" Content="Código" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,27,0,0" Grid.Column="1"/>
                 <TextBox Name="tbCodigo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Margin="0,23,0,0" Grid.Column="2"/>
-                <DataGrid Name="gridPesquisa" HorizontalAlignment="Left" VerticalAlignment="Top" Height="189" Width="471" Margin="2,172,0,-2" AlternationCount="2" HeadersVisibility="All" ColumnWidth="SizeToCells" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="3">
+                <DataGrid Name="gridPesquisa" HorizontalAlignment="Left" VerticalAlignment="Top" Height="189" Width="471" Margin="2,172,0,-2" AlternationCount="2" HeadersVisibility="All" ColumnWidth="SizeToCells" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="3" MouseDoubleClick="Editar">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cód" Width="70" Binding="{Binding Path=Id}"/>
                         <DataGridTextColumn Header="Razão Social" Width="150" Binding="{Binding Path=RazaoSocial}"/>

@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MODEL;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace UTILS
 {
@@ -31,7 +34,9 @@ namespace UTILS
                             if (propertyInfo.Name.Equals("Id"))
                                 propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name + "_" + nameModel], propertyInfo.PropertyType), null);
                             else
+                            {
                                 propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                            }
                         }
                         catch
                         {
@@ -105,6 +110,35 @@ namespace UTILS
                     retorno.Append(row[i].ToString());
             }
             return retorno.ToString();
+        }
+        public static string DataTableToJSON(this DataTable dataTable)
+        {
+            string[] StrDc = new string[dataTable.Columns.Count];
+            string HeadStr = string.Empty;
+            for (int i = 0; i < dataTable.Columns.Count; i++)
+            {
+                StrDc[i] = dataTable.Columns[i].Caption;
+                HeadStr += "\"" + StrDc[i] + "\":\"" + StrDc[i] + i.ToString() + "¾" + "\",";
+            }
+            HeadStr = HeadStr.Substring(0, HeadStr.Length - 1);
+            StringBuilder Sb = new StringBuilder();
+            Sb.Append("[");
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                string TempStr = HeadStr;
+                for (int j = 0; j < dataTable.Columns.Count; j++)
+                    TempStr = TempStr.Replace(dataTable.Columns[j] + j.ToString() + "¾", dataTable.Rows[i][j].ToString().Trim());
+                Sb.Append("{" + TempStr + "},");
+            }
+            Sb = new StringBuilder(Sb.ToString().Substring(0, Sb.ToString().Length - 1));
+            if (Sb.ToString().Length > 0)
+                Sb.Append("]");
+
+            return StripControlChars(Sb.ToString());
+        }
+        public static string StripControlChars(string s)
+        {
+            return Regex.Replace(s, @"[^\x20-\x7F]", "");
         }
     }
 }
