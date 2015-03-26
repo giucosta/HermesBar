@@ -29,7 +29,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Endereço">
-                <Grid Height="185" Margin="16,0,10,133" VerticalAlignment="Bottom">
+                <Grid Height="185" Margin="16,0,10,131" VerticalAlignment="Bottom">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="35"></RowDefinition>
                         <RowDefinition Height="35"></RowDefinition>

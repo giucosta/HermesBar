@@ -28,8 +28,8 @@
                         <DataGridTextColumn Header="Cnpj" Width="150" Binding="{Binding Path=Cpj}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="0,88,0,0" Grid.Column="1" Grid.ColumnSpan="2" Click="Pesquisa"/>
-                <Button Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold"/>
+                <Button Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="0,89,0,0" Grid.Column="1" Grid.ColumnSpan="2" Click="Pesquisa"/>
+                <Button Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Click="Novo"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

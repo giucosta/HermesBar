@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Fornecedor\FornecedorCadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Login\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +96,9 @@
     </Compile>
     <Compile Include="View\Fornecedor\Fornecedor.xaml.cs">
       <DependentUpon>Fornecedor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Fornecedor\FornecedorCadastro.xaml.cs">
+      <DependentUpon>FornecedorCadastro.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>

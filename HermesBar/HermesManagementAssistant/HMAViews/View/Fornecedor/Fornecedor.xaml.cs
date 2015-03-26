@@ -48,7 +48,7 @@ namespace HMAViews.View.Fornecedor
         }
         private void Novo(object sender, RoutedEventArgs e)
         {
-
+            new FornecedorCadastro().Show();
         }
     }
 }

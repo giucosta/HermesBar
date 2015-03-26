@@ -83,7 +83,7 @@ namespace HMAViews
                         Cep = fornecedor.Endereco.Cep,
                         Cidade = fornecedor.Endereco.Cidade
                     };
-                    new FornecedorCadastro(forn).Show();
+                    new HermesManagementAssistant.View.Fornecedor.FornecedorCadastro(forn).Show();
                 }
                 else
                     Mensagens.GeraMensagens("Importar XML", MENSAGEM.ARQUIVO_JA_EXPORTADO, null, TIPOS_MENSAGENS.ALERTA);
