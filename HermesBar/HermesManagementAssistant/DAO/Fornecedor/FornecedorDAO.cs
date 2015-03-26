@@ -58,6 +58,41 @@ namespace DAO.Fornecedor
                 return null;
             }
         }
+        public bool Editar(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.CreateSpecificQuery("UPDATE Fornecedor SET RazaoSocial = @RazaoSocial, Cpj = @Cpj, InscricaoEstadual = @InscricaoEstadual");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Fornecedor", ConstantesDAO.EQUAL, fornecedor.Id);
+                AO.InsertParameter("RazaoSocial", fornecedor.RazaoSocial);
+                AO.InsertParameter("Cpj", fornecedor.Cpj);
+                AO.InsertParameter("InscricaoEstadual", fornecedor.InscricaoEstadual);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Editar", "FornecedorDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
+                return false;
+            }
+        }
+        public bool Excluir(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.DeleteFromId();
+                AO.GetCommand();
+                AO.InsertParameter("Id_Fornecedor",fornecedor.Id);
+                return AO.ExecuteCommand();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public int RetornaIdContato(FornecedorModel fornecedor)
         {
             try

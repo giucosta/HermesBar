@@ -1,6 +1,7 @@
 ﻿using BLL.Comum;
 using DAO.Connections;
 using DAO.Fornecedor;
+using DAO.Utils;
 using MODEL;
 using MODEL.Fornecedor;
 using Newtonsoft.Json;
@@ -46,6 +47,7 @@ namespace BLL.Fornecedor
                 return _contatoBLL;
             }
         }
+
         public bool Salvar(FornecedorModel fornecedor)
         {
             if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
@@ -85,6 +87,62 @@ namespace BLL.Fornecedor
         public int RecuperaIdEndereco(FornecedorModel fornecedor)
         {
             return FornecedorDAO.RetornaIdEndereco(fornecedor);
+        }
+        public bool Editar(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
+                if (FornecedorDAO.Editar(fornecedor))
+                {
+                    if (EnderecoBLL.Editar(fornecedor.Endereco))
+                    {
+                        if (ContatoBLL.Editar(fornecedor.Contato))
+                        {
+                            AO.Commit();
+                            return true;
+                        }
+                        else
+                            AO.Rollback();
+                    }
+                    else
+                        AO.Rollback();
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Excluir(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
+                if (FornecedorDAO.Excluir(fornecedor))
+                {
+                    if (EnderecoBLL.Excluir(fornecedor.Endereco))
+                    {
+                        if (ContatoBLL.Excluir(fornecedor.Contato))
+                        {
+                            AO.Commit();
+                            return true;
+                        }
+                        else
+                            AO.Rollback();
+                    }
+                    else
+                        AO.Rollback();
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region EnderecoFornecedor

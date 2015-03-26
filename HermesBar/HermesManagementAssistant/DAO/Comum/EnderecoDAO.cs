@@ -111,5 +111,29 @@ namespace DAO.Comum
                 return false;
             }
         }
+        public bool Editar(EnderecoModel endereco)
+        {
+            try
+            {
+                AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
+                AO.CreateSpecificQuery("UPDATE Endereco SET Rua = @Rua, Numero = @Numero, Bairro = @Bairro,Complemento = @Complemento, Cep = @Cep, Cidade = @Cidade, Estado = @Estado");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, endereco.Id);
+                AO.InsertParameter("Rua",endereco.Rua);
+                AO.InsertParameter("Numero", endereco.Numero);
+                AO.InsertParameter("Bairro", endereco.Bairro);
+                AO.InsertParameter("Complemento", endereco.Complemento);
+                AO.InsertParameter("Cep", endereco.Cep);
+                AO.InsertParameter("Cidade", endereco.Cidade);
+                AO.InsertParameter("Estado", endereco.Estado);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Editar", "EnderecoDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
+                return false;
+            }
+        }
     }
 }

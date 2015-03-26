@@ -48,6 +48,7 @@ namespace HMAViews.View.Fornecedor
                 return _enderecoBLL;
             }
         }
+        private FornecedorModel _fornecedorEdicao = null;
         public FornecedorCadastro()
         {
             InitializeComponent();
@@ -58,22 +59,44 @@ namespace HMAViews.View.Fornecedor
             InitializeComponent();
             PreencheTelaFornecedor(fornecedor);
             btExcluir.Visibility = System.Windows.Visibility.Visible;
+            _fornecedorEdicao = fornecedor;
         }
+
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            var camposObrigatorios = VerificarCamposObrigatorios();
-            if (camposObrigatorios.Count == 0)
+            if (_fornecedorEdicao == null)
             {
-                if (FornecedorBLL.Salvar(CarregaFornecedor()))
+                var camposObrigatorios = VerificarCamposObrigatorios();
+                if (camposObrigatorios.Count == 0)
                 {
-                    Mensagens.GeraMensagens("Salvo com sucesso!", MENSAGEM.FORNECEDOR_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                    new Fornecedor().Show();
-                    this.Close();
+                    if (FornecedorBLL.Salvar(CarregaFornecedor()))
+                    {
+                        Mensagens.GeraMensagens("Salvo com sucesso!", MENSAGEM.FORNECEDOR_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                        new Fornecedor().Show();
+                        this.Close();
+                    }
+                    else
+                        Mensagens.GeraMensagens("Falha ao cadastrar!", MENSAGEM.FORNECEDOR_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
                 }
                 else
-                    Mensagens.GeraMensagens("Falha ao cadastrar!", MENSAGEM.FORNECEDOR_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
-            }else
-                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+                    Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+            }
+            else
+                Editar();
+        }
+        private void Editar()
+        {
+            if (FornecedorBLL.Editar(CarregaFornecedor()))
+                Mensagens.GeraMensagens("Editado com sucesso", MENSAGEM.FORNECEDOR_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+            else
+                Mensagens.GeraMensagens("Erro ao editar", MENSAGEM.FORNECEDOR_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+        }
+        private void Excluir(object sender, RoutedEventArgs e)
+        {
+            if (FornecedorBLL.Excluir(_fornecedorEdicao))
+                Mensagens.GeraMensagens("Excluído com sucesso", MENSAGEM.FORNECEDOR_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+            else
+                Mensagens.GeraMensagens("Erro ao excluir", MENSAGEM.FORNECEDOR_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
         private List<string> VerificarCamposObrigatorios()
         {
@@ -92,6 +115,9 @@ namespace HMAViews.View.Fornecedor
         private FornecedorModel CarregaFornecedor()
         {
             var fornecedor = new FornecedorModel();
+            if (_fornecedorEdicao != null)
+                fornecedor.Id = _fornecedorEdicao.Id;
+            
             fornecedor.RazaoSocial = tbRazaoSocial.Text;
             fornecedor.Cpj = tbCnpj.Text;
             fornecedor.InscricaoEstadual = tbInscEstadual.Text;
@@ -103,6 +129,8 @@ namespace HMAViews.View.Fornecedor
         private ContatoModel CarregaContatoFornecedor()
         {
             var contato = new ContatoModel();
+            if (_fornecedorEdicao != null)
+                contato.Id = _fornecedorEdicao.Contato.Id;
             contato.Nome = tbNome.Text;
             contato.Telefone = tbTelefone.Text;
             contato.Celular = tbCelular.Text;
@@ -114,6 +142,8 @@ namespace HMAViews.View.Fornecedor
         private EnderecoModel CarregaEnderecoFornecedor()
         {
             var endereco = new EnderecoModel();
+            if (_fornecedorEdicao != null)
+                endereco.Id = _fornecedorEdicao.Endereco.Id;
             endereco.Tipo = new TipoEnderecoModel() { Tipo = Constantes.ATipoEndereco.MATRIZ };
             endereco.Rua = tbRua.Text;
             endereco.Cep = tbCep.Text;

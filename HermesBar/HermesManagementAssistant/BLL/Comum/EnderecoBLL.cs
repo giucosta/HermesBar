@@ -62,5 +62,9 @@ namespace BLL.Comum
                 return DAO.Excluir(endereco);
             return false;
         }
+        public bool Editar(EnderecoModel endereco)
+        {
+            return DAO.Editar(endereco);
+        }
     }
 }
