@@ -5,6 +5,7 @@ using HermesManagementAssistant.View.Produtos;
 using HMAViews.View.Atracoes;
 using HMAViews.View.Estabelecimento;
 using HMAViews.View.Fornecedor;
+using HMAViews.View.Produtos;
 using Microsoft.Win32;
 using MODEL;
 using MODEL.Fornecedor;
@@ -55,7 +56,7 @@ namespace HMAViews
         }
         public void Produtos(object sender, RoutedEventArgs e)
         {
-            new Produto().Show();
+            new Produtos().Show();
         }
         public void TipoProduto(object sender, RoutedEventArgs e)
         {

@@ -94,20 +94,23 @@ namespace BLL.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.GetTransaction();
-                if (FornecedorDAO.Editar(fornecedor))
+                if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
                 {
-                    if (EnderecoBLL.Editar(fornecedor.Endereco))
+                    if (FornecedorDAO.Editar(fornecedor))
                     {
-                        if (ContatoBLL.Editar(fornecedor.Contato))
+                        if (EnderecoBLL.Editar(fornecedor.Endereco))
                         {
-                            AO.Commit();
-                            return true;
+                            if (ContatoBLL.Editar(fornecedor.Contato))
+                            {
+                                AO.Commit();
+                                return true;
+                            }
+                            else
+                                AO.Rollback();
                         }
                         else
                             AO.Rollback();
                     }
-                    else
-                        AO.Rollback();
                 }
                 return false;
             }
@@ -152,7 +155,8 @@ namespace BLL.Fornecedor
                 return EnderecoBLL.Salvar(endereco);
             return null;
         }
-        private bool DeleteAddress(EnderecoModel endereco){
+        private bool DeleteAddress(EnderecoModel endereco)
+        {
             if (endereco.Id != 0)
                 return EnderecoBLL.Excluir(endereco);
             return false;

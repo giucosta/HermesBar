@@ -91,7 +91,11 @@ namespace HMAViews.View.Fornecedor
             if (camposObrigatorios.Count == 0)
             {
                 if (FornecedorBLL.Editar(CarregaFornecedor()))
+                {
                     Mensagens.GeraMensagens("Editado com sucesso", MENSAGEM.FORNECEDOR_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Fornecedor().Show();
+                    this.Close();
+                }
                 else
                     Mensagens.GeraMensagens("Erro ao editar", MENSAGEM.FORNECEDOR_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }else
@@ -100,7 +104,11 @@ namespace HMAViews.View.Fornecedor
         private void Excluir(object sender, RoutedEventArgs e)
         {
             if (FornecedorBLL.Excluir(_fornecedorEdicao))
+            {
                 Mensagens.GeraMensagens("Excluído com sucesso", MENSAGEM.FORNECEDOR_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new Fornecedor().Show();
+                this.Close();
+            }    
             else
                 Mensagens.GeraMensagens("Erro ao excluir", MENSAGEM.FORNECEDOR_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
@@ -241,6 +249,14 @@ namespace HMAViews.View.Fornecedor
             cbEstado.ItemsSource = EnderecoBLL.CarregaEstados();
             tbRazaoSocial.Focus();
             btExcluir.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Deseja fechar?", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
+                e.Cancel = false;
+            else
+                e.Cancel = true;
         }
     }
 }
