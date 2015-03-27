@@ -70,5 +70,9 @@ namespace UTILS
             public const string DATABASE = @"Database = HermesBar;";
             public const string SEGURANCA = @"integrated security = true;";
         }
+        public static class AInscricaoEstadual
+        {
+            public const string ISENTO = "Isento";
+        }
     }
 }

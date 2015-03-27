@@ -21,13 +21,14 @@ namespace DAO.Fornecedor
             {
                 AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
                 AO.CreateDataInsert();
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@RazaoSocial", fornecedor.RazaoSocial);
-                Connection.AddParameter("@Cnpj", fornecedor.Cpj);
-                Connection.AddParameter("@InscricaoEstadual", fornecedor.InscricaoEstadual);
-                Connection.AddParameter("@Contato", fornecedor.Contato.Id);
-                Connection.AddParameter("@Endereco", fornecedor.Endereco.Id);
-                return Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("RazaoSocial", fornecedor.RazaoSocial);
+                AO.InsertParameter("Cpj", fornecedor.Cpj);
+                AO.InsertParameter("InscricaoEstadual", fornecedor.InscricaoEstadual);
+                AO.InsertParameter("Contato", fornecedor.Contato.Id);
+                AO.InsertParameter("Endereco", fornecedor.Endereco.Id);
+                
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {

@@ -116,7 +116,7 @@ namespace DAO.Comum
             try
             {
                 AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
-                AO.CreateSpecificQuery("UPDATE Endereco SET Rua = @Rua, Numero = @Numero, Bairro = @Bairro,Complemento = @Complemento, Cep = @Cep, Cidade = @Cidade, Estado = @Estado");
+                AO.CreateSpecificQuery("UPDATE Endereco SET Rua = @Rua, Numero = @Numero, Bairro = @Bairro, Complemento = @Complemento, Cep = @Cep, Cidade = @Cidade, Estado = @Estado");
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Endereco", ConstantesDAO.EQUAL, endereco.Id);
                 AO.InsertParameter("Rua",endereco.Rua);

@@ -64,7 +64,7 @@ namespace BLL.Comum
         }
         public bool Editar(EnderecoModel endereco)
         {
-            return DAO.Editar(endereco);
+            return DAO.Editar(VerificaCamposNulos(endereco));
         }
     }
 }

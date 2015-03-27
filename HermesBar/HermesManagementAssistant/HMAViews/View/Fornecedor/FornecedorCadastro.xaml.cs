@@ -57,6 +57,7 @@ namespace HMAViews.View.Fornecedor
         public FornecedorCadastro(FornecedorModel fornecedor)
         {
             InitializeComponent();
+            CarregaTela();
             PreencheTelaFornecedor(fornecedor);
             btExcluir.Visibility = System.Windows.Visibility.Visible;
             _fornecedorEdicao = fornecedor;
@@ -86,10 +87,15 @@ namespace HMAViews.View.Fornecedor
         }
         private void Editar()
         {
-            if (FornecedorBLL.Editar(CarregaFornecedor()))
-                Mensagens.GeraMensagens("Editado com sucesso", MENSAGEM.FORNECEDOR_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-            else
-                Mensagens.GeraMensagens("Erro ao editar", MENSAGEM.FORNECEDOR_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            var camposObrigatorios = VerificarCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                if (FornecedorBLL.Editar(CarregaFornecedor()))
+                    Mensagens.GeraMensagens("Editado com sucesso", MENSAGEM.FORNECEDOR_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro ao editar", MENSAGEM.FORNECEDOR_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }else
+                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
         }
         private void Excluir(object sender, RoutedEventArgs e)
         {
@@ -120,6 +126,8 @@ namespace HMAViews.View.Fornecedor
             
             fornecedor.RazaoSocial = tbRazaoSocial.Text;
             fornecedor.Cpj = tbCnpj.Text;
+            if (string.IsNullOrWhiteSpace(tbInscEstadual.Text))
+                fornecedor.InscricaoEstadual = Constantes.AInscricaoEstadual.ISENTO;
             fornecedor.InscricaoEstadual = tbInscEstadual.Text;
             fornecedor.Contato = CarregaContatoFornecedor();
             fornecedor.Endereco = CarregaEnderecoFornecedor();
@@ -160,7 +168,18 @@ namespace HMAViews.View.Fornecedor
             tbInscEstadual.Text = forn.InscricaoEstadual;
             tbRazaoSocial.Text = forn.RazaoSocial;
             tbCep.Text = forn.Endereco.Cep;
-            ConsultaCeps.ConsultarCep(tbRua, tbCidade, tbBairro, cbEstado, tbCep);
+            tbRua.Text = forn.Endereco.Rua;
+            tbCidade.Text = forn.Endereco.Cidade;
+            tbBairro.Text = forn.Endereco.Bairro;
+            tbCep.Text = forn.Endereco.Cep;
+            var i = 0;
+            foreach (var x in cbEstado.ItemsSource)
+            {
+                if (forn.Endereco.Estado == x.ToString())
+                    cbEstado.SelectedIndex = i;
+                else
+                    i++;
+            }
             tbNumero.Text = forn.Endereco.Numero;
             tbComplemento.Text = forn.Endereco.Complemento;
             tbNome.Text = forn.Contato.Nome;
