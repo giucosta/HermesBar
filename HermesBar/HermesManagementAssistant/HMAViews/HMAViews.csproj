@@ -81,6 +81,9 @@
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Produtos\ProdutosCadastro.xaml.cs">
+      <DependentUpon>ProdutosCadastro.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\Atracoes\Atracoes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +136,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Page Include="View\Produtos\Produtos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Produtos\ProdutosCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

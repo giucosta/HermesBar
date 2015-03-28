@@ -76,5 +76,10 @@ namespace HMAViews.View.Produtos
                     });
             }
         }
+        private void Novo(object sender, RoutedEventArgs e)
+        {
+            new ProdutosCadastro().Show();
+            this.Close();
+        }
     }
 }
