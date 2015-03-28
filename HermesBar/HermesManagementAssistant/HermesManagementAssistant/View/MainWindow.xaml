@@ -1,4 +1,4 @@
-﻿<Window x:Class="HermesManagementAssistant.MainWindow"
+﻿<Window x:Class="HMAViews.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Hermes Management Assistant" Height="734.079" Width="894.737" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">

@@ -15,9 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Utils.Mensagens;
 
-namespace HermesManagementAssistant.View.Usuario
+namespace HMAViews.View.Usuario
 {
     /// <summary>
     /// Interaction logic for UsuarioCadastro.xaml
@@ -37,21 +36,12 @@ namespace HermesManagementAssistant.View.Usuario
             {
                 if (VerificaSenhas())
                 {
-                    if (!VerificaUsuarioExistente(tbNome.Text)){
-                        if (GravarUsuario())
-                            Mensagens.GeraMensagens("Cadastro OK!", MENSAGEM.USUARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                        else
-                            Mensagens.GeraMensagens("Erro ao cadastrar", MENSAGEM.USUARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    if (!VerificaUsuarioExistente(tbNome.Text))
+                    {
+                        GravarUsuario();
                     }
-                        
-                    else
-                        Mensagens.GeraMensagens(MENSAGEM.USUARIO_CADASTRADO, MENSAGEM.USUARIO_CADASTRADO, null, TIPOS_MENSAGENS.ALERTA);
                 }
-                else
-                    Mensagens.GeraMensagens(MENSAGEM.SENHA_IDENTICA, MENSAGEM.SENHA_IDENTICA, null, TIPOS_MENSAGENS.ALERTA);
             }
-            else
-                Mensagens.GeraMensagens("Campos Obrigatórios",MENSAGEM.CAMPOS_OBRIGATORIOS + " - ",obrigatorios,TIPOS_MENSAGENS.ALERTA);
         }
         private List<String> VerificaCamposObrigatorios()
         {
@@ -82,10 +72,7 @@ namespace HermesManagementAssistant.View.Usuario
         {
             var login = new LoginBLL().GravarLogin(CarregaLoginCadastro());
             if (login == null)
-            {
-                Mensagens.GeraMensagens(MENSAGEM.ERRO_GRAVAR_LOGIN, MENSAGEM.ERRO_GRAVAR_LOGIN, null, TIPOS_MENSAGENS.ERRO);
                 return false;
-            }
 
             if (new UsuarioBLL().GravarUsuario(CarregaUsuarioCadastro(login)))
                 return true;

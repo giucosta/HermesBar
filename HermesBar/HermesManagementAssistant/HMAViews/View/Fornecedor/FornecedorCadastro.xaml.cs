@@ -1,7 +1,7 @@
 ﻿using BLL.Comum;
 using BLL.Fornecedor;
 using FirstFloor.ModernUI.Windows.Controls;
-using HermesManagementAssistant.Utils;
+using HMAViews.Utils;
 using MODEL;
 using MODEL.Fornecedor;
 using System;
@@ -18,8 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utils.Mensagens;
-using UTILS;
+using HMAViews;
+using UTIL;
 
 namespace HMAViews.View.Fornecedor
 {

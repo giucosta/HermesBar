@@ -1,4 +1,4 @@
-﻿<Window x:Class="HermesManagementAssistant.View.Funcionario.FuncionarioCadastro"
+﻿<Window x:Class="HMAViews.View.Funcionario.FuncionarioCadastro"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Cadastro de Funcionários" Height="430" Width="560" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA" Closing="Window_Closing">

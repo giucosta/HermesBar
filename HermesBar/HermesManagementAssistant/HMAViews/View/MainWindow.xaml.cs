@@ -1,7 +1,6 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
-using HermesManagementAssistant.View.Fornecedor;
-using HermesManagementAssistant.View.Funcionario;
-using HermesManagementAssistant.View.Produtos;
+using HMAViews.View.Funcionario;
+using HMAViews.View.Produtos;
 using HMAViews.View;
 using HMAViews.View.Atracoes;
 using HMAViews.View.Estabelecimento;
@@ -25,8 +24,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utils.Mensagens;
-using UTILS;
+using HMAViews;
+using UTIL;
+using HMAViews.Utils;
 
 namespace HMAViews
 {
@@ -86,7 +86,7 @@ namespace HMAViews
                         Cep = fornecedor.Endereco.Cep,
                         Cidade = fornecedor.Endereco.Cidade
                     };
-                    new HermesManagementAssistant.View.Fornecedor.FornecedorCadastro(forn).Show();
+                    new FornecedorCadastro(forn).Show();
                 }
                 else
                     Mensagens.GeraMensagens("Importar XML", MENSAGEM.ARQUIVO_JA_EXPORTADO, null, TIPOS_MENSAGENS.ALERTA);

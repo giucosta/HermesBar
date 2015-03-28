@@ -14,11 +14,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using UTILS;
-using Utils.Mensagens;
-using HermesManagementAssistant.Utils;
+using HMAViews.Utils;
+using UTIL;
 
-namespace HermesManagementAssistant.View.Funcionario
+namespace HMAViews.View.Funcionario
 {
     /// <summary>
     /// Interaction logic for UsuarioCadastro.xaml
@@ -95,12 +94,9 @@ namespace HermesManagementAssistant.View.Funcionario
 
                     if (FuncionarioBLL.Salvar(funcionario))
                     {
-                        Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
                         new Funcionario().Show();
                         this.Close();
                     }
-                    else
-                        Mensagens.GeraMensagens("Erro ao salvar o funcionário", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
                 }
             }
             else
@@ -169,7 +165,7 @@ namespace HermesManagementAssistant.View.Funcionario
                 campos.Add("Data de Nascimento");
             if (string.IsNullOrWhiteSpace(tbDataAdmissao.Text))
                 campos.Add("Data de Admissao");
-            
+
             //Endereço
             if (string.IsNullOrWhiteSpace(tbRua.Text))
                 campos.Add("Rua");
@@ -210,18 +206,13 @@ namespace HermesManagementAssistant.View.Funcionario
         }
         private void ExcluirFuncionario(object sender, RoutedEventArgs e)
         {
-            if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.CERTEZA_EXCLUIR_FUNCIONARIO, null, TIPOS_MENSAGENS.QUESTAO)){
-                if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario, Endereco = new EnderecoModel() { Id = _idEndereco }, Contato = new ContatoModel() {Id = _idContato } }))
-                {
-                    Mensagens.GeraMensagens("Funcionário Excluído", MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                    new Funcionario().Show();
-                    this.Close();
-                }    
-                else
-                    Mensagens.GeraMensagens("Erro!", MENSAGEM.FUNCIONARIO_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+
+            if (FuncionarioBLL.Excluir(new FuncionarioModel() { Id = _idFuncionario, Endereco = new EnderecoModel() { Id = _idEndereco }, Contato = new ContatoModel() { Id = _idContato } }))
+            {
+                new Funcionario().Show();
+                this.Close();
             }
-            else
-                return;
+            return;
         }
         private void EditarFuncionario()
         {
@@ -231,12 +222,9 @@ namespace HermesManagementAssistant.View.Funcionario
 
             if (FuncionarioBLL.Editar(func))
             {
-                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.FUNCIONARIO_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
                 new Funcionario().Show();
                 this.Close();
             }
-            else
-                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.FUNCIONARIO_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
         private void LimparCamposEndereco()
         {
@@ -251,7 +239,7 @@ namespace HermesManagementAssistant.View.Funcionario
         #region Masked
         private void CpfMasked(Object sender, KeyEventArgs e)
         {
-            Mascaras.CpfMasked(tbCpf,e);
+            Mascaras.CpfMasked(tbCpf, e);
         }
         private void PhoneMasked(Object sender, KeyEventArgs e)
         {

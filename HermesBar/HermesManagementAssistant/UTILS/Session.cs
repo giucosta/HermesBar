@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UTILS
+namespace UTIL
 {
     public static class Session
     {
         public static UsuarioModel Usuario { get; set; }
+        public static string MensagemErro { get; set; }
     }
 }

@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Utils.Mensagens
+
+namespace HMAViews.Utils
 {
     public static class Mensagens
     {
+        public static string Erro { get; set; }
         public static bool GeraMensagens(string titulo, string mensagemErro, List<String> erros, string tipo)
         {
             var msg = "";
@@ -30,7 +32,22 @@ namespace Utils.Mensagens
                     return true;
             }
             return false;
-                
+        }
+
+        public static bool GeraMensagens(string titulo, string mensagemErro, string tipo)
+        {
+            if (tipo == TIPOS_MENSAGENS.ERRO){
+                MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + Erro, titulo, MessageBoxButton.OK, MessageBoxImage.Error);
+                Erro = string.Empty;
+            }
+            if (tipo == TIPOS_MENSAGENS.QUESTAO)
+            {
+                MessageBoxResult result = MessageBox.Show(mensagemErro + Environment.NewLine + Environment.NewLine + Erro, titulo, MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+                Erro = string.Empty;
+                if (result == MessageBoxResult.Yes)
+                    return true;
+            }
+            return false;
         }
     }
     public static class TIPOS_MENSAGENS

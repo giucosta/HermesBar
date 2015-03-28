@@ -1,4 +1,4 @@
-﻿<Window x:Class="HermesManagementAssistant.View.Produtos.Produto"
+﻿<Window x:Class="HMAViews.View.Produtos.Produto"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Pesquisa de Produtos" Height="562.836" Width="776.418" WindowStartupLocation="CenterScreen" Background="#FFAAAAAA">

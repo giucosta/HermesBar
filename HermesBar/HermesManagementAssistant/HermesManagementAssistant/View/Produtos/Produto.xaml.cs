@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HermesManagementAssistant.View.Produtos
+namespace HMAViews.View.Produtos
 {
     /// <summary>
     /// Interaction logic for Produto.xaml

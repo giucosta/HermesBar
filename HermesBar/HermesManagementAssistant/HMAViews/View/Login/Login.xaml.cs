@@ -17,7 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utils.Mensagens;
+using HMAViews;
+using HMAViews.Utils;
 
 namespace HMAViews.View.Login
 {

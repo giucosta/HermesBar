@@ -34,6 +34,10 @@
     <Reference Include="AvalonControlsLibrary">
       <HintPath>..\HermesManagementAssistant\Content\Release V2\Release V2\AvalonControlsLibrary\AvalonControlsLibrary\obj\Debug\AvalonControlsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="ConsultaCep, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HermesManagementAssistant\ConsultaCep.dll</HintPath>
+    </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
@@ -78,6 +82,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utils\ConsultaCeps.cs" />
+    <Compile Include="Utils\Mascaras.cs" />
+    <Compile Include="Utils\Mensagens.cs" />
+    <Compile Include="Utils\Verificadores.cs" />
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
@@ -167,9 +175,9 @@
       <Project>{39db8432-4b55-4375-bdf5-519c70071885}</Project>
       <Name>REPORTS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\UTILS\UTILS.csproj">
+    <ProjectReference Include="..\UTILS\UTIL.csproj">
       <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
-      <Name>UTILS</Name>
+      <Name>UTIL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

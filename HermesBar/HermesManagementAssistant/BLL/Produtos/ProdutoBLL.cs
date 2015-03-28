@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using UTIL;
 
 namespace BLL.Produtos
 {
@@ -38,6 +38,8 @@ namespace BLL.Produtos
             {
                 if (produto.ValorCusto < produto.ValorVenda)
                     return ProdutoDAO.Salvar(produto);
+                else
+                    UTIL.Session.MensagemErro = "O valor da Venda não pode ser menor que o valor do custo!";
             }
             return false;
         }

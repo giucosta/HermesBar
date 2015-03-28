@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UTILS;
+using UTIL;
 using DAO.Utils;
 
 namespace DAO.Comum

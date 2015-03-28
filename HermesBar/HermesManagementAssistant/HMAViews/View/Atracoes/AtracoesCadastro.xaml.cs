@@ -1,7 +1,7 @@
 ﻿using BLL.Atracoes;
 using BLL.Comum;
 using FirstFloor.ModernUI.Windows.Controls;
-using HermesManagementAssistant.Utils;
+using HMAViews.Utils;
 using MODEL;
 using MODEL.Atracoes;
 using System;
@@ -18,8 +18,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utils.Mensagens;
-using UTILS;
+using UTIL;
+
 
 namespace HMAViews.View.Atracoes
 {

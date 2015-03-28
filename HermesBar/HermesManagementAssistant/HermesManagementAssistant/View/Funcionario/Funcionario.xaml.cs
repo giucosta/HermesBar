@@ -1,5 +1,5 @@
 ﻿using BLL.Funcionario;
-using HermesManagementAssistant.Utils;
+using HMAViews.Utils;
 using MODEL;
 using REPORTS;
 using System;
@@ -16,7 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HermesManagementAssistant.View.Funcionario
+namespace HMAViews.View.Funcionario
 {
     /// <summary>
     /// Interaction logic for Funcionario.xaml

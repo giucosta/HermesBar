@@ -8,7 +8,7 @@ using DAO.Utils;
 using DAO.Connections;
 using System.Data.SqlClient;
 using System.Data;
-using UTILS;
+using UTIL;
 using DAO.Comum;
 
 namespace DAO.Fornecedor

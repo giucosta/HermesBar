@@ -1,9 +1,6 @@
-﻿using HermesManagementAssistant.View.Atracoes;
-using HermesManagementAssistant.View.Estabelecimento;
-using HermesManagementAssistant.View.Funcionario;
-using HermesManagementAssistant.View.Login;
-using HermesManagementAssistant.View.Usuario;
-using HermesManagementAssistant.View.Produtos;
+﻿using HMAViews.View.Funcionario;
+using HMAViews.View.Usuario;
+using HMAViews.View.Produtos;
 using MODEL;
 using System;
 using System.Collections.Generic;
@@ -20,15 +17,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Utils.Mensagens;
-using HermesManagementAssistant.View.Fornecedor;
 using Microsoft.Win32;
 using System.IO;
 using BLL.Fornecedor;
-using UTILS;
+using UTIL;
 
 
-namespace HermesManagementAssistant
+namespace HMAViews
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -39,8 +34,6 @@ namespace HermesManagementAssistant
         {
             if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.ADMINISTRADOR)
                 InitializeComponent();
-            else
-                Mensagens.GeraMensagens("Permissões",MENSAGEM.SEM_PERMISSAO,null, TIPOS_MENSAGENS.ALERTA);
         }
 
         private void PesquisaUsuario(object sender, RoutedEventArgs e)
@@ -49,7 +42,7 @@ namespace HermesManagementAssistant
         }
         private void PesquisaAtracoes(object sender, RoutedEventArgs e)
         {
-            new AtracoesView().Show();
+            
         }
         private void PesquisaFuncionarios(object sender, RoutedEventArgs e)
         {
@@ -57,7 +50,7 @@ namespace HermesManagementAssistant
         }
         private void PesquisaEstabelecimento(object sender, RoutedEventArgs e)
         {
-            new Estabelecimento().Show();
+            
         }
         private void PesquisaProdutos(object sender, RoutedEventArgs e)
         {
@@ -69,7 +62,7 @@ namespace HermesManagementAssistant
         }
         private void PesquisaFornecedor(object sender, RoutedEventArgs e)
         {
-            new Fornecedor().Show();
+            
         }
         private void ImportarNFe(Object sender, RoutedEventArgs e)
         {
@@ -81,21 +74,6 @@ namespace HermesManagementAssistant
             {
                 XmlReader xmlReader = new XmlReader();
                 var fornecedor = xmlReader.ImportXml(open.FileName,open.OpenFile());
-                if (fornecedor != null)
-                {
-                    FornecedorCadastro view = new FornecedorCadastro();
-                    view.tbRazaoSocial.Text = fornecedor.RazaoSocial;
-                    view.tbCpfCnpj.Text = fornecedor.Cpj;
-                    view.tbInscricaoEstadual.Text = fornecedor.InscricaoEstadual;
-                    view.tbRua.Text = fornecedor.Endereco.Rua;
-                    view.tbNumero.Text = fornecedor.Endereco.Numero;
-                    view.tbBairro.Text = fornecedor.Endereco.Bairro;
-                    view.tbCidade.Text = fornecedor.Endereco.Cidade;
-                    view.tbCep.Text = fornecedor.Endereco.Cep;
-                    view.Show();
-                }
-                else
-                    Mensagens.GeraMensagens("Importar XML",MENSAGEM.ARQUIVO_JA_EXPORTADO,null,TIPOS_MENSAGENS.ALERTA);
             }
         }
     }

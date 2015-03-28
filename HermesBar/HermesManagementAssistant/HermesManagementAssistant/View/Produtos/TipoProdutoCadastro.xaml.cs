@@ -13,9 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Utils.Mensagens;
 
-namespace HermesManagementAssistant.View.Produtos
+namespace HMAViews.View.Produtos
 {
     /// <summary>
     /// Interaction logic for TipoProdutoCadastro.xaml
@@ -53,15 +52,10 @@ namespace HermesManagementAssistant.View.Produtos
                 {
                     if (TipoProdutoBLL.Salvar(new TipoProdutoModel() { Tipo = tbTipo.Text, Descricao = tbDescricao.Text }))
                     {
-                        Mensagens.GeraMensagens("Cadastrado com sucesso!", MENSAGEM.TIPOPRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
                         new TipoProduto().Show();
                         this.Close();
                     }
-                    else
-                        Mensagens.GeraMensagens("Erro no cadastro!", MENSAGEM.TIPOPRODUTO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
                 }
-                else
-                    Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
             }
             else
                 Editar();
@@ -77,15 +71,11 @@ namespace HermesManagementAssistant.View.Produtos
         {
             if (_idTipoProduto != 0)
             {
-                if (Mensagens.GeraMensagens("Confirma exclusão?", MENSAGEM.TIPOPRODUTO_EXCLUIR_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
+
+                if (TipoProdutoBLL.Excluir(new TipoProdutoModel() { Id = _idTipoProduto }))
                 {
-                    if (TipoProdutoBLL.Excluir(new TipoProdutoModel() { Id = _idTipoProduto })){
-                        Mensagens.GeraMensagens("Excluído com sucesso!", MENSAGEM.TIPOPRODUTO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                        new TipoProduto().Show();
-                        this.Close();
-                    }
-                    else
-                        Mensagens.GeraMensagens("Erro ao excluir!", MENSAGEM.TIPOPRODUTO_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    new TipoProduto().Show();
+                    this.Close();
                 }
             }
         }
@@ -97,14 +87,11 @@ namespace HermesManagementAssistant.View.Produtos
         }
         private void Editar()
         {
-            if (TipoProdutoBLL.Editar(new TipoProdutoModel() { Id = _idTipoProduto, Tipo = tbTipo.Text, Descricao = tbDescricao.Text })){
-                Mensagens.GeraMensagens("Edição Ok!", MENSAGEM.TIPOPRODUTO_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+            if (TipoProdutoBLL.Editar(new TipoProdutoModel() { Id = _idTipoProduto, Tipo = tbTipo.Text, Descricao = tbDescricao.Text }))
+            {
                 new TipoProduto().Show();
                 this.Close();
             }
-            else
-                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.TIPOPRODUTO_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
         }
-
     }
 }

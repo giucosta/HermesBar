@@ -9,7 +9,7 @@ using DAO;
 using System.Data.SqlClient;
 using DAO.Connections;
 using System.Data;
-using UTILS;
+using UTIL;
 using DAO.Utils;
 
 namespace DAO.Produtos

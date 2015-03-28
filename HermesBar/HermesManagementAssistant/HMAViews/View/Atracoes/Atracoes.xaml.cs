@@ -1,6 +1,5 @@
 ﻿using BLL.Atracoes;
 using FirstFloor.ModernUI.Windows.Controls;
-using HermesManagementAssistant.View.Atracoes;
 using MODEL;
 using MODEL.Atracoes;
 using System;

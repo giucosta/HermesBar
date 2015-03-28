@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HermesManagementAssistant.View.Usuario
+namespace HMAViews.View.Usuario
 {
     /// <summary>
     /// Interaction logic for Usuario.xaml

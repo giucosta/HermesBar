@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO.Utils;
-using UTILS;
+using UTIL;
 
 namespace DAO.Estabelecimento
 {

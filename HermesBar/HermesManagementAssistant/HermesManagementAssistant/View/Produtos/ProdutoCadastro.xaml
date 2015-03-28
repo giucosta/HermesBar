@@ -1,4 +1,4 @@
-﻿<Window x:Class="HermesManagementAssistant.View.Produtos.ProdutoCadastro"
+﻿<Window x:Class="HMAViews.View.Produtos.ProdutoCadastro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Cadastro de Produtos" Height="478.263" Width="597.955">

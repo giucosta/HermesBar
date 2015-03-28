@@ -7,7 +7,7 @@ using DAO.Atracoes;
 using System.Data;
 using MODEL;
 using BLL.Comum;
-using UTILS;
+using UTIL;
 using DAO.Utils;
 using MODEL.Atracoes;
 

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DAO.Utils;
 using DAO.Connections;
-using UTILS;
+using UTIL;
 using System.Data;
 
 namespace DAO.Produtos

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace UTILS
+namespace UTIL
 {
     public class XmlReader
     {

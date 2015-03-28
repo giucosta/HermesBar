@@ -13,7 +13,7 @@
         <StackPanel>
             <Grid Height="460">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition Width="460"/>
@@ -52,7 +52,7 @@
 
                 <TextBox Name="tbNome" TabIndex="1" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="1" Width="450" MaxLength="100"/>
                 <TextBox Name="tbNomeReduzido" TabIndex="2" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="2" Width="450" MaxHeight="50"/>
-                <TextBox Name="tbCodigo" TabIndex="3" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="3" Width="225" MaxHeight="20"/>
+                <TextBox Name="tbCodigo" TabIndex="3" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="3" Width="225" MaxHeight="20" KeyDown="MascaraCodigo"/>
                 <ComboBox Name="cbTipo" TabIndex="4" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="4" Width="225" SelectedValuePath="Id" DisplayMemberPath="Tipo"/>
                 <ComboBox Name="cbUnidade" TabIndex="5" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="5" Width="225"/>
                 <ComboBox Name="cbMarca" TabIndex="6" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="3" Grid.Row="6" Width="225" SelectedValuePath="Id" DisplayMemberPath="Marca"/>
@@ -65,8 +65,8 @@
                 <TextBox Name="tbObservacao" TabIndex="10" HorizontalAlignment="Left" AcceptsReturn="True" VerticalAlignment="Center" Width="450" Grid.Column="3" Grid.Row="13" Height="64" Margin="0,5,0,-38"/>
             </Grid>
             <Grid>
-                <Button x:Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" TabIndex="12" Margin="100,0,0,0"/>
-                <Button x:Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" TabIndex="11" Margin="10,0,0,0"/>
+                <Button x:Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" TabIndex="11" Margin="20,0,0,0"/>
+                <Button x:Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" TabIndex="12" Margin="100,0,0,0" Click="Salvar"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

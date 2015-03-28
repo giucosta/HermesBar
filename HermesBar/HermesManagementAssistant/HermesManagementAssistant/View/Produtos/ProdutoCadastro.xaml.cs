@@ -1,6 +1,5 @@
 ﻿using BLL.Fornecedor;
 using BLL.Produtos;
-using HermesManagementAssistant.Utils;
 using MODEL.Fornecedor;
 using MODEL.Produto;
 using System;
@@ -16,9 +15,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Utils.Mensagens;
 
-namespace HermesManagementAssistant.View.Produtos
+namespace HMAViews.View.Produtos
 {
     /// <summary>
     /// Interaction logic for ProdutoCadastro.xaml
@@ -124,22 +122,13 @@ namespace HermesManagementAssistant.View.Produtos
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            var obrigatorios = VerificaCamposObrigatorios();
-            if (obrigatorios.Count == 0)
-            {
-                if (ProdutoBLL.Salvar(CarregaProdutos()))
-                    Mensagens.GeraMensagens("Produto Cadastrado!", MENSAGEM.PRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                else
-                    Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.PRODUTO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
-            }
-            else
-                Mensagens.GeraMensagens("Campos obrigatórios!", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
+            
         }
 
         #region Masked
         private void NumberMasked(object sender, KeyEventArgs e)
         {
-            Mascaras.SomenteNumeros(tbCodigo, e);
+            
         }
         #endregion
     }
