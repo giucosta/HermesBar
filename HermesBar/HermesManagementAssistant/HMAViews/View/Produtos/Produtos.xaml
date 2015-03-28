@@ -14,6 +14,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="400"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -31,21 +32,23 @@
                 <Label Content="Nome" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3"/>
                 <Label Content="Tipo de produto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4"/>
 
-                <TextBox Name="tbCodigo" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2" Width="300"/>
-                <TextBox Name="tbNome" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="3" Width="300"/>
-                <ComboBox Name="cbTipoProduto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="4" Width="300"/>
+                <TextBox Name="tbCodigo" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="2" Width="300" MaxLength="20" KeyDown="MascaraCodigo"/>
+                <TextBox Name="tbNome" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" Width="300" MaxLength="50"/>
+                <ComboBox Name="cbTipoProduto" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="4" Width="300" SelectedValuePath="Id" DisplayMemberPath="Tipo"/>
 
-                <Button Name="btPesquisar" Content="Pesquisar" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Width="90"/>
+                <Button Name="btPesquisar" Content="Pesquisar" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Width="90" Click="Pesquisar"/>
                 <Button Name="btNovo" Content="Novo" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Width="90" FontWeight="Bold"/>
-                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="8" Width="599" Grid.ColumnSpan="2" Height="112" Margin="4,13,-101,25" Grid.Column="1">
+                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" 
+                          VerticalAlignment="Center" Height="112" Width="599" 
+                          Margin="-10,13,-101,25" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="8" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Cód" Binding="{Binding Path=Id}"/>
+                        <DataGridTextColumn Header="Cód." Binding="{Binding Path=CodigoOriginal}"/>
                         <DataGridTextColumn Header="Nome" Binding="{Binding Path=Nome}"/>
                         <DataGridTextColumn Header="Marca" Binding="{Binding Path=Marca}"/>
-                        <DataGridTextColumn Header="Tipo" Binding="{Binding Path=Tipo}"/>
+                        <DataGridTextColumn Header="Uni." Binding="{Binding Path=Unidade}"/>
                         <DataGridTextColumn Header="Quant. Estoque" Binding="{Binding Path=QuantidadeEstoque}"/>
                         <DataGridTextColumn Header="Vlr. Venda" Binding="{Binding Path=ValorVenda}"/>
-                        <DataGridTextColumn Header="Vlr. Compra" Binding="{Binding Path=ValorCompra}"/>
+                        <DataGridTextColumn Header="Tipo" Binding="{Binding Path=Tipo}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

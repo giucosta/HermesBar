@@ -41,12 +41,12 @@ namespace BLL.Produtos
             }
             return false;
         }
-        public DataTable Pesquisa(ProdutoModel produto)
+        public List<ProdutoGridModel> Pesquisa(ProdutoModel produto)
         {
-            if (produto.Tipo != null) 
+            if(produto.Tipo != null)
                 produto.Tipo = (TipoProdutoModel)TipoProdutoBLL.Pesquisa(produto.Tipo).First();
 
-            return ProdutoDAO.PesquisaGrid(produto);
+            return PreencheProdutoGrid(ProdutoDAO.PesquisaGrid(produto));
         }
         public List<string> RetornaUnidadeProduto()
         {
@@ -71,6 +71,24 @@ namespace BLL.Produtos
         public int SugereProximoCodigo()
         {
             return int.Parse(ProdutoDAO.SugereProximoCodigo().DataTableToString()) + 1;
+        }
+        private List<ProdutoGridModel> PreencheProdutoGrid(DataTable data)
+        {
+            var list = new List<ProdutoGridModel>();
+            for (int i = 0; i < data.Rows.Count; i++)
+            {
+                list.Add(new ProdutoGridModel()
+                {
+                    CodigoOriginal = data.Rows[i]["CodigoOriginal"].ToString(),
+                    Marca = data.Rows[i]["Marca"].ToString(),
+                    Nome = data.Rows[i]["Nome"].ToString(),
+                    QuantidadeEstoque = data.Rows[i]["QuantidadeEstoque"].ToString(),
+                    Tipo = data.Rows[i]["Tipo"].ToString(),
+                    Unidade = data.Rows[i]["Unidade"].ToString(),
+                    ValorVenda = data.Rows[i]["ValorVenda"].ToString()
+                });
+            }
+            return list;
         }
     }
 }

@@ -2,6 +2,7 @@
 using HermesManagementAssistant.View.Fornecedor;
 using HermesManagementAssistant.View.Funcionario;
 using HermesManagementAssistant.View.Produtos;
+using HMAViews.View;
 using HMAViews.View.Atracoes;
 using HMAViews.View.Estabelecimento;
 using HMAViews.View.Fornecedor;
@@ -13,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;

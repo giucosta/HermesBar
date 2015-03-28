@@ -181,10 +181,10 @@ namespace HMAViews.View.Atracoes
 
             return atracoes;
         }
-        private void SomenteNumeros(Object sender, KeyEventArgs e)
-        {
-            Mascaras.SomenteNumeros(tbValor, e);
-        }
+        //private void SomenteNumeros(Object sender, KeyEventArgs e)
+        //{
+        //    Mascaras.SomenteNumeros(tbValor, e);
+        //}
         private void PhoneMasked(Object sender, KeyEventArgs e)
         {
             Mascaras.PhoneMasked(tbTelefone, e);

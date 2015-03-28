@@ -45,7 +45,7 @@ namespace HermesManagementAssistant.View.Produtos
         public Produto()
         {
             InitializeComponent();
-            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel()).AsDataView();
+            gridPesquisa.ItemsSource = ProdutoBLL.Pesquisa(new ProdutoModel());
             cbTipoProduto.ItemsSource = TipoProdutoBLL.RetornaTipos();
         }
         private void Editar(object sender, MouseButtonEventArgs e)
@@ -61,7 +61,7 @@ namespace HermesManagementAssistant.View.Produtos
                         Nome = tbNome.Text,
                         CodigoOriginal = tbCodigo.Text,
                         Tipo = new TipoProdutoModel()
-                    }).AsDataView();
+                    });
             }
             else
             {
@@ -71,7 +71,7 @@ namespace HermesManagementAssistant.View.Produtos
                         Nome = tbNome.Text,
                         CodigoOriginal = tbCodigo.Text,
                         Tipo = new TipoProdutoModel() { Id = (int)cbTipoProduto.SelectedValue }
-                    }).AsDataView();
+                    });
             }
         }
         public void NovoProduto(object sender, RoutedEventArgs e)

@@ -52,6 +52,7 @@
     <Compile Include="Login\LoginModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Produtos\MarcaProduto.cs" />
+    <Compile Include="Produtos\ProdutoGridModel.cs" />
     <Compile Include="Produtos\ProdutoModel.cs" />
     <Compile Include="Produtos\TipoProdutoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
