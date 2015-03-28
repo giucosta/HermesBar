@@ -74,12 +74,14 @@ namespace HMAViews.View.Produtos
         {
             InitializeComponent();
             CarregaCamposTela();
+            btExcluir.Visibility = System.Windows.Visibility.Hidden;
         }
         public ProdutosCadastro(ProdutoGridModel produto)
         {
             InitializeComponent();
             CarregaCamposTela();
             CarregaTelaEdicao(produto);
+            tbCodigo.IsReadOnly = true;
         }
         private void MascaraCodigo(object sender, KeyEventArgs e)
         {
@@ -108,16 +110,34 @@ namespace HMAViews.View.Produtos
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            var camposObrigatorios = VerificaCamposObrigatorios();
-            if (camposObrigatorios.Count == 0)
+            if (_produto == null)
             {
-                if (ProdutoBLL.Salvar(CarregaProduto()))
-                    Mensagens.GeraMensagens("Produto cadastrado!", MENSAGEM.PRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                var camposObrigatorios = VerificaCamposObrigatorios();
+                if (camposObrigatorios.Count == 0)
+                {
+                    if (ProdutoBLL.Salvar(CarregaProduto()))
+                        Mensagens.GeraMensagens("Produto cadastrado!", MENSAGEM.PRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    else
+                        Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.PRODUTO_CADASTRO_ERRO, TIPOS_MENSAGENS.ERRO);
+                }
                 else
-                    Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.PRODUTO_CADASTRO_ERRO, TIPOS_MENSAGENS.ERRO);
+                    Mensagens.GeraMensagens("Campos Obrigatórios!", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
             }
             else
-                Mensagens.GeraMensagens("Campos Obrigatórios!", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+                Editar();
+        }
+        private void Excluir(object sender, RoutedEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Confirma exclusão?", MENSAGEM.PRODUTO_EXCLUIR_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
+            {
+                if (ProdutoBLL.Excluir(_produto)){
+                    Mensagens.GeraMensagens("Excluído com sucesso!", MENSAGEM.PRODUTO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Produtos().Show();
+                    this.Close();
+                }
+                else
+                    Mensagens.GeraMensagens("Erro ao excluir", MENSAGEM.PRODUTO_EXCLUIR_ERRO, TIPOS_MENSAGENS.ERRO);
+            }
         }
         private List<string> VerificaCamposObrigatorios()
         {
@@ -146,6 +166,7 @@ namespace HMAViews.View.Produtos
         {
             var produto = new ProdutoModel();
             produto.CodigoOriginal = tbCodigo.Text;
+            produto.CodigoBarras = "";
             produto.Fornecedor = new FornecedorModel() { Id = (int)cbFornecedor.SelectedValue };
             produto.Marca = new MarcaModel() { Id = (int)cbMarca.SelectedValue };
             produto.Nome = tbNome.Text;
@@ -160,15 +181,63 @@ namespace HMAViews.View.Produtos
         }
         private void CarregaTelaEdicao(ProdutoGridModel produto)
         {
-            var produtoModel = ProdutoBLL.RetornaProdutoEdicao(produto);
+             _produto = ProdutoBLL.RetornaProdutoEdicao(produto);
 
-            tbCodigo.Text = produtoModel.CodigoOriginal;
-            tbNome.Text = produtoModel.Nome;
-            tbNomeReduzido.Text = produtoModel.NomeReduzido;
-            tbObservacao.Text = produtoModel.Observacao;
-            tbQuantEstoque.Text = produtoModel.QuantidadeEstoque.ToString();
-            tbValorCusto.Text = produtoModel.ValorCusto.ToString();
-            tbValorVenda.Text = produtoModel.ValorVenda.ToString();
+             tbCodigo.Text = _produto.CodigoOriginal;
+             tbNome.Text = _produto.Nome;
+             tbNomeReduzido.Text = _produto.NomeReduzido;
+             tbObservacao.Text = _produto.Observacao;
+             tbQuantEstoque.Text = _produto.QuantidadeEstoque.ToString();
+             tbValorCusto.Text = _produto.ValorCusto.ToString();
+             tbValorVenda.Text = _produto.ValorVenda.ToString();
+           
+            var i = 0;
+            foreach (var item in cbFornecedor.ItemsSource)
+            {
+                FornecedorModel forn = (FornecedorModel)item;
+                if (forn.RazaoSocial.Equals(_produto.Fornecedor.RazaoSocial))
+                {
+                    cbFornecedor.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
+            i = 0;
+            foreach (var item in cbMarca.ItemsSource)
+            {
+                MarcaModel marca = (MarcaModel)item;
+                if (marca.Marca.Equals(_produto.Marca.Marca))
+                {
+                    cbMarca.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
+            i = 0;
+            foreach (var item in cbTipo.ItemsSource)
+            {
+                TipoProdutoModel tipo = (TipoProdutoModel)item;
+                if (tipo.Tipo.Equals(_produto.Tipo.Tipo))
+                {
+                    cbTipo.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
+            i = 0;
+            foreach (var item in cbUnidade.ItemsSource)
+            {
+                if (_produto.Unidade.Equals(item.ToString()))
+                {
+                    cbUnidade.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
         }
     }
 }

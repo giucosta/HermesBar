@@ -65,8 +65,8 @@
                 <TextBox Name="tbObservacao" TabIndex="10" HorizontalAlignment="Left" AcceptsReturn="True" VerticalAlignment="Center" Width="450" Grid.Column="3" Grid.Row="13" Height="64" Margin="0,5,0,-38"/>
             </Grid>
             <Grid>
-                <Button x:Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" TabIndex="11" Margin="20,0,0,0"/>
-                <Button x:Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" TabIndex="12" Margin="100,0,0,0" Click="Salvar"/>
+                <Button Name="btSalvar" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" TabIndex="11" Margin="20,0,0,0" Click="Salvar"/>
+                <Button Name="btExcluir" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Background="Red" TabIndex="12" Margin="100,0,0,0" Click="Excluir"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

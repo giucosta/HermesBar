@@ -71,7 +71,24 @@ namespace BLL.Produtos
         {
             try
             {
-                return ProdutoDAO.Editar(produto);
+                if(produto.ValorCusto < produto.ValorVenda)
+                    return ProdutoDAO.Editar(produto);
+                else
+                    UTIL.Session.MensagemErro = "O valor da Venda não pode ser menor que o valor do custo!";
+
+                return false;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
+        }
+        public bool Excluir(ProdutoModel produto)
+        {
+            try
+            {
+                return ProdutoDAO.Excluir(produto);
             }
             catch (Exception e)
             {

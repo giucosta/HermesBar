@@ -34,12 +34,27 @@ namespace DAO.Produtos
                 AO.InsertParameter("ValorCusto", produto.ValorCusto);
                 AO.InsertParameter("ValorVenda", produto.ValorVenda);
                 AO.InsertParameter("Observacao", produto.Observacao);
-                
-                return Connection.ExecutarComando();
+
+                return AO.ExecuteCommand();
             }
             catch (Exception e)
             {
                 Log.Log.GravarLog("Salvar","ProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
+                throw e;
+            }
+        }
+        public bool Excluir(ProdutoModel produto)
+        {
+            try
+            {
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.DeleteFromId();
+                AO.GetCommand();
+                AO.InsertParameter("Id_Produto", produto.Id);
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }
@@ -168,8 +183,9 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSpecificQuery("UPDATE Produto SET CodigoOriginal = @CodigoOriginal, Nome = @Nome, NomeReduzido = @NomeReduzido, Tipo = @Tipo, Marca = @Marca, Unidade = @Unidade, Fornecedor = @Fornecedor, QuantidadeEstoque = @QuantidadeEstoque, ValorCusto = @ValorCusto, ValorVenda = @ValorVenda, Observacao = @Observacao");
+                AO.CreateSpecificQuery("UPDATE Produto SET CodigoOriginal = @CodigoOriginal, Nome = @Nome, NomeReduzido = @NomeReduzido, Id_TipoProduto = @Tipo, Id_Marca = @Marca, Unidade = @Unidade, Id_Fornecedor = @Fornecedor, QuantidadeEstoque = @QuantidadeEstoque, ValorCusto = @ValorCusto, ValorVenda = @ValorVenda, Observacao = @Observacao");
                 AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Produto", ConstantesDAO.EQUAL, produto.Id);
                 AO.InsertParameter("CodigoOriginal", produto.CodigoOriginal);
                 AO.InsertParameter("Nome", produto.Nome);
                 AO.InsertParameter("NomeReduzido", produto.NomeReduzido);

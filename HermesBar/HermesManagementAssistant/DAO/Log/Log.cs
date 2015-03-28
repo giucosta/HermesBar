@@ -19,15 +19,15 @@ namespace DAO.Log
             {
                 AccessObject<Object> AO = new AccessObject<Object>();
                 AO.CreateSpecificQuery(@"INSERT INTO Logs VALUES(@Metodo, @Classe, @Data, @Usuario, @Erro, @Tipo)");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@Metodo", Metodo);
-                Connection.AddParameter("@Classe", Classe);
-                Connection.AddParameter("@Data", DateTime.Now);
-                Connection.AddParameter("@Usuario", Session.Usuario.Nome);
-                Connection.AddParameter("@Erro", Erro);
-                Connection.AddParameter("@Tipo", Tipo);
-                
-                Connection.ExecutarComando();
+                AO.GetCommand();
+                AO.InsertParameter("Metodo", Metodo);
+                AO.InsertParameter("Classe", Classe);
+                AO.InsertParameter("Data", DateTime.Now);
+                AO.InsertParameter("Usuario", Session.Usuario.Nome);
+                AO.InsertParameter("Erro", Erro);
+                AO.InsertParameter("Tipo", Tipo);
+
+                AO.ExecuteCommand();
             }
             catch (Exception e)
             {
