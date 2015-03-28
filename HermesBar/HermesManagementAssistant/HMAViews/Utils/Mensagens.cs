@@ -4,13 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using UTIL;
 
 
 namespace HMAViews.Utils
 {
     public static class Mensagens
     {
-        public static string Erro { get; set; }
+        public static string Erro
+        {
+            get
+            {
+                return Session.MensagemErro;
+            }
+            set { }
+        }
         public static bool GeraMensagens(string titulo, string mensagemErro, List<String> erros, string tipo)
         {
             var msg = "";
@@ -33,7 +41,6 @@ namespace HMAViews.Utils
             }
             return false;
         }
-
         public static bool GeraMensagens(string titulo, string mensagemErro, string tipo)
         {
             if (tipo == TIPOS_MENSAGENS.ERRO){
