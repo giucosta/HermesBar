@@ -27,8 +27,8 @@ namespace DAO.Produtos
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar","MarcaProdutoDAO",e.StackTrace, Constantes.ATipoMetodo.INSERT);
-                return false;
+                Log.Log.GravarLog("Salvar","MarcaProdutoDAO",e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public DataTable RetornaMarcas()
@@ -42,8 +42,23 @@ namespace DAO.Produtos
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("RetornaMarcas", "MarcaProdutoDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
-                return null;
+                Log.Log.GravarLog("RetornaMarcas", "MarcaProdutoDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
+            }
+        }
+        public DataTable RecuperaMarcaId(int id)
+        {
+            try
+            {
+                AccessObject<MarcaModel> AO = new AccessObject<MarcaModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Marca", ConstantesDAO.EQUAL, id);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

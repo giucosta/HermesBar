@@ -1,4 +1,6 @@
-﻿using DAO.Produtos;
+﻿using BLL.Fornecedor;
+using DAO.Produtos;
+using MODEL.Fornecedor;
 using MODEL.Produto;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,26 @@ namespace BLL.Produtos
                 return _tipoProdutoBLL;
             }
         }
+        private FornecedorBLL _fornecedorBLL = null;
+        public FornecedorBLL FornecedorBLL
+        {
+            get
+            {
+                if (_fornecedorBLL == null)
+                    _fornecedorBLL = new FornecedorBLL();
+                return _fornecedorBLL;
+            }
+        }
+        private MarcaProdutoBLL _marcaProduto = null;
+        public MarcaProdutoBLL MarcaProdutoBLL
+        {
+            get
+            {
+                if (_marcaProduto == null)
+                    _marcaProduto = new MarcaProdutoBLL();
+                return _marcaProduto;
+            }
+        }
         public bool Salvar(ProdutoModel produto)
         {
             if (PesquisaProdutoCodigo(produto).Count == 0)
@@ -41,7 +63,21 @@ namespace BLL.Produtos
                 else
                     UTIL.Session.MensagemErro = "O valor da Venda não pode ser menor que o valor do custo!";
             }
+            else
+                UTIL.Session.MensagemErro = "Código já cadastrado!";
             return false;
+        }
+        public bool Editar(ProdutoModel produto)
+        {
+            try
+            {
+                return ProdutoDAO.Editar(produto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public List<ProdutoGridModel> Pesquisa(ProdutoModel produto)
         {
@@ -68,11 +104,27 @@ namespace BLL.Produtos
         }
         public List<ProdutoModel> PesquisaProdutoCodigo(ProdutoModel produto)
         {
-            return ProdutoDAO.PesquisaProdutoCodigo(produto).DataTableToList<ProdutoModel>();
+            try
+            {
+                return ProdutoDAO.PesquisaProdutoCodigo(produto).DataTableToList<ProdutoModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public int SugereProximoCodigo()
         {
-            return int.Parse(ProdutoDAO.SugereProximoCodigo().DataTableToString()) + 1;
+            try
+            {
+                return int.Parse(ProdutoDAO.SugereProximoCodigo().DataTableToString()) + 1;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
         }
         private List<ProdutoGridModel> PreencheProdutoGrid(DataTable data)
         {
@@ -91,6 +143,47 @@ namespace BLL.Produtos
                 });
             }
             return list;
+        }
+        public int RecuperaIdFornecedorProduto(ProdutoModel produto)
+        {
+            try
+            {
+                return ProdutoDAO.RecuperaIdFornecedorProduto(produto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
+        }
+        public int RecuperaIdMarcaProduto(ProdutoModel produto)
+        {
+            try
+            {
+                return ProdutoDAO.RecuperaIdMarcaProduto(produto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
+        }
+        public ProdutoModel RetornaProdutoEdicao(ProdutoGridModel grid)
+        {
+            try
+            {
+                var produto = ProdutoDAO.RecuperaProdutoEdicao(grid.CodigoOriginal).DataTableToSimpleObject<ProdutoModel>();
+                produto.Fornecedor = FornecedorBLL.PesquisaFornecedorPorId(ProdutoDAO.RecuperaIdFornecedorProduto(produto));
+                produto.Marca = MarcaProdutoBLL.RecuperaMarcaid(ProdutoDAO.RecuperaIdMarcaProduto(produto));
+                produto.Tipo = TipoProdutoBLL.RecuperaTipoId(ProdutoDAO.RecuperaIdTipoProduto(produto));
+
+                return produto;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
     }
 }

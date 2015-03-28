@@ -27,6 +27,7 @@ namespace HMAViews.View.Produtos
     /// </summary>
     public partial class ProdutosCadastro : ModernWindow
     {
+        #region AccessMethod
         private ProdutoBLL _produtoBLL = null;
         public ProdutoBLL ProdutoBLL
         {
@@ -67,10 +68,18 @@ namespace HMAViews.View.Produtos
                 return _marcaProdutoBLL;
             }
         }
+        #endregion
+        private ProdutoModel _produto = null;
         public ProdutosCadastro()
         {
             InitializeComponent();
             CarregaCamposTela();
+        }
+        public ProdutosCadastro(ProdutoGridModel produto)
+        {
+            InitializeComponent();
+            CarregaCamposTela();
+            CarregaTelaEdicao(produto);
         }
         private void MascaraCodigo(object sender, KeyEventArgs e)
         {
@@ -82,6 +91,20 @@ namespace HMAViews.View.Produtos
             cbTipo.ItemsSource = TipoProdutoBLL.RetornaTipos();
             cbUnidade.ItemsSource = ProdutoBLL.RetornaUnidadeProduto();
             cbMarca.ItemsSource = MarcaProdutoBLL.RetonaMarca();
+            tbCodigo.Text = ProdutoBLL.SugereProximoCodigo().ToString();
+        }
+        private void Editar()
+        {
+            var camposObrigatorios = VerificaCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                if (ProdutoBLL.Editar(CarregaProduto()))
+                    Mensagens.GeraMensagens("Editado com sucesso!", MENSAGEM.PRODUTO_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro ao editar", MENSAGEM.PRODUTO_EDITAR_ERRO, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, null, TIPOS_MENSAGENS.ALERTA);
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
@@ -119,7 +142,6 @@ namespace HMAViews.View.Produtos
 
             return camposObrigatorios;
         }
-
         private ProdutoModel CarregaProduto()
         {
             var produto = new ProdutoModel();
@@ -135,6 +157,18 @@ namespace HMAViews.View.Produtos
             produto.ValorVenda = Convert.ToDouble(tbValorVenda.Text);
 
             return produto;
+        }
+        private void CarregaTelaEdicao(ProdutoGridModel produto)
+        {
+            var produtoModel = ProdutoBLL.RetornaProdutoEdicao(produto);
+
+            tbCodigo.Text = produtoModel.CodigoOriginal;
+            tbNome.Text = produtoModel.Nome;
+            tbNomeReduzido.Text = produtoModel.NomeReduzido;
+            tbObservacao.Text = produtoModel.Observacao;
+            tbQuantEstoque.Text = produtoModel.QuantidadeEstoque.ToString();
+            tbValorCusto.Text = produtoModel.ValorCusto.ToString();
+            tbValorVenda.Text = produtoModel.ValorVenda.ToString();
         }
     }
 }

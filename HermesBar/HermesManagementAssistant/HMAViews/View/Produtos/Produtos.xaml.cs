@@ -81,5 +81,11 @@ namespace HMAViews.View.Produtos
             new ProdutosCadastro().Show();
             this.Close();
         }
+        private void Editar(object sender, MouseEventArgs e)
+        {
+            DataGrid data = (DataGrid)sender;
+            new ProdutosCadastro((ProdutoGridModel)data.SelectedItems[0]).Show();
+            this.Close();
+        }
     }
 }

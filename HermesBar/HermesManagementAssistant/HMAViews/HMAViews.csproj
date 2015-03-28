@@ -163,6 +163,10 @@
       <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{928090e3-dff9-4e0b-855a-d5a83ecfb0bc}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HermesManagementAssistant\HermesManagementAssistant.csproj">
       <Project>{cb135545-5847-4d86-a1a0-b4869d47899c}</Project>
       <Name>HermesManagementAssistant</Name>

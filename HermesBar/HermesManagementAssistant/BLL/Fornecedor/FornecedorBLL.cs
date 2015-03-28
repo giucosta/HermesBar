@@ -52,7 +52,8 @@ namespace BLL.Fornecedor
         {
             if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
             {
-                Connection.GetTransaction();
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
                 fornecedor.Endereco = SaveAddress(fornecedor.Endereco);
                 if (fornecedor.Endereco != null)
                 {
@@ -61,11 +62,11 @@ namespace BLL.Fornecedor
                     {
                         fornecedor.Contato = contatoSalvo;
                         FornecedorDAO.Salvar(fornecedor);
-                        Connection.Commit();
+                        AO.Commit();
                         return true;
                     }
                     else
-                        Connection.Rollback();
+                        AO.Rollback();
                 }
             }
             return false;
@@ -146,6 +147,14 @@ namespace BLL.Fornecedor
             {
                 throw;
             }
+        }
+        public FornecedorModel PesquisaFornecedorPorId(int id)
+        {
+            var fornecedor = FornecedorDAO.Pesquisar(new FornecedorModel() { Id = id }).DataTableToSimpleObject<FornecedorModel>();
+            fornecedor.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(fornecedor));
+            fornecedor.Endereco = EnderecoBLL.RecuperaEnderecoId(RecuperaIdEndereco(fornecedor));
+
+            return fornecedor;
         }
 
         #region EnderecoFornecedor

@@ -44,5 +44,17 @@ namespace BLL.Produtos
         {
             return TipoProdutoDAO.RetornaTipos().DataTableToList<TipoProdutoModel>();
         }
+        public TipoProdutoModel RecuperaTipoId(int id)
+        {
+            try
+            {
+                return TipoProdutoDAO.RecuperaTipoId(id).DataTableToSimpleObject<TipoProdutoModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
+        }
     }
 }

@@ -30,5 +30,17 @@ namespace BLL.Produtos
         {
             return MarcaProdutoDAO.RetornaMarcas().DataTableToList<MarcaModel>();
         }
+        public MarcaModel RecuperaMarcaid(int id)
+        {
+            try
+            {
+                return MarcaProdutoDAO.RecuperaMarcaId(id).DataTableToSimpleObject<MarcaModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                throw e;
+            }
+        }
     }
 }

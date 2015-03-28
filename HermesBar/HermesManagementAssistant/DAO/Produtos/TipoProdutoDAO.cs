@@ -100,5 +100,21 @@ namespace DAO.Produtos
                 throw;
             }
         }
+        public DataTable RecuperaTipoId(int id)
+        {
+            try
+            {
+                AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoProduto", ConstantesDAO.EQUAL, id);
+
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
