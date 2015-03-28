@@ -37,8 +37,11 @@ namespace HMAViews
     {
         public MainWindow()
         {
-            InitializeComponent();
-            this.WindowState = WindowState.Maximized;
+            if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.ADMINISTRADOR)
+            {
+                InitializeComponent();
+                this.WindowState = WindowState.Maximized;
+            }
         }
         public void Atracoes(object sender, RoutedEventArgs e)
         {
@@ -78,7 +81,6 @@ namespace HMAViews
                 {
                     var forn = new FornecedorModel();
                     forn.RazaoSocial = fornecedor.RazaoSocial;
-                    forn.Cpj = fornecedor.Cpj;
                     forn.InscricaoEstadual = fornecedor.InscricaoEstadual;
                     forn.Endereco = new EnderecoModel() { 
                         Rua = fornecedor.Endereco.Rua, 
@@ -86,10 +88,21 @@ namespace HMAViews
                         Cep = fornecedor.Endereco.Cep,
                         Cidade = fornecedor.Endereco.Cidade
                     };
+                    forn.Contato = new ContatoModel();
                     new FornecedorCadastro(forn).Show();
                 }
                 else
                     Mensagens.GeraMensagens("Importar XML", MENSAGEM.ARQUIVO_JA_EXPORTADO, null, TIPOS_MENSAGENS.ALERTA);
+            }
+        }
+        private void GerenciarTelas()
+        {
+            if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.GARCOM)
+            {
+                mnCaixa.Visibility = System.Windows.Visibility.Hidden;
+                mnConfiguracoes.Visibility = System.Windows.Visibility.Hidden;
+                mnFuncionarios.Visibility = System.Windows.Visibility.Hidden;
+                mniAbrirCaixa.Visibility = System.Windows.Visibility.Hidden;
             }
         }
     }

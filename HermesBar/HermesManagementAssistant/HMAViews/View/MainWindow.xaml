@@ -9,7 +9,9 @@
     <ScrollViewer>
         <StackPanel>
             <Menu Name="Menu" Height="21">
-                <MenuItem Name="mnConfiguracoes" Header="_Configurações"/>
+                <MenuItem Name="mnConfiguracoes" Header="_Configurações">
+                    <MenuItem Name="mniUsuarios" Header="_Usuarios"/>
+                </MenuItem>
                 <MenuItem Name="mnGestao" Header="_Gestão">
                     <MenuItem Name="mniAtracoes" Header="_Atracoes" Click="Atracoes"/>
                     <MenuItem Name="mniEstabelecimento" Header="Estabelecimento" Click="Estabelecimento"/>
