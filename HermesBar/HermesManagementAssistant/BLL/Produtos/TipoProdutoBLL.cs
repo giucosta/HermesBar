@@ -26,23 +26,63 @@ namespace BLL.Produtos
 
         public bool Salvar(TipoProdutoModel tipoProduto)
         {
-            return TipoProdutoDAO.Salvar(tipoProduto);
+            try
+            {
+                return TipoProdutoDAO.Salvar(tipoProduto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public bool Excluir(TipoProdutoModel tipoProduto)
         {
-            return TipoProdutoDAO.Excluir(tipoProduto);
+            try
+            {
+                return TipoProdutoDAO.Excluir(tipoProduto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public List<TipoProdutoModel> Pesquisa(TipoProdutoModel tipoProduto)
         {
-            return TipoProdutoDAO.Pesquisa(tipoProduto).DataTableToList<TipoProdutoModel>();
+            try
+            {
+                return TipoProdutoDAO.Pesquisa(tipoProduto).DataTableToList<TipoProdutoModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public bool Editar(TipoProdutoModel tipo)
         {
-            return TipoProdutoDAO.Editar(tipo);
+            try
+            {
+                return TipoProdutoDAO.Editar(tipo);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public List<TipoProdutoModel> RetornaTipos()
         {
-            return TipoProdutoDAO.RetornaTipos().DataTableToList<TipoProdutoModel>();
+            try
+            {
+                return TipoProdutoDAO.RetornaTipos().DataTableToList<TipoProdutoModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public TipoProdutoModel RecuperaTipoId(int id)
         {

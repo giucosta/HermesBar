@@ -38,9 +38,7 @@
 
                 <Button Name="btPesquisar" Content="Pesquisar" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Width="90" Click="Pesquisar"/>
                 <Button Name="btNovo" Content="Novo" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Width="90" FontWeight="Bold" Click="Novo"/>
-                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" 
-                          VerticalAlignment="Center" Height="112" Width="599" 
-                          Margin="-10,13,-101,25" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="8" AutoGenerateColumns="False" MouseDoubleClick="Editar">
+                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" VerticalAlignment="Center" Height="112" Width="599" Margin="-10,13,-101,25" Grid.ColumnSpan="3" Grid.Column="1" Grid.Row="8" AutoGenerateColumns="False" MouseDoubleClick="Editar" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cód." Binding="{Binding Path=CodigoOriginal}"/>
                         <DataGridTextColumn Header="Nome" Binding="{Binding Path=Nome}"/>

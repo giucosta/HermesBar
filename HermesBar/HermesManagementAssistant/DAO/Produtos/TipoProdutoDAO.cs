@@ -30,8 +30,8 @@ namespace DAO.Produtos
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar","TipoProdutoDAO",e.StackTrace , Constantes.ATipoMetodo.INSERT);
-                return false;
+                Log.Log.GravarLog("Salvar","TipoProdutoDAO",e.Message , Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public bool Excluir(TipoProdutoModel tipoProduto)
@@ -48,7 +48,7 @@ namespace DAO.Produtos
             catch (Exception e)
             {
                 Log.Log.GravarLog("Excluir","TipoProdutoDAO",e.StackTrace, Constantes.ATipoMetodo.DELETE);
-                return false;
+                throw e;
             }
         }
         public DataTable Pesquisa(TipoProdutoModel tipoProduto)
@@ -58,14 +58,15 @@ namespace DAO.Produtos
                 AccessObject<TipoProdutoModel> AO = new AccessObject<TipoProdutoModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoProduto", ConstantesDAO.LIKE, tipoProduto.Id);
+                if(tipoProduto.Id != 0)
+                    AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoProduto", ConstantesDAO.LIKE, tipoProduto.Id);
 
                 return AO.GetDataTable();
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Pesquisar","TipoProdutoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("Pesquisar","TipoProdutoDAO",e.Message,Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public bool Editar(TipoProdutoModel tipo)
@@ -83,7 +84,7 @@ namespace DAO.Produtos
             catch (Exception e)
             {
                 Log.Log.GravarLog("Editar", "TipoProdutoDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
-                return false;
+                throw e;
             }
         }
         public DataTable RetornaTipos()
@@ -95,9 +96,10 @@ namespace DAO.Produtos
                 AO.GetCommand();
                 return AO.GetDataTable();
             }
-            catch (Exception)
-            {   
-                throw;
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RetornaTipos", "TipoProdutoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public DataTable RecuperaTipoId(int id)
@@ -113,6 +115,7 @@ namespace DAO.Produtos
             }
             catch (Exception e)
             {
+                Log.Log.GravarLog("Pesquisar", "RetornaTipos", e.Message, Constantes.ATipoMetodo.SELECT);
                 throw e;
             }
         }

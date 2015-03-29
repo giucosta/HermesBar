@@ -75,6 +75,7 @@ namespace HMAViews.Utils
         public const string ERRO_ENVIA_EMAIL = "Ocorreu um erro ao enviar email, favor consultar o administrador do sistema";
         public const string PREENCHE_CAMPO_LOGIN = "Favor preencher o campo LOGIN";
         public const string FECHAR_TELA_CONFIRMA = "Deseja fechar esta janela?";
+        public const string ERRO_PESQUISAR = "Erro ao pesquisar!";
         //Login
         public const string ERRO_GRAVAR_LOGIN = "Erro ao gravar o login";
         public const string SEM_PERMISSAO = "PERMISSÃO INVÁLIDA";

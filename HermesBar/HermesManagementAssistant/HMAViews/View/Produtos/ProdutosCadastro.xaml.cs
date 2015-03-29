@@ -239,5 +239,15 @@ namespace HMAViews.View.Produtos
                     i++;
             }
         }
+        private void Fechar(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (Mensagens.GeraMensagens("Deseja fechar?", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
+            {
+                e.Cancel = false;
+                new Produtos().Show();
+            }
+            else
+                e.Cancel = true;
+        }
     }
 }

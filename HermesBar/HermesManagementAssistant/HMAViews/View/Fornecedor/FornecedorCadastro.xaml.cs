@@ -250,13 +250,5 @@ namespace HMAViews.View.Fornecedor
             tbRazaoSocial.Focus();
             btExcluir.Visibility = System.Windows.Visibility.Hidden;
         }
-
-        private void ModernWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (Mensagens.GeraMensagens("Deseja fechar?", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
-                e.Cancel = false;
-            else
-                e.Cancel = true;
-        }
     }
 }
