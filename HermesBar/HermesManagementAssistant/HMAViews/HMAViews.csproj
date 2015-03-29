@@ -86,6 +86,12 @@
     <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
     <Compile Include="Utils\Verificadores.cs" />
+    <Compile Include="View\Caixa\EntradaCliente.xaml.cs">
+      <DependentUpon>EntradaCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Estoque\Estoque.xaml.cs">
+      <DependentUpon>Estoque.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
@@ -106,7 +112,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Caixa\EntradaCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Estabelecimento\Estabelecimento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Estoque\Estoque.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,6 +208,7 @@
       <Name>UTIL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

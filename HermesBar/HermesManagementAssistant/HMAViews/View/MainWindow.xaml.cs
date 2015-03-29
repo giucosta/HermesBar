@@ -27,6 +27,8 @@ using System.Windows.Shapes;
 using HMAViews;
 using UTIL;
 using HMAViews.Utils;
+using HMAViews.View.Caixa;
+using HMAViews.View.Estoque;
 
 namespace HMAViews
 {
@@ -66,6 +68,14 @@ namespace HMAViews
         public void TipoProduto(object sender, RoutedEventArgs e)
         {
             new TipoProduto().Show();
+        }
+        public void AbrirCaixa(object sender, RoutedEventArgs e)
+        {
+            new EntradaCliente().Show();
+        }
+        public void ConsultarEstoque(object sender, RoutedEventArgs e)
+        {
+            new Estoque().Show();
         }
         public void ImportarNfe(object sender, RoutedEventArgs e)
         {

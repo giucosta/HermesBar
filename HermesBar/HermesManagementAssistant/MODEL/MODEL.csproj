@@ -42,11 +42,14 @@
     <Compile Include="Abstract\IModel.cs" />
     <Compile Include="Atracoes\AtracoesModel.cs" />
     <Compile Include="Atracoes\EstiloAtracoesModel.cs" />
+    <Compile Include="Caixa\CartaoModel.cs" />
+    <Compile Include="Cliente\ClienteModel.cs" />
     <Compile Include="Comum\ContatoModel.cs" />
     <Compile Include="Comum\EnderecoModel.cs" />
     <Compile Include="Comum\TipoEnderecoModel.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoModel.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoModel.cs" />
+    <Compile Include="Estoque\EstoqueModel.cs" />
     <Compile Include="Fornecedor\FornecedorModel.cs" />
     <Compile Include="Funcionario\FuncionarioModel.cs" />
     <Compile Include="Login\LoginModel.cs" />
