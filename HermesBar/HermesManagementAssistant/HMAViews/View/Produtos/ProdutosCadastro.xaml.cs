@@ -165,6 +165,8 @@ namespace HMAViews.View.Produtos
         private ProdutoModel CarregaProduto()
         {
             var produto = new ProdutoModel();
+            if (_produto.Id != 0)
+                produto.Id = _produto.Id;
             produto.CodigoOriginal = tbCodigo.Text;
             produto.CodigoBarras = "";
             produto.Fornecedor = new FornecedorModel() { Id = (int)cbFornecedor.SelectedValue };
