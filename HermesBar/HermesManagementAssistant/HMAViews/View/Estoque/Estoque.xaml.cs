@@ -35,6 +35,7 @@ namespace HMAViews.View.Estoque
         public Estoque()
         {
             InitializeComponent();
+            CarregaCombos();
         }
         private void CarregaCombos()
         {
