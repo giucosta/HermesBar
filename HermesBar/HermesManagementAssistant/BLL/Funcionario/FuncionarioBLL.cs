@@ -117,7 +117,15 @@ namespace BLL.Funcionario
         }
         public List<FuncionarioModel> Pesquisa(FuncionarioModel func)
         {
-            return FuncionarioDAO.Pesquisa(func).DataTableToList<FuncionarioModel>();
+            try
+            {
+                return FuncionarioDAO.Pesquisa(func).DataTableToList<FuncionarioModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public FuncionarioModel PesquisaFuncionarioId(FuncionarioModel func)
         {

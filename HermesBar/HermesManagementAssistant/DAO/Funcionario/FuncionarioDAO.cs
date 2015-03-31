@@ -20,7 +20,6 @@ namespace DAO.Funcionario
             try
             {
                 AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
-                //AO.CreateSpecificQuery("INSERT INTO Funcionario VALUES (@Nome, @Cpf, @Rg, @DataNascimento, @CarteiraTrabalho, @Serie, @Endereco, @Tipo, @Contato, @DataAdmissao)");
                 AO.CreateDataInsert();
                 AO.GetCommand();
                 AO.InsertParameter("Nome", funcionario.Nome);
@@ -38,8 +37,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar", "FuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
-                return false;
+                Log.Log.GravarLog("Salvar", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public bool Excluir(FuncionarioModel funcionario)
@@ -55,8 +54,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Excluir", "FuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.DELETE);
-                return false;
+                Log.Log.GravarLog("Excluir", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.DELETE);
+                throw e;
             }
         }
         public bool Editar(FuncionarioModel funcionario)
@@ -86,8 +85,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Editar","FuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.UPDATE);
-                return false;
+                Log.Log.GravarLog("Editar","FuncionarioDAO",e.Message,Constantes.ATipoMetodo.UPDATE);
+                throw e;
             }
         }
         public DataTable Pesquisa(FuncionarioModel func)
@@ -108,8 +107,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Pesquisa", "FuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("Pesquisa", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public DataTable PesquisaPorId(int id)
@@ -124,8 +123,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("PesquisaPorId","FuncionarioDAO",e.StackTrace, Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("PesquisaPorId","FuncionarioDAO",e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public int RetornaIdEndereco(FuncionarioModel funcionario)
@@ -138,9 +137,10 @@ namespace DAO.Funcionario
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario",ConstantesDAO.EQUAL,funcionario.Id);
                 return (int)AO.GetDataTable().Rows[0]["Id_Endereco"];
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("RetornaIdEndereco", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public int RetornaIdContato(FuncionarioModel funcionario)
@@ -153,9 +153,10 @@ namespace DAO.Funcionario
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario", ConstantesDAO.EQUAL, funcionario.Id);
                 return (int)AO.GetDataTable().Rows[0]["Id_Contato"];
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("RetornaIdEndereco", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public DataTable PesquisaFuncionarioCpf(string cpf)
@@ -170,8 +171,8 @@ namespace DAO.Funcionario
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("PesqusiaFuncionarioCpf","FuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("PesqusiaFuncionarioCpf", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
 

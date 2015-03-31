@@ -59,7 +59,7 @@ namespace HMAViews
         }
         public void Funcionarios(object sender, RoutedEventArgs e)
         {
-            new Funcionario().Show();
+            new Funcionarios().Show();
         }
         public void Produtos(object sender, RoutedEventArgs e)
         {
