@@ -42,7 +42,7 @@ namespace HMAViews.View.Funcionario
         }
         private void Novo(object sender, RoutedEventArgs e)
         {
-
+            new FuncionariosCadastro().Show();
         }
         private void Pesquisar(object sender, RoutedEventArgs e)
         {

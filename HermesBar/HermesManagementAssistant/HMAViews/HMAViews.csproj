@@ -95,6 +95,9 @@
     <Compile Include="View\Funcionario\Funcionarios.xaml.cs">
       <DependentUpon>Funcionarios.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Funcionario\FuncionariosCadastro.xaml.cs">
+      <DependentUpon>FuncionariosCadastro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
     </Compile>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Funcionario\Funcionarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Funcionario\FuncionariosCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
