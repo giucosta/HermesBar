@@ -19,7 +19,6 @@
                 <Button Name="tbNovoEstilo" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="26" Margin="390,58,0,0" Height="22" FontWeight="Bold" FontSize="16" ToolTip="Cadastro rápido de estilos"/>
                 <Label Name="lbValor" Content="Valor" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,89,0,0" FontWeight="Bold"/>
                 <xctk:CalculatorUpDown Value="0.00" Name="tbValor" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="120" Margin="120,88,0,0" ToolTip="Insira o valor do show" TabIndex="3"/>
-                <!--<TextBox Name="tbValor" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="120,88,0,0" KeyDown="SomenteNumeros" ToolTip="Insira o valor do show" TabIndex="3"/>-->
                 <Label Name="lbTempo" Content="Tempo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="255,88,0,0" FontWeight="Bold"/>
                 <TextBox Name="tbTempo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="324,89,0,0" ToolTip="Insira o tempo do show" TabIndex="4"/>
                 <Label x:Name="lbNomeContato" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,137,0,0" FontWeight="Bold"/>

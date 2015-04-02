@@ -9,6 +9,6 @@ namespace MODEL
 {
     public class TipoFuncionarioModel : IModel
     {
-        public string TipoFuncionario { get; set; }
+        public string Tipo { get; set; }
     }
 }

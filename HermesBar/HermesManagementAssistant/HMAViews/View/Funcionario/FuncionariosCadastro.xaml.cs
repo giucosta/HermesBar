@@ -1,4 +1,6 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using BLL.Comum;
+using BLL.Funcionario;
+using FirstFloor.ModernUI.Windows.Controls;
 using HMAViews.Mascara;
 using System;
 using System.Collections.Generic;
@@ -22,9 +24,46 @@ namespace HMAViews.View.Funcionario
     /// </summary>
     public partial class FuncionariosCadastro : ModernWindow
     {
+        private FuncionarioBLL _funcionarioBLL = null;
+        public FuncionarioBLL FuncionarioBLL
+        {
+            get
+            {
+                if (_funcionarioBLL == null)
+                    _funcionarioBLL = new FuncionarioBLL();
+                return _funcionarioBLL;
+            }
+        }
+        private EnderecoBLL _enderecoBLL = null;
+        public EnderecoBLL EnderecoBLL
+        {
+            get
+            {
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
+            }
+        }
+        private TipoFuncionarioBLL _tipoFuncionarioBLL = null;
+        public TipoFuncionarioBLL TipoFuncionarioBLL
+        {
+            get
+            {
+                if (_tipoFuncionarioBLL == null)
+                    _tipoFuncionarioBLL = new TipoFuncionarioBLL();
+                return _tipoFuncionarioBLL;
+            }
+        }
         public FuncionariosCadastro()
         {
             InitializeComponent();
+            CarregaTela();
+        }
+
+        private void CarregaTela()
+        {
+            cbEstado.ItemsSource = EnderecoBLL.CarregaEstados();
+            cbTipo.ItemsSource = TipoFuncionarioBLL.RetornaTipos();
         }
         private void MascaraCpf(object sender, KeyEventArgs e)
         {

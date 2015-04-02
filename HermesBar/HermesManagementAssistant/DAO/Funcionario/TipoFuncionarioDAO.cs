@@ -19,18 +19,18 @@ namespace DAO.Funcionario
             try
             {
                 AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
-                AO.CreateSpecificQuery(@"INSERT INTO TipoFuncionario VALUES (@TipoFuncionario)");
-                Connection.GetCommand(AO.ReturnQuery());
-                Connection.AddParameter("@TipoFuncionario", tipoFuncionario.TipoFuncionario);
-
-                if(Connection.ExecutarComando())
+                AO.CreateSpecificQuery("INSERT INTO TipoFuncionario VALUES (@TipoFuncionario)");
+                AO.GetCommand();
+                AO.InsertParameter("TipoFuncionario", tipoFuncionario.Tipo);
+                
+                if(AO.ExecuteCommand())
                     return RetornaTipo(tipoFuncionario);
                 return null;
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar", "TipoFuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
-                return null;
+                Log.Log.GravarLog("Salvar", "TipoFuncionarioDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public TipoFuncionarioModel RetornaTipo(TipoFuncionarioModel tipoFuncionario)
@@ -40,14 +40,14 @@ namespace DAO.Funcionario
                 AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL, tipoFuncionario.TipoFuncionario);
+                AO.InsertParameter(ConstantesDAO.WHERE, "Tipo",ConstantesDAO.EQUAL, tipoFuncionario.Tipo);
                 
                 return CarregaTipoFuncionario(AO.GetDataTable());
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("RetornaTipo", "TipoFuncionarioDAO", e.StackTrace, Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("RetornaTipo", "TipoFuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         private TipoFuncionarioModel CarregaTipoFuncionario(DataTable data)
@@ -58,37 +58,32 @@ namespace DAO.Funcionario
                 {
                     var tipo = new TipoFuncionarioModel();
                     tipo.Id = (int)data.Rows[0]["Id_TipoFuncionario"];
-                    tipo.TipoFuncionario = data.Rows[0]["Tipo"].ToString();
+                    tipo.Tipo = data.Rows[0]["Tipo"].ToString();
 
                     return tipo;
                 }
                 else
                     return null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return null;
+                throw e;
             }   
         }
-        public List<String> TiposFuncionarios()
+        public DataTable TiposFuncionarios()
         {
             try
             {
                 AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
-                AO.CreateSelectWithSimpleParameter("Tipo");
-                Connection.GetCommand(AO.ReturnQuery());
-                var dataTable = Connection.getDataTable();
-                var listaTipos = new List<String>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
 
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                    listaTipos.Add(dataTable.Rows[i]["Tipo"].ToString());
-
-                return listaTipos;
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("TiposFuncionarios","TipoFuncionarioDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("TiposFuncionarios", "TipoFuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
     }

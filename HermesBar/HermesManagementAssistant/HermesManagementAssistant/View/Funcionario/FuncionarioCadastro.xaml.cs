@@ -140,7 +140,7 @@ namespace HMAViews.View.Funcionario
             funcionario.DataNascimento = tbDataNascimento.SelectedDate.Value;
             funcionario.CarteiraTrabalho = tbCartTrabalho.Text;
             funcionario.Serie = tbSerie.Text;
-            funcionario.Tipo = TipoFuncionarioBLL.RetornaTipo(new TipoFuncionarioModel() { TipoFuncionario = cbTipo.SelectionBoxItem.ToString() });
+            funcionario.Tipo = TipoFuncionarioBLL.RetornaTipo(new TipoFuncionarioModel() { Tipo = cbTipo.SelectionBoxItem.ToString() });
 
             return funcionario;
         }

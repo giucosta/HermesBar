@@ -51,7 +51,7 @@
                             <TextBox Name="tbRg" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="3" MaxLength="15"/>
                             <TextBox Name="tbCartTrabalho" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="4" KeyDown="MascaraCartTrabalho"/>
                             <TextBox Name="tbSerie" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="5" KeyDown="MascaraSerie"/>
-                            <ComboBox Name="cbTipo" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="6"/>
+                            <ComboBox Name="cbTipo" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="6" SelectedValuePath="Id" DisplayMemberPath="Tipo"/>
                             <DatePicker Name="tbDataNascimento" Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FirstDayOfWeek="Monday" TabIndex="7"/>
                             <DatePicker Name="tbDataAdmissao" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" FirstDayOfWeek="Monday" TabIndex="8"/>
                         </Grid>

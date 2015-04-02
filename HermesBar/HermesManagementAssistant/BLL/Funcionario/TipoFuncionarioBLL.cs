@@ -6,13 +6,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTIL;
 
 namespace BLL.Funcionario
 {
     public class TipoFuncionarioBLL
     {
         private TipoFuncionarioDAO _tipoFuncionarioDAO = null;
-        public TipoFuncionarioDAO DAO
+        public TipoFuncionarioDAO TipoFuncionarioDAO
         {
             get
             {
@@ -24,24 +25,24 @@ namespace BLL.Funcionario
         public TipoFuncionarioModel Salvar(TipoFuncionarioModel tipoFuncionario)
         {
             if (VerificaTipoExistente(tipoFuncionario))
-                return DAO.Salvar(tipoFuncionario);
+                return TipoFuncionarioDAO.Salvar(tipoFuncionario);
             else
-                return DAO.RetornaTipo(tipoFuncionario);
+                return TipoFuncionarioDAO.RetornaTipo(tipoFuncionario);
         }
         public bool VerificaTipoExistente(TipoFuncionarioModel tipoFuncionario)
         {
-            if (DAO.RetornaTipo(tipoFuncionario) != null)
+            if (TipoFuncionarioDAO.RetornaTipo(tipoFuncionario) != null)
                 return true;
             else
                 return false;
         }
-        public List<String> RetornaTipos()
+        public List<TipoFuncionarioModel> RetornaTipos()
         {
-            return DAO.TiposFuncionarios();
+            return TipoFuncionarioDAO.TiposFuncionarios().DataTableToList<TipoFuncionarioModel>();
         }
         public TipoFuncionarioModel RetornaTipo(TipoFuncionarioModel tipo)
         {
-            return DAO.RetornaTipo(tipo);
+            return TipoFuncionarioDAO.RetornaTipo(tipo);
         }
     }
 }
