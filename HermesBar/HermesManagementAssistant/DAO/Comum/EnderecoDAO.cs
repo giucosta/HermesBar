@@ -14,7 +14,7 @@ namespace DAO.Comum
 {
     public class EnderecoDAO
     {
-        public EnderecoModel Salvar(EnderecoModel endereco)
+        public DataTable Salvar(EnderecoModel endereco)
         {
             try
             {
@@ -36,27 +36,27 @@ namespace DAO.Comum
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar","EnderecoDAO",e.StackTrace.ToString(),Constantes.ATipoMetodo.INSERT);
-                return null;
+                Log.Log.GravarLog("Salvar", "EnderecoDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public TipoEnderecoModel RetornaTipoEndereco(EnderecoModel endereco)
         {
             return new TipoEnderecoDAO().RetornaTipoEndereco(endereco);
         }
-        public EnderecoModel RecuperaUltimoEndereco()
+        public DataTable RecuperaUltimoEndereco()
         {
             try
             {
                 AccessObject<EnderecoModel> AO = new AccessObject<EnderecoModel>();
                 AO.CreateSpecificQuery(@"SELECT TOP 1 * FROM Endereco ORDER BY Id_Endereco DESC");
                 AO.GetCommand();
-                return CarregaEndereco(AO.GetDataTable());
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("RecuperaUltimoEndereco","EnderecoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                throw;
+                Log.Log.GravarLog("RecuperaUltimoEndereco", "EnderecoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         private EnderecoModel CarregaEndereco(DataTable endereco)

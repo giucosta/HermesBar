@@ -24,12 +24,17 @@ namespace BLL.Comum
         }
         public ContatoModel Salvar(ContatoModel contato)
         {
-            if (Validacoes.ValidarEmail(contato.Email))
+            try
             {
-                if(!string.IsNullOrWhiteSpace(contato.Nome))
+                if (Validacoes.ValidarEmail(contato.Email))
                     return DAO.Salvar(VerifyNullValues(contato));
-            }  
-            return null;
+                return null;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public bool Excluir(ContatoModel contato)
         {

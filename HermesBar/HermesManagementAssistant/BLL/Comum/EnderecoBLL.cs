@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTIL;
 
 namespace BLL.Comum
 {
@@ -22,9 +23,19 @@ namespace BLL.Comum
         }
         public EnderecoModel Salvar(EnderecoModel endereco)
         {
-            if(!string.IsNullOrEmpty(endereco.Cep))
-                return DAO.Salvar(VerificaCamposNulos(endereco));
-            return null;
+            try
+            {
+                var data = DAO.Salvar(endereco);
+                var enderecoModel = data.DataTableToSimpleObject<EnderecoModel>();
+                enderecoModel.Id = (int)data.Rows[0]["Id_Endereco"];
+
+                return enderecoModel;
+}
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
         public List<String> CarregaEstados()
         {

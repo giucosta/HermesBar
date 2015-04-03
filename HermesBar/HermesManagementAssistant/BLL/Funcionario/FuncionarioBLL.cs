@@ -61,32 +61,40 @@ namespace BLL.Funcionario
 
         public bool Salvar(FuncionarioModel funcionario)
         {
-            if (VerificaIdadeFuncionario(funcionario))
+            try
             {
-                if (Validacoes.ValidaCPF(funcionario.Cpf))
+                if (VerificaIdadeFuncionario(funcionario))
                 {
-                    AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
-                    AO.GetTransaction();
-                    var endereco = EnderecoBLL.Salvar(funcionario.Endereco);
-                    if (endereco != null)
+                    if (Validacoes.ValidaCPF(funcionario.Cpf))
                     {
-                        funcionario.Endereco = endereco;
-                        var contato = ContatoBLL.Salvar(funcionario.Contato);
-                        if (contato != null)
-                            funcionario.Contato = contato;
+                        AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                        AO.GetTransaction();
+                        var endereco = EnderecoBLL.Salvar(funcionario.Endereco);
+                        if (endereco != null)
+                        {
+                            funcionario.Endereco = endereco;
+                            var contato = ContatoBLL.Salvar(funcionario.Contato);
+                            if (contato != null)
+                                funcionario.Contato = contato;
+                            else
+                                AO.Rollback();
+                            if (FuncionarioDAO.Salvar(funcionario))
+                            {
+                                AO.Commit();
+                                return true;
+                            }
+                        }
                         else
                             AO.Rollback();
-                        if (FuncionarioDAO.Salvar(funcionario))
-                        {
-                            AO.Commit();
-                            return true;
-                        }
                     }
-                    else
-                        AO.Rollback();
                 }
+                return false;
             }
-            return false;
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public bool Excluir(FuncionarioModel funcionario)
         {

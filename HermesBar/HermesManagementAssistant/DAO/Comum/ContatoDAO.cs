@@ -34,8 +34,8 @@ namespace DAO.Comum
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar","ContatoDAO",e.StackTrace,Constantes.ATipoMetodo.INSERT);
-                return null;
+                Log.Log.GravarLog("Salvar", "ContatoDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public bool Excluir(ContatoModel contato)
@@ -69,8 +69,8 @@ namespace DAO.Comum
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Pesquisa","ContatoDAO",e.StackTrace,Constantes.ATipoMetodo.SELECT);
-                return null;
+                Log.Log.GravarLog("Pesquisa", "ContatoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public ContatoModel PesquisaContatoId(int id)
@@ -83,9 +83,10 @@ namespace DAO.Comum
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Contato", ConstantesDAO.EQUAL, id);
                 return CarregaContato(AO.GetDataTable());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Log.Log.GravarLog("PesquisaContatoId", "ContatoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
             }
         }
         public List<ContatoModel> CarregaListModel(DataTable data)
@@ -107,19 +108,27 @@ namespace DAO.Comum
         }
         private ContatoModel CarregaContato(DataTable data)
         {
-            if (data != null)
+            try
             {
-                var contato = new ContatoModel();
-                contato.Id = (int)data.Rows[0]["Id_Contato"];
-                contato.Nome = data.Rows[0]["Nome"].ToString();
-                contato.Telefone = data.Rows[0]["Telefone"].ToString();
-                contato.Celular = data.Rows[0]["Celular"].ToString();
-                contato.Email = data.Rows[0]["Email"].ToString();
-                contato.Site = data.Rows[0]["Site"].ToString();
+                if (data != null)
+                {
+                    var contato = new ContatoModel();
+                    contato.Id = (int)data.Rows[0]["Id_Contato"];
+                    contato.Nome = data.Rows[0]["Nome"].ToString();
+                    contato.Telefone = data.Rows[0]["Telefone"].ToString();
+                    contato.Celular = data.Rows[0]["Celular"].ToString();
+                    contato.Email = data.Rows[0]["Email"].ToString();
+                    contato.Site = data.Rows[0]["Site"].ToString();
 
-                return contato;
+                    return contato;
+                }
+                return null;
             }
-            return null;
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("CarregaContato", "ContatoDAO", e.Message, "Outros");
+                throw e;
+            }
         }
         public ContatoModel RecuperaContatoPeloId(int id)
         {
