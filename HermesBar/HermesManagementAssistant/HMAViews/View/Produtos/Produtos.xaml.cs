@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HMAViews.Utils;
+using HMAViews.View.Estoque;
 
 namespace HMAViews.View.Produtos
 {
@@ -83,9 +84,28 @@ namespace HMAViews.View.Produtos
         }
         private void Editar(object sender, MouseEventArgs e)
         {
-            DataGrid data = (DataGrid)sender;
-            new ProdutosCadastro((ProdutoGridModel)data.SelectedItems[0]).Show();
-            this.Close();
+            try
+            {
+                DataGrid data = (DataGrid)sender;
+                new ProdutosCadastro((ProdutoGridModel)data.SelectedItems[0]).Show();
+                this.Close();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Mensagens.GeraMensagens("Ops!", MENSAGEM.PRODUTO_EDITAR_SELECIONAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
+        }
+        private void VerificarEstoque(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var item = (ProdutoGridModel)gridPesquisa.SelectedItems[0];
+                new Estoque.Estoque().Show();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Mensagens.GeraMensagens("Ops!", MENSAGEM.PRODUTO_ESTOQUE_SELECIONAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
         }
     }
 }
