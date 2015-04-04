@@ -1,5 +1,6 @@
 ﻿using BLL.Produtos;
 using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,12 @@ namespace HMAViews.View.Estoque
         public Estoque()
         {
             InitializeComponent();
+        }
+        public Estoque(ProdutoGridModel produto)
+        {
+            InitializeComponent();
+            lbCodProduto.Content = produto.CodigoOriginal;
+            lbQuantEstoque.Content = produto.QuantidadeEstoque;
         }
     }
 }
