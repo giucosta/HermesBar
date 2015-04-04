@@ -2,6 +2,7 @@
 using FirstFloor.ModernUI.Windows.Controls;
 using HMAViews.Mascara;
 using MODEL;
+using MODEL.Produto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,12 @@ namespace HMAViews.View.Funcionario
         private void Novo(object sender, RoutedEventArgs e)
         {
             new FuncionariosCadastro().Show();
+        }
+        private void Editar(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid data = (DataGrid)sender;
+            new FuncionariosCadastro((FuncionarioModel)data.SelectedItems[0]).Show();
+            this.Close();
         }
         private void Pesquisar(object sender, RoutedEventArgs e)
         {

@@ -33,6 +33,22 @@ namespace DAO.Funcionario
                 throw e;
             }
         }
+        public DataTable PesquisarTipoid(int id)
+        {
+            try
+            {
+                AccessObject<TipoFuncionarioModel> AO = new AccessObject<TipoFuncionarioModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_TipoFuncionario", ConstantesDAO.EQUAL, id);
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("PesquisarTipoid", "TipoFuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
         public TipoFuncionarioModel RetornaTipo(TipoFuncionarioModel tipoFuncionario)
         {
             try

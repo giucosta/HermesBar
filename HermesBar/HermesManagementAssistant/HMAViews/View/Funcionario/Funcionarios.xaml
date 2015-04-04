@@ -36,7 +36,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="180"/>
                 </Grid.RowDefinitions>
-                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" VerticalAlignment="Center" Width="650" Height="170" AutoGenerateColumns="False" SelectedValuePath="Id" IsReadOnly="True">
+                <DataGrid Name="gridPesquisa" HorizontalAlignment="Center" VerticalAlignment="Center" Width="650" Height="170" AutoGenerateColumns="False" SelectedValuePath="Id" IsReadOnly="True" MouseDoubleClick="Editar">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cód." Width="70" Binding="{Binding Path=Id}"/>
                         <DataGridTextColumn Header="Nome" Width="180" Binding="{Binding Path=Nome}"/>

@@ -159,6 +159,22 @@ namespace DAO.Funcionario
                 throw e;
             }
         }
+        public int RetornaIdTipo(FuncionarioModel funcionario)
+        {
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.CreateSelectWithSimpleParameter("Id_TipoFuncionario");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario", ConstantesDAO.EQUAL, funcionario.Id);
+                return (int)AO.GetDataTable().Rows[0]["Id_TipoFuncionario"];
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RetornaIdTipo", "FuncionarioDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
         public DataTable PesquisaFuncionarioCpf(string cpf)
         {
             try

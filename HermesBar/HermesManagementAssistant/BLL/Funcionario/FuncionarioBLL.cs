@@ -57,6 +57,16 @@ namespace BLL.Funcionario
                        
             }
         }
+        private TipoFuncionarioBLL _tipoFuncionarioBLL = null;
+        public TipoFuncionarioBLL TipoFuncionarioBLL
+        {
+            get
+            {
+                if (_tipoFuncionarioBLL == null)
+                    _tipoFuncionarioBLL = new TipoFuncionarioBLL();
+                return _tipoFuncionarioBLL;
+            }
+        }
         #endregion
 
         public bool Salvar(FuncionarioModel funcionario)
@@ -127,12 +137,55 @@ namespace BLL.Funcionario
         {
             try
             {
-                return FuncionarioDAO.Pesquisa(func).DataTableToList<FuncionarioModel>();
+                var funcionario = FuncionarioDAO.Pesquisa(func).DataTableToList<FuncionarioModel>();
+                foreach (var item in funcionario)
+                {
+                    item.Endereco = EnderecoBLL.RecuperaEnderecoId(RecuperaIdEndereco(item));
+                    item.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(item));
+                    item.Tipo = TipoFuncionarioBLL.RecuperaTipoId(RecuperaIdTipo(item));
+                }
+                return funcionario;
             }
             catch (Exception e)
             {
                 UTIL.Session.MensagemErro = e.Message;
                 return null;
+            }
+        }
+        private int RecuperaIdTipo(FuncionarioModel funcionario)
+        {
+            try
+            {
+                return FuncionarioDAO.RetornaIdTipo(funcionario);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
+        }
+        private int RecuperaIdEndereco(FuncionarioModel funcionario)
+        {
+            try
+            {
+                return FuncionarioDAO.RetornaIdEndereco(funcionario);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
+        }
+        private int RecuperaIdContato(FuncionarioModel funcionario)
+        {
+            try
+            {
+                return FuncionarioDAO.RetornaIdContato(funcionario);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
             }
         }
         public FuncionarioModel PesquisaFuncionarioId(FuncionarioModel func)

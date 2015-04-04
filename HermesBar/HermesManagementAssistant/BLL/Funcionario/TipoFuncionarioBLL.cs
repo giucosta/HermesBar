@@ -44,5 +44,17 @@ namespace BLL.Funcionario
         {
             return TipoFuncionarioDAO.RetornaTipo(tipo);
         }
+        public TipoFuncionarioModel RecuperaTipoId(int id)
+        {
+            try
+            {
+                return TipoFuncionarioDAO.PesquisarTipoid(id).DataTableToSimpleObject<TipoFuncionarioModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
+        }
     }
 }

@@ -67,6 +67,8 @@ namespace HMAViews.View.Funcionario
         {
             InitializeComponent();
             _funcionarioModel = funcionario;
+            CarregaTela();
+            CarregarEdicao(_funcionarioModel);
         }
 
         private void CarregaTela()
@@ -152,7 +154,48 @@ namespace HMAViews.View.Funcionario
 
             return contato;
         }
-
+        private void CarregarEdicao(FuncionarioModel funcionario)
+        {
+            tbNome.Text = funcionario.Nome;
+            tbCpf.Text = funcionario.Cpf;
+            tbRg.Text = funcionario.Rg;
+            tbDataAdmissao.Text = funcionario.DataAdmissao.ToShortDateString();
+            tbDataNascimento.Text = funcionario.DataNascimento.ToShortDateString();
+            tbCartTrabalho.Text = funcionario.CarteiraTrabalho;
+            tbSerie.Text = funcionario.Serie;
+            int i = 0;
+            foreach (var item in cbTipo.ItemsSource)
+            {
+                TipoFuncionarioModel tipo = (TipoFuncionarioModel)item;
+                
+                if(tipo.Tipo.Equals(funcionario.Tipo.Tipo)){
+                    cbTipo.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
+            tbCep.Text = funcionario.Endereco.Cep;
+            tbRua.Text = funcionario.Endereco.Rua;
+            tbNumero.Text = funcionario.Endereco.Numero;
+            tbComplemento.Text = funcionario.Endereco.Complemento;
+            tbBairro.Text = funcionario.Endereco.Bairro;
+            tbCidade.Text = funcionario.Endereco.Cidade;
+            i = 0;
+            foreach (var item in cbEstado.ItemsSource)
+            {
+                if (item.ToString().Equals(funcionario.Endereco.Estado))
+                {
+                    cbEstado.SelectedIndex = i;
+                    break;
+                }
+                else
+                    i++;
+            }
+            tbTelefone.Text = funcionario.Contato.Telefone;
+            tbCelular.Text = funcionario.Contato.Celular;
+            tbEmail.Text = funcionario.Contato.Email;
+        }
         #region mascaras
 
         private void MascaraCpf(object sender, KeyEventArgs e)

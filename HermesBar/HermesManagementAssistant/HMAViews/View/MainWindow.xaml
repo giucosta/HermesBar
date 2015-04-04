@@ -37,10 +37,8 @@
             </Menu>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="400"/>
+                    <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
-                <Image Height="236" Width="690" Grid.Row="1" Source="...\images\LOGO_GENERICA 04.png" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.2"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>
