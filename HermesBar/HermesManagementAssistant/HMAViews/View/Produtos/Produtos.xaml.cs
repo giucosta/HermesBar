@@ -17,6 +17,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HMAViews.Utils;
 using HMAViews.View.Estoque;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Windows.Controls.Primitives;
+using System.IO;
+using System.Diagnostics;
 
 namespace HMAViews.View.Produtos
 {
@@ -106,6 +110,10 @@ namespace HMAViews.View.Produtos
             {
                 Mensagens.GeraMensagens("Ops!", MENSAGEM.PRODUTO_ESTOQUE_SELECIONAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
             }
+        }
+        private void Imprimir(object sender, RoutedEventArgs e)
+        {
+           
         }
     }
 }
