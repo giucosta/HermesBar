@@ -51,8 +51,8 @@ namespace DAO.Comum
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Excluir", "ContatoDAO", e.StackTrace, Constantes.ATipoMetodo.DELETE);
-                return false;
+                Log.Log.GravarLog("Excluir", "ContatoDAO", e.Message, Constantes.ATipoMetodo.DELETE);
+                throw e;
             }
         }
         public ContatoModel Pesquisa(ContatoModel contato)

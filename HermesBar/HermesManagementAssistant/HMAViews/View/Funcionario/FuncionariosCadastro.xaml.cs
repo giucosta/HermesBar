@@ -86,15 +86,45 @@ namespace HMAViews.View.Funcionario
                     if (FuncionarioBLL.Salvar(CarregaFuncionario()))
                     {
                         Mensagens.GeraMensagens("Funcionário Cadastrado!", MENSAGEM.FUNCIONARIO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                        new Funcionario().Show();
+                        new Funcionarios().Show();
                         this.Close();
                     }
                     else
                         Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.FUNCIONARIO_CADASTRO_ERRO, TIPOS_MENSAGENS.ERRO);
                 }
                 else
-                    Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, null, TIPOS_MENSAGENS.ALERTA);
+                    Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
             }
+            else
+                Editar();
+        }
+        private void Editar()
+        {
+            var camposObrigatorios = VerificaCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                if (FuncionarioBLL.Editar(CarregaFuncionario()))
+                {
+                    Mensagens.GeraMensagens("Funcionário editado!", MENSAGEM.FUNCIONARIO_EDITAR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Funcionarios().Show();
+                    this.Close();
+                }
+                else
+                    Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.FUNCIONARIO_EDITAR_ERRO, TIPOS_MENSAGENS.ERRO);
+            }
+            else
+                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+        }
+        private void Excluir(object sender, RoutedEventArgs e)
+        {
+            if (FuncionarioBLL.Excluir(CarregaFuncionario()))
+            {
+                Mensagens.GeraMensagens("Excluído com sucesso", MENSAGEM.FUNCIONARIO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new Funcionarios().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao excluir", MENSAGEM.FUNCIONARIO_EXCLUIR_ERRO, TIPOS_MENSAGENS.SUCESSO);
         }
         private List<string> VerificaCamposObrigatorios()
         {
@@ -103,6 +133,8 @@ namespace HMAViews.View.Funcionario
                 camposObrigatorios.Add("NOME");
             if (string.IsNullOrEmpty(tbDataNascimento.Text))
                 camposObrigatorios.Add("DATA NASCIMENTO");
+            if (string.IsNullOrEmpty(tbDataAdmissao.Text))
+                camposObrigatorios.Add("DATA ADMISSÃO");
             if (string.IsNullOrEmpty(tbCpf.Text))
                 camposObrigatorios.Add("CPF");
             if (string.IsNullOrEmpty(cbTipo.SelectionBoxItem.ToString()))
@@ -117,6 +149,8 @@ namespace HMAViews.View.Funcionario
         private FuncionarioModel CarregaFuncionario()
         {
             var funcionario = new FuncionarioModel();
+            if (_funcionarioModel != null)
+                funcionario.Id = _funcionarioModel.Id;
             funcionario.CarteiraTrabalho = tbCartTrabalho.Text;
             funcionario.Endereco = CarregaEndereco();
             funcionario.Contato = CarregaContato();
@@ -133,6 +167,8 @@ namespace HMAViews.View.Funcionario
         private EnderecoModel CarregaEndereco()
         {
             var endereco = new EnderecoModel();
+            if (_funcionarioModel != null)
+                endereco.Id = _funcionarioModel.Endereco.Id;
             endereco.Bairro = tbBairro.Text;
             endereco.Cep = tbCep.Text;
             endereco.Cidade = tbCidade.Text;
@@ -147,6 +183,8 @@ namespace HMAViews.View.Funcionario
         private ContatoModel CarregaContato()
         {
             var contato = new ContatoModel();
+            if (_funcionarioModel != null)
+                contato.Id = _funcionarioModel.Contato.Id;
             contato.Celular = tbCelular.Text;
             contato.Email = tbEmail.Text;
             contato.Nome = tbNome.Text;

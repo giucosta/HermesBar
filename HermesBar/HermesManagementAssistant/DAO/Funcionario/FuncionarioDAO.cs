@@ -70,16 +70,16 @@ namespace DAO.Funcionario
                                                     DataNascimento = @DataNascimento,
                                                     CarteiraTrabalho = @CarteiraTrabalho,
                                                     Serie = @Serie,
-                                                    DataAdmissao = @DataAdmissao WHERE Id_Funcionario = @Id_Funcionario");
+                                                    DataAdmissao = @DataAdmissao");
                 AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Funcionario", ConstantesDAO.EQUAL, funcionario.Id);
                 AO.InsertParameter("Nome", funcionario.Nome);
                 AO.InsertParameter("Cpf", funcionario.Cpf);
                 AO.InsertParameter("Rg", funcionario.Rg);
-                AO.InsertParameter("DataNascimento", Conversores.DateTimeToInt(funcionario.DataNascimento));
+                AO.InsertParameter("DataNascimento", funcionario.DataNascimento);
                 AO.InsertParameter("CarteiraTrabalho", funcionario.CarteiraTrabalho);
                 AO.InsertParameter("Serie", funcionario.Serie);
-                AO.InsertParameter("DataAdmissao", Conversores.DateTimeToInt(funcionario.DataAdmissao));
-                AO.InsertParameter("Id_funcionario", funcionario.Id);
+                AO.InsertParameter("DataAdmissao", funcionario.DataAdmissao);
 
                 return AO.ExecuteCommand();
             }

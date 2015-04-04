@@ -131,7 +131,32 @@ namespace BLL.Funcionario
         }
         public bool Editar(FuncionarioModel funcionario)
         {
-            return FuncionarioDAO.Editar(funcionario);
+            try
+            {
+                AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();
+                AO.GetTransaction();
+                if (FuncionarioDAO.Editar(funcionario))
+                {
+                    if (ContatoBLL.Editar(funcionario.Contato))
+                    {
+                        if (EnderecoBLL.Editar(funcionario.Endereco))
+                        {
+                            AO.Commit();
+                            return true;
+                        }
+                    }
+                    else
+                        AO.Rollback();
+                }
+                else
+                    AO.Rollback();
+                return false;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public List<FuncionarioModel> Pesquisa(FuncionarioModel func)
         {

@@ -45,7 +45,7 @@
                             <Label Content="Série" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             <Label Content="Tipo" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                             <Label Content="Data Nasc." Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                            <Label Content="Data Admissão" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            <Label Content="Data Admissão" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center"  FontWeight="Bold"/>
                             <TextBox Name="tbNome" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="260" TabIndex="1" MaxLength="100"/>
                             <TextBox Name="tbCpf" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="2" KeyDown="MascaraCpf"/>
                             <TextBox Name="tbRg" Grid.Row="3" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" TabIndex="3" MaxLength="15"/>
@@ -132,7 +132,7 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Button Name="btSalvar" Grid.Row="1" Grid.Column="1" Content="Salvar" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontWeight="Bold" TabIndex="20" Click="Salvar"/>
-                <Button Name="btExcluir" Grid.Row="1" Grid.Column="3" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" TabIndex="21"/>
+                <Button Name="btExcluir" Grid.Row="1" Grid.Column="3" Content="Excluir" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" TabIndex="21" Click="Excluir"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

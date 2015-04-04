@@ -65,7 +65,7 @@ namespace BLL.Comum
         public bool Editar(ContatoModel contato)
         {
             if (contato.Id != 0)
-                return DAO.Editar(contato);
+                return DAO.Editar(VerifyNullValues(contato));
             return false;
         }
     }
