@@ -28,9 +28,6 @@ namespace DAO.Produtos
                 AO.InsertParameter("Marca", produto.Marca.Id);
                 AO.InsertParameter("Unidade", produto.Unidade);
                 AO.InsertParameter("Fornecedor", produto.Fornecedor.Id);
-                AO.InsertParameter("QuantidadeEstoque", produto.QuantidadeEstoque);
-                AO.InsertParameter("EstoqueMinimo", produto.EstoqueMinimo);
-                AO.InsertParameter("EstoqueIdeal", produto.EstoqueIdeal);
                 AO.InsertParameter("ValorCusto", produto.ValorCusto);
                 AO.InsertParameter("ValorVenda", produto.ValorVenda);
                 AO.InsertParameter("Observacao", produto.Observacao);
@@ -184,7 +181,7 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSpecificQuery("UPDATE Produto SET CodigoOriginal = @CodigoOriginal, Nome = @Nome, NomeReduzido = @NomeReduzido, Id_TipoProduto = @Tipo, Id_Marca = @Marca, Unidade = @Unidade, Id_Fornecedor = @Fornecedor, QuantidadeEstoque = @QuantidadeEstoque, ValorCusto = @ValorCusto, ValorVenda = @ValorVenda, Observacao = @Observacao");
+                AO.CreateSpecificQuery("UPDATE Produto SET CodigoOriginal = @CodigoOriginal, Nome = @Nome, NomeReduzido = @NomeReduzido, Id_TipoProduto = @Tipo, Id_Marca = @Marca, Unidade = @Unidade, Id_Fornecedor = @Fornecedor, ValorCusto = @ValorCusto, ValorVenda = @ValorVenda, Observacao = @Observacao");
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_Produto", ConstantesDAO.EQUAL, produto.Id);
                 AO.InsertParameter("CodigoOriginal", produto.CodigoOriginal);
@@ -194,7 +191,6 @@ namespace DAO.Produtos
                 AO.InsertParameter("Marca",produto.Marca.Id);
                 AO.InsertParameter("Unidade",produto.Unidade);
                 AO.InsertParameter("Fornecedor",produto.Fornecedor.Id);
-                AO.InsertParameter("QuantidadeEstoque",produto.QuantidadeEstoque);
                 AO.InsertParameter("ValorCusto",produto.ValorCusto);
                 AO.InsertParameter("ValorVenda",produto.ValorVenda);
                 AO.InsertParameter("Observacao",produto.Observacao);

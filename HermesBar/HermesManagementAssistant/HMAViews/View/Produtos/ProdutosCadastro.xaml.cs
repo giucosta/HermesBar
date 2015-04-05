@@ -193,7 +193,6 @@ namespace HMAViews.View.Produtos
              tbNome.Text = _produto.Nome;
              tbNomeReduzido.Text = _produto.NomeReduzido;
              tbObservacao.Text = _produto.Observacao;
-             tbQuantEstoque.Text = _produto.QuantidadeEstoque.ToString();
              tbValorCusto.Text = _produto.ValorCusto.ToString();
              tbValorVenda.Text = _produto.ValorVenda.ToString();
            

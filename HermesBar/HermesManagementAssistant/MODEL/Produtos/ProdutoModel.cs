@@ -18,9 +18,6 @@ namespace MODEL.Produto
         public MarcaModel Marca { get; set; }
         public string Unidade { get; set; }
         public FornecedorModel Fornecedor { get; set; }
-        public int QuantidadeEstoque { get; set; }
-        public int EstoqueMinimo { get; set; }
-        public int EstoqueIdeal { get; set; }
         public double ValorCusto { get; set; }
         public double ValorVenda { get; set; }
         public string Observacao { get; set; }

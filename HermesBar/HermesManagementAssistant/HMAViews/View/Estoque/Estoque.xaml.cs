@@ -49,18 +49,38 @@ namespace HMAViews.View.Estoque
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            EstoqueModel estoque = new EstoqueModel();
-            estoque.Produto = new ProdutoModel() { CodigoOriginal = (string)lbCodProduto.Content };
-            estoque.QuantidadeEstoque = Double.Parse(tbQuantidade.Text);
-
-            if (EstoqueBLL.Editar(estoque))
+            try
             {
-                Mensagens.GeraMensagens("Atualizado!", MENSAGEM.ESTOQUE_INSERIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
-                new Produtos.Produtos().Show();
-                this.Close();
+                EstoqueModel estoque = new EstoqueModel();
+                estoque.Produto = new ProdutoModel() { CodigoOriginal = (string)lbCodProduto.Content };
+                var valorAdicionar = Double.Parse(tbQuantidade.Text);
+                if (valorAdicionar > 0)
+                {
+                    if (rbNovosItens.IsChecked == true)
+                        estoque.QuantidadeEstoque = Double.Parse(lbQuantEstoque.Content.ToString()) + valorAdicionar;
+                    else
+                        estoque.QuantidadeEstoque = Double.Parse(lbQuantEstoque.Content.ToString()) - Double.Parse(tbQuantidade.Text);    
+                }
+                else
+                {
+                    Mensagens.GeraMensagens("Valor precisa ser superior a 0", "O valor a adicionar precisa ser superior a 0(ZERO)", null, TIPOS_MENSAGENS.ALERTA);
+                    tbQuantidade.Focus();
+                    return;
+                }
+
+                if (EstoqueBLL.Editar(estoque))
+                {
+                    Mensagens.GeraMensagens("Atualizado!", MENSAGEM.ESTOQUE_INSERIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                    new Produtos.Produtos().Show();
+                    this.Close();
+                }
+                else
+                    Mensagens.GeraMensagens("Erro ao atualizar!", MENSAGEM.ESTOQUE_INSERIR_ERRO, TIPOS_MENSAGENS.ERRO);
             }
-            else
-                Mensagens.GeraMensagens("Erro ao atualizar!", MENSAGEM.ESTOQUE_INSERIR_ERRO, TIPOS_MENSAGENS.ERRO);
+            catch (FormatException)
+            {
+                Mensagens.GeraMensagens("Campo obrigatório", "É obrigatório o preenchimento do campo quantidade", null, TIPOS_MENSAGENS.ALERTA);
+            }
         }
     }
 }
