@@ -33,9 +33,9 @@
                             <ColumnDefinition Width="50"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Cód. Produto : " HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center"/>
-                        <Label Name="lbCodProduto" Content="1" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Name="lbCodProduto" Content="" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" Grid.Column="2" FontWeight="Bold"/>
                         <Label Content="Quant. Estoque : " HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Center" Grid.Column="1"/>
-                        <Label Name="lbQuantEstoque" Content="10" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontWeight="Bold"/>
+                        <Label Name="lbQuantEstoque" Content="" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" FontWeight="Bold"/>
                     </Grid>
                 </GroupBox>
                 <GroupBox Header="Avisos" Grid.Row="2" Grid.Column="3">
@@ -73,7 +73,7 @@
                         <RadioButton Name="CorrecaoEstoque" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Content="Correção do estoque atual"/>
                         <Label Content="Quantidade" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
                         <TextBox Name="tbQuantidade" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="50" MaxLength="3"/>
-                        <Button Name="btSalvar" Content="Salvar" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Button Name="btSalvar" Content="Salvar" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Click="Salvar"/>
                     </Grid>
                 </GroupBox>
             </Grid>

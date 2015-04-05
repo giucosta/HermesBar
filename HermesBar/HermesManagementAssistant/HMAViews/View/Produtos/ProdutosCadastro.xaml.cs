@@ -116,7 +116,11 @@ namespace HMAViews.View.Produtos
                 if (camposObrigatorios.Count == 0)
                 {
                     if (ProdutoBLL.Salvar(CarregaProduto()))
+                    {
                         Mensagens.GeraMensagens("Produto cadastrado!", MENSAGEM.PRODUTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                        new Produtos().Show();
+                        this.Close();
+                    }
                     else
                         Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.PRODUTO_CADASTRO_ERRO, TIPOS_MENSAGENS.ERRO);
                 }
@@ -165,7 +169,7 @@ namespace HMAViews.View.Produtos
         private ProdutoModel CarregaProduto()
         {
             var produto = new ProdutoModel();
-            if (_produto.Id != 0)
+            if (_produto != null)
                 produto.Id = _produto.Id;
             produto.CodigoOriginal = tbCodigo.Text;
             produto.CodigoBarras = "";

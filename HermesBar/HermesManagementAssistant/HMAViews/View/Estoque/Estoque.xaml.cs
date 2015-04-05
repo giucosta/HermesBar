@@ -1,5 +1,7 @@
-﻿using BLL.Produtos;
+﻿using BLL.Estoque;
+using BLL.Produtos;
 using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Estoque;
 using MODEL.Produto;
 using System;
 using System.Collections.Generic;
@@ -23,14 +25,14 @@ namespace HMAViews.View.Estoque
     /// </summary>
     public partial class Estoque : ModernWindow
     {
-        private TipoProdutoBLL _tipoProdutoBLL = null;
-        public TipoProdutoBLL TipoProdutoBLL
+        private EstoqueBLL _estoqueBLL = null;
+        public EstoqueBLL EstoqueBLL
         {
             get
             {
-                if (_tipoProdutoBLL == null)
-                    _tipoProdutoBLL = new TipoProdutoBLL();
-                return _tipoProdutoBLL;
+                if (_estoqueBLL == null)
+                    _estoqueBLL = new EstoqueBLL();
+                return _estoqueBLL;
             }
         }
         public Estoque()
@@ -42,6 +44,14 @@ namespace HMAViews.View.Estoque
             InitializeComponent();
             lbCodProduto.Content = produto.CodigoOriginal;
             lbQuantEstoque.Content = produto.QuantidadeEstoque;
+        }
+        private void Salvar(object sender, RoutedEventArgs e)
+        {
+            EstoqueModel estoque = new EstoqueModel();
+            estoque.Produto = new ProdutoModel() { CodigoOriginal = (string)lbCodProduto.Content };
+            estoque.QuantidadeEstoque = Double.Parse(tbQuantidade.Text);
+
+            EstoqueBLL.Editar(estoque);
         }
     }
 }

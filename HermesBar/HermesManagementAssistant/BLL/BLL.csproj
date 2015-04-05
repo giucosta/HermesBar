@@ -50,6 +50,7 @@
     <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoBLL.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoBLL.cs" />
+    <Compile Include="Estoque\EstoqueBLL.cs" />
     <Compile Include="Fornecedor\FornecedorBLL.cs" />
     <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />

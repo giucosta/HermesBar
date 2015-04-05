@@ -1,5 +1,8 @@
-﻿using BLL.Fornecedor;
+﻿using BLL.Estoque;
+using BLL.Fornecedor;
 using DAO.Produtos;
+using DAO.Utils;
+using MODEL.Estoque;
 using MODEL.Fornecedor;
 using MODEL.Produto;
 using System;
@@ -54,17 +57,54 @@ namespace BLL.Produtos
                 return _marcaProduto;
             }
         }
+        private EstoqueBLL _estoqueBLL = null;
+        public EstoqueBLL EstoqueBLL
+        {
+            get
+            {
+                if (_estoqueBLL == null)
+                    _estoqueBLL = new EstoqueBLL();
+                return _estoqueBLL;
+            }
+        }
         public bool Salvar(ProdutoModel produto)
         {
-            if (PesquisaProdutoCodigo(produto).Count == 0)
+            try
             {
-                if (produto.ValorCusto < produto.ValorVenda)
-                    return ProdutoDAO.Salvar(produto);
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.GetTransaction();
+                if (PesquisaProdutoCodigo(produto).Count == 0)
+                {
+                    if (produto.ValorCusto < produto.ValorVenda)
+                        if (ProdutoDAO.Salvar(produto))
+                        {
+                            var estoque = new EstoqueModel();
+                            estoque.Produto = produto;
+                            estoque.EstoqueMinimo = 0;
+                            estoque.EstoqueIdeal = 0;
+                            estoque.QuantidadeEstoque = 0;
+                            if(EstoqueBLL.Salvar(estoque))
+                            {
+                                AO.Commit();
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            UTIL.Session.MensagemErro = "O valor da Venda não pode ser menor que o valor do custo!";
+                            AO.Rollback();
+                        }
+                }
                 else
-                    UTIL.Session.MensagemErro = "O valor da Venda não pode ser menor que o valor do custo!";
+                {
+                    UTIL.Session.MensagemErro = "Código já cadastrado!";
+                    AO.Rollback();
+                }
             }
-            else
-                UTIL.Session.MensagemErro = "Código já cadastrado!";
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+            }
             return false;
         }
         public bool Editar(ProdutoModel produto)
