@@ -1,7 +1,9 @@
 ﻿using BLL.Estoque;
 using BLL.Produtos;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Utils;
 using MODEL.Estoque;
+using HMAViews.View.Produtos;
 using MODEL.Produto;
 using System;
 using System.Collections.Generic;
@@ -51,7 +53,14 @@ namespace HMAViews.View.Estoque
             estoque.Produto = new ProdutoModel() { CodigoOriginal = (string)lbCodProduto.Content };
             estoque.QuantidadeEstoque = Double.Parse(tbQuantidade.Text);
 
-            EstoqueBLL.Editar(estoque);
+            if (EstoqueBLL.Editar(estoque))
+            {
+                Mensagens.GeraMensagens("Atualizado!", MENSAGEM.ESTOQUE_INSERIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new Produtos.Produtos().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao atualizar!", MENSAGEM.ESTOQUE_INSERIR_ERRO, TIPOS_MENSAGENS.ERRO);
         }
     }
 }

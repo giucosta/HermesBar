@@ -105,6 +105,7 @@ namespace HMAViews.View.Produtos
             {
                 var item = (ProdutoGridModel)gridPesquisa.SelectedItems[0];
                 new Estoque.Estoque(item).Show();
+                this.Close();
             }
             catch (ArgumentOutOfRangeException)
             {

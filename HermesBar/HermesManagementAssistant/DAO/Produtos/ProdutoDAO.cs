@@ -63,10 +63,11 @@ namespace DAO.Produtos
             try
             {
                 AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
-                AO.CreateSpecificQuery("SELECT Produto.CodigoOriginal, Produto.Nome, Marca.Marca, Produto.Unidade, Produto.QuantidadeEstoque, Produto.ValorVenda, TipoProduto.Tipo FROM Produto");
+                AO.CreateSpecificQuery("SELECT Produto.CodigoOriginal, Produto.Nome, Marca.Marca, Produto.Unidade, Estoque.QuantidadeEstoque, Produto.ValorVenda, TipoProduto.Tipo FROM Produto");
                 AO.GetCommand();
                 AO.CreateInnerJoin("TipoProduto", "Id_TipoProduto");
                 AO.CreateInnerJoin("Marca", "Id_Marca");
+                AO.CreateInnerJoin("Estoque", "Id_Produto");
                 AO.InsertParameter(ConstantesDAO.WHERE, "Produto.Nome", ConstantesDAO.LIKE, produto.Nome);
                 AO.InsertParameter(ConstantesDAO.AND, "Produto.CodigoOriginal", ConstantesDAO.LIKE, produto.CodigoOriginal);
                 if(produto.Tipo != null)

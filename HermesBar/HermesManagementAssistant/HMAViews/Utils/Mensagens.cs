@@ -125,6 +125,9 @@ namespace HMAViews.Utils
         public const string PRODUTO_EDITAR_ERRO = "Erro ao editar produto!";
         public const string PRODUTO_ESTOQUE_SELECIONAR_ERRO = "É necessário selecionar um produto na lista de pesquisa!";
         public const string PRODUTO_EDITAR_SELECIONAR_ERRO = "A pesquisa não produziu resultados suficientes para edição!";
+        //ESTOQUE
+        public const string ESTOQUE_INSERIR_SUCESSO = "Estoque atualizado com sucesso";
+        public const string ESTOQUE_INSERIR_ERRO = "Erro ao atualizar estoque";
         //FORNECEDOR
         public const string FORNECEDOR_CADASTRO_SUCESSO = "Fornecedor cadastrado com sucesso!";
         public const string FORNECEDOR_CADASTRO_ERRO = "Erro ao cadastrar Fornecedor";

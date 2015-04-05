@@ -166,7 +166,7 @@ namespace GerenciadorBancoHMA
             ResetarBanco();
             StringBuilder sbSP = new StringBuilder();
             sbSP.AppendLine(@"
-                             CREATE PROCEDURE SP_Carrega_Valores_Teste
+                              CREATE PROCEDURE SP_Carrega_Valores_Teste
     AS
     EXEC SP_Resetar_Banco_HMA
     --
@@ -221,9 +221,9 @@ namespace GerenciadorBancoHMA
 	INSERT INTO Marca VALUES('Pepsi', 2);
 	INSERT INTO Marca VALUES('Ouro Fino', 2);
 	--
-    INSERT INTO Produto VALUES('0001','011231414114','Coca-Cola lata 350ML','Coca lata',1,1,'Lata',1,100,80,150,'1,50','3,00','');
-    INSERT INTO Produto VALUES('0002','011123123231414114','Skol lata 350ML','Skol lata',3,2,'Lata',			1,100,80,150,'1,80','4,00','');
-    INSERT INTO Produto VALUES('0003','3123231414114','Skol Garrafa 600ML','Skol Garrafa',	2,2,'Garrafa',		1,100,80,150,'1,80','4,00','');
+    INSERT INTO Produto VALUES('0001','011231414114','Coca-Cola lata 350ML','Coca lata',1,1,'Lata',1,'1,50','3,00','');
+    INSERT INTO Produto VALUES('0002','011123123231414114','Skol lata 350ML','Skol lata',3,2,'Lata',1,'1,80','4,00','');
+    INSERT INTO Produto VALUES('0003','3123231414114','Skol Garrafa 600ML','Skol Garrafa',	2,2,'Garrafa',1,'1,80','4,00','');
     --
 	INSERT INTO Estoque VALUES(1,100,150,80);
 	INSERT INTO Estoque VALUES(2,100,150,80);
@@ -417,11 +417,11 @@ namespace GerenciadorBancoHMA
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Produto')
         BEGIN
 	        DROP TABLE Produto;
-	        CREATE TABLE Produto(Id_Produto INT IDENTITY(1,1) PRIMARY KEY,CodigoOriginal VARCHAR(20),CodigoBarras VARCHAR(50),Nome VARCHAR(100),NomeReduzido VARCHAR(100),Id_TipoProduto INT,Id_Marca INT ,Unidade VARCHAR(10),Id_Fornecedor INT,QuantidadeEstoque INT,EstoqueMinimo INT,EstoqueIdeal INT,ValorCusto VARCHAR(10),ValorVenda VARCHAR(10),Observacao VARCHAR(200),FOREIGN KEY(Id_TipoProduto)REFERENCES TipoProduto(Id_TipoProduto),FOREIGN KEY(Id_Fornecedor)REFERENCES Fornecedor(Id_Fornecedor), FOREIGN KEY(Id_Marca) REFERENCES Marca(Id_Marca));
+	        CREATE TABLE Produto(Id_Produto INT IDENTITY(1,1) PRIMARY KEY,CodigoOriginal VARCHAR(20),CodigoBarras VARCHAR(50),Nome VARCHAR(100),NomeReduzido VARCHAR(100),Id_TipoProduto INT,Id_Marca INT ,Unidade VARCHAR(10),Id_Fornecedor INT,ValorCusto VARCHAR(10),ValorVenda VARCHAR(10),Observacao VARCHAR(200),FOREIGN KEY(Id_TipoProduto)REFERENCES TipoProduto(Id_TipoProduto),FOREIGN KEY(Id_Fornecedor)REFERENCES Fornecedor(Id_Fornecedor), FOREIGN KEY(Id_Marca) REFERENCES Marca(Id_Marca));
         END
         ELSE 
         BEGIN
-	        CREATE TABLE Produto(Id_Produto INT IDENTITY(1,1) PRIMARY KEY,CodigoOriginal VARCHAR(20),CodigoBarras VARCHAR(50),Nome VARCHAR(100),NomeReduzido VARCHAR(100),Id_TipoProduto INT,Id_Marca INT ,Unidade VARCHAR(10),Id_Fornecedor INT,QuantidadeEstoque INT,EstoqueMinimo INT,EstoqueIdeal INT,ValorCusto VARCHAR(10),ValorVenda VARCHAR(10),Observacao VARCHAR(200),FOREIGN KEY(Id_TipoProduto)REFERENCES TipoProduto(Id_TipoProduto),FOREIGN KEY(Id_Fornecedor)REFERENCES Fornecedor(Id_Fornecedor), FOREIGN KEY(Id_Marca) REFERENCES Marca(Id_Marca));
+	        CREATE TABLE Produto(Id_Produto INT IDENTITY(1,1) PRIMARY KEY,CodigoOriginal VARCHAR(20),CodigoBarras VARCHAR(50),Nome VARCHAR(100),NomeReduzido VARCHAR(100),Id_TipoProduto INT,Id_Marca INT ,Unidade VARCHAR(10),Id_Fornecedor INT,ValorCusto VARCHAR(10),ValorVenda VARCHAR(10),Observacao VARCHAR(200),FOREIGN KEY(Id_TipoProduto)REFERENCES TipoProduto(Id_TipoProduto),FOREIGN KEY(Id_Fornecedor)REFERENCES Fornecedor(Id_Fornecedor), FOREIGN KEY(Id_Marca) REFERENCES Marca(Id_Marca));
         END
 		--
 		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Estoque')
