@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Mascara;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,14 @@ namespace HMAViews.View.Caixa
         public EntradaCliente()
         {
             InitializeComponent();
+        }
+        private void MascaraSaldoInicial(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbSaldoInicial, e);
+        }
+        private void AbrirCaixa(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
