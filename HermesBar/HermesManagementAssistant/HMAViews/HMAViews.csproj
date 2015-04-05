@@ -46,6 +46,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
+      <HintPath>..\..\..\..\WpfToolkitChart\WpfToolkitChart\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -89,6 +92,9 @@
     <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
     <Compile Include="Utils\Verificadores.cs" />
+    <Compile Include="View\Caixa\CaixaAberto.xaml.cs">
+      <DependentUpon>CaixaAberto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Caixa\EntradaCliente.xaml.cs">
       <DependentUpon>EntradaCliente.xaml</DependentUpon>
     </Compile>
@@ -118,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Atracoes\AtracoesCadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Caixa\CaixaAberto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +214,10 @@
     <Resource Include="images\LOGO_GENERICA 04.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\WpfToolkitChart\WpfToolkitChart\WpfToolkitChart.csproj">
+      <Project>{1fbf4292-daef-459c-9d95-c32688e2cf3b}</Project>
+      <Name>WpfToolkitChart</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
       <Name>BLL</Name>
@@ -221,7 +235,6 @@
       <Name>UTIL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

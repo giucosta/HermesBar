@@ -40,7 +40,7 @@
                 <TextBox Name="tbSaldoInicial" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" KeyDown="MascaraSaldoInicial"/>
                 <Label Content="Observação" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <TextBox Name="tbObservacao" Grid.Row="2" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" Height="70" MaxLines="3" AcceptsReturn="True" Grid.RowSpan="3"/>
-                <Button Name="btAbrirCaixa" Content="Abrir Caixa" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold"/>
+                <Button Name="btAbrirCaixa" Content="Abrir Caixa" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Click="AbrirCaixa"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

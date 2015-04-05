@@ -19,7 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using UTIL;
 
-namespace HMAViews.View.Funcionario
+namespace HMAViews.View.Funcionarios
 {
     /// <summary>
     /// Interaction logic for FuncionariosCadastro.xaml

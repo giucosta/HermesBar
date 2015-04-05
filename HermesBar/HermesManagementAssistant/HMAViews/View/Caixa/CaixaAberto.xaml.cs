@@ -1,5 +1,4 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
-using HMAViews.Mascara;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +17,13 @@ using System.Windows.Shapes;
 namespace HMAViews.View.Caixa
 {
     /// <summary>
-    /// Interaction logic for EntradaCliente.xaml
+    /// Interaction logic for CaixaAberto.xaml
     /// </summary>
-    public partial class EntradaCliente : ModernWindow
+    public partial class CaixaAberto : ModernWindow
     {
-        public EntradaCliente()
+        public CaixaAberto()
         {
             InitializeComponent();
-        }
-        private void MascaraSaldoInicial(object sender, KeyEventArgs e)
-        {
-            Mascaras.SomenteNumeros(tbSaldoInicial, e);
-        }
-        private void AbrirCaixa(object sender, RoutedEventArgs e)
-        {
-            new CaixaAberto().Show();
         }
     }
 }

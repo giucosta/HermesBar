@@ -1,5 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
-using HMAViews.View.Funcionario;
+using HMAViews.View.Funcionarios;
 using HMAViews.View.Produtos;
 using HMAViews.View;
 using HMAViews.View.Atracoes;
@@ -73,10 +73,6 @@ namespace HMAViews
         {
             new EntradaCliente().Show();
         }
-        public void ConsultarEstoque(object sender, RoutedEventArgs e)
-        {
-            new Estoque().Show();
-        }
         public void ImportarNfe(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -114,6 +110,10 @@ namespace HMAViews
                 mnFuncionarios.Visibility = System.Windows.Visibility.Hidden;
                 mniAbrirCaixa.Visibility = System.Windows.Visibility.Hidden;
             }
+        }
+        private void GraficosE(object sender, RoutedEventArgs e)
+        {
+            new WpfToolkitChart.MainWindow().Show();
         }
     }
 }

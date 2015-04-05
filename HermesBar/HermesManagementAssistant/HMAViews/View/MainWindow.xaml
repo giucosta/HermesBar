@@ -15,10 +15,6 @@
                 <MenuItem Name="mnGestao" Header="_Gestão">
                     <MenuItem Name="mniAtracoes" Header="_Atracoes" Click="Atracoes"/>
                     <MenuItem Name="mniEstabelecimento" Header="Estabelecimento" Click="Estabelecimento"/>
-                    <MenuItem Name="mniEstoque" Header="Estoque">
-                        <MenuItem Name="mniConsultarEstoque" Header="Consultar Estoque" Click="ConsultarEstoque"/>
-                        <MenuItem Name="mniAtualizarEstoque" Header="Atualizar Estoque"/>
-                    </MenuItem>
                     <MenuItem x:Name="mniFornecedor" Header="_Fornecedor" Click="Fornecedor"/>
                     <MenuItem Name="mnFuncionarios" Header="_Funcionários">
                         <MenuItem Name="mniFuncionarios" Header="Funcionários" Click="Funcionarios"/>
@@ -36,9 +32,7 @@
                 </MenuItem>
             </Menu>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                </Grid.RowDefinitions>
+                <Button Name="Graficos" Content="Graficos" Click="GraficosE"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

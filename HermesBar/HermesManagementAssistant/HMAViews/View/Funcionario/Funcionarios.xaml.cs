@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HMAViews.View.Funcionario
+namespace HMAViews.View.Funcionarios
 {
     /// <summary>
     /// Interaction logic for Funcionarios.xaml
