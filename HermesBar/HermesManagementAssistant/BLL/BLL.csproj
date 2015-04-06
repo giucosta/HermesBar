@@ -33,6 +33,10 @@
     <Reference Include="ConsultaCep">
       <HintPath>..\HermesManagementAssistant\ConsultaCep.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+=======
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,14 +47,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Atracoes\AtracoesBLL.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Atracoes\EstiloAtracoesBLL.cs" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
     <Compile Include="Comum\ContatoBLL.cs" />
     <Compile Include="Comum\EnderecoBLL.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />
     <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoBLL.cs" />
     <Compile Include="Estabelecimento\EstabelecimentoBLL.cs" />
+<<<<<<< HEAD
     <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />
+=======
+    <Compile Include="Estoque\EstoqueBLL.cs" />
+    <Compile Include="Fornecedor\FornecedorBLL.cs" />
+    <Compile Include="Funcionario\FuncionarioBLL.cs" />
+    <Compile Include="Login\LoginBLL.cs" />
+    <Compile Include="Perfil\PerfilBLL.cs" />
+    <Compile Include="Produtos\MarcaProdutoBLL.cs" />
+    <Compile Include="Produtos\ProdutoBLL.cs" />
+    <Compile Include="Produtos\TipoProdutoBLL.cs" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Session\SessionBLL.cs" />
     <Compile Include="Funcionario\TipoFuncionarioBLL.cs" />
@@ -65,9 +84,15 @@
       <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+<<<<<<< HEAD
     <ProjectReference Include="..\UTILS\UTILS.csproj">
       <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
       <Name>UTILS</Name>
+=======
+    <ProjectReference Include="..\UTILS\UTIL.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTIL</Name>
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
