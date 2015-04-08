@@ -30,7 +30,7 @@
                 <Label Content="Estilo"     HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="1" Grid.Row="2"/>
                 <TextBox    Name="tbNome"   HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="2" Grid.Row="1" Width="300" TabIndex="1" ToolTip="Insira o nome da atração que deseja pesquisar"/>
                 <ComboBox   Name="cbTipo"   HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="2" Grid.Row="2" Width="300" SelectedValuePath="Id" DisplayMemberPath="Estilo" TabIndex="2" ToolTip="Selecione o estilo da atração que deseja pesquisar"/>
-                <DataGrid   Name="dgPesquisa" HorizontalAlignment="Left"    VerticalAlignment="Top"  Grid.Column="1" Grid.Row="5" AutoGenerateColumns="False" SelectedValuePath="Id" MouseDoubleClick="Editar" Grid.ColumnSpan="2" Height="206" Margin="0,0,-79,-176" Width="530">
+                <DataGrid   Name="dgPesquisa" HorizontalAlignment="Left"    VerticalAlignment="Top"  Grid.Column="1" Grid.Row="5" AutoGenerateColumns="False" SelectedValuePath="Id" MouseDoubleClick="Editar" Grid.ColumnSpan="2" Height="206" Margin="0,0,-79,-176" Width="530" IsReadOnly="True">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cód." Width="70" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Nome}"/>
@@ -40,7 +40,7 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Pesquisa" Grid.Column="1" Grid.Row="4" TabIndex="3" ToolTip="Clique para pesquisar uma atração"/>
-                <Button Name="btNovo" Content="Novo" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Click="Novo" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração" Margin="100,7,0,7" Grid.ColumnSpan="2" Width="76"/>
+                <Button Name="btNovo" Content="Novo" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Click="Novo" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração" Margin="100,7,0,7" Grid.ColumnSpan="2" Width="76" FontWeight="Bold"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

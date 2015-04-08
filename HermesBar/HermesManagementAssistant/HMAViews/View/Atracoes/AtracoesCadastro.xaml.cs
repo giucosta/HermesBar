@@ -193,16 +193,5 @@ namespace HMAViews.View.Atracoes
         {
             Mascaras.PhoneMasked(tbCelular, e);
         }
-        private void Fechando(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (_idAtracao == 0)
-            {
-                if (Mensagens.GeraMensagens("Fechar janela!", MENSAGEM.FECHAR_TELA_CONFIRMA, null, TIPOS_MENSAGENS.QUESTAO))
-                    e.Cancel = false;
-                else
-                    e.Cancel = true;
-            }
-            e.Cancel = false;
-        }
     }
 }
