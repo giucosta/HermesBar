@@ -7,15 +7,30 @@
                   mc:Ignorable="d"
                   Title="Cadastro de Atrações"
                   LogoData="F1 M 24.9015,43.0378L 25.0963,43.4298C 26.1685,49.5853 31.5377,54.2651 38,54.2651C 44.4623,54.2651 49.8315,49.5854 50.9037,43.4299L 51.0985,43.0379C 51.0985,40.7643 52.6921,39.2955 54.9656,39.2955C 56.9428,39.2955 58.1863,41.1792 58.5833,43.0379C 57.6384,52.7654 47.9756,61.75 38,61.75C 28.0244,61.75 18.3616,52.7654 17.4167,43.0378C 17.8137,41.1792 19.0572,39.2954 21.0344,39.2954C 23.3079,39.2954 24.9015,40.7643 24.9015,43.0378 Z M 26.7727,20.5833C 29.8731,20.5833 32.3864,23.0966 32.3864,26.197C 32.3864,29.2973 29.8731,31.8106 26.7727,31.8106C 23.6724,31.8106 21.1591,29.2973 21.1591,26.197C 21.1591,23.0966 23.6724,20.5833 26.7727,20.5833 Z M 49.2273,20.5833C 52.3276,20.5833 54.8409,23.0966 54.8409,26.197C 54.8409,29.2973 52.3276,31.8106 49.2273,31.8106C 46.127,31.8106 43.6136,29.2973 43.6136,26.197C 43.6136,23.0966 46.127,20.5833 49.2273,20.5833 Z"
-                  Style="{StaticResource BlankWindow}" Height="390.474" Width="561.294" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+                  Style="{StaticResource BlankWindow}" Height="443.256" Width="561.294" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <ScrollViewer>
         <StackPanel>
-            <Grid Height="341" Width="492">
-                <Label x:Name="lbNome" Content="Nome" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,25,0,0"/>
-                <TextBox x:Name="tbNome" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Margin="107,20,0,0" TabIndex="1" ToolTip="Insira o nome da atração que deseja pesquisar"/>
-                <Label x:Name="lbEstilo" Content="Estilo" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="32,65,0,0"/>
-                <ComboBox x:Name="cbTipo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="374" Margin="107,62,0,0" SelectedValuePath="Id" DisplayMemberPath="Estilo" TabIndex="2" ToolTip="Selecione o estilo da atração que deseja pesquisar"/>
-                <DataGrid x:Name="dgPesquisa" HorizontalAlignment="Left" Margin="30,129,0,0" VerticalAlignment="Top" Height="125" Width="455" AlternationCount="2" RowBackground="Beige" AlternatingRowBackground="LightBlue" HeadersVisibility="All" HorizontalGridLinesBrush="#DDDDDD" VerticalGridLinesBrush="#DDDDDD" ColumnWidth="SizeToCells" AutoGenerateColumns="False" SelectedValuePath="Id" MouseDoubleClick="Editar">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Content="Nome"       HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
+                <Label Content="Estilo"     HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="1" Grid.Row="2"/>
+                <TextBox    Name="tbNome"   HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="2" Grid.Row="1" Width="300" TabIndex="1" ToolTip="Insira o nome da atração que deseja pesquisar"/>
+                <ComboBox   Name="cbTipo"   HorizontalAlignment="Left"      VerticalAlignment="Center"  Grid.Column="2" Grid.Row="2" Width="300" SelectedValuePath="Id" DisplayMemberPath="Estilo" TabIndex="2" ToolTip="Selecione o estilo da atração que deseja pesquisar"/>
+                <DataGrid   Name="dgPesquisa" HorizontalAlignment="Left"    VerticalAlignment="Top"  Grid.Column="1" Grid.Row="5" AutoGenerateColumns="False" SelectedValuePath="Id" MouseDoubleClick="Editar" Grid.ColumnSpan="2" Height="206" Margin="0,0,-79,-176" Width="530">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Cód." Width="70" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Nome}"/>
@@ -24,8 +39,8 @@
                         <DataGridTextColumn Header="Estilo" Width="100" Binding="{Binding Estilo}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" Margin="32,95,0,0" VerticalAlignment="Top" Width="105" Click="Pesquisa" TabIndex="3" ToolTip="Clique para pesquisar uma atração"/>
-                <Button x:Name="btNovo" Content="Novo" HorizontalAlignment="Left" Margin="32,263,0,0" VerticalAlignment="Top" Width="105" FontWeight="Bold" Click="Novo" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração"/>
+                <Button Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Pesquisa" Grid.Column="1" Grid.Row="4" TabIndex="3" ToolTip="Clique para pesquisar uma atração"/>
+                <Button Name="btNovo" Content="Novo" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Click="Novo" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração" Margin="100,7,0,7" Grid.ColumnSpan="2" Width="76"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>
