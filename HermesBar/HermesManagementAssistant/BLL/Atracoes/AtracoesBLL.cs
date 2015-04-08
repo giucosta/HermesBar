@@ -65,23 +65,31 @@ namespace BLL.Atracoes
         }
         public bool Salvar(AtracoesModel atracoes)
         {
-            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
-            AO.GetTransaction();
-            var contato = ContatoBLL.Salvar(atracoes.Contato);
-            if (contato != null)
+            try
             {
-                atracoes.Contato = contato;
-                if (AtracoesDAO.Salvar(atracoes))
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.GetTransaction();
+                var contato = ContatoBLL.Salvar(atracoes.Contato);
+                if (contato != null)
                 {
-                    AO.Commit();
-                    return true;
+                    atracoes.Contato = contato;
+                    if (AtracoesDAO.Salvar(atracoes))
+                    {
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
                 }
                 else
                     AO.Rollback();
+                return false;
             }
-            else
-                AO.Rollback();
-            return false;
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
         public bool Excluir(AtracoesModel atracoes)
         {

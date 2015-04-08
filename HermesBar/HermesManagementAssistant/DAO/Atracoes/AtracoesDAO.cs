@@ -33,8 +33,8 @@ namespace DAO.Atracoes
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Salvar", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.INSERT);
-                return false;
+                Log.Log.GravarLog("Salvar", "AtracoesDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
             }
         }
         public bool Excluir(AtracoesModel atracoes)

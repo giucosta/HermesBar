@@ -48,7 +48,7 @@ namespace HMAViews.View.Atracoes
                 return _contatoBLL;
             }
         }
-        private int _idAtracao = 0;
+        private AtracoesModel _atracao = null;
         private int _idContato = 0;
         public AtracoesCadastro()
         {
@@ -65,7 +65,7 @@ namespace HMAViews.View.Atracoes
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            if (_idAtracao == 0)
+            if (_atracao != null)
             {
                 var obrigatorios = ValidarCampos();
                 if (obrigatorios.Count == 0)
@@ -81,7 +81,7 @@ namespace HMAViews.View.Atracoes
                         this.Close();
                     }
                     else
-                        Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                        Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ATRACOES_CADASTRO_ERRO, TIPOS_MENSAGENS.ERRO);
                 }
                 else
                     Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, obrigatorios, TIPOS_MENSAGENS.ALERTA);
@@ -142,7 +142,7 @@ namespace HMAViews.View.Atracoes
         }
         private void CarregaAtracaoEdicao(AtracoesModel atracao)
         {
-            _idAtracao = atracao.Id;
+            _atracao = atracao;
             tbAtracao.Text = atracao.Nome;
             tbTempo.Text = atracao.Tempo_Show;
             tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString();
@@ -159,7 +159,7 @@ namespace HMAViews.View.Atracoes
         private ContatoModel CarregaContato()
         {
             var contato = new ContatoModel();
-            if (_idContato != 0)
+            if (_atracao != null)
                 contato.Id = _idContato;
             contato.Nome = tbNome.Text;
             contato.Telefone = tbTelefone.Text;
