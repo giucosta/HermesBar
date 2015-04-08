@@ -31,9 +31,6 @@
                     <MenuItem Name="mniFecharCaixa" Header="Fechar Caixa"/>
                 </MenuItem>
             </Menu>
-            <Grid>
-                <Button Name="Graficos" Content="Graficos" Click="GraficosE"/>
-            </Grid>
         </StackPanel>
     </ScrollViewer>
 </mui:ModernWindow>

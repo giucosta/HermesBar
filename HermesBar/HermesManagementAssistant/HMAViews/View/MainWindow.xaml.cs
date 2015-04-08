@@ -111,9 +111,5 @@ namespace HMAViews
                 mniAbrirCaixa.Visibility = System.Windows.Visibility.Hidden;
             }
         }
-        private void GraficosE(object sender, RoutedEventArgs e)
-        {
-            new WpfToolkitChart.MainWindow().Show();
-        }
     }
 }
