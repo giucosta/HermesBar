@@ -151,8 +151,8 @@ namespace DAO.Atracoes
             }
             catch (Exception e)
             {
-                Log.Log.GravarLog("Editar", "AtracoesDAO", e.StackTrace, Constantes.ATipoMetodo.UPDATE);
-                return false;
+                Log.Log.GravarLog("Editar", "AtracoesDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
+                throw e;
             }
         }
     }

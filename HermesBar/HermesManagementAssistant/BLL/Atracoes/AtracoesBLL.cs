@@ -109,20 +109,27 @@ namespace BLL.Atracoes
         }
         public bool Editar(AtracoesModel atracoes)
         {
-            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
-            AO.GetTransaction();
-            if (ContatoBLL.Editar(atracoes.Contato))
+            try
             {
-                if (AtracoesDAO.Editar(atracoes))
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.GetTransaction();
+                if (ContatoBLL.Editar(atracoes.Contato))
                 {
-                    AO.Commit();
-                    return true;
+                    if (AtracoesDAO.Editar(atracoes))
+                    {
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
                 }
                 else
                     AO.Rollback();
             }
-            else
-                AO.Rollback();
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+            }
             return false;
         }
         public int RecuperaIdContato(AtracoesModel atracao)

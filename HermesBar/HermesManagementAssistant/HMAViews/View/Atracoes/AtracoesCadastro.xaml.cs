@@ -117,7 +117,7 @@ namespace HMAViews.View.Atracoes
                 this.Close();
             }
             else
-                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                Mensagens.GeraMensagens("Erro ao editar!", MENSAGEM.ATRACOES_EDITAR_ERRO, TIPOS_MENSAGENS.ERRO);
         }
         private List<String> ValidarCampos()
         {
