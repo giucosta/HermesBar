@@ -65,7 +65,7 @@ namespace HMAViews.View.Atracoes
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
-            if (_atracao != null)
+            if (_atracao == null)
             {
                 var obrigatorios = ValidarCampos();
                 if (obrigatorios.Count == 0)
@@ -93,7 +93,7 @@ namespace HMAViews.View.Atracoes
         {
             if (Mensagens.GeraMensagens("Deseja Excluir?", MENSAGEM.ATRACOES_EXCLUIR_CERTEZA, null, TIPOS_MENSAGENS.QUESTAO))
             {
-                if (AtracoesBLL.Excluir(new AtracoesModel() { Id = _idAtracao, Contato = new ContatoModel() { Id = _idContato } }))
+                if (AtracoesBLL.Excluir(new AtracoesModel() { Id = _atracao.Id, Contato = new ContatoModel() { Id = _idContato } }))
                 {
                     Mensagens.GeraMensagens("Atração excluída", MENSAGEM.ATRACOES_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
                     new Atracoes().Show();
@@ -172,8 +172,8 @@ namespace HMAViews.View.Atracoes
         private AtracoesModel CarregaAtracoes()
         {
             var atracoes = new AtracoesModel();
-            if (_idAtracao != 0)
-                atracoes.Id = _idAtracao;
+            if (_atracao != null)
+                atracoes.Id = _atracao.Id;
             atracoes.Nome = tbAtracao.Text;
             atracoes.Tempo_Show = tbTempo.Text;
             atracoes.Ultimo_Valor_Cobrado = Double.Parse(tbValor.Text);

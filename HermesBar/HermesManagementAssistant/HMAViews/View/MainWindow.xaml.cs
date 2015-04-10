@@ -29,6 +29,7 @@ using UTIL;
 using HMAViews.Utils;
 using HMAViews.View.Caixa;
 using HMAViews.View.Estoque;
+using HMAViews.View.Entrada;
 
 namespace HMAViews
 {
@@ -71,7 +72,7 @@ namespace HMAViews
         }
         public void AbrirCaixa(object sender, RoutedEventArgs e)
         {
-            new EntradaCliente().Show();
+            new AberturaCaixa().Show();
         }
         public void ImportarNfe(object sender, RoutedEventArgs e)
         {
@@ -100,6 +101,10 @@ namespace HMAViews
                 else
                     Mensagens.GeraMensagens("Importar XML", MENSAGEM.ARQUIVO_JA_EXPORTADO, null, TIPOS_MENSAGENS.ALERTA);
             }
+        }
+        public void Entrada(object sender, RoutedEventArgs e)
+        {
+            new EntradaCliente().Show();
         }
         private void GerenciarTelas()
         {

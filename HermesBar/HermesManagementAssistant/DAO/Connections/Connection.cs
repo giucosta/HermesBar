@@ -29,10 +29,11 @@ namespace DAO.Connections
                 {
                     _connection.Open();
                 }
-                catch (SqlException)
+                catch (SqlException e)
                 {
                     Log.Log.GravarLog("GetConnection", "Connection", "Falha ao conectar na base de dados", "");
                     _connection = null;
+                    throw e;
                 }
             }
             return _connection;
@@ -44,11 +45,11 @@ namespace DAO.Connections
                 _command.ExecuteNonQuery();
                 return true;
             }
-            catch(SqlException)
+            catch(SqlException e)
             {
                 Log.Log.GravarLog("ExecutarComando","Connection",_command.CommandText,"");
                 OutConnection();
-                return false;
+                throw e;
             }
         }
         public static DataTable getDataTable()
@@ -61,10 +62,10 @@ namespace DAO.Connections
 
                 return dataTable;
             }
-            catch(SqlException)
+            catch(SqlException e)
             {
                 OutConnection();
-                return null;
+                throw e;
             }
         }
         public static void OutConnection(){

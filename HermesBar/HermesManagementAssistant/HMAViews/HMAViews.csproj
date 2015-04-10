@@ -95,7 +95,10 @@
     <Compile Include="View\Caixa\CaixaAberto.xaml.cs">
       <DependentUpon>CaixaAberto.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Caixa\EntradaCliente.xaml.cs">
+    <Compile Include="View\Caixa\AberturaCaixa.xaml.cs">
+      <DependentUpon>AberturaCaixa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Entrada\EntradaCliente.xaml.cs">
       <DependentUpon>EntradaCliente.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Estoque\Estoque.xaml.cs">
@@ -131,7 +134,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Caixa\EntradaCliente.xaml">
+    <Page Include="View\Caixa\AberturaCaixa.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Entrada\EntradaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

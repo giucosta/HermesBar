@@ -20,9 +20,9 @@ namespace HMAViews.View.Caixa
     /// <summary>
     /// Interaction logic for EntradaCliente.xaml
     /// </summary>
-    public partial class EntradaCliente : ModernWindow
+    public partial class AberturaCaixa : ModernWindow
     {
-        public EntradaCliente()
+        public AberturaCaixa()
         {
             InitializeComponent();
         }

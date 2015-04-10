@@ -13,7 +13,6 @@ namespace MODEL.Caixa
     {
         public string NumeroCartao { get; set; }
         public ClienteModel Cliente { get; set; }
-        public List<ProdutoModel> Produtos { get; set; }
         public DateTime Data { get; set; }
         public double ValorTotal { get; set; }
         public string FormaPagamento { get; set; }

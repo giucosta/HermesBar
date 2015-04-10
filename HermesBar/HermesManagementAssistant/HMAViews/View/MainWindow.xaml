@@ -12,6 +12,9 @@
                 <MenuItem Name="mnConfiguracoes" Header="_Configurações">
                     <MenuItem Name="mniUsuarios" Header="_Usuarios"/>
                 </MenuItem>
+                <MenuItem Name="mnEntradaCliente" Header="_Clientes">
+                    <MenuItem Name="mniEntradaCliente" Header="_Entrada" Click="Entrada"/>
+                </MenuItem>
                 <MenuItem Name="mnGestao" Header="_Gestão">
                     <MenuItem Name="mniAtracoes" Header="_Atracoes" Click="Atracoes"/>
                     <MenuItem Name="mniEstabelecimento" Header="Estabelecimento" Click="Estabelecimento"/>
