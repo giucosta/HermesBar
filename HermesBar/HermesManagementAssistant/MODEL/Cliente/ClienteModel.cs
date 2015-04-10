@@ -10,8 +10,7 @@ namespace MODEL.Cliente
     public class ClienteModel : IModel
     {
         public string Nome { get; set; }
-        public DateTime DataNascimento { get; set; }
         public string RG { get; set; }
-        public ContatoModel Contato { get; set; }
+        public string Telefone { get; set; }
     }
 }

@@ -138,5 +138,7 @@ namespace HMAViews.Utils
         public const string FORNECEDOR_EDITAR_ERRO = "Erro ao editar fornecedor!";
         //CONSULTA CEP
         public const string CONSULTACEP_TAMANHO_ERRO = "Insira um CEP válido";
+        //ENTRADA CLIENTE
+        public const string ENTRADACLIENTE_ERRO = "Erro ao inserir cliente/cartão";
     }
 }

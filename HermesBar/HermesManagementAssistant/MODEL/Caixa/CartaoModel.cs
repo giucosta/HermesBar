@@ -16,7 +16,7 @@ namespace MODEL.Caixa
         public DateTime Data { get; set; }
         public double ValorTotal { get; set; }
         public string FormaPagamento { get; set; }
-        public DateTime HoraEntrada { get; set; }
-        public DateTime HoraSaida { get; set; }
+        public DateTime? HoraEntrada { get; set; }
+        public DateTime? HoraSaida { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using MODEL.Cliente;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,18 @@ namespace BLL.Cliente
             {
                 UTIL.Session.MensagemErro = e.Message;
                 return false;
+            }
+        }
+        public ClienteModel RecuperaUltimoCliente()
+        {
+            try
+            {
+                return ClienteDAO.RecuperaUltimoCadastro().DataTableToSimpleObject<ClienteModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
             }
         }
     }

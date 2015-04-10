@@ -1,5 +1,6 @@
 ﻿using BLL.Caixa;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Utils;
 using MODEL.Caixa;
 using System;
 using System.Collections.Generic;
@@ -33,18 +34,51 @@ namespace HMAViews.View.Entrada
                 return _cartaoBLL;
             }
         }
+        private int _numeroCartao = 001;
         public EntradaCliente()
         {
             InitializeComponent();
+            tbNumeroCartao.Text = _numeroCartao.ToString("D4");
         }
         private void RegistrarEntrada(object sender, RoutedEventArgs e)
         {
-            var model = new CartaoModel();
-            model.HoraEntrada = DateTime.Now;
-            model.NumeroCartao = tbNumeroCartao.Text;
-            model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, DataNascimento = DateTime.Parse(tbDataNascimento.Text), RG = tbRG.Text, Contato = new MODEL.ContatoModel() { Nome = tbNome.Text, Telefone = tbTelefone.Text } };
+            var camposObrigatorios = VerificaCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                var model = new CartaoModel();
+                model.NumeroCartao = tbNumeroCartao.Text;
+                model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, RG = tbRG.Text, Telefone = tbTelefone.Text };
 
-            CartaoBLL.Salvar(model);
+                if (!CartaoBLL.Salvar(model))
+                    Mensagens.GeraMensagens("Erro ao inserir cliente", MENSAGEM.ENTRADACLIENTE_ERRO, TIPOS_MENSAGENS.ERRO);
+                else
+                    RegistraProximoNumero();
+            }
+            else
+                Mensagens.GeraMensagens("Campos obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+        }
+        private void RegistraProximoNumero()
+        {
+            tbNome.Clear();
+            tbRG.Clear();
+            tbTelefone.Clear();
+
+            _numeroCartao++;
+            tbNumeroCartao.Text = _numeroCartao.ToString("D4");
+        }
+        private List<string> VerificaCamposObrigatorios()
+        {
+            var camposObrigatorios = new List<string>();
+            if (string.IsNullOrEmpty(tbNome.Text))
+                camposObrigatorios.Add("NOME");
+            if (string.IsNullOrEmpty(tbNumeroCartao.Text))
+                camposObrigatorios.Add("NÚMERO CARTÃO");
+            if (string.IsNullOrEmpty(tbRG.Text))
+                camposObrigatorios.Add("RG");
+            if (string.IsNullOrEmpty(tbTelefone.Text))
+                camposObrigatorios.Add("TELEFONE");
+
+            return camposObrigatorios;
         }
     }
 }
