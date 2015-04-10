@@ -38,6 +38,8 @@ namespace HMAViews.View.Entrada
         public EntradaCliente()
         {
             InitializeComponent();
+            if (UTIL.Session.CaixaAberto)
+                _numeroCartao = CartaoBLL.RecuperaUltimoCartao();
             tbNumeroCartao.Text = _numeroCartao.ToString("D4");
         }
         private void RegistrarEntrada(object sender, RoutedEventArgs e)
@@ -52,7 +54,10 @@ namespace HMAViews.View.Entrada
                 if (!CartaoBLL.Salvar(model))
                     Mensagens.GeraMensagens("Erro ao inserir cliente", MENSAGEM.ENTRADACLIENTE_ERRO, TIPOS_MENSAGENS.ERRO);
                 else
+                {
                     RegistraProximoNumero();
+                    UTIL.Session.CaixaAberto = true;
+                }
             }
             else
                 Mensagens.GeraMensagens("Campos obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);

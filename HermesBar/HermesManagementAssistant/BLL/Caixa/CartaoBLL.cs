@@ -64,5 +64,17 @@ namespace BLL.Caixa
                 return false;
             }
         }
+        public int RecuperaUltimoCartao()
+        {
+            try
+            {
+                return int.Parse(CartaoDAO.UltimoNumeroCartao().Rows[0]["NumeroCartao"].ToString()) + 1;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return 0;
+            }
+        }
     }
 }

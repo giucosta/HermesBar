@@ -11,5 +11,6 @@ namespace UTIL
     {
         public static UsuarioModel Usuario { get; set; }
         public static string MensagemErro { get; set; }
+        public static bool CaixaAberto { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using MODEL.Caixa;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,21 @@ namespace DAO.Caixa
                 AO.InsertParameter("HoraSaida", cartao.HoraSaida);
 
                 return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public DataTable UltimoNumeroCartao()
+        {
+            try
+            {
+                AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
+                AO.CreateSpecificQuery("SELECT MAX(NumeroCartao) AS NumeroCartao FROM Cartao");
+                AO.GetCommand();
+
+                return AO.GetDataTable();
             }
             catch (Exception e)
             {

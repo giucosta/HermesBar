@@ -14,6 +14,7 @@ namespace BLL.Session
         public void CarregaSession(LoginModel login)
         {
             UTIL.Session.Usuario = new UsuarioDAO().RetornaUsuario(login);
+            UTIL.Session.CaixaAberto = false;
         }
     }
 }
