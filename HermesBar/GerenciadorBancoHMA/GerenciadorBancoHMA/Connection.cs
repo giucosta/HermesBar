@@ -272,6 +272,10 @@ namespace GerenciadorBancoHMA
 		    DROP TABLE EstiloAtracoes;
 			DROP TABLE Marca;
             DROP TABLE Estoque;
+			DROP TABLE Cliente;
+			DROP TABLE Cartao;
+			DROP TABLE ConsumoCartao;
+			DROP TABLE Caixa;
         END
         --
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Perfil')
@@ -432,6 +436,46 @@ namespace GerenciadorBancoHMA
 		ELSE
 		BEGIN
 			CREATE TABLE Estoque(Id_Estoque INT IDENTITY(1,1) PRIMARY KEY,Id_Produto INT,QuantidadeEstoque INT,QuantidadeIdeal INT,QuantidadeMinima INT,FOREIGN KEY(Id_Produto)REFERENCES Produto(Id_Produto));
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Cliente')
+		BEGIN
+			DROP TABLE Cliente;
+			CREATE TABLE Cliente(Id_Cliente INT IDENTITY(1,1) PRIMARY KEY,Nome VARCHAR(100),RG VARCHAR(20),Telefone VARCHAR(15))
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE Cliente(Id_Cliente INT IDENTITY(1,1) PRIMARY KEY,Nome VARCHAR(100),RG VARCHAR(20),Telefone VARCHAR(15))
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Cartao')
+		BEGIN
+			DROP TABLE Cartao;
+			CREATE TABLE Cartao(Id_Cartao INT IDENTITY(1,1) PRIMARY KEY,NumeroCartao VARCHAR(10),Id_Cliente INT,Data DATETIME,ValorTotal DECIMAL,FormaPagamento VARCHAR(20),HoraEntrada DATETIME,HoraSaida DATETIME)
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE Cartao(Id_Cartao INT IDENTITY(1,1) PRIMARY KEY,NumeroCartao VARCHAR(10),Id_Cliente INT,Data DATETIME,ValorTotal DECIMAL,FormaPagamento VARCHAR(20),HoraEntrada DATETIME,HoraSaida DATETIME)
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'ConsumoCartao')
+		BEGIN
+			DROP TABLE ConsumoCartao;
+			CREATE TABLE ConsumoCartao(Id_Cartao INT,Id_Produto INT,Data DATETIME,FOREIGN KEY(Id_Cartao) REFERENCES Cartao(Id_Cartao),FOREIGN KEY(Id_Produto) REFERENCES Produto(Id_Produto))
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE ConsumoCartao(Id_Cartao INT,Id_Produto INT,Data DATETIME,FOREIGN KEY(Id_Cartao) REFERENCES Cartao(Id_Cartao),FOREIGN KEY(Id_Produto) REFERENCES Produto(Id_Produto))
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Caixa')
+		BEGIN
+			DROP TABLE Caixa;
+			CREATE TABLE Caixa(Id_Caixa INT IDENTITY(1,1) PRIMARY KEY,ValorInicial DECIMAL,ObservacaoAbertura VARCHAR(100),DataAbertura DATETIME,DataMovimentacao DATETIME,Descricao VARCHAR(100),ValorEntrada DECIMAL,FormaPagamento VARCHAR(100),Observacao VARCHAR(100),DataFechamento DATETIME,TotalEntrada DECIMAL,TotalSaida DECIMAL,TotalGeral DECIMAL)
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE Caixa(Id_Caixa INT IDENTITY(1,1) PRIMARY KEY,ValorInicial DECIMAL,ObservacaoAbertura VARCHAR(100),DataAbertura DATETIME,DataMovimentacao DATETIME,Descricao VARCHAR(100),ValorEntrada DECIMAL,FormaPagamento VARCHAR(100),Observacao VARCHAR(100),DataFechamento DATETIME,TotalEntrada DECIMAL,TotalSaida DECIMAL,TotalGeral DECIMAL)
 		END");
             try
             {
