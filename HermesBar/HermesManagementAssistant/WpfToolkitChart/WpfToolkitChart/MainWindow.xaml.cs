@@ -27,6 +27,7 @@ namespace WpfToolkitChart
 
     private void showColumnChart()
     {
+        //Lista pra carregar os graficos
       List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
       valueList.Add(new KeyValuePair<string, int>("Cervejas",60));
       valueList.Add(new KeyValuePair<string, int>("Refrigerantes", 20));
