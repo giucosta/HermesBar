@@ -45,6 +45,7 @@
     <Compile Include="Abstract\IUsuario.cs" />
     <Compile Include="Atracoes\AtracoesDAO.cs" />
     <Compile Include="Atracoes\EstiloAtracoesDAO.cs" />
+    <Compile Include="Caixa\CaixaAbertoDAO.cs" />
     <Compile Include="Caixa\CartaoDAO.cs" />
     <Compile Include="Cliente\ClienteDAO.cs" />
     <Compile Include="Comum\ContatoDAO.cs" />

@@ -1,5 +1,7 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using BLL.Caixa;
+using FirstFloor.ModernUI.Windows.Controls;
 using HMAViews.Mascara;
+using MODEL.Caixa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,16 @@ namespace HMAViews.View.Caixa
     /// </summary>
     public partial class AberturaCaixa : ModernWindow
     {
+        private CaixaAbertoBLL _caixaAbertoBLL = null;
+        public CaixaAbertoBLL CaixaAbertlBLL
+        {
+            get
+            {
+                if (_caixaAbertoBLL == null)
+                    _caixaAbertoBLL = new CaixaAbertoBLL();
+                return _caixaAbertoBLL;
+            }
+        }
         public AberturaCaixa()
         {
             InitializeComponent();
@@ -32,6 +44,11 @@ namespace HMAViews.View.Caixa
         }
         private void AbrirCaixa(object sender, RoutedEventArgs e)
         {
+            var caixa = new CaixaModel();
+            caixa.ValorEntrada = Convert.ToDouble(tbSaldoInicial.Text);
+            caixa.ObservacaoAbertura = tbObservacao.Text;
+            CaixaAbertlBLL.AbrirCaixa(caixa);
+
             new CaixaAberto().Show();
         }
     }

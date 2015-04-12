@@ -85,5 +85,17 @@ namespace HMAViews.View.Entrada
 
             return camposObrigatorios;
         }
+        private void MascaraCartao(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbNumeroCartao, e);
+        }
+        private void MascaraTelefone(object sender, KeyEventArgs e)
+        {
+            Mascaras.PhoneMasked(tbTelefone, e);
+        }
+        private void MascaraRg(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbRG, e);
+        }
     }
 }

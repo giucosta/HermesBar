@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Atracoes\AtracoesBLL.cs" />
     <Compile Include="Atracoes\EstiloAtracoesBLL.cs" />
+    <Compile Include="Caixa\CaixaAbertoBLL.cs" />
     <Compile Include="Caixa\CartaoBLL.cs" />
     <Compile Include="Cliente\ClienteBLL.cs" />
     <Compile Include="Comum\ContatoBLL.cs" />

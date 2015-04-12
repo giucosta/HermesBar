@@ -1,4 +1,5 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using BLL.Caixa;
+using FirstFloor.ModernUI.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,20 @@ namespace HMAViews.View.Caixa
     /// </summary>
     public partial class CaixaAberto : ModernWindow
     {
+        private CaixaAbertoBLL _caixaAbertoBLL = null;
+        public CaixaAbertoBLL CaixaAbertoBLL
+        {
+            get
+            {
+                if (_caixaAbertoBLL == null)
+                    _caixaAbertoBLL = new CaixaAbertoBLL();
+                return _caixaAbertoBLL;
+            }
+        }
         public CaixaAberto()
         {
             InitializeComponent();
+            movimentacoes.ItemsSource = CaixaAbertoBLL.RetornaMovimentacoes();
         }
     }
 }

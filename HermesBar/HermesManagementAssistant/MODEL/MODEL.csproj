@@ -42,6 +42,7 @@
     <Compile Include="Abstract\IModel.cs" />
     <Compile Include="Atracoes\AtracoesModel.cs" />
     <Compile Include="Atracoes\EstiloAtracoesModel.cs" />
+    <Compile Include="Caixa\CaixaModel.cs" />
     <Compile Include="Caixa\CartaoModel.cs" />
     <Compile Include="Caixa\ConsumoCartaoModel.cs" />
     <Compile Include="Cliente\ClienteModel.cs" />
