@@ -32,6 +32,7 @@
                 <MenuItem Name="mnCaixa" Header="_Caixa">
                     <MenuItem Name="mniAbrirCaixa" Header="Abrir Caixa" Click="AbrirCaixa"/>
                     <MenuItem Name="mniFecharCaixa" Header="Fechar Caixa"/>
+                    <MenuItem Name="mniBanco" Header="Banco" Click="AbrirBanco"/>
                 </MenuItem>
             </Menu>
         </StackPanel>

@@ -5,7 +5,6 @@ using HMAViews.View;
 using HMAViews.View.Atracoes;
 using HMAViews.View.Estabelecimento;
 using HMAViews.View.Fornecedor;
-using HMAViews.View.Produtos;
 using Microsoft.Win32;
 using MODEL;
 using MODEL.Fornecedor;
@@ -30,6 +29,7 @@ using HMAViews.Utils;
 using HMAViews.View.Caixa;
 using HMAViews.View.Estoque;
 using HMAViews.View.Entrada;
+using HMAViews.View.Banco;
 
 namespace HMAViews
 {
@@ -105,6 +105,10 @@ namespace HMAViews
         public void Entrada(object sender, RoutedEventArgs e)
         {
             new EntradaCliente().Show();
+        }
+        public void AbrirBanco(object sender, RoutedEventArgs e)
+        {
+            new Bancos().Show();
         }
         private void GerenciarTelas()
         {
