@@ -27,8 +27,8 @@
                 </Grid.RowDefinitions>
                 <Label Content="Código" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
                 <Label Content="Nome" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <TextBox Name="tbCodigo" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140"/>
-                <TextBox Name="tbNome" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="290"/>
+                <TextBox Name="tbCodigo" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="140" MaxLength="20"/>
+                <TextBox Name="tbNome" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="290" MaxLength="50"/>
                 <CheckBox Name="cbAtivo" Content="Ativo" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <CheckBox Name="cbPermiteLancamento" Content="Permite Lançamento" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Button Name="btGravar" Content="Salvar" Grid.Column="2" Grid.Row="6" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>

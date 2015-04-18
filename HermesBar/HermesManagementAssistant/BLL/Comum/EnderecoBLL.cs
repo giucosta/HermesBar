@@ -25,7 +25,7 @@ namespace BLL.Comum
         {
             try
             {
-                var data = DAO.Salvar(endereco);
+                var data = DAO.Salvar(VerificaCamposNulos(endereco));
                 var enderecoModel = data.DataTableToSimpleObject<EnderecoModel>();
                 enderecoModel.Id = (int)data.Rows[0]["Id_Endereco"];
 

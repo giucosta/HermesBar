@@ -111,6 +111,10 @@ namespace HMAViews
         {
             new Bancos().Show();
         }
+        public void AbrirCentroCusto(object sender, RoutedEventArgs e)
+        {
+            new CadastroCentroCusto().Show();
+        }
         private void GerenciarTelas()
         {
             if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.GARCOM)

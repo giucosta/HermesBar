@@ -109,6 +109,9 @@
     <Compile Include="View\Banco\Bancos.xaml.cs">
       <DependentUpon>Bancos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Banco\CadastroCentroCusto.xaml.cs">
+      <DependentUpon>CadastroCentroCusto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Caixa\CaixaAberto.xaml.cs">
       <DependentUpon>CaixaAberto.xaml</DependentUpon>
     </Compile>
@@ -154,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Banco\Bancos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Banco\CadastroCentroCusto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
