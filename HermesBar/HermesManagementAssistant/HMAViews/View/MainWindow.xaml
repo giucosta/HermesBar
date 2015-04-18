@@ -21,7 +21,7 @@
                     <MenuItem x:Name="mniFornecedor" Header="_Fornecedor" Click="Fornecedor"/>
                     <MenuItem Name="mnFuncionarios" Header="_Funcionários">
                         <MenuItem Name="mniFuncionarios" Header="Funcionários" Click="Funcionarios"/>
-                        <MenuItem Name="mniEmitirRecibo" Header="Emitir Recibo"/>
+                        <MenuItem Name="mniEmitirRecibo" Header="Emitir Recibo" Click="EmitirRecibo"/>
                     </MenuItem>
                     <MenuItem x:Name="mnProdutos" Header="_Produtos">
                         <MenuItem x:Name="mniProdutos" Header="Produtos" Click="Produtos"/>

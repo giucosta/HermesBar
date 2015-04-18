@@ -30,6 +30,7 @@ using HMAViews.View.Caixa;
 using HMAViews.View.Estoque;
 using HMAViews.View.Entrada;
 using HMAViews.View.Banco;
+using HMAViews.View.Funcionario;
 
 namespace HMAViews
 {
@@ -119,6 +120,10 @@ namespace HMAViews
                 mnFuncionarios.Visibility = System.Windows.Visibility.Hidden;
                 mniAbrirCaixa.Visibility = System.Windows.Visibility.Hidden;
             }
+        }
+        public void EmitirRecibo(object sender, RoutedEventArgs e)
+        {
+            new ReciboFuncionario().Show();
         }
     }
 }

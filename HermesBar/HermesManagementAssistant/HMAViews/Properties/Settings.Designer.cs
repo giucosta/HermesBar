@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace REPORTS.Properties {
+namespace HMAViews.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

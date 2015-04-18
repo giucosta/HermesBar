@@ -41,14 +41,16 @@
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\packages\ModernUI.WPF.1.0.6\lib\net45\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
       <HintPath>..\..\..\..\WpfToolkitChart\WpfToolkitChart\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -57,9 +59,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.4\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -88,6 +92,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ReciboFuncionarioDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ConsultaCeps.cs" />
     <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
@@ -112,6 +126,12 @@
     </Compile>
     <Compile Include="View\Funcionario\FuncionariosCadastro.xaml.cs">
       <DependentUpon>FuncionariosCadastro.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Funcionario\ReciboFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Funcionario\ReciboFuncionario.Designer.cs">
+      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
@@ -222,7 +242,23 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ReciboFuncionarioDataSet.xsc">
+      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ReciboFuncionarioDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReciboFuncionarioDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReciboFuncionarioDataSet.xss">
+      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\LOGO_GENERICA 04.png" />
@@ -248,6 +284,12 @@
       <Project>{1fbf4292-daef-459c-9d95-c32688e2cf3b}</Project>
       <Name>WpfToolkitChart</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\Funcionario\ReciboFuncionario.resx">
+      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Funcionario\Report1.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

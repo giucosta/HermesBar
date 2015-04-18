@@ -75,6 +75,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
       <Name>MODEL</Name>

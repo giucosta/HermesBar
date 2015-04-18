@@ -17,7 +17,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HMAViews.Utils;
 using HMAViews.View.Estoque;
-using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Controls.Primitives;
 using System.IO;
 using System.Diagnostics;

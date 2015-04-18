@@ -44,6 +44,11 @@
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0 Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HermesBarDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HermesBarDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ListarFuncionarios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,7 +69,19 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Reports\ReciboFuncionario.rdlc" />
     <EmbeddedResource Include="Reports\ListarFuncionarioReport.rdlc" />
+    <None Include="HermesBarDataSet.xsc">
+      <DependentUpon>HermesBarDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HermesBarDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HermesBarDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HermesBarDataSet.xss">
+      <DependentUpon>HermesBarDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\MODEL.FuncionarioModel.datasource" />
     <None Include="Properties\DataSources\REPORTMODEL.Funcionarios.ListarFuncionarioReportModel.datasource" />
     <None Include="Properties\Settings.settings">
