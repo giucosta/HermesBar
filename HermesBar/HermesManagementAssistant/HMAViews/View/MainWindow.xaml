@@ -31,6 +31,8 @@
                     <MenuItem Name="mniBanco" Header="Banco">
                         <MenuItem Name="mnniBanco" Header="_Banco" Click="AbrirBanco"/>
                         <MenuItem Name="mnniCentroCusto" Header="_Centro de Custo" Click="AbrirCentroCusto"/>
+                        <MenuItem Name="mnniContasReceber" Header="_Contas a Receber" Click="AbrirContasReceber"/>
+                        <MenuItem Name="mnniContasPagar" Header="_Contas a Pagar" Click="AbrirContasPagar"/>
                     </MenuItem>
 
                 </MenuItem>

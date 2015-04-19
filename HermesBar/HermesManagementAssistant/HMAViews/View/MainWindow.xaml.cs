@@ -115,6 +115,15 @@ namespace HMAViews
         {
             new CadastroCentroCusto().Show();
         }
+        public void AbrirContasPagar(object sender, RoutedEventArgs e)
+        {
+            new ContasPagar().Show();
+        }
+        public void AbrirContasReceber(object sender, RoutedEventArgs e)
+        {
+            new ContasReceber().Show();
+        }
+
         private void GerenciarTelas()
         {
             if (Session.Usuario.Perfil.IdPerfil == Constantes.APerfil.GARCOM)

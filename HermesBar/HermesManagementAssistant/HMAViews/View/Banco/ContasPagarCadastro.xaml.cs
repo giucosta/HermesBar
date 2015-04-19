@@ -17,18 +17,13 @@ using System.Windows.Shapes;
 namespace HMAViews.View.Banco
 {
     /// <summary>
-    /// Interaction logic for ContasPagar.xaml
+    /// Interaction logic for ContasPagarCadastro.xaml
     /// </summary>
-    public partial class ContasPagar : ModernWindow
+    public partial class ContasPagarCadastro : ModernWindow
     {
-        public ContasPagar()
+        public ContasPagarCadastro()
         {
             InitializeComponent();
-        }
-        private void NovoContasPagar(object sender, RoutedEventArgs e)
-        {
-            new ContasPagarCadastro().Show();
-            this.Close();
         }
     }
 }
