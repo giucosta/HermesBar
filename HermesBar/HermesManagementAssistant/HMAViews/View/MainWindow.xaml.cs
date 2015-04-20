@@ -113,7 +113,7 @@ namespace HMAViews
         }
         public void AbrirCentroCusto(object sender, RoutedEventArgs e)
         {
-            new CadastroCentroCusto().Show();
+            new CentroCusto().Show();
         }
         public void AbrirContasPagar(object sender, RoutedEventArgs e)
         {

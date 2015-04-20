@@ -31,7 +31,7 @@
                 <TextBox Name="tbNome" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="290" MaxLength="50"/>
                 <CheckBox Name="cbAtivo" Content="Ativo" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <CheckBox Name="cbPermiteLancamento" Content="Permite Lançamento" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Button Name="btGravar" Content="Salvar" Grid.Column="2" Grid.Row="6" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Name="btGravar" Content="Salvar" Grid.Column="2" Grid.Row="6" FontWeight="Bold" Width="100" HorizontalAlignment="Left" VerticalAlignment="Center" Click="CadastrarCentroCusto"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

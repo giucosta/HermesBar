@@ -98,6 +98,10 @@ namespace DAO.Utils
             else
                 AddParameter(attribute, comparisionAttribute);
         }
+        public void InsertComparisionAttribute()
+        {
+            sql = ReturnQuery() + " WHERE 1=1";
+        }
         public void InsertParameter(String attribute, Object attributeModel)
         {
             Connection._command.CommandText = ReturnQuery();

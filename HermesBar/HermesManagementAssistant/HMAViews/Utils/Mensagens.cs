@@ -140,5 +140,10 @@ namespace HMAViews.Utils
         public const string CONSULTACEP_TAMANHO_ERRO = "Insira um CEP válido";
         //ENTRADA CLIENTE
         public const string ENTRADACLIENTE_ERRO = "Erro ao inserir cliente/cartão";
+        //CENTRO DE CUSTO
+        public const string CENTROCUSTO_CADASTRO_SUCESSO = "Centro de Custo cadastrado!";
+        public const string CENTROCUSTO_CADASTRO_ERRO = "Erro ao cadastrar Centro de Custo!";
+        public const string CENTROCUSTO_EDITAR_SUCESSO = "Centro de Custo editado!";
+        public const string CENTROCUSTO_EDITAR_ERRO = "Erro ao editar Centro de Custo!";
     }
 }

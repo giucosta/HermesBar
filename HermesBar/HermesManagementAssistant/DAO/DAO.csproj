@@ -45,6 +45,7 @@
     <Compile Include="Abstract\IUsuario.cs" />
     <Compile Include="Atracoes\AtracoesDAO.cs" />
     <Compile Include="Atracoes\EstiloAtracoesDAO.cs" />
+    <Compile Include="Banco\CentroCustoDAO.cs" />
     <Compile Include="Caixa\CaixaAbertoDAO.cs" />
     <Compile Include="Caixa\CartaoDAO.cs" />
     <Compile Include="Cliente\ClienteDAO.cs" />
@@ -87,6 +88,7 @@
       <Name>UTIL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
