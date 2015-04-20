@@ -7,29 +7,50 @@
                   mc:Ignorable="d"
                   Title="Pesquisa de Fornecedor"
                   LogoData="F1 M 24.9015,43.0378L 25.0963,43.4298C 26.1685,49.5853 31.5377,54.2651 38,54.2651C 44.4623,54.2651 49.8315,49.5854 50.9037,43.4299L 51.0985,43.0379C 51.0985,40.7643 52.6921,39.2955 54.9656,39.2955C 56.9428,39.2955 58.1863,41.1792 58.5833,43.0379C 57.6384,52.7654 47.9756,61.75 38,61.75C 28.0244,61.75 18.3616,52.7654 17.4167,43.0378C 17.8137,41.1792 19.0572,39.2954 21.0344,39.2954C 23.3079,39.2954 24.9015,40.7643 24.9015,43.0378 Z M 26.7727,20.5833C 29.8731,20.5833 32.3864,23.0966 32.3864,26.197C 32.3864,29.2973 29.8731,31.8106 26.7727,31.8106C 23.6724,31.8106 21.1591,29.2973 21.1591,26.197C 21.1591,23.0966 23.6724,20.5833 26.7727,20.5833 Z M 49.2273,20.5833C 52.3276,20.5833 54.8409,23.0966 54.8409,26.197C 54.8409,29.2973 52.3276,31.8106 49.2273,31.8106C 46.127,31.8106 43.6136,29.2973 43.6136,26.197C 43.6136,23.0966 46.127,20.5833 49.2273,20.5833 Z"
-                  Style="{StaticResource BlankWindow}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="432" Width="547.647">
+                  Style="{StaticResource BlankWindow}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="430" Width="550">
     <ScrollViewer>
         <StackPanel>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35*"/>
-                    <ColumnDefinition Width="82*"/>
-                    <ColumnDefinition Width="390*"/>
-                    <ColumnDefinition Width="35*"/>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="390"/>
+                    <ColumnDefinition Width="35"/>
                 </Grid.ColumnDefinitions>
-                <Label Name="lbRazaoSocial" Content="Razão Social" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,59,0,0" Grid.Column="1"/>
-                <TextBox Name="tbRazaoSocial" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Margin="0,55,0,0" Grid.Column="2"/>
-                <Label Name="lbCodigo" Content="Código" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,27,0,0" Grid.Column="1"/>
-                <TextBox Name="tbCodigo" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="363" Margin="0,23,0,0" Grid.Column="2"/>
-                <DataGrid Name="gridPesquisa" HorizontalAlignment="Left" VerticalAlignment="Top" Height="189" Width="471" Margin="2,172,0,-2" AlternationCount="2" HeadersVisibility="All" ColumnWidth="SizeToCells" AutoGenerateColumns="False" Grid.Column="1" Grid.ColumnSpan="3" MouseDoubleClick="Editar" IsReadOnly="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Label Content="Razão Social" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1"/>
+                <TextBox Name="tbRazaoSocial" HorizontalAlignment="Left" VerticalAlignment="Center" Width="360" Grid.Column="2" Grid.Row="1"/>
+                <Label Content="Código" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+                <TextBox Name="tbCodigo" HorizontalAlignment="Left" VerticalAlignment="Center" Width="360" Grid.Column="2" Grid.Row="2"/>
+                <Button Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Width="100" Click="Pesquisa"/>
+                <Button Name="tbNovo" Content="Novo" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="6" FontWeight="Bold" Width="100"  Click="Novo"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="520"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <DataGrid Name="gridPesquisa" HorizontalAlignment="Left" VerticalAlignment="Top" AutoGenerateColumns="False" Grid.Column="1" Grid.Row="1" MouseDoubleClick="Editar" IsReadOnly="True">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Cód" Width="70" Binding="{Binding Path=Id}"/>
-                        <DataGridTextColumn Header="Razão Social" Width="150" Binding="{Binding Path=RazaoSocial}"/>
-                        <DataGridTextColumn Header="Cnpj" Width="150" Binding="{Binding Path=Cpj}"/>
+                        <DataGridTextColumn Header="Cód" Width="100" Binding="{Binding Path=Id}"/>
+                        <DataGridTextColumn Header="Razão Social" Width="250" Binding="{Binding Path=RazaoSocial}"/>
+                        <DataGridTextColumn Header="Cnpj" Width="150"  Binding="{Binding Path=Cpj}"/>
                     </DataGrid.Columns>
                 </DataGrid>
-                <Button Name="btPesquisa" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Top" Width="91" Margin="0,89,0,0" Grid.Column="1" Grid.ColumnSpan="2" Click="Pesquisa"/>
-                <Button Name="tbNovo" Content="Novo" HorizontalAlignment="Left" Margin="0,138,0,0" VerticalAlignment="Top" Width="89" Grid.Column="1" Grid.ColumnSpan="2" FontWeight="Bold" Click="Novo"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>
