@@ -121,6 +121,9 @@
     <Compile Include="View\Banco\ContasReceber.xaml.cs">
       <DependentUpon>ContasReceber.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Banco\ContasReceberCadastro.xaml.cs">
+      <DependentUpon>ContasReceberCadastro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Caixa\CaixaAberto.xaml.cs">
       <DependentUpon>CaixaAberto.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Banco\ContasReceber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Banco\ContasReceberCadastro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
