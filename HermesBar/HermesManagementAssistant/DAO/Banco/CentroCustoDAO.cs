@@ -32,8 +32,7 @@ namespace DAO.Banco
                 throw e;
             }
         }
-
-        public DataTable GetAllCentroCusto(CentroCustoModel centroCusto)
+        public DataTable PesquisaCentroCusto(CentroCustoModel centroCusto)
         {
             try
             {
@@ -59,7 +58,7 @@ namespace DAO.Banco
             try
             {
                 AccessObject<CentroCustoModel> AO = new AccessObject<CentroCustoModel>();
-                AO.CreateSpecificQuery("UPDATE CentroCusto SET Nome = @Nome, Codigo = @Codigo, Status = @Status, @PermiteLancamento = @PermiteLancamento");
+                AO.CreateSpecificQuery("UPDATE CentroCusto SET Nome = @Nome, Codigo = @Codigo, Status = @Status, PermiteLancamento = @PermiteLancamento");
                 AO.GetCommand();
                 AO.InsertParameter(ConstantesDAO.WHERE, "Id_CentroCusto", ConstantesDAO.EQUAL, centroCusto.Id);
                 AO.InsertParameter("Codigo", centroCusto.Codigo);
@@ -72,6 +71,40 @@ namespace DAO.Banco
             catch (Exception e)
             {
                 Log.Log.GravarLog("Editar", "CentroCustoDAO", e.Message, Constantes.ATipoMetodo.UPDATE);
+                throw e;
+            }
+        }
+        public DataTable VerificaCodigoExistente(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                AccessObject<CentroCustoModel> AO = new AccessObject<CentroCustoModel>();
+                AO.CreateSelectWithSimpleParameter("Codigo");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Codigo", ConstantesDAO.EQUAL, centroCusto.Codigo);
+                
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("VerificaCodigoExistente", "CentroCustoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
+        public bool Excluir(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                AccessObject<CentroCustoModel> AO = new AccessObject<CentroCustoModel>();
+                AO.DeleteFromId();
+                AO.GetCommand();
+                AO.InsertParameter("Id_CentroCusto", centroCusto.Id);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Excluir", "CentroCustoDAO", e.Message, Constantes.ATipoMetodo.DELETE);
                 throw e;
             }
         }

@@ -1,7 +1,6 @@
 ﻿using BLL.Fornecedor;
 using BLL.Produtos;
 using FirstFloor.ModernUI.Windows.Controls;
-using HMAViews.Utils;
 using MODEL.Fornecedor;
 using MODEL.Produto;
 using System;
@@ -19,6 +18,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HMAViews;
+using HMAViews.Utils;
+using HMAViews.Mascara;
 
 namespace HMAViews.View.Produtos
 {

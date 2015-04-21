@@ -1,6 +1,7 @@
 ﻿using BLL.Comum;
 using BLL.Funcionario;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Mascara;
 using HMAViews.Utils;
 using MODEL;
 using System;

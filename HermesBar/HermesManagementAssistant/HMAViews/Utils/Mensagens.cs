@@ -145,5 +145,7 @@ namespace HMAViews.Utils
         public const string CENTROCUSTO_CADASTRO_ERRO = "Erro ao cadastrar Centro de Custo!";
         public const string CENTROCUSTO_EDITAR_SUCESSO = "Centro de Custo editado!";
         public const string CENTROCUSTO_EDITAR_ERRO = "Erro ao editar Centro de Custo!";
+        public const string CENTROCUSTO_EXCLUIR_SUCESSO = "Centro de custo excluído!";
+        public const string CENTROCUSTO_EXCLUIR_ERRO = "Erro ao excluir Centro de custo";
     }
 }

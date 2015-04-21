@@ -15,11 +15,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using HMAViews.Utils;
 using HMAViews.View.Estoque;
 using System.Windows.Controls.Primitives;
 using System.IO;
 using System.Diagnostics;
+using HMAViews.Mascara;
+using HMAViews.Utils;
 
 namespace HMAViews.View.Produtos
 {

@@ -1,5 +1,6 @@
 ﻿using BLL.Caixa;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Mascara;
 using HMAViews.Utils;
 using MODEL.Caixa;
 using System;

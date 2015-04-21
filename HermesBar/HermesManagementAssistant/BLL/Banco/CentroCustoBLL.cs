@@ -26,7 +26,11 @@ namespace BLL.Banco
         {
             try
             {
-                return CentroCustoDAO.Salvar(centroCusto);
+                if (!VerificaCodigoExistente(centroCusto))
+                    return CentroCustoDAO.Salvar(centroCusto);
+                else
+                    UTIL.Session.MensagemErro = "Código já existente";
+                return false;
             }
             catch (Exception e)
             {
@@ -38,7 +42,7 @@ namespace BLL.Banco
         {
             try
             {
-                return CentroCustoDAO.GetAllCentroCusto(centroCusto).DataTableToList<CentroCustoModel>();
+                return CentroCustoDAO.PesquisaCentroCusto(centroCusto).DataTableToList<CentroCustoModel>();
             }
             catch (Exception e)
             {
@@ -50,7 +54,6 @@ namespace BLL.Banco
         {
             try
             {
-
                 return CentroCustoDAO.Editar(centroCusto);
             }
             catch (Exception e)
@@ -59,6 +62,32 @@ namespace BLL.Banco
                 return false;
             }
 
+        }
+        public bool VerificaCodigoExistente(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                if (CentroCustoDAO.VerificaCodigoExistente(centroCusto).Rows.Count > 0)
+                    return true;
+                return false;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return true;
+            }
+        }
+        public bool Excluir(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                return CentroCustoDAO.Excluir(centroCusto);
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return false;
+            }
         }
 
     }

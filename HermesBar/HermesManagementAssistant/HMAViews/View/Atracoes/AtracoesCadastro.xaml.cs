@@ -1,6 +1,7 @@
 ﻿using BLL.Atracoes;
 using BLL.Comum;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Mascara;
 using HMAViews.Utils;
 using MODEL;
 using MODEL.Atracoes;

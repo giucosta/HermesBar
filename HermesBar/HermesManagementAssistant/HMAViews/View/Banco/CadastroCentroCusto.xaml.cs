@@ -38,6 +38,7 @@ namespace HMAViews.View.Banco
         public CadastroCentroCusto()
         {
             InitializeComponent();
+            btExcluir.Visibility = System.Windows.Visibility.Hidden;
         }
         public CadastroCentroCusto(CentroCustoModel centroCusto)
         {
@@ -105,6 +106,17 @@ namespace HMAViews.View.Banco
                     Mensagens.GeraMensagens("Erro ao cadastrar!", MENSAGEM.CENTROCUSTO_EDITAR_ERRO, TIPOS_MENSAGENS.ERRO);
             }else
                 Mensagens.GeraMensagens("Campos obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+        }
+        private void Excluir(object sender, RoutedEventArgs e)
+        {
+            if (CentroCustoBLL.Excluir(_centroCustoModel))
+            {
+                Mensagens.GeraMensagens("Excluído", MENSAGEM.CENTROCUSTO_EXCLUIR_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                new CentroCusto().Show();
+                this.Close();
+            }
+            else
+                Mensagens.GeraMensagens("Erro ao excluir", MENSAGEM.CENTROCUSTO_EXCLUIR_ERRO, TIPOS_MENSAGENS.ERRO);
         }
         private void CarregaTelaEdicao()
         {
