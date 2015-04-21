@@ -46,6 +46,7 @@
     <Compile Include="Atracoes\AtracoesDAO.cs" />
     <Compile Include="Atracoes\EstiloAtracoesDAO.cs" />
     <Compile Include="Banco\CentroCustoDAO.cs" />
+    <Compile Include="Banco\ContasPagarDAO.cs" />
     <Compile Include="Caixa\CaixaAbertoDAO.cs" />
     <Compile Include="Caixa\CartaoDAO.cs" />
     <Compile Include="Cliente\ClienteDAO.cs" />

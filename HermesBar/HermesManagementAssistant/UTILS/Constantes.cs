@@ -74,5 +74,13 @@ namespace UTIL
         {
             public const string ISENTO = "Isento";
         }
+        public static class ATipoPagamento
+        {
+            public const string Cheque = "Cheque";
+            public const string CartaoCredito = "Crédito";
+            public const string Dinheiro = "Dinheiro";
+            public const string CartaoDebito = "Débito";
+            public const string Boleto = "Boleto";
+        }
     }
 }

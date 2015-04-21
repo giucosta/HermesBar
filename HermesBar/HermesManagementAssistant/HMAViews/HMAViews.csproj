@@ -306,6 +306,12 @@
     <Resource Include="images\LOGO_GENERICA 04.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="View\Funcionario\ReciboFuncionario.resx">
+      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Funcionario\Report1.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
       <Name>BLL</Name>
@@ -322,12 +328,6 @@
       <Project>{1fbf4292-daef-459c-9d95-c32688e2cf3b}</Project>
       <Name>WpfToolkitChart</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="View\Funcionario\ReciboFuncionario.resx">
-      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Funcionario\Report1.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
