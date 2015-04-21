@@ -276,6 +276,7 @@ namespace GerenciadorBancoHMA
 			DROP TABLE Cartao;
 			DROP TABLE ConsumoCartao;
 			DROP TABLE Caixa;
+			DROP TABLE CentroCusto;
         END
         --
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Perfil')
@@ -476,6 +477,16 @@ namespace GerenciadorBancoHMA
 		ELSE
 		BEGIN
 			CREATE TABLE Caixa(Id_Caixa INT IDENTITY(1,1) PRIMARY KEY,ValorInicial DECIMAL,ObservacaoAbertura VARCHAR(100),DataAbertura DATETIME,DataMovimentacao DATETIME,Descricao VARCHAR(100),ValorEntrada DECIMAL,FormaPagamento VARCHAR(100),Observacao VARCHAR(100),DataFechamento DATETIME,TotalEntrada DECIMAL,TotalSaida DECIMAL,TotalGeral DECIMAL)
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'CentroCusto')
+		BEGIN
+			DROP TABLE CentroCusto;
+			CREATE TABLE CentroCusto(Id_CentroCusto INT IDENTITY(1,1) PRIMARY KEY,Codigo VARCHAR(10),Nome VARCHAR(50),Status VARCHAR(1),PermiteLancamento VARCHAR(1));
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE CentroCusto(Id_CentroCusto INT IDENTITY(1,1) PRIMARY KEY,Codigo VARCHAR(10),Nome VARCHAR(50),Status VARCHAR(1),PermiteLancamento VARCHAR(1));
 		END");
             try
             {
