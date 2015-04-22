@@ -84,6 +84,7 @@ namespace HMAViews.View.Banco
             contasPagar.Parcelas = tbParcelas.Text;
             contasPagar.Referente = tbReferente.Text;
             contasPagar.Valor = tbValor.Text;
+            contasPagar.ValorPago = "0";
             contasPagar.Status = "S";
 
             if (ContasPagarBLL.Salvar(contasPagar))

@@ -17,6 +17,7 @@ namespace MODEL.Banco
         public string FormaPagamento { get; set; }
         public string Parcelas { get; set; }
         public string Valor { get; set; }
+        public string ValorPago { get; set; }
         public string NumeroNota { get; set; }
         public string Observacao { get; set; }
         public DateTime DataCadastro { get; set; }

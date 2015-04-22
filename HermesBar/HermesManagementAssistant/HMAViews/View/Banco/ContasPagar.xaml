@@ -48,10 +48,10 @@
                 </Grid.RowDefinitions>
                 <DataGrid Name="gridPesquisa" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Grid.Column="1">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Dias"/>
-                        <DataGridTextColumn Header="Venc." Binding="{Binding DataVencimento}"/>
+                        <DataGridTextColumn Header="Dias" Binding="{Binding DiasAtraso}"/>
                         <DataGridTextColumn Header="Valor Cobrado" Binding="{Binding Valor}"/>
-                        <DataGridTextColumn Header="Valor Pago"/>
+                        <DataGridTextColumn Header="Forma Pgto" Binding="{Binding FormaPagamento}"/>
+                        <DataGridTextColumn Header="Parcelas" Binding="{Binding Parcelas}"/>
                         <DataGridTextColumn Header="Resumo" Binding="{Binding Referente}"/>
                         <DataGridTextColumn Header="Para" Binding="{Binding Fornecedor}"/>
                         <DataGridTextColumn Header="Situação" Binding="{Binding Status}"/>

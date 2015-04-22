@@ -26,6 +26,7 @@ namespace DAO.Banco
                 AO.InsertParameter("FormaPagamento", contasPagar.FormaPagamento);
                 AO.InsertParameter("Parcelas", contasPagar.Parcelas);
                 AO.InsertParameter("Valor", contasPagar.Valor);
+                AO.InsertParameter("ValorPago", contasPagar.ValorPago);
                 AO.InsertParameter("NumeroNota", contasPagar.NumeroNota);
                 AO.InsertParameter("Observacao", contasPagar.Observacao);
                 AO.InsertParameter("DataCadastro", contasPagar.DataCadastro);
@@ -57,6 +58,22 @@ namespace DAO.Banco
             catch (Exception e)
             {
                 Log.Log.GravarLog("Pesquisar", "ContasPagarDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
+        public DataTable RetornaFornecedorId(ContasPagarModel contasPagar)
+        {
+            try
+            {
+                AccessObject<ContasPagarModel> AO = new AccessObject<ContasPagarModel>();
+                AO.CreateSelectWithSimpleParameter("Id_Fornecedor");
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_ContasPagar", ConstantesDAO.EQUAL, contasPagar.Id);
+
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }

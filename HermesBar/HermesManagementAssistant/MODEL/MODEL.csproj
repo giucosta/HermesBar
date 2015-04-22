@@ -43,6 +43,7 @@
     <Compile Include="Atracoes\AtracoesModel.cs" />
     <Compile Include="Atracoes\EstiloAtracoesModel.cs" />
     <Compile Include="Banco\CentroCustoModel.cs" />
+    <Compile Include="Banco\ContasPagarGridModel.cs" />
     <Compile Include="Banco\ContasPagarModel.cs" />
     <Compile Include="Banco\FormaPagamentoModel.cs" />
     <Compile Include="Caixa\CaixaModel.cs" />
