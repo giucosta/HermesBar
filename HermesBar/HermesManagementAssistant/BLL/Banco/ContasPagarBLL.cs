@@ -58,7 +58,12 @@ namespace BLL.Banco
 
             foreach (var item in contas)
             {
-                var atraso = DateTime.Now - item.DataVencimento;
+                TimeSpan atraso;
+                if (item.DataVencimento < DateTime.Now)
+                    atraso = DateTime.Now - item.DataVencimento;
+                else
+                    atraso = item.DataVencimento - DateTime.Now;
+
                 grid.Add(new ContasPagarGridModel()
                 {
                     Fornecedor = item.Fornecedor.RazaoSocial,
@@ -74,6 +79,7 @@ namespace BLL.Banco
             
             return grid;
         }
+
         public FornecedorModel RecuperaFornecedor(ContasPagarModel contas)
         {
             return FornecedorBLL.PesquisaFornecedorPorId(Convert.ToInt16(ContasPagarDAO.RetornaFornecedorId(contas).Rows[0]["Id_Fornecedor"]));

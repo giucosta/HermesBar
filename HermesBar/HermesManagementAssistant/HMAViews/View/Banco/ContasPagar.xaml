@@ -25,7 +25,7 @@
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Label Content="Ativo" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Content="Data" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Label Content="Vencimento" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Label Content="Plano de contas" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <CheckBox Name="cbAtivoSim" Content="Sim" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
                 <CheckBox Name="cbAtivoNao" Content="Não" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="80,0,0,0"/>
@@ -46,7 +46,7 @@
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="300"/>
                 </Grid.RowDefinitions>
-                <DataGrid Name="gridPesquisa" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Grid.Column="1">
+                <DataGrid Name="gridPesquisa" AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="1" Grid.Column="1" SelectionUnit="FullRow">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Dias" Binding="{Binding DiasAtraso}"/>
                         <DataGridTextColumn Header="Valor Cobrado" Binding="{Binding Valor}"/>
