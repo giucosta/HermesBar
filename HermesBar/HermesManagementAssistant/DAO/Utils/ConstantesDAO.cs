@@ -27,5 +27,6 @@ namespace DAO.Utils
         public const string VALUES = "VALUES";
         public const string SET = "SET";
         public const string DISTINCT = "DISTINCT";
+        public const string BETWEEN = "BETWEEN";
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BLL.Banco;
 using BLL.Fornecedor;
 using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Banco;
 using MODEL.Fornecedor;
 using System;
 using System.Collections.Generic;
@@ -59,6 +60,12 @@ namespace HMAViews.View.Banco
             InitializeComponent();
             CarregaCampos();
         }
+        public ContasPagarCadastro(ContasPagarModel contasPagar)
+        {
+            InitializeComponent();
+            btCancelar.Visibility = System.Windows.Visibility.Visible;
+        }
+        
         private void CarregaCampos()
         {
             tbFornecedor.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel());
@@ -66,7 +73,23 @@ namespace HMAViews.View.Banco
         }
         private void Salvar(object sender, RoutedEventArgs e)
         {
+            var contasPagar = new ContasPagarModel();
+            contasPagar.DataCadastro = DateTime.Now;
+            contasPagar.DataEmissao = dpDataEmissao.DisplayDate;
+            contasPagar.DataVencimento = dpDataVenc.DisplayDate;
+            contasPagar.FormaPagamento = cbFormaPagamento.SelectionBoxItem.ToString();
+            contasPagar.Fornecedor = (FornecedorModel)tbFornecedor.SelectedItem;
+            contasPagar.NumeroNota = tbNumeroNota.Text;
+            contasPagar.Observacao = tbObservacao.Text;
+            contasPagar.Parcelas = tbParcelas.Text;
+            contasPagar.Referente = tbReferente.Text;
+            contasPagar.Valor = tbValor.Text;
+            contasPagar.Status = "S";
 
+            if (ContasPagarBLL.Salvar(contasPagar))
+                MessageBox.Show("deu");
+            else
+                MessageBox.Show("Ops");
         }
     }
 }

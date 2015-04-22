@@ -11,6 +11,7 @@ namespace MODEL.Banco
     public class ContasPagarModel : IModel
     {
         public DateTime DataEmissao { get; set; }
+        public DateTime DataVencimento { get; set; }
         public FornecedorModel Fornecedor{ get; set; }
         public string Referente { get; set; }
         public string FormaPagamento { get; set; }
@@ -19,5 +20,6 @@ namespace MODEL.Banco
         public string NumeroNota { get; set; }
         public string Observacao { get; set; }
         public DateTime DataCadastro { get; set; }
+        public string Status { get; set; }
     }
 }

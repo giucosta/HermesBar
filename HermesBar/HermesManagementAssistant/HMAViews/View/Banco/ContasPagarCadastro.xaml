@@ -25,28 +25,32 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
                 <Label Content="Data Emissão"   Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Fornecedor"     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Referente"      Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Forma Pgto."    Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Nº Parcelas"    Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="Valor"          Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Nº Nota"        Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="Observação"     Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"/>
+                <Label Content="Data Venc."     Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Fornecedor"     Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Referente"      Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Forma Pgto."    Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Nº Parcelas"    Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Valor"          Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Nº Nota"        Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="Observação"     Grid.Column="1" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"/>
 
                 <DatePicker Name="dpDataEmissao"    Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FirstDayOfWeek="Monday"/>
-                <ComboBox   Name="tbFornecedor"     Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" SelectedValuePath="Id" DisplayMemberPath="RazaoSocial"/>
-                <TextBox    Name="tbReferente"      Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" MaxLength="50"/>
-                <ComboBox   Name="cbFormaPagamento" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="FormaPagamento"/>
-                <TextBox    Name="tbParcelas"       Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="2"/>
-                <TextBox    Name="tbValor"          Grid.Column="2" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="10"/>
-                <TextBox    Name="tbNumeroNota"     Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="10"/>
-                <TextBox    Name="tbObservacao"     Grid.Column="2" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="40" AcceptsReturn="True" MaxLength="200"/>
-                <Button     Name="btSalvar"         Grid.Column="1" Grid.Row="10" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontWeight="Bold" Content="Salvar" Click="Salvar"/>
+                <DatePicker Name="dpDataVenc"       Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" FirstDayOfWeek="Monday"/>
+                <ComboBox   Name="tbFornecedor"     Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" SelectedValuePath="Id" DisplayMemberPath="RazaoSocial"/>
+                <TextBox    Name="tbReferente"      Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" MaxLength="50"/>
+                <ComboBox   Name="cbFormaPagamento" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" DisplayMemberPath="FormaPagamento"/>
+                <TextBox    Name="tbParcelas"       Grid.Column="2" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="2"/>
+                <TextBox    Name="tbValor"          Grid.Column="2" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="10"/>
+                <TextBox    Name="tbNumeroNota"     Grid.Column="2" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" MaxLength="10"/>
+                <TextBox    Name="tbObservacao"     Grid.Column="2" Grid.Row="9" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="40" AcceptsReturn="True" MaxLength="200"/>
+                <Button     Name="btSalvar"         Grid.Column="1" Grid.Row="11" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FontWeight="Bold" Content="Salvar" Click="Salvar"/>
+                <Button     Name="btCancelar"       Grid.Column="2" Grid.Row="11" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" Content="Cancelar" Visibility="Hidden"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

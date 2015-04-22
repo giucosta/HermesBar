@@ -1,4 +1,6 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using BLL.Banco;
+using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Banco;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,16 @@ namespace HMAViews.View.Banco
     /// </summary>
     public partial class ContasPagar : ModernWindow
     {
+        private ContasPagarBLL _contasPagarBLL = null;
+        public ContasPagarBLL ContasPagarBLL
+        {
+            get
+            {
+                if (_contasPagarBLL == null)
+                    _contasPagarBLL = new ContasPagarBLL();
+                return _contasPagarBLL;
+            }
+        }
         public ContasPagar()
         {
             InitializeComponent();
@@ -29,6 +41,19 @@ namespace HMAViews.View.Banco
         {
             new ContasPagarCadastro().Show();
             this.Close();
+        }
+        private void Pesquisar(object sender, RoutedEventArgs e)
+        {
+            var model = new ContasPagarModel();
+            if ((bool)cbAtivoSim.IsChecked)
+                model.Status = "S";
+            else
+                model.Status = "N";
+
+            model.DataEmissao = tbDataDe.DisplayDate;
+            var data = tbDataAte.DisplayDate;
+
+            gridPesquisa.ItemsSource = ContasPagarBLL.Pesquisar(model,data);
         }
     }
 }

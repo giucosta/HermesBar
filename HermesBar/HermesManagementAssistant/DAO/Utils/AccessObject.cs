@@ -98,6 +98,24 @@ namespace DAO.Utils
             else
                 AddParameter(attribute, comparisionAttribute);
         }
+        public void InsertParameter(String sqlCommand, String attribute, String condition, Object comparisionAttribute, string otherCondiction, Object comparisionAttribute2)
+        {
+            var attr = AttributeFormat(attribute);
+            var stb = new StringBuilder();
+
+            stb.Append(" " + sqlCommand);
+            stb.Append(" " + attribute);
+            stb.Append(" " + condition);
+            stb.Append(" " + attr);
+            stb.Append(" " + otherCondiction);
+            stb.Append(" " + attr + "Final");
+
+            sql += FormatSql(stb.ToString());
+
+            Connection._command.CommandText = ReturnQuery();
+            AddParameter(attribute, comparisionAttribute);
+            AddParameter(attribute + "Final", comparisionAttribute2);
+        }
         public void InsertComparisionAttribute()
         {
             sql = ReturnQuery() + " WHERE 1=1";
