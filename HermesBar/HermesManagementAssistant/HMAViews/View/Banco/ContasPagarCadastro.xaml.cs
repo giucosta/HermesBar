@@ -1,6 +1,8 @@
 ﻿using BLL.Banco;
 using BLL.Fornecedor;
 using FirstFloor.ModernUI.Windows.Controls;
+using HMAViews.Mascara;
+using HMAViews.Utils;
 using MODEL.Banco;
 using MODEL.Fornecedor;
 using System;
@@ -20,9 +22,6 @@ using System.Windows.Shapes;
 
 namespace HMAViews.View.Banco
 {
-    /// <summary>
-    /// Interaction logic for ContasPagarCadastro.xaml
-    /// </summary>
     public partial class ContasPagarCadastro : ModernWindow
     {
         private ContasPagarBLL _contasPagarBLL = null;
@@ -65,7 +64,7 @@ namespace HMAViews.View.Banco
             InitializeComponent();
             btCancelar.Visibility = System.Windows.Visibility.Visible;
         }
-        
+
         private void CarregaCampos()
         {
             tbFornecedor.ItemsSource = FornecedorBLL.Pesquisar(new FornecedorModel());
@@ -91,6 +90,26 @@ namespace HMAViews.View.Banco
                 MessageBox.Show("deu");
             else
                 MessageBox.Show("Ops");
+        }
+        private void AlterarFormaPagamento(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbFormaPagamento.SelectedItem.ToString().Equals("Crédito") || cbFormaPagamento.SelectedItem.ToString().Equals("Boleto"))
+                tbParcelas.IsReadOnly = false;
+            else
+            {
+                tbParcelas.Clear();
+                tbParcelas.IsReadOnly = true;
+            }
+        }
+        private void MascaraParcelas(object sender, KeyEventArgs e)
+        {
+            Mascaras.SomenteNumeros(tbParcelas, e);
+        }
+        private void MascaraValor(object sender, RoutedEventArgs e)
+        {
+            var text = tbValor.Text;
+            if (Verificadores.VerificaNumero(text))
+                tbValor.Text = text.Replace(".", "");
         }
     }
 }
