@@ -277,6 +277,8 @@ namespace GerenciadorBancoHMA
 			DROP TABLE ConsumoCartao;
 			DROP TABLE Caixa;
 			DROP TABLE CentroCusto;
+			DROP TABLE ContasPagar;
+			DROP TABLE Logs;
         END
         --
         IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Perfil')
@@ -487,6 +489,26 @@ namespace GerenciadorBancoHMA
 		ELSE
 		BEGIN
 			CREATE TABLE CentroCusto(Id_CentroCusto INT IDENTITY(1,1) PRIMARY KEY,Codigo VARCHAR(10),Nome VARCHAR(50),Status VARCHAR(1),PermiteLancamento VARCHAR(1));
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'ContasPagar')
+		BEGIN
+			DROP TABLE ContasPagar;
+			CREATE TABLE ContasPagar(Id_ContasPagar INT IDENTITY(1,1) PRIMARY KEY,DataEmissao DATE,DataVencimento DATE,Id_Fornecedor INT,Id_CentroCusto INT,Referente VARCHAR(50),FormaPagamento VARCHAR(100),Parcelas VARCHAR(2),Valor VARCHAR(10),ValorPago VARCHAR(10),NumeroNota VARCHAR(10),Observacao VARCHAR(200),DataCadastro DATE,Status VARCHAR(1),FOREIGN KEY(Id_Fornecedor) REFERENCES Fornecedor(Id_Fornecedor),FOREIGN KEY(Id_CentroCusto) REFERENCES CentroCusto(Id_CentroCusto));
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE ContasPagar(Id_ContasPagar INT IDENTITY(1,1) PRIMARY KEY,DataEmissao DATE,DataVencimento DATE,Id_Fornecedor INT,Id_CentroCusto INT,Referente VARCHAR(50),FormaPagamento VARCHAR(100),Parcelas VARCHAR(2),Valor VARCHAR(10),ValorPago VARCHAR(10),NumeroNota VARCHAR(10),Observacao VARCHAR(200),DataCadastro DATE,Status VARCHAR(1),FOREIGN KEY(Id_Fornecedor) REFERENCES Fornecedor(Id_Fornecedor),FOREIGN KEY(Id_CentroCusto) REFERENCES CentroCusto(Id_CentroCusto));
+		END
+		--
+		IF EXISTS(SELECT name FROM sysobjects WHERE name = 'Logs')
+		BEGIN
+			DROP TABLE Logs;
+			CREATE TABLE Logs(Id_Logs INT IDENTITY(1,1) PRIMARY KEY,Metodo VARCHAR(50),Classe VARCHAR(50),Data DATETIME,Usuario VARCHAR(100),Erro VARCHAR(100),Tipo VARCHAR(100));
+		END
+		ELSE
+		BEGIN
+			CREATE TABLE Logs(Id_Logs INT IDENTITY(1,1) PRIMARY KEY,Metodo VARCHAR(50),Classe VARCHAR(50),Data DATETIME,Usuario VARCHAR(100),Erro VARCHAR(100),Tipo VARCHAR(100));
 		END");
             try
             {
