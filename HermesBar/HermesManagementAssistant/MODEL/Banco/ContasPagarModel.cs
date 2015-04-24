@@ -13,6 +13,7 @@ namespace MODEL.Banco
         public DateTime DataEmissao { get; set; }
         public DateTime DataVencimento { get; set; }
         public FornecedorModel Fornecedor{ get; set; }
+        public CentroCustoModel CentroCusto { get; set; }
         public string Referente { get; set; }
         public string FormaPagamento { get; set; }
         public string Parcelas { get; set; }

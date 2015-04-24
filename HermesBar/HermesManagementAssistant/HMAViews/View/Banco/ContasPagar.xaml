@@ -26,13 +26,13 @@
                 </Grid.RowDefinitions>
                 <Label Content="Ativo" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Label Content="Vencimento" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Label Content="Plano de contas" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <Label Content="Centro de Custo" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <CheckBox Name="cbAtivoSim" Content="Sim" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" IsChecked="True"/>
                 <CheckBox Name="cbAtivoNao" Content="Não" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="80,0,0,0"/>
                 <DatePicker Name="tbDataDe" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FirstDayOfWeek="Monday"/>
                 <Label Content="à" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="110,0,0,0" FontWeight="Bold"/>
                 <DatePicker Name="tbDataAte" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100" FirstDayOfWeek="Monday" Margin="130,0,0,0"/>
-                <ComboBox Name="cbPlanoContas" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100"/>
+                <ComboBox Name="cbCentroCusto" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" DisplayMemberPath="Nome" SelectedValuePath="Id"/>
                 <Button Name="btPesquisar" Content="Pesquisar" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Click="Pesquisar"/>
                 <Button Name="btNovo" Content="Novo" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" Margin="110,0,0,0" Click="NovoContasPagar"/>
             </Grid>

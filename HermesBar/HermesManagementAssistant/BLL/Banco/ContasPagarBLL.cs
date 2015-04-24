@@ -33,7 +33,16 @@ namespace BLL.Banco
                 return _fornecedorBLL;
             }
         }
-
+        private CentroCustoBLL _centroCustoBLL = null;
+        public CentroCustoBLL CentroCustoBLL
+        {
+            get
+            {
+                if (_centroCustoBLL == null)
+                    _centroCustoBLL = new CentroCustoBLL();
+                return _centroCustoBLL;
+            }
+        }
         public bool Salvar(ContasPagarModel contasPagar)
         {
             try
@@ -53,9 +62,9 @@ namespace BLL.Banco
             foreach (var item in contas)
             {
                 item.Fornecedor = RecuperaFornecedor(item);
+                item.CentroCusto = RecuperaCentroCusto(item);
             }
-                
-
+            
             foreach (var item in contas)
             {
                 TimeSpan atraso;
@@ -79,10 +88,13 @@ namespace BLL.Banco
             
             return grid;
         }
-
         public FornecedorModel RecuperaFornecedor(ContasPagarModel contas)
         {
             return FornecedorBLL.PesquisaFornecedorPorId(Convert.ToInt16(ContasPagarDAO.RetornaFornecedorId(contas).Rows[0]["Id_Fornecedor"]));
+        }
+        public CentroCustoModel RecuperaCentroCusto(ContasPagarModel contas)
+        {
+            return CentroCustoBLL.RecuperaCentroCusto(contas.CentroCusto);
         }
     }
 }

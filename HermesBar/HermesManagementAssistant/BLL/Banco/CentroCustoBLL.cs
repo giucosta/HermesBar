@@ -89,6 +89,18 @@ namespace BLL.Banco
                 return false;
             }
         }
+        public CentroCustoModel RecuperaCentroCusto(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                return CentroCustoDAO.RecuperaCentroCusto(centroCusto).DataTableToSimpleObject<CentroCustoModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
+        }
 
     }
 }

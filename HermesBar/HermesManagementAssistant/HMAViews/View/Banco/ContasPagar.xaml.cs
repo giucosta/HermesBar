@@ -35,9 +35,20 @@ namespace HMAViews.View.Banco
                 return _contasPagarBLL;
             }
         }
+        private CentroCustoBLL _centroCustoBLL = null;
+        public CentroCustoBLL CentroCustoBLL
+        {
+            get
+            {
+                if (_centroCustoBLL == null)
+                    _centroCustoBLL = new CentroCustoBLL();
+                return _centroCustoBLL;
+            }
+        }
         public ContasPagar()
         {
             InitializeComponent();
+            cbCentroCusto.ItemsSource = CentroCustoBLL.GetAllCentroCusto(new CentroCustoModel());
         }
         private void NovoContasPagar(object sender, RoutedEventArgs e)
         {
@@ -54,7 +65,7 @@ namespace HMAViews.View.Banco
 
             model.DataEmissao = tbDataDe.DisplayDate;
             var data = tbDataAte.DisplayDate;
-
+            model.CentroCusto = (CentroCustoModel)cbCentroCusto.SelectedItem;
             gridPesquisa.ItemsSource = ContasPagarBLL.Pesquisar(model,data);
             UpdateRowColor();
         }

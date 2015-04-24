@@ -108,5 +108,22 @@ namespace DAO.Banco
                 throw e;
             }
         }
+        public DataTable RecuperaCentroCusto(CentroCustoModel centroCusto)
+        {
+            try
+            {
+                AccessObject<CentroCustoModel> AO = new AccessObject<CentroCustoModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_CentroCusto", ConstantesDAO.EQUAL, centroCusto.Id);
+                
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("RecuperaCentroCusto", "CentroCustoDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
     }
 }
