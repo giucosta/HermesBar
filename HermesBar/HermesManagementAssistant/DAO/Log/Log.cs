@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using DAO;
 using UTIL;
 using DAO.Utils;
+using MODEL.Log;
 
 namespace DAO.Log
 {
@@ -17,8 +18,8 @@ namespace DAO.Log
         {
             try
             {
-                AccessObject<Object> AO = new AccessObject<Object>();
-                AO.CreateSpecificQuery(@"INSERT INTO Logs VALUES(@Metodo, @Classe, @Data, @Usuario, @Erro, @Tipo)");
+                AccessObject<LogsModel> AO = new AccessObject<LogsModel>();
+                AO.CreateDataInsert();
                 AO.GetCommand();
                 AO.InsertParameter("Metodo", Metodo);
                 AO.InsertParameter("Classe", Classe);

@@ -147,5 +147,10 @@ namespace HMAViews.Utils
         public const string CENTROCUSTO_EDITAR_ERRO = "Erro ao editar Centro de Custo!";
         public const string CENTROCUSTO_EXCLUIR_SUCESSO = "Centro de custo excluído!";
         public const string CENTROCUSTO_EXCLUIR_ERRO = "Erro ao excluir Centro de custo";
+        //CONTAS PAGAR
+        public const string CONTASPAGAR_CADASTRO_SUCESSO = "Conta a pagar inserida!";
+        public const string CONTASPAGAR_CADASTRO_ERRO = "Erro ao inserir conta a pagar";
+        public const string CONTASPAGAR_CANCELAR_SUCESSO = "Conta cancelada";
+        public const string CONTASPAGAR_CANCELAR_ERRO = "Erro ao cancelar conta";
     }
 }
