@@ -57,6 +57,9 @@ namespace BLL.Banco
         }
         public List<ContasPagarGridModel> Pesquisar(ContasPagarModel contasPagar, DateTime dataFinal)
         {
+            if (contasPagar.CentroCusto == null)
+                contasPagar.CentroCusto = new CentroCustoModel();
+
             var contas = ContasPagarDAO.Pesquisar(contasPagar, DateTime.Now).DataTableToList<ContasPagarModel>();
             var grid = new List<ContasPagarGridModel>();
             foreach (var item in contas)
