@@ -101,7 +101,7 @@ namespace HMAViews.View.Atracoes
                     this.Close();
                 }
                 else
-                    Mensagens.GeraMensagens("Erro!", MENSAGEM.ATRACOES_EXCLUIR_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                    Mensagens.GeraMensagens("Erro!", MENSAGEM.ATRACOES_EXCLUIR_ERRO, TIPOS_MENSAGENS.ERRO);
             }
             else
                 return;
@@ -182,10 +182,6 @@ namespace HMAViews.View.Atracoes
 
             return atracoes;
         }
-        //private void SomenteNumeros(Object sender, KeyEventArgs e)
-        //{
-        //    Mascaras.SomenteNumeros(tbValor, e);
-        //}
         private void PhoneMasked(Object sender, KeyEventArgs e)
         {
             Mascaras.PhoneMasked(tbTelefone, e);

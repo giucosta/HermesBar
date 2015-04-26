@@ -83,28 +83,34 @@ namespace BLL.Atracoes
                 }
                 else
                     AO.Rollback();
-                return false;
             }
             catch (Exception e)
             {
                 UTIL.Session.MensagemErro = e.Message;
-                return false;
             }
+            return false;
         }
         public bool Excluir(AtracoesModel atracoes)
         {
-            AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
-            AO.GetTransaction();
-            if (AtracoesDAO.Excluir(atracoes))
+            try
             {
-                if (ContatoBLL.Excluir(atracoes.Contato))
+                AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
+                AO.GetTransaction();
+                if (AtracoesDAO.Excluir(atracoes))
                 {
-                    AO.Commit();
-                    return true;
+                    if (ContatoBLL.Excluir(atracoes.Contato))
+                    {
+                        AO.Commit();
+                        return true;
+                    }
                 }
+                else
+                    AO.Rollback();
             }
-            else
-                AO.Rollback();
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+            }
             return false;
         }
         public bool Editar(AtracoesModel atracoes)

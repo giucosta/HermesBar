@@ -191,7 +191,6 @@ namespace DAO.Funcionario
                 throw e;
             }
         }
-
         public List<FuncionarioModel> GeraRelatorio()
         {
             AccessObject<FuncionarioModel> AO = new AccessObject<FuncionarioModel>();

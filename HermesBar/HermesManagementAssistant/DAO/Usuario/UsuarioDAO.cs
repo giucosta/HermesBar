@@ -34,7 +34,6 @@ namespace DAO.Usuario
                 throw e;
             }
         }
-
         public bool GravaNovaSenha(LoginModel login)
         {
             try
@@ -53,7 +52,6 @@ namespace DAO.Usuario
                 throw;
             }
         }
-
         public UsuarioModel RetornaUsuario(LoginModel login)
         {
             try
@@ -81,7 +79,6 @@ namespace DAO.Usuario
                 return null;
             }
         }
-
         public DataTable Pesquisar(UsuarioModel usuario)
         {
             try
@@ -117,7 +114,6 @@ namespace DAO.Usuario
                 return null;
             }
         }
-
         public bool PesquisaUsuarioExistente(string nome)
         {
             try
@@ -138,7 +134,6 @@ namespace DAO.Usuario
                 return false;
             }
         }
-
         public bool Salvar(UsuarioModel usuario)
         {
             try
@@ -160,7 +155,6 @@ namespace DAO.Usuario
                 return false;
             }
         }
-
         public bool Excluir(UsuarioModel usuario)
         {
             try

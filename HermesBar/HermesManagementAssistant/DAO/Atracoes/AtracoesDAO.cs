@@ -50,7 +50,7 @@ namespace DAO.Atracoes
             catch (Exception e)
             {
                 Log.Log.GravarLog("Excluir", "ExcluirDAO", e.StackTrace, Constantes.ATipoMetodo.DELETE);
-                return false;
+                throw e;
             }
         }
         public DataTable Pesquisa(AtracoesModel atracoes)

@@ -53,10 +53,10 @@ namespace HMAViews.View.Login
             else
             {
                 Mensagens.GeraMensagens(MENSAGEM.LOGIN_INVALIDO, MENSAGEM.LOGIN_INVALIDO, null, TIPOS_MENSAGENS.ERRO);
-                limparCampos();
+                LimparCampos();
             }
         }
-        private void limparCampos()
+        private void LimparCampos()
         {
             tbSenha.Clear();
             tbSenha.Clear();

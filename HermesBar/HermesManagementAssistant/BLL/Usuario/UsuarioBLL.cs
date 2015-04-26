@@ -29,7 +29,6 @@ namespace BLL.Usuario
         {
             return UsuarioDAO.PesquisaUsuarioExistente(usuario);
         }
-
         public bool GravarUsuario(UsuarioModel usuario)
         {
             return UsuarioDAO.Salvar(usuario);
