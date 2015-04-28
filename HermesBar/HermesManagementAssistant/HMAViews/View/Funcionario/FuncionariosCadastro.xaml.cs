@@ -235,6 +235,13 @@ namespace HMAViews.View.Funcionarios
             tbCelular.Text = funcionario.Contato.Celular;
             tbEmail.Text = funcionario.Contato.Email;
         }
+
+        private void ConsultarCep(object sender, RoutedEventArgs e)
+        {
+            if (!ConsultaCeps.ConsultarCep(tbRua, tbCidade, tbBairro, cbEstado, tbCep))
+                tbCep.Text = "Cep não existente";
+            tbNumero.Focus();
+        }
         #region mascaras
 
         private void MascaraCpf(object sender, KeyEventArgs e)
