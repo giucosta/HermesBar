@@ -48,5 +48,17 @@ namespace DAO.Caixa
                 throw e;
             }
         }
+        public DataTable RecuperaNomeCliente(CartaoModel cartao)
+        {
+            try
+            {
+                AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
     }
 }
