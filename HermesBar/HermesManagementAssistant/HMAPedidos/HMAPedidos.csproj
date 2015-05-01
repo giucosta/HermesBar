@@ -71,6 +71,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BLL\BLL.csproj">
+      <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
+      <Name>BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{928090e3-dff9-4e0b-855a-d5a83ecfb0bc}</Project>
       <Name>DAO</Name>
@@ -78,6 +82,10 @@
     <ProjectReference Include="..\HMAViews\HMAViews.csproj">
       <Project>{1fd77396-437a-41e2-bbdd-a5d39f1ab66f}</Project>
       <Name>HMAViews</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MODEL\MODEL.csproj">
+      <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
+      <Name>MODEL</Name>
     </ProjectReference>
     <ProjectReference Include="..\UTILS\UTIL.csproj">
       <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
