@@ -136,7 +136,7 @@ namespace HMAViews
         }
         public void EmitirRecibo(object sender, RoutedEventArgs e)
         {
-            new ReciboFuncionario().Show();
+            new EmitirReciboFuncionario().emitirRecibos(new FuncionarioModel());
         }
     }
 }

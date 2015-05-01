@@ -43,6 +43,33 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\UTILS\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel.resources">
+      <HintPath>..\UTILS\de\MigraDoc.DocumentObjectModel.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\UTILS\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering.resources">
+      <HintPath>..\UTILS\de\MigraDoc.Rendering.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>..\UTILS\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering.resources">
+      <HintPath>..\UTILS\de\MigraDoc.RtfRendering.resources.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\UTILS\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting">
+      <HintPath>..\UTILS\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.resources">
+      <HintPath>..\UTILS\de\PdfSharp.resources.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -97,11 +124,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ReciboFuncionarioDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Utils\ConsultaCeps.cs" />
     <Compile Include="Utils\Mascaras.cs" />
     <Compile Include="Utils\Mensagens.cs" />
@@ -139,17 +161,12 @@
     <Compile Include="View\Estoque\Estoque.xaml.cs">
       <DependentUpon>Estoque.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Funcionario\EmitirReciboFuncionario.cs" />
     <Compile Include="View\Funcionario\Funcionarios.xaml.cs">
       <DependentUpon>Funcionarios.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Funcionario\FuncionariosCadastro.xaml.cs">
       <DependentUpon>FuncionariosCadastro.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Funcionario\ReciboFuncionario.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Funcionario\ReciboFuncionario.Designer.cs">
-      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Produtos\Produtos.xaml.cs">
       <DependentUpon>Produtos.xaml</DependentUpon>
@@ -290,26 +307,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="ReciboFuncionarioDataSet.xsc">
-      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ReciboFuncionarioDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ReciboFuncionarioDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ReciboFuncionarioDataSet.xss">
-      <DependentUpon>ReciboFuncionarioDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\LOGO_GENERICA 04.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="View\Funcionario\ReciboFuncionario.resx">
-      <DependentUpon>ReciboFuncionario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Funcionario\Report1.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
