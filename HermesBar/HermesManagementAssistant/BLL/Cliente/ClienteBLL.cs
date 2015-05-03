@@ -47,5 +47,17 @@ namespace BLL.Cliente
                 return null;
             }
         }
+        public List<ClienteModel> Pesquisar(ClienteModel cliente)
+        {
+            try
+            {
+                return ClienteDAO.Pesquisar(cliente).DataTableToList<ClienteModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
+        }
     }
 }

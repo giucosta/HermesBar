@@ -63,6 +63,7 @@
     <Compile Include="Funcionario\FuncionarioDAO.cs" />
     <Compile Include="Login\LoginDAO.cs" />
     <Compile Include="Log\Log.cs" />
+    <Compile Include="Pedido\PedidoDAO.cs" />
     <Compile Include="Perfil\PerfilDAO.cs" />
     <Compile Include="Produtos\MarcaProdutoDAO.cs" />
     <Compile Include="Produtos\ProdutoDAO.cs" />

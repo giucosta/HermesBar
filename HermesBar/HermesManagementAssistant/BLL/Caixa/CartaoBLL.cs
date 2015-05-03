@@ -3,11 +3,13 @@ using DAO.Caixa;
 using DAO.Cliente;
 using DAO.Utils;
 using MODEL.Caixa;
+using MODEL.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTIL;
 
 namespace BLL.Caixa
 {
@@ -74,6 +76,37 @@ namespace BLL.Caixa
             {
                 UTIL.Session.MensagemErro = e.Message;
                 return 0;
+            }
+        }
+        public List<CartaoModel> Pesquisar(CartaoModel cartao)
+        {
+            try
+            {
+                cartao.Data = DateTime.Now;
+                var cartoes = CartaoDAO.Pesquisar(cartao).DataTableToList<CartaoModel>();
+                foreach (var item in cartoes)
+                    item.Cliente = RecuperaCliente(item);
+
+                return cartoes;
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
+        }
+        public ClienteModel RecuperaCliente(CartaoModel cartao)
+        {
+            try
+            {
+                ClienteModel cliente = new ClienteModel();
+                cliente.Id = Convert.ToInt16(CartaoDAO.RetornaIdCliente(cartao).Rows[0]["Id_Cliente"]);
+                return ClienteBLL.Pesquisar(cliente).First();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
             }
         }
     }

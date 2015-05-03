@@ -60,6 +60,7 @@
     <Compile Include="Fornecedor\FornecedorBLL.cs" />
     <Compile Include="Funcionario\FuncionarioBLL.cs" />
     <Compile Include="Login\LoginBLL.cs" />
+    <Compile Include="Pedido\PedidoBLL.cs" />
     <Compile Include="Perfil\PerfilBLL.cs" />
     <Compile Include="Produtos\MarcaProdutoBLL.cs" />
     <Compile Include="Produtos\ProdutoBLL.cs" />

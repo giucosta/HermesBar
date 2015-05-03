@@ -46,5 +46,26 @@ namespace DAO.Cliente
                 throw e;
             }
         }
+        public DataTable Pesquisar(ClienteModel cliente)
+        {
+            try
+            {
+                AccessObject<ClienteModel> AO = new AccessObject<ClienteModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertComparisionAttribute();
+                if (cliente.Id != 0)
+                    AO.InsertParameter(ConstantesDAO.AND, "Id_Cliente", ConstantesDAO.EQUAL, cliente.Id);
+                else if (!string.IsNullOrEmpty(cliente.RG))
+                    AO.InsertParameter(ConstantesDAO.AND, "RG", ConstantesDAO.EQUAL, cliente.RG);
+
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Pesquisar", "ClienteDAO", e.Message, Constantes.ATipoMetodo.SELECT);
+                throw e;
+            }
+        }
     }
 }
