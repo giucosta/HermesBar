@@ -13,7 +13,8 @@
                     <MenuItem Name="mniUsuarios" Header="_Usuarios"/>
                 </MenuItem>
                 <MenuItem Name="mnEntradaCliente" Header="_Clientes">
-                    <MenuItem Name="mniEntradaCliente" Header="_Entrada" Click="Entrada"/>
+                    <MenuItem Name="mniEntradaCliente" Header="_Entrada" Click="EntradaCliente"/>
+                    <MenuItem Name="mniSaidaCliente" Header="_Saída" Click="SaidaCliente"/>
                 </MenuItem>
                 <MenuItem Name="mnGestao" Header="_Gestão">
                     <MenuItem Name="mniAtracoes" Header="_Atracoes" Click="Atracoes"/>

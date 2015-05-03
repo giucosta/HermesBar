@@ -180,6 +180,9 @@
     <Compile Include="View\Produtos\TipoProdutoCadastro.xaml.cs">
       <DependentUpon>TipoProdutoCadastro.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Saida\SaidaCliente.xaml.cs">
+      <DependentUpon>SaidaCliente.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\Atracoes\Atracoes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -296,6 +299,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Produtos\TipoProdutoCadastro.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Saida\SaidaCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

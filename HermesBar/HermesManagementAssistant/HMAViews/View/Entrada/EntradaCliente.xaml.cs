@@ -1,8 +1,10 @@
 ﻿using BLL.Caixa;
+using BLL.Cliente;
 using FirstFloor.ModernUI.Windows.Controls;
 using HMAViews.Mascara;
 using HMAViews.Utils;
 using MODEL.Caixa;
+using MODEL.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,33 +37,63 @@ namespace HMAViews.View.Entrada
                 return _cartaoBLL;
             }
         }
-        private int _numeroCartao = 001;
+        private ClienteBLL _clienteBLL = null;
+        public ClienteBLL ClienteBLL
+        {
+            get
+            {
+                if (_clienteBLL == null)
+                    _clienteBLL = new ClienteBLL();
+                return _clienteBLL;
+            }
+        }
+
+        private int _numeroCartao;
+        private ClienteModel _cliente = null;
         public EntradaCliente()
         {
             InitializeComponent();
-            if (UTIL.Session.CaixaAberto)
-                _numeroCartao = CartaoBLL.RecuperaUltimoCartao();
+            
+            _numeroCartao = CartaoBLL.RecuperaUltimoCartao();
             tbNumeroCartao.Text = _numeroCartao.ToString("D4");
         }
         private void RegistrarEntrada(object sender, RoutedEventArgs e)
         {
+            bool clienteExiste = true;
             var camposObrigatorios = VerificaCamposObrigatorios();
             if (camposObrigatorios.Count == 0)
             {
                 var model = new CartaoModel();
                 model.NumeroCartao = tbNumeroCartao.Text;
-                model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, RG = tbRG.Text, Telefone = tbTelefone.Text };
+                
+                if (_cliente == null)
+                {
+                    model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, RG = tbRG.Text, Telefone = tbTelefone.Text };
+                    clienteExiste = false;
+                }
+                else
+                    model.Cliente = _cliente;
 
-                if (!CartaoBLL.Salvar(model))
+                if (!CartaoBLL.Salvar(model, clienteExiste))
                     Mensagens.GeraMensagens("Erro ao inserir cliente", MENSAGEM.ENTRADACLIENTE_ERRO, TIPOS_MENSAGENS.ERRO);
                 else
                 {
                     RegistraProximoNumero();
                     UTIL.Session.CaixaAberto = true;
+                    _cliente = null;
                 }
             }
             else
                 Mensagens.GeraMensagens("Campos obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
+        }
+        private void PesquisaRG(object sender, RoutedEventArgs e)
+        {
+            _cliente = ClienteBLL.Pesquisar(new ClienteModel() { RG = tbRG.Text }).FirstOrDefault();
+            if (_cliente != null)
+            {
+                tbTelefone.Text = _cliente.Telefone;
+                tbNome.Text = _cliente.Nome;
+            }
         }
         private void RegistraProximoNumero()
         {

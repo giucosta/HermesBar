@@ -36,28 +36,35 @@ namespace BLL.Caixa
             }
         }
 
-        public bool Salvar(CartaoModel cartao)
+        public bool Salvar(CartaoModel cartao, bool clienteExistente)
         {
             try
             {
                 AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
                 AO.GetTransaction();
 
-                if (ClienteBLL.Salvar(cartao.Cliente))
+                if (!clienteExistente)
                 {
-                    cartao.Cliente = ClienteBLL.RecuperaUltimoCliente();
-                    cartao.Data = DateTime.Now;
-                    cartao.HoraEntrada = DateTime.Now;
-                    cartao.FormaPagamento = "";
-                    cartao.HoraSaida = DateTime.Now;
-                    if (CartaoDAO.Salvar(cartao))
+                    if(ClienteBLL.Salvar(cartao.Cliente))
+                        cartao.Cliente = ClienteBLL.RecuperaUltimoCliente();
+                    else
                     {
-                        AO.Commit();
-                        return true;
+                        AO.Rollback();
+                        return false;
                     }
+                }
+                cartao.Data = DateTime.Now;
+                cartao.HoraEntrada = DateTime.Now;
+                cartao.FormaPagamento = "";
+                cartao.HoraSaida = DateTime.Now;
+                if (CartaoDAO.Salvar(cartao))
+                {
+                    AO.Commit();
+                    return true;
                 }
                 else
                     AO.Rollback();
+
                 return false;
             }
             catch (Exception e)

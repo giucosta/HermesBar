@@ -38,12 +38,14 @@
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-                <Label Content="Nome" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="Telefone" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <Label Content="RG" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
-                <TextBox Name="tbNome" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="100"/>
-                <TextBox Name="tbTelefone" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="20" KeyDown="MascaraTelefone" Margin="0,5,0,3"/>
-                <TextBox Name="tbRG" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="15" KeyDown="MascaraRg"/>
+                <Label Content="RG" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Nome" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+                <Label Content="Telefone" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+
+                <TextBox Name="tbRG" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="15" KeyDown="MascaraRg" LostFocus="PesquisaRG"/>
+                <TextBox Name="tbNome" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="100"/>
+                <TextBox Name="tbTelefone" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Width="340" MaxLength="20" KeyDown="MascaraTelefone" Margin="0,5,0,3"/>
+                
                 <CheckBox Name="cbMesaReservada" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Possui reserva?"/>
                 <Button Name="btEntrar" Content="Entrar" Grid.Column="1" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Width="100" Click="RegistrarEntrada"/>
             </Grid>

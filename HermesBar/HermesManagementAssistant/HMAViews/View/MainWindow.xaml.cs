@@ -31,6 +31,7 @@ using HMAViews.View.Estoque;
 using HMAViews.View.Entrada;
 using HMAViews.View.Banco;
 using HMAViews.View.Funcionario;
+using HMAViews.View.Saida;
 
 namespace HMAViews
 {
@@ -103,9 +104,13 @@ namespace HMAViews
                     Mensagens.GeraMensagens("Importar XML", MENSAGEM.ARQUIVO_JA_EXPORTADO, null, TIPOS_MENSAGENS.ALERTA);
             }
         }
-        public void Entrada(object sender, RoutedEventArgs e)
+        public void EntradaCliente(object sender, RoutedEventArgs e)
         {
             new EntradaCliente().Show();
+        }
+        public void SaidaCliente(object sender, RoutedEventArgs e)
+        {
+            new SaidaCliente().Show();
         }
         public void AbrirBanco(object sender, RoutedEventArgs e)
         {
