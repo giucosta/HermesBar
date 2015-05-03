@@ -118,6 +118,8 @@ namespace HMAPedidos
 
                 if (!PedidoBLL.Salvar(pedido))
                     Mensagens.GeraMensagens("Erro ao inserir!", MENSAGEM.PEDIDOS_INSERIR_ERRO, TIPOS_MENSAGENS.ERRO);
+                else
+                    _produtos = ProdutoBLL.Pesquisa(new ProdutoModel());
 
                 LimparCampos();
             }

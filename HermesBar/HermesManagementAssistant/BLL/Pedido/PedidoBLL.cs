@@ -12,6 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UTIL;
+using DAO.Utils;
+using BLL.Estoque;
+using MODEL.Estoque;
 
 namespace BLL.Pedido
 {
@@ -57,13 +60,43 @@ namespace BLL.Pedido
                 return _funcionarioBLL;
             }
         }
-
+        private EstoqueBLL _estoqueBLL = null;
+        public EstoqueBLL EstoqueBLL
+        {
+            get
+            {
+                if (_estoqueBLL == null)
+                    _estoqueBLL = new EstoqueBLL();
+                return _estoqueBLL;
+            }
+        }
         public bool Salvar(PedidoModel pedido)
         {
             try
             {
-                pedido.Data = DateTime.Now;
-                return PedidoDAO.Salvar(pedido);
+                AccessObject<PedidoModel> AO = new AccessObject<PedidoModel>();
+                AO.GetTransaction();
+                var produto = ProdutoBLL.PesquisaProdutoCodigo(pedido.CodigoProduto).FirstOrDefault();
+                
+                var estoque = new EstoqueModel();
+                estoque.Produto = produto;
+                estoque = EstoqueBLL.Pesquisar(estoque);
+                estoque.Produto = produto;
+                estoque.QuantidadeEstoque = (estoque.QuantidadeEstoque - Double.Parse(pedido.Quantidade));
+
+                if (EstoqueBLL.Editar(estoque))
+                {
+                    pedido.Data = DateTime.Now;
+                    if (PedidoDAO.Salvar(pedido)){
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
+                }
+                else
+                    AO.Rollback();
+                return false;
             }
             catch (Exception e)
             {
