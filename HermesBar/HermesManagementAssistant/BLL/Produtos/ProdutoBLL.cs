@@ -80,8 +80,8 @@ namespace BLL.Produtos
                         {
                             var estoque = new EstoqueModel();
                             estoque.Produto = produto;
-                            estoque.EstoqueMinimo = 0;
-                            estoque.EstoqueIdeal = 0;
+                            estoque.QuantidadeMinima = 0;
+                            estoque.QuantidadeIdeal = 0;
                             estoque.QuantidadeEstoque = 0;
                             if(EstoqueBLL.Salvar(estoque))
                             {

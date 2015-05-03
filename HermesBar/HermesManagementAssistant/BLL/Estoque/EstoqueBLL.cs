@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTIL;
 
 namespace BLL.Estoque
 {
@@ -63,6 +64,18 @@ namespace BLL.Estoque
                 UTIL.Session.MensagemErro = e.Message;
             }
             return false;
+        }
+        public EstoqueModel Pesquisar(EstoqueModel estoque)
+        {
+            try
+            {
+                return EstoqueDAO.Pesquisar(estoque).DataTableToSimpleObject<EstoqueModel>();
+            }
+            catch (Exception e)
+            {
+                UTIL.Session.MensagemErro = e.Message;
+                return null;
+            }
         }
     }
 }

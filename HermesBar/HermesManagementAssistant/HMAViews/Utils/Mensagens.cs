@@ -152,6 +152,8 @@ namespace HMAViews.Utils
         public const string CONTASPAGAR_CADASTRO_ERRO = "Erro ao inserir conta a pagar";
         public const string CONTASPAGAR_CANCELAR_SUCESSO = "Conta cancelada";
         public const string CONTASPAGAR_CANCELAR_ERRO = "Erro ao cancelar conta";
+        //PEDIDO
         public const string PEDIDOS_INSERIR_ERRO = "Erro ao inserir pedido!";
+        public const string PEDIDOS_FALTA_ESTOQUE = "Produto sem estoque!";
     }
 }

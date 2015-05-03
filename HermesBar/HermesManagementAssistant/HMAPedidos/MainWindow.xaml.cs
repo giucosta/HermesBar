@@ -23,6 +23,8 @@ using BLL.Caixa;
 using MODEL.Caixa;
 using MODEL.Pedido;
 using BLL.Pedido;
+using BLL.Estoque;
+using MODEL.Estoque;
 
 namespace HMAPedidos
 {
@@ -69,6 +71,16 @@ namespace HMAPedidos
                 if (_pedidoBLL == null)
                     _pedidoBLL = new PedidoBLL();
                 return _pedidoBLL;
+            }
+        }
+        private EstoqueBLL _estoqueBLL = null;
+        public EstoqueBLL EstoqueBLL
+        {
+            get
+            {
+                if (_estoqueBLL == null)
+                    _estoqueBLL = new EstoqueBLL();
+                return _estoqueBLL;
             }
         }
 
@@ -146,8 +158,17 @@ namespace HMAPedidos
             {
                 if (item.CodigoOriginal == tbCodigoProduto.Text)
                 {
-                    lbResultNomeProduto.Content = item.Nome;
-                    _produtoModel = item;
+                    if (Double.Parse(item.QuantidadeEstoque) > 0)
+                    {
+                        lbResultNomeProduto.Content = item.Nome;
+                        _produtoModel = item;
+                    }
+                    else 
+                    {
+                        Mensagens.GeraMensagens("Estoque!", MENSAGEM.PEDIDOS_FALTA_ESTOQUE, null, TIPOS_MENSAGENS.ALERTA);
+                        LimparCampos();
+                    }
+                        
                     break;
                 }
             }

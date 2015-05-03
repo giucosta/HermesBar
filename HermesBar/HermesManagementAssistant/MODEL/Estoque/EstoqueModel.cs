@@ -12,7 +12,7 @@ namespace MODEL.Estoque
     {
         public ProdutoModel Produto { get; set; }
         public double QuantidadeEstoque { get; set; }
-        public double EstoqueMinimo { get; set; }
-        public double EstoqueIdeal { get; set; }
+        public double QuantidadeMinima { get; set; }
+        public double QuantidadeIdeal { get; set; }
     }
 }

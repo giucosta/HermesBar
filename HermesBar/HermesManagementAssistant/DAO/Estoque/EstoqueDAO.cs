@@ -2,6 +2,7 @@
 using MODEL.Estoque;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,8 +21,8 @@ namespace DAO.Estoque
                 AO.GetCommand();
                 AO.InsertParameter("Produto", estoque.Produto.Id);
                 AO.InsertParameter("QuantidadeEstoque", estoque.QuantidadeEstoque);
-                AO.InsertParameter("EstoqueMinimo", estoque.EstoqueMinimo);
-                AO.InsertParameter("EstoqueIdeal", estoque.EstoqueIdeal);
+                AO.InsertParameter("EstoqueMinimo", estoque.QuantidadeMinima);
+                AO.InsertParameter("EstoqueIdeal", estoque.QuantidadeIdeal);
 
                 return AO.ExecuteCommand();
             }
@@ -46,6 +47,23 @@ namespace DAO.Estoque
             catch (Exception e)
             {
                 Log.Log.GravarLog("Editar", "EstoqueDAO", e.Message, Constantes.ATipoMetodo.INSERT);
+                throw e;
+            }
+        }
+        public DataTable Pesquisar(EstoqueModel estoque)
+        {
+            try
+            {
+                AccessObject<EstoqueModel> AO = new AccessObject<EstoqueModel>();
+                AO.CreateSelectAll();
+                AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Id_Produto", ConstantesDAO.EQUAL, estoque.Produto.Id);
+
+                return AO.GetDataTable();
+            }
+            catch (Exception e)
+            {
+                Log.Log.GravarLog("Pesquisar", "EstoqueDAO", e.Message, Constantes.ATipoMetodo.SELECT);
                 throw e;
             }
         }

@@ -74,10 +74,6 @@
       <Project>{b2f0ec43-11f9-45cc-81b7-a9de82ba8514}</Project>
       <Name>BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAO\DAO.csproj">
-      <Project>{928090e3-dff9-4e0b-855a-d5a83ecfb0bc}</Project>
-      <Name>DAO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HMAViews\HMAViews.csproj">
       <Project>{1fd77396-437a-41e2-bbdd-a5d39f1ab66f}</Project>
       <Name>HMAViews</Name>
