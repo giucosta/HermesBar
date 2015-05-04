@@ -78,6 +78,7 @@ namespace BLL.Pedido
                 AO.GetTransaction();
                 var produto = ProdutoBLL.PesquisaProdutoCodigo(pedido.CodigoProduto).FirstOrDefault();
                 
+                //TODO - Refatorar essa parte
                 var estoque = new EstoqueModel();
                 estoque.Produto = produto;
                 estoque = EstoqueBLL.Pesquisar(estoque);
