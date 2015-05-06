@@ -160,9 +160,9 @@ namespace HMAViews.View.Produtos
                 camposObrigatorios.Add("Unidade");
             if (string.IsNullOrEmpty(cbFornecedor.SelectionBoxItem.ToString()))
                 camposObrigatorios.Add("Fornecedor");
-            if (string.IsNullOrEmpty(tbValorCusto.Text))
+            if (Convert.ToDouble(tbValorCusto.Text) == 0)
                 camposObrigatorios.Add("Valor Custo");
-            if (string.IsNullOrEmpty(tbValorVenda.Text))
+            if (Convert.ToDouble(tbValorVenda.Text) == 0)
                 camposObrigatorios.Add("Valor Venda");
 
             return camposObrigatorios;

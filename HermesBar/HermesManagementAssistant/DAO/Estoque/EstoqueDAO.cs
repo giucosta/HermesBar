@@ -21,8 +21,8 @@ namespace DAO.Estoque
                 AO.GetCommand();
                 AO.InsertParameter("Produto", estoque.Produto.Id);
                 AO.InsertParameter("QuantidadeEstoque", estoque.QuantidadeEstoque);
-                AO.InsertParameter("EstoqueMinimo", estoque.QuantidadeMinima);
-                AO.InsertParameter("EstoqueIdeal", estoque.QuantidadeIdeal);
+                AO.InsertParameter("QuantidadeMinima", estoque.QuantidadeMinima);
+                AO.InsertParameter("QuantidadeIdeal", estoque.QuantidadeIdeal);
 
                 return AO.ExecuteCommand();
             }
