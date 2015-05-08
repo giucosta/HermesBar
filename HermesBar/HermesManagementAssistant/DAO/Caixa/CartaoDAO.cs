@@ -3,6 +3,7 @@ using MODEL.Caixa;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,7 @@ namespace DAO.Caixa
                 AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
                 AO.CreateSpecificQuery("SELECT MAX(NumeroCartao) AS NumeroCartao FROM Cartao");
                 AO.GetCommand();
+                AO.InsertParameter(ConstantesDAO.WHERE, "Data", ConstantesDAO.EQUAL, DateTime.Now.ToShortDateString());
 
                 return AO.GetDataTable();
             }

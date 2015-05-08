@@ -68,6 +68,20 @@ namespace DAO.Connections
                 throw e;
             }
         }
+        public static SqlDataReader GetDataReader()
+        {
+            try
+            {
+                var dataReader = _command.ExecuteReader();
+                _command = null;
+                return dataReader;
+            }
+            catch (SqlException e)
+            {
+                OutConnection();
+                throw e;
+            }
+        }
         public static void OutConnection(){
             if (_connection != null)
                 _connection.Close();

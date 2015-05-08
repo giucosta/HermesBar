@@ -22,7 +22,7 @@
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
                 <GroupBox Header="Número Cartão" Grid.Row="1" Grid.Column="1" FontWeight="Bold">
-                    <TextBox Name="tbNumeroCartao" BorderBrush="Transparent" TextAlignment="Right" FontSize="30" VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbNumeroCartao" BorderBrush="Transparent" TextAlignment="Right" FontSize="30" VerticalContentAlignment="Center" LostFocus="PesquisarCartao"/>
                 </GroupBox>
             </Grid>
             <Grid Width="900" HorizontalAlignment="Left">

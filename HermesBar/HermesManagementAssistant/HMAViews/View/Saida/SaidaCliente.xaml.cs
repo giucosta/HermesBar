@@ -1,4 +1,8 @@
-﻿using FirstFloor.ModernUI.Windows.Controls;
+﻿using BLL.Caixa;
+using BLL.Pedido;
+using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Caixa;
+using MODEL.Pedido;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +25,33 @@ namespace HMAViews.View.Saida
     /// </summary>
     public partial class SaidaCliente : ModernWindow
     {
+        private CartaoBLL _cartaoBLL = null;
+        public CartaoBLL CartaoBLL
+        {
+            get
+            {
+                if (_cartaoBLL == null)
+                    _cartaoBLL = new CartaoBLL();
+                return _cartaoBLL;
+            }
+        }
+        private PedidoBLL _pedidoBLL = null;
+        public PedidoBLL PedidoBLL
+        {
+            get
+            {
+                if (_pedidoBLL == null)
+                    _pedidoBLL = new PedidoBLL();
+                return _pedidoBLL;
+            }
+        }
         public SaidaCliente()
         {
             InitializeComponent();
+        }
+        private void PesquisarCartao(object sender, RoutedEventArgs e)
+        {
+            var pedidos = PedidoBLL.Pesquisar(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
         }
     }
 }

@@ -190,6 +190,11 @@ namespace DAO.Utils
             inner_join = null;
             return Connection.getDataTable();
         }
+        public SqlDataReader GetDataReader()
+        {
+            inner_join = null;
+            return Connection.GetDataReader();
+        }
         public void OutConnection()
         {
             Connection.OutConnection();
