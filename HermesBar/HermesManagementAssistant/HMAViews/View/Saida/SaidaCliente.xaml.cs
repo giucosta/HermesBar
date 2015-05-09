@@ -51,7 +51,7 @@ namespace HMAViews.View.Saida
         }
         private void PesquisarCartao(object sender, RoutedEventArgs e)
         {
-            var pedidos = PedidoBLL.Pesquisar(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
+            gridPesquisa.ItemsSource = PedidoBLL.Pesquisar(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
         }
     }
 }

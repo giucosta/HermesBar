@@ -36,12 +36,12 @@
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <DataGrid Grid.Row="1" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid Name="gridPesquisa" Grid.Row="1" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Produto"/>
-                        <DataGridTextColumn Header="Quantidade"/>
-                        <DataGridTextColumn Header="Funcionário"/>
-                        <DataGridTextColumn Header="Valor Unitário"/>
+                        <DataGridTextColumn Header="Produto" Binding="{Binding CodigoProduto.Nome}"/>
+                        <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade}"/>
+                        <DataGridTextColumn Header="Funcionário" Binding="{Binding CodigoFuncionario.Nome}"/>
+                        <DataGridTextColumn Header="Valor Unitário" Binding="{Binding CodigoProduto.ValorVenda}"/>
                         <DataGridTextColumn Header="Valor Total"/>
                     </DataGrid.Columns>
                 </DataGrid>
