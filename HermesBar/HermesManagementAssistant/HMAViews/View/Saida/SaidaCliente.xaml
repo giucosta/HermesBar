@@ -47,7 +47,7 @@
                         <DataGridTextColumn Header="Produto" Binding="{Binding CodigoProduto.Nome}"/>
                         <DataGridTextColumn Header="Quantidade" Binding="{Binding Quantidade}"/>
                         <DataGridTextColumn Header="Funcionário" Binding="{Binding CodigoFuncionario.Nome}"/>
-                        <DataGridTextColumn Header="Valor Unitário" Binding="{Binding CodigoProduto.ValorVenda}"/>
+                        <DataGridTextColumn Header="Valor Unitário" Binding="{Binding CodigoProduto.ValorVenda, StringFormat={}{0:C}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

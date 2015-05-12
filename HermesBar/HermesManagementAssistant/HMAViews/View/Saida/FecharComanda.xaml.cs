@@ -1,4 +1,5 @@
 ﻿using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Pedido;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace HMAViews.View.Saida
     /// </summary>
     public partial class FecharComanda : ModernWindow
     {
-        public FecharComanda()
+        public FecharComanda(FechamentoModel fechamento)
         {
             InitializeComponent();
         }

@@ -45,24 +45,25 @@ namespace HMAViews.View.Saida
                 return _pedidoBLL;
             }
         }
+        private FechamentoModel _fechamento = null;
         public SaidaCliente()
         {
             InitializeComponent();
         }
         private void PesquisarCartao(object sender, RoutedEventArgs e)
         {
-            var fechamento = PedidoBLL.PesquisaFechamento(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
-            if (fechamento.Pedido.Count > 0)
+            _fechamento = PedidoBLL.PesquisaFechamento(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
+            if (_fechamento.Pedido.Count > 0)
             {
-                gridPesquisa.ItemsSource = fechamento.Pedido;
-                tbTotal.Text = fechamento.ValorTotal.ToString();
+                gridPesquisa.ItemsSource = _fechamento.Pedido;
+                tbTotal.Text = _fechamento.ValorTotal.ToString("C");
             }    
             else
                 MessageBox.Show("Este cliente não possui pedidos!");
         }
         private void FecharComanda(object sender, RoutedEventArgs e)
         {
-
+            new FecharComanda(_fechamento).Show();
         }
     }
 }

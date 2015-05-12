@@ -179,7 +179,6 @@ namespace BLL.Pedido
             var list = Pesquisar(pedido);
             foreach (var item in list)
                 fechamentoModel.ValorTotal += item.CodigoProduto.ValorVenda;
-
             fechamentoModel.Pedido = list;
 
             return fechamentoModel;
