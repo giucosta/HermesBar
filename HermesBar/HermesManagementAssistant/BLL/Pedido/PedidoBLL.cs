@@ -173,5 +173,16 @@ namespace BLL.Pedido
                 return null;
             }
         }
+        public FechamentoModel PesquisaFechamento(PedidoModel pedido)
+        {
+            var fechamentoModel = new FechamentoModel();
+            var list = Pesquisar(pedido);
+            foreach (var item in list)
+                fechamentoModel.ValorTotal += item.CodigoProduto.ValorVenda;
+
+            fechamentoModel.Pedido = list;
+
+            return fechamentoModel;
+        }
     }
 }

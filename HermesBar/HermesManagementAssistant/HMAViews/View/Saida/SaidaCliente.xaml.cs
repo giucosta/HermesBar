@@ -51,9 +51,12 @@ namespace HMAViews.View.Saida
         }
         private void PesquisarCartao(object sender, RoutedEventArgs e)
         {
-            var pedidos = PedidoBLL.Pesquisar(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
-            if (pedidos.Count > 0)
-                gridPesquisa.ItemsSource = pedidos;
+            var fechamento = PedidoBLL.PesquisaFechamento(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
+            if (fechamento.Pedido.Count > 0)
+            {
+                gridPesquisa.ItemsSource = fechamento.Pedido;
+                tbTotal.Text = fechamento.ValorTotal.ToString();
+            }    
             else
                 MessageBox.Show("Este cliente não possui pedidos!");
         }

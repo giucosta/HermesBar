@@ -60,6 +60,7 @@
     <Compile Include="Funcionario\FuncionarioModel.cs" />
     <Compile Include="Login\LoginModel.cs" />
     <Compile Include="Log\LogsModel.cs" />
+    <Compile Include="Pedido\FechamentoModel.cs" />
     <Compile Include="Pedido\PedidoModel.cs" />
     <Compile Include="Perfil\PerfilModel.cs" />
     <Compile Include="Produtos\MarcaProduto.cs" />
