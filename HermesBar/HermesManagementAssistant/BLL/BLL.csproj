@@ -47,6 +47,7 @@
     <Compile Include="Atracoes\EstiloAtracoesBLL.cs" />
     <Compile Include="Banco\CentroCustoBLL.cs" />
     <Compile Include="Banco\ContasPagarBLL.cs" />
+    <Compile Include="Banco\ContasReceberBLL.cs" />
     <Compile Include="Banco\FormaPagamentoBLL.cs" />
     <Compile Include="Caixa\CaixaAbertoBLL.cs" />
     <Compile Include="Caixa\CartaoBLL.cs" />

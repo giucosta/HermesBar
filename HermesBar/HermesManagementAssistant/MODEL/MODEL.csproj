@@ -45,6 +45,7 @@
     <Compile Include="Banco\CentroCustoModel.cs" />
     <Compile Include="Banco\ContasPagarGridModel.cs" />
     <Compile Include="Banco\ContasPagarModel.cs" />
+    <Compile Include="Banco\ContasReceberModel.cs" />
     <Compile Include="Banco\FormaPagamentoModel.cs" />
     <Compile Include="Caixa\CaixaModel.cs" />
     <Compile Include="Caixa\CartaoModel.cs" />

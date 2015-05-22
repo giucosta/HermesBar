@@ -1,5 +1,7 @@
-﻿using BLL.Cliente;
+﻿using BLL.Caixa;
+using BLL.Cliente;
 using FirstFloor.ModernUI.Windows.Controls;
+using MODEL.Caixa;
 using MODEL.Pedido;
 using System;
 using System.Collections.Generic;
@@ -34,10 +36,21 @@ namespace HMAViews.View.Saida
                 return _clienteBLL;
             }
         }
+        private CartaoBLL _cartaoBLL = null;
+        public CartaoBLL CartaoBLL
+        {
+            get
+            {
+                if (_cartaoBLL == null)
+                    _cartaoBLL = new CartaoBLL();
+                return _cartaoBLL;
+            }
+        }
         public static List<string> bandeiras = Constantes.ABandeiraCartao.BandeirasCartao;
         private double totalPagar;
         private FechamentoModel fech;
         private double valorEntrada;
+        private CartaoModel _cartaoModel;
         public FecharComanda(FechamentoModel fechamento)
         {
             InitializeComponent();
@@ -57,26 +70,62 @@ namespace HMAViews.View.Saida
             totalPagar = valorEntrada + fechamento.ValorTotal;
 
             lbTotalPagar.Content = lbTotalPagar.Content + totalPagar.ToString("C");
+
+            _cartaoModel = cliente.NumeroCartao;
+            _cartaoModel.ValorTotal = totalPagar;
         }
         private void CalculaDesconto(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(tbDesconto.Text))
+            CalculaValor(tbDesconto);
+        }
+        private void CalculaPagamentoDinheiro(object sender, RoutedEventArgs e)
+        {
+            CalculaValor(tbDinheiro);
+            _cartaoModel.FormaPagamento = Constantes.ATipoPagamento.Dinheiro;
+        }
+        private void CalculaPagamentoCredito(object sender, RoutedEventArgs e)
+        {
+            CalculaValor(tbValorCredito);
+            _cartaoModel.FormaPagamento = Constantes.ATipoPagamento.CartaoCredito;
+        }
+        private void CalculaPagamentoDebito(object sender, RoutedEventArgs e)
+        {
+            CalculaValor(tbValorDebito);
+            _cartaoModel.FormaPagamento = Constantes.ATipoPagamento.CartaoDebito;
+        }
+        private void CalculaPagamentoCheque(object sender, RoutedEventArgs e)
+        {
+            CalculaValor(tbCheque);
+            _cartaoModel.FormaPagamento = Constantes.ATipoPagamento.Cheque;
+        }
+        private void FecharComandas(object sender, RoutedEventArgs e)
+        {
+            if (CartaoBLL.FecharComanda(_cartaoModel)){
+                MessageBox.Show("Comanda fechada com sucesso!");
+                new SaidaCliente().Show();
+                this.Close();
+            }
+            else
+                MessageBox.Show("Deu erro nas parada tudo");
+        }
+        private void CalculaValor(TextBox textBox)
+        {
+            if (!string.IsNullOrEmpty(textBox.Text))
             {
-                var valorDesconto = Convert.ToDouble(tbDesconto.Text);
-                if (valorDesconto > 0)
-                {
-                    totalPagar = totalPagar - valorDesconto;
-                    if (totalPagar > 0)
-                        lbTotalPagar.Content = "TOTAL A PAGAR: " + totalPagar.ToString("C");
-                    else
-                        lbTotalPagar.Content = "TROCO: " + totalPagar.ToString("C");
-                }
+                double pagamentoDinheiro = Convert.ToDouble(textBox.Text);
+                totalPagar = totalPagar - pagamentoDinheiro;
+                if (totalPagar > 0)
+                    lbTotalPagar.Content = "FALTANDO: " + totalPagar.ToString("C");
+                if (totalPagar < 0)
+                    lbTotalPagar.Content = "TROCO: " + totalPagar.ToString("C");
+                if (totalPagar == 0)
+                    lbTotalPagar.Content = totalPagar.ToString("C");
             }
             else
             {
                 totalPagar = fech.ValorTotal + valorEntrada;
                 lbTotalPagar.Content = "TOTAL A PAGAR:" + totalPagar.ToString("C");
-            }    
+            }   
         }
     }
 }

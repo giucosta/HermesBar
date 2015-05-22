@@ -1,4 +1,5 @@
-﻿using BLL.Cliente;
+﻿using BLL.Banco;
+using BLL.Cliente;
 using DAO.Caixa;
 using DAO.Cliente;
 using DAO.Utils;
@@ -117,6 +118,32 @@ namespace BLL.Caixa
             {
                 UTIL.Session.MensagemErro = e.Message;
                 return null;
+            }
+        }
+        public bool FecharComanda(CartaoModel cartao)
+        {
+            try
+            {
+                AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
+                AO.GetTransaction();
+
+                if (CartaoDAO.FecharCartao(cartao))
+                {
+                    if (new ContasReceberBLL().InserirContasReceber(cartao))
+                    {
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
+                }
+                else
+                    AO.Rollback();
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

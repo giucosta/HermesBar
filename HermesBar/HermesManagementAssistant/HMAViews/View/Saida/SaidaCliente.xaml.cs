@@ -55,7 +55,12 @@ namespace HMAViews.View.Saida
             _fechamento = PedidoBLL.PesquisaFechamento(new PedidoModel() { NumeroCartao = new CartaoModel() { NumeroCartao = tbNumeroCartao.Text } });
             if (_fechamento.Pedido.Count > 0)
             {
+                
                 gridPesquisa.ItemsSource = _fechamento.Pedido;
+                _fechamento.ValorTotal = 0;
+                foreach (var item in _fechamento.Pedido)
+                    _fechamento.ValorTotal += (Convert.ToDouble(item.Quantidade) * item.CodigoProduto.ValorVenda);
+
                 tbTotal.Text = _fechamento.ValorTotal.ToString("C");
             }    
             else
@@ -64,6 +69,7 @@ namespace HMAViews.View.Saida
         private void FecharComanda(object sender, RoutedEventArgs e)
         {
             new FecharComanda(_fechamento).Show();
+            this.Close();
         }
     }
 }

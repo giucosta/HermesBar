@@ -1,5 +1,5 @@
 ﻿using MODEL.Abstract;
-using MODEL.Fornecedor;
+using MODEL.Cliente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +12,16 @@ namespace MODEL.Banco
     {
         public DateTime DataEmissao { get; set; }
         public DateTime DataVencimento { get; set; }
-        public FornecedorModel Fornecedor { get; set; }
+        public ClienteModel Cliente { get; set; }
         public CentroCustoModel CentroCusto { get; set; }
         public string Referente { get; set; }
         public string FormaPagamento { get; set; }
-        public string Parcelas { get; set; }
-        public string Valor { get; set; }
-        public string ValorRecebido{ get; set; }
+        public int Parcelas { get; set; }
+        public double Valor { get; set; }
+        public double ValorPago { get; set; }
         public string Observacao { get; set; }
         public DateTime DataCadastro { get; set; }
         public string Status { get; set; }
+
     }
 }

@@ -87,5 +87,24 @@ namespace DAO.Caixa
                 throw e;
             }
         }
+
+        public bool FecharCartao(CartaoModel cartao)
+        {
+            try
+            {
+                AccessObject<CartaoModel> AO = new AccessObject<CartaoModel>();
+                AO.CreateSpecificQuery(@"UPDATE Cartao SET ValorTotal = @ValorTotal, FormaPagamento = @FormaPagamento, HoraSaida = (SELECT GETDATE()) WHERE Id_Cartao = @Id");
+                AO.GetCommand();
+                AO.InsertParameter("ValorTotal", cartao.ValorTotal);
+                AO.InsertParameter("FormaPagamento", cartao.FormaPagamento);
+                AO.InsertParameter("Id", cartao.Id);
+
+                return AO.ExecuteCommand();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
