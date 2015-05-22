@@ -82,5 +82,15 @@ namespace UTIL
             public const string CartaoDebito = "Débito";
             public const string Boleto = "Boleto";
         }
+        public static class ABandeiraCartao
+        {
+            public static List<string> BandeirasCartao
+            {
+                get
+                {
+                    return new List<string>() { "VISA", "MASTERCARD", "CIELO", "ELAVON" };
+                }
+            }
+        }
     }
 }

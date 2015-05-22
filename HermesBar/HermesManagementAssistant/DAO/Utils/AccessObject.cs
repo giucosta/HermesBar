@@ -126,6 +126,7 @@ namespace DAO.Utils
             AddParameter(attribute,attributeModel);
         }
         
+
         public void CreateSpecificQuery(String query)
         {
             sql += query;

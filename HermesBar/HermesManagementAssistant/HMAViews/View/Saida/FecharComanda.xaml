@@ -21,10 +21,11 @@
                     <RowDefinition Height="100"/>
                     <RowDefinition Height="10"/>
                 </Grid.RowDefinitions>
-                <Label Content="TOTAL DOS PEDIDOS: " FontSize="20" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label Content="(+) ENTRADA :" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Label Name="lbTotalPedido" Content="TOTAL DOS PEDIDOS: " FontSize="20" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold"/>
+                <Label Name="lbEntrada" Content="(+) ENTRADA :" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="0,30,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="(-) DESCONTO :" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="300,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Content="TOTAL A PAGAR:" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Foreground="Red"/>
+                <TextBox Name="tbDesconto" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="460,3,0,0" Width="100" LostFocus="CalculaDesconto"/>
+                <Label Name="lbTotalPagar" Content="TOTAL A PAGAR:" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="0,50,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold" Foreground="Red"/>
                 <Separator Grid.Row="1" Grid.Column="1" Margin="0,80,0,0"/>
             </Grid>
             <Grid>

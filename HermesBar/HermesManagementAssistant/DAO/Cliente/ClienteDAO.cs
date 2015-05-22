@@ -22,6 +22,7 @@ namespace DAO.Cliente
                 AO.InsertParameter("Nome", cliente.Nome);
                 AO.InsertParameter("Rg", cliente.RG);
                 AO.InsertParameter("Telefone", cliente.Telefone);
+                AO.InsertParameter("Sexo", cliente.Sexo);
 
                 return AO.ExecuteCommand();
             }

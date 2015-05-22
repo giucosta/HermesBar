@@ -105,5 +105,34 @@ namespace DAO.Pedido
                 throw e;
             }
         }
+
+        public DataTable RecuperaPedido(PedidoModel pedido)
+        {
+            try
+            {
+                AccessObject<FechamentoTotalModel> AO = new AccessObject<FechamentoTotalModel>();
+                AO.CreateSpecificQuery(@"SELECT 
+	                                    Pedido.CodigoProduto
+	                                    ,Produto.NomeReduzido
+	                                    ,Produto.ValorVenda
+	                                    ,Pedido.Quantidade
+	                                    ,Pedido.NumeroCartao
+	                                    ,Cliente.Nome
+	                                    ,Cliente.Telefone
+                                    FROM Pedido
+                                    INNER JOIN Cartao ON Cartao.NumeroCartao = Pedido.NumeroCartao
+                                    INNER JOIN Cliente ON Cartao.Id_Cliente = Cliente.Id_Cliente
+                                    INNER JOIN Produto ON Produto.CodigoOriginal = Pedido.CodigoProduto
+                                    WHERE 1=1
+                                    AND Cartao.NumeroCartao = '0001'
+                                    AND Cartao.Data = CAST(REPLACE('2015-05-21', '-', '') AS DATE)");
+                AO.GetCommand();
+                return AO.GetDataTable();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

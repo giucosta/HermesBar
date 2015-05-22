@@ -11,5 +11,6 @@ namespace DAO.Abstract
     {
         bool Salvar(T objeto);
         bool Excluir(T objeto);
+
     }
 }

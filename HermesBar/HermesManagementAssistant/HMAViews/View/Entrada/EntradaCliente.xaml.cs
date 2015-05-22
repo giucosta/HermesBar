@@ -68,7 +68,13 @@ namespace HMAViews.View.Entrada
                 
                 if (_cliente == null)
                 {
-                    model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, RG = tbRG.Text, Telefone = tbTelefone.Text };
+                    string sexo;
+                    if (cbSexoFeminino.IsChecked == true)
+                        sexo = "F";
+                    else
+                        sexo = "M";
+
+                    model.Cliente = new MODEL.Cliente.ClienteModel() { Nome = tbNome.Text, RG = tbRG.Text, Telefone = tbTelefone.Text,Sexo = sexo };
                     clienteExiste = false;
                 }
                 else
