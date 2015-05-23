@@ -35,13 +35,12 @@
                         <DataGridTextColumn Header="Cód." Width="70" Binding="{Binding Id}"/>
                         <DataGridTextColumn Header="Nome" Width="100" Binding="{Binding Nome}"/>
                         <DataGridTextColumn Header="Tempo" Width="80" Binding="{Binding Tempo_Show}"/>
-                        <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Ultimo_Valor_Cobrado}"/>
+                        <DataGridTextColumn Header="Valor" Width="80" Binding="{Binding Ultimo_Valor_Cobrado, StringFormat={}{0:C}}"/>
                         <DataGridTextColumn Header="Estilo" Width="100" Binding="{Binding Estilo}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Button Name="btPesquisar" Content="Pesquisar" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Pesquisa" Grid.Column="1" Grid.Row="4" TabIndex="3" ToolTip="Clique para pesquisar uma atração"/>
                 <Button Name="btNovo" Content="Novo" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Click="Novo" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração" Margin="100,7,0,7" Grid.ColumnSpan="2" Width="76" FontWeight="Bold"/>
-                <Button Name="btImprimit" Content="Imprimit" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.Row="4" Click="Imprimir" TabIndex="4" ToolTip="Clique para cadastrar uma nova atração" Margin="190,7,0,7" Grid.ColumnSpan="2" Width="76" FontWeight="Bold"/>
             </Grid>
         </StackPanel>
     </ScrollViewer>

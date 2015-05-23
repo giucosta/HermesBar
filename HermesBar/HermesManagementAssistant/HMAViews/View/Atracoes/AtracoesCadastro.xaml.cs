@@ -146,7 +146,7 @@ namespace HMAViews.View.Atracoes
             _atracao = atracao;
             tbAtracao.Text = atracao.Nome;
             tbTempo.Text = atracao.Tempo_Show;
-            tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString();
+            tbValor.Text = atracao.Ultimo_Valor_Cobrado.ToString("C");
             cbEstilo.SelectedValue = atracao.Estilo.Id;
 
             var contato = ContatoBLL.RecuperaContatoId(AtracoesBLL.RecuperaIdContato(atracao));
@@ -189,6 +189,10 @@ namespace HMAViews.View.Atracoes
         private void CelularMasked(Object sender, KeyEventArgs e)
         {
             Mascaras.PhoneMasked(tbCelular, e);
+        }
+        private void AplicarValorMonetario(object sender, RoutedEventArgs e)
+        {
+            tbValor.Text = "R$ " + tbValor.Text;
         }
     }
 }

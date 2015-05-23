@@ -154,5 +154,11 @@ namespace HMAViews.View.Estabelecimento
 
             return configEstabelecimento;
         }
+
+        private List<string> VerificaCamposObrigatorios()
+        {
+            var camposObrigatorios = new List<string>();
+            return camposObrigatorios;
+        }
     }
 }

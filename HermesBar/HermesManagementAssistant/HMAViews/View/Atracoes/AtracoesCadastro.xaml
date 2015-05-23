@@ -42,7 +42,7 @@
                 <TextBox Name="tbAtracao" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Insira o nome da atração" TabIndex="1" Grid.Column="2" Grid.Row="1" Width="350"/>
                 <ComboBox Name="cbEstilo" HorizontalAlignment="Left" VerticalAlignment="Center" SelectedValuePath="Id" DisplayMemberPath="Estilo" ToolTip="Selecione o estilo da atração" TabIndex="2" Grid.Column="2" Grid.Row="2" Width="300"/>
                 <Button Name="tbNovoEstilo" Content="+" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="Bold" FontSize="16" ToolTip="Cadastro rápido de estilos" Grid.Column="2" Grid.Row="2" Height="25"/>
-                <xctk:CalculatorUpDown Value="0.00" Name="tbValor" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Insira o valor do show" TabIndex="3" Grid.Column="2" Grid.Row="3" Width="350"/>
+                <xctk:CalculatorUpDown Value="0.00" Name="tbValor" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Insira o valor do show" TabIndex="3" Grid.Column="2" Grid.Row="3" Width="350" LostFocus="AplicarValorMonetario"/>
                 <TextBox Name="tbTempo" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Insira o tempo do show" TabIndex="4" Grid.Column="2" Grid.Row="4" Width="350"/>
                 <TextBox Name="tbNome" HorizontalAlignment="Left" VerticalAlignment="Center" ToolTip="Insira o nome do contato da atração" TabIndex="5" Grid.Column="2" Grid.Row="5" Width="350"/>
                 <TextBox Name="tbTelefone" HorizontalAlignment="Left" VerticalAlignment="Center" KeyDown="PhoneMasked" ToolTip="Insira o telefone do contato" TabIndex="6" Grid.Column="2" Grid.Row="6" Width="350"/>
