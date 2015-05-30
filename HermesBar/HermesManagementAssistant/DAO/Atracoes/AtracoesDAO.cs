@@ -60,9 +60,10 @@ namespace DAO.Atracoes
                 AccessObject<AtracoesModel> AO = new AccessObject<AtracoesModel>();
                 AO.CreateSelectAll();
                 AO.GetCommand();
-                AO.InsertParameter(ConstantesDAO.WHERE, "Nome", ConstantesDAO.LIKE, atracoes.Nome);
+                AO.InsertComparisionAttribute();
+                AO.InsertParameter(ConstantesDAO.AND, "Nome", ConstantesDAO.LIKE, atracoes.Nome);
                 if(atracoes.Estilo.Id != 0)
-                    AO.InsertParameter(ConstantesDAO.AND, "Id_EstiloAtracoes", ConstantesDAO.LIKE, atracoes.Estilo.Id);
+                    AO.InsertParameter(ConstantesDAO.AND, "Id_EstiloAtracoes", ConstantesDAO.EQUAL, atracoes.Estilo.Id);
 
                 return AO.GetDataTable();
             }
