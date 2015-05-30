@@ -101,10 +101,16 @@ namespace HMAViews.View.Estabelecimento
         }
         private void Gravar(object sender, RoutedEventArgs e)
         {
-            if (EstabelecimentoBLL.Salvar(CarregaModelEstabelecimento()))
-                Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ESTABELECIMENTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+            var camposObrigatorios = VerificaCamposObrigatorios();
+            if (camposObrigatorios.Count == 0)
+            {
+                if (EstabelecimentoBLL.Salvar(CarregaModelEstabelecimento()))
+                    Mensagens.GeraMensagens("Salvo com sucesso", MENSAGEM.ESTABELECIMENTO_CADASTRO_SUCESSO, null, TIPOS_MENSAGENS.SUCESSO);
+                else
+                    Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ESTABELECIMENTO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+            }
             else
-                Mensagens.GeraMensagens("Erro ao salvar", MENSAGEM.ESTABELECIMENTO_CADASTRO_ERRO, null, TIPOS_MENSAGENS.ERRO);
+                Mensagens.GeraMensagens("Campos Obrigatórios", MENSAGEM.CAMPOS_OBRIGATORIOS, camposObrigatorios, TIPOS_MENSAGENS.ALERTA);
         }
         private EstabelecimentoModel CarregaModelEstabelecimento()
         {
@@ -158,6 +164,27 @@ namespace HMAViews.View.Estabelecimento
         private List<string> VerificaCamposObrigatorios()
         {
             var camposObrigatorios = new List<string>();
+            if (string.IsNullOrEmpty(tbRazaoSocial.Text))
+                camposObrigatorios.Add("RAZÃO SOCIAL");
+            if (string.IsNullOrEmpty(tbNomeFantasia.Text))
+                camposObrigatorios.Add("NOME FANTASIA");
+            if (string.IsNullOrEmpty(tbCnpj.Text))
+                camposObrigatorios.Add("CNPJ");
+            if (string.IsNullOrEmpty(tbInscEstadual.Text))
+                camposObrigatorios.Add("INSCRIÇÃO ESTADUAL");
+            if (string.IsNullOrEmpty(tbCep.Text))
+                camposObrigatorios.Add("CEP");
+            if (string.IsNullOrEmpty(tbNome.Text))
+                camposObrigatorios.Add("NOME");
+            if (string.IsNullOrEmpty(tbTelefone.Text))
+                camposObrigatorios.Add("TELEFONE");
+            if (string.IsNullOrEmpty(tbCelular.Text))
+                camposObrigatorios.Add("CELULAR");
+            if (string.IsNullOrEmpty(tbEmail.Text))
+                camposObrigatorios.Add("EMAIL");
+            if (string.IsNullOrEmpty(tbQuantMesa.Text))
+                camposObrigatorios.Add("QUANTIDADE DE MESAS");
+
             return camposObrigatorios;
         }
     }
