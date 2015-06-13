@@ -128,6 +128,9 @@ namespace BLL.Produtos
         {
             try
             {
+                AccessObject<ProdutoModel> AO = new AccessObject<ProdutoModel>();
+                AO.GetTransaction();
+                
                 return ProdutoDAO.Excluir(produto);
             }
             catch (Exception e)
