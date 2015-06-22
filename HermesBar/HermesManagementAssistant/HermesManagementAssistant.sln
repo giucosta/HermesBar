@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfToolkitChart", "WpfToolk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMAPedidos", "HMAPedidos\HMAPedidos.csproj", "{9A21A2AA-2311-471C-A5E5-1E742D4CD1E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMANet", "HMANet\HMANet.csproj", "{FA154824-2A83-4950-A019-219C1BCBD32E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,16 @@ Global
 		{9A21A2AA-2311-471C-A5E5-1E742D4CD1E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9A21A2AA-2311-471C-A5E5-1E742D4CD1E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9A21A2AA-2311-471C-A5E5-1E742D4CD1E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FA154824-2A83-4950-A019-219C1BCBD32E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
