@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace HermesBarWEB.Controllers
 {
@@ -22,6 +23,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult Login()
         {
+            ViewBag.UsuarioSenhaIncorreto = null;
             return View();
         }
         public ActionResult EfetuarLogin(UsuarioModel login)
@@ -29,10 +31,12 @@ namespace HermesBarWEB.Controllers
             var result = LoginBLL.EfetuarLogin(login);
             if (result != null)
             {
+                FormsAuthentication.SetAuthCookie(result.PerfilSigla, false);
                 Session["USR"] = result;
                 return RedirectToAction("Index", "Home");
             }
-            return View("Login");
+            ViewBag.UsuarioSenhaIncorreto = "Usuário e/ou senha incorretos";
+            return View("Login", new UsuarioModel());
         }
 
         private void GetUser()

@@ -133,6 +133,7 @@
     </Compile>
     <Compile Include="Models\User\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UTIL\UserValidate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

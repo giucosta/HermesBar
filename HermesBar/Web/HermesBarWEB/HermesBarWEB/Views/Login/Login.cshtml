@@ -29,6 +29,12 @@
         {
             <div class="login-wrap">
                 <p class="login-img"><i class="icon_lock_alt"></i></p>
+                @if (ViewBag.UsuarioSenhaIncorreto != null)
+                {
+                    <div class="login-wrap">
+                        <b>@ViewBag.UsuarioSenhaIncorreto</b>
+                    </div>
+                }
                 <div class="input-group">
                     <span class="input-group-addon"><i class="icon_profile"></i></span>
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "E-mail", @required="required"})

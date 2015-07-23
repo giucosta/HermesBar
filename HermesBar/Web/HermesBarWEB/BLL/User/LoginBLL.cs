@@ -27,7 +27,10 @@ namespace BLL.User
         {
             try
             {
-                return ConvertEntityToModel(LoginDAO.Login(ConvertModelToEntity(usuario)).DataTableToList<HMA_USR>().FirstOrDefault());
+                var result = LoginDAO.Login(ConvertModelToEntity(usuario)).DataTableToList<HMA_USR>().FirstOrDefault();
+                if (result != null)
+                    return ConvertEntityToModel(result);
+                return null;
             }
             catch (Exception ex)
             {
