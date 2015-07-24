@@ -1,0 +1,32 @@
+﻿@model MODEL.Contact.ContatoModel
+<section class="panel">
+    <header class="panel-heading">
+        Contato
+    </header>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Insira o nome", @required = "required" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Telefone, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control round-input", @placeholder = "Insira o telefone" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Celular, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Celular, new { @class = "form-control round-input", @placeholder = "Insira o celular" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 control-label" })
+            <div class="col-sm-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Insira o e-mail" })
+            </div>
+        </div>
+    </div>
+</section>

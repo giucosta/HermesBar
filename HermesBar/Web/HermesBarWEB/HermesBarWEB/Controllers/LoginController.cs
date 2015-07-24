@@ -39,10 +39,12 @@ namespace HermesBarWEB.Controllers
             return View("Login", new UsuarioModel());
         }
 
+        #region Private Methods
         private void GetUser()
         {
             var user = (UsuarioModel)Session["USR"];
             ViewBag.User = user.Nome;
         }
+        #endregion
     }
 }

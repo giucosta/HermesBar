@@ -1,0 +1,74 @@
+﻿@model MODEL.Supplier.FornecedorModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Fornecedores</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i>Cadastros</li>
+                    <li><i class="fa fa-file-text-o"></i>Fornecedor</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("Cadastrar", "Fornecedor", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Fornecedores
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RazaoSocial, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.RazaoSocial, new { @class = "form-control", @placeholder = "Insira a Razão Social", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.NomeFantasia, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.NomeFantasia, new { @class = "form-control", @placeholder = "Insira o Nome Fantasia", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Cnpj, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.Cnpj, new { @class = "form-control", @placeholder = "Insira o CNPJ", @required = "required" })
+                                        <span class="help-block">Deverá inserir um CNPJ válido</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InscricaoEstadual, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.InscricaoEstadual, new { @class = "form-control round-input", @placeholder = "Insira a Inscrição Estadual" })
+                                        <span class="help-block">Deixe o campo em branco caso ISENTO</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InscricaoMunicipal, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.InscricaoMunicipal, new { @class = "form-control round-input", @placeholder = "Insira a Inscrição Municipal" })
+                                        <span class="help-block">Deixe o campo em branco caso ISENTO</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @Html.Partial("~/Views/Partials/EnderecoPartial.cshtml")
+                        @Html.Partial("~/Views/Partials/ContatoPartial.cshtml")
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

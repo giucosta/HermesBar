@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
@@ -194,6 +195,7 @@
     <Content Include="img\user.jpg" />
     <Content Include="img\user22.png" />
     <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-wysiwyg-custom.js" />
     <Content Include="Scripts\bootstrap-wysiwyg.js" />
@@ -215,6 +217,7 @@
     <Content Include="Scripts\ga.js" />
     <Content Include="Scripts\gdp-data.js" />
     <Content Include="Scripts\gritter.js" />
+    <Content Include="Scripts\HMA.js" />
     <Content Include="Scripts\html5shiv.js" />
     <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
@@ -303,6 +306,18 @@
       <Project>{17cd4e83-0675-457e-b458-e8d8f648eed8}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fornecedor\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\EnderecoPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\ContatoPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partials\SalvarVoltarPartial.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

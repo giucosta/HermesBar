@@ -7,12 +7,12 @@ function showmessage(){
 		time: ''
 	});
 }
+
 $(function () {
 
     setTimeout(showmessage,2000);
     $( "#inline-datepicker" ).datepicker();
-    /* Bar Chart starts */
-
+    
     var d1 = [];
     for (var i = 0; i <= 20; i += 1)
         d1.push([i, parseInt(Math.random() * 30)]);
@@ -59,11 +59,8 @@ $(function () {
         plotWithOptions();
     });
 
-    /* Bar chart ends */
-
 });
 
-/* Curve chart starts */
 
 $(function () {
     var sin = [], cos = [];
@@ -206,7 +203,5 @@ $(function () {
       console.log("Callback has been called!");
       $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
      });
-     $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-
-    
+     $('#reportrange span').html(moment().subtract('days', 29).format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY')); 
 });

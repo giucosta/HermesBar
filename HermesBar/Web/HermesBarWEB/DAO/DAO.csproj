@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commom\EnderecoDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
   </ItemGroup>
   <ItemGroup>
