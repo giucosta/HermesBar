@@ -39,6 +39,13 @@ namespace HermesBarWEB.Controllers
             return View("Login", new UsuarioModel());
         }
 
+        public ActionResult EfetuarLogoff()
+        {
+            FormsAuthentication.SignOut();
+            Session["USR"] = null;
+            return View("Login");
+        }
+
         #region Private Methods
         private void GetUser()
         {

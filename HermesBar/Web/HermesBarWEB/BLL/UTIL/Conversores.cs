@@ -10,6 +10,12 @@ namespace BLL.UTIL
 {
     public static class Conversores
     {
+        /// <summary>
+        /// Performs the conversion of a DataTable object for a list
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="DataTable"></param>
+        /// <returns>List<T></returns>
         public static List<T> DataTableToList<T>(this DataTable table) where T : class, new()
         {
             try

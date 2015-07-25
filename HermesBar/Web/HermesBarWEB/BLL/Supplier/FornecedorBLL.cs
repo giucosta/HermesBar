@@ -1,5 +1,6 @@
 ﻿using BLL.Commom;
 using DAO.Supplier;
+using ENTITY.Commom;
 using ENTITY.Supplier;
 using MODEL.Supplier;
 using MODEL.User;
@@ -8,11 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.UTIL;
 
 namespace BLL.Supplier
 {
     public class FornecedorBLL
     {
+        #region Singleton
         private FornecedorDAO _fornecedorDAO = null;
         private FornecedorDAO FornecedorDAO
         {
@@ -43,6 +46,8 @@ namespace BLL.Supplier
                 return _contatoBLL;
             }
         }
+        #endregion
+
         public bool Insert(FornecedorModel fornecedor, UsuarioModel usuario)
         {
             try
@@ -50,14 +55,47 @@ namespace BLL.Supplier
                 var fornecedorEntity = ConvertModelToEntity(fornecedor, usuario);
                 var enderecoEntity = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
                 var contatoEntity = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
-                var result =  Convert.ToInt32(FornecedorDAO.Insert(fornecedorEntity, enderecoEntity, contatoEntity).Rows[0]["SUCCESS"]);
-
-                return result != 0;
+                return Convert.ToInt32(FornecedorDAO.Insert(fornecedorEntity, enderecoEntity, contatoEntity).Rows[0]["SUCCESS"]) != 0;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro ao cadastrar fornecedor " +ex.Message);
             }
+        }
+        public List<FornecedorModel> Get(FornecedorModel model, UsuarioModel usuario)
+        {
+            try
+            {
+                var result = FornecedorDAO.Get(ConvertModelToEntity(model, usuario));
+                var supplier = result.Tables[0].DataTableToList<HMA_FOR>();
+                var address = result.Tables[1].DataTableToList<HMA_END>();
+                var contact = result.Tables[2].DataTableToList<HMA_CON>();
+
+                var list = new List<FornecedorModel>();
+                foreach (var item in supplier)
+                {
+                    foreach (var a in address)
+                    {
+                        foreach (var c in contact)
+                        {
+                            list.Add(ConvertEntityToModel(item, a, c));
+                        }
+                    }
+                }
+                
+                return list;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Update(FornecedorModel fornecedor, UsuarioModel usuario)
+        {
+            var supplier = ConvertModelToEntity(fornecedor, usuario);
+            var address = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
+            var contact = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
+            return Convert.ToInt32(FornecedorDAO.Update(supplier, address, contact).Rows[0]["SUCCESS"]) != 0;
         }
 
         #region Private Methods
@@ -75,6 +113,29 @@ namespace BLL.Supplier
                 entity.FAN = model.NomeFantasia;
                 entity.RAZ = model.RazaoSocial;
                 return entity;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private FornecedorModel ConvertEntityToModel(HMA_FOR forn, HMA_END end, HMA_CON con)
+        {
+            try
+            {
+                var model = new FornecedorModel();
+                model.Cnpj = forn.CNPJ;
+                model.Id = forn._ID;
+                model.InscricaoEstadual = forn.INSEST;
+                model.InscricaoMunicipal = forn.INSMUN;
+                model.NomeFantasia = forn.FAN;
+                model.RazaoSocial = forn.RAZ;
+                model.StatusSelected = forn._ATV.ToString();
+
+                model.Endereco = EnderecoBLL.ConvertEntityToModel(end);
+                model.Contato = ContatoBLL.ConvertEntityToModel(con);
+
+                return model;
             }
             catch (Exception ex)
             {

@@ -11,8 +11,8 @@
                 <h3 class="page-header"><i class="fa fa fa-bars"></i>Fornecedores</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
-                    <li><i class="icon_document_alt"></i>Cadastros</li>
-                    <li><i class="fa fa-file-text-o"></i>Fornecedor</li>
+                    <li><i class="icon_document_alt"></i><a href="/Fornecedor/Get">Fornecedor</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Fornecedor/Cadastrar">Cadastro</a></li>
                 </ol>
             </div>
         </div>
@@ -21,8 +21,9 @@
         <section>
             <div class="row">
                 <div class="col-md-12">
-                    @using (Html.BeginForm("Cadastrar", "Fornecedor", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("CadastrarFornecedor", "Fornecedor", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
+                        @Html.HiddenFor(m => m.Id)
                         <section class="panel">
                             <header class="panel-heading">
                                 Cadastro de Fornecedores
@@ -63,8 +64,8 @@
                                 </div>
                             </div>
                         </section>
-                        @Html.Partial("~/Views/Partials/EnderecoPartial.cshtml")
-                        @Html.Partial("~/Views/Partials/ContatoPartial.cshtml")
+                        @Html.Partial("~/Views/Partials/EnderecoPartial.cshtml",Model.Endereco)
+                        @Html.Partial("~/Views/Partials/ContatoPartial.cshtml",Model.Contato)
                         @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
                     }
                 </div>

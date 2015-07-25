@@ -1,4 +1,7 @@
-﻿using HermesBarWEB.UTIL;
+﻿using BLL.User;
+using BLL.UTIL;
+using HermesBarWEB.UTIL;
+using MODEL.Commom;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -10,16 +13,17 @@ namespace HermesBarWEB.Controllers
 {
     public class HomeController : Controller
     {
+        private UsuarioModel user;
+        public HomeController()
+        { 
+            GetSession.GetUserSession(ref user);
+            ViewBag.User = user.Nome;
+            ViewBag.Email = GetEmail.Get();
+        }
         [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador})]
         public ActionResult Index()
         {
-            GetUser();
             return View();
-        }
-        private void GetUser()
-        {
-            var user = (UsuarioModel)Session["USR"];
-            ViewBag.User = user.Nome;
         }
     }
 }

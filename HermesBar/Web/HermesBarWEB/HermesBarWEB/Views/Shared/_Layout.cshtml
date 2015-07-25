@@ -1,19 +1,18 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var Model = (MODEL.Commom.LayoutModel)ViewBag.Email;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="~/img/favicon.png">
     <title>@ViewBag.Title</title>
-    <!-- Bootstrap CSS -->
+
     <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-    <!-- bootstrap theme -->
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet">
-    <!--external css-->
-    <!-- font icon -->
     <link href="~/Content/elegant-icons-style.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <!-- Custom styles -->
     <link href="~/Content/style.css" rel="stylesheet">
     <link href="~/Content/style-responsive.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
@@ -102,52 +101,41 @@
                     <li id="mail_notificatoin_bar" class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-envelope-l"></i>
-                            <span class="badge bg-important">3</span>
+                            <span class="badge bg-important">@Model.EmailCount</span>
                         </a>
                         <ul class="dropdown-menu extended inbox">
                             <div class="notify-arrow notify-arrow-blue"></div>
                             <li>
-                                <p class="blue">Você tem 3 novos e-mails</p>
+                                <p class="blue">Você tem @Model.EmailCount novos e-mails</p>
                             </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"></span>
-                                    <span class="subject">
-                                        <span class="from">Giuliano Costa</span>
-                                        <span class="time">1 min</span>
-                                    </span>
-                                    <span>
-                                        Segue anexo o novo layout...
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"></span>
-                                    <span class="subject">
-                                        <span class="from">Coca-cola S/A</span>
-                                        <span class="time">5 mins</span>
-                                    </span>
-                                    <span>
-                                        Segue nota fiscal em anexo
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="photo"></span>
-                                    <span class="subject">
-                                        <span class="from">Facebook.com</span>
-                                        <span class="time">2 hrs</span>
-                                    </span>
-                                    <span>
-                                        Sua publicação alcançou 1000 likes.
-                                    </span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">Veja todos os e-mails</a>
-                            </li>
+                            @foreach (var item in Model.List)
+                            {
+                                <li>
+                                    <a href="#">
+                                        <span class="photo"></span>
+                                        <span class="subject">
+                                            <span class="from">@item.From</span>
+                                            <span class="time">1 min</span>
+                                        </span>
+                                        <span>
+                                            @item.Subject
+                                        </span>
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.EmailCount == 0)
+                            {
+                                <li>
+                                    <a href="#">Você não possui e-mails no momento</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="#">Veja todos os e-mails</a>
+                                </li>
+                            }
+                            
                         </ul>
                     </li>
                     <li id="alert_notificatoin_bar" class="dropdown">
@@ -203,7 +191,7 @@
                                 <a href="#"><i class="icon_mail_alt"></i> Meu E-mail</a>
                             </li>
                             <li>
-                                <a href="/"><i class="icon_key_alt"></i> Sair</a>
+                                <a href="/Login/EfetuarLogoff"><i class="icon_key_alt"></i> Sair</a>
                             </li>
                             <li>
                                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentação</a>
@@ -229,8 +217,7 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li>@Html.ActionLink("Fornecedores","Index","Fornecedor")</li>
-                            @*<li><a class="" href="form_component.html">Fornecedores</a></li>*@
+                            <li>@Html.ActionLink("Fornecedores","Get","Fornecedor")</li>
                             <li><a class="" href="form_validation.html">Produtos</a></li>
                             <li><a class="" href="form_validation.html">Atraçoes</a></li>
                             <li><a class="" href="form_validation.html">Funcionários</a></li>
@@ -287,7 +274,7 @@
     <script src="~/Scripts/jquery.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.scrollTo.min.js"></script>
-    <script src="~/Scripts/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
+    <script src="~/Scripts/jquery.nicescroll.js" type="text/javascript"></script>
     <script src="~/Scripts/scripts.js"></script>
     <script src="~/Scripts/HMA.js"></script>
 </body>
