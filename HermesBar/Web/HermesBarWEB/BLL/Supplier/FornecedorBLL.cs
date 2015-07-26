@@ -52,13 +52,12 @@ namespace BLL.Supplier
         {
             try
             {
+                ProcessDataForInsert(ref fornecedor);
+                fornecedor.StatusSelected = "1";
                 var fornecedorEntity = ConvertModelToEntity(fornecedor, usuario);
-                if (string.IsNullOrWhiteSpace(fornecedorEntity.INSMUN))
-                    fornecedorEntity.INSMUN = "ISENTO";
-                if (string.IsNullOrWhiteSpace(fornecedorEntity.INSEST))
-                    fornecedorEntity.INSEST = "ISENTO";
                 var enderecoEntity = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
                 var contatoEntity = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
+
                 return Convert.ToInt32(FornecedorDAO.Insert(fornecedorEntity, enderecoEntity, contatoEntity).Rows[0]["SUCCESS"]) != 0;
             }
             catch (Exception ex)
@@ -76,16 +75,9 @@ namespace BLL.Supplier
                 var contact = result.Tables[2].DataTableToList<HMA_CON>();
 
                 var list = new List<FornecedorModel>();
-                foreach (var item in supplier)
-                {
-                    foreach (var a in address)
-                    {
-                        foreach (var c in contact)
-                        {
-                            list.Add(ConvertEntityToModel(item, a, c));
-                        }
-                    }
-                }
+
+                for (int i = 0; i < supplier.Count; i++)
+                    list.Add(ConvertEntityToModel(supplier[i], address[i], contact[i]));
                 
                 return list;
             }
@@ -96,6 +88,8 @@ namespace BLL.Supplier
         }
         public bool Update(FornecedorModel fornecedor, UsuarioModel usuario)
         {
+            ProcessDataForInsert(ref fornecedor);
+
             var supplier = ConvertModelToEntity(fornecedor, usuario);
             var address = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
             var contact = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
@@ -103,6 +97,25 @@ namespace BLL.Supplier
         }
 
         #region Private Methods
+        private void ProcessDataForInsert(ref FornecedorModel forn)
+        {
+            try
+            {
+                forn.Cnpj = forn.Cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                forn.Contato.Telefone = forn.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                forn.Contato.Celular = forn.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                forn.Endereco.Cep = forn.Endereco.Cep.Replace("-", "");
+
+                if (string.IsNullOrWhiteSpace(forn.InscricaoEstadual))
+                    forn.InscricaoEstadual = "ISENTO";
+                if (string.IsNullOrWhiteSpace(forn.InscricaoMunicipal))
+                    forn.InscricaoMunicipal = "ISENTO";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         private HMA_FOR ConvertModelToEntity(FornecedorModel model, UsuarioModel usuario)
         {
             try

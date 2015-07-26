@@ -58,8 +58,10 @@ namespace HermesBarWEB.Controllers
                 if (fornecedor.Id != 0)
                     return EditarFornecedor(fornecedor);
 
-                FornecedorBLL.Insert(fornecedor, user);
-                return View("Cadastrar");
+                if (FornecedorBLL.Insert(fornecedor, user))
+                    return View("Get", FornecedorBLL.Get(new FornecedorModel(), user));
+
+                return View("Cadastrar", fornecedor);
             }
             catch (Exception)
             {
