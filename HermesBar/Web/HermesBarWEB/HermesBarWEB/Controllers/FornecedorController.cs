@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using HermesBarWEB.UTIL;
 using BLL.UTIL;
+using BLL.Commom;
 
 namespace HermesBarWEB.Controllers
 {
@@ -24,6 +25,7 @@ namespace HermesBarWEB.Controllers
             //ViewBag.Email = GetEmail.Get();
         }
 
+        #region Singleton
         private FornecedorBLL _fornecedorBLL = null;
         private FornecedorBLL FornecedorBLL
         {
@@ -34,7 +36,17 @@ namespace HermesBarWEB.Controllers
                 return _fornecedorBLL;
             }
         }
-
+        private EnderecoBLL _enderecoBLL = null;
+        private EnderecoBLL EnderecoBLL
+        {
+            get
+            {
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
+            }
+        }
+        #endregion
         public ActionResult Get()
         {
             return View(FornecedorBLL.Get(new FornecedorModel(), user));
@@ -44,8 +56,9 @@ namespace HermesBarWEB.Controllers
             var model = new FornecedorModel()
             {
                 Contato = new ContatoModel(),
-                Endereco = new EnderecoModel()
+                Endereco = EnderecoBLL.GetStates(new EnderecoModel())
             };
+            
             return View(model);
         }
         public ActionResult CadastrarFornecedor(FornecedorModel fornecedor, EnderecoModel endereco, ContatoModel contato)
@@ -68,7 +81,6 @@ namespace HermesBarWEB.Controllers
                 return View("~/Views/Shared/Error.cshtml");
             }
         }
-
         public ActionResult EditarFornecedor(FornecedorModel fornecedor)
         {
             try
@@ -87,8 +99,10 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var model = new FornecedorModel() { Id = id };
-                return View("Cadastrar", FornecedorBLL.Get(model, user).FirstOrDefault());
+                var result = FornecedorBLL.Get(new FornecedorModel() { Id = id }, user).FirstOrDefault();
+                result.Endereco = EnderecoBLL.GetStates(result.Endereco);
+
+                return View("Cadastrar", result);
             }
             catch (Exception)
             {

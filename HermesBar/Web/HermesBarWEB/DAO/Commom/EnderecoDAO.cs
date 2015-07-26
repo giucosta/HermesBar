@@ -10,12 +10,13 @@ namespace DAO.Commom
 {
     public class EnderecoDAO : Connection.Connection
     {
-        public DataTable Insert(HMA_END end)
+        public DataTable GetStates()
         {
             try
             {
                 OpenConnection();
                 var data = new DataTable();
+                CreateDataAdapter("[dbo].[SP_HMA_UF_GET]");
 
                 return GetResult(data);
             }

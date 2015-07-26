@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MODEL.Address
 {
@@ -24,5 +25,7 @@ namespace MODEL.Address
         public string Cidade { get; set; }
         [DisplayName("UF")]
         public int Uf { get; set; }
+        public string UfSelected { get; set; }
+        public List<SelectListItem> UfList { get; set; }
     }
 }
