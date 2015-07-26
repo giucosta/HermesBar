@@ -69,7 +69,6 @@ $(function () {
         cos.push([i, Math.cos(i)]);
     }
 
-    // First Chart
     var chart1 = function(){
       $("#chart1").html("");
       var tax_data = [
@@ -93,12 +92,9 @@ $(function () {
         labels: ['Licensed', 'Off the road']
       });
     }
-    // Init First Chart
     chart1();
-    // Resize First Chart on page resize
     $(window).resize(debounce(chart1,200));
     
-    // Second Chart
     var graph2 = function(){
       $("#graph2").html("");
       Morris.Donut({
@@ -111,15 +107,11 @@ $(function () {
         ],
         hideHover: 'auto',
         colors: ["#C5CED6", "#59646E","#384B5E", "#999"]
-        //colors: ["#4BB5C1", "#96CA2D", "#7FC6BC","#EDF7F2"]
       });
     }
-    // Init Second Chart
     graph2();
-    // Resize Second Chart on page resize
     $(window).resize(debounce(graph2,200));
     
-    // Third Chart
     var chart1 = function(){
       $("#bar-chart2").html("");
       Morris.Bar({
@@ -141,9 +133,7 @@ $(function () {
       });
     
     }
-    // Init Third Chart
     chart1();
-    // Resize Third Chart on page resize
     $(window).resize(debounce(chart1,200));
     
     $("#pie-chart4").sparkline([55, 100, 120, 110], {

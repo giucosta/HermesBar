@@ -18,12 +18,16 @@ namespace HermesBarWEB.Controllers
         { 
             GetSession.GetUserSession(ref user);
             ViewBag.User = user.Nome;
-            ViewBag.Email = GetEmail.Get();
         }
         [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador})]
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult GetEmails()
+        {
+            return Json(GetEmail.Get(), JsonRequestBehavior.AllowGet);
         }
     }
 }

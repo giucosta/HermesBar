@@ -53,6 +53,10 @@ namespace BLL.Supplier
             try
             {
                 var fornecedorEntity = ConvertModelToEntity(fornecedor, usuario);
+                if (string.IsNullOrWhiteSpace(fornecedorEntity.INSMUN))
+                    fornecedorEntity.INSMUN = "ISENTO";
+                if (string.IsNullOrWhiteSpace(fornecedorEntity.INSEST))
+                    fornecedorEntity.INSEST = "ISENTO";
                 var enderecoEntity = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
                 var contatoEntity = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
                 return Convert.ToInt32(FornecedorDAO.Insert(fornecedorEntity, enderecoEntity, contatoEntity).Rows[0]["SUCCESS"]) != 0;

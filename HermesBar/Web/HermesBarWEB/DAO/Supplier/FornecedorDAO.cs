@@ -18,7 +18,7 @@ namespace DAO.Supplier
             {
                 OpenConnection();
                 var data = new DataTable();
-                CreateDataAdapter("[dbo].[HMA_FOR_INS]");
+                CreateDataAdapter("[dbo].[SP_HMA_FOR_INS]");
                 InserParameter("ATV", SqlDbType.Int, forn._ATV);
                 InserParameter("USR", SqlDbType.Int, forn._USR);
                 InserParameter("RAZ", SqlDbType.VarChar, forn.RAZ);

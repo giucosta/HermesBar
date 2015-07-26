@@ -21,7 +21,7 @@ namespace HermesBarWEB.Controllers
         {
             GetSession.GetUserSession(ref user);
             ViewBag.User = user.Nome;
-            ViewBag.Email = GetEmail.Get();
+            //ViewBag.Email = GetEmail.Get();
         }
 
         private FornecedorBLL _fornecedorBLL = null;
