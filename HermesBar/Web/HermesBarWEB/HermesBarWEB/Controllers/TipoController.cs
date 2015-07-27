@@ -29,6 +29,12 @@ namespace HermesBarWEB.Controllers
                 return View(listModel);
             return View(new List<TipoModel>());
         }
+        public ActionResult GetId(int id)
+        {
+            var result = TypeBLL.GetId(new TipoModel() { Id = id }, GetUser());
+            CarregaCampos(ref result);
+            return View("Cadastrar", result);
+        }
         public ActionResult Cadastrar()
         {
             var model = new TipoModel();
@@ -39,6 +45,9 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
+                if (tipo.Id != 0)
+                    return Editar(tipo);
+
                 if (TypeBLL.Insert(tipo, GetUser()))
                     return View("Get", TypeBLL.Get());
                 return View("Cadastrar", tipo);
@@ -49,11 +58,30 @@ namespace HermesBarWEB.Controllers
                 throw ex;
             }
         }
+        public ActionResult Editar(TipoModel tipo)
+        {
+            try
+            {
+                if (TypeBLL.Update(tipo, GetUser()))
+                    return View("Get", TypeBLL.Get());
+                return View("Cadastrar", tipo);
+            }
+            catch (Exception ex)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+        }
         private void CarregaCampos(ref TipoModel tipo)
         {
             tipo.Status = new List<SelectListItem>();
-            tipo.Status.Add(new SelectListItem() { Text = Enumerators.Status.Ativo.ToString(), Value = ((int)Enumerators.Status.Ativo).ToString(), Selected = true });
-            tipo.Status.Add(new SelectListItem() { Text = Enumerators.Status.Inativo.ToString(), Value = ((int)Enumerators.Status.Inativo).ToString() });
+            foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
+            {
+                if (tipo.StatusSelected == ((int)item).ToString())
+                    tipo.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString(), Selected = true });
+                else
+                    tipo.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
+            }
+
         }
         private UsuarioModel GetUser()
         {

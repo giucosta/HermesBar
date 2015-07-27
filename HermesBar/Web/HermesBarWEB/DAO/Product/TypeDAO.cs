@@ -29,6 +29,26 @@ namespace DAO.Product
                 CloseConnection();
             }
         }
+        public DataTable GetId(HMA_TIP tipo)
+        {
+            try
+            {
+                OpenConnection();
+                var data = new DataTable();
+                CreateDataAdapter("[dbo].[SP_HMA_TIP_GET_ID]");
+                InserParameter("ID", SqlDbType.Int, tipo._ID);
+
+                return GetResult(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
         public DataTable Insert(HMA_TIP tipo)
         {
             try
@@ -40,6 +60,30 @@ namespace DAO.Product
                 InserParameter("ATV", SqlDbType.Int, tipo._ATV);
                 InserParameter("NOM", SqlDbType.VarChar, tipo.NOM);
                 InserParameter("DSC", SqlDbType.VarChar, tipo.DSC);
+
+                return GetResult(data);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Update(HMA_TIP tipo)
+        {
+            try
+            {
+                OpenConnection();
+                var data = new DataTable();
+                CreateDataAdapter("[dbo].[SP_HMA_TIP_UPD]");
+                InserParameter("USR", SqlDbType.Int, tipo._USR);
+                InserParameter("ATV", SqlDbType.Int, tipo._ATV);
+                InserParameter("NOM", SqlDbType.VarChar, tipo.NOM);
+                InserParameter("DSC", SqlDbType.VarChar, tipo.DSC);
+                InserParameter("ID", SqlDbType.Int, tipo._ID);
 
                 return GetResult(data);
             }

@@ -44,11 +44,33 @@ namespace BLL.Product
                 throw ex;
             }
         }
+        public TipoModel GetId(TipoModel tipo, UsuarioModel user)
+        {
+            try
+            {
+                return ConvertEntityToModel(TypeDAO.GetId(ConvertModelToEntity(tipo, user)).DataTableToList<HMA_TIP>().FirstOrDefault());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public bool Insert(TipoModel tipo, UsuarioModel user)
         {
             try
             {
                 return Convert.ToInt32(TypeDAO.Insert(ConvertModelToEntity(tipo, user)).Rows[0]["SUCCESS"]) == 1;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public bool Update(TipoModel tipo, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(TypeDAO.Update(ConvertModelToEntity(tipo, user)).Rows[0]["SUCCESS"]) == 1;
             }
             catch (Exception ex)
             {
