@@ -25,6 +25,7 @@ function VerifyEmails() {
             if (data != null) {
                 $('#Quantidade-Email').html(data.EmailCount);
                 $('#Quantidade-Email-Aviso').html('Você possui ' + data.EmailCount + ' novo e-mail');
+                GenerateEmailInfo(data);
             }
         },
         statusCode: {
@@ -35,6 +36,14 @@ function VerifyEmails() {
             console.log(xhr.responseText);
         }
     });
+}
+function GenerateEmailInfo(data) {
+    for (var i = 0; i < data.List.length; i++) {
+        if (data.List[i].Subject.length > 40) {
+            data.List[i].Subject = data.List[i].Subject.substr(0, 40);
+        }
+        $('#Infos-Email').append('<a href="#">' + '<span class="photo"></span>' + '<span class="subject"><span class="from" id="From">' + data.List[i].From + '</span><span class="time">1 min</span></span><span id="Subject">' + data.List[i].Subject +'</span></a>');
+    }
 }
 /****************************END LAYOUT METHODS**************************************/
 
