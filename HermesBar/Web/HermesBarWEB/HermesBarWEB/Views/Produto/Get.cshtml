@@ -1,25 +1,34 @@
-﻿@model List<MODEL.Supplier.FornecedorModel>
+﻿@model List<MODEL.Product.ProdutoModel>
 @{
     ViewBag.Title = "Hermes Bar WEB";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string urlEdit = "/Fornecedor/GetId?Id=";
+    string urlEdit = "/Produto/GetId?Id=";
 }
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="page-header"><i class="fa fa fa-bars"></i>Fornecedores</h3>
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Produtos</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
-                    <li><i class="icon_document_alt"></i><a href="/Fornecedor/Get">Fornecedor</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Produto/Get">Produto</a></li>
                 </ol>
             </div>
         </div>
-        @Html.ActionLink("Novo", "Cadastrar", "Fornecedor", new { @class = "btn btn-primary tooltips", @data_toggle = "tooltip", @data_original_title = "Clique para cadastrar um novo fornecedor" })
+        @*@Html.ActionLink("Novo", "Cadastrar", "Produto", new { @class = "btn btn-primary" })*@
     </section>
     <div class="col-md-12">
         <div class="row">
-            <div class="col-lg-12">
+            <section class="panel">
+                <div class="panel-body">
+                    @*<button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" type="button" data-original-title="Clique para cadastrar um novo produto">Novo</button>*@
+                    <a href="/Tipo/Get" data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" data-original-title="Clique para cadastrar um novo tipo">Tipo</a>
+                    @*<button href="/Tipo/Get" title="" data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" type="button" data-original-title="Clique para cadastrar um novo tipo">Tipo</button>*@
+                    @*<button title="" data-placement="top" data-toggle="tooltip" class="btn btn-default tooltips" type="button" data-original-title="Clique para cadastrar uma nova categoria">Categoria</button>*@
+                </div>
+            </section>
+
+                @*<div class="col-lg-12">
                 <section class="panel">
                     <div id="c-slide" class="carousel slide auto panel-body">
                         <ol class="carousel-indicators out">
@@ -30,11 +39,11 @@
                         <div class="carousel-inner">
                             <div class="item text-center">
                                 <h3>Cadastre um fornecedor</h3>
-                                <small class="">Estas informações serão úteis na hora de cadastrar o produto</small>
+                                <small class="">Estas informações serão úteis na hora da emissão do pedido</small>
                             </div>
                             <div class="item text-center active">
                                 <h3><i class="icon_plus_alt2"></i> Clique para editar</h3>
-                                <small class="">Edite as informações do seu fornecedor sempre que desejar</small>
+                                <small class="">Edite as informações do seu produto sempre que desejar</small>
                             </div>
                             <div class="item text-center">
                                 <h3>Para mais informações</h3>
@@ -51,7 +60,7 @@
                 </section>
                 <section class="panel">
                     <header class="panel-heading">
-                        Fornecedores
+                        Produtos
                     </header>
                     <table class="table table-striped table-advance table-hover">
                         <tbody>
@@ -67,13 +76,13 @@
                             {
                                 @Html.Hidden("Id", item.Id)
                                 <tr>
-                                    <td>@item.RazaoSocial</td>
-                                    <td>@item.Contato.Email</td>
-                                    <td>@item.Endereco.Cidade</td>
-                                    <td>@item.Contato.Telefone</td>
+                                    <td>@item.Nome</td>
+                                    <td>@item.Descricao</td>
+                                    <td>@item.TipoSelected</td>
+                                    <td>@item.CategoriaSelected</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-primary popovers" data-original-title="Editar" data-content="Clique para editar as informações do fornecedor" data-placement="top" data-trigger="hover" href="@urlEdit + @item.Id"><i class="icon_plus_alt2"></i></a>
+                                            <a class="btn btn-primary popovers" data-original-title="Editar" data-content="Clique para editar as informações do produto" data-placement="top" data-trigger="hover" href="@urlEdit + @item.Id"><i class="icon_plus_alt2"></i></a>
                                             <a class="btn btn-success" href="#" disabled="disabled"><i class="icon_check_alt2"></i></a>
                                             <a class="btn btn-danger" href="#" disabled="disabled"><i class="icon_close_alt2"></i></a>
                                         </div>
@@ -83,8 +92,7 @@
                         </tbody>
                     </table>
                 </section>
-            </div>
+            </div>*@
         </div>
     </div>
 </section>
-   

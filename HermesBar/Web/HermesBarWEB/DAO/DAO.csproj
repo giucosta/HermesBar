@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commom\EnderecoDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
+    <Compile Include="Product\TypeDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />

@@ -13,7 +13,7 @@ $('#Celular').mask('(00)0000-00009');
 
 /********************************LAYOUT METHODS**************************************/
 var VerifyEmail = setInterval(function () { VerifyEmails() }, 300000);
-VerifyConnection();
+//VerifyConnection();
 function VerifyEmails() {
     $.ajax({
         type: 'GET',
@@ -141,16 +141,16 @@ function GenerateRequest(type, url, data, async) {
         }
     });
 }
-function VerifyConnection() {
-    jQuery.ajaxSetup({ async: false });
-    re = "";
-    r = Math.round(Math.random() * 10000);
-    $.get("http://1.bp.blogspot.com/-LtDtdVE1roA/UmAavs_T_iI/AAAAAAAADNY/g0L-HAPlkTY/s1600/0060.png", { subins: r }, function (d) {
-        re = true;
-    }).error(function () {
-        re = false;
-        alert('Você está sem conexão com a internet, seus dados serão salvos localmente');
-    });
-    return re;
-}
+//function VerifyConnection() {
+//    jQuery.ajaxSetup({ async: false });
+//    re = "";
+//    r = Math.round(Math.random() * 10000);
+//    $.get("http://1.bp.blogspot.com/-LtDtdVE1roA/UmAavs_T_iI/AAAAAAAADNY/g0L-HAPlkTY/s1600/0060.png", { subins: r }, function (d) {
+//        re = true;
+//    }).error(function () {
+//        re = false;
+//        alert('Você está sem conexão com a internet, seus dados serão salvos localmente');
+//    });
+//    return re;
+//}
 /********************************END AUX METHODS**************************************/

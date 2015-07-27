@@ -129,11 +129,14 @@
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
+    <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\User\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UTIL\Enumerators.cs" />
     <Compile Include="UTIL\GetSession.cs" />
     <Compile Include="UTIL\UserValidate.cs" />
   </ItemGroup>
@@ -323,6 +326,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Fornecedor\Get.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Produto\Get.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tipo\Get.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Tipo\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
