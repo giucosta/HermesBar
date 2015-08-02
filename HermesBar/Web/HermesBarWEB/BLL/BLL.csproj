@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Commom\ContatoBLL.cs" />
     <Compile Include="Commom\EnderecoBLL.cs" />
+    <Compile Include="Product\ProductBLL.cs" />
     <Compile Include="Product\TypeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier\FornecedorBLL.cs" />

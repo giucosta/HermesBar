@@ -13,7 +13,13 @@ $('#Celular').mask('(00)0000-00009');
 
 /********************************LAYOUT METHODS**************************************/
 var VerifyEmail = setInterval(function () { VerifyEmails() }, 300000);
-//VerifyConnection();
+var connection = VerifyConnection();
+//if (connection != false) {
+//    initDatabase();
+//}
+$('body').on('click', '#tela-cheia', function () {
+    alert('criar método para deixar em tela cheia');
+});
 function VerifyEmails() {
     $.ajax({
         type: 'GET',
@@ -141,16 +147,55 @@ function GenerateRequest(type, url, data, async) {
         }
     });
 }
-//function VerifyConnection() {
-//    jQuery.ajaxSetup({ async: false });
-//    re = "";
-//    r = Math.round(Math.random() * 10000);
-//    $.get("http://1.bp.blogspot.com/-LtDtdVE1roA/UmAavs_T_iI/AAAAAAAADNY/g0L-HAPlkTY/s1600/0060.png", { subins: r }, function (d) {
-//        re = true;
-//    }).error(function () {
-//        re = false;
-//        alert('Você está sem conexão com a internet, seus dados serão salvos localmente');
-//    });
-//    return re;
-//}
+function VerifyConnection() {
+    jQuery.ajaxSetup({ async: false });
+    re = "";
+    r = Math.round(Math.random() * 10000);
+    $.get("http://1.bp.blogspot.com/-LtDtdVE1roA/UmAavs_T_iI/AAAAAAAADNY/g0L-HAPlkTY/s1600/0060.png", { subins: r }, function (d) {
+        re = true;
+    }).error(function () {
+        re = false;
+        alert('Você está sem conexão com a internet, seus dados serão salvos localmente');
+    });
+    return re;
+}
 /********************************END AUX METHODS**************************************/
+//var db = openDatabase("HMALite", "1.0", "HMALite - Arquivos locais", 200000);
+
+//db.transaction(function (transaction) {
+//    transaction.executeSql('CREATE TABLE IF NOT EXISTS User ("id" INTEGER PRIMARY KEY, "Nome" TEXT NOT NULL, "Email" TEXT NOT NULL)', [], null, db.onError);
+//})
+
+//// função callback de erro
+//db.onError = function (transaction, e) {
+//    alert("Aconteceu um erro: " + e.message);
+//    console.log(e.message);
+//}
+
+//// função de callback de sucesso de insert
+//db.onSuccess = function (transaction, e) {
+//    alert("Dados Gravados com Sucesso!");
+//    console.log(e);
+//}
+
+//// função temporaria que lista resultados
+//db.getResults = function (transaction, r) {
+//    console.log('deu certo!');
+//    console.log(r);
+
+//    for (var i = 0; i < r.rows.length; i++) {
+//        console.log(r.rows.item(i)[['Id']]);
+//        console.log(r.rows.item(i)[['Nome']]);
+//        console.log(r.rows.item(i)[['Email']]);
+//    }
+//}
+
+//// aqui vai o insert
+//db.transaction(function (transaction) {
+//    transaction.executeSql("INSERT INTO User(Id,Nome, Email) VALUES(?, ?, ?)", [1, 'Giuliano Costa', 'giulianocosta@outlook.com'], db.onSuccess, db.onError);
+//})
+
+//// consulta no banco
+//db.transaction(function (transaction) {
+//    transaction.executeSql("SELECT * FROM User", [], db.getResults, db.onError);
+//})
