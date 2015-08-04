@@ -4,6 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     string urlEdit = "/Fornecedor/GetId?Id=";
 }
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.Sucesso)
+{
+    <script type="text/javascript">
+        swal("Uhul!", "Fornecedor cadastrado com sucesso!", "success");
+    </script>
+}
 <section id="main-content">
     <section class="wrapper">
         <div class="row">

@@ -59,6 +59,8 @@ namespace BLL.Product
         {
             try
             {
+                if (string.IsNullOrEmpty(tipo.Descricao))
+                    tipo.Descricao = "";
                 return Convert.ToInt32(TypeDAO.Insert(ConvertModelToEntity(tipo, user)).Rows[0]["SUCCESS"]) == 1;
             }
             catch (Exception ex)

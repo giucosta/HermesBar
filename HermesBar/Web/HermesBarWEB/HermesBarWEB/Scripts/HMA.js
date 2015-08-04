@@ -29,6 +29,7 @@ function VerifyEmails() {
         cache: false,
         success: function (data) {
             if (data != null) {
+                GenerateTimeMessage('Atenção', 'Você possui novos e-mails', 'success');
                 $('#Quantidade-Email').html(data.EmailCount);
                 $('#Quantidade-Email-Aviso').html('Você possui ' + data.EmailCount + ' novo e-mail');
                 GenerateEmailInfo(data);
@@ -74,6 +75,47 @@ $('body').on('focusout', '#InscricaoMunicipal', function () {
         $(this).val('ISENTO');
 });
 /**************************END SUPPLIER METHODS**************************************/
+
+/*******************************PRODUCT METHODS**************************************/
+$('body').on('click', '#novo-tipo', function () {
+    swal({
+        title: "Cadastro rápido!",
+        text: "Insira o tipo:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Insira o nome"
+    }, function (inputValue) {
+        if (inputValue === false)
+            return false;
+        if (inputValue === "") {
+            swal.showInputError("O campo está em branco :(");
+            return false
+        }
+        var data = { nome : inputValue };
+        GenerateRequest('GET', '/Tipo/CadastroRapido', data, false);
+        if (resultRequest == 'True') {
+            swal("Legal!", "Novo tipo cadastrado!", "success");
+            GenerateRequest('GET', '/Tipo/GetJson', null, false);
+            if (resultRequest != null) {
+                GenerateTypeList(resultRequest);
+            }
+        } else {
+            swal("Oops!", "Ocorreu um erro ao gravar o novo tipo de produto!", "error");
+        }
+    });
+});
+
+function GenerateTypeList(data) {
+    $('#TipoSelected option').remove();
+    var selecione = '<option value="0">Selecione</option>'
+    $('#TipoSelected').append(selecione);
+    for (var i = 0; i < data.length; i++) {
+        $('#TipoSelected').append('<option value="'+data[i].Id+'">'+data[i].Nome+'</option>')
+    }
+}
+/****************************END PRODUCT METHODS*************************************/
 
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
@@ -158,6 +200,12 @@ function VerifyConnection() {
         alert('Você está sem conexão com a internet, seus dados serão salvos localmente');
     });
     return re;
+}
+function GenerateTimeMessage(title, message, type) {
+    swal({ title: title, text: message, type: type, timer: 2000, showConfirmButton: false });
+}
+function GenerateMessage(title, message, type) {
+    swal({ title: title, text: message, type: type });
 }
 /********************************END AUX METHODS**************************************/
 //var db = openDatabase("HMALite", "1.0", "HMALite - Arquivos locais", 200000);

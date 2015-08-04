@@ -155,6 +155,7 @@
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Content\style-responsive.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="Content\widgets.css" />
     <Content Include="Content\xcharts.min.css" />
     <Content Include="fonts\ElegantIcons.svg" />
@@ -258,6 +259,7 @@
     <Content Include="Scripts\sliders.js" />
     <Content Include="Scripts\sparkline-chart.js" />
     <Content Include="Scripts\sparklines.js" />
+    <Content Include="Scripts\sweetalert-dev.js" />
     <Content Include="Scripts\xcharts.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

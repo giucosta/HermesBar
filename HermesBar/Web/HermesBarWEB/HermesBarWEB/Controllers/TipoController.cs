@@ -29,6 +29,10 @@ namespace HermesBarWEB.Controllers
                 return View(listModel);
             return View(new List<TipoModel>());
         }
+        public ActionResult GetJson()
+        {
+            return Json(TypeBLL.Get(), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult GetId(int id)
         {
             var result = TypeBLL.GetId(new TipoModel() { Id = id }, GetUser());
@@ -56,6 +60,18 @@ namespace HermesBarWEB.Controllers
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool CadastroRapido(string nome)
+        {
+            try
+            {
+                return TypeBLL.Insert(new TipoModel() { Nome = nome, Descricao = "", StatusSelected = "1" }, GetUser());
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
         public ActionResult Editar(TipoModel tipo)

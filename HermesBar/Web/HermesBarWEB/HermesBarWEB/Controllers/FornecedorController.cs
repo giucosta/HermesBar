@@ -22,6 +22,8 @@ namespace HermesBarWEB.Controllers
         {
             GetSession.GetUserSession(ref user);
             ViewBag.User = user.Nome;
+            ViewBag.Erro = false;
+            ViewBag.Sucesso = false;
             //ViewBag.Email = GetEmail.Get();
         }
 
@@ -53,12 +55,8 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult Cadastrar()
         {
-            var model = new FornecedorModel()
-            {
-                Contato = new ContatoModel(),
-                Endereco = EnderecoBLL.GetStates(new EnderecoModel())
-            };
-            
+            var model = new FornecedorModel();
+            LoadModel(ref model);
             return View(model);
         }
         public ActionResult CadastrarFornecedor(FornecedorModel fornecedor, EnderecoModel endereco, ContatoModel contato)
@@ -72,8 +70,12 @@ namespace HermesBarWEB.Controllers
                     return EditarFornecedor(fornecedor);
 
                 if (FornecedorBLL.Insert(fornecedor, user))
+                {
+                    ViewBag.Sucesso = true;
                     return View("Get", FornecedorBLL.Get(new FornecedorModel(), user));
-
+                }
+                LoadModel(ref fornecedor);
+                ViewBag.Erro = true;
                 return View("Cadastrar", fornecedor);
             }
             catch (Exception)
@@ -108,6 +110,11 @@ namespace HermesBarWEB.Controllers
             {
                 return View("~/Views/Shared/Error.cshtml");
             }
+        }
+        private void LoadModel(ref FornecedorModel fornecedor)
+        {
+            fornecedor.Contato = new ContatoModel();
+            fornecedor.Endereco = EnderecoBLL.GetStates(new EnderecoModel());
         }
     }
 }
