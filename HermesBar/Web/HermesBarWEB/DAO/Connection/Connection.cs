@@ -56,8 +56,9 @@ namespace DAO.Connection
             if (value != null)
                 adapter.SelectCommand.Parameters.Add("@" + parameter, type).Value = value;
         }
-        public DataTable GetResult(DataTable data)
+        public DataTable GetResult()
         {
+            DataTable data = new DataTable();
             adapter.Fill(data);
             CloseConnection();
 

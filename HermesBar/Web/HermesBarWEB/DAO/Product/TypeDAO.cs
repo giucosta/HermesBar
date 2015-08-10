@@ -18,7 +18,7 @@ namespace DAO.Product
                 var data = new DataTable();
                 CreateDataAdapter("[dbo].[SP_HMA_TIP_GET]");
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace DAO.Product
                 CreateDataAdapter("[dbo].[SP_HMA_TIP_GET_ID]");
                 InserParameter("ID", SqlDbType.Int, tipo._ID);
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace DAO.Product
                 InserParameter("NOM", SqlDbType.VarChar, tipo.NOM);
                 InserParameter("DSC", SqlDbType.VarChar, tipo.DSC);
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {
@@ -85,7 +85,7 @@ namespace DAO.Product
                 InserParameter("DSC", SqlDbType.VarChar, tipo.DSC);
                 InserParameter("ID", SqlDbType.Int, tipo._ID);
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {

@@ -18,7 +18,7 @@ namespace DAO.Commom
                 var data = new DataTable();
                 CreateDataAdapter("[dbo].[SP_HMA_UF_GET]");
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {

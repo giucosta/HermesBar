@@ -17,7 +17,7 @@ namespace DAO.Product
                 var data = new DataTable();
                 CreateDataAdapter("[dbo].[SP_HMA_PROD_GET]");
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {

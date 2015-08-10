@@ -40,7 +40,7 @@ namespace DAO.Supplier
                 InserParameter("CEL", SqlDbType.VarChar, con.CEL);
                 InserParameter("EMA", SqlDbType.VarChar, con.EMA);
                 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {
@@ -101,11 +101,11 @@ namespace DAO.Supplier
                 InserParameter("CEL", SqlDbType.VarChar, con.CEL);
                 InserParameter("EMA", SqlDbType.VarChar, con.EMA);
 
-                return GetResult(data);
+                return GetResult();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

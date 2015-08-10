@@ -21,7 +21,7 @@ namespace DAO.User
                 InserParameter("EMA", SqlDbType.VarChar, USR.EMA);
                 InserParameter("PAS", SqlDbType.VarChar, USR.PAS);
 
-                return GetResult(data);
+                return GetResult();
             }
             catch (Exception ex)
             {

@@ -52,6 +52,16 @@ namespace HermesBarWEB.Controllers
                 else
                     model.Tipos.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
             }
+
+            model.UnidadesMedida = new List<SelectListItem>();
+            var unidades = new UniMedBLL().Get();
+            foreach (var item in unidades)
+            {
+                if (item.Id.ToString() == model.UnidadeMedidaSelected)
+                    model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString(), Selected = true });
+                else
+                    model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
+            }
         }
         #endregion
     }

@@ -46,6 +46,7 @@
     <Compile Include="Product\CategoriaModel.cs" />
     <Compile Include="Product\ProdutoModel.cs" />
     <Compile Include="Product\TipoModel.cs" />
+    <Compile Include="Product\UnidadeMedidaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier\FornecedorModel.cs" />
     <Compile Include="User\UsuarioModel.cs" />

@@ -107,12 +107,52 @@ $('body').on('click', '#novo-tipo', function () {
     });
 });
 
+$('body').on('click', '#novo-unidade', function () {
+    swal({
+        title: "Cadastro rápido!",
+        text: "Insira a Unidade:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Insira a Unidade"
+    }, function (inputValue) {
+        if (inputValue === false)
+            return false;
+        if (inputValue === "") {
+            swal.showInputError("O campo está em branco :(");
+            return false
+        }
+        var data = { nome: inputValue };
+        GenerateRequest('GET', '/UnidadeMedida/CadastroRapido', data, false);
+        if (resultRequest == 'True') {
+            swal("Legal!", "Nova Unidade cadastrada!", "success");
+            GenerateRequest('GET', '/UnidadeMedida/GetJson', null, false);
+            if (resultRequest != null) {
+                GenerateUnityList(resultRequest);
+            }
+        } else {
+            swal("Oops!", "Ocorreu um erro ao gravar a nova unidade de produto!", "error");
+        }
+    });
+});
+
+
 function GenerateTypeList(data) {
     $('#TipoSelected option').remove();
     var selecione = '<option value="0">Selecione</option>'
     $('#TipoSelected').append(selecione);
     for (var i = 0; i < data.length; i++) {
         $('#TipoSelected').append('<option value="'+data[i].Id+'">'+data[i].Nome+'</option>')
+    }
+}
+
+function GenerateUnityList(data) {
+    $('#UnidadeMedidaSelected option').remove();
+    var selecione = '<option value="0">Selecione</option>'
+    $('#UnidadeMedidaSelected').append(selecione);
+    for (var i = 0; i < data.length; i++) {
+        $('#UnidadeMedidaSelected').append('<option value="' + data[i].Id + '">' + data[i].Nome + '</option>')
     }
 }
 /****************************END PRODUCT METHODS*************************************/
