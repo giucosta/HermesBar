@@ -30,14 +30,21 @@
                             <div class="panel-body">
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Insira o nome do produto", @required = "required" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <select class="form-control">
+                                            <option>Status</option>
+                                            <option>Ativo</option>
+                                            <option>Inativo</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Descricao, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(m => m.Descricao, new { @class = "form-control", @placeholder = "Insira uma descrição", @required = "required" })
+                                        @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control", @placeholder = "Insira uma descrição", @required = "required" })
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -61,7 +68,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.ValorCompra, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-10">
-                                        @Html.TextBoxFor(m => m.ValorCompra, new { @class = "form-control", @required = "required" })
+                                        @Html.TextBoxFor(m => m.ValorCompra, new { @class = "form-control", @required = "required", @type="number" })
                                         <span class="help-block">Insira o valor médio de compra do produto</span>
                                     </div>
                                 </div>
@@ -88,6 +95,47 @@
                                     @Html.LabelFor(m => m.QuantidadeMinimaAviso, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-10">
                                         @Html.TextBoxFor(m => m.QuantidadeMinimaAviso, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Composição
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" placeholder="Insira o item" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control"  placeholder="Quantidade"/>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn btn-default">+</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>Item</td>
+                                                    <td>Quantidade</td>
+                                                    <td>#</td>
+                                                </tr>    
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Limão</td>
+                                                    <td>2</td>
+                                                    <td><button type="button" class="btn btn-default">excluir</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
