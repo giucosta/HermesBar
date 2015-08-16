@@ -29,10 +29,13 @@ namespace MODEL.Product
         public List<SelectListItem> UnidadesMedida { get; set; }
         [DisplayName("Quant. Mínima para Aviso")]
         public int QuantidadeMinimaAviso{ get; set; }
-        [DisplayName("Quantidade Ideal")]
+        [DisplayName("Quantidade Atual")]
         public double QuantidadeAtual { get; set; }
         public string CategoriaSelected { get; set; }
         [DisplayName("Categoria")]
         public List<SelectListItem> Categorias { get; set; }
+
+        public string StatusSelected { get; set; }
+        public List<SelectListItem> Status { get; set; }
     }
 }

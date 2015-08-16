@@ -99,7 +99,7 @@ namespace BLL.Product
                 throw ex;
             }
         }
-        private TipoModel ConvertEntityToModel(HMA_TIP tipo)
+        internal TipoModel ConvertEntityToModel(HMA_TIP tipo)
         {
             try
             {

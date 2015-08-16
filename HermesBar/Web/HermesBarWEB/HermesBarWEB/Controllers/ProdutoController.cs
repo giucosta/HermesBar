@@ -39,10 +39,37 @@ namespace HermesBarWEB.Controllers
             LoadModel(ref model);
             return View(model);
         }
+        public ActionResult GetId(int id)
+        {
+            var model = ProdutoBLL.GetId(id);
+            LoadModel(ref model);
+            return View("Cadastrar", model);
+        }
+        public ActionResult CadastrarProduto(ProdutoModel produto)
+        {
+            try
+            {
+                if (!ProdutoBLL.Insert(produto, GetUser()))
+                {
+                    ViewBag.Error = "Ocorreu um erro ao salvar o produto";
+                    return View("Cadastrar", produto);
+                }
+                ViewBag.Success = "Produto cadastrado com sucesso!";
+                return View("Get", ProdutoBLL.Get());
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Ocorreu um erro ao salvar o produto " + ex.Message;
+                return View("Cadastrar", produto);
+            }
+        }
 
         #region Private Methods
         private void LoadModel(ref ProdutoModel model)
         {
+            if (string.IsNullOrEmpty(model.CodigoVenda))
+                model.CodigoVenda = ProdutoBLL.GetNextCode().ToString();
+
             model.Tipos = new List<SelectListItem>();
             var tipos = new TypeBLL().Get();
             foreach (var item in tipos)
@@ -62,6 +89,18 @@ namespace HermesBarWEB.Controllers
                 else
                     model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
             }
+            model.Status = new List<SelectListItem>();
+            foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
+            {
+                if (model.StatusSelected == ((int)item).ToString())
+                    model.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString(), Selected = true });
+                else
+                    model.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
+            }
+        }
+        private UsuarioModel GetUser()
+        {
+            return (UsuarioModel)Session["USR"];
         }
         #endregion
     }

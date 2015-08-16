@@ -14,5 +14,13 @@ namespace ENTITY.Product
         public decimal VLR_VEN { get; set; }
         public string COD_VEN { get; set; }
         public int QUANT_MIN { get; set; }
+        public decimal QUANT_ATL { get; set; }
+
+        #region External Attributes
+        public string MED_NOM { get; set; }
+        public string TIP_NOM { get; set; }
+        public int MED_ID { get; set; }
+        public int TIP_ID { get; set; }
+        #endregion
     }
 }
