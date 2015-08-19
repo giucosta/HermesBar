@@ -74,6 +74,29 @@ namespace BLL.Product
                 throw;
             }
         }
+        public bool Update(ProdutoModel produto, UsuarioModel user)
+        {
+            try
+            {
+                var prod = ConvertModelToEntity(produto, user);
+                var tipo = new HMA_TIP() { _ID = Convert.ToInt32(produto.TipoSelected) };
+                var unidade = new HMA_UNI_MED() { _ID = Convert.ToInt32(produto.UnidadeMedidaSelected) };
+
+                return Convert.ToInt32(ProductDAO.Update(prod, tipo, unidade).Rows[0]["SUCCESS"]) == 1;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Active(ProdutoModel produto, UsuarioModel user)
+        {
+            return Convert.ToInt32(ProductDAO.Active(ConvertModelToEntity(produto, user)).Rows[0]["SUCCESS"]) == 1;
+        }
+        public bool Inactive(ProdutoModel produto, UsuarioModel user)
+        {
+            return Convert.ToInt32(ProductDAO.Inactive(ConvertModelToEntity(produto, user)).Rows[0]["SUCCESS"]) == 1;
+        }
         public int GetNextCode()
         {
             try

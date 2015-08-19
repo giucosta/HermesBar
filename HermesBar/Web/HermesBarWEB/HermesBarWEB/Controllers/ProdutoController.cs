@@ -49,19 +49,55 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (!ProdutoBLL.Insert(produto, GetUser()))
+                if (produto.Id == 0)
                 {
-                    ViewBag.Error = "Ocorreu um erro ao salvar o produto";
-                    return View("Cadastrar", produto);
+                    if (!ProdutoBLL.Insert(produto, GetUser()))
+                    {
+                        ViewBag.InsertError = true;
+                        return View("Cadastrar", produto);
+                    }
+                    ViewBag.InsertSuccess = true;
+                    return View("Get", ProdutoBLL.Get());
                 }
-                ViewBag.Success = "Produto cadastrado com sucesso!";
-                return View("Get", ProdutoBLL.Get());
+                else
+                    return EditarProduto(produto);
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Ocorreu um erro ao salvar o produto " + ex.Message;
+                ViewBag.InsertError = true;
                 return View("Cadastrar", produto);
             }
+        }
+        private ActionResult EditarProduto(ProdutoModel produto)
+        {
+            if (ProdutoBLL.Update(produto, GetUser()))
+            {
+                ViewBag.UpdateSuccess = true;
+                return View("Get", ProdutoBLL.Get());
+            }
+            ViewBag.UpdateError = true;
+            return View("Cadastrar", produto);
+        }
+
+        public ActionResult ActiveId(int id)
+        {
+            if(ProdutoBLL.Active(new ProdutoModel(){Id = id}, GetUser()))
+            {
+                ViewBag.ActiveSuccess = true;
+                return View("Get",ProdutoBLL.Get());
+            }
+            ViewBag.ActiveError = true;
+            return View("Get",ProdutoBLL.Get());
+        }
+        public ActionResult InactiveId(int id)
+        {
+            if (ProdutoBLL.Inactive(new ProdutoModel() { Id = id }, GetUser()))
+            {
+                ViewBag.InactiveSuccess = true;
+                return View("Get", ProdutoBLL.Get());
+            }
+            ViewBag.InactiveError = true;
+            return View("Get", ProdutoBLL.Get());
         }
 
         #region Private Methods

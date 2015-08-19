@@ -78,6 +78,76 @@ namespace DAO.Product
                 CloseConnection();
             }
         }
+        public DataTable Update(HMA_PROD prod, HMA_TIP tip, HMA_UNI_MED med)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter("SP_HMA_PROD_UPD");
+                InserParameter("USR", SqlDbType.Int, prod._USR);
+                InserParameter("ATV", SqlDbType.Int, prod._ATV);
+                InserParameter("NOM", SqlDbType.VarChar, prod.NOM);
+                InserParameter("DSC", SqlDbType.VarChar, prod.DSC);
+                InserParameter("VLR_COM", SqlDbType.Decimal, prod.VLR_COM);
+                InserParameter("VLR_VEN", SqlDbType.Decimal, prod.VLR_VEN);
+                InserParameter("QUANT_MIN", SqlDbType.Int, prod.QUANT_MIN);
+                InserParameter("QUANT_ATL", SqlDbType.Int, prod.QUANT_ATL);
+                InserParameter("ID", SqlDbType.Int, prod._ID);
+                InserParameter("ID_TIP", SqlDbType.Int, tip._ID);
+                InserParameter("MED_ID", SqlDbType.Int, med._ID);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Active(HMA_PROD prod)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter("SP_HMA_PROD_ACT");
+                InserParameter("ID", SqlDbType.Int, prod._ID);
+                InserParameter("USR", SqlDbType.Int, prod._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+
+        public DataTable Inactive(HMA_PROD prod)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter("SP_HMA_PROD_INACT");
+                InserParameter("ID", SqlDbType.Int, prod._ID);
+                InserParameter("USR", SqlDbType.Int, prod._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
         public DataTable GetNextCod()
         {
             try

@@ -8,10 +8,16 @@
 @Scripts.Render("~/bundles/sweetalert");
 @Styles.Render("~/content/sweetalert")
 <!--Necessário para o sweet-->
-@if (ViewBag.Error != null)
+@if (ViewBag.InsertError != null)
 {
     <script type="text/javascript">
         swal("Ooops!", "Erro ao cadastrar produto" , "error");
+    </script>
+}
+@if (ViewBag.UpdateError != null)
+{
+    <script type="text/javascript">
+        swal("Ooops!", "Erro ao editar produto", "error");
     </script>
 }
 <section id="main-content">
