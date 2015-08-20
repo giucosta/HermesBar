@@ -1,0 +1,64 @@
+﻿@model MODEL.User.UsuarioModel
+@{
+    Layout = null;               
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.png">
+    <title>Hermes Management Assistant WEB</title>
+
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/bootstrap-theme")
+    @Styles.Render("~/content/elegante-icons")
+    @Styles.Render("~/content/font-awesome")
+    @Styles.Render("~/content/style")
+    @Styles.Render("~/content/responsive")
+    @Styles.Render("~/content/sweetalert")
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scrollTo")
+    @Scripts.Render("~/bundles/niceScroll")
+    @Scripts.Render("~/bundles/jqueryMask")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/sweetalert")
+    @Scripts.Render("~/bundles/hma")
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="login-img3-body">
+    <div class="container">
+        @using (Html.BeginForm("EfetuarLogin", "Login",FormMethod.Post, new { @class = "login-form" }))
+        {
+            <div class="login-wrap">
+                <p class="login-img"><i class="icon_lock_alt"></i></p>
+                @if (ViewBag.UsuarioSenhaIncorreto != null)
+                {
+                    <script type="text/javascript">
+                        swal("Atenção", "Usuário e/ou senha incorretos", "warning");
+                    </script>
+                }
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_profile"></i></span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "E-mail", @required="required"})
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                    @Html.TextBoxFor(m => m.Senha, new { @class = "form-control", @placeholder = "Senha", @type = "password", @maxlength = "8", @required = "required" })
+                </div>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Lembrar-me
+                    <span class="pull-right"> <a href="#"> Esqueceu sua senha?</a></span>
+                </label>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Efetuar Login</button>
+            </div>
+        }
+    </div>
+</body>
+</html>

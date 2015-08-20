@@ -18,7 +18,7 @@ namespace DAO.Supplier
             {
                 OpenConnection();
                 var data = new DataTable();
-                CreateDataAdapter("[dbo].[SP_HMA_FOR_INS]");
+                CreateDataAdapter(SQL.SP_SUPPLIER.INSERT);
                 InserParameter("ATV", SqlDbType.Int, forn._ATV);
                 InserParameter("USR", SqlDbType.Int, forn._USR);
                 InserParameter("RAZ", SqlDbType.VarChar, forn.RAZ);
@@ -42,9 +42,9 @@ namespace DAO.Supplier
                 
                 return GetResult();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -56,15 +56,14 @@ namespace DAO.Supplier
             try
             {
                 OpenConnection();
-                var data = new DataSet();
-                CreateDataAdapter("[dbo].[SP_HMA_FOR_GET]");
+                CreateDataAdapter(SQL.SP_SUPPLIER.GET);
                 InserParameter("FOR_ID", SqlDbType.Int, forn._ID);
 
-                return GetResultAsDataSet(data);
+                return GetResultAsDataSet();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {
@@ -78,7 +77,7 @@ namespace DAO.Supplier
                 OpenConnection();
                 var data = new DataTable();
 
-                CreateDataAdapter("[dbo].[SP_HMA_FOR_UPD]");
+                CreateDataAdapter(SQL.SP_SUPPLIER.UPDATE);
                 InserParameter("ID_FOR",SqlDbType.Int, forn._ID);
                 InserParameter("ATV", SqlDbType.Int, forn._ATV);
                 InserParameter("USR", SqlDbType.Int, forn._USR);

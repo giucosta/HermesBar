@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Commom\HMA_CON.cs" />
     <Compile Include="Commom\HMA_END.cs" />
+    <Compile Include="Establishment\HMA_EST.cs" />
     <Compile Include="Product\HMA_PROD.cs" />
     <Compile Include="Product\HMA_TIP.cs" />
     <Compile Include="Product\HMA_UNI_MED.cs" />

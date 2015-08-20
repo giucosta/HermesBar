@@ -10,7 +10,7 @@ namespace MODEL.Establishment
     public class EstablishmentModel
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
+        public string NomeFantasia { get; set; }
         public string RazaoSocial { get; set; }
         public List<SelectListItem> Status { get; set; }
         public string StatusSelected { get; set; }

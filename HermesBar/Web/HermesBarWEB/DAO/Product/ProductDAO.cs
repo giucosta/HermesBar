@@ -16,7 +16,7 @@ namespace DAO.Product
             {
                 OpenConnection();
                 var data = new DataTable();
-                CreateDataAdapter("[dbo].[SP_HMA_PROD_GET]");
+                CreateDataAdapter(SQL.SP_PROD.GET);
 
                 return GetResult();
             }
@@ -29,13 +29,12 @@ namespace DAO.Product
                 CloseConnection();
             }
         }
-
         public DataTable GetId(HMA_PROD prod)
         {
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_GETID");
+                CreateDataAdapter(SQL.SP_PROD.GET_ID);
                 InserParameter("ID", SqlDbType.Int, prod._ID);
 
                 return GetResult();
@@ -54,7 +53,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_INS");
+                CreateDataAdapter(SQL.SP_PROD.INSERT);
                 InserParameter("USR", SqlDbType.Int, prod._USR);
                 InserParameter("ATV", SqlDbType.Int, prod._ATV);
                 InserParameter("NOM", SqlDbType.VarChar, prod.NOM);
@@ -83,7 +82,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_UPD");
+                CreateDataAdapter(SQL.SP_PROD.UPDATE);
                 InserParameter("USR", SqlDbType.Int, prod._USR);
                 InserParameter("ATV", SqlDbType.Int, prod._ATV);
                 InserParameter("NOM", SqlDbType.VarChar, prod.NOM);
@@ -112,7 +111,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_ACT");
+                CreateDataAdapter(SQL.SP_PROD.ACTIVE);
                 InserParameter("ID", SqlDbType.Int, prod._ID);
                 InserParameter("USR", SqlDbType.Int, prod._USR);
 
@@ -127,13 +126,12 @@ namespace DAO.Product
                 CloseConnection();
             }
         }
-
         public DataTable Inactive(HMA_PROD prod)
         {
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_INACT");
+                CreateDataAdapter(SQL.SP_PROD.INACTIVE);
                 InserParameter("ID", SqlDbType.Int, prod._ID);
                 InserParameter("USR", SqlDbType.Int, prod._USR);
 
@@ -153,7 +151,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_GET_COD");
+                CreateDataAdapter(SQL.SP_PROD.GET_NEXT_CODE);
 
                 return GetResult();
             }
@@ -171,7 +169,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("SP_HMA_PROD_VER_PROD");
+                CreateDataAdapter(SQL.SP_PROD.VERIFY);
                 InserParameter("COD_VEN", SqlDbType.VarChar, prod.COD_VEN);
                 InserParameter("NOM", SqlDbType.VarChar, prod.NOM);
 

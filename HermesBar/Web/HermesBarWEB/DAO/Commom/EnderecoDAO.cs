@@ -16,13 +16,13 @@ namespace DAO.Commom
             {
                 OpenConnection();
                 var data = new DataTable();
-                CreateDataAdapter("[dbo].[SP_HMA_UF_GET]");
+                CreateDataAdapter(SQL.SP_ADDRESS.GET_UF);
 
                 return GetResult();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
             finally
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ENTITY.Establishment;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,14 +10,15 @@ namespace DAO.Establishment
 {
     public class EstablishmentDAO : Connection.Connection
     {
-        public DataTable Get()
+        public DataSet Get(HMA_EST est)
         {
             try
             {
                 OpenConnection();
-                CreateDataAdapter("[dbo].[SP_HMA_EST_GET]");
+                CreateDataAdapter(SQL.SP_EST.GET);
+                InserParameter("ID_EST", SqlDbType.Int, est._ID);
 
-                return GetResult();
+                return GetResultAsDataSet();
             }
             catch (Exception)
             {

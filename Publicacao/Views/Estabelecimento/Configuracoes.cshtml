@@ -1,0 +1,66 @@
+﻿@model MODEL.Establishment.EstablishmentModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@*@if (ViewBag.Sucesso)
+{
+    <script type="text/javascript">
+        swal("Uhul!", "Estabelecimento cadastrado com sucesso!", "success");
+    </script>
+}*@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Estabelecimento</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Estabelecimento/Configuracoes">Configurações do Estabelecimento</a></li>
+                </ol>
+            </div>
+        </div>
+        @Html.ActionLink("Novo", "Cadastrar", "Estabelecimento", new { @class = "btn btn-primary tooltips", @data_toggle = "tooltip", @data_original_title = "Clique para cadastrar um novo estabelecimento/filial" })
+    </section>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div id="c-slide" class="carousel slide auto panel-body">
+                        <ol class="carousel-indicators out">
+                            <li class="" data-slide-to="0" data-target="#c-slide"></li>
+                            <li class="active" data-slide-to="1" data-target="#c-slide"></li>
+                            <li class="" data-slide-to="2" data-target="#c-slide"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item text-center">
+                                <h3>Cadastre um estabelecimento</h3>
+                                <small class="">Estas informações serão úteis durante todo o processo</small>
+                            </div>
+                            <div class="item text-center active">
+                                <h3><i class="icon_plus_alt2"></i> Clique para editar</h3>
+                                <small class="">Edite as informações de seu estabelecimento sempre que desejar</small>
+                            </div>
+                            <div class="item text-center">
+                                <h3>Para mais informações</h3>
+                                <small class="">Acesse a documentação do sistema</small>
+                            </div>
+                        </div>
+                        <a data-slide="prev" href="#c-slide" class="left carousel-control">
+                            <i class="arrow_carrot-left_alt2"></i>
+                        </a>
+                        <a data-slide="next" href="#c-slide" class="right carousel-control">
+                            <i class="arrow_carrot-right_alt2"></i>
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -43,6 +43,7 @@
     <Compile Include="Address\EnderecoModel.cs" />
     <Compile Include="Commom\LayoutModel.cs" />
     <Compile Include="Contact\ContatoModel.cs" />
+    <Compile Include="Establishment\EstablishmentModel.cs" />
     <Compile Include="Product\CategoriaModel.cs" />
     <Compile Include="Product\ProdutoModel.cs" />
     <Compile Include="Product\TipoModel.cs" />

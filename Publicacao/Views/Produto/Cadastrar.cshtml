@@ -1,0 +1,162 @@
+﻿@model MODEL.Product.ProdutoModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertError != null)
+{
+    <script type="text/javascript">
+        swal("Ooops!", "Erro ao cadastrar produto" , "error");
+    </script>
+}
+@if (ViewBag.UpdateError != null)
+{
+    <script type="text/javascript">
+        swal("Ooops!", "Erro ao editar produto", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Produtos</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Produto/Get">Produtos</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Produto/Cadastrar">Cadastro</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("CadastrarProduto", "Produto", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(m => m.Id)
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Produtos
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-8">
+                                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Insira o nome do produto", @required = "required" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @Html.DropDownListFor(m => m.StatusSelected, Model.Status, "Selecione", new { @class="form-control", @required="required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Descricao, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control", @placeholder = "Insira uma descrição", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Tipos, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(m => m.TipoSelected, Model.Tipos, "Selecione", new { @class="form-control" })
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="novo-tipo" class="btn btn-default">Novo</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.UnidadesMedida, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(m => m.UnidadeMedidaSelected, Model.UnidadesMedida, "Selecione", new { @class="form-control" })
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" id="novo-unidade" class="btn btn-default">Novo</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ValorCompra, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.ValorCompra, new { @class = "form-control", @required = "required", @type="text" })
+                                        <span class="help-block">Insira o valor médio de compra do produto</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ValorVenda, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m  => m.ValorVenda, new { @class = "form-control", @required = "required", @type="text"  })
+                                        <span class="help-block">Insira o valor de venda do produto</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.CodigoVenda, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.CodigoVenda, new { @class = "form-control", @required = "required", @placeholder = "Insira o código utilizado para venda" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuantidadeAtual, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.QuantidadeAtual, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuantidadeMinimaAviso, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.QuantidadeMinimaAviso, new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        @*<section class="panel">
+                            <header class="panel-heading">
+                                Composição
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" placeholder="Insira o item" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control"  placeholder="Quantidade"/>
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn btn-default">+</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2"></div>
+                                    <div class="col-sm-10">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>Item</td>
+                                                    <td>Quantidade</td>
+                                                    <td>#</td>
+                                                </tr>    
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Limão</td>
+                                                    <td>2</td>
+                                                    <td><button type="button" class="btn btn-danger">excluir</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>*@
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

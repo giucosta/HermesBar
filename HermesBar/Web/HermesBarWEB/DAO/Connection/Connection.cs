@@ -71,8 +71,9 @@ namespace DAO.Connection
 
             return data;
         }
-        public DataSet GetResultAsDataSet(DataSet data)
+        public DataSet GetResultAsDataSet()
         {
+            DataSet data = new DataSet();
             adapter.Fill(data);
             CloseConnection();
 
