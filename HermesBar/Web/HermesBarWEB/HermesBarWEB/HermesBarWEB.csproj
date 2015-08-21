@@ -348,6 +348,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\HermesBar.pubxml" />
+    <Content Include="Views\Estabelecimento\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

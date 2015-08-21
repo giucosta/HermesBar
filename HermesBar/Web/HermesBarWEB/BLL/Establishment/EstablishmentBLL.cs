@@ -68,7 +68,42 @@ namespace BLL.Establishment
             }
         }
 
+        public bool Insert(EstablishmentModel est, UsuarioModel user)
+        {
+            try
+            {
+                ProccessForInsert(ref est);
+                var establishment = ConvertModelToEntity(est, user);
+                var address = EnderecoBLL.ConvertModelToEntity(est.Endereco, user);
+                var contact = ContatoBLL.ConvertModelToEntity(est.Contato, user);
+
+                return Convert.ToInt32(EstablishmentDAO.Insert(establishment, address, contact).Rows[0]["SUCCESS"]) == 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao cadastrar estabelecimento " + ex.Message);
+            }
+        }
         #region Private Methods
+        private void ProccessForInsert(ref EstablishmentModel est)
+        {
+            try
+            {
+                est.Cnpj = est.Cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
+                est.Contato.Telefone = est.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                est.Contato.Celular = est.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                est.Endereco.Cep = est.Endereco.Cep.Replace("-", "");
+
+                if (string.IsNullOrWhiteSpace(est.InscricaoEstadual))
+                    est.InscricaoEstadual = "ISENTO";
+                if (string.IsNullOrWhiteSpace(est.InscricaoMunicipal))
+                    est.InscricaoMunicipal = "ISENTO";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private HMA_EST ConvertModelToEntity(EstablishmentModel est, UsuarioModel user)
         {
             try

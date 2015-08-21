@@ -111,9 +111,9 @@ namespace BLL.Supplier
                 if (string.IsNullOrWhiteSpace(forn.InscricaoMunicipal))
                     forn.InscricaoMunicipal = "ISENTO";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         private HMA_FOR ConvertModelToEntity(FornecedorModel model, UsuarioModel usuario)
@@ -131,9 +131,9 @@ namespace BLL.Supplier
                 entity.RAZ = model.RazaoSocial;
                 return entity;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         private FornecedorModel ConvertEntityToModel(HMA_FOR forn, HMA_END end, HMA_CON con)
@@ -154,9 +154,9 @@ namespace BLL.Supplier
 
                 return model;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         #endregion
