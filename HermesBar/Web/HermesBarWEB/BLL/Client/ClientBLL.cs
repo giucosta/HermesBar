@@ -37,10 +37,22 @@ namespace BLL.Client
 
         public bool Insert(ClientModel client, UsuarioModel user)
         {
-            var cli = ConvertModelToEntity(client, user);
-            var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
-
-            return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
+            try
+            {
+                ProcessDataForInsert(ref client);
+                var cli = ConvertModelToEntity(client, user);
+                if (ClientDAO.Get(cli).Tables[0].Rows.Count == 0)
+                {
+                    var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
+                    return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
+                }
+                else
+                    throw new Exceptions("Cliente já cadastrado com mesmo RG");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public List<ClientModel> Get(ClientModel client, UsuarioModel user)
         {
@@ -65,6 +77,18 @@ namespace BLL.Client
         }
 
         #region Private Methods
+        private void ProcessDataForInsert(ref ClientModel client)
+        {
+            try
+            {
+                client.Contato.Telefone = client.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                client.Contato.Celular = client.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private HMA_CLI ConvertModelToEntity(ClientModel client, UsuarioModel user)
         {
             try
@@ -74,6 +98,7 @@ namespace BLL.Client
                 entity.NASC = client.DataNascimento;
                 entity._ATV = Convert.ToInt32(client.StatusSelected);
                 entity._USR = user.Id;
+                entity.RG = client.RG == null ? "" : client.RG; 
 
                 return entity;
             }
@@ -91,6 +116,7 @@ namespace BLL.Client
                 model.StatusSelected = cli._ATV.ToString();
                 model.DataNascimento = cli.NASC;
                 model.Contato = ContatoBLL.ConvertEntityToModel(con);
+                model.RG = cli.RG;
 
                 return model;
             }

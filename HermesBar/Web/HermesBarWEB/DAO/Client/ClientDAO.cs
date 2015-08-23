@@ -20,6 +20,7 @@ namespace DAO.Client
                 InserParameter("USR", SqlDbType.Int, cli._USR);
                 InserParameter("ATV", SqlDbType.Int, cli._ATV);
                 InserParameter("NASC", SqlDbType.DateTime, cli.NASC);
+                InserParameter("RG", SqlDbType.VarChar, cli.RG);
 
                 InserParameter("NOM", SqlDbType.VarChar, con.NOM);
                 InserParameter("TEL", SqlDbType.VarChar, con.TEL);
@@ -44,6 +45,7 @@ namespace DAO.Client
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_CLI.GET);
                 InserParameter("ID", SqlDbType.Int, cli._ID);
+                InserParameter("RG", SqlDbType.VarChar, cli.RG);
 
                 return GetResultAsDataSet();
             }

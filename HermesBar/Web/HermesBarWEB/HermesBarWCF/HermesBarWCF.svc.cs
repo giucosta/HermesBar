@@ -143,5 +143,9 @@ namespace HermesBarWCF
         {
             return Client.Get(client, user);
         }
+        public bool Insert(ClientModel client, UsuarioModel user)
+        {
+            return Client.Insert(client, user);
+        }
     }
 }

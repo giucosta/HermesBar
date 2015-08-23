@@ -9,5 +9,6 @@ namespace ENTITY.Client
     public class HMA_CLI : RegControl
     {
         public DateTime NASC { get; set; }
+        public string RG { get; set; }
     }
 }

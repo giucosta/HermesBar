@@ -14,37 +14,37 @@
 @if (ViewBag.InsertSuccess != null)
 {
     <script type="text/javascript">
-        swal("Legal!", "Produto cadastrado com sucesso", "success");
+        swal("Legal!", "Cliente cadastrado com sucesso", "success");
     </script>
 }
 @if (ViewBag.UpdateSuccess != null)
 {
     <script type="text/javascript">
-        swal("Legal!", "Produto editado com sucesso", "success");
+        swal("Legal!", "Cliente editado com sucesso", "success");
     </script>
 }
 @if (ViewBag.ActiveSuccess != null)
 {
     <script type="text/javascript">
-        swal("Legal!", "Produto ativado com sucesso", "success");
+        swal("Legal!", "Cliente ativado com sucesso", "success");
     </script>
 }
 @if (ViewBag.ActiveError != null)
 {
     <script type="text/javascript">
-        swal("Ooops!", "Erro ao ativar produto", "error");
+        swal("Ooops!", "Erro ao ativar cliente", "error");
     </script>
 }
 @if (ViewBag.InactiveSuccess != null)
 {
     <script type="text/javascript">
-        swal("Legal!", "Produto inativado com sucesso", "success");
+        swal("Legal!", "Cliente inativado com sucesso", "success");
     </script>
 }
 @if (ViewBag.InactiveError != null)
 {
     <script type="text/javascript">
-        swal("Ooops!", "Erro ao inativar produto", "error");
+        swal("Ooops!", "Erro ao inativar cliente", "error");
     </script>
 }
 <section id="main-content">
@@ -111,7 +111,7 @@
                                 @Html.Hidden("Id", item.Id)
                                 <tr>
                                     <td>@item.Contato.Nome</td>
-                                    <td>@item.DataNascimento</td>
+                                    <td>@item.DataNascimento.ToShortDateString()</td>
                                     <td>@item.Contato.Celular</td>
                                     <td>@item.Contato.Email</td>
                                     <td>

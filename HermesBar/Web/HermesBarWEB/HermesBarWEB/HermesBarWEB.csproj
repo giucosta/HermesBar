@@ -357,6 +357,7 @@
     <Content Include="Views\Estabelecimento\Cadastrar.cshtml" />
     <Content Include="Views\Agenda\Consultar.cshtml" />
     <Content Include="Views\Cliente\Get.cshtml" />
+    <Content Include="Views\Cliente\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

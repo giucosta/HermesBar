@@ -52,6 +52,7 @@
     <Compile Include="User\EmailBLL.cs" />
     <Compile Include="User\LoginBLL.cs" />
     <Compile Include="UTIL\Conversores.cs" />
+    <Compile Include="UTIL\Exceptions.cs" />
     <Compile Include="UTIL\GetEmail.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -159,6 +159,23 @@ function GenerateUnityList(data) {
 }
 /****************************END PRODUCT METHODS*************************************/
 
+/*********************************CLIENT METHODS*************************************/
+$('body').on('focusout', '#DataNascimento', function () {
+    var nascimento = new Date($(this).val());
+    var hoje = new Date();
+    if (Math.floor(Math.ceil(Math.abs(nascimento.getTime() - hoje.getTime()) / (1000 * 3600 * 24)) / 365.25) > 18)
+    {
+        $(this).css('border-color', '');
+        return;
+    }
+    else
+    {
+        GenerateMessage('Oops!', 'Idade inferior a 18 anos!', 'warning');
+        $(this).css('border-color', 'red');
+    }     
+});
+/*****************************END CLIENT METHODS*************************************/
+
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');
