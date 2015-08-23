@@ -94,6 +94,10 @@ namespace HermesBarWCF
         {
             return Estabelecimento.Insert(estabelecimento, usuario);
         }
+        public bool Update(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        {
+            return Estabelecimento.Update(estabelecimento, usuario);
+        }
     }
     public class EnderecoService : IAddress
     {

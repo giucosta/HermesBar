@@ -65,13 +65,29 @@ namespace HermesBarWEB.Controllers
             {
                 estabelecimento.Endereco = endereco;
                 estabelecimento.Contato = contato;
-                if (EstabelecimentoService.Insert(estabelecimento, user))
+                if (estabelecimento.Id == 0)
                 {
-                    ViewBag.Sucesso = true;
-                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                    if (EstabelecimentoService.Insert(estabelecimento, user))
+                    {
+                        ViewBag.Sucesso = true;
+                        return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                    }
+                    ViewBag.Erro = true;
+                    return View("Cadastrar", estabelecimento);
                 }
-                ViewBag.Erro = true;
-                return View("Cadastrar", estabelecimento);
+                return EditarEstabelecimento(estabelecimento);
+            }
+            catch (Exception)
+            {
+                return View("~/Views/Shared/Error.cshtml");
+            }
+        }
+
+        private ActionResult EditarEstabelecimento(EstablishmentModel estabelecimento)
+        {
+            try
+            {
+
             }
             catch (Exception)
             {
@@ -85,14 +101,16 @@ namespace HermesBarWEB.Controllers
             if (model.Contato == null)
                 model.Contato = new ContatoModel();
 
-            var ufs = EnderecoService.GetStates(model.Endereco);
-            foreach (var item in ufs.UfList)
+            model.Endereco = EnderecoService.GetStates(model.Endereco);
+            if (!string.IsNullOrEmpty(model.Endereco.UfSelected))
             {
-                if (model.Endereco.UfSelected == item.Value)
+                foreach (var item in model.Endereco.UfList)
                 {
-                    item.Selected = true;
-                    model.Endereco.UfList = ufs.UfList;
-                    break;
+                    if (model.Endereco.UfSelected == item.Value)
+                    {
+                        item.Selected = true;
+                        break;
+                    }
                 }
             }
             

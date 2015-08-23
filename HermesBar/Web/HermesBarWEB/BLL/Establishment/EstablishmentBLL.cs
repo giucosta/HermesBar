@@ -47,6 +47,7 @@ namespace BLL.Establishment
             }
         }
         #endregion
+
         public List<EstablishmentModel> Get(EstablishmentModel est, UsuarioModel user)
         {
             try
@@ -67,7 +68,6 @@ namespace BLL.Establishment
                 throw;
             }
         }
-
         public bool Insert(EstablishmentModel est, UsuarioModel user)
         {
             try
@@ -84,6 +84,23 @@ namespace BLL.Establishment
                 throw new Exception("Erro ao cadastrar estabelecimento " + ex.Message);
             }
         }
+        public bool Update(EstablishmentModel est, UsuarioModel user)
+        {
+            try
+            {
+                ProccessForInsert(ref est);
+                var establishment = ConvertModelToEntity(est, user);
+                var address = EnderecoBLL.ConvertModelToEntity(est.Endereco, user);
+                var contact = ContatoBLL.ConvertModelToEntity(est.Contato, user);
+
+                return Convert.ToInt32(EstablishmentDAO.Update(establishment, address, contact).Rows[0]["SUCCESS"]) > 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao editar estabelecimento " + ex.Message);
+            }
+        }
+
         #region Private Methods
         private void ProccessForInsert(ref EstablishmentModel est)
         {

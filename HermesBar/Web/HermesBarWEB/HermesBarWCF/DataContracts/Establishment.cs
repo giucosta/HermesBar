@@ -31,5 +31,9 @@ namespace HermesBarWCF.DataContracts
         {
             return EstabelecimentoBLL.Insert(estabelecimento, usuario);
         }
+        public bool Update(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        {
+            return EstabelecimentoBLL.Update(estabelecimento, usuario);
+        }
     }
 }
