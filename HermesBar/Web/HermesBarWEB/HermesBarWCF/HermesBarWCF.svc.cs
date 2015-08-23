@@ -1,5 +1,6 @@
 ﻿using HermesBarWCF.DataContracts;
 using HermesBarWCF.IContract;
+using MODEL.Address;
 using MODEL.Establishment;
 using MODEL.Product;
 using MODEL.User;
@@ -92,6 +93,24 @@ namespace HermesBarWCF
         public bool Insert(EstablishmentModel estabelecimento, UsuarioModel usuario)
         {
             return Estabelecimento.Insert(estabelecimento, usuario);
+        }
+    }
+    public class EnderecoService : IAddress
+    {
+        private Address _address = null;
+        private Address Address
+        {
+            get
+            {
+                if (_address == null)
+                    _address = new Address();
+                return _address;
+            }
+        }
+
+        public EnderecoModel GetStates(EnderecoModel endereco)
+        {
+            return Address.GetStates(endereco);
         }
     }
 }

@@ -25,16 +25,18 @@ namespace HermesBarWEB.Controllers
                 return _estabelecimentoService;
             }
         }
-        private EnderecoBLL _enderecoBLL = null;
-        private EnderecoBLL EnderecoBLL
+
+        private HermesBarWCF.EnderecoService _enderecoService = null;
+        private HermesBarWCF.EnderecoService EnderecoService
         {
             get
             {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new EnderecoBLL();
-                return _enderecoBLL;
+                if (_enderecoService == null)
+                    _enderecoService = new HermesBarWCF.EnderecoService();
+                return _enderecoService;
             }
         }
+        
         private UsuarioModel user;
         public EstabelecimentoController()
         {
@@ -83,19 +85,14 @@ namespace HermesBarWEB.Controllers
             if (model.Contato == null)
                 model.Contato = new ContatoModel();
 
-            var ufs = EnderecoBLL.GetStates(new EnderecoModel());
-            if (model.Endereco == null)
-                model.Endereco = ufs;
-            else
+            var ufs = EnderecoService.GetStates(model.Endereco);
+            foreach (var item in ufs.UfList)
             {
-                foreach (var item in ufs.UfList)
+                if (model.Endereco.UfSelected == item.Value)
                 {
-                    if (model.Endereco.UfSelected == item.Value)
-                    {
-                        item.Selected = true;
-                        model.Endereco.UfList = ufs.UfList;
-                        break;
-                    }
+                    item.Selected = true;
+                    model.Endereco.UfList = ufs.UfList;
+                    break;
                 }
             }
             
