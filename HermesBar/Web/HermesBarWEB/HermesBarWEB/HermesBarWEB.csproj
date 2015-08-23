@@ -126,6 +126,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -353,6 +355,8 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\HermesBar.pubxml" />
     <Content Include="Views\Estabelecimento\Cadastrar.cshtml" />
+    <Content Include="Views\Agenda\Consultar.cshtml" />
+    <Content Include="Views\Cliente\Get.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

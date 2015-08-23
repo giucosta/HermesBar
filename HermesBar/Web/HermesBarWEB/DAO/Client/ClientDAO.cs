@@ -37,5 +37,24 @@ namespace DAO.Client
                 CloseConnection();
             }
         }
+        public DataSet Get(HMA_CLI cli)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_CLI.GET);
+                InserParameter("ID", SqlDbType.Int, cli._ID);
+
+                return GetResultAsDataSet();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

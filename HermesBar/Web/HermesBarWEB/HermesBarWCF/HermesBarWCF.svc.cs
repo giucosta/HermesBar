@@ -1,6 +1,7 @@
 ﻿using HermesBarWCF.DataContracts;
 using HermesBarWCF.IContract;
 using MODEL.Address;
+using MODEL.Client;
 using MODEL.Establishment;
 using MODEL.Product;
 using MODEL.User;
@@ -123,6 +124,24 @@ namespace HermesBarWCF
         public EnderecoModel GetStates(EnderecoModel endereco)
         {
             return Address.GetStates(endereco);
+        }
+    }
+    public class ClienteService : IClient
+    {
+        private Client _client = null;
+        private Client Client
+        {
+            get
+            {
+                if (_client == null)
+                    _client = new Client();
+                return _client;
+            }
+        }
+
+        public List<ClientModel> Get(ClientModel client, UsuarioModel user)
+        {
+            return Client.Get(client, user);
         }
     }
 }

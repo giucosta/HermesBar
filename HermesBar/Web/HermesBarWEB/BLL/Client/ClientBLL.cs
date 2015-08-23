@@ -1,6 +1,7 @@
 ﻿using BLL.Commom;
 using DAO.Client;
 using ENTITY.Client;
+using ENTITY.Commom;
 using MODEL.Client;
 using MODEL.User;
 using System;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BLL.UTIL;
 namespace BLL.Client
 {
     public class ClientBLL
@@ -33,12 +34,34 @@ namespace BLL.Client
                 return _contatoBLL;
             }
         }
+
         public bool Insert(ClientModel client, UsuarioModel user)
         {
             var cli = ConvertModelToEntity(client, user);
             var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
 
             return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
+        }
+        public List<ClientModel> Get(ClientModel client, UsuarioModel user)
+        {
+            try
+            {
+                var result = ClientDAO.Get(ConvertModelToEntity(client, user));
+
+                var cli = result.Tables[0].DataTableToList<HMA_CLI>();
+                var con = result.Tables[1].DataTableToList<HMA_CON>();
+
+                var list = new List<ClientModel>();
+
+                for (int i = 0; i < cli.Count; i++)
+                    list.Add(ConvertEntityToModel(cli[i], con[i]));
+
+                return list;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region Private Methods
@@ -53,6 +76,23 @@ namespace BLL.Client
                 entity._USR = user.Id;
 
                 return entity;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private ClientModel ConvertEntityToModel(HMA_CLI cli, HMA_CON con)
+        {
+            try
+            {
+                var model = new ClientModel();
+                model.Id = cli._ID;
+                model.StatusSelected = cli._ATV.ToString();
+                model.DataNascimento = cli.NASC;
+                model.Contato = ContatoBLL.ConvertEntityToModel(con);
+
+                return model;
             }
             catch (Exception)
             {

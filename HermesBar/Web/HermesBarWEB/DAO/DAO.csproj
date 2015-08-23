@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\ClientDAO.cs" />
     <Compile Include="Commom\EnderecoDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
     <Compile Include="Establishment\EstablishmentDAO.cs" />
@@ -51,6 +52,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SP_ADDRESS.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SQL\SP_CLI.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SP_CLI.resx</DependentUpon>
     </Compile>
     <Compile Include="SQL\SP_EST.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -83,6 +89,10 @@
     <EmbeddedResource Include="SQL\SP_ADDRESS.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SP_ADDRESS.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\SP_CLI.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SP_CLI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\SP_EST.resx">
       <Generator>ResXFileCodeGenerator</Generator>
