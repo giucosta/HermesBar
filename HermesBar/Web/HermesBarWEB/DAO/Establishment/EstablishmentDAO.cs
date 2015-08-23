@@ -111,5 +111,45 @@ namespace DAO.Establishment
                 CloseConnection();
             }
         }
+        public DataTable Inative(HMA_EST est)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_EST.INACTIVE);
+                InserParameter("ID", SqlDbType.Int, est._ID);
+                InserParameter("USR", SqlDbType.Int, est._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Active(HMA_EST est)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_EST.ACTIVE);
+                InserParameter("ID", SqlDbType.Int, est._ID);
+                InserParameter("USR", SqlDbType.Int, est._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

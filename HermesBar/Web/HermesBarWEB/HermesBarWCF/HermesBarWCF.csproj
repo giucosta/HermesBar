@@ -63,12 +63,14 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContracts\Address.cs" />
     <Compile Include="DataContracts\Establishment.cs" />
     <Compile Include="DataContracts\Login.cs" />
     <Compile Include="DataContracts\Produtos.cs" />
     <Compile Include="HermesBarWCF.svc.cs">
       <DependentUpon>HermesBarWCF.svc</DependentUpon>
     </Compile>
+    <Compile Include="IContract\IAddress.cs" />
     <Compile Include="IContract\IEstablishment.cs" />
     <Compile Include="IContract\ILogin.cs" />
     <Compile Include="IContract\IProduct.cs" />

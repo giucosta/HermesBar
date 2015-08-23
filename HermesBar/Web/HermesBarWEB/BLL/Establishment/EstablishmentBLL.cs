@@ -93,11 +93,33 @@ namespace BLL.Establishment
                 var address = EnderecoBLL.ConvertModelToEntity(est.Endereco, user);
                 var contact = ContatoBLL.ConvertModelToEntity(est.Contato, user);
 
-                return Convert.ToInt32(EstablishmentDAO.Update(establishment, address, contact).Rows[0]["SUCCESS"]) > 1;
+                return Convert.ToInt32(EstablishmentDAO.Update(establishment, address, contact).Rows[0]["SUCCESS"]) != 0;
             }
             catch (Exception ex)
             {
                 throw new Exception("Erro ao editar estabelecimento " + ex.Message);
+            }
+        }
+        public bool Inactive(EstablishmentModel est, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(EstablishmentDAO.Inative(ConvertModelToEntity(est, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao inativar estabelecimento " + ex.Message);
+            }
+        }
+        public bool Active(EstablishmentModel est, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(EstablishmentDAO.Active(ConvertModelToEntity(est, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao ativar estabelecimento " + ex.Message);
             }
         }
 
@@ -107,8 +129,15 @@ namespace BLL.Establishment
             try
             {
                 est.Cnpj = est.Cnpj.Replace(".", "").Replace("/", "").Replace("-", "");
-                est.Contato.Telefone = est.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
-                est.Contato.Celular = est.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                if (!string.IsNullOrEmpty(est.Contato.Telefone))
+                    est.Contato.Telefone = est.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                else
+                    est.Contato.Telefone = "";
+                if (!string.IsNullOrEmpty(est.Contato.Celular))
+                    est.Contato.Celular = est.Contato.Celular.Replace("(", "").Replace(")", "").Replace("-", "");
+                else
+                    est.Contato.Celular = "";
+
                 est.Endereco.Cep = est.Endereco.Cep.Replace("-", "");
 
                 if (string.IsNullOrWhiteSpace(est.InscricaoEstadual))

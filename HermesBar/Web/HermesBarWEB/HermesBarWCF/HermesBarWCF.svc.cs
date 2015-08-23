@@ -98,6 +98,14 @@ namespace HermesBarWCF
         {
             return Estabelecimento.Update(estabelecimento, usuario);
         }
+        public bool Inactive(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        {
+            return Estabelecimento.Inactive(estabelecimento, usuario);
+        }
+        public bool Active(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        {
+            return Estabelecimento.Active(estabelecimento, usuario);
+        }
     }
     public class EnderecoService : IAddress
     {

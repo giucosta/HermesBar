@@ -82,20 +82,61 @@ namespace HermesBarWEB.Controllers
                 return View("~/Views/Shared/Error.cshtml");
             }
         }
+        public ActionResult Inativar(int id)
+        {
+            try
+            {
+                if (EstabelecimentoService.Inactive(new EstablishmentModel() { Id = id }, user))
+                {
+                    ViewBag.InativarSucesso = true;
+                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                }
+                ViewBag.InativarErro = true;
+                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+            }
+            catch (Exception)
+            {
+                ViewBag.InativarErro = true;
+                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+            }
+        }
+        public ActionResult Ativar(int id)
+        {
+            try
+            {
+                if (EstabelecimentoService.Active(new EstablishmentModel() { Id = id }, user))
+                {
+                    ViewBag.AtivarSucesso = true;
+                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                }
+                ViewBag.AtivarErro = true;
+                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+            }
+            catch (Exception)
+            {
+                ViewBag.AtivarErro = true;
+                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+            }
+        }
 
+        #region Private Methods
         private ActionResult EditarEstabelecimento(EstablishmentModel estabelecimento)
         {
             try
             {
-
+                if (EstabelecimentoService.Update(estabelecimento, user))
+                {
+                    ViewBag.EditarSucesso = true;
+                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                }
+                ViewBag.EditarErro = true;
+                return View("Cadastrar", estabelecimento);
             }
             catch (Exception)
             {
                 return View("~/Views/Shared/Error.cshtml");
             }
         }
-
-        #region Private Methods
         private void LoadModel(ref EstablishmentModel model)
         {
             if (model.Contato == null)
