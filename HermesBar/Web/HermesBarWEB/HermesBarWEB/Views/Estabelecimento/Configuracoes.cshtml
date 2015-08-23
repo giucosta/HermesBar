@@ -9,12 +9,12 @@
 @Scripts.Render("~/bundles/sweetalert");
 @Styles.Render("~/content/sweetalert")
 <!--Necessário para o sweet-->
-@*@if (ViewBag.Sucesso)
+@if (ViewBag.Sucesso != null)
 {
     <script type="text/javascript">
         swal("Uhul!", "Estabelecimento cadastrado com sucesso!", "success");
     </script>
-}*@
+}
 <section id="main-content">
     <section class="wrapper">
         <div class="row">

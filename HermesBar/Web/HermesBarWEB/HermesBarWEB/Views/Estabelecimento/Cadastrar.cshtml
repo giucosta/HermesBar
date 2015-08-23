@@ -3,6 +3,17 @@
     ViewBag.Title = "Hermes Bar WEB";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.Erro != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao cadastrar estabelecimento!", "error");
+    </script>
+}
 <section id="main-content">
     <section class="wrapper">
         <div class="row">

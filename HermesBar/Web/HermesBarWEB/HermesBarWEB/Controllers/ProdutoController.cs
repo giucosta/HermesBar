@@ -13,14 +13,14 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class ProdutoController : Controller
     {
-        private ProductBLL _produtoBLL = null;
-        private ProductBLL ProdutoBLL
+        private HermesBarWCF.ProductService _productService = null;
+        private HermesBarWCF.ProductService ProductService
         {
             get
             {
-                if (_produtoBLL == null)
-                    _produtoBLL = new ProductBLL();
-                return _produtoBLL;
+                if (_productService == null)
+                    _productService = new HermesBarWCF.ProductService();
+                return _productService;
             }
         }
         private UsuarioModel user;
@@ -31,7 +31,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult Get()
         {
-            return View(ProdutoBLL.Get());
+            return View(ProductService.Get());
         }
         public ActionResult Cadastrar()
         {
@@ -41,7 +41,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult GetId(int id)
         {
-            var model = ProdutoBLL.GetId(id);
+            var model = ProductService.GetId(id);
             LoadModel(ref model);
             return View("Cadastrar", model);
         }
@@ -51,18 +51,18 @@ namespace HermesBarWEB.Controllers
             {
                 if (produto.Id == 0)
                 {
-                    if (!ProdutoBLL.Insert(produto, GetUser()))
+                    if (!ProductService.Insert(produto, GetUser()))
                     {
                         ViewBag.InsertError = true;
                         return View("Cadastrar", produto);
                     }
                     ViewBag.InsertSuccess = true;
-                    return View("Get", ProdutoBLL.Get());
+                    return View("Get", ProductService.Get());
                 }
                 else
                     return EditarProduto(produto);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ViewBag.InsertError = true;
                 return View("Cadastrar", produto);
@@ -70,41 +70,56 @@ namespace HermesBarWEB.Controllers
         }
         private ActionResult EditarProduto(ProdutoModel produto)
         {
-            if (ProdutoBLL.Update(produto, GetUser()))
+            try
             {
-                ViewBag.UpdateSuccess = true;
-                return View("Get", ProdutoBLL.Get());
+                if (ProductService.Update(produto, GetUser()))
+                {
+                    ViewBag.UpdateSuccess = true;
+                    return View("Get", ProductService.Get());
+                }
+                ViewBag.UpdateError = true;
+                return View("Cadastrar", produto);
             }
-            ViewBag.UpdateError = true;
-            return View("Cadastrar", produto);
+            catch (Exception)
+            {
+                ViewBag.UpdateError = true;
+                return View("Cadastrar", produto);
+            }
         }
-
         public ActionResult ActiveId(int id)
         {
-            if(ProdutoBLL.Active(new ProdutoModel(){Id = id}, GetUser()))
+            try
             {
-                ViewBag.ActiveSuccess = true;
-                return View("Get",ProdutoBLL.Get());
+                if (ProductService.Active(new ProdutoModel() { Id = id }, GetUser()))
+                {
+                    ViewBag.ActiveSuccess = true;
+                    return View("Get", ProductService.Get());
+                }
+                ViewBag.ActiveError = true;
+                return View("Get", ProductService.Get());
             }
-            ViewBag.ActiveError = true;
-            return View("Get",ProdutoBLL.Get());
+            catch (Exception)
+            {
+                ViewBag.ActiveError = true;
+                return View("Get", ProductService.Get());
+            }
         }
         public ActionResult InactiveId(int id)
         {
-            if (ProdutoBLL.Inactive(new ProdutoModel() { Id = id }, GetUser()))
+            if (ProductService.Inactive(new ProdutoModel() { Id = id }, GetUser()))
             {
                 ViewBag.InactiveSuccess = true;
-                return View("Get", ProdutoBLL.Get());
+                return View("Get", ProductService.Get());
             }
             ViewBag.InactiveError = true;
-            return View("Get", ProdutoBLL.Get());
+            return View("Get", ProductService.Get());
         }
 
         #region Private Methods
         private void LoadModel(ref ProdutoModel model)
         {
             if (string.IsNullOrEmpty(model.CodigoVenda))
-                model.CodigoVenda = ProdutoBLL.GetNextCode().ToString();
+                model.CodigoVenda = ProductService.GetNextCode().ToString();
 
             model.Tipos = new List<SelectListItem>();
             var tipos = new TypeBLL().Get();

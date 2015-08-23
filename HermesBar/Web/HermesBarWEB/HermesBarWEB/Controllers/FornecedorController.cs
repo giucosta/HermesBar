@@ -24,7 +24,6 @@ namespace HermesBarWEB.Controllers
             ViewBag.User = user.Nome;
             ViewBag.Erro = false;
             ViewBag.Sucesso = false;
-            //ViewBag.Email = GetEmail.Get();
         }
 
         #region Singleton
@@ -93,8 +92,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                
-                throw;
+                return View("~/Views/Shared/Error.cshtml");
             }
         }
         public ActionResult GetId(int id)

@@ -311,6 +311,10 @@
       <Project>{a269009c-05d5-4a0c-9e57-f70d9afc141f}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HermesBarWCF\HermesBarWCF.csproj">
+      <Project>{701c60ab-5239-433a-a068-e41df7b5563c}</Project>
+      <Name>HermesBarWCF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{17cd4e83-0675-457e-b458-e8d8f648eed8}</Project>
       <Name>MODEL</Name>

@@ -11,14 +11,14 @@ namespace HermesBarWEB.Controllers
 {
     public class LoginController : Controller
     {
-        private LoginBLL _loginBLL = null;
-        private LoginBLL LoginBLL
+        private HermesBarWCF.LoginService _loginService = null;
+        private HermesBarWCF.LoginService LoginService
         {
             get
             {
-                if (_loginBLL == null)
-                    _loginBLL = new LoginBLL();
-                return _loginBLL;
+                if (_loginService == null)
+                    _loginService = new HermesBarWCF.LoginService();
+                return _loginService;
             }
         }
         public ActionResult Login()
@@ -28,7 +28,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult EfetuarLogin(UsuarioModel login)
         {
-            var result = LoginBLL.EfetuarLogin(login);
+            var result = LoginService.EfetuarLogin(login);
             if (result != null)
             {
                 FormsAuthentication.SetAuthCookie(result.PerfilSigla, false);

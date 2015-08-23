@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ENTITY", "ENTITY\ENTITY.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MODEL", "MODEL\MODEL.csproj", "{17CD4E83-0675-457E-B458-E8D8F648EED8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermesBarWCF", "HermesBarWCF\HermesBarWCF.csproj", "{701C60AB-5239-433A-A068-E41DF7B5563C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,16 @@ Global
 		{17CD4E83-0675-457E-B458-E8D8F648EED8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{17CD4E83-0675-457E-B458-E8D8F648EED8}.Release|x64.ActiveCfg = Release|Any CPU
 		{17CD4E83-0675-457E-B458-E8D8F648EED8}.Release|x86.ActiveCfg = Release|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Release|x64.ActiveCfg = Release|Any CPU
+		{701C60AB-5239-433A-A068-E41DF7B5563C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
