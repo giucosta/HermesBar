@@ -31,6 +31,10 @@ namespace HermesBarWCF.DataContracts
         {
             return ClientBLL.Insert(client, user);
         }
+        public bool Update(ClientModel client, UsuarioModel user)
+        {
+            return ClientBLL.Update(client, user);
+        }
         public bool Inactive(ClientModel client, UsuarioModel user)
         {
             return ClientBLL.Inactive(client, user);

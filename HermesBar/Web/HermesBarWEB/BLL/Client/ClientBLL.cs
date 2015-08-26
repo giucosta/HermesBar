@@ -97,6 +97,20 @@ namespace BLL.Client
                 throw;
             }
         }
+        public bool Update(ClientModel client, UsuarioModel user)
+        {
+            try
+            {
+                ProcessDataForInsert(ref client);
+                var cli = ConvertModelToEntity(client, user);
+                var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
+                return Convert.ToInt32(ClientDAO.Update(cli, con).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void ProcessDataForInsert(ref ClientModel client)

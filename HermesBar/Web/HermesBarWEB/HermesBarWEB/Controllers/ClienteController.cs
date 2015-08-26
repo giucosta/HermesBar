@@ -71,6 +71,9 @@ namespace HermesBarWEB.Controllers
             try
             {
                 cliente.Contato = contato;
+                if (cliente.Id != 0)
+                    return Editar(cliente);
+
                 if (ClienteService.Insert(cliente, user))
                 {
                     ViewBag.InsertSuccess = true;
@@ -109,6 +112,26 @@ namespace HermesBarWEB.Controllers
                     ViewBag.ActiveSuccess = true;
                 else
                     ViewBag.ActiveError = true;
+                return View("Get", ClienteService.Get(new ClientModel(), user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private ActionResult Editar(ClientModel client)
+        {
+            try
+            {
+                if (ClienteService.Update(client, user))
+                    ViewBag.UpdateSuccess = true;
+                else
+                {
+                    ViewBag.UpdateError = true;
+                    LoadModel(ref client);
+                    return View("Cadastrar", client);
+                }
                 return View("Get", ClienteService.Get(new ClientModel(), user));
             }
             catch (Exception)

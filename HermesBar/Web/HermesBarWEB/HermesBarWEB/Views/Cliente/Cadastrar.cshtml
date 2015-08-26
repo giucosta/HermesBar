@@ -14,6 +14,12 @@
         swal("Oops!", "Erro ao cadastrar cliente!", "error");
     </script>
 }
+@if (ViewBag.UpdateError != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao editar cliente!", "error");
+    </script>
+}
 @if (ViewBag.RgCadastrado != null)
 {
     <script type="text/javascript">

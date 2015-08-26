@@ -15,5 +15,6 @@ namespace HermesBarWCF.IContract
         bool Insert(ClientModel client, UsuarioModel user);
         bool Inactive(ClientModel client, UsuarioModel user);
         bool Active(ClientModel client, UsuarioModel user);
+        bool Update(ClientModel client, UsuarioModel user);
     }
 }

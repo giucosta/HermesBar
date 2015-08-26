@@ -98,5 +98,33 @@ namespace DAO.Client
                 CloseConnection();
             }
         }
+        public DataTable Update(HMA_CLI cli, HMA_CON con)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_CLI.UPDATE);
+                InserParameter("ID", SqlDbType.Int, cli._ID);
+                InserParameter("USR", SqlDbType.Int, cli._USR);
+                InserParameter("ATV", SqlDbType.Int, cli._ATV);
+                InserParameter("NASC", SqlDbType.DateTime, cli.NASC);
+                InserParameter("RG", SqlDbType.VarChar, cli.RG);
+
+                InserParameter("NOM", SqlDbType.VarChar, con.NOM);
+                InserParameter("TEL", SqlDbType.VarChar, con.TEL);
+                InserParameter("CEL", SqlDbType.VarChar, con.CEL);
+                InserParameter("EMA", SqlDbType.VarChar, con.EMA);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

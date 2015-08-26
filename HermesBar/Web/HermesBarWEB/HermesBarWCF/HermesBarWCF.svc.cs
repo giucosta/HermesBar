@@ -155,5 +155,9 @@ namespace HermesBarWCF
         {
             return Client.Active(client, user);
         }
+        public bool Update(ClientModel client, UsuarioModel user)
+        {
+            return Client.Update(client, user);
+        }
     }
 }
