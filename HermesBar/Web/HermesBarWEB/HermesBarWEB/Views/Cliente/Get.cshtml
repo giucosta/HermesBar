@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = "Hermes Bar WEB";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string urlEdit = "/Produto/GetId?Id=";
-    string urlActive = "/Produto/ActiveId?Id=";
-    string urlInactive = "/Produto/InactiveId?Id=";
+    string urlEdit = "/Cliente/GetId?Id=";
+    string urlActive = "/Cliente/ActiveId?Id=";
+    string urlInactive = "/Cliente/InactiveId?Id=";
 }
 <!--Necessário para o sweet-->
 @Scripts.Render("~/bundles/jquery");
@@ -116,15 +116,15 @@
                                     <td>@item.Contato.Email</td>
                                     <td>
                                         <div class="btn-group">
-                                            <a class="btn btn-primary popovers" data-original-title="Editar" data-content="Clique para editar as informações do produto" data-placement="top" data-trigger="hover" href="@urlEdit + @item.Id"><i class="icon_plus_alt2"></i></a>
+                                            <a class="btn btn-primary popovers" data-original-title="Editar" data-content="Clique para editar as informações do cliente" data-placement="top" data-trigger="hover" href="@urlEdit + @item.Id"><i class="icon_plus_alt2"></i></a>
                                             @if (item.StatusSelected == "1")
                                             {
-                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar a utilização do produto" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id" disabled="disabled"><i class="icon_check_alt2"></i></a>
-                                                <a class="btn btn-danger popovers" data-original-title="Inativar" data-content="Clique para inativar o produto" data-placement="top" data-trigger="hover" href="@urlInactive + @item.Id"><i class="icon_close_alt2"></i></a>
+                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar o cliente" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id" disabled="disabled"><i class="icon_check_alt2"></i></a>
+                                                <a class="btn btn-danger popovers" data-original-title="Inativar" data-content="Clique para inativar o cliente" data-placement="top" data-trigger="hover" href="@urlInactive + @item.Id"><i class="icon_close_alt2"></i></a>
                                             }
                                             else
                                             {
-                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar a utilização do produto" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id"><i class="icon_check_alt2"></i></a>
+                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar o cliente" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id"><i class="icon_check_alt2"></i></a>
                                                 <a class="btn btn-danger" href="@urlInactive + @item.Id" disabled="disabled"><i class="icon_close_alt2"></i></a>
                                             }
                                         </div>

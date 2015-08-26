@@ -147,5 +147,13 @@ namespace HermesBarWCF
         {
             return Client.Insert(client, user);
         }
+        public bool Inactive(ClientModel client, UsuarioModel user)
+        {
+            return Client.Inactive(client, user);
+        }
+        public bool Active(ClientModel client, UsuarioModel user)
+        {
+            return Client.Active(client, user);
+        }
     }
 }

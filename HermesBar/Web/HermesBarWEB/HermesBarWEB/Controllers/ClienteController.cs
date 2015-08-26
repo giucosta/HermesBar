@@ -40,6 +40,19 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public ActionResult GetId(int id)
+        {
+            try
+            {
+                var model = ClienteService.Get(new ClientModel() { Id = id }, user).FirstOrDefault();
+                LoadModel(ref model);
+                return View("Cadastrar", model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public ActionResult Cadastrar()
         {
             try
@@ -73,12 +86,46 @@ namespace HermesBarWEB.Controllers
                 return View("Cadastrar", cliente);
             }
         }
+        public ActionResult InactiveId(int id)
+        {
+            try
+            {
+                if (ClienteService.Inactive(new ClientModel() { Id =id }, user))
+                    ViewBag.InactiveSuccess = true;
+                else
+                    ViewBag.InactiveError = true;
+                return View("Get", ClienteService.Get(new ClientModel(), user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult ActiveId(int id)
+        {
+            try
+            {
+                if (ClienteService.Active(new ClientModel() { Id = id }, user))
+                    ViewBag.ActiveSuccess = true;
+                else
+                    ViewBag.ActiveError = true;
+                return View("Get", ClienteService.Get(new ClientModel(), user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private void LoadModel(ref ClientModel cliente)
         {
             try
             {
-                cliente.Contato = new MODEL.Contact.ContatoModel();
-                cliente.DataNascimento = DateTime.Now;
+                if(cliente.Contato == null)
+                    cliente.Contato = new MODEL.Contact.ContatoModel();
+                
+                if(cliente.DataNascimento == DateTime.MinValue)
+                    cliente.DataNascimento = DateTime.Now;
+
                 cliente.Status = new List<SelectListItem>();
                 foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
                 {

@@ -82,7 +82,7 @@ namespace HermesBarWEB.Controllers
                     return View("Get", TypeBLL.Get());
                 return View("Cadastrar", tipo);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return View("~/Views/Shared/Error.cshtml");
             }

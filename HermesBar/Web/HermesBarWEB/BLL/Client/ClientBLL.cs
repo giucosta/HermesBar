@@ -75,6 +75,28 @@ namespace BLL.Client
                 throw;
             }
         }
+        public bool Inactive(ClientModel client, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(ClientDAO.Inactive(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Active(ClientModel client, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(ClientDAO.Active(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void ProcessDataForInsert(ref ClientModel client)
