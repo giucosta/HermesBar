@@ -175,7 +175,47 @@ $('body').on('focusout', '#DataNascimento', function () {
     }     
 });
 /*****************************END CLIENT METHODS*************************************/
+/******************************CALENDAR METHODS**************************************/
+$('#calendar').fullCalendar({
+    lang: 'pt-br',
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'
+        
+    },
+    editable: true,
+    eventLimit: true,
+    events: [
+        {
+            id:1,
+            title: 'Reserva Letícia',
+            start: '2015-08-26',
+            end: '2015-08-26'
+        },
+        {
+            id:2,
+            title: 'Reserva aniversário',
+            start: '2015-08-26',
+            end: '2015-08-26'
+        },
+        {
+            id: 999,
+            title: 'Blindagem',
+            start: '2015-08-27T23:00:00'
+        },
+        {
+            title: 'Click for Google',
+            url: 'http://google.com/',
+            start: '2015-02-28'
+        }
+    ]
+});
 
+$('body').on('click', '.fc-title', function () {
+    GenerateMessage('Evento', $(this).html(), 'success');
+});
+/**************************END CALENDAR METHODS**************************************/
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');

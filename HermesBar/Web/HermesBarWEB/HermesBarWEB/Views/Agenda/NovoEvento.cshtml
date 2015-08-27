@@ -1,0 +1,83 @@
+﻿@model MODEL.Event.EventModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertError != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao cadastrar cliente!", "error");
+    </script>
+}
+@if (ViewBag.UpdateError != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao editar cliente!", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Agenda</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Agenda/Consultar">Agenda</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Cliente/NovoEvento">Cadastro de evento</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("CadastrarEvento", "Evento", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(m => m.Id)
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Eventos
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Data, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(m => m.Data, new { @class = "form-control", @required = "required", @type="date" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @Html.DropDownListFor(m => m.StatusSelected, Model.Status, "Selecione", new { @class = "form-control", @required = "required" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @Html.TextBoxFor(m => m.QuantidadePessoas, new { @class = "form-control", @type = "number", @placeholder = "Quantidade de pessoas" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Cliente, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(m => m.ClienteSelected, Model.Cliente, "Selecione", new { @class="form-control" })
+                                    </div>
+                                    <div class="col-sm-1">
+                                        <button type="button" class="btn btn-default">Novo</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Observacao, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextAreaFor(m => m.Observacao, new { @class="form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

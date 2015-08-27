@@ -254,7 +254,9 @@
     <Content Include="Scripts\jquery.stepy.js" />
     <Content Include="Scripts\jquery.tagsinput.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\lang-all.js" />
     <Content Include="Scripts\lte-ie7.js" />
+    <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\morris-script.js" />
     <Content Include="Scripts\morris.min.js" />
     <Content Include="Scripts\npm.js" />
@@ -358,6 +360,7 @@
     <Content Include="Views\Agenda\Consultar.cshtml" />
     <Content Include="Views\Cliente\Get.cshtml" />
     <Content Include="Views\Cliente\Cadastrar.cshtml" />
+    <Content Include="Views\Agenda\NovoEvento.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

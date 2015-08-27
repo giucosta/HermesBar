@@ -16,6 +16,8 @@ namespace HermesBarWEB
             bundles.Add(new ScriptBundle("~/bundles/niceScroll").Include("~/Scripts/jquery.nicescroll.js"));
             bundles.Add(new ScriptBundle("~/bundles/jqueryMask").Include("~/Scripts/jquery-mask.js"));
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include("~/Scripts/scripts.js"));
+            bundles.Add(new ScriptBundle("~/bundles/calendar").Include("~/Scripts/fullcalendar.js"));
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include("~/Scripts/moment.min.js"));
             #endregion
 
             #region Styles
@@ -26,6 +28,7 @@ namespace HermesBarWEB
             bundles.Add(new StyleBundle("~/content/style").Include("~/Content/style.css"));
             bundles.Add(new StyleBundle("~/content/responsive").Include("~/Content/style-responsive.css"));
             bundles.Add(new StyleBundle("~/content/sweetalert").Include("~/Content/sweetalert.css"));
+            bundles.Add(new StyleBundle("~/content/calendar").Include("~/Content/fullcalendar.css"));
             #endregion
         }
     }

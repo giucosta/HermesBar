@@ -21,6 +21,7 @@
     @Styles.Render("~/content/style")
     @Styles.Render("~/content/responsive")
     @Styles.Render("~/content/sweetalert")
+    @Styles.Render("~/content/calendar")
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -273,6 +274,10 @@
     @Scripts.Render("~/bundles/jqueryMask")
     @Scripts.Render("~/bundles/scripts")
     @Scripts.Render("~/bundles/sweetalert")
+    <script src="~/Scripts/moment.min.js"></script>
+    @*@Scripts.Render("~/bundles/moment")*@
+    @Scripts.Render("~/bundles/calendar")
+    <script src="~/Scripts/lang-all.js"></script>
     @Scripts.Render("~/bundles/hma")
 </body>
 </html>
