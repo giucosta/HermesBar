@@ -44,6 +44,7 @@
     <Compile Include="Commom\ContatoBLL.cs" />
     <Compile Include="Commom\EnderecoBLL.cs" />
     <Compile Include="Establishment\EstablishmentBLL.cs" />
+    <Compile Include="Event\EventBLL.cs" />
     <Compile Include="Product\ProductBLL.cs" />
     <Compile Include="Product\TypeBLL.cs" />
     <Compile Include="Product\UniMedBLL.cs" />

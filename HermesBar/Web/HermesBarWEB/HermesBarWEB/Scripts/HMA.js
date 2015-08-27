@@ -186,31 +186,41 @@ $('#calendar').fullCalendar({
     },
     editable: true,
     eventLimit: true,
-    events: [
-        {
-            id:1,
-            title: 'Reserva Letícia',
-            start: '2015-08-26',
-            end: '2015-08-26'
-        },
-        {
-            id:2,
-            title: 'Reserva aniversário',
-            start: '2015-08-26',
-            end: '2015-08-26'
-        },
-        {
-            id: 999,
-            title: 'Blindagem',
-            start: '2015-08-27T23:00:00'
-        },
-        {
-            title: 'Click for Google',
-            url: 'http://google.com/',
-            start: '2015-02-28'
-        }
-    ]
+    events: GetValues()
+    //[
+    //    {
+    //        id:1,
+    //        title: 'Reserva Letícia',
+    //        start: '2015-08-26',
+    //        end: '2015-08-26'
+    //    },
+    //    {
+    //        id:2,
+    //        title: 'Reserva aniversário',
+    //        start: '2015-08-26',
+    //        end: '2015-08-26'
+    //    },
+    //    {
+    //        id: 999,
+    //        title: 'Blindagem',
+    //        start: '2015-08-27T23:00:00'
+    //    },
+    //    {
+    //        title: 'Click for Google',
+    //        url: 'http://google.com/',
+    //        start: '2015-02-28'
+    //    }
+    //]
 });
+function GetValues() {
+    GenerateRequest('GET', '/Agenda/GetValues', null, false);
+
+    var evento = [];
+    for (var i = 0; i < resultRequest.length; i++) {
+        evento[evento.length] = { id: resultRequest[i].Id, title: resultRequest[i].ClienteNome, start: new Date(parseInt(resultRequest[i].Data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', ''))) };
+    }
+    return evento;
+}
 
 $('body').on('click', '.fc-title', function () {
     GenerateMessage('Evento', $(this).html(), 'success');

@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Data, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-6">
-                                        @Html.TextBoxFor(m => m.Data, new { @class = "form-control", @required = "required", @type="date" })
+                                        @Html.TextBoxFor(m => m.Data, new { @class = "form-control", @required = "required", @type="datetime" })
                                     </div>
                                     <div class="col-sm-2">
                                         @Html.DropDownListFor(m => m.StatusSelected, Model.Status, "Selecione", new { @class = "form-control", @required = "required" })
