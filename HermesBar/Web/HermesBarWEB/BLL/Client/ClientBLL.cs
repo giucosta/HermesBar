@@ -35,19 +35,20 @@ namespace BLL.Client
             }
         }
 
-        public bool Insert(ClientModel client, UsuarioModel user)
+        public bool Insert(ClientModel client, UsuarioModel user, bool cadastroRapido = false)
         {
             try
             {
                 ProcessDataForInsert(ref client);
                 var cli = ConvertModelToEntity(client, user);
-                if (ClientDAO.Get(cli).Tables[0].Rows.Count == 0)
+                if (!cadastroRapido)
                 {
-                    var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
-                    return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
+                    if(ClientDAO.Get(cli).Tables[0].Rows.Count != 0)
+                        throw new Exceptions("Cliente já cadastrado com mesmo RG");
                 }
-                else
-                    throw new Exceptions("Cliente já cadastrado com mesmo RG");
+                var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
+                return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
+                
             }
             catch (Exception)
             {
@@ -68,7 +69,7 @@ namespace BLL.Client
                 for (int i = 0; i < cli.Count; i++)
                     list.Add(ConvertEntityToModel(cli[i], con[i]));
 
-                return list;
+                return list.OrderBy(m => m.Contato.Nome).ToList();
             }
             catch (Exception)
             {
@@ -117,8 +118,24 @@ namespace BLL.Client
         {
             try
             {
-                client.Contato.Telefone = client.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
-                client.Contato.Celular = client.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                if (!string.IsNullOrEmpty(client.Contato.Telefone))
+                    client.Contato.Telefone = client.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                else 
+                    client.Contato.Telefone = "";
+
+                if (!string.IsNullOrEmpty(client.Contato.Celular))
+                    client.Contato.Celular = client.Contato.Celular.Replace("(", "").Replace(")", "").Replace("-", "");
+                else
+                    client.Contato.Celular = "";
+
+                if (string.IsNullOrEmpty(client.Contato.Email))
+                    client.Contato.Email = "";
+
+                if (string.IsNullOrEmpty(client.RG))
+                    client.RG = "0";
+
+                if (client.DataNascimento == DateTime.MinValue)
+                    client.DataNascimento = DateTime.Now;
             }
             catch (Exception)
             {
@@ -134,7 +151,7 @@ namespace BLL.Client
                 entity.NASC = client.DataNascimento;
                 entity._ATV = Convert.ToInt32(client.StatusSelected);
                 entity._USR = user.Id;
-                entity.RG = client.RG == null ? "" : client.RG; 
+                entity.RG = client.RG == null ? "0" : client.RG; 
 
                 return entity;
             }

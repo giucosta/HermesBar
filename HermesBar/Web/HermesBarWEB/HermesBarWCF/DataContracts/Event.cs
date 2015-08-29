@@ -27,5 +27,13 @@ namespace HermesBarWCF.DataContracts
         {
             return EventBLL.Get(evento, user);
         }
+        public bool Insert(EventModel evento, UsuarioModel user)
+        {
+            return EventBLL.Insert(evento, user);
+        }
+        public bool Update(EventModel evento, UsuarioModel user)
+        {
+            return EventBLL.Update(evento, user);
+        }
     }
 }

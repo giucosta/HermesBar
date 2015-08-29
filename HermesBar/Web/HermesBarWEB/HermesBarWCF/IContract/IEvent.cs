@@ -12,5 +12,7 @@ namespace HermesBarWCF.IContract
     public interface IEvent
     {
         List<EventModel> Get(EventModel evento, UsuarioModel user);
+        bool Insert(EventModel evento, UsuarioModel user);
+        bool Update(EventModel evento, UsuarioModel user);
     }
 }

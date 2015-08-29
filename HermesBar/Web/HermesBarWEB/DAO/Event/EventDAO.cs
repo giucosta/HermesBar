@@ -29,5 +29,53 @@ namespace DAO.Event
                 CloseConnection();
             }
         }
+        public DataTable Insert(HMA_AGE age)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_AGE.INSERT);
+                InserParameter("USR", SqlDbType.Int, age._USR);
+                InserParameter("ATV", SqlDbType.Int, age._ATV);
+                InserParameter("ID_CLI", SqlDbType.Int, age._ID_CLI);
+                InserParameter("QUANT_RESR", SqlDbType.Int, age.QUANT_RESR);
+                InserParameter("OBS", SqlDbType.VarChar, age.OBS);
+                InserParameter("DATA_RESER", SqlDbType.DateTime, age.DATA_RESER);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Update(HMA_AGE age)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_AGE.UPDATE);
+                InserParameter("USR", SqlDbType.Int, age._USR);
+                InserParameter("ATV", SqlDbType.Int, age._ATV);
+                InserParameter("QUANT_RESR", SqlDbType.Int, age.QUANT_RESR);
+                InserParameter("OBS", SqlDbType.VarChar, age.OBS);
+                InserParameter("DATA_RESER", SqlDbType.DateTime, age.DATA_RESER);
+                InserParameter("ID", SqlDbType.Int, age._ID);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

@@ -46,6 +46,28 @@ namespace BLL.Event
                 throw;
             }
         }
+        public bool Insert(EventModel evento, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(EventDAO.Insert(ConvertModelToEntity(evento, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Update(EventModel evento, UsuarioModel user)
+        {
+            try
+            {
+                return Convert.ToInt32(EventDAO.Update(ConvertModelToEntity(evento, user)).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private HMA_AGE ConvertModelToEntity(EventModel eve, UsuarioModel user)

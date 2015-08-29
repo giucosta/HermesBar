@@ -2,6 +2,23 @@
     ViewBag.Title = "Hermes Bar WEB";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Evento cadastrado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.UpdateSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Evento editado com sucesso", "success");
+    </script>
+}
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
@@ -28,8 +45,8 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="item text-center">
-                                <h3>Consulte</h3>
-                                <small class="">Consulte a agenda do dia/semana/mês que desejar</small>
+                                <h3>Editar</h3>
+                                <small class="">Para editar clique sobre o evento desejado</small>
                             </div>
                             <div class="item text-center active">
                                 <h3>Insira reservas</h3>

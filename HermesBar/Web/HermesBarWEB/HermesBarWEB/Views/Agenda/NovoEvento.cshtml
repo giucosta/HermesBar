@@ -11,13 +11,13 @@
 @if (ViewBag.InsertError != null)
 {
     <script type="text/javascript">
-        swal("Oops!", "Erro ao cadastrar cliente!", "error");
+        swal("Oops!", "Erro ao cadastrar evento!", "error");
     </script>
 }
 @if (ViewBag.UpdateError != null)
 {
     <script type="text/javascript">
-        swal("Oops!", "Erro ao editar cliente!", "error");
+        swal("Oops!", "Erro ao editar evento!", "error");
     </script>
 }
 <section id="main-content">
@@ -37,7 +37,7 @@
         <section>
             <div class="row">
                 <div class="col-md-12">
-                    @using (Html.BeginForm("CadastrarEvento", "Evento", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("CadastrarEvento", "Agenda", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         @Html.HiddenFor(m => m.Id)
                         <section class="panel">
@@ -63,7 +63,7 @@
                                         @Html.DropDownListFor(m => m.ClienteSelected, Model.Cliente, "Selecione", new { @class="form-control" })
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" class="btn btn-default">Novo</button>
+                                        <button type="button" id="novo-cliente" class="btn btn-default">Novo</button>
                                     </div>
                                 </div>
                                 <div class="form-group">

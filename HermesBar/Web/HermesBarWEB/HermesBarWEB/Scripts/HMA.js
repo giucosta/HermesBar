@@ -2,6 +2,7 @@
 var data = new Date();
 var mile_atual = data.getTime();
 var resultRequest = '';
+var evento = '';
 /***************************END GLOBAL VARIABLES**************************************/
 
 /*************************************MASK********************************************/
@@ -181,12 +182,28 @@ $('#calendar').fullCalendar({
     header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
-        
+        right: 'month,agendaWeek,agendaDay'  
     },
     editable: true,
     eventLimit: true,
-    events: GetValues()
+    events: GetValues(),
+    eventClick: function (calEvent, jsEvent, view) {
+        var data = { id: calEvent.id };
+        window.location = '/Agenda/Editar?id=' + calEvent.id;       
+    },
+    eventAfterRender: function (event, element, view) {
+    var dataHoje = new Date();
+        if (event.start < dataHoje && event.end > dataHoje) {
+            //event.color = "#FFB347"; //Em andamento
+            element.css('background-color', '#FFB347');
+        } else if (event.start < dataHoje && event.end < dataHoje) {
+            //event.color = "#77DD77"; //Concluído OK
+            element.css('background-color', '#77DD77');
+        } else if (event.start > dataHoje && event.end > dataHoje) {
+            //event.color = "#AEC6CF"; //Não iniciado
+            element.css('background-color', '#AEC6CF');
+        }
+    }
     //[
     //    {
     //        id:1,
@@ -194,22 +211,6 @@ $('#calendar').fullCalendar({
     //        start: '2015-08-26',
     //        end: '2015-08-26'
     //    },
-    //    {
-    //        id:2,
-    //        title: 'Reserva aniversário',
-    //        start: '2015-08-26',
-    //        end: '2015-08-26'
-    //    },
-    //    {
-    //        id: 999,
-    //        title: 'Blindagem',
-    //        start: '2015-08-27T23:00:00'
-    //    },
-    //    {
-    //        title: 'Click for Google',
-    //        url: 'http://google.com/',
-    //        start: '2015-02-28'
-    //    }
     //]
 });
 function GetValues() {
@@ -217,14 +218,49 @@ function GetValues() {
 
     var evento = [];
     for (var i = 0; i < resultRequest.length; i++) {
-        evento[evento.length] = { id: resultRequest[i].Id, title: resultRequest[i].ClienteNome, start: new Date(parseInt(resultRequest[i].Data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', ''))) };
+        evento[evento.length] = { id: resultRequest[i].Id, title: resultRequest[i].ClienteNome, start: DateFormat(resultRequest[i].Data) };
     }
     return evento;
 }
 
-$('body').on('click', '.fc-title', function () {
-    GenerateMessage('Evento', $(this).html(), 'success');
-});
+$('body').on('click', '#novo-cliente', function () {
+    swal({
+        title: "Cadastro rápido!",
+        text: "Insira o cliente:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Insira o nome"
+    }, function (inputValue) {
+        if (inputValue === false)
+            return false;
+        if (inputValue === "") {
+            swal.showInputError("O campo está em branco :(");
+            return false
+        }
+        var data = { nome: inputValue };
+        GenerateRequest('GET', '/Cliente/CadastroRapido', data, false);
+        if (resultRequest == 'True') {
+            swal("Legal!", "Novo cliente cadastrado!", "success");
+            GenerateRequest('GET', '/Cliente/GetJson', null, false);
+            if (resultRequest != null) {
+                GenerateClientList(resultRequest);
+            }
+        } else {
+            swal("Oops!", "Ocorreu um erro ao gravar o cliente!", "error");
+        }
+    });
+})
+
+function GenerateClientList(data) {
+    $('#ClienteSelected option').remove();
+    var selecione = '<option value="0">Selecione</option>'
+    $('#ClienteSelected').append(selecione);
+    for (var i = 0; i < data.length; i++) {
+        $('#ClienteSelected').append('<option value="' + data[i].Id + '">' + data[i].Contato.Nome + '</option>')
+    }
+}
 /**************************END CALENDAR METHODS**************************************/
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
@@ -315,6 +351,9 @@ function GenerateTimeMessage(title, message, type) {
 }
 function GenerateMessage(title, message, type) {
     swal({ title: title, text: message, type: type });
+}
+function DateFormat(data) {
+    return new Date(parseInt(data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', '')));
 }
 /********************************END AUX METHODS**************************************/
 //var db = openDatabase("HMALite", "1.0", "HMALite - Arquivos locais", 200000);

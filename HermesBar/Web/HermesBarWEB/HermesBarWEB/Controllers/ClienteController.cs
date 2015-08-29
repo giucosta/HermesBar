@@ -74,7 +74,7 @@ namespace HermesBarWEB.Controllers
                 if (cliente.Id != 0)
                     return Editar(cliente);
 
-                if (ClienteService.Insert(cliente, user))
+                if (ClienteService.Insert(cliente, user, false))
                 {
                     ViewBag.InsertSuccess = true;
                     return RedirectToAction("Get", "Cliente");
@@ -119,7 +119,28 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public bool CadastroRapido(string nome)
+        {
+            try
+            {
+                var cliente = new ClientModel();
+                cliente.Contato = new ContatoModel();
+                cliente.Contato.Nome = nome;
 
+                return ClienteService.Insert(cliente, user, true);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult GetJson()
+        {
+            return Json(ClienteService.Get(new ClientModel(), user), JsonRequestBehavior.AllowGet);
+        }
+
+
+        #region Private Methods
         private ActionResult Editar(ClientModel client)
         {
             try
@@ -163,5 +184,6 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        #endregion
     }
 }

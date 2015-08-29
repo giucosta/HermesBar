@@ -144,9 +144,9 @@ namespace HermesBarWCF
         {
             return Client.Get(client, user);
         }
-        public bool Insert(ClientModel client, UsuarioModel user)
+        public bool Insert(ClientModel client, UsuarioModel user, bool cadastroRapido)
         {
-            return Client.Insert(client, user);
+            return Client.Insert(client, user, cadastroRapido);
         }
         public bool Inactive(ClientModel client, UsuarioModel user)
         {
@@ -177,6 +177,14 @@ namespace HermesBarWCF
         public List<EventModel> Get(EventModel evento, UsuarioModel user)
         {
             return Event.Get(evento, user);
+        }
+        public bool Insert(EventModel evento, UsuarioModel user)
+        {
+            return Event.Insert(evento, user);
+        }
+        public bool Update(EventModel evento, UsuarioModel user)
+        {
+            return Event.Update(evento, user);
         }
     }
 }
