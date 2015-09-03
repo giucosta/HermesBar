@@ -16,5 +16,6 @@ namespace ENTITY.Employee
         public int TIP { get; set; }
         public int _ID_CAR { get; set; }
         public string FUN { get; set; }
+        public string SEX { get; set; }
     }
 }
