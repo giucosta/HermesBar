@@ -2,6 +2,7 @@
 using HermesBarWCF.IContract;
 using MODEL.Address;
 using MODEL.Client;
+using MODEL.Employee;
 using MODEL.Establishment;
 using MODEL.Event;
 using MODEL.Product;
@@ -185,6 +186,24 @@ namespace HermesBarWCF
         public bool Update(EventModel evento, UsuarioModel user)
         {
             return Event.Update(evento, user);
+        }
+    }
+    public class FuncionarioService : IEmployee
+    {
+        private Employee _employee = null;
+        private Employee Employee
+        {
+            get
+            {
+                if (_employee == null)
+                    _employee = new Employee();
+                return _employee;
+            }
+        }
+
+        public List<EmployeeModel> Get(EmployeeModel model, UsuarioModel user)
+        {
+            return Employee.Get(model, user);
         }
     }
 }
