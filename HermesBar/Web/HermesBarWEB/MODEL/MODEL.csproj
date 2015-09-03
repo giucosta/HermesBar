@@ -44,6 +44,7 @@
     <Compile Include="Client\ClientModel.cs" />
     <Compile Include="Commom\LayoutModel.cs" />
     <Compile Include="Contact\ContatoModel.cs" />
+    <Compile Include="Employee\EmployeeModel.cs" />
     <Compile Include="Establishment\EstablishmentModel.cs" />
     <Compile Include="Event\EventModel.cs" />
     <Compile Include="Product\CategoriaModel.cs" />

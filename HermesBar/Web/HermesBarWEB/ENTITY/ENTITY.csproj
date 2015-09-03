@@ -42,6 +42,9 @@
     <Compile Include="Client\HMA_CLI.cs" />
     <Compile Include="Commom\HMA_CON.cs" />
     <Compile Include="Commom\HMA_END.cs" />
+    <Compile Include="Employee\HMA_CAR_FUNC.cs" />
+    <Compile Include="Employee\HMA_FUNC.cs" />
+    <Compile Include="Employee\HMA_TIP_FUNC.cs" />
     <Compile Include="Establishment\HMA_EST.cs" />
     <Compile Include="Event\HMA_AGE.cs" />
     <Compile Include="Product\HMA_PROD.cs" />

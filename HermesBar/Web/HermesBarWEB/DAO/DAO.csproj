@@ -43,6 +43,7 @@
     <Compile Include="Client\ClientDAO.cs" />
     <Compile Include="Commom\EnderecoDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
+    <Compile Include="Employee\EmployeeDAO.cs" />
     <Compile Include="Establishment\EstablishmentDAO.cs" />
     <Compile Include="Event\EventDAO.cs" />
     <Compile Include="Product\ProductDAO.cs" />
@@ -69,6 +70,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SP_EST.resx</DependentUpon>
     </Compile>
+    <Compile Include="SQL\SP_EMPL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SP_EMPL.resx</DependentUpon>
+    </Compile>
     <Compile Include="SQL\SP_PROD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +87,7 @@
     </Compile>
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
+    <Compile Include="UTIL\InsertParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -107,6 +114,10 @@
     <EmbeddedResource Include="SQL\SP_EST.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SP_EST.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\SP_EMPL.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SP_EMPL.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\SP_PROD.resx">
       <Generator>ResXFileCodeGenerator</Generator>
