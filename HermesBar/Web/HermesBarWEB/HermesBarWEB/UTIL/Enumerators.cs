@@ -12,5 +12,11 @@ namespace HermesBarWEB.UTIL
             Inativo = 0,
             Ativo = 1
         }
+
+        public enum Sexo
+        {
+            Masculino = 0,
+            Feminino = 1
+        }
     }
 }

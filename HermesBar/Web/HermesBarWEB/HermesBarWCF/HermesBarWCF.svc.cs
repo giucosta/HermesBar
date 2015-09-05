@@ -209,5 +209,9 @@ namespace HermesBarWCF
         {
             return Employee.Insert(model, user);
         }
+        public List<TypeEmployeeModel> GetTypes()
+        {
+            return Employee.GetTypes();
+        }
     }
 }

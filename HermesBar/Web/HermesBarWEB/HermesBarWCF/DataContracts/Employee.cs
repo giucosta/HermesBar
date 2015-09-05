@@ -22,6 +22,17 @@ namespace HermesBarWCF.DataContracts
                 return _employeeBLL;
             }
         }
+        private TypeEmployeeBLL _typeEmployee = null;
+        private TypeEmployeeBLL TypeEmployeeBLL
+        {
+            get
+            {
+                if (_typeEmployee == null)
+                    _typeEmployee = new TypeEmployeeBLL();
+                return _employeeBLL;
+            }
+        }
+
 
         public List<EmployeeModel> Get(EmployeeModel model, UsuarioModel user)
         {
@@ -30,6 +41,11 @@ namespace HermesBarWCF.DataContracts
         public bool Insert(EmployeeModel model, UsuarioModel user)
         {
             return EmployeeBLL.Insert(model, user);
+        }
+
+        public List<TypeEmployeeModel> GetTypes()
+        {
+            return TypeEmployeeBLL.Get();
         }
     }
 }
