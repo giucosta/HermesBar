@@ -204,14 +204,6 @@ $('#calendar').fullCalendar({
             element.css('background-color', '#AEC6CF');
         }
     }
-    //[
-    //    {
-    //        id:1,
-    //        title: 'Reserva Letícia',
-    //        start: '2015-08-26',
-    //        end: '2015-08-26'
-    //    },
-    //]
 });
 function GetValues() {
     GenerateRequest('GET', '/Agenda/GetValues', null, false);
@@ -262,6 +254,11 @@ function GenerateClientList(data) {
     }
 }
 /**************************END CALENDAR METHODS**************************************/
+/*****************************EMPLOYEES METHODS**************************************/
+$('body').on('focusout', '#DataDemissao', function () {
+
+});
+/**************************END EMPLOYEES METHODS*************************************/
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');

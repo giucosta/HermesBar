@@ -1,5 +1,4 @@
-﻿using DAO.UTIL;
-using ENTITY.Commom;
+﻿using ENTITY.Commom;
 using ENTITY.Employee;
 using System;
 using System.Collections.Generic;
@@ -39,19 +38,29 @@ namespace DAO.Employee
                 CreateDataAdapter(SQL.SP_EMPL.INSERT);
                 InserParameter("USR", SqlDbType.Int, func._USR);
                 InserParameter("ATV", SqlDbType.Int, func._ATV);
-                InserParameter("RG", SqlDbType.Int, func.RG);
-                InserParameter("CPF", SqlDbType.Int, func.CPF);
-                InserParameter("CTPS", SqlDbType.Int, func.CTPS);
-                InserParameter("DT_ADM", SqlDbType.Int, func.DT_ADM);
-                InserParameter("DT_DEM", SqlDbType.Int, func.DT_DEM);
+                InserParameter("RG", SqlDbType.VarChar, func.RG);
+                InserParameter("CPF", SqlDbType.VarChar, func.CPF);
+                InserParameter("CTPS", SqlDbType.VarChar, func.CTPS);
+                InserParameter("DT_ADM", SqlDbType.DateTime, func.DT_ADM);
+                InserParameter("DT_DEM", SqlDbType.DateTime, func.DT_DEM);
                 InserParameter("TIP", SqlDbType.Int, func.TIP);
                 InserParameter("ID_CAR", SqlDbType.Int, func._ID_CAR);
                 InserParameter("FUN", SqlDbType.VarChar, func.FUN);
                 InserParameter("SEX", SqlDbType.Char, func.SEX);
 
-                new UTIL.ContactParameters().InsertContactParameters(ref con);
-                new UTIL.AddressParameters().InsertAddressParameters(ref end);
-                
+                InserParameter("RUA", SqlDbType.VarChar, end.RUA);
+                InserParameter("NUM", SqlDbType.VarChar, end.NUM);
+                InserParameter("BAI", SqlDbType.VarChar, end.BAI);
+                InserParameter("COMP", SqlDbType.VarChar, end.COMP);
+                InserParameter("CEP", SqlDbType.VarChar, end.CEP);
+                InserParameter("CID", SqlDbType.VarChar, end.CID);
+                InserParameter("UF", SqlDbType.Int, end.UF);
+
+                InserParameter("NOM", SqlDbType.VarChar, con.NOM);
+                InserParameter("TEL", SqlDbType.VarChar, con.TEL);
+                InserParameter("CEL", SqlDbType.VarChar, con.CEL);
+                InserParameter("EMA", SqlDbType.VarChar, con.EMA);
+
                 return GetResult();
             }
             catch (Exception)

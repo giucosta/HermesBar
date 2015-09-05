@@ -1,5 +1,6 @@
 ﻿using HermesBarWEB.UTIL;
 using MODEL.Address;
+using MODEL.Contact;
 using MODEL.Employee;
 using MODEL.User;
 using System;
@@ -49,6 +50,22 @@ namespace HermesBarWEB.Controllers
             LoadModel(ref model);
             return View(model);
         }
+        public ActionResult CadastrarFuncionario(EmployeeModel employee, EnderecoModel address, ContatoModel contact)
+        {
+            try
+            {
+                employee.Contato = contact;
+                employee.Endereco = address;
+
+                if (Service.Insert(employee, user))
+                    return View("Get", Service.Get(new EmployeeModel(), user));
+                return View("Get", Service.Get(new EmployeeModel(), user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void LoadModel(ref EmployeeModel employee)
@@ -89,9 +106,9 @@ namespace HermesBarWEB.Controllers
             foreach (var item in employeePlaces)
             {
                 if (employee.CargoSelected == item.Id.ToString())
-                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Descricao, Selected = true });
+                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Id.ToString(), Selected = true });
                 else
-                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Descricao });
+                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Id.ToString() });
             }
         }
         #endregion

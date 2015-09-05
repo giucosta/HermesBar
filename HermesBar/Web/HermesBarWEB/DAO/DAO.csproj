@@ -89,7 +89,6 @@
     </Compile>
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
-    <Compile Include="UTIL\InsertParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -129,6 +128,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SP_SUPPLIER.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UTIL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
