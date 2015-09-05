@@ -363,6 +363,7 @@
     <Content Include="Views\Cliente\Cadastrar.cshtml" />
     <Content Include="Views\Agenda\NovoEvento.cshtml" />
     <Content Include="Views\Funcionario\Get.cshtml" />
+    <Content Include="Views\Funcionario\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

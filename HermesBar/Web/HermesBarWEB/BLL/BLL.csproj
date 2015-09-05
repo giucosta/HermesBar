@@ -44,6 +44,8 @@
     <Compile Include="Commom\ContatoBLL.cs" />
     <Compile Include="Commom\EnderecoBLL.cs" />
     <Compile Include="Employee\EmployeeBLL.cs" />
+    <Compile Include="Employee\PlaceEmployeeBLL.cs" />
+    <Compile Include="Employee\TypeEmployeeBLL.cs" />
     <Compile Include="Establishment\EstablishmentBLL.cs" />
     <Compile Include="Event\EventBLL.cs" />
     <Compile Include="Product\ProductBLL.cs" />

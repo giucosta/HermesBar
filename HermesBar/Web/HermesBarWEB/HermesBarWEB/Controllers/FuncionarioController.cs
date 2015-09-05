@@ -1,4 +1,5 @@
 ﻿using HermesBarWEB.UTIL;
+using MODEL.Address;
 using MODEL.Employee;
 using MODEL.User;
 using System;
@@ -21,6 +22,16 @@ namespace HermesBarWEB.Controllers
                 return _service;
             }
         }
+        private HermesBarWCF.EnderecoService _enderecoService = null;
+        private HermesBarWCF.EnderecoService EnderecoService
+        {
+            get
+            {
+                if (_enderecoService == null)
+                    _enderecoService = new HermesBarWCF.EnderecoService();
+                return _enderecoService;
+            }
+        }
         
         private UsuarioModel user;
         public FuncionarioController()
@@ -34,14 +45,17 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult Cadastrar()
         {
-            return View();
+            var model = new EmployeeModel();
+            LoadModel(ref model);
+            return View(model);
         }
 
+        #region Private Methods
         private void LoadModel(ref EmployeeModel employee)
         {
             employee.Contato = new MODEL.Contact.ContatoModel();
-            employee.Endereco = new MODEL.Address.EnderecoModel();
-
+            employee.Endereco = EnderecoService.GetStates(new EnderecoModel());
+            
             employee.Status = new List<SelectListItem>();
             foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
             {
@@ -69,7 +83,17 @@ namespace HermesBarWEB.Controllers
                 else
                     employee.Tipo.Add(new SelectListItem() { Text = item.Tipo, Value = item.Id.ToString() });
             }
-            employee.
+
+            var employeePlaces = Service.GetPlaces();
+            employee.Cargo = new List<SelectListItem>();
+            foreach (var item in employeePlaces)
+            {
+                if (employee.CargoSelected == item.Id.ToString())
+                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Descricao, Selected = true });
+                else
+                    employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Descricao });
+            }
         }
+        #endregion
     }
 }

@@ -213,5 +213,9 @@ namespace HermesBarWCF
         {
             return Employee.GetTypes();
         }
+        public List<PlaceEmployeeModel> GetPlaces()
+        {
+            return Employee.GetPlaces();
+        }
     }
 }

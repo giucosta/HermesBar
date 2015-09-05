@@ -12,6 +12,7 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Employee
     {
+        #region Singleton
         private EmployeeBLL _employeeBLL = null;
         private EmployeeBLL EmployeeBLL
         {
@@ -29,10 +30,20 @@ namespace HermesBarWCF.DataContracts
             {
                 if (_typeEmployee == null)
                     _typeEmployee = new TypeEmployeeBLL();
-                return _employeeBLL;
+                return _typeEmployee;
             }
         }
-
+        private PlaceEmployeeBLL _placeEmployee = null;
+        private PlaceEmployeeBLL PlaceEmployeeBLL
+        {
+            get
+            {
+                if (_placeEmployee == null)
+                    _placeEmployee = new PlaceEmployeeBLL();
+                return _placeEmployee;
+            }
+        }
+        #endregion
 
         public List<EmployeeModel> Get(EmployeeModel model, UsuarioModel user)
         {
@@ -42,10 +53,13 @@ namespace HermesBarWCF.DataContracts
         {
             return EmployeeBLL.Insert(model, user);
         }
-
         public List<TypeEmployeeModel> GetTypes()
         {
             return TypeEmployeeBLL.Get();
+        }
+        public List<PlaceEmployeeModel> GetPlaces()
+        {
+            return PlaceEmployeeBLL.Get();
         }
     }
 }

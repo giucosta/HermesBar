@@ -1,0 +1,105 @@
+﻿@model MODEL.Employee.EmployeeModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertError != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao cadastrar funcionário!", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Funcionnários</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Funcionario/Get">Funcionário</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Funcionario/Cadastrar">Cadastro</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("CadastrarFuncionario", "Funcionario", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(m => m.Id)
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Funcionários
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Tipo, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.TipoSelected, Model.Tipo, "Selecione", new { @class="form-control", @required="required" })
+                                    </div>
+                                    @Html.LabelFor(m => m.Status, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.StatusSelected, Model.Status, "Selecione", new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.DataAdmissao, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.DataAdmissao, new { @class = "form-control", @required = "required", @type="date" })
+                                    </div>
+                                    @Html.LabelFor(m => m.DataDemissao, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.DataDemissao, new { @class = "form-control", @required = "required", @type = "date" })
+                                        <span class="help-block">Deixe em branco caso nova admissão</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Rg, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Rg, new { @class = "form-control round-input", @placeholder = "Insira o RG", @required = "required" })
+                                    </div>
+                                    @Html.LabelFor(m => m.Cpf, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control round-input", @placeholder = "Insira o CPF", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Ctps, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.TextBoxFor(m => m.Ctps, new { @class = "form-control round-input", @placeholder = "Insira a CTPS", @required = "required" })
+                                    </div>
+                                    @Html.LabelFor(m => m.Sexo, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-4">
+                                        @Html.DropDownListFor(m => m.SexoSelected, Model.Sexo, "Selecione", new { @class="form-control", @required="required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Cargo, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(m => m.CargoSelected, Model.Cargo, "Selecione", new { @class = "form-control", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Funcao, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.Funcao, new { @class="form-control", @required="required",@placeholder="Descrimine a função" })
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @Html.Partial("~/Views/Partials/EnderecoPartial.cshtml", Model.Endereco)
+                        @Html.Partial("~/Views/Partials/ContatoPartial.cshtml", Model.Contato)
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

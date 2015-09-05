@@ -44,6 +44,8 @@
     <Compile Include="Commom\EnderecoDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
     <Compile Include="Employee\EmployeeDAO.cs" />
+    <Compile Include="Employee\PlaceEmployeeDAO.cs" />
+    <Compile Include="Employee\TypeEmployeeDAO.cs" />
     <Compile Include="Establishment\EstablishmentDAO.cs" />
     <Compile Include="Event\EventDAO.cs" />
     <Compile Include="Product\ProductDAO.cs" />
