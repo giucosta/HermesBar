@@ -68,25 +68,56 @@ namespace BLL.Employee
                 throw;
             }
         }
+        public bool Insert(EmployeeModel employee, UsuarioModel user)
+        {
+            try
+            {
+                ProcessDataForInsert(ref employee);
 
+                var employeeEntity = ConvertModelToEntity(employee, user);
+                var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
+                var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
+
+                return Convert.ToInt32(EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private void ProcessDataForInsert(ref EmployeeModel emp)
+        {
+            try
+            {
+                emp.Rg = emp.Rg.Replace(".", "").Replace("-", "");
+                emp.Cpf = emp.Cpf.Replace(".", "").Replace("-", "");
+                emp.Contato.Telefone = emp.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                emp.Contato.Celular = emp.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
+                emp.Endereco.Cep = emp.Endereco.Cep.Replace("-", "");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #region Private Methods
-        private EmployeeModel ConvertEntityToModel(HMA_FUNC func, HMA_CON con, HMA_END end)
+        private EmployeeModel ConvertEntityToModel(HMA_FUNC emp, HMA_CON con, HMA_END end)
         {
             try
             {
                 var model = new EmployeeModel();
-                model.CargoSelected = func._ID_CAR.ToString();
+                model.CargoSelected = emp._ID_CAR.ToString();
                 model.Contato = ContatoBLL.ConvertEntityToModel(con);
                 model.Endereco = EnderecoBLL.ConvertEntityToModel(end);
-                model.Funcao = func.FUN;
-                model.Id = func._ID;
-                model.Rg = func.RG;
-                model.Cpf = func.CPF;
-                model.Ctps = func.CTPS;
-                model.DataAdmissao = func.DT_ADM;
-                model.DataDemissao = func.DT_DEM;
-                model.SexoSelected = func.SEX;
-                model.TipoSelected = func.TIP.ToString();
+                model.Funcao = emp.FUN;
+                model.Id = emp._ID;
+                model.Rg = emp.RG;
+                model.Cpf = emp.CPF;
+                model.Ctps = emp.CTPS;
+                model.DataAdmissao = emp.DT_ADM;
+                model.DataDemissao = emp.DT_DEM;
+                model.SexoSelected = emp.SEX;
+                model.TipoSelected = emp.TIP.ToString();
 
                 return model;
             }

@@ -205,5 +205,9 @@ namespace HermesBarWCF
         {
             return Employee.Get(model, user);
         }
+        public bool Insert(EmployeeModel model, UsuarioModel user)
+        {
+            return Employee.Insert(model, user);
+        }
     }
 }

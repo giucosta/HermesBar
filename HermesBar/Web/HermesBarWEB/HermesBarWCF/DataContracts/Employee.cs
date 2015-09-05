@@ -27,5 +27,9 @@ namespace HermesBarWCF.DataContracts
         {
             return EmployeeBLL.Get(model, user);
         }
+        public bool Insert(EmployeeModel model, UsuarioModel user)
+        {
+            return EmployeeBLL.Insert(model, user);
+        }
     }
 }
