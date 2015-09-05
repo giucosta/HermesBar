@@ -7,6 +7,7 @@ var evento = '';
 
 /*************************************MASK********************************************/
 $('#Cnpj').mask('00.000.000/0000-00');
+$('#Cpf').mask('000.000.000-00');
 $('#Cep').mask('00000-000');
 $('#Telefone').mask('(00)0000-00009')
 $('#Celular').mask('(00)0000-00009');
@@ -256,7 +257,22 @@ function GenerateClientList(data) {
 /**************************END CALENDAR METHODS**************************************/
 /*****************************EMPLOYEES METHODS**************************************/
 $('body').on('focusout', '#DataDemissao', function () {
-
+    if ($(this).val() == '' || $(this).val() == undefined) {
+        return;
+    }
+    if ($(this).val() < $('#DataAdmissao').val()) {
+        GenerateTimeMessage('Oops!', 'Data de demissão não pode ser inferior a data de admissão!', 'warning');
+        $(this).val('');
+        $(this).focus();
+        return false;
+    }
+});
+$('body').on('focusout', '#Cpf', function () {
+    if (CpfValidade($(this).val()) == false) {
+        GenerateTimeMessage('Oops!', 'CPF inválido', 'warning');
+        $(this).focus();
+        return false;
+    }
 });
 /**************************END EMPLOYEES METHODS*************************************/
 /***********************************AUX METHODS**************************************/
@@ -307,6 +323,31 @@ function CnpjValidade(cnpj){
     if (resultado != digitos.charAt(1))
         return false;
 
+    return true;
+}
+function CpfValidade(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, '');
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (cpf == "00000000000")
+        return false;
+    for (i = 1; i <= 9; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))
+        Resto = 0;
+
+    if (Resto != parseInt(cpf.substring(9, 10)))
+        return false;
+    Soma = 0;
+    for (i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto != parseInt(cpf.substring(10, 11)))
+        return false;
     return true;
 }
 function GenerateRequest(type, url, data, async) {
