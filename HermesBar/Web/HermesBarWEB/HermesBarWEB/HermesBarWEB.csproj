@@ -134,6 +134,7 @@
     <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PdvController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Controllers\UnidadeMedidaController.cs" />
@@ -366,6 +367,8 @@
     <Content Include="Views\Funcionario\Get.cshtml" />
     <Content Include="Views\Funcionario\Cadastrar.cshtml" />
     <Content Include="Views\Estoque\Consultar.cshtml" />
+    <Content Include="Views\Shared\_LayoutPdv.cshtml" />
+    <Content Include="Views\Pdv\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

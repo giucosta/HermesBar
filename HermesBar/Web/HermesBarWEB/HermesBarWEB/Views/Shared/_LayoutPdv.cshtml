@@ -1,0 +1,137 @@
+﻿@{
+    var Model = new MODEL.Commom.LayoutModel();
+    Model.List = new List<MODEL.Commom.LayoutModel>();
+    if (ViewBag.Email != null)
+    {
+        Model = (MODEL.Commom.LayoutModel)ViewBag.Email;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/img/favicon.png">
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/bootstrap-theme")
+    @Styles.Render("~/content/elegante-icons")
+    @Styles.Render("~/content/font-awesome")
+    @Styles.Render("~/content/style")
+    @Styles.Render("~/content/responsive")
+    @Styles.Render("~/content/sweetalert")
+    @Styles.Render("~/content/calendar")
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="modal"><!-- Place at bottom of page --></div>
+    <section id="container" class="">
+        <header class="header dark-bg">
+            <div class="toggle-nav">
+                <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+            </div>
+            <a href="/Pdv/Index" class="logo">Hermes <span class="lite">Bar PDV</span></a>
+            <div class="top-nav notification-row">
+                <ul class="nav pull-right top-menu">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="/img/avatar1_small.jpg">
+                            </span>
+                            <span class="username">@ViewBag.User</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li>
+                                <a href="#" id="tela-cheia"><i class="icon_desktop"></i> Tela Cheia</a>
+                            </li>
+                            <li>
+                                <a href="/Login/EfetuarLogoff"><i class="icon_key_alt"></i> Sair</a>
+                            </li>
+                            <li>
+                                <a href="documentation.html"><i class="icon_documents_alt"></i> Documentação</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <aside>
+            <div id="sidebar" class="nav-collapse ">
+                <ul class="sidebar-menu">
+                    <li class="">
+                        <a class="" href="/Home/Index">
+                            <i class="icon_house_alt"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Cliente</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Entrada", "Get", "Fornecedor")</li>
+                            <li>@Html.ActionLink("Saída", "Get", "Produto")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span>Operações</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Abrir Caixa", "Get", "Fornecedor")</li>
+                            <li>@Html.ActionLink("Sangria", "Get", "Fornecedor")</li>
+                            <li>@Html.ActionLink("Reforço", "Get", "Produto")</li>
+                            <li>@Html.ActionLink("Fechar Caixa", "Get", "Cliente")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_desktop"></i>
+                            <span>Vender</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Vender", "Configuracoes", "Estabelecimento")</li>
+                        </ul>
+                    </li>
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_table"></i>
+                            <span>Atender</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="basic_table.html">Atender</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        @RenderBody()
+    </section>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scrollTo")
+    @Scripts.Render("~/bundles/niceScroll")
+    @Scripts.Render("~/bundles/jqueryMask")
+    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/sweetalert")
+    <script src="~/Scripts/moment.min.js"></script>
+    @Scripts.Render("~/bundles/calendar")
+    <script src="~/Scripts/lang-all.js"></script>
+    @Scripts.Render("~/bundles/hma")
+</body>
+</html>
