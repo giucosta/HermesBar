@@ -217,5 +217,9 @@ namespace HermesBarWCF
         {
             return Employee.GetPlaces();
         }
+        public bool Update(EmployeeModel model, UsuarioModel user)
+        {
+            return Employee.Update(model, user);
+        }
     }
 }

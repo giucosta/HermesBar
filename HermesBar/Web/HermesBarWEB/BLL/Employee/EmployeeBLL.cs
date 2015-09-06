@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using System.Data.SqlTypes;
 
 namespace BLL.Employee
 {
@@ -73,12 +74,37 @@ namespace BLL.Employee
             try
             {
                 ProcessDataForInsert(ref employee);
+                if (EmployeeDAO.Get(ConvertModelToEntity(employee, user)).Tables[0].Rows.Count == 0)
+                {
+                    var employeeEntity = ConvertModelToEntity(employee, user);
+                    var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
+                    var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
 
-                var employeeEntity = ConvertModelToEntity(employee, user);
-                var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
-                var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
+                    return Convert.ToInt32(EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+                }
+                else
+                    throw new Exception("Cpf já cadastrado!");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Update(EmployeeModel employee, UsuarioModel user)
+        {
+            try
+            {
+                ProcessDataForInsert(ref employee);
+                if (EmployeeDAO.Get(ConvertModelToEntity(employee, user)).Tables[0].Rows.Count == 1)
+                {
+                    var employeeEntity = ConvertModelToEntity(employee, user);
+                    var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
+                    var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
 
-                return Convert.ToInt32(EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+                    return Convert.ToInt32(EmployeeDAO.Update(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+                }
+                else
+                    throw new Exception("Cpf já cadastrado!");
             }
             catch (Exception)
             {
@@ -94,6 +120,8 @@ namespace BLL.Employee
                 emp.Contato.Telefone = emp.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
                 emp.Contato.Celular = emp.Contato.Telefone.Replace("(", "").Replace(")", "").Replace("-", "");
                 emp.Endereco.Cep = emp.Endereco.Cep.Replace("-", "");
+                if (emp.DataDemissao == DateTime.MinValue)
+                    emp.DataDemissao = (DateTime)SqlDateTime.MinValue;
             }
             catch (Exception)
             {
@@ -118,6 +146,7 @@ namespace BLL.Employee
                 model.DataDemissao = emp.DT_DEM;
                 model.SexoSelected = emp.SEX;
                 model.TipoSelected = emp.TIP.ToString();
+                model.StatusSelected = emp._ATV.ToString();
 
                 return model;
             }

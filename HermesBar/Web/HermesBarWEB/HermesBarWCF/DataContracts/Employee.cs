@@ -61,5 +61,9 @@ namespace HermesBarWCF.DataContracts
         {
             return PlaceEmployeeBLL.Get();
         }
+        public bool Update(EmployeeModel model, UsuarioModel user)
+        {
+            return EmployeeBLL.Update(model, user);
+        }
     }
 }

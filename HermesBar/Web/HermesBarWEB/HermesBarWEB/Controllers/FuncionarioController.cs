@@ -39,10 +39,10 @@ namespace HermesBarWEB.Controllers
         {
             GetSession.GetUserSession(ref this.user);
         }
-
+        
         public ActionResult Get()
         {
-            return View(Service.Get(new EmployeeModel(), user));
+            return View(Service.Get(new EmployeeModel() { Cpf = "" }, user));
         }
         public ActionResult Cadastrar()
         {
@@ -57,21 +57,61 @@ namespace HermesBarWEB.Controllers
                 employee.Contato = contact;
                 employee.Endereco = address;
 
+                if (employee.Id != 0)
+                    return EditarFuncionar(employee);
+
                 if (Service.Insert(employee, user))
-                    return View("Get", Service.Get(new EmployeeModel(), user));
-                return View("Get", Service.Get(new EmployeeModel(), user));
+                {
+                    ViewBag.InsertSuccess = true;
+                    return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+                }
+                ViewBag.InsertError = true;
+                LoadModel(ref employee);
+                return View("Cadastrar", employee);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                ViewBag.CpfCadastrado = ex.Message;
+                LoadModel(ref employee);
+                return View("Cadastrar", employee);
+            }
+        }
+        public ActionResult GetId(int id)
+        {
+            var model = Service.Get(new EmployeeModel() { Id = id, Cpf = "" }, user).FirstOrDefault();
+            LoadModel(ref model);
+            return View("Cadastrar", model);
+        }
+        private ActionResult EditarFuncionar(EmployeeModel employee)
+        {
+            try
+            {
+                if (Service.Update(employee, user))
+                {
+                    ViewBag.UpdateSuccess = true;
+                    return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+                }
+                ViewBag.UpdateError = true;
+                LoadModel(ref employee);
+                return View("Cadastrar", employee);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.CpfCadastrado = ex.Message;
+                LoadModel(ref employee);
+                return View("Cadastrar", employee);
             }
         }
 
         #region Private Methods
         private void LoadModel(ref EmployeeModel employee)
         {
-            employee.Contato = new MODEL.Contact.ContatoModel();
-            employee.Endereco = EnderecoService.GetStates(new EnderecoModel());
+            if(employee.Contato == null)
+                employee.Contato = new MODEL.Contact.ContatoModel();
+            if (employee.Endereco != null)
+                employee.Endereco = EnderecoService.GetStates(employee.Endereco);
+            else
+                employee.Endereco = EnderecoService.GetStates(new EnderecoModel());
             
             employee.Status = new List<SelectListItem>();
             foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
