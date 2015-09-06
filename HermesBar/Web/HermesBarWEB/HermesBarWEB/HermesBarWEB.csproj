@@ -369,6 +369,7 @@
     <Content Include="Views\Estoque\Consultar.cshtml" />
     <Content Include="Views\Shared\_LayoutPdv.cshtml" />
     <Content Include="Views\Pdv\Index.cshtml" />
+    <Content Include="Views\Pdv\AbrirCaixa.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

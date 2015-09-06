@@ -13,6 +13,8 @@ $('#Telefone').mask('(00)0000-00009')
 $('#Celular').mask('(00)0000-00009');
 $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
+$('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
+$('#data-abertura-caixa').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -275,6 +277,26 @@ $('body').on('focusout', '#Cpf', function () {
     }
 });
 /**************************END EMPLOYEES METHODS*************************************/
+/**********************************CAIXA METHODS*************************************/
+$('body').on('click', '#abrir-caixa', function () {
+    swal({
+        title: 'Deseja abrir o caixa?',
+        text: 'Abrir o caixa permite realizar inúmeras funções gerenciais',
+        type: 'info',
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+    }, function () {
+        var data = { valorInicial: $('#caixa-valor-inicial').val() };
+        GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
+        if (resultRequest == 'True') {
+            GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
+        } else {
+            GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+        }
+    });
+});
+/******************************END CAIXA METHODS*************************************/
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');
@@ -392,6 +414,29 @@ function GenerateMessage(title, message, type) {
 }
 function DateFormat(data) {
     return new Date(parseInt(data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', '')));
+}
+function FormatActualDate(dateToFormat) {
+    var dateValue = new Date(dateToFormat);
+    var monthValue = dateValue.getMonth() + 1;
+    var dayValue = dateValue.getDate();
+    var yearValue = dateValue.getFullYear();
+    var hoursValue = dateValue.getHours();
+    var minutesValue = dateValue.getMinutes();
+    var secondsValue = dateValue.getSeconds();
+
+    if (monthValue < 10)
+        monthValue = '0' + monthValue;
+    if (dayValue < 10)
+        dayValue = '0' + dayValue;
+    if (hoursValue < 10)
+        hoursValue = '0' + hoursValue;
+    if (minutesValue < 10)
+        minutesValue = '0' + minutesValue;
+    if (secondsValue < 10)
+        secondsValue = '0' + secondsValue;
+
+    // dd-mm-yyyy-hh-mm-ss
+    return (dayValue + '/' + monthValue + '/' + yearValue + ' - ' + hoursValue + ':' + minutesValue);
 }
 /********************************END AUX METHODS**************************************/
 //var db = openDatabase("HMALite", "1.0", "HMALite - Arquivos locais", 200000);
