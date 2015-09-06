@@ -105,5 +105,45 @@ namespace DAO.Employee
 
             return GetResult();
         }
+        public DataTable Inactive(HMA_FUNC func)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_EMPL.INACTIVE);
+                InserParameter("ID", SqlDbType.Int, func._ID);
+                InserParameter("USR", SqlDbType.Int, func._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Active(HMA_FUNC func)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_EMPL.ACTIVE);
+                InserParameter("ID", SqlDbType.Int, func._ID);
+                InserParameter("USR", SqlDbType.Int, func._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

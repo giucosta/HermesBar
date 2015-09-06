@@ -16,5 +16,7 @@ namespace HermesBarWCF.IContract
         bool Update(EmployeeModel model, UsuarioModel user);
         List<TypeEmployeeModel> GetTypes();
         List<PlaceEmployeeModel> GetPlaces();
+        bool Active(EmployeeModel model, UsuarioModel user);
+        bool Inactive(EmployeeModel model, UsuarioModel user);
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="UTIL\Conversores.cs" />
     <Compile Include="UTIL\Exceptions.cs" />
     <Compile Include="UTIL\GetEmail.cs" />
+    <Compile Include="UTIL\GetResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj">

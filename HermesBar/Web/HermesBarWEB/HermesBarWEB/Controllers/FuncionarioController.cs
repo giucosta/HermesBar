@@ -102,6 +102,36 @@ namespace HermesBarWEB.Controllers
                 return View("Cadastrar", employee);
             }
         }
+        public ActionResult InactiveId(int id)
+        {
+            try
+            {
+                if (Service.Inactive(new EmployeeModel() { Id = id }, user))
+                    ViewBag.InactiveSuccess = true;
+                else
+                    ViewBag.InactiveError = true;
+                return View("Get", Service.Get(new EmployeeModel() { Cpf= "" }, user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult ActiveId(int id)
+        {
+            try
+            {
+                if (Service.Active(new EmployeeModel() { Id = id }, user))
+                    ViewBag.ActiveSuccess = true;
+                else
+                    ViewBag.ActiveError = true;
+                return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void LoadModel(ref EmployeeModel employee)

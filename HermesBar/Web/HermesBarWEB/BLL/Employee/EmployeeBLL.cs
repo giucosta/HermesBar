@@ -80,7 +80,7 @@ namespace BLL.Employee
                     var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
                     var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
 
-                    return Convert.ToInt32(EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+                    return EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).GetResults();
                 }
                 else
                     throw new Exception("Cpf já cadastrado!");
@@ -101,7 +101,7 @@ namespace BLL.Employee
                     var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
                     var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
 
-                    return Convert.ToInt32(EmployeeDAO.Update(employeeEntity, contatcEntity, addressEntity).Rows[0]["SUCCESS"]) != 0;
+                    return EmployeeDAO.Update(employeeEntity, contatcEntity, addressEntity).GetResults();
                 }
                 else
                     throw new Exception("Cpf já cadastrado!");
@@ -111,6 +111,30 @@ namespace BLL.Employee
                 throw;
             }
         }
+        public bool Active(EmployeeModel employee, UsuarioModel user)
+        {
+            try
+            {
+                return EmployeeDAO.Active(ConvertModelToEntity(employee, user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Inactive(EmployeeModel employee, UsuarioModel user)
+        {
+            try
+            {
+                return EmployeeDAO.Inactive(ConvertModelToEntity(employee, user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        #region Private Methods
         private void ProcessDataForInsert(ref EmployeeModel emp)
         {
             try
@@ -128,7 +152,6 @@ namespace BLL.Employee
                 throw;
             }
         }
-        #region Private Methods
         private EmployeeModel ConvertEntityToModel(HMA_FUNC emp, HMA_CON con, HMA_END end)
         {
             try

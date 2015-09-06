@@ -221,5 +221,13 @@ namespace HermesBarWCF
         {
             return Employee.Update(model, user);
         }
+        public bool Active(EmployeeModel model, UsuarioModel user)
+        {
+            return Employee.Active(model, user);
+        }
+        public bool Inactive(EmployeeModel model, UsuarioModel user)
+        {
+            return Employee.Inactive(model, user);
+        }
     }
 }
