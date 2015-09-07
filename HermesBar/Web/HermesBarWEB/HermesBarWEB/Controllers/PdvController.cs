@@ -30,6 +30,9 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
+                ((PdvSession)Session["PDV"]).ValorInicial = Convert.ToDecimal(valorInicial);
+                ((PdvSession)Session["PDV"]).DataAbertura = DateTime.Now;
+                ((PdvSession)Session["PDV"]).Usuario = _user.Id;
                 return true;
             }
             catch (Exception)
