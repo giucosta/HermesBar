@@ -12,6 +12,7 @@ namespace HermesBarWEB.Controllers
 {
     public class PdvController : Controller
     {
+        #region Singleton
         private UsuarioModel _user;
         private HermesBarWCF.CaixaService _caixaService = null;
         private HermesBarWCF.CaixaService CaixaService
@@ -23,6 +24,7 @@ namespace HermesBarWEB.Controllers
                 return _caixaService;
             }
         }
+        #endregion
         public PdvController()
         {
             GetSession.GetUserSession(ref this._user);
@@ -42,25 +44,6 @@ namespace HermesBarWEB.Controllers
         public ActionResult FecharCaixa()
         {
             return View();
-        }
-        public bool FecharCaixaValor(string valorFinal)
-        {
-            try
-            {
-                var model = (PayBoxModel)Session["PDV"];
-                
-                model.DataFechamento = DateTime.Now;
-                model.StatusSelected = "1";
-                model.ValorFechamento = Convert.ToDecimal(valorFinal);
-
-                LoadSessionPdv(ref model);
-                model.Aberto = !CaixaService.Close(model, _user);
-                return model.Aberto;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
         }
         public bool AbrirCaixaValor(string valorInicial)
         {
@@ -83,6 +66,34 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public bool FecharCaixaValor(string valorFinal)
+        {
+            try
+            {
+                var model = (PayBoxModel)Session["PDV"];
+                
+                model.DataFechamento = DateTime.Now;
+                model.StatusSelected = "1";
+                model.ValorFechamento = Convert.ToDecimal(valorFinal);
+
+                LoadSessionPdv(ref model);
+                model.Aberto = !CaixaService.Close(model, _user);
+                return model.Aberto;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult EntradaCliente()
+        {
+            return View();
+        }
+        public bool EntradaClienteCadastro(string id, string nome, string telefone, string nascimento)
+        {
+            return true;
+        }
+        #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)
         {
             try
@@ -97,5 +108,6 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        #endregion
     }
 }

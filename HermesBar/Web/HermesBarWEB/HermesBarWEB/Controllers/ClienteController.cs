@@ -53,6 +53,21 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public ActionResult GetRg(string rg)
+        {
+            try
+            {
+                var result = ClienteService.Get(new ClientModel() { RG = rg }, user).FirstOrDefault();
+                if (result != null)
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                else
+                    return Json(null, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public ActionResult Cadastrar()
         {
             try

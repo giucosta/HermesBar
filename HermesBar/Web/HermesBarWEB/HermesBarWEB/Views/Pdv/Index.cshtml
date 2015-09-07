@@ -76,11 +76,11 @@
                             <div class="col-md-3">
                                 @if (session.Aberto)
                                 {
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" >Entrada cliente</button>
+                                    @Html.ActionLink("Entrada Cliente", "EntradaCliente", "Pdv", new { @class = "btn btn-primary btn-lg btn-block", @disabled = "disabled" })
                                 }
                                 else
                                 {
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Entrada cliente</button>
+                                    @Html.ActionLink("Entrada Cliente", "EntradaCliente", "Pdv", new { @class = "btn btn-primary btn-lg btn-block" })
                                 }
                             </div>
                             <div class="col-md-3">

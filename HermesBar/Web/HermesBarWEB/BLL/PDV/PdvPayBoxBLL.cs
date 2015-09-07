@@ -58,10 +58,10 @@ namespace BLL.PDV
                     model.Aberto = true;
                     return model;
                 }
-                var model = new PayBoxModel();
-                model.Aberto = false;
+                var retorno = new PayBoxModel();
+                retorno.Aberto = false;
 
-                return model;
+                return retorno;
             }
             catch (Exception)
             {

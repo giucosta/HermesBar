@@ -11,12 +11,15 @@ $('#Cpf').mask('000.000.000-00');
 $('#Cep').mask('00000-000');
 $('#Telefone').mask('(00)0000-00009')
 $('#Celular').mask('(00)0000-00009');
+$('#telefone-cliente').mask('(00)0000-00009');
 $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
+$('#nascimento-cliente').mask('00/00/0000');
 $('#data-abertura-caixa').val(FormatActualDate(new Date()));
 $('#data-fechamento-caixa').val(FormatActualDate(new Date()));
+$('#data-entrada-cliente').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -144,7 +147,6 @@ $('body').on('click', '#novo-unidade', function () {
         }
     });
 });
-
 
 function GenerateTypeList(data) {
     $('#TipoSelected option').remove();
@@ -318,6 +320,43 @@ $('body').on('click', '#fechar-caixa', function () {
             GenerateTimeMessage('OOps!', 'Erro ao fechar caixa', 'error');
         }
     });
+});
+
+$('body').on('focusout', '#rg-cliente', function () {
+    resultRequest = null;
+    var data = { rg: $(this).val() };
+    GenerateRequest('GET', '/Cliente/GetRg', data, false);
+    if (resultRequest != undefined) {
+        console.log(resultRequest);
+        $('#id-cliente').val(resultRequest.Id);
+        $('#nome-cliente').val(resultRequest.Contato.Nome);
+        $('#telefone-cliente').val(resultRequest.Contato.Celular);
+        $('#nascimento-cliente').val(FormatActualDate(DateFormat(resultRequest.DataNascimento)));
+        $('#nome-cliente').prop('disabled', true);
+        $('#telefone-cliente').prop('disabled', true);
+        $('#nascimento-cliente').prop('disabled', true);
+    } else {
+        GenerateTimeMessage('Oops!', 'Cliente não cadastrado!', 'warning');
+        $('#nome-cliente').prop('disabled', false);
+        $('#nome-cliente').focus();
+        $('#telefone-cliente').prop('disabled', false);
+        $('#nascimento-cliente').prop('disabled', false);
+        $('#id-cliente').val('');
+        $('#nome-cliente').val('');
+        $('#telefone-cliente').val('');
+        $('#nascimento-cliente').val('');
+    }
+});
+
+$('body').on('click', '#entrada-cliente', function () {
+    var nascimento = $('#nascimento-cliente').val().split('-');
+    var data = { id: $('#id-cliente').val(), nome: $('#nome-cliente').val(), telefone: $('#telefone-cliente').val(), nascimento: nascimento[0].replace(/ /g, '') };
+    GenerateRequest('GET', '/Pdv/EntradaClienteCadastro', data, false);
+    if (resultRequest == 'True') {
+        GenerateTimeMessage('Uhul!', 'Entrada liberada!', 'success');
+    } else {
+        GenerateTimeMessage('OOps!', 'Erro ao realizar a entrada do cliente!', 'error');
+    }
 });
 /******************************END CAIXA METHODS*************************************/
 /***********************************AUX METHODS**************************************/
