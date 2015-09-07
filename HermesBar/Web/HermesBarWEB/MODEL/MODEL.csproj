@@ -49,6 +49,7 @@
     <Compile Include="Employee\TypeEmployeeModel.cs" />
     <Compile Include="Establishment\EstablishmentModel.cs" />
     <Compile Include="Event\EventModel.cs" />
+    <Compile Include="PDV\PayBox\CaixaModel.cs" />
     <Compile Include="PDV\Session\PdvSession.cs" />
     <Compile Include="Product\CategoriaModel.cs" />
     <Compile Include="Product\ProdutoModel.cs" />

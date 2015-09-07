@@ -14,7 +14,9 @@ $('#Celular').mask('(00)0000-00009');
 $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
+$('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
 $('#data-abertura-caixa').val(FormatActualDate(new Date()));
+$('#data-fechamento-caixa').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -291,8 +293,29 @@ $('body').on('click', '#abrir-caixa', function () {
         GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
         if (resultRequest == 'True') {
             GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
+            windows.location = 'Pdv/Index';
         } else {
             GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+        }
+    });
+});
+
+$('body').on('click', '#fechar-caixa', function () {
+    swal({
+        title: 'Deseja fechar o caixa?',
+        text: 'Ao fechar o caixa, nenhum pedido poderá ser emitido',
+        type: 'info',
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+    }, function () {
+        var data = { valorFinal: $('#caixa-valor-final').val() };
+        GenerateRequest('GET', '/Pdv/FecharCaixaValor', data, false);
+        if (resultRequest == 'False') {
+            GenerateTimeMessage('Uhul!', 'Caixa fechado com sucesso!', 'success');
+            windows.location = 'Pdv/Index';
+        } else {
+            GenerateTimeMessage('OOps!', 'Erro ao fechar caixa', 'error');
         }
     });
 });

@@ -5,6 +5,7 @@ using MODEL.Client;
 using MODEL.Employee;
 using MODEL.Establishment;
 using MODEL.Event;
+using MODEL.PDV.PayBox;
 using MODEL.Product;
 using MODEL.User;
 using System;
@@ -228,6 +229,31 @@ namespace HermesBarWCF
         public bool Inactive(EmployeeModel model, UsuarioModel user)
         {
             return Employee.Inactive(model, user);
+        }
+    }
+    public class CaixaService : IPayBox
+    {
+        private PayBox _payBox = null;
+        private PayBox PayBox
+        {
+            get
+            {
+                if (_payBox == null)
+                    _payBox = new PayBox();
+                return _payBox;
+            }
+        }
+        public bool Open(PayBoxModel payBox, UsuarioModel user)
+        {
+            return PayBox.Open(payBox, user);
+        }
+        public PayBoxModel VerifyPayBox()
+        {
+            return PayBox.VerifyPayBox();
+        }
+        public bool Close(PayBoxModel payBox, UsuarioModel user)
+        {
+            return PayBox.Close(payBox, user);
         }
     }
 }

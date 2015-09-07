@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Hermes Bar PDV";
     Layout = "~/Views/Shared/_LayoutPdv.cshtml";
+    var session = (MODEL.PDV.PayBox.PayBoxModel)Session["PDV"];
 }
 <section id="main-content">
     <section class="wrapper">
@@ -53,16 +54,44 @@
                     <div class="row">
                         <div class="panel-body">
                             <div class="col-md-3">
-                                @Html.ActionLink("Abrir Caixa", "AbrirCaixa", "Pdv", new { @class = "btn btn-primary btn-lg btn-block" })
+                                @if (session.Aberto)
+                                {
+                                    @Html.ActionLink("Abrir Caixa", "AbrirCaixa", "Pdv", new { @class = "btn btn-primary btn-lg btn-block", @disabled="disabled" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Abrir Caixa", "AbrirCaixa", "Pdv", new { @class = "btn btn-primary btn-lg btn-block" })
+                                }
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Fechar caixa</button>
+                                @if (session.Aberto)
+                                {
+                                    @Html.ActionLink("Fechar Caixa", "FecharCaixa", "Pdv", new { @class = "btn btn-primary btn-lg btn-block" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Fechar Caixa", "FecharCaixa", "Pdv", new { @class = "btn btn-primary btn-lg btn-block", @disabled="disabled" })
+                                }
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Entrada cliente</button>
+                                @if (session.Aberto)
+                                {
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" >Entrada cliente</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Entrada cliente</button>
+                                }
                             </div>
                             <div class="col-md-3">
-                                <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Saída cliente</button>
+                                @if (session.Aberto)
+                                {
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Saída cliente</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" disabled="disabled">Saída cliente</button>
+                                }
                             </div>
                         </div>
                     </div>

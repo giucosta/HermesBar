@@ -9,7 +9,7 @@
                 <h3 class="page-header"><i class="fa fa fa-bars"></i>Caixa</h3>
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/Pdv/Index">Home</a></li>
-                    <li><i class="icon_document_alt"></i><a href="/Pdv/AbrirCaixa">Abrir Caixa</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Pdv/FecharCaixa">Fechar Caixa</a></li>
                 </ol>
             </div>
         </div>
@@ -21,26 +21,25 @@
                     <form class="form-horizontal">
                         <section class="panel">
                             <header class="panel-heading">
-                                Abrir Caixa
+                                Fechar Caixa
                             </header>
                             <div class="panel-body">
 
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Valor Inicial</label>
+                                    <label class="col-sm-2 control-label">Valor Final</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="caixa-valor-inicial" placeholder="Insira o valor disponível em caixa" />
+                                        <input type="text" class="form-control" id="caixa-valor-final" placeholder="Insira o valor total em caixa" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Data Abertura</label>
+                                    <label class="col-sm-2 control-label">Data Fechamento</label>
                                     <div class="col-sm-10">
-                                        <input type="datetime" id="data-abertura-caixa" class="form-control" disabled="disabled" />
+                                        <input type="datetime" id="data-fechamento-caixa" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
-
                             </div>
                         </section>
-                        <button type="button" class="btn btn-primary" id="abrir-caixa">Abrir caixa</button>
+                        <button type="button" class="btn btn-primary" id="fechar-caixa">Fechar caixa</button>
                     </form>
                 </div>
             </div>
