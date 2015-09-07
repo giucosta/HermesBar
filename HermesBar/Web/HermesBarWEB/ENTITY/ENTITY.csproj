@@ -48,6 +48,8 @@
     <Compile Include="Establishment\HMA_EST.cs" />
     <Compile Include="Event\HMA_AGE.cs" />
     <Compile Include="PDV\HMA_PDV_CAI.cs" />
+    <Compile Include="PDV\HMA_PDV_CLI.cs" />
+    <Compile Include="PDV\HMA_PDV_CLI_MOV.cs" />
     <Compile Include="Product\HMA_PROD.cs" />
     <Compile Include="Product\HMA_TIP.cs" />
     <Compile Include="Product\HMA_UNI_MED.cs" />

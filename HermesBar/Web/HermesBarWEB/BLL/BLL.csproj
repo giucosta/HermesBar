@@ -48,6 +48,7 @@
     <Compile Include="Employee\TypeEmployeeBLL.cs" />
     <Compile Include="Establishment\EstablishmentBLL.cs" />
     <Compile Include="Event\EventBLL.cs" />
+    <Compile Include="PDV\PdvClientBLL.cs" />
     <Compile Include="PDV\PdvPayBoxBLL.cs" />
     <Compile Include="Product\ProductBLL.cs" />
     <Compile Include="Product\TypeBLL.cs" />

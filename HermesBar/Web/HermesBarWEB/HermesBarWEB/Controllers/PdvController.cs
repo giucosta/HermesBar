@@ -1,4 +1,6 @@
 ﻿using HermesBarWEB.UTIL;
+using MODEL.Client;
+using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
 using MODEL.PDV.Session;
 using MODEL.User;
@@ -22,6 +24,26 @@ namespace HermesBarWEB.Controllers
                 if (_caixaService == null)
                     _caixaService = new HermesBarWCF.CaixaService();
                 return _caixaService;
+            }
+        }
+        private HermesBarWCF.PdvClienteService _pdvClienteService = null;
+        private HermesBarWCF.PdvClienteService PdvClienteService
+        {
+            get
+            {
+                if (_pdvClienteService == null)
+                    _pdvClienteService = new HermesBarWCF.PdvClienteService();
+                return _pdvClienteService;
+            }
+        }
+        private HermesBarWCF.ClienteService _clienteService = null;
+        private HermesBarWCF.ClienteService ClienteService
+        {
+            get
+            {
+                if (_clienteService == null)
+                    _clienteService = new HermesBarWCF.ClienteService();
+                return _clienteService;
             }
         }
         #endregion
@@ -70,15 +92,18 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var model = (PayBoxModel)Session["PDV"];
-                
-                model.DataFechamento = DateTime.Now;
-                model.StatusSelected = "1";
-                model.ValorFechamento = Convert.ToDecimal(valorFinal);
+                var model = GetSessionPdv();
+                if (model.Aberto)
+                {
+                    model.DataFechamento = DateTime.Now;
+                    model.StatusSelected = "1";
+                    model.ValorFechamento = Convert.ToDecimal(valorFinal);
 
-                LoadSessionPdv(ref model);
-                model.Aberto = !CaixaService.Close(model, _user);
-                return model.Aberto;
+                    LoadSessionPdv(ref model);
+                    model.Aberto = !CaixaService.Close(model, _user);
+                    return model.Aberto;
+                }
+                return false;
             }
             catch (Exception)
             {
@@ -89,10 +114,37 @@ namespace HermesBarWEB.Controllers
         {
             return View();
         }
-        public bool EntradaClienteCadastro(string id, string nome, string telefone, string nascimento)
+        public bool EntradaClienteCadastro(string id, string rg, string nome, string telefone, string nascimento)
         {
-            return true;
+            if (GetSessionPdv().Aberto)
+            {
+                var model = new PdvClientModel();
+                if (string.IsNullOrEmpty(id))
+                {
+                    var clienteModel = new ClientModel();
+                    clienteModel.RG = rg;
+                    clienteModel.Contato = new MODEL.Contact.ContatoModel();
+                    clienteModel.Contato.Nome = nome;
+                    clienteModel.Contato.Celular = telefone;
+                    clienteModel.DataNascimento = Convert.ToDateTime(nascimento);
+                    clienteModel.StatusSelected = "1";
+
+                    if (ClienteService.Insert(clienteModel, _user, true))
+                        id = ClienteService.Get(clienteModel, _user).FirstOrDefault().Id.ToString();
+                    else
+                        return false;
+                }
+                model.IdCliente = Convert.ToInt32(id);
+                model.Entrada = DateTime.Now;
+                model.ConsumoTotal = 0;
+                model.IdCaixa = GetSessionPdv().Id;
+                model.Saida = DateTime.Now;
+
+                return PdvClienteService.Insert(model, _user);
+            }
+            return false;
         }
+
         #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)
         {
@@ -102,6 +154,17 @@ namespace HermesBarWEB.Controllers
                     Session["PDV"] = model;
                 else
                     Session["PDV"] = new PayBoxModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private PayBoxModel GetSessionPdv()
+        {
+            try
+            {
+                return (PayBoxModel)Session["PDV"];
             }
             catch (Exception)
             {

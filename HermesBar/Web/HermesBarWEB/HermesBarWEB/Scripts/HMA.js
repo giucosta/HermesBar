@@ -350,10 +350,14 @@ $('body').on('focusout', '#rg-cliente', function () {
 
 $('body').on('click', '#entrada-cliente', function () {
     var nascimento = $('#nascimento-cliente').val().split('-');
-    var data = { id: $('#id-cliente').val(), nome: $('#nome-cliente').val(), telefone: $('#telefone-cliente').val(), nascimento: nascimento[0].replace(/ /g, '') };
+    var data = { id: $('#id-cliente').val(), rg : $('#rg-cliente').val(), nome: $('#nome-cliente').val(), telefone: $('#telefone-cliente').val(), nascimento: nascimento[0].replace(/ /g, '') };
     GenerateRequest('GET', '/Pdv/EntradaClienteCadastro', data, false);
     if (resultRequest == 'True') {
         GenerateTimeMessage('Uhul!', 'Entrada liberada!', 'success');
+        $('#id-cliente').val('');
+        $('#nome-cliente').val('');
+        $('#telefone-cliente').val('');
+        $('#nascimento-cliente').val('');
     } else {
         GenerateTimeMessage('OOps!', 'Erro ao realizar a entrada do cliente!', 'error');
     }

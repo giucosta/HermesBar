@@ -12,7 +12,7 @@ namespace MODEL.PDV.Client
         public int IdCliente { get; set; }
         public int IdCaixa { get; set; }
         public DateTime Entrada { get; set; }
-        public DateTime Saida { get; set; }
-        public decimal ConsumoTotal { get; set; }
+        public DateTime? Saida { get; set; }
+        public decimal? ConsumoTotal { get; set; }
     }
 }

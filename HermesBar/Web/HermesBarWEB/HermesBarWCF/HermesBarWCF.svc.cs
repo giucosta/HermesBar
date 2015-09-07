@@ -5,6 +5,7 @@ using MODEL.Client;
 using MODEL.Employee;
 using MODEL.Establishment;
 using MODEL.Event;
+using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
 using MODEL.Product;
 using MODEL.User;
@@ -254,6 +255,23 @@ namespace HermesBarWCF
         public bool Close(PayBoxModel payBox, UsuarioModel user)
         {
             return PayBox.Close(payBox, user);
+        }
+    }
+    public class PdvClienteService : IPdvClient
+    {
+        private PdvClient _pdv = null;
+        private PdvClient PdvClient
+        {
+            get
+            {
+                if (_pdv == null)
+                    _pdv = new PdvClient();
+                return _pdv;
+            }
+        }
+        public bool Insert(PdvClientModel client, UsuarioModel user)
+        {
+            return PdvClient.Insert(client, user);
         }
     }
 }
