@@ -19,6 +19,7 @@ namespace DAO.PDV
                 InserParameter("USR", SqlDbType.Int, cli._USR);
                 InserParameter("ID_CLI", SqlDbType.Int, cli._ID_CLI);
                 InserParameter("ID_CAI", SqlDbType.Int, cli._ID_CAI);
+                InserParameter("NUM_CAR", SqlDbType.Int, cli.NUM_CAR);
 
                 return GetResult();
             }

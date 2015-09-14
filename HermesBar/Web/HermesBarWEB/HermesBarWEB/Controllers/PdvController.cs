@@ -114,7 +114,7 @@ namespace HermesBarWEB.Controllers
         {
             return View();
         }
-        public bool EntradaClienteCadastro(string id, string rg, string nome, string telefone, string nascimento)
+        public bool EntradaClienteCadastro(string id, string rg, string nome, string telefone, string nascimento, string numeroCartao)
         {
             if (GetSessionPdv().Aberto)
             {
@@ -139,6 +139,7 @@ namespace HermesBarWEB.Controllers
                 model.ConsumoTotal = 0;
                 model.IdCaixa = GetSessionPdv().Id;
                 model.Saida = DateTime.Now;
+                model.NumeroCartao = Convert.ToInt32(numeroCartao);
 
                 return PdvClienteService.Insert(model, _user);
             }

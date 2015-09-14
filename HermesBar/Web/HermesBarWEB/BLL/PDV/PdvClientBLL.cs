@@ -39,7 +39,8 @@ namespace BLL.PDV
                 model.CONS_TOT = cli.ConsumoTotal;
                 model.HOR_ENT = cli.Entrada;
                 model.HOR_SAI = cli.Saida;
-
+                model.NUM_CAR = cli.NumeroCartao;
+                
                 return model;
             }
             catch (Exception)

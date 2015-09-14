@@ -13,5 +13,6 @@ namespace ENTITY.PDV
         public DateTime? HOR_SAI { get; set; }
         public decimal? CONS_TOT { get; set; }
         public int _ID_CAI { get; set; }
+        public int NUM_CAR { get; set; }
     }
 }
