@@ -256,6 +256,11 @@ namespace HermesBarWCF
         {
             return PayBox.Close(payBox, user);
         }
+
+        public bool Reinforcement(PayBoxModel payBox, UsuarioModel user)
+        {
+            return PayBox.Reinforcement(payBox, user);
+        }
     }
     public class PdvClienteService : IPdvClient
     {

@@ -12,5 +12,6 @@ namespace ENTITY.PDV
         public DateTime? DT_FEC { get; set; }
         public decimal VLR_INI { get; set; }
         public decimal? VLR_FIN { get; set; }
+        public decimal? VLR_REF { get; set; }
     }
 }

@@ -145,6 +145,26 @@ namespace HermesBarWEB.Controllers
             }
             return false;
         }
+        public ActionResult ReforcoCaixa()
+        {
+            return View();
+        }
+
+        public bool AdicionarReforco(string valorReforco)
+        {
+            try
+            {
+                var model = new PayBoxModel();
+                model.ValorReforco = Convert.ToDecimal(valorReforco);
+                model.Id = GetSessionPdv().Id;
+
+                return CaixaService.Reinforcement(model, _user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)

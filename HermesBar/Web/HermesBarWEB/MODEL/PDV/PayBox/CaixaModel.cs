@@ -14,6 +14,7 @@ namespace MODEL.PDV.PayBox
         public DateTime? DataFechamento { get; set; }
         public Decimal ValorAbertura { get; set; }
         public Decimal? ValorFechamento { get; set; }
+        public Decimal? ValorReforco { get; set; }
         public string StatusSelected { get; set; }
         public List<SelectListItem> Status { get; set; }
         public bool Aberto { get; set; }

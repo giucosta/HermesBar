@@ -47,6 +47,17 @@ namespace BLL.PDV
                 throw;
             }
         }
+        public bool Reinforcement(PayBoxModel payBox, UsuarioModel user)
+        {
+            try
+            {
+                return PayBoxDAO.Reinforcement(ConvertModelToEntity(payBox, user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public PayBoxModel VerifyPayBox()
         {
             try
@@ -68,6 +79,7 @@ namespace BLL.PDV
                 throw;
             }
         }
+
         #region Private Methods
         private HMA_PDV_CAI ConvertModelToEntity(PayBoxModel payBox, UsuarioModel user)
         {
@@ -81,9 +93,9 @@ namespace BLL.PDV
                 entity.DT_FEC = payBox.DataFechamento;
                 entity.VLR_FIN = payBox.ValorFechamento;
                 entity.VLR_INI = payBox.ValorAbertura;
+                entity.VLR_REF = payBox.ValorReforco;
                 
                 return entity;
-
             }
             catch (Exception)
             {

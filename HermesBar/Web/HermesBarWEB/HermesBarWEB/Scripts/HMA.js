@@ -15,11 +15,13 @@ $('#telefone-cliente').mask('(00)0000-00009');
 $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
+$('#reforco-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
 $('#nascimento-cliente').mask('00/00/0000');
 $('#data-abertura-caixa').val(FormatActualDate(new Date()));
 $('#data-fechamento-caixa').val(FormatActualDate(new Date()));
 $('#data-entrada-cliente').val(FormatActualDate(new Date()));
+$('#data-reforco-caixa').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -283,23 +285,28 @@ $('body').on('focusout', '#Cpf', function () {
 /**************************END EMPLOYEES METHODS*************************************/
 /**********************************CAIXA METHODS*************************************/
 $('body').on('click', '#abrir-caixa', function () {
-    swal({
-        title: 'Deseja abrir o caixa?',
-        text: 'Abrir o caixa permite realizar inúmeras funções gerenciais',
-        type: 'info',
-        showCancelButton: true,
-        closeOnConfirm: false,
-        showLoaderOnConfirm: true,
-    }, function () {
-        var data = { valorInicial: $('#caixa-valor-inicial').val() };
-        GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
-        if (resultRequest == 'True') {
-            GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
-            windows.location = 'Pdv/Index';
-        } else {
-            GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
-        }
-    });
+    if ($('#caixa-valor-inicial').val() != '') {
+        swal({
+            title: 'Deseja abrir o caixa?',
+            text: 'Abrir o caixa permite realizar inúmeras funções gerenciais',
+            type: 'info',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            var data = { valorInicial: $('#caixa-valor-inicial').val() };
+            GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
+            if (resultRequest == 'True') {
+                GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
+                windows.location = 'Pdv/Index';
+            } else {
+                GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+            }
+        });
+    } else {
+        GenerateTimeMessage('OOps!', 'Não é possível abrir o caixa com valor inicial 0', 'warning');
+        return;
+    }
 });
 
 $('body').on('click', '#fechar-caixa', function () {
@@ -358,8 +365,33 @@ $('body').on('click', '#entrada-cliente', function () {
         $('#nome-cliente').val('');
         $('#telefone-cliente').val('');
         $('#nascimento-cliente').val('');
+        $('#rg-cliente').val();
     } else {
         GenerateTimeMessage('OOps!', 'Erro ao realizar a entrada do cliente!', 'error');
+    }
+});
+
+$('body').on('click', '#reforco-caixa', function () {
+    if ($('#reforco-valor-caixa').val() != '') {
+        swal({
+            title: 'Deseja inserir reforço?',
+            text: 'Inserir reforços ao caixa permite que o processo de venda continue',
+            type: 'info',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            var data = { valorReforco: $('#reforco-valor-caixa').val() };
+            GenerateRequest('GET', '/Pdv/AdicionarReforco', data, false);
+            if (resultRequest == 'True') {
+                GenerateTimeMessage('Uhul!', 'Reforço inserido com sucesso!', 'success');
+                windows.location = 'Pdv/Index';
+            } else {
+                GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+            }
+        });
+    } else {
+        GenerateTimeMessage('OOps!', 'É necessário preencher um valor para o reforço', 'warning');
     }
 });
 /******************************END CAIXA METHODS*************************************/
