@@ -15,8 +15,10 @@ namespace MODEL.PDV.PayBox
         public Decimal ValorAbertura { get; set; }
         public Decimal? ValorFechamento { get; set; }
         public Decimal? ValorReforco { get; set; }
+        public Decimal? ValorSangria { get; set; }
         public string StatusSelected { get; set; }
         public List<SelectListItem> Status { get; set; }
         public bool Aberto { get; set; }
+        public string Descricao { get; set; }
     }
 }

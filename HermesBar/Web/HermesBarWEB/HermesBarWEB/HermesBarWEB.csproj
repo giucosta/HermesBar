@@ -373,6 +373,7 @@
     <Content Include="Views\Pdv\FecharCaixa.cshtml" />
     <Content Include="Views\Pdv\EntradaCliente.cshtml" />
     <Content Include="Views\Pdv\ReforcoCaixa.cshtml" />
+    <Content Include="Views\Pdv\SangriaCaixa.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

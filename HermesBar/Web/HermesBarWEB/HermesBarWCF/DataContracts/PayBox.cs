@@ -39,5 +39,9 @@ namespace HermesBarWCF.DataContracts
         {
             return PayBoxBLL.Reinforcement(payBox, user);
         }
+        public bool Depletion(PayBoxModel payBox, UsuarioModel user)
+        {
+            return PayBoxBLL.Depletion(payBox, user);
+        }
     }
 }

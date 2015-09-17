@@ -16,12 +16,14 @@ $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
 $('#reforco-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
+$('#sangria-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
 $('#nascimento-cliente').mask('00/00/0000');
 $('#data-abertura-caixa').val(FormatActualDate(new Date()));
 $('#data-fechamento-caixa').val(FormatActualDate(new Date()));
 $('#data-entrada-cliente').val(FormatActualDate(new Date()));
 $('#data-reforco-caixa').val(FormatActualDate(new Date()));
+$('#data-sangria-caixa').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -298,7 +300,7 @@ $('body').on('click', '#abrir-caixa', function () {
             GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
             if (resultRequest == 'True') {
                 GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
-                windows.location = 'Pdv/Index';
+                window.location = '/Pdv/Index';
             } else {
                 GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
             }
@@ -372,7 +374,7 @@ $('body').on('click', '#entrada-cliente', function () {
 });
 
 $('body').on('click', '#reforco-caixa', function () {
-    if ($('#reforco-valor-caixa').val() != '') {
+    if ($('#reforco-valor-caixa').val() != '' && $('#motivo-reforco-caixa').val() != '') {
         swal({
             title: 'Deseja inserir reforço?',
             text: 'Inserir reforços ao caixa permite que o processo de venda continue',
@@ -381,17 +383,41 @@ $('body').on('click', '#reforco-caixa', function () {
             closeOnConfirm: false,
             showLoaderOnConfirm: true,
         }, function () {
-            var data = { valorReforco: $('#reforco-valor-caixa').val() };
+            var data = { valorReforco: $('#reforco-valor-caixa').val(), motivo : $('#motivo-reforco-caixa').val() };
             GenerateRequest('GET', '/Pdv/AdicionarReforco', data, false);
             if (resultRequest == 'True') {
                 GenerateTimeMessage('Uhul!', 'Reforço inserido com sucesso!', 'success');
-                windows.location = 'Pdv/Index';
+                window.location = '/Pdv/Index';
             } else {
-                GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+                GenerateTimeMessage('OOps!', 'Erro ao efetuar reforço do caixa', 'error');
             }
         });
     } else {
-        GenerateTimeMessage('OOps!', 'É necessário preencher um valor para o reforço', 'warning');
+        GenerateTimeMessage('OOps!', 'Campos obrigatórios não preenchidos', 'warning');
+    }
+});
+
+$('body').on('click', '#sangria-caixa', function () {
+    if ($('#sangria-valor-caixa').val() != '' && $('#sangria-reforco-caixa').val() != '') {
+        swal({
+            title: 'Deseja efetuar a sangria?',
+            text: 'Dica: Remova valores do caixa e guarde em locais seguros!',
+            type: 'info',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            var data = { valorSangria: $('#sangria-valor-caixa').val(), motivo: $('#motivo-sangria-caixa').val() };
+            GenerateRequest('GET', '/Pdv/EfetuarSangria', data, false);
+            if (resultRequest == 'True') {
+                GenerateTimeMessage('Uhul!', 'Sangria efetuada com sucesso!', 'success');
+                window.location = '/Pdv/Index';
+            } else {
+                GenerateTimeMessage('OOps!', 'Erro efetuar sangria do caixa', 'error');
+            }
+        });
+    } else {
+        GenerateTimeMessage('OOps!', 'Campos obrigatórios não preenchidos', 'warning');
     }
 });
 /******************************END CAIXA METHODS*************************************/

@@ -261,6 +261,10 @@ namespace HermesBarWCF
         {
             return PayBox.Reinforcement(payBox, user);
         }
+        public bool Depletion(PayBoxModel payBox, UsuarioModel user)
+        {
+            return PayBox.Depletion(payBox, user);
+        }
     }
     public class PdvClienteService : IPdvClient
     {

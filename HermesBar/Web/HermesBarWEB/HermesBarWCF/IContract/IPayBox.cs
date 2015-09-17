@@ -15,5 +15,6 @@ namespace HermesBarWCF.IContract
         PayBoxModel VerifyPayBox();
         bool Close(PayBoxModel payBox, UsuarioModel user);
         bool Reinforcement(PayBoxModel payBox, UsuarioModel user);
+        bool Depletion(PayBoxModel payBox, UsuarioModel user);
     }
 }

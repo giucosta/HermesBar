@@ -62,6 +62,29 @@ namespace DAO.PDV
                 InserParameter("USR", SqlDbType.Int, caixa._USR);
                 InserParameter("ID", SqlDbType.Int, caixa._ID);
                 InserParameter("VLR_REF", SqlDbType.Decimal, caixa.VLR_REF);
+                InserParameter("DSC", SqlDbType.VarChar, caixa.DESCR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Depletion(HMA_PDV_CAI caixa)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_PDV_CAI.DEPLETION);
+                InserParameter("USR", SqlDbType.Int, caixa._USR);
+                InserParameter("ID", SqlDbType.Int, caixa._ID);
+                InserParameter("VLR", SqlDbType.Decimal, caixa.VLR_SAN);
+                InserParameter("DSC", SqlDbType.VarChar, caixa.DESCR);
 
                 return GetResult();
             }

@@ -13,5 +13,7 @@ namespace ENTITY.PDV
         public decimal VLR_INI { get; set; }
         public decimal? VLR_FIN { get; set; }
         public decimal? VLR_REF { get; set; }
+        public decimal? VLR_SAN { get; set; }
+        public string DESCR { get; set; }
     }
 }

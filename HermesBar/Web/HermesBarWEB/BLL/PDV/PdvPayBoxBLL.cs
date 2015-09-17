@@ -58,6 +58,17 @@ namespace BLL.PDV
                 throw;
             }
         }
+        public bool Depletion(PayBoxModel payBox, UsuarioModel user)
+        {
+            try
+            {
+                return PayBoxDAO.Depletion(ConvertModelToEntity(payBox, user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public PayBoxModel VerifyPayBox()
         {
             try
@@ -94,6 +105,8 @@ namespace BLL.PDV
                 entity.VLR_FIN = payBox.ValorFechamento;
                 entity.VLR_INI = payBox.ValorAbertura;
                 entity.VLR_REF = payBox.ValorReforco;
+                entity.VLR_SAN = payBox.ValorSangria;
+                entity.DESCR = payBox.Descricao;
                 
                 return entity;
             }
@@ -113,6 +126,9 @@ namespace BLL.PDV
                 model.StatusSelected = payBox._ATV.ToString();
                 model.ValorAbertura = payBox.VLR_INI;
                 model.ValorFechamento = payBox.VLR_FIN;
+                model.Descricao = payBox.DESCR;
+                model.ValorSangria = payBox.VLR_SAN;
+                model.ValorReforco = payBox.VLR_REF;
 
                 return model;
             }

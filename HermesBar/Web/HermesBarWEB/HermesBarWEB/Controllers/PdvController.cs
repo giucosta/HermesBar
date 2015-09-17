@@ -149,16 +149,36 @@ namespace HermesBarWEB.Controllers
         {
             return View();
         }
-
-        public bool AdicionarReforco(string valorReforco)
+        public bool AdicionarReforco(string valorReforco, string motivo)
         {
             try
             {
                 var model = new PayBoxModel();
-                model.ValorReforco = Convert.ToDecimal(valorReforco);
                 model.Id = GetSessionPdv().Id;
-
+                model.ValorReforco = Convert.ToDecimal(valorReforco);
+                model.Descricao = motivo;
+                
                 return CaixaService.Reinforcement(model, _user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult SangriaCaixa()
+        {
+            return View();
+        }
+        public bool EfetuarSangria(string valorSangria, string motivo)
+        {
+            try
+            {
+                var model = new PayBoxModel();
+                model.Id = GetSessionPdv().Id;
+                model.ValorSangria = Convert.ToDecimal(valorSangria);
+                model.Descricao = motivo;
+                
+                return CaixaService.Depletion(model, _user);
             }
             catch (Exception)
             {
