@@ -5,9 +5,9 @@
       "type": "App Designer",
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "appDesigner",
-      "projectGuid": "ecbbcb8e-8a96-445f-9792-41307883f88a",
-      "lastModifiedDate": 1442718770053,
-      "creationDate": 1439694217102
+      "projectGuid": "7bf5d682-0349-46ac-83e1-6e354456ce3e",
+      "lastModifiedDate": 1442718769877,
+      "creationDate": 1442718769749
     },
     "XDK-app-designer": "true",
     "sourceDirectory": "www",
@@ -30,69 +30,6 @@
       {
         "id": "org.apache.cordova.splashscreen",
         "version": "0.3.5",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.camera",
-        "version": "0.3.4",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.network-information",
-        "version": "0.2.14",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.battery-status",
-        "version": "0.2.12",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.geolocation",
-        "version": "0.3.11",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.statusbar",
-        "version": "0.1.9",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.vibration",
-        "version": "0.3.12",
-        "selectedState": "Included",
-        "data": {},
-        "paramvals": {},
-        "dependsOn": [],
-        "dependedBy": []
-      },
-      {
-        "id": "org.apache.cordova.dialogs",
-        "version": "0.2.11",
         "selectedState": "Included",
         "data": {},
         "paramvals": {},

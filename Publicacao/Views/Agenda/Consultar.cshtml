@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Evento cadastrado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.UpdateSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Evento editado com sucesso", "success");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Agenda</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Agenda/Consultar">Consultar agenda</a></li>
+                </ol>
+            </div>
+        </div>
+        @Html.ActionLink("Novo", "NovoEvento", "Agenda", new { @class = "btn btn-primary" })
+    </section>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <section class="panel">
+                    <div id="c-slide" class="carousel slide auto panel-body">
+                        <ol class="carousel-indicators out">
+                            <li class="" data-slide-to="0" data-target="#c-slide"></li>
+                            <li class="active" data-slide-to="1" data-target="#c-slide"></li>
+                            <li class="" data-slide-to="2" data-target="#c-slide"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item text-center">
+                                <h3>Editar</h3>
+                                <small class="">Para editar clique sobre o evento desejado</small>
+                            </div>
+                            <div class="item text-center active">
+                                <h3>Insira reservas</h3>
+                                <small class="">Insira as reservas realizadas por seus clientes</small>
+                            </div>
+                            <div class="item text-center">
+                                <h3>Para mais informações</h3>
+                                <small class="">Acesse a documentação do sistema</small>
+                            </div>
+                        </div>
+                        <a data-slide="prev" href="#c-slide" class="left carousel-control">
+                            <i class="arrow_carrot-left_alt2"></i>
+                        </a>
+                        <a data-slide="next" href="#c-slide" class="right carousel-control">
+                            <i class="arrow_carrot-right_alt2"></i>
+                        </a>
+                    </div>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                    </header>
+                    <div id="calendar"></div>
+                </section>
+            </div>
+        </div>
+        
+    </div>
+</section>

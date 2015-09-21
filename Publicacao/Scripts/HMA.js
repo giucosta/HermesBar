@@ -2,15 +2,26 @@
 var data = new Date();
 var mile_atual = data.getTime();
 var resultRequest = '';
+var evento = '';
 /***************************END GLOBAL VARIABLES**************************************/
 
 /*************************************MASK********************************************/
 $('#Cnpj').mask('00.000.000/0000-00');
+$('#Cpf').mask('000.000.000-00');
 $('#Cep').mask('00000-000');
 $('#Telefone').mask('(00)0000-00009')
 $('#Celular').mask('(00)0000-00009');
+$('#telefone-cliente').mask('(00)0000-00009');
 $('#ValorCompra').mask('000.000.000.000.000,00', { reverse: true });
 $('#ValorVenda').mask('000.000.000.000.000,00', { reverse: true });
+$('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
+$('#reforco-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
+$('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
+$('#nascimento-cliente').mask('00/00/0000');
+$('#data-abertura-caixa').val(FormatActualDate(new Date()));
+$('#data-fechamento-caixa').val(FormatActualDate(new Date()));
+$('#data-entrada-cliente').val(FormatActualDate(new Date()));
+$('#data-reforco-caixa').val(FormatActualDate(new Date()));
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
@@ -139,7 +150,6 @@ $('body').on('click', '#novo-unidade', function () {
     });
 });
 
-
 function GenerateTypeList(data) {
     $('#TipoSelected option').remove();
     var selecione = '<option value="0">Selecione</option>'
@@ -159,6 +169,232 @@ function GenerateUnityList(data) {
 }
 /****************************END PRODUCT METHODS*************************************/
 
+/*********************************CLIENT METHODS*************************************/
+$('body').on('focusout', '#DataNascimento', function () {
+    var nascimento = new Date($(this).val());
+    var hoje = new Date();
+    if (Math.floor(Math.ceil(Math.abs(nascimento.getTime() - hoje.getTime()) / (1000 * 3600 * 24)) / 365.25) > 18)
+    {
+        $(this).css('border-color', '');
+        return;
+    }
+    else
+    {
+        GenerateMessage('Oops!', 'Idade inferior a 18 anos!', 'warning');
+        $(this).css('border-color', 'red');
+    }     
+});
+/*****************************END CLIENT METHODS*************************************/
+/******************************CALENDAR METHODS**************************************/
+$('#calendar').fullCalendar({
+    lang: 'pt-br',
+    header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'month,agendaWeek,agendaDay'  
+    },
+    editable: true,
+    eventLimit: true,
+    events: GetValues(),
+    eventClick: function (calEvent, jsEvent, view) {
+        var data = { id: calEvent.id };
+        window.location = '/Agenda/Editar?id=' + calEvent.id;       
+    },
+    eventAfterRender: function (event, element, view) {
+    var dataHoje = new Date();
+        if (event.start < dataHoje && event.end > dataHoje) {
+            //event.color = "#FFB347"; //Em andamento
+            element.css('background-color', '#FFB347');
+        } else if (event.start < dataHoje && event.end < dataHoje) {
+            //event.color = "#77DD77"; //Concluído OK
+            element.css('background-color', '#77DD77');
+        } else if (event.start > dataHoje && event.end > dataHoje) {
+            //event.color = "#AEC6CF"; //Não iniciado
+            element.css('background-color', '#AEC6CF');
+        }
+    }
+});
+function GetValues() {
+    GenerateRequest('GET', '/Agenda/GetValues', null, false);
+
+    var evento = [];
+    for (var i = 0; i < resultRequest.length; i++) {
+        evento[evento.length] = { id: resultRequest[i].Id, title: resultRequest[i].ClienteNome, start: DateFormat(resultRequest[i].Data) };
+    }
+    return evento;
+}
+
+$('body').on('click', '#novo-cliente', function () {
+    swal({
+        title: "Cadastro rápido!",
+        text: "Insira o cliente:",
+        type: "input",
+        showCancelButton: true,
+        closeOnConfirm: false,
+        animation: "slide-from-top",
+        inputPlaceholder: "Insira o nome"
+    }, function (inputValue) {
+        if (inputValue === false)
+            return false;
+        if (inputValue === "") {
+            swal.showInputError("O campo está em branco :(");
+            return false
+        }
+        var data = { nome: inputValue };
+        GenerateRequest('GET', '/Cliente/CadastroRapido', data, false);
+        if (resultRequest == 'True') {
+            swal("Legal!", "Novo cliente cadastrado!", "success");
+            GenerateRequest('GET', '/Cliente/GetJson', null, false);
+            if (resultRequest != null) {
+                GenerateClientList(resultRequest);
+            }
+        } else {
+            swal("Oops!", "Ocorreu um erro ao gravar o cliente!", "error");
+        }
+    });
+})
+
+function GenerateClientList(data) {
+    $('#ClienteSelected option').remove();
+    var selecione = '<option value="0">Selecione</option>'
+    $('#ClienteSelected').append(selecione);
+    for (var i = 0; i < data.length; i++) {
+        $('#ClienteSelected').append('<option value="' + data[i].Id + '">' + data[i].Contato.Nome + '</option>')
+    }
+}
+/**************************END CALENDAR METHODS**************************************/
+/*****************************EMPLOYEES METHODS**************************************/
+$('body').on('focusout', '#DataDemissao', function () {
+    if ($(this).val() == '' || $(this).val() == undefined) {
+        return;
+    }
+    if ($(this).val() < $('#DataAdmissao').val()) {
+        GenerateTimeMessage('Oops!', 'Data de demissão não pode ser inferior a data de admissão!', 'warning');
+        $(this).val('');
+        $(this).focus();
+        return false;
+    }
+});
+$('body').on('focusout', '#Cpf', function () {
+    if (CpfValidade($(this).val()) == false) {
+        GenerateTimeMessage('Oops!', 'CPF inválido', 'warning');
+        $(this).focus();
+        return false;
+    }
+});
+/**************************END EMPLOYEES METHODS*************************************/
+/**********************************CAIXA METHODS*************************************/
+$('body').on('click', '#abrir-caixa', function () {
+    if ($('#caixa-valor-inicial').val() != '') {
+        swal({
+            title: 'Deseja abrir o caixa?',
+            text: 'Abrir o caixa permite realizar inúmeras funções gerenciais',
+            type: 'info',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            var data = { valorInicial: $('#caixa-valor-inicial').val() };
+            GenerateRequest('GET', '/Pdv/AbrirCaixaValor', data, false);
+            if (resultRequest == 'True') {
+                GenerateTimeMessage('Uhul!', 'Caixa aberto com sucesso!', 'success');
+                window.location = '/Pdv/Index';
+            } else {
+                GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+            }
+        });
+    } else {
+        GenerateTimeMessage('OOps!', 'Não é possível abrir o caixa com valor inicial 0', 'warning');
+        return;
+    }
+});
+
+$('body').on('click', '#fechar-caixa', function () {
+    swal({
+        title: 'Deseja fechar o caixa?',
+        text: 'Ao fechar o caixa, nenhum pedido poderá ser emitido',
+        type: 'info',
+        showCancelButton: true,
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+    }, function () {
+        var data = { valorFinal: $('#caixa-valor-final').val() };
+        GenerateRequest('GET', '/Pdv/FecharCaixaValor', data, false);
+        if (resultRequest == 'False') {
+            GenerateTimeMessage('Uhul!', 'Caixa fechado com sucesso!', 'success');
+            windows.location = 'Pdv/Index';
+        } else {
+            GenerateTimeMessage('OOps!', 'Erro ao fechar caixa', 'error');
+        }
+    });
+});
+
+$('body').on('focusout', '#rg-cliente', function () {
+    resultRequest = null;
+    var data = { rg: $(this).val() };
+    GenerateRequest('GET', '/Cliente/GetRg', data, false);
+    if (resultRequest != undefined) {
+        console.log(resultRequest);
+        $('#id-cliente').val(resultRequest.Id);
+        $('#nome-cliente').val(resultRequest.Contato.Nome);
+        $('#telefone-cliente').val(resultRequest.Contato.Celular);
+        $('#nascimento-cliente').val(FormatActualDate(DateFormat(resultRequest.DataNascimento)));
+        $('#nome-cliente').prop('disabled', true);
+        $('#telefone-cliente').prop('disabled', true);
+        $('#nascimento-cliente').prop('disabled', true);
+    } else {
+        GenerateTimeMessage('Oops!', 'Cliente não cadastrado!', 'warning');
+        $('#nome-cliente').prop('disabled', false);
+        $('#nome-cliente').focus();
+        $('#telefone-cliente').prop('disabled', false);
+        $('#nascimento-cliente').prop('disabled', false);
+        $('#id-cliente').val('');
+        $('#nome-cliente').val('');
+        $('#telefone-cliente').val('');
+        $('#nascimento-cliente').val('');
+    }
+});
+
+$('body').on('click', '#entrada-cliente', function () {
+    var nascimento = $('#nascimento-cliente').val().split('-');
+    var data = { id: $('#id-cliente').val(), rg: $('#rg-cliente').val(), nome: $('#nome-cliente').val(), telefone: $('#telefone-cliente').val(), nascimento: nascimento[0].replace(/ /g, ''), numeroCartao: $('#cartao-entrada-cliente').val() };
+    GenerateRequest('GET', '/Pdv/EntradaClienteCadastro', data, false);
+    if (resultRequest == 'True') {
+        GenerateTimeMessage('Uhul!', 'Entrada liberada!', 'success');
+        $('#id-cliente').val('');
+        $('#nome-cliente').val('');
+        $('#telefone-cliente').val('');
+        $('#nascimento-cliente').val('');
+        $('#rg-cliente').val();
+    } else {
+        GenerateTimeMessage('OOps!', 'Erro ao realizar a entrada do cliente!', 'error');
+    }
+});
+
+$('body').on('click', '#reforco-caixa', function () {
+    if ($('#reforco-valor-caixa').val() != '') {
+        swal({
+            title: 'Deseja inserir reforço?',
+            text: 'Inserir reforços ao caixa permite que o processo de venda continue',
+            type: 'info',
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        }, function () {
+            var data = { valorReforco: $('#reforco-valor-caixa').val() };
+            GenerateRequest('GET', '/Pdv/AdicionarReforco', data, false);
+            if (resultRequest == 'True') {
+                GenerateTimeMessage('Uhul!', 'Reforço inserido com sucesso!', 'success');
+                window.location = '/Pdv/Index';
+            } else {
+                GenerateTimeMessage('OOps!', 'Erro ao abrir caixa', 'error');
+            }
+        });
+    } else {
+        GenerateTimeMessage('OOps!', 'É necessário preencher um valor para o reforço', 'warning');
+    }
+});
+/******************************END CAIXA METHODS*************************************/
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');
@@ -209,6 +445,31 @@ function CnpjValidade(cnpj){
 
     return true;
 }
+function CpfValidade(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, '');
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (cpf == "00000000000")
+        return false;
+    for (i = 1; i <= 9; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+
+    if ((Resto == 10) || (Resto == 11))
+        Resto = 0;
+
+    if (Resto != parseInt(cpf.substring(9, 10)))
+        return false;
+    Soma = 0;
+    for (i = 1; i <= 10; i++)
+        Soma = Soma + parseInt(cpf.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto != parseInt(cpf.substring(10, 11)))
+        return false;
+    return true;
+}
 function GenerateRequest(type, url, data, async) {
     $.ajax({
         type: type,
@@ -248,6 +509,32 @@ function GenerateTimeMessage(title, message, type) {
 }
 function GenerateMessage(title, message, type) {
     swal({ title: title, text: message, type: type });
+}
+function DateFormat(data) {
+    return new Date(parseInt(data.replace('Date', '').replace('/', '').replace('(', '').replace(')', '').replace('/', '')));
+}
+function FormatActualDate(dateToFormat) {
+    var dateValue = new Date(dateToFormat);
+    var monthValue = dateValue.getMonth() + 1;
+    var dayValue = dateValue.getDate();
+    var yearValue = dateValue.getFullYear();
+    var hoursValue = dateValue.getHours();
+    var minutesValue = dateValue.getMinutes();
+    var secondsValue = dateValue.getSeconds();
+
+    if (monthValue < 10)
+        monthValue = '0' + monthValue;
+    if (dayValue < 10)
+        dayValue = '0' + dayValue;
+    if (hoursValue < 10)
+        hoursValue = '0' + hoursValue;
+    if (minutesValue < 10)
+        minutesValue = '0' + minutesValue;
+    if (secondsValue < 10)
+        secondsValue = '0' + secondsValue;
+
+    // dd-mm-yyyy-hh-mm-ss
+    return (dayValue + '/' + monthValue + '/' + yearValue + ' - ' + hoursValue + ':' + minutesValue);
 }
 /********************************END AUX METHODS**************************************/
 //var db = openDatabase("HMALite", "1.0", "HMALite - Arquivos locais", 200000);

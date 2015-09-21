@@ -1,0 +1,140 @@
+﻿@model List<MODEL.Client.ClientModel>
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string urlEdit = "/Cliente/GetId?Id=";
+    string urlActive = "/Cliente/ActiveId?Id=";
+    string urlInactive = "/Cliente/InactiveId?Id=";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.InsertSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Cliente cadastrado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.UpdateSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Cliente editado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.ActiveSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Cliente ativado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.ActiveError != null)
+{
+    <script type="text/javascript">
+        swal("Ooops!", "Erro ao ativar cliente", "error");
+    </script>
+}
+@if (ViewBag.InactiveSuccess != null)
+{
+    <script type="text/javascript">
+        swal("Legal!", "Cliente inativado com sucesso", "success");
+    </script>
+}
+@if (ViewBag.InactiveError != null)
+{
+    <script type="text/javascript">
+        swal("Ooops!", "Erro ao inativar cliente", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Clientes</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Cliente/Get">Clientes</a></li>
+                </ol>
+            </div>
+        </div>
+        @Html.ActionLink("Novo", "Cadastrar", "Produto", new { @class = "btn btn-primary" })
+    </section>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div id="c-slide" class="carousel slide auto panel-body">
+                        <ol class="carousel-indicators out">
+                            <li class="" data-slide-to="0" data-target="#c-slide"></li>
+                            <li class="active" data-slide-to="1" data-target="#c-slide"></li>
+                            <li class="" data-slide-to="2" data-target="#c-slide"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item text-center">
+                                <h3>Cadastre um cliente</h3>
+                                <small class="">Estas informações serão úteis na entrada e agenda</small>
+                            </div>
+                            <div class="item text-center active">
+                                <h3><i class="icon_plus_alt2"></i> Clique para editar</h3>
+                                <small class="">Edite as informações do seu cliente sempre que desejar</small>
+                            </div>
+                            <div class="item text-center">
+                                <h3>Para mais informações</h3>
+                                <small class="">Acesse a documentação do sistema</small>
+                            </div>
+                        </div>
+                        <a data-slide="prev" href="#c-slide" class="left carousel-control">
+                            <i class="arrow_carrot-left_alt2"></i>
+                        </a>
+                        <a data-slide="next" href="#c-slide" class="right carousel-control">
+                            <i class="arrow_carrot-right_alt2"></i>
+                        </a>
+                    </div>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        Produtos
+                    </header>
+                    <table class="table table-striped table-advance table-hover">
+                        <tbody>
+                            <tr>
+                                <th><i class="icon_profile"></i> Nome</th>
+                                <th><i class="icon_profile"></i> Data de Nascimento</th>
+                                <th><i class="icon_icon_mobile"></i> Celular</th>
+                                <th><i class="icon_mail_alt"></i> Email</th>
+                                <th><i class="icon_cogs"></i> Ação</th>
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                @Html.Hidden("Id", item.Id)
+                                <tr>
+                                    <td>@item.Contato.Nome</td>
+                                    <td>@item.DataNascimento.ToShortDateString()</td>
+                                    <td>@item.Contato.Celular</td>
+                                    <td>@item.Contato.Email</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-primary popovers" data-original-title="Editar" data-content="Clique para editar as informações do cliente" data-placement="top" data-trigger="hover" href="@urlEdit + @item.Id"><i class="icon_plus_alt2"></i></a>
+                                            @if (item.StatusSelected == "1")
+                                            {
+                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar o cliente" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id" disabled="disabled"><i class="icon_check_alt2"></i></a>
+                                                <a class="btn btn-danger popovers" data-original-title="Inativar" data-content="Clique para inativar o cliente" data-placement="top" data-trigger="hover" href="@urlInactive + @item.Id"><i class="icon_close_alt2"></i></a>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-success popovers" data-original-title="Ativar" data-content="Clique para ativar o cliente" data-placement="top" data-trigger="hover" href="@urlActive + @item.Id"><i class="icon_check_alt2"></i></a>
+                                                <a class="btn btn-danger" href="@urlInactive + @item.Id" disabled="disabled"><i class="icon_close_alt2"></i></a>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

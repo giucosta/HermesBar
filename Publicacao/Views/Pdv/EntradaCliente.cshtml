@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Hermes Bar PDV";
+    Layout = "~/Views/Shared/_LayoutPdv.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Cliente</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Pdv/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Pdv/EntradaCliente">Entrada Cliente</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Entrada Cliente
+                            </header>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">RG</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="rg-cliente" placeholder="Insira o RG do Cliente" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Nome</label>
+                                    <div class="col-sm-10">
+                                        <input type="hidden" class="form-control" id="id-cliente" />
+                                        <input type="text" class="form-control" id="nome-cliente" placeholder="Insira o nome do Cliente" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Telefone</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="telefone-cliente" placeholder="Insira o telefone do Cliente" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Data de Nascimento</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime" class="form-control" id="nascimento-cliente" placeholder="Insira a data de nascimento" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Número Cartão</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" id="cartao-entrada-cliente" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Data Entrada</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime" id="data-entrada-cliente" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <button type="button" class="btn btn-primary" id="entrada-cliente">Registrar Entrada</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

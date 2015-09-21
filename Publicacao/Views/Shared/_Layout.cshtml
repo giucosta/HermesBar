@@ -21,6 +21,7 @@
     @Styles.Render("~/content/style")
     @Styles.Render("~/content/responsive")
     @Styles.Render("~/content/sweetalert")
+    @Styles.Render("~/content/calendar")
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -207,9 +208,9 @@
                         <ul class="sub">
                             <li>@Html.ActionLink("Fornecedores","Get","Fornecedor")</li>
                             <li>@Html.ActionLink("Produtos","Get","Produto")</li>
-                            <li><a class="" href="form_validation.html">Atraçoes</a></li>
-                            <li><a class="" href="form_validation.html">Funcionários</a></li>
-                            <li><a class="" href="form_validation.html">Estabelecimento</a></li>
+                            <li>@Html.ActionLink("Clientes","Get","Cliente")</li>
+                            <li>@Html.ActionLink("Agenda","Consultar","Agenda")</li>
+                            <li>@Html.ActionLink("Funcionários","Get","Funcionario")</li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -221,7 +222,7 @@
                         <ul class="sub">
                             <li>@Html.ActionLink("Configurações","Configuracoes","Estabelecimento")</li>
                             <li><a class="" href="general.html">Vendas</a></li>
-                            <li><a class="" href="buttons.html">Estoque</a></li>
+                            <li>@Html.ActionLink("Estoque","Consultar","Estoque")</li>
                         </ul>
                     </li>
                     @*<li>
@@ -259,7 +260,11 @@
                         <a href="javascript:;" class="">
                             <i class="icon_documents_alt"></i>
                             <span>PDV</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
+                        <ul class="sub">
+                            <li>@Html.ActionLink("Iniciar PDV","Index","Pdv")</li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -273,6 +278,10 @@
     @Scripts.Render("~/bundles/jqueryMask")
     @Scripts.Render("~/bundles/scripts")
     @Scripts.Render("~/bundles/sweetalert")
+    <script src="~/Scripts/moment.min.js"></script>
+    @*@Scripts.Render("~/bundles/moment")*@
+    @Scripts.Render("~/bundles/calendar")
+    <script src="~/Scripts/lang-all.js"></script>
     @Scripts.Render("~/bundles/hma")
 </body>
 </html>

@@ -1,0 +1,113 @@
+﻿@model MODEL.Establishment.EstablishmentModel
+@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.Erro != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao cadastrar estabelecimento!", "error");
+    </script>
+}
+@if (ViewBag.EditarErro != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao editar estabelecimento!", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Estabelecimento</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Estabelecimento/Configuracoes">Estabelecimento</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Estabelecimento/Cadastrar">Cadastro</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("CadastrarEstabelecimento", "Estabelecimento", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.HiddenFor(m => m.Id)
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Estabelecimento
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.RazaoSocial, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-8">
+                                        @Html.TextBoxFor(m => m.RazaoSocial, new { @class = "form-control", @placeholder = "Insira a Razão Social", @required = "required" })
+                                    </div>
+                                    <div class="col-sm-2">
+                                        @Html.DropDownListFor(m => m.StatusSelected, Model.Status, "Selecione", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.NomeFantasia, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.NomeFantasia, new { @class = "form-control", @placeholder = "Insira o Nome Fantasia", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Cnpj, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.Cnpj, new { @class = "form-control", @placeholder = "Insira o CNPJ", @required = "required" })
+                                        <span class="help-block cnpj-error">Deverá inserir um CNPJ válido</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InscricaoEstadual, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.InscricaoEstadual, new { @class = "form-control round-input", @placeholder = "Insira a Inscrição Estadual" })
+                                        <span class="help-block">Deixe o campo em branco caso ISENTO</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.InscricaoMunicipal, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.InscricaoMunicipal, new { @class = "form-control round-input", @placeholder = "Insira a Inscrição Municipal" })
+                                        <span class="help-block">Deixe o campo em branco caso ISENTO</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @Html.Partial("~/Views/Partials/EnderecoPartial.cshtml", Model.Endereco)
+                        @Html.Partial("~/Views/Partials/ContatoPartial.cshtml", Model.Contato)
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Configurações Gerais
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuantidadeMaximoPessoas, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.QuantidadeMaximoPessoas, new { @class = "form-control round-input", @placeholder = "Insira a lotação máxima", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.QuantidadeMesas, new { @class="col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.TextBoxFor(m => m.QuantidadeMesas, new { @class = "form-control round-input", @placeholder = "Insira de mesas disponíveis", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

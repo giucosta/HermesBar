@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Hermes Bar PDV";
+    Layout = "~/Views/Shared/_LayoutPdv.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Caixa</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Pdv/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Pdv/AbrirCaixa">Abrir Caixa</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Abrir Caixa
+                            </header>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Valor Inicial</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="caixa-valor-inicial" placeholder="Insira o valor disponível em caixa" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Data Abertura</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime" id="data-abertura-caixa" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+                        <button type="button" class="btn btn-primary" id="abrir-caixa">Abrir caixa</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
