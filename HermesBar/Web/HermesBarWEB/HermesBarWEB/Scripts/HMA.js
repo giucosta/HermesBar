@@ -24,6 +24,7 @@ $('#data-fechamento-caixa').val(FormatActualDate(new Date()));
 $('#data-entrada-cliente').val(FormatActualDate(new Date()));
 $('#data-reforco-caixa').val(FormatActualDate(new Date()));
 $('#data-sangria-caixa').val(FormatActualDate(new Date()));
+$('#codigo-cliente').focus();
 /*********************************END MASK********************************************/
 
 /********************************LAYOUT METHODS**************************************/
