@@ -1,0 +1,122 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hermes Bar PDV</title>
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/bootstrap-theme")
+    @Styles.Render("~/content/elegante-icons")
+    @Styles.Render("~/content/font-awesome")
+    @Styles.Render("~/content/style")
+    @Styles.Render("~/content/responsive")
+    @Styles.Render("~/content/sweetalert")
+</head>
+<body>
+    <div class="col-md-12">
+        <br />
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <h3>Hermes Bar | PEDIDOS</h3>
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Código Cliente</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="codigo-cliente" placeholder="Insira o número do cartão ou seu código de barras" />
+                                    </div>
+                                    <label class="col-sm-2 control-label">Código Atendente</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" placeholder="Insira sua matrícula" id="codigo-funcionario"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cliente</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="nome-cliente" disabled="disabled"/>
+                                    </div>
+                                    <label class="col-sm-2 control-label">Hora entrada</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="hora-entrada-cliente" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Código do Produto</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="codigo-produto" placeholder="Insira o código ou o nome do produto" />
+                                    </div>
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-2">
+                                        <button type="button" class="btn btn-default" id="pesquisar-produto">Pesquisar</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Quantidade</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="quantidade-produto" placeholder="Insira a quantidade" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Data do Pedido</label>
+                                    <div class="col-sm-10">
+                                        <input type="datetime" id="data-abertura-caixa" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"></label>
+                                    <div class="col-sm-10">
+                                        <button type="button" class="btn btn-primary">Adicionar Produto</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-2 control-label"></div>
+                                    <div class="col-sm-10 table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <td>Código Produto</td>
+                                                    <td>Produto</td>
+                                                    <td>Quantidade</td>
+                                                    <td>Cliente</td>
+                                                    <td>#</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>10</td>
+                                                    <td>10</td>
+                                                    <td>10</td>
+                                                    <td>10</td>
+                                                    <td><button type="button" class="btn btn-danger">Excluir</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <button type="button" class="btn btn-primary" id="abrir-caixa">Fechar pedido</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+    </section>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/scrollTo")
+@Scripts.Render("~/bundles/niceScroll")
+@Scripts.Render("~/bundles/jqueryMask")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/sweetalert")
+@Scripts.Render("~/bundles/hma")
+</html>

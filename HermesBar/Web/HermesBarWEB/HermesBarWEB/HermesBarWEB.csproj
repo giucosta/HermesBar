@@ -135,6 +135,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PdvController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\TipoController.cs" />
     <Compile Include="Controllers\UnidadeMedidaController.cs" />
@@ -374,6 +375,7 @@
     <Content Include="Views\Pdv\EntradaCliente.cshtml" />
     <Content Include="Views\Pdv\ReforcoCaixa.cshtml" />
     <Content Include="Views\Pdv\SangriaCaixa.cshtml" />
+    <Content Include="Views\Pedido\Pedidos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
