@@ -46,6 +46,27 @@ namespace HermesBarWEB.Controllers
                 return _clienteService;
             }
         }
+
+        private HermesBarWCF.FuncionarioService _funcionarioService = null;
+        private HermesBarWCF.FuncionarioService FuncionarioServoce
+        {
+            get
+            {
+                if (_funcionarioService == null)
+                    _funcionarioService = new HermesBarWCF.FuncionarioService();
+                return _funcionarioService;
+            }
+        }
+        private HermesBarWCF.ProductService _produtoService = null;
+        private HermesBarWCF.ProductService ProdutoService
+        {
+            get
+            {
+                if (_produtoService == null)
+                    _produtoService = new HermesBarWCF.ProductService();
+                return _produtoService;
+            }
+        }
         #endregion
         public PdvController()
         {
@@ -111,6 +132,10 @@ namespace HermesBarWEB.Controllers
             }
         }
         public ActionResult EntradaCliente()
+        {
+            return View();
+        }
+        public ActionResult SaidaCliente()
         {
             return View();
         }
@@ -185,7 +210,51 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public string GetClienteCartao(string numeroCartao)
+        {
+            try
+            {
+                return PdvClienteService.GetCar(new PdvClientModel() { NumeroCartao = Convert.ToInt32(numeroCartao) }, _user);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+        public ActionResult GetFuncionarioId(string idFuncionario)
+        {
+            try
+            {
+                return Json(FuncionarioServoce.Get(new MODEL.Employee.EmployeeModel() { Id = Convert.ToInt32(idFuncionario), Cpf = "" }, _user), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult GetProdutoId(string idProduto)
+        {
+            try
+            {
+                return Json(ProdutoService.GetId(Convert.ToInt32(idProduto)), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        public ActionResult InserirPedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade)
+        {
+            try
+            {
+                return Json(PdvClienteService.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)
         {

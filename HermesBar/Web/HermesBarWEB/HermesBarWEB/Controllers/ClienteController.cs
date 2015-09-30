@@ -154,7 +154,6 @@ namespace HermesBarWEB.Controllers
             return Json(ClienteService.Get(new ClientModel(), user), JsonRequestBehavior.AllowGet);
         }
 
-
         #region Private Methods
         private ActionResult Editar(ClientModel client)
         {

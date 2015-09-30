@@ -50,6 +50,7 @@
     <Compile Include="Event\EventBLL.cs" />
     <Compile Include="PDV\PdvClientBLL.cs" />
     <Compile Include="PDV\PdvPayBoxBLL.cs" />
+    <Compile Include="PDV\PdvPedidoBLL.cs" />
     <Compile Include="Product\ProductBLL.cs" />
     <Compile Include="Product\TypeBLL.cs" />
     <Compile Include="Product\UniMedBLL.cs" />

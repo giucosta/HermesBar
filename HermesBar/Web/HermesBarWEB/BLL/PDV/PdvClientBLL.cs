@@ -27,6 +27,17 @@ namespace BLL.PDV
         {
             return ClientDAO.Insert(ConvertModelToEntity(client, user)).GetResults();
         }
+        public string GetCar(PdvClientModel client, UsuarioModel user)
+        {
+            try
+            {
+                return ClientDAO.GetCar(ConvertModelToEntity(client, user)).Rows[0]["NOM"].ToString();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private HMA_PDV_CLI ConvertModelToEntity(PdvClientModel cli, UsuarioModel user)
         {
             try

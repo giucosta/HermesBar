@@ -282,5 +282,13 @@ namespace HermesBarWCF
         {
             return PdvClient.Insert(client, user);
         }
+        public string GetCar(PdvClientModel client, UsuarioModel user)
+        {
+            return PdvClient.GetCar(client, user);
+        }
+        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user)
+        {
+            return PdvClient.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user);
+        }
     }
 }

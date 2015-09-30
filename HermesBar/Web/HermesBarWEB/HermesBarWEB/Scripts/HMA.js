@@ -337,7 +337,6 @@ $('body').on('focusout', '#rg-cliente', function () {
     var data = { rg: $(this).val() };
     GenerateRequest('GET', '/Cliente/GetRg', data, false);
     if (resultRequest != undefined) {
-        console.log(resultRequest);
         $('#id-cliente').val(resultRequest.Id);
         $('#nome-cliente').val(resultRequest.Contato.Nome);
         $('#telefone-cliente').val(resultRequest.Contato.Celular);
@@ -422,6 +421,65 @@ $('body').on('click', '#sangria-caixa', function () {
     }
 });
 /******************************END CAIXA METHODS*************************************/
+
+/******************************PEDIDOS METHODS*************************************/
+
+$('body').on('focusout', '#codigo-cliente', function () {
+    var data = { numeroCartao: $(this).val() };
+    GenerateRequest('GET', '/Pdv/GetClienteCartao', data, false);
+    if (resultRequest == null || resultRequest == 'null' || resultRequest == ''){
+        GenerateTimeMessage('Oops!', 'Cliente não encontrado!', 'warning');
+        $(this).val('');
+        $(this).focus();
+    }
+    else {
+        $('#nome-cliente').val(resultRequest);
+        $('#codigo-funcionario').prop('disabled', false);
+        $('#codigo-funcionario').focus();
+    }
+});
+
+$('body').on('focusout', '#codigo-funcionario', function () {
+    var data = { idFuncionario: $(this).val() };
+    GenerateRequest('GET', '/Pdv/GetFuncionarioId', data, false);
+    if (resultRequest != null) {
+        $('#nome-funcionario').val(resultRequest[0].Contato.Nome);
+        $('#codigo-produto').prop('disabled', false);
+        $('#codigo-produto').focus();
+    } else {
+        GenerateTimeMessage('Oops', 'Atendente não encontrado', 'warning');
+        $(this).val('');
+        $(this).focus();
+    }
+});
+
+$('body').on('focusout', '#codigo-produto', function () {
+    var data = { idProduto: $(this).val() };
+    GenerateRequest('GET', '/Pdv/GetProdutoId', data, false);
+    if (resultRequest.Nome != null) {
+        $(this).val(resultRequest.Nome);
+        $('#quantidade-produto').prop('disabled', false);
+        $('#quantidade-produto').focus();
+    } else {
+        GenerateTimeMessage('Oops', 'Produto não encontrado', 'warning');
+        $(this).val('');
+        $(this).focus();
+    }
+});
+
+$('body').on('click', '#fechar-pedido', function () {
+    var data = { cartaoCliente: $('#codigo-cliente').val(), codigoAtendente: $('#codigo-funcionario').val(), nomeProduto: $('#codigo-produto').val(), quantidade: $('#quantidade-produto').val() };
+    GenerateRequest('GET', '/Pdv/InserirPedido', data, false);
+    if (resultRequest == 'True') {
+        GenerateTimeMessage('Legal!', 'Pedido realizado com sucesso!', 'success');
+        window.location.reload();
+    } else {
+        GenerateTimeMessage('Oops!', 'Erro ao realizar pedido!', 'error');
+    }
+        
+});
+/**************************END PEDIDOS METHODS*************************************/
+
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){
     cnpj = cnpj.replace(/[^\d]+/g, '');

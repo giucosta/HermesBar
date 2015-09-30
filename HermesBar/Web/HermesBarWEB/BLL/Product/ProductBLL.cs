@@ -53,7 +53,11 @@ namespace BLL.Product
         public ProdutoModel GetId(int id)
         {
             var entity = new HMA_PROD() { _ID = id };
-            return ConvertEntityToModel(ProductDAO.GetId(entity).DataTableToList<HMA_PROD>().FirstOrDefault());
+            var result = ProductDAO.GetId(entity).DataTableToList<HMA_PROD>().FirstOrDefault();
+
+            if (result != null)
+                return ConvertEntityToModel(result);
+            return new ProdutoModel();
         }
         public bool Insert(ProdutoModel produto, UsuarioModel user)
         {

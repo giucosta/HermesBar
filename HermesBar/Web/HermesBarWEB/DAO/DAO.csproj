@@ -50,6 +50,7 @@
     <Compile Include="Event\EventDAO.cs" />
     <Compile Include="PDV\Pdv_CaixaDAO.cs" />
     <Compile Include="PDV\Pdv_ClientDAO.cs" />
+    <Compile Include="PDV\Pdv_PedidoDAO.cs" />
     <Compile Include="Product\ProductDAO.cs" />
     <Compile Include="Product\TypeDAO.cs" />
     <Compile Include="Product\UniMedDAO.cs" />

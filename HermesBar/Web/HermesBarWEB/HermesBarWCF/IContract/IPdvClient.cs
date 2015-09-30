@@ -12,5 +12,7 @@ namespace HermesBarWCF.IContract
     public interface IPdvClient
     {
         bool Insert(PdvClientModel client, UsuarioModel user);
+        string GetCar(PdvClientModel client, UsuarioModel user);
+        bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user);
     }
 }

@@ -32,5 +32,25 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
+
+        public DataTable GetCar(HMA_PDV_CLI cli)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_PDV_CLI.GET_CAR);
+                InserParameter("NUMEROCARTAO", SqlDbType.Int, cli.NUM_CAR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }
