@@ -12,5 +12,6 @@ namespace ENTITY.PDV
         public string _ID_PROD { get; set; }
         public int _ID_FUNC { get; set; }
         public int QTD { get; set; }
+        public int CAI { get; set; }
     }
 }

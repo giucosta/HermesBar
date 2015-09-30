@@ -13,7 +13,7 @@ namespace HermesBarWCF.IContract
     {
         bool Insert(ProdutoModel produto, UsuarioModel usuario);
         List<ProdutoModel> Get();
-        ProdutoModel GetId(int id);
+        ProdutoModel GetId(int id, int ativo);
         bool Active(ProdutoModel produto, UsuarioModel usuario);
         bool Inactive(ProdutoModel produto, UsuarioModel usuario);
         int GetNextCode();

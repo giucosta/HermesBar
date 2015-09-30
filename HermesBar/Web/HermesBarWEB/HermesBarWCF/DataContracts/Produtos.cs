@@ -31,9 +31,9 @@ namespace HermesBarWCF.DataContracts
         {
             return ProdutoBLL.Get();
         }
-        public ProdutoModel GetId(int id)
+        public ProdutoModel GetId(int id, int ativo)
         {
-            return ProdutoBLL.GetId(id);
+            return ProdutoBLL.GetId(id, ativo);
         }
         public bool Active(ProdutoModel produto, UsuarioModel usuario)
         {

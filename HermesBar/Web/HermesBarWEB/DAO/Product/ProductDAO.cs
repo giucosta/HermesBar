@@ -36,6 +36,7 @@ namespace DAO.Product
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_PROD.GET_ID);
                 InserParameter("ID", SqlDbType.Int, prod._ID);
+                InserParameter("ATV", SqlDbType.Int, prod._ATV);
 
                 return GetResult();
             }

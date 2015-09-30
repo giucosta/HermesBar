@@ -50,9 +50,9 @@ namespace BLL.Product
                 throw ex;
             }
         }
-        public ProdutoModel GetId(int id)
+        public ProdutoModel GetId(int id, int ativo)
         {
-            var entity = new HMA_PROD() { _ID = id };
+            var entity = new HMA_PROD() { _ID = id, _ATV = ativo };
             var result = ProductDAO.GetId(entity).DataTableToList<HMA_PROD>().FirstOrDefault();
 
             if (result != null)

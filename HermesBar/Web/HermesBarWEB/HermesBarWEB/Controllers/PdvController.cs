@@ -3,6 +3,7 @@ using MODEL.Client;
 using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
 using MODEL.PDV.Session;
+using MODEL.Product;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -236,7 +237,21 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return Json(ProdutoService.GetId(Convert.ToInt32(idProduto)), JsonRequestBehavior.AllowGet);
+                if (idProduto == "")
+                    return Json(new ProdutoModel(), JsonRequestBehavior.AllowGet);
+                return Json(ProdutoService.GetId(Convert.ToInt32(idProduto), (int)HermesBarWEB.UTIL.Enumerators.Status.Ativo), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult InserirPedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade)
+        {
+            try
+            {
+
+                return Json(PdvClienteService.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user, GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -244,16 +259,16 @@ namespace HermesBarWEB.Controllers
             }
         }
 
-        public ActionResult InserirPedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade)
+        public ActionResult Fechamento(string numeroCartao)
         {
-            try
-            {
-                return Json(PdvClienteService.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user), JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            if (numeroCartao == "")
+                return Json(new List<PdvFechamentoClientModel>(), JsonRequestBehavior.AllowGet);
+
+            var fechamentoModel = new PdvClientModel();
+            fechamentoModel.NumeroCartao = Convert.ToInt32(numeroCartao);
+            fechamentoModel.IdCaixa = GetSessionPdv().Id;
+
+            return Json(PdvClienteService.Fechamento(fechamentoModel), JsonRequestBehavior.AllowGet);
         }
         #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)

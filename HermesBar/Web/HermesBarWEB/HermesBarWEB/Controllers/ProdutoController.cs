@@ -41,7 +41,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult GetId(int id)
         {
-            var model = ProductService.GetId(id);
+            var model = ProductService.GetId(id, (int)HermesBarWEB.UTIL.Enumerators.Status.Inativo);
             LoadModel(ref model);
             return View("Cadastrar", model);
         }

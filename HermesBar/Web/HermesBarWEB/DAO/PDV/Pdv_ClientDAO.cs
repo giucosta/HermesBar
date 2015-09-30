@@ -32,7 +32,6 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-
         public DataTable GetCar(HMA_PDV_CLI cli)
         {
             try
@@ -40,6 +39,26 @@ namespace DAO.PDV
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_PDV_CLI.GET_CAR);
                 InserParameter("NUMEROCARTAO", SqlDbType.Int, cli.NUM_CAR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Fechar(HMA_PDV_CLI cli)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_PDV_CLI.FECHAR);
+                InserParameter("NUM_CAR", SqlDbType.Int, cli.NUM_CAR);
+                InserParameter("NUM_CAI", SqlDbType.Int, cli._ID_CAI);
 
                 return GetResult();
             }

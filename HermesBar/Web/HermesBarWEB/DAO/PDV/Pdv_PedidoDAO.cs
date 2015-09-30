@@ -22,6 +22,7 @@ namespace DAO.PDV
                 InserParameter("ID_FUNC", SqlDbType.Int, pedido._ID_FUNC);
                 InserParameter("QTD", SqlDbType.Int, pedido.QTD);
                 InserParameter("USR", SqlDbType.Int, pedido._USR);
+                InserParameter("CAI", SqlDbType.Int, pedido.CAI);
 
                 return GetResult();
             }

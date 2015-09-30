@@ -420,6 +420,70 @@ $('body').on('click', '#sangria-caixa', function () {
         GenerateTimeMessage('OOps!', 'Campos obrigatórios não preenchidos', 'warning');
     }
 });
+
+$('body').on('focusout', '#saida-cartao-cliente', function () {
+    var data = { numeroCartao: $(this).val() };
+    GenerateRequest('GET', '/Pdv/Fechamento', data, false);
+    if (resultRequest.length != 0) {
+        $('#saida-nome-cliente').val(resultRequest[0].Nome);
+        var total = 0;
+        for (var i = 0; i < resultRequest.length; i++) {
+            total += resultRequest[i].TOTAL;
+            $('#produtos tbody').append('<tr><td>' + resultRequest[i].Produto + '</td><td> ' + resultRequest[i].Quantidade + '</td><td>' + resultRequest[i].TOTAL + '</td></tr>')
+        }
+        $('#saida-total-cliente').val('R$ ' + total);
+        $('#troco').val(0);
+        $('#valor-recebido').prop('disabled', false);
+        $('#valor-recebido').focus();
+    } else {
+        GenerateTimeMessage('Oops!', 'Cartão não encontrado!', 'warning');
+    }
+});
+
+$('body').on('focusout', '#valor-recebido', function () {
+    var recebido = $(this).val().replace(',','.');
+    var total = $('#saida-total-cliente').val().replace('R$','').replace(' ','');
+    if (recebido > total){
+        $('#troco').val(recebido - total);
+    }
+    else if(recebido < total){
+        $('#troco').val('Faltando: ' + (total - recebido));
+    } else if (recebido == total) {
+        $('#troco').val('');
+    }
+});
+
+$('body').on('click', '#click-total', function () {
+    if ($('#saida-total-cliente').prop('disabled') == false) {
+        $('#saida-total-cliente').prop('disabled', true);
+    } else {
+        $('#saida-total-cliente').prop('disabled', false);
+        $('#saida-total-cliente').focus();
+    }
+});
+
+$('body').on('focusout', '#saida-total-cliente', function () {
+    $(this).prop('disabled', true);
+    $('#valor-recebido').val('');
+    $('#troco').val('');
+});
+var formaPagamento = '';
+$('body').on('click', '#cartao-credito', function () {
+    formaPagamento = $(this).text();
+});
+$('body').on('click', '#cartao-debito', function () {
+    formaPagamento = $(this).text();
+});
+$('body').on('click', '#dinheiro', function () {
+    formaPagamento = $(this).text();
+});
+$('body').on('click', '#cheque', function () {
+    formaPagamento = $(this).text();
+});
+
+$('body').on('click', '#saida-registrar-cliente', function () {
+    var data = {}
+});
 /******************************END CAIXA METHODS*************************************/
 
 /******************************PEDIDOS METHODS*************************************/
@@ -470,7 +534,7 @@ $('body').on('focusout', '#codigo-produto', function () {
 $('body').on('click', '#fechar-pedido', function () {
     var data = { cartaoCliente: $('#codigo-cliente').val(), codigoAtendente: $('#codigo-funcionario').val(), nomeProduto: $('#codigo-produto').val(), quantidade: $('#quantidade-produto').val() };
     GenerateRequest('GET', '/Pdv/InserirPedido', data, false);
-    if (resultRequest == 'True') {
+    if (resultRequest == true) {
         GenerateTimeMessage('Legal!', 'Pedido realizado com sucesso!', 'success');
         window.location.reload();
     } else {

@@ -38,6 +38,11 @@ namespace BLL.PDV
                 throw;
             }
         }
+        public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
+        {
+            return ClientDAO.Fechar(new HMA_PDV_CLI() { _ID_CAI = client.IdCaixa, NUM_CAR = client.NumeroCartao }).DataTableToList<PdvFechamentoClientModel>();
+        }
+
         private HMA_PDV_CLI ConvertModelToEntity(PdvClientModel cli, UsuarioModel user)
         {
             try

@@ -40,9 +40,9 @@ namespace HermesBarWCF
         {
             return Produtos.Get();
         }
-        public ProdutoModel GetId(int id)
+        public ProdutoModel GetId(int id, int ativo)
         {
-            return Produtos.GetId(id);
+            return Produtos.GetId(id, ativo);
         }
         public bool Active(ProdutoModel produto, UsuarioModel usuario)
         {
@@ -286,9 +286,13 @@ namespace HermesBarWCF
         {
             return PdvClient.GetCar(client, user);
         }
-        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user)
+        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
-            return PdvClient.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user);
+            return PdvClient.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
+        }
+        public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
+        {
+            return PdvClient.Fechamento(client);
         }
     }
 }

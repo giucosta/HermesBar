@@ -13,6 +13,7 @@ namespace HermesBarWCF.IContract
     {
         bool Insert(PdvClientModel client, UsuarioModel user);
         string GetCar(PdvClientModel client, UsuarioModel user);
-        bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user);
+        bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa);
+        List<PdvFechamentoClientModel> Fechamento(PdvClientModel client);
     }
 }

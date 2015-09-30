@@ -50,6 +50,7 @@
     <Compile Include="Establishment\EstablishmentModel.cs" />
     <Compile Include="Event\EventModel.cs" />
     <Compile Include="PDV\Client\PdvClientModel.cs" />
+    <Compile Include="PDV\Client\PdvFechamentoClientModel.cs" />
     <Compile Include="PDV\PayBox\CaixaModel.cs" />
     <Compile Include="PDV\Session\PdvSession.cs" />
     <Compile Include="Product\CategoriaModel.cs" />

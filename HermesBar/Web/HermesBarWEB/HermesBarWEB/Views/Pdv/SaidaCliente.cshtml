@@ -39,33 +39,52 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Valor Total</label>
-                                    <div class="col-sm-4">
-                                        <textarea class="form-control" id="saida-total-cliente" placeholder="Valor total" style="font-size:18px;"></textarea>
+                                    <div class="col-sm-4" id="click-total">
+                                        <textarea class="form-control" id="saida-total-cliente" placeholder="Valor total" style="font-size:18px;" disabled="disabled"></textarea>
+                                        <span class="help-block">Clique para alterar o valor e atribuir desconto</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Forma de Pagamento</label>
+                                    <div class="col-sm-2"></div>
                                     <div class="col-sm-10">
-                                        <button type="button" class="btn btn-default">Cartão Crédito</button>
-                                        <button type="button" class="btn btn-default">Cartão Débito</button>
-                                        <button type="button" class="btn btn-default">Dinheiro</button>
-                                        <button type="button" class="btn btn-default">Cheque</button>
+
+                                        <table class="table" id="produtos">
+                                            <thead>
+                                                <tr>
+                                                    <td>Produto</td>
+                                                    <td>Quantidade</td>
+                                                    <td>Total</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Valor Recebido</label>
                                     <div class="col-sm-4">
-                                        <textarea class="form-control" placeholder="Valor Recebido" style="font-size:18px;"></textarea>
+                                        <textarea class="form-control" id="valor-recebido" placeholder="Valor Recebido" style="font-size:18px;" disabled="disabled"></textarea>
                                     </div>
                                     <label class="col-sm-2 control-label">Troco</label>
                                     <div class="col-sm-4">
-                                        <textarea class="form-control" placeholder="Troco" style="font-size:18px;"></textarea>
+                                        <textarea class="form-control" id="troco" placeholder="Troco" style="font-size:18px;" disabled="disabled"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Forma de Pagamento</label>
+                                    <div class="col-sm-10">
+                                        <button type="button" class="btn btn-default" id="cartao-credito">Cartão Crédito</button>
+                                        <button type="button" class="btn btn-default" id="cartao-debito">Cartão Débito</button>
+                                        <button type="button" class="btn btn-default" id="dinheiro">Dinheiro</button>
+                                        <button type="button" class="btn btn-default" id="cheque">Cheque</button>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <button type="button" class="btn btn-primary" id="saida-registrar-cliente">Registrar Saída</button>
-                        <button type="button" class="btn btn-default" id="saida-registrar-cliente">Imprimir Cupom</button>
+                        <button type="button" class="btn btn-default" id="saida-cupom-cliente">Imprimir Cupom</button>
                     </form>
                 </div>
             </div>

@@ -40,9 +40,14 @@ namespace HermesBarWCF.DataContracts
         {
             return ClientBLL.GetCar(client, user);
         }
-        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user)
+        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
-            return PedidoBLL.Insert(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user);
+            return PedidoBLL.Insert(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
+        }
+
+        public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
+        {
+            return ClientBLL.Fechamento(client);
         }
     }
 }

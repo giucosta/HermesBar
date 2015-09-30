@@ -23,7 +23,7 @@ namespace BLL.PDV
             }
         }
 
-        public bool Insert(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user)
+        public bool Insert(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
             var model = new HMA_PDV_PED_CLI();
             model._USR = user.Id;
@@ -31,7 +31,7 @@ namespace BLL.PDV
             model._ID_FUNC = Convert.ToInt32(codigoAtendente);
             model._ID_PROD = nomeProduto;
             model.QTD = Convert.ToInt32(quantidade);
-
+            model.CAI = idCaixa;
             return PedidoDAO.Insert(model).GetResults();
         }
     }
