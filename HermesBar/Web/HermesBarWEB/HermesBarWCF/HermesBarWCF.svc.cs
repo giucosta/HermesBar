@@ -294,5 +294,9 @@ namespace HermesBarWCF
         {
             return PdvClient.Fechamento(client);
         }
+        public bool FecharComanda(int numeroComanda, int idCaixa)
+        {
+            return PdvClient.FecharComanda(numeroComanda, idCaixa);
+        }
     }
 }

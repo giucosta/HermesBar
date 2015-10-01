@@ -71,5 +71,26 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
+
+        public DataTable FecharComanda(int numeroComanda, int idCaixa)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_PDV_CLI.FECHAR_COMANDA);
+                InserParameter("NUM_CAR", SqlDbType.Int, numeroComanda);
+                InserParameter("ID_CAI", SqlDbType.Int, idCaixa);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

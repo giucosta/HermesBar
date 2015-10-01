@@ -482,7 +482,10 @@ $('body').on('click', '#cheque', function () {
 });
 
 $('body').on('click', '#saida-registrar-cliente', function () {
-    var data = {}
+    var data = { numeroCartao: $('#saida-cartao-cliente').val() };
+    GenerateRequest('GET', '/Pdv/FecharComanda', data, false);
+    GenerateTimeMessage('Ok!', 'Saída registrada', 'success');
+    window.location.reload();
 });
 /******************************END CAIXA METHODS*************************************/
 

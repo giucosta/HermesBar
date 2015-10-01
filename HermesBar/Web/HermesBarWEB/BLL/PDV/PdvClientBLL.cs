@@ -43,6 +43,18 @@ namespace BLL.PDV
             return ClientDAO.Fechar(new HMA_PDV_CLI() { _ID_CAI = client.IdCaixa, NUM_CAR = client.NumeroCartao }).DataTableToList<PdvFechamentoClientModel>();
         }
 
+        public bool FecharComanda(int numeroComanda,int idCaixa)
+        {
+            try
+            {
+                return ClientDAO.FecharComanda(numeroComanda, idCaixa).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         private HMA_PDV_CLI ConvertModelToEntity(PdvClientModel cli, UsuarioModel user)
         {
             try

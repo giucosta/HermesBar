@@ -270,6 +270,10 @@ namespace HermesBarWEB.Controllers
 
             return Json(PdvClienteService.Fechamento(fechamentoModel), JsonRequestBehavior.AllowGet);
         }
+        public ActionResult FecharComanda(string numeroCartao)
+        {
+            return Json(PdvClienteService.FecharComanda(Convert.ToInt32(numeroCartao), GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
+        }
         #region Private Methods
         private void LoadSessionPdv(ref PayBoxModel model)
         {
