@@ -51,7 +51,7 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-        public DataTable Fechar(HMA_PDV_CLI cli)
+        public DataTable Close(HMA_PDV_CLI cli)
         {
             try
             {
@@ -71,14 +71,19 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-        public DataTable FecharComanda(int numeroComanda, int idCaixa)
+        public DataTable CloseCommand(HMA_PDV_CLI cli)
         {
             try
             {
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_PDV_CLI.FECHAR_COMANDA);
-                InserParameter("NUM_CAR", SqlDbType.Int, numeroComanda);
-                InserParameter("ID_CAI", SqlDbType.Int, idCaixa);
+                InserParameter("NUM_CAR", SqlDbType.Int, cli.NUM_CAR);
+                InserParameter("USR", SqlDbType.Int, cli._USR);
+                InserParameter("ID_CAI", SqlDbType.Int, cli._ID_CAI);
+                InserParameter("VLR_REC", SqlDbType.Decimal, cli.VLR_REC);
+                InserParameter("VLR_TOT", SqlDbType.Decimal, cli.CONS_TOT);
+                InserParameter("TRC", SqlDbType.Decimal, cli.TRC);
+                InserParameter("FRM_PAG", SqlDbType.VarChar, cli.FRM_PAG);
 
                 return GetResult();
             }

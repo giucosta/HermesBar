@@ -14,5 +14,8 @@ namespace ENTITY.PDV
         public decimal? CONS_TOT { get; set; }
         public int _ID_CAI { get; set; }
         public int NUM_CAR { get; set; }
+        public decimal? VLR_REC { get; set; }
+        public decimal? TRC { get; set; }
+        public string FRM_PAG { get; set; }
     }
 }

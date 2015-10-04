@@ -258,7 +258,6 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
-
         public ActionResult Fechamento(string numeroCartao)
         {
             if (numeroCartao == "")
@@ -270,11 +269,32 @@ namespace HermesBarWEB.Controllers
 
             return Json(PdvClienteService.Fechamento(fechamentoModel), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult FecharComanda(string numeroCartao)
+        public ActionResult FecharComanda(string numeroCartao, string valorTotal, string valorRecebido, string troco, string formaPagamento)
         {
-            return Json(PdvClienteService.FecharComanda(Convert.ToInt32(numeroCartao), GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
+            return Json(PdvClienteService.FecharComanda(ConvertToModel(numeroCartao, valorTotal, valorRecebido, troco, formaPagamento), _user), JsonRequestBehavior.AllowGet);
         }
+
+        
         #region Private Methods
+        private PdvClientModel ConvertToModel(string numeroCartao, string valorTotal, string valorRecebido, string troco, string formaPagamento)
+        {
+            try
+            {
+                var model = new PdvClientModel();
+                model.NumeroCartao = Convert.ToInt32(numeroCartao);
+                model.IdCaixa = GetSessionPdv().Id;
+                model.Troco = Convert.ToDecimal(troco);
+                model.ConsumoTotal = Convert.ToDecimal(valorTotal);
+                model.ValorRecebido = Convert.ToDecimal(valorRecebido);
+                model.FormaPagamento = formaPagamento;
+
+                return model;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private void LoadSessionPdv(ref PayBoxModel model)
         {
             try

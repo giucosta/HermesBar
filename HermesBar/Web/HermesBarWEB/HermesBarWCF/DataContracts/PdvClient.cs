@@ -49,9 +49,9 @@ namespace HermesBarWCF.DataContracts
         {
             return ClientBLL.Fechamento(client);
         }
-        public bool FecharComanda(int numeroComanda, int idCaixa)
+        public bool FecharComanda(PdvClientModel client, UsuarioModel user)
         {
-            return ClientBLL.FecharComanda(numeroComanda, idCaixa);
+            return ClientBLL.FecharComanda(client, user);
         }
     }
 }

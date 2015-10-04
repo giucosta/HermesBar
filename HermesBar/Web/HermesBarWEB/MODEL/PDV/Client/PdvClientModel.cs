@@ -15,5 +15,8 @@ namespace MODEL.PDV.Client
         public DateTime? Saida { get; set; }
         public decimal? ConsumoTotal { get; set; }
         public int NumeroCartao { get; set; }
+        public decimal? ValorRecebido { get; set; }
+        public decimal? Troco { get; set; }
+        public string FormaPagamento { get; set; }
     }
 }

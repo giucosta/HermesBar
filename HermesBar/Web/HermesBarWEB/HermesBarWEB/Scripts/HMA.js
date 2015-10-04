@@ -444,15 +444,16 @@ $('body').on('focusout', '#saida-cartao-cliente', function () {
 });
 
 $('body').on('focusout', '#valor-recebido', function () {
-    var recebido = $(this).val().replace(',','.');
-    var total = $('#saida-total-cliente').val().replace('R$','').replace(' ','');
+    var recebido = $(this).val().replace(',', '.');
+    $('#troco').val('');
+    var total = $('#saida-total-cliente').val().replace('R$', '').replace(' ', '');
     if (recebido > total){
         $('#troco').val(recebido - total);
     }
     else if(recebido < total){
         $('#troco').val('Faltando: ' + (total - recebido));
-    } else if (recebido == total) {
-        $('#troco').val('');
+    }else{
+        $('#troco').val('0');
     }
 });
 
@@ -485,7 +486,13 @@ $('body').on('click', '#cheque', function () {
 });
 
 $('body').on('click', '#saida-registrar-cliente', function () {
-    var data = { numeroCartao: $('#saida-cartao-cliente').val() };
+    var data = {
+        numeroCartao: $('#saida-cartao-cliente').val(),
+        valorTotal: $('#saida-total-cliente').val().replace('R$', '').replace(' ', ''),
+        valorRecebido: $('#valor-recebido').val(),
+        troco: $('#troco').val().replace('Faltando: -', ''),
+        formaPagamento: formaPagamento
+    };
     GenerateRequest('GET', '/Pdv/FecharComanda', data, false);
     GenerateTimeMessage('Ok!', 'Saída registrada', 'success');
     window.location.reload();

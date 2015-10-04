@@ -23,6 +23,7 @@ namespace BLL.PDV
                 return _clientDAO;
             }
         }
+
         public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return Convert.ToInt32(ClientDAO.Insert(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]);
@@ -40,14 +41,13 @@ namespace BLL.PDV
         }
         public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
         {
-            return ClientDAO.Fechar(new HMA_PDV_CLI() { _ID_CAI = client.IdCaixa, NUM_CAR = client.NumeroCartao }).DataTableToList<PdvFechamentoClientModel>();
+            return ClientDAO.Close(new HMA_PDV_CLI() { _ID_CAI = client.IdCaixa, NUM_CAR = client.NumeroCartao }).DataTableToList<PdvFechamentoClientModel>();
         }
-
-        public bool FecharComanda(int numeroComanda,int idCaixa)
+        public bool FecharComanda(PdvClientModel client, UsuarioModel user)
         {
             try
             {
-                return ClientDAO.FecharComanda(numeroComanda, idCaixa).GetResults();
+                return ClientDAO.CloseCommand(ConvertModelToEntity(client, user)).GetResults();
             }
             catch (Exception)
             {
@@ -68,6 +68,9 @@ namespace BLL.PDV
                 model.HOR_ENT = cli.Entrada;
                 model.HOR_SAI = cli.Saida;
                 model.NUM_CAR = cli.NumeroCartao;
+                model.FRM_PAG = cli.FormaPagamento;
+                model.VLR_REC = cli.ValorRecebido;
+                model.TRC = cli.Troco;
                 
                 return model;
             }
