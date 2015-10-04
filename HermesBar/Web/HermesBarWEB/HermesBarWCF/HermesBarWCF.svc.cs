@@ -278,7 +278,7 @@ namespace HermesBarWCF
                 return _pdv;
             }
         }
-        public bool Insert(PdvClientModel client, UsuarioModel user)
+        public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return PdvClient.Insert(client, user);
         }

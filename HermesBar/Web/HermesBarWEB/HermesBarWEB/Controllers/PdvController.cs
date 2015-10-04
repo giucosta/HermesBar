@@ -140,7 +140,7 @@ namespace HermesBarWEB.Controllers
         {
             return View();
         }
-        public bool EntradaClienteCadastro(string id, string rg, string nome, string telefone, string nascimento, string numeroCartao)
+        public int EntradaClienteCadastro(string id, string rg, string nome, string telefone, string nascimento, string numeroCartao)
         {
             if (GetSessionPdv().Aberto)
             {
@@ -158,7 +158,7 @@ namespace HermesBarWEB.Controllers
                     if (ClienteService.Insert(clienteModel, _user, true))
                         id = ClienteService.Get(clienteModel, _user).FirstOrDefault().Id.ToString();
                     else
-                        return false;
+                        return -3;
                 }
                 model.IdCliente = Convert.ToInt32(id);
                 model.Entrada = DateTime.Now;
@@ -169,7 +169,7 @@ namespace HermesBarWEB.Controllers
 
                 return PdvClienteService.Insert(model, _user);
             }
-            return false;
+            return -3;
         }
         public ActionResult ReforcoCaixa()
         {

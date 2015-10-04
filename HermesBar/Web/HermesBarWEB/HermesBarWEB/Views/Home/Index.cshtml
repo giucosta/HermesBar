@@ -13,4 +13,58 @@
             </div>
         </div>
     </section>
+    <div class="panel-body">
+        <div class="tab-pane" id="chartjs">
+            <div class="row">
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Vendas (Semanal)
+                        </header>
+                        <div class="panel-body text-center">
+                            <canvas id="line" height="300" width="450"></canvas>
+                        </div>
+                    </section>
+                </div>
+                <!-- Bar -->
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Público por idade (Comparação mês anterior)
+                        </header>
+                        <div class="panel-body text-center">
+                            <canvas id="bar" height="300" width="500"></canvas>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Cervejas mais vendidas (Mensal)
+                        </header>
+                        <div class="panel-body text-center">
+                            <canvas id="pie" height="300" width="400"></canvas>
+                        </div>
+                    </section>
+                </div>
+                <!-- Doughnut -->
+                <div class="col-lg-6">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Produtos mais consumidos (Mensal)
+                        </header>
+                        <div class="panel-body text-center">
+                            <canvas id="doughnut" height="300" width="400"></canvas>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+<script src="~/Scripts/jquery-1.11.3.js"></script>
+<script src="~/Scripts/Chart.js"></script>
+<script src="~/Scripts/chartjs-custom.js"></script>
+

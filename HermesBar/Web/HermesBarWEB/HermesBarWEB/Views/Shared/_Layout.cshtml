@@ -277,5 +277,16 @@
     @Scripts.Render("~/bundles/calendar")
     <script src="~/Scripts/lang-all.js"></script>
     @Scripts.Render("~/bundles/hma")
+    <script>
+    if ($(".custom-custom-bar-chart")) {
+        $(".bar").each(function () {
+            var i = jQuery(this).find(".value").html();
+            $(this).find(".value").html("");
+            $(this).find(".value").animate({
+                height: i
+            }, 2000)
+        })
+    }
+    </script>
 </body>
 </html>

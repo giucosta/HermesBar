@@ -215,6 +215,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\calendar-custom.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\chartjs-custom.js" />
     <Content Include="Scripts\charts-flot.js" />
     <Content Include="Scripts\charts-other.js" />

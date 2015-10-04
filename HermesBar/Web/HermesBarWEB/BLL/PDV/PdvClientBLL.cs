@@ -23,9 +23,9 @@ namespace BLL.PDV
                 return _clientDAO;
             }
         }
-        public bool Insert(PdvClientModel client, UsuarioModel user)
+        public int Insert(PdvClientModel client, UsuarioModel user)
         {
-            return ClientDAO.Insert(ConvertModelToEntity(client, user)).GetResults();
+            return Convert.ToInt32(ClientDAO.Insert(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]);
         }
         public string GetCar(PdvClientModel client, UsuarioModel user)
         {

@@ -71,7 +71,6 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-
         public DataTable FecharComanda(int numeroComanda, int idCaixa)
         {
             try

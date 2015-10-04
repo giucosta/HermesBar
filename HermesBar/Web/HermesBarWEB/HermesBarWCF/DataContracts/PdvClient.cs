@@ -32,7 +32,7 @@ namespace HermesBarWCF.DataContracts
                 return _pedidoBLL;
             }
         }
-        public bool Insert(PdvClientModel client, UsuarioModel user)
+        public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return ClientBLL.Insert(client, user);
         }
