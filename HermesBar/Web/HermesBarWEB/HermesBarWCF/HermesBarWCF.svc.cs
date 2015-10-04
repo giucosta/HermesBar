@@ -299,4 +299,21 @@ namespace HermesBarWCF
             return PdvClient.FecharComanda(client, user);
         }
     }
+    public class UsuarioService : IUser
+    {
+        private User _user = null;
+        private User User
+        {
+            get
+            {
+                if (_user == null)
+                    _user = new User();
+                return _user;
+            }
+        }
+        public List<UsuarioModel> Get(UsuarioModel user)
+        {
+            return User.Get(user);
+        }
+    }
 }

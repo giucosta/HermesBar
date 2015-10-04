@@ -58,6 +58,7 @@
     <Compile Include="Supplier\FornecedorBLL.cs" />
     <Compile Include="User\EmailBLL.cs" />
     <Compile Include="User\LoginBLL.cs" />
+    <Compile Include="User\UserBLL.cs" />
     <Compile Include="UTIL\Conversores.cs" />
     <Compile Include="UTIL\Exceptions.cs" />
     <Compile Include="UTIL\GetEmail.cs" />

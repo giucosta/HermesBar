@@ -1,24 +1,22 @@
-﻿using System;
+﻿using ENTITY.User;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ENTITY.User;
 
 namespace DAO.User
 {
-    public class LoginDAO : Connection.Connection
+    public class UsuarioDAO : Connection.Connection
     {
-        public DataTable Login(HMA_USR USR)
+        public DataTable Get(HMA_USR user)
         {
             try
             {
                 OpenConnection();
-                var data = new DataTable();
-                CreateDataAdapter(SQL.SP_USR.LOGON);
-                InserParameter("EMA", SqlDbType.VarChar, USR.EMA);
-                InserParameter("PAS", SqlDbType.VarChar, USR.PAS);
+                CreateDataAdapter(SQL.SP_USR.GET);
+                InserParameter("ID", SqlDbType.Int, user._ID);
 
                 return GetResult();
             }

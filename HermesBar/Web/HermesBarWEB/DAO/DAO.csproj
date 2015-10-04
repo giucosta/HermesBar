@@ -100,8 +100,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SP_SUPPLIER.resx</DependentUpon>
     </Compile>
+    <Compile Include="SQL\SP_USR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SP_USR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
+    <Compile Include="User\UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -148,6 +154,10 @@
     <EmbeddedResource Include="SQL\SP_SUPPLIER.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SP_SUPPLIER.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\SP_USR.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SP_USR.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
