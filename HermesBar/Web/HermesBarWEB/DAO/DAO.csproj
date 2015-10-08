@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SP_PDV_CLI.resx</DependentUpon>
     </Compile>
+    <Compile Include="SQL\SP_PER.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SP_PER.resx</DependentUpon>
+    </Compile>
     <Compile Include="SQL\SP_PROD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -107,6 +112,7 @@
     </Compile>
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
+    <Compile Include="User\PerfilDAO.cs" />
     <Compile Include="User\UsuarioDAO.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +152,10 @@
     <EmbeddedResource Include="SQL\SP_PDV_CLI.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SP_PDV_CLI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SQL\SP_PER.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SP_PER.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SQL\SP_PROD.resx">
       <Generator>ResXFileCodeGenerator</Generator>

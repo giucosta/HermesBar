@@ -1,4 +1,4 @@
-﻿using ENTITY.User;
+﻿using DAO.SQL;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace DAO.User
 {
-    public class UsuarioDAO : Connection.Connection
+    public class ProfileDAO : Connection.Connection
     {
-        public DataTable Get(HMA_USR user)
+        public DataTable Get()
         {
             try
             {
                 OpenConnection();
-                CreateDataAdapter(SQL.SP_USR.GET);
-                InserParameter("ID", SqlDbType.Int, user._ID);
+                CreateDataAdapter(SP_PER.GET);
 
                 return GetResult();
             }

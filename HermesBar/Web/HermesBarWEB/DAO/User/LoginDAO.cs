@@ -17,7 +17,7 @@ namespace DAO.User
                 OpenConnection();
                 var data = new DataTable();
                 CreateDataAdapter(SQL.SP_USR.LOGON);
-                InserParameter("EMA", SqlDbType.VarChar, USR.EMA);
+                InserParameter("NOM", SqlDbType.VarChar, USR.NOM);
                 InserParameter("PAS", SqlDbType.VarChar, USR.PAS);
 
                 return GetResult();

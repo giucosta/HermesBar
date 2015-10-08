@@ -72,6 +72,7 @@
     <Compile Include="DataContracts\PayBox.cs" />
     <Compile Include="DataContracts\PdvClient.cs" />
     <Compile Include="DataContracts\Produtos.cs" />
+    <Compile Include="DataContracts\Profile.cs" />
     <Compile Include="DataContracts\User.cs" />
     <Compile Include="HermesBarWCF.svc.cs">
       <DependentUpon>HermesBarWCF.svc</DependentUpon>
@@ -85,6 +86,7 @@
     <Compile Include="IContract\IPayBox.cs" />
     <Compile Include="IContract\IPdvClient.cs" />
     <Compile Include="IContract\IProduct.cs" />
+    <Compile Include="IContract\IProfile.cs" />
     <Compile Include="IContract\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

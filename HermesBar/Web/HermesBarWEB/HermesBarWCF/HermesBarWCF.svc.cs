@@ -316,4 +316,22 @@ namespace HermesBarWCF
             return User.Get(user);
         }
     }
+    public class PerfilService : IProfile
+    {
+        private Profile _profile = null;
+        private Profile Profile
+        {
+            get
+            {
+                if (_profile == null)
+                    _profile = new Profile();
+                return _profile;
+            }
+        }
+
+        public List<PerfilModel> Get()
+        {
+            return Profile.Get();
+        }
+    }
 }

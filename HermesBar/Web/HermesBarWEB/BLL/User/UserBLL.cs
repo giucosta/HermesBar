@@ -12,13 +12,13 @@ namespace BLL.User
 {
     public class UserBLL
     {
-        private UsuarioDAO _usuarioDAO = null;
-        private UsuarioDAO UsuarioDAO
+        private UserDAO _usuarioDAO = null;
+        private UserDAO UsuarioDAO
         {
             get
             {
                 if (_usuarioDAO == null)
-                    _usuarioDAO = new UsuarioDAO();
+                    _usuarioDAO = new UserDAO();
                 return _usuarioDAO;
             }
         }

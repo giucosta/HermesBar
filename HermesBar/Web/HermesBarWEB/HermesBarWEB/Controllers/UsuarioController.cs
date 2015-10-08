@@ -22,7 +22,16 @@ namespace HermesBarWEB.Controllers
                 return _usuarioService;
             }
         }
-        
+        private PerfilService _perfilService = null;
+        private PerfilService PerfilService
+        {
+            get
+            {
+                if (_perfilService == null)
+                    _perfilService = new PerfilService();
+                return _perfilService;
+            }
+        }
         private UsuarioModel user;
         public UsuarioController()
         {
@@ -36,9 +45,23 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult Cadastrar()
         {
-            return View();
+            var model = new UsuarioModel();
+            LoadModel(ref model);
+            return View(model);
         }
 
+        public ActionResult CadastrarUsuario(UsuarioModel usuario)
+        {
+            try
+            {
+
+                return View("Cadastrar");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #region Private Methods
         private void LoadModel(ref UsuarioModel user)
         {
@@ -50,10 +73,14 @@ namespace HermesBarWEB.Controllers
                 else
                     user.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
             }
+
             user.Perfil = new List<SelectListItem>();
-            foreach (var item in collection)
+            foreach (var item in PerfilService.Get())
             {
-                
+                if (user.PerfilSelected == item.Id.ToString())
+                    user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString(), Selected = true });
+                else
+                    user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString() });
             }
         }
         #endregion

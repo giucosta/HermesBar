@@ -59,6 +59,7 @@
     <Compile Include="Product\UnidadeMedidaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Supplier\FornecedorModel.cs" />
+    <Compile Include="User\PerfilModel.cs" />
     <Compile Include="User\UsuarioModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
