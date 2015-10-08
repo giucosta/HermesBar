@@ -35,6 +35,13 @@ namespace DAO.User
             {
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_USR.INSERT);
+                InserParameter("USR", SqlDbType.Int, user._ID);
+                InserParameter("ATV", SqlDbType.Int, user._ATV);
+                InserParameter("NOM", SqlDbType.VarChar, user.NOM);
+                InserParameter("EMA", SqlDbType.VarChar, user.EMA);
+                InserParameter("ID_PER", SqlDbType.Int, user.PER_ID);
+
+                return GetResult();
             }
             catch (Exception)
             {
