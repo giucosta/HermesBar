@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace HermesBarWEB.Controllers
 {
+    [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class FuncionarioController : Controller
     {
         private HermesBarWCF.FuncionarioService _service = null;

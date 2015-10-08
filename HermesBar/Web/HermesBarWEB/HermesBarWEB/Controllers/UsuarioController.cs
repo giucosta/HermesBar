@@ -12,6 +12,7 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class UsuarioController : Controller
     {
+        #region Singleton
         private UsuarioService _usuarioService = null;
         private UsuarioService UsuarioService
         {
@@ -32,6 +33,7 @@ namespace HermesBarWEB.Controllers
                 return _perfilService;
             }
         }
+        #endregion
         private UsuarioModel user;
         public UsuarioController()
         {
@@ -49,19 +51,23 @@ namespace HermesBarWEB.Controllers
             LoadModel(ref model);
             return View(model);
         }
-
         public ActionResult CadastrarUsuario(UsuarioModel usuario)
         {
             try
             {
+                usuario.Id = user.Id;
+                if (UsuarioService.Insert(usuario))
+                    return View("Get", UsuarioService.Get(new UsuarioModel()));
 
-                return View("Cadastrar");
+                LoadModel(ref usuario);
+                return View("Cadastrar", usuario);
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
         #region Private Methods
         private void LoadModel(ref UsuarioModel user)
         {

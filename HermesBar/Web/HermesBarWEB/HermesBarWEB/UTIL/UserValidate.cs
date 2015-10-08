@@ -53,7 +53,8 @@ namespace HermesBarWEB.UTIL
     {
         public enum Perfil
         {
-            Administrador = 1
+            Administrador = 1,
+            Atendente = 2
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Web.Mvc;
 
 namespace HermesBarWEB.Controllers
 {
+    [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class EstabelecimentoController : Controller
     {
         private HermesBarWCF.EstabelecimentoService _estabelecimentoService = null;

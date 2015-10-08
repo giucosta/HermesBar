@@ -11,5 +11,6 @@ namespace HermesBarWCF.IContract
     public interface IUser
     {
         List<UsuarioModel> Get(UsuarioModel user);
+        bool Insert(UsuarioModel user);
     }
 }

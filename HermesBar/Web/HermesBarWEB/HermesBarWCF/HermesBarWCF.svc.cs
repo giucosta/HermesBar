@@ -315,6 +315,10 @@ namespace HermesBarWCF
         {
             return User.Get(user);
         }
+        public bool Insert(UsuarioModel user)
+        {
+            return User.Insert(user);
+        }
     }
     public class PerfilService : IProfile
     {

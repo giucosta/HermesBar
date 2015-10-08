@@ -33,7 +33,14 @@ namespace HermesBarWEB.Controllers
             {
                 FormsAuthentication.SetAuthCookie(result.PerfilSigla, false);
                 Session["USR"] = result;
-                return RedirectToAction("Index", "Home");
+                switch (result.PerfilSigla)
+                {
+                    case "ATE":
+                        return RedirectToAction("Pedidos", "Pedido");
+                    case "ADM":
+                        return RedirectToAction("Index", "Home");
+                }
+                return View("Login", new UsuarioModel());
             }
             ViewBag.UsuarioSenhaIncorreto = "Usuário e/ou senha incorretos";
             return View("Login", new UsuarioModel());

@@ -40,6 +40,7 @@ namespace DAO.User
                 InserParameter("NOM", SqlDbType.VarChar, user.NOM);
                 InserParameter("EMA", SqlDbType.VarChar, user.EMA);
                 InserParameter("ID_PER", SqlDbType.Int, user.PER_ID);
+                InserParameter("PAS", SqlDbType.VarChar, user.PAS);
 
                 return GetResult();
             }

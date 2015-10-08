@@ -112,8 +112,8 @@
     </Compile>
     <Compile Include="Supplier\FornecedorDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
-    <Compile Include="User\PerfilDAO.cs" />
-    <Compile Include="User\UsuarioDAO.cs" />
+    <Compile Include="User\ProfileDAO.cs" />
+    <Compile Include="User\UserDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

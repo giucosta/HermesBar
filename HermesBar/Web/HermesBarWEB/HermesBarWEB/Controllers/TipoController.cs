@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace HermesBarWEB.Controllers
 {
+    [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class TipoController : Controller
     {
         private TypeBLL _typeBLL = null;

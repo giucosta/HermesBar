@@ -39,7 +39,17 @@ namespace BLL.User
                 throw;
             }
         }
-
+        public bool Insert(UsuarioModel user)
+        {
+            try
+            {
+                return UsuarioDAO.Insert(ConvertModelToEntity(user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #region Private Methods
         private HMA_USR ConvertModelToEntity(UsuarioModel user)
         {
@@ -50,6 +60,9 @@ namespace BLL.User
                 ent.NOM = user.Nome;
                 ent.PAS = user.Senha;
                 ent._ATV = Convert.ToInt32(user.StatusSelected);
+                if(!string.IsNullOrEmpty(user.PerfilSelected))
+                    ent.PER_ID = Convert.ToInt32(user.PerfilSelected);
+                ent.EMA = user.Email;
 
                 return ent;
             }

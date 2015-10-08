@@ -1,4 +1,5 @@
 ﻿using BLL.Product;
+using HermesBarWEB.UTIL;
 using MODEL.Product;
 using MODEL.User;
 using System;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace HermesBarWEB.Controllers
 {
+    [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class UnidadeMedidaController : Controller
     {
         private UniMedBLL _unidadeMedidaBLL = null;

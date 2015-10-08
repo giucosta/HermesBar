@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace HermesBarWEB.Controllers
 {
+    [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class HomeController : Controller
     {
         private UsuarioModel user;
@@ -19,12 +20,11 @@ namespace HermesBarWEB.Controllers
             GetSession.GetUserSession(ref user);
             ViewBag.User = user.Nome;
         }
-        [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador})]
+        
         public ActionResult Index()
         {
             return View();
         }
-
         public ActionResult GetEmails()
         {
             return Json(GetEmail.Get(), JsonRequestBehavior.AllowGet);
