@@ -22,7 +22,7 @@ namespace HermesBarWEB.Controllers
                 return _usuarioService;
             }
         }
-
+        
         private UsuarioModel user;
         public UsuarioController()
         {
@@ -30,10 +30,32 @@ namespace HermesBarWEB.Controllers
             ViewBag.User = user.Nome;
         }
 
-
         public ActionResult Get()
         {
             return View(UsuarioService.Get(new UsuarioModel()));
         }
+        public ActionResult Cadastrar()
+        {
+            return View();
+        }
+
+        #region Private Methods
+        private void LoadModel(ref UsuarioModel user)
+        {
+            user.Status = new List<SelectListItem>();
+            foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
+            {
+                if (user.StatusSelected == ((int)item).ToString())
+                    user.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString(), Selected = true });
+                else
+                    user.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
+            }
+            user.Perfil = new List<SelectListItem>();
+            foreach (var item in collection)
+            {
+                
+            }
+        }
+        #endregion
     }
 }

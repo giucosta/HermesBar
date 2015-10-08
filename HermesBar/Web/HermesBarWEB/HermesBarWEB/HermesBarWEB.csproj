@@ -380,6 +380,7 @@
     <Content Include="Views\Pedido\Pedidos.cshtml" />
     <Content Include="Views\Pdv\SaidaCliente.cshtml" />
     <Content Include="Views\Usuario\Get.cshtml" />
+    <Content Include="Views\Usuario\Cadastrar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

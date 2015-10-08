@@ -14,6 +14,8 @@ namespace MODEL.User
         public string Email { get; set; }
         public string PerfilSigla { get; set; }
         public int PerfilId { get; set; }
+        public List<SelectListItem> Perfil { get; set; }
+        public string PerfilSelected { get; set; }
         public string Senha { get; set; }
         public string StatusSelected { get; set; }
         public List<SelectListItem> Status { get; set; }
