@@ -53,5 +53,29 @@ namespace DAO.User
                 CloseConnection();
             }
         }
+        public DataTable Update(HMA_USR user)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_USR.UPDATE);
+                InserParameter("ATV", SqlDbType.Int, user._ATV);
+                InserParameter("NOM", SqlDbType.VarChar, user.NOM);
+                InserParameter("EMA", SqlDbType.VarChar, user.EMA);
+                InserParameter("PAS", SqlDbType.VarChar, user.PAS);
+                InserParameter("ID_USR", SqlDbType.Int, user._ID);
+                InserParameter("ID_PER", SqlDbType.Int, user.PER_ID);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

@@ -45,6 +45,12 @@ namespace HermesBarWEB.Controllers
         {
             return View(UsuarioService.Get(new UsuarioModel()));
         }
+        public ActionResult GetId(int id)
+        {
+             var model = UsuarioService.Get(new UsuarioModel() { Id = id }).FirstOrDefault();
+            LoadModel(ref model);
+            return View("Cadastrar", model);
+        }
         public ActionResult Cadastrar()
         {
             var model = new UsuarioModel();
@@ -55,12 +61,26 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
+                if (usuario.Id != 0)
+                    return EditarUsuario(usuario);
+
                 usuario.Id = user.Id;
                 if (UsuarioService.Insert(usuario))
                     return View("Get", UsuarioService.Get(new UsuarioModel()));
 
                 LoadModel(ref usuario);
                 return View("Cadastrar", usuario);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private ActionResult EditarUsuario(UsuarioModel usuario)
+        {
+            try
+            {
+                return View();
             }
             catch (Exception)
             {
@@ -83,7 +103,7 @@ namespace HermesBarWEB.Controllers
             user.Perfil = new List<SelectListItem>();
             foreach (var item in PerfilService.Get())
             {
-                if (user.PerfilSelected == item.Id.ToString())
+                if (user.PerfilSigla == item.Sigla)
                     user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString(), Selected = true });
                 else
                     user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString() });

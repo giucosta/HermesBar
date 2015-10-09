@@ -78,7 +78,8 @@ namespace BLL.User
                 var model = new UsuarioModel();
                 model.Id = user._ID;
                 model.Email = user.EMA;
-                model.PerfilSigla = user.DSC;
+                model.PerfilSigla = user.SIG;
+                model.PerfilDescricao = user.DSC;
                 model.Nome = user.NOM;
                 model.StatusSelected = user._ATV.ToString();
 

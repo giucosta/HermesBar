@@ -13,6 +13,7 @@ namespace MODEL.User
         public string Nome { get; set; }
         public string Email { get; set; }
         public string PerfilSigla { get; set; }
+        public string PerfilDescricao { get; set; }
         public int PerfilId { get; set; }
         public List<SelectListItem> Perfil { get; set; }
         public string PerfilSelected { get; set; }
