@@ -12,6 +12,7 @@ namespace BLL.User
 {
     public class UserBLL
     {
+        #region Singleton
         private UserDAO _usuarioDAO = null;
         private UserDAO UsuarioDAO
         {
@@ -22,7 +23,7 @@ namespace BLL.User
                 return _usuarioDAO;
             }
         }
-
+        #endregion
         public List<UsuarioModel> Get(UsuarioModel user)
         {
             try
@@ -50,6 +51,40 @@ namespace BLL.User
                 throw;
             }
         }
+        public bool Update(UsuarioModel user)
+        {
+            try
+            {
+                return UsuarioDAO.Update(ConvertModelToEntity(user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Inactive(UsuarioModel user)
+        {
+            try
+            {
+                return UsuarioDAO.Inactive(ConvertModelToEntity(user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Active(UsuarioModel user)
+        {
+            try
+            {
+                return UsuarioDAO.Active(ConvertModelToEntity(user)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #region Private Methods
         private HMA_USR ConvertModelToEntity(UsuarioModel user)
         {

@@ -319,6 +319,18 @@ namespace HermesBarWCF
         {
             return User.Insert(user);
         }
+        public bool Update(UsuarioModel user)
+        {
+            return User.Update(user);
+        }
+        public bool Active(UsuarioModel user)
+        {
+            return User.Active(user);
+        }
+        public bool Inactive(UsuarioModel user)
+        {
+            return User.Inactive(user);
+        }
     }
     public class PerfilService : IProfile
     {

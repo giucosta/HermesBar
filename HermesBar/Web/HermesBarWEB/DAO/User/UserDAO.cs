@@ -77,5 +77,43 @@ namespace DAO.User
                 CloseConnection();
             }
         }
+        public DataTable Inactive(HMA_USR user)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_USR.INACTIVE);
+                InserParameter("ID", SqlDbType.Int, user._ID);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable Active(HMA_USR user)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_USR.ACTIVE);
+                InserParameter("ID", SqlDbType.Int, user._ID);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

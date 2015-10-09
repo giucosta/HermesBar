@@ -76,11 +76,50 @@ namespace HermesBarWEB.Controllers
                 throw;
             }
         }
+        public ActionResult ActiveId(int id)
+        {
+            try
+            {
+                if (UsuarioService.Active(new UsuarioModel() { Id = id }))
+                    ViewBag.ActiveSuccess = true;
+                else
+                    ViewBag.ActiveError = true;
+                return View("Get", UsuarioService.Get(new UsuarioModel()));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult InactiveId(int id)
+        {
+            try
+            {
+                if (UsuarioService.Inactive(new UsuarioModel() { Id = id }))
+                    ViewBag.InactiveSuccess = true;
+                else
+                    ViewBag.InactiveError = true;
+                return View("Get", UsuarioService.Get(new UsuarioModel()));
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private ActionResult EditarUsuario(UsuarioModel usuario)
         {
             try
             {
-                return View();
+                if (UsuarioService.Update(usuario))
+                {
+                    ViewBag.UpdateSuccess = true;
+                    return View("Get", UsuarioService.Get(new UsuarioModel()));
+                }
+                ViewBag.UpdateError = true;
+                LoadModel(ref usuario);
+                return View("Cadastrar", usuario);
             }
             catch (Exception)
             {
