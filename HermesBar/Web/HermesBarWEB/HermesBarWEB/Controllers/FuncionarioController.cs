@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Address;
 using MODEL.Contact;
 using MODEL.Employee;
@@ -14,27 +16,9 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class FuncionarioController : Controller
     {
-        private HermesBarWCF.EmployeeService _service = null;
-        private HermesBarWCF.EmployeeService Service
-        {
-            get
-            {
-                if (_service == null)
-                    _service = new HermesBarWCF.EmployeeService();
-                return _service;
-            }
-        }
-        private HermesBarWCF.AddressService _enderecoService = null;
-        private HermesBarWCF.AddressService EnderecoService
-        {
-            get
-            {
-                if (_enderecoService == null)
-                    _enderecoService = new HermesBarWCF.AddressService();
-                return _enderecoService;
-            }
-        }
-        
+        private EmployeeService EmployeeService = Singleton<EmployeeService>.Instance();
+        private AddressService AddressService = Singleton<AddressService>.Instance();
+       
         private UsuarioModel user;
         public FuncionarioController()
         {
@@ -43,13 +27,27 @@ namespace HermesBarWEB.Controllers
         
         public ActionResult Get()
         {
-            return View(Service.Get(new EmployeeModel() { Cpf = "" }, user));
+            try
+            {
+                return View(EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
         public ActionResult Cadastrar()
         {
-            var model = new EmployeeModel();
-            LoadModel(ref model);
-            return View(model);
+            try
+            {
+                var model = new EmployeeModel();
+                LoadModel(ref model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
         public ActionResult CadastrarFuncionario(EmployeeModel employee, EnderecoModel address, ContatoModel contact)
         {
@@ -61,10 +59,10 @@ namespace HermesBarWEB.Controllers
                 if (employee.Id != 0)
                     return EditarFuncionar(employee);
 
-                if (Service.Insert(employee, user))
+                if (EmployeeService.Insert(employee, user))
                 {
                     ViewBag.InsertSuccess = true;
-                    return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
                 }
                 ViewBag.InsertError = true;
                 LoadModel(ref employee);
@@ -79,18 +77,25 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult GetId(int id)
         {
-            var model = Service.Get(new EmployeeModel() { Id = id, Cpf = "" }, user).FirstOrDefault();
-            LoadModel(ref model);
-            return View("Cadastrar", model);
+            try
+            {
+                var model = EmployeeService.Get(new EmployeeModel() { Id = id, Cpf = "" }, user).FirstOrDefault();
+                LoadModel(ref model);
+                return View("Cadastrar", model);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
         private ActionResult EditarFuncionar(EmployeeModel employee)
         {
             try
             {
-                if (Service.Update(employee, user))
+                if (EmployeeService.Update(employee, user))
                 {
                     ViewBag.UpdateSuccess = true;
-                    return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
                 }
                 ViewBag.UpdateError = true;
                 LoadModel(ref employee);
@@ -107,30 +112,32 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (Service.Inactive(new EmployeeModel() { Id = id }, user))
+                if (EmployeeService.Inactive(new EmployeeModel() { Id = id }, user))
                     ViewBag.InactiveSuccess = true;
                 else
                     ViewBag.InactiveError = true;
-                return View("Get", Service.Get(new EmployeeModel() { Cpf= "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf= "" }, user));
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.InactiveError = true;
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
             }
         }
         public ActionResult ActiveId(int id)
         {
             try
             {
-                if (Service.Active(new EmployeeModel() { Id = id }, user))
+                if (EmployeeService.Active(new EmployeeModel() { Id = id }, user))
                     ViewBag.ActiveSuccess = true;
                 else
                     ViewBag.ActiveError = true;
-                return View("Get", Service.Get(new EmployeeModel() { Cpf = "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.ActiveError = true;
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
             }
         }
 
@@ -140,9 +147,9 @@ namespace HermesBarWEB.Controllers
             if(employee.Contato == null)
                 employee.Contato = new MODEL.Contact.ContatoModel();
             if (employee.Endereco != null)
-                employee.Endereco = EnderecoService.GetStates(employee.Endereco);
+                employee.Endereco = AddressService.GetStates(employee.Endereco);
             else
-                employee.Endereco = EnderecoService.GetStates(new EnderecoModel());
+                employee.Endereco = AddressService.GetStates(new EnderecoModel());
             
             employee.Status = new List<SelectListItem>();
             foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
@@ -162,7 +169,7 @@ namespace HermesBarWEB.Controllers
                     employee.Sexo.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
             }
 
-            var employeeType = Service.GetTypes();
+            var employeeType = EmployeeService.GetTypes();
             employee.Tipo = new List<SelectListItem>();
             foreach (var item in employeeType)
             {
@@ -172,7 +179,7 @@ namespace HermesBarWEB.Controllers
                     employee.Tipo.Add(new SelectListItem() { Text = item.Tipo, Value = item.Id.ToString() });
             }
 
-            var employeePlaces = Service.GetPlaces();
+            var employeePlaces = EmployeeService.GetPlaces();
             employee.Cargo = new List<SelectListItem>();
             foreach (var item in employeePlaces)
             {

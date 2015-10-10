@@ -9,6 +9,7 @@ using MODEL.Event;
 using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
 using MODEL.Product;
+using MODEL.Supplier;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace HermesBarWCF
 {
     public class ProductService : IProduct
     {
-        public Produtos Product = Singleton<Produtos>.Instance();
+        public Product Product = Singleton<Product>.Instance();
 
         public bool Insert(ProdutoModel product, UsuarioModel user)
         {
@@ -250,6 +251,36 @@ namespace HermesBarWCF
         public List<PerfilModel> Get()
         {
             return Profile.Get();
+        }
+    }
+    public class SupplierService : ISupplier
+    {
+        private Supplier Supplier = Singleton<Supplier>.Instance();
+        public bool Insert(FornecedorModel supplier, UsuarioModel user)
+        {
+            try
+            {
+                return Supplier.Insert(supplier, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<FornecedorModel> Get(FornecedorModel model, UsuarioModel user)
+        {
+            try
+            {
+                return Supplier.Get(model, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Update(FornecedorModel supplier, UsuarioModel user)
+        {
+            return Supplier.Update(supplier, user);
         }
     }
 }

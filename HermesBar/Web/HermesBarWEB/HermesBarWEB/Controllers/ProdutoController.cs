@@ -1,4 +1,5 @@
-﻿using BLL.Product;
+﻿using HELPER;
+using HermesBarWCF;
 using HermesBarWEB.UTIL;
 using MODEL.Product;
 using MODEL.User;
@@ -13,16 +14,7 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class ProdutoController : Controller
     {
-        private HermesBarWCF.ProductService _productService = null;
-        private HermesBarWCF.ProductService ProductService
-        {
-            get
-            {
-                if (_productService == null)
-                    _productService = new HermesBarWCF.ProductService();
-                return _productService;
-            }
-        }
+        private ProductService ProductService = Singleton<ProductService>.Instance();
         private UsuarioModel user;
         public ProdutoController()
         {

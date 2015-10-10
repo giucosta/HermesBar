@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Client;
 using MODEL.Contact;
 using MODEL.User;
@@ -13,16 +15,7 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class ClienteController : Controller
     {
-        private HermesBarWCF.ClientService _clienteService = null;
-        private HermesBarWCF.ClientService ClienteService
-        {
-            get
-            {
-                if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClientService();
-                return _clienteService;
-            }
-        }
+        private ClientService ClienteService = Singleton<ClientService>.Instance();
 
         private UsuarioModel user;
         public ClienteController()
@@ -38,7 +31,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         public ActionResult GetId(int id)
@@ -51,7 +44,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         public ActionResult GetRg(string rg)
@@ -66,7 +59,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return null;
             }
         }
         public ActionResult Cadastrar()
@@ -79,7 +72,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         public ActionResult CadastrarCliente(ClientModel cliente, ContatoModel contato)
@@ -117,7 +110,8 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.InactiveError = true;
+                return View("Get", ClienteService.Get(new ClientModel(), user));
             }
         }
         public ActionResult ActiveId(int id)
@@ -132,7 +126,8 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.ActiveError = true;
+                return View("Get", ClienteService.Get(new ClientModel(), user));
             }
         }
         public bool CadastroRapido(string nome)
@@ -147,7 +142,7 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return false;
             }
         }
         public ActionResult GetJson()
@@ -172,7 +167,9 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.UpdateError = true;
+                LoadModel(ref client);
+                return View("Cadastrar", client);
             }
         }
         private void LoadModel(ref ClientModel cliente)

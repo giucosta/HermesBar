@@ -11,11 +11,11 @@ using System.Web;
 namespace HermesBarWCF.DataContracts
 {
     [DataContract]
-    public class Produtos
+    public class Product
     {
         private ProductBLL ProdutoBLL;
 
-        public Produtos()
+        public Product()
         {
             this.ProdutoBLL = Singleton<ProductBLL>.Instance();
         }

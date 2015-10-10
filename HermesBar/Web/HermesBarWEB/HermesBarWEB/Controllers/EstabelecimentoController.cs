@@ -1,5 +1,5 @@
-﻿using BLL.Commom;
-using BLL.Establishment;
+﻿using HELPER;
+using HermesBarWCF;
 using HermesBarWEB.UTIL;
 using MODEL.Address;
 using MODEL.Contact;
@@ -16,27 +16,8 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class EstabelecimentoController : Controller
     {
-        private HermesBarWCF.EstablishmentService _estabelecimentoService = null;
-        private HermesBarWCF.EstablishmentService EstabelecimentoService
-        {
-            get
-            {
-                if (_estabelecimentoService == null)
-                    _estabelecimentoService = new HermesBarWCF.EstablishmentService();
-                return _estabelecimentoService;
-            }
-        }
-
-        private HermesBarWCF.AddressService _enderecoService = null;
-        private HermesBarWCF.AddressService EnderecoService
-        {
-            get
-            {
-                if (_enderecoService == null)
-                    _enderecoService = new HermesBarWCF.AddressService();
-                return _enderecoService;
-            }
-        }
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
+        private AddressService AddressService = Singleton<AddressService>.Instance();
         
         private UsuarioModel user;
         public EstabelecimentoController()
@@ -46,19 +27,40 @@ namespace HermesBarWEB.Controllers
         
         public ActionResult Configuracoes()
         {
-            return View(EstabelecimentoService.Get(new EstablishmentModel(), user));
+            try
+            {
+                return View(EstablishmentService.Get(new EstablishmentModel(), user));
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
         public ActionResult Cadastrar()
         {
-            var model = new EstablishmentModel();
-            LoadModel(ref model);
-            return View(model);
+            try
+            {
+                var model = new EstablishmentModel();
+                LoadModel(ref model);
+                return View(model);
+            }
+            catch (Exception)
+            {   
+                return View("Error");
+            }
         }
         public ActionResult GetId(int id)
         {
-            var result = EstabelecimentoService.Get(new EstablishmentModel() { Id = id }, user).FirstOrDefault();
-            LoadModel(ref result);
-            return View("Cadastrar", result);
+            try
+            {
+                var result = EstablishmentService.Get(new EstablishmentModel() { Id = id }, user).FirstOrDefault();
+                LoadModel(ref result);
+                return View("Cadastrar", result);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
         }
         public ActionResult CadastrarEstabelecimento(EstablishmentModel estabelecimento, EnderecoModel endereco, ContatoModel contato)
         {
@@ -68,10 +70,10 @@ namespace HermesBarWEB.Controllers
                 estabelecimento.Contato = contato;
                 if (estabelecimento.Id == 0)
                 {
-                    if (EstabelecimentoService.Insert(estabelecimento, user))
+                    if (EstablishmentService.Insert(estabelecimento, user))
                     {
                         ViewBag.Sucesso = true;
-                        return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                        return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
                     }
                     ViewBag.Erro = true;
                     return View("Cadastrar", estabelecimento);
@@ -80,43 +82,44 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                return View("~/Views/Shared/Error.cshtml");
+                ViewBag.Erro = true;
+                return View("Cadastrar", estabelecimento);
             }
         }
         public ActionResult Inativar(int id)
         {
             try
             {
-                if (EstabelecimentoService.Inactive(new EstablishmentModel() { Id = id }, user))
+                if (EstablishmentService.Inactive(new EstablishmentModel() { Id = id }, user))
                 {
                     ViewBag.InativarSucesso = true;
-                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                    return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
                 }
                 ViewBag.InativarErro = true;
-                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
             }
             catch (Exception)
             {
                 ViewBag.InativarErro = true;
-                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
             }
         }
         public ActionResult Ativar(int id)
         {
             try
             {
-                if (EstabelecimentoService.Active(new EstablishmentModel() { Id = id }, user))
+                if (EstablishmentService.Active(new EstablishmentModel() { Id = id }, user))
                 {
                     ViewBag.AtivarSucesso = true;
-                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                    return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
                 }
                 ViewBag.AtivarErro = true;
-                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
             }
             catch (Exception)
             {
                 ViewBag.AtivarErro = true;
-                return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
             }
         }
 
@@ -125,10 +128,10 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (EstabelecimentoService.Update(estabelecimento, user))
+                if (EstablishmentService.Update(estabelecimento, user))
                 {
                     ViewBag.EditarSucesso = true;
-                    return View("Configuracoes", EstabelecimentoService.Get(new EstablishmentModel(), user));
+                    return View("Configuracoes", EstablishmentService.Get(new EstablishmentModel(), user));
                 }
                 ViewBag.EditarErro = true;
                 return View("Cadastrar", estabelecimento);
@@ -143,7 +146,7 @@ namespace HermesBarWEB.Controllers
             if (model.Contato == null)
                 model.Contato = new ContatoModel();
 
-            model.Endereco = EnderecoService.GetStates(model.Endereco);
+            model.Endereco = AddressService.GetStates(model.Endereco);
             if (!string.IsNullOrEmpty(model.Endereco.UfSelected))
             {
                 foreach (var item in model.Endereco.UfList)

@@ -1,6 +1,4 @@
-﻿using BLL.User;
-using BLL.UTIL;
-using HermesBarWEB.UTIL;
+﻿using HermesBarWEB.UTIL;
 using MODEL.Commom;
 using MODEL.User;
 using System;

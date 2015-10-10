@@ -1,4 +1,5 @@
-﻿using HermesBarWCF;
+﻿using HELPER;
+using HermesBarWCF;
 using HermesBarWEB.UTIL;
 using MODEL.User;
 using System;
@@ -13,26 +14,8 @@ namespace HermesBarWEB.Controllers
     public class UsuarioController : Controller
     {
         #region Singleton
-        private UserService _usuarioService = null;
-        private UserService UsuarioService
-        {
-            get
-            {
-                if (_usuarioService == null)
-                    _usuarioService = new UserService();
-                return _usuarioService;
-            }
-        }
-        private ProfileService _perfilService = null;
-        private ProfileService PerfilService
-        {
-            get
-            {
-                if (_perfilService == null)
-                    _perfilService = new ProfileService();
-                return _perfilService;
-            }
-        }
+        private UserService UserService = Singleton<UserService>.Instance();
+        private ProfileService ProfileService = Singleton<ProfileService>.Instance();
         #endregion
 
         private UsuarioModel user;
@@ -44,11 +27,11 @@ namespace HermesBarWEB.Controllers
 
         public ActionResult Get()
         {
-            return View(UsuarioService.Get(new UsuarioModel()));
+            return View(UserService.Get(new UsuarioModel()));
         }
         public ActionResult GetId(int id)
         {
-             var model = UsuarioService.Get(new UsuarioModel() { Id = id }).FirstOrDefault();
+             var model = UserService.Get(new UsuarioModel() { Id = id }).FirstOrDefault();
             LoadModel(ref model);
             return View("Cadastrar", model);
         }
@@ -66,8 +49,8 @@ namespace HermesBarWEB.Controllers
                     return EditarUsuario(usuario);
 
                 usuario.Id = user.Id;
-                if (UsuarioService.Insert(usuario))
-                    return View("Get", UsuarioService.Get(new UsuarioModel()));
+                if (UserService.Insert(usuario))
+                    return View("Get", UserService.Get(new UsuarioModel()));
 
                 LoadModel(ref usuario);
                 return View("Cadastrar", usuario);
@@ -81,42 +64,44 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (UsuarioService.Active(new UsuarioModel() { Id = id }))
+                if (UserService.Active(new UsuarioModel() { Id = id }))
                     ViewBag.ActiveSuccess = true;
                 else
                     ViewBag.ActiveError = true;
-                return View("Get", UsuarioService.Get(new UsuarioModel()));
+                return View("Get", UserService.Get(new UsuarioModel()));
 
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.ActiveError = true;
+                return View("Get", UserService.Get(new UsuarioModel()));
             }
         }
         public ActionResult InactiveId(int id)
         {
             try
             {
-                if (UsuarioService.Inactive(new UsuarioModel() { Id = id }))
+                if (UserService.Inactive(new UsuarioModel() { Id = id }))
                     ViewBag.InactiveSuccess = true;
                 else
                     ViewBag.InactiveError = true;
-                return View("Get", UsuarioService.Get(new UsuarioModel()));
+                return View("Get", UserService.Get(new UsuarioModel()));
 
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.InactiveError = true;
+                return View("Get", UserService.Get(new UsuarioModel()));
             }
         }
         private ActionResult EditarUsuario(UsuarioModel usuario)
         {
             try
             {
-                if (UsuarioService.Update(usuario))
+                if (UserService.Update(usuario))
                 {
                     ViewBag.UpdateSuccess = true;
-                    return View("Get", UsuarioService.Get(new UsuarioModel()));
+                    return View("Get", UserService.Get(new UsuarioModel()));
                 }
                 ViewBag.UpdateError = true;
                 LoadModel(ref usuario);
@@ -124,7 +109,9 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                ViewBag.UpdateError = true;
+                LoadModel(ref usuario);
+                return View("Cadastrar", usuario);
             }
         }
 
@@ -141,7 +128,7 @@ namespace HermesBarWEB.Controllers
             }
 
             user.Perfil = new List<SelectListItem>();
-            foreach (var item in PerfilService.Get())
+            foreach (var item in ProfileService.Get())
             {
                 if (user.PerfilSigla == item.Sigla)
                     user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString(), Selected = true });

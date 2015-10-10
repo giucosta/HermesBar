@@ -1,4 +1,6 @@
 ﻿using BLL.User;
+using HELPER;
+using HermesBarWCF;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,7 @@ namespace HermesBarWEB.Controllers
 {
     public class LoginController : Controller
     {
-        private HermesBarWCF.LoginService _loginService = null;
-        private HermesBarWCF.LoginService LoginService
-        {
-            get
-            {
-                if (_loginService == null)
-                    _loginService = new HermesBarWCF.LoginService();
-                return _loginService;
-            }
-        }
+        private LoginService LoginService = Singleton<LoginService>.Instance();
         public ActionResult Login()
         {
             ViewBag.UsuarioSenhaIncorreto = null;
@@ -28,22 +21,29 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult EfetuarLogin(UsuarioModel login)
         {
-            var result = LoginService.EfetuarLogin(login);
-            if (result != null)
+            try
             {
-                FormsAuthentication.SetAuthCookie(result.PerfilSigla, false);
-                Session["USR"] = result;
-                switch (result.PerfilSigla)
+                var result = LoginService.EfetuarLogin(login);
+                if (result != null)
                 {
-                    case "ATE":
-                        return RedirectToAction("Pedidos", "Pedido");
-                    case "ADM":
-                        return RedirectToAction("Index", "Home");
+                    FormsAuthentication.SetAuthCookie(result.PerfilSigla, false);
+                    Session["USR"] = result;
+                    switch (result.PerfilSigla)
+                    {
+                        case "ATE":
+                            return RedirectToAction("Pedidos", "Pedido");
+                        case "ADM":
+                            return RedirectToAction("Index", "Home");
+                    }
+                    return View("Login", new UsuarioModel());
                 }
+                ViewBag.UsuarioSenhaIncorreto = "Usuário e/ou senha incorretos";
                 return View("Login", new UsuarioModel());
             }
-            ViewBag.UsuarioSenhaIncorreto = "Usuário e/ou senha incorretos";
-            return View("Login", new UsuarioModel());
+            catch (Exception)
+            {
+                return View("Login", new UsuarioModel());
+            }
         }
 
         public ActionResult EfetuarLogoff()

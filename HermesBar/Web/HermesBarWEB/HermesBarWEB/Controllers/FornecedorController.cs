@@ -1,5 +1,4 @@
-﻿using BLL.Supplier;
-using MODEL.Address;
+﻿using MODEL.Address;
 using MODEL.Contact;
 using MODEL.Supplier;
 using MODEL.User;
@@ -9,8 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HermesBarWEB.UTIL;
-using BLL.UTIL;
-using BLL.Commom;
+using HermesBarWCF;
+using HELPER;
 
 namespace HermesBarWEB.Controllers
 {
@@ -27,30 +26,12 @@ namespace HermesBarWEB.Controllers
         }
 
         #region Singleton
-        private SupplierBLL _fornecedorBLL = null;
-        private SupplierBLL FornecedorBLL
-        {
-            get
-            {
-                if (_fornecedorBLL == null)
-                    _fornecedorBLL = new SupplierBLL();
-                return _fornecedorBLL;
-            }
-        }
-        private AddressBLL _enderecoBLL = null;
-        private AddressBLL EnderecoBLL
-        {
-            get
-            {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new AddressBLL();
-                return _enderecoBLL;
-            }
-        }
+        private SupplierService SupplierService = Singleton<SupplierService>.Instance();
+        private AddressService AddressService = Singleton<AddressService>.Instance();
         #endregion
         public ActionResult Get()
         {
-            return View(FornecedorBLL.Get(new FornecedorModel(), user));
+            return View(SupplierService.Get(new FornecedorModel(), user));
         }
         public ActionResult Cadastrar()
         {
@@ -68,10 +49,10 @@ namespace HermesBarWEB.Controllers
                 if (fornecedor.Id != 0)
                     return EditarFornecedor(fornecedor);
 
-                if (FornecedorBLL.Insert(fornecedor, user))
+                if (SupplierService.Insert(fornecedor, user))
                 {
                     ViewBag.Sucesso = true;
-                    return View("Get", FornecedorBLL.Get(new FornecedorModel(), user));
+                    return View("Get", SupplierService.Get(new FornecedorModel(), user));
                 }
                 LoadModel(ref fornecedor);
                 ViewBag.Erro = true;
@@ -86,9 +67,9 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (FornecedorBLL.Update(fornecedor, user))
-                    return View("Get", FornecedorBLL.Get(new FornecedorModel(), user));
-                return View("Get", FornecedorBLL.Get(new FornecedorModel(), user));
+                if (SupplierService.Update(fornecedor, user))
+                    return View("Get", SupplierService.Get(new FornecedorModel(), user));
+                return View("Get", SupplierService.Get(new FornecedorModel(), user));
             }
             catch (Exception)
             {
@@ -99,8 +80,8 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var result = FornecedorBLL.Get(new FornecedorModel() { Id = id }, user).FirstOrDefault();
-                result.Endereco = EnderecoBLL.GetStates(result.Endereco);
+                var result = SupplierService.Get(new FornecedorModel() { Id = id }, user).FirstOrDefault();
+                result.Endereco = AddressService.GetStates(result.Endereco);
 
                 return View("Cadastrar", result);
             }
@@ -112,7 +93,7 @@ namespace HermesBarWEB.Controllers
         private void LoadModel(ref FornecedorModel fornecedor)
         {
             fornecedor.Contato = new ContatoModel();
-            fornecedor.Endereco = EnderecoBLL.GetStates(new EnderecoModel());
+            fornecedor.Endereco = AddressService.GetStates(new EnderecoModel());
         }
     }
 }

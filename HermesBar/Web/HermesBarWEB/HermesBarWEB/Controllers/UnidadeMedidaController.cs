@@ -1,5 +1,4 @@
-﻿using BLL.Product;
-using HermesBarWEB.UTIL;
+﻿using HermesBarWEB.UTIL;
 using MODEL.Product;
 using MODEL.User;
 using System;

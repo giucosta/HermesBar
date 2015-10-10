@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Client;
 using MODEL.Event;
 using MODEL.User;
@@ -14,26 +16,8 @@ namespace HermesBarWEB.Controllers
     public class AgendaController : Controller
     {
         #region Singleton
-        private HermesBarWCF.EventService _eventoService = null;
-        private HermesBarWCF.EventService EventoService
-        {
-            get
-            {
-                if (_eventoService == null)
-                    _eventoService = new HermesBarWCF.EventService();
-                return _eventoService;
-            }
-        }
-        private HermesBarWCF.ClientService _clienteService = null;
-        private HermesBarWCF.ClientService ClienteService
-        {
-            get
-            {
-                if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClientService();
-                return _clienteService;
-            }
-        }
+        private EventService EventService = Singleton<EventService>.Instance();
+        private ClientService ClientService = Singleton<ClientService>.Instance();
         #endregion
 
         private UsuarioModel user;
@@ -52,7 +36,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return Json(EventoService.Get(new EventModel() { Id = id }, user), JsonRequestBehavior.AllowGet);
+                return Json(EventService.Get(new EventModel() { Id = id }, user), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -63,13 +47,13 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var model = EventoService.Get(new EventModel() { Id = id }, user).FirstOrDefault();
+                var model = EventService.Get(new EventModel() { Id = id }, user).FirstOrDefault();
                 LoadModel(ref model);
                 return View("NovoEvento", model);
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         public ActionResult NovoEvento()
@@ -84,7 +68,7 @@ namespace HermesBarWEB.Controllers
             {
                 if (evento.Id == 0)
                 {
-                    if (EventoService.Insert(evento, user))
+                    if (EventService.Insert(evento, user))
                     {
                         ViewBag.InsertSuccess = true;
                         return View("Consultar");
@@ -97,14 +81,14 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         private ActionResult EditarEvento(EventModel evento)
         {
             try
             {
-                if(EventoService.Update(evento, user))
+                if(EventService.Update(evento, user))
                 {
                     ViewBag.UpdateSuccess = true;
                     return View("Consultar");
@@ -115,14 +99,14 @@ namespace HermesBarWEB.Controllers
             }
             catch (Exception)
             {
-                throw;
+                return View("Error");
             }
         }
         private void LoadModel(ref EventModel evento)
         {
             try
             {
-                var clientes = ClienteService.Get(new ClientModel(), user);
+                var clientes = ClientService.Get(new ClientModel(), user);
                 evento.Cliente = new List<SelectListItem>();
                 foreach (var item in clientes)
                 {

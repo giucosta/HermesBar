@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Client;
 using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
@@ -18,57 +20,11 @@ namespace HermesBarWEB.Controllers
     {
         #region Singleton
         private UsuarioModel _user;
-        private HermesBarWCF.PayBoxService _caixaService = null;
-        private HermesBarWCF.PayBoxService CaixaService
-        {
-            get
-            {
-                if (_caixaService == null)
-                    _caixaService = new HermesBarWCF.PayBoxService();
-                return _caixaService;
-            }
-        }
-        private HermesBarWCF.PdvClientService _pdvClienteService = null;
-        private HermesBarWCF.PdvClientService PdvClienteService
-        {
-            get
-            {
-                if (_pdvClienteService == null)
-                    _pdvClienteService = new HermesBarWCF.PdvClientService();
-                return _pdvClienteService;
-            }
-        }
-        private HermesBarWCF.ClientService _clienteService = null;
-        private HermesBarWCF.ClientService ClienteService
-        {
-            get
-            {
-                if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClientService();
-                return _clienteService;
-            }
-        }
-
-        private HermesBarWCF.EmployeeService _funcionarioService = null;
-        private HermesBarWCF.EmployeeService FuncionarioServoce
-        {
-            get
-            {
-                if (_funcionarioService == null)
-                    _funcionarioService = new HermesBarWCF.EmployeeService();
-                return _funcionarioService;
-            }
-        }
-        private HermesBarWCF.ProductService _produtoService = null;
-        private HermesBarWCF.ProductService ProdutoService
-        {
-            get
-            {
-                if (_produtoService == null)
-                    _produtoService = new HermesBarWCF.ProductService();
-                return _produtoService;
-            }
-        }
+        private PayBoxService PayBoxService = Singleton<PayBoxService>.Instance();
+        private PdvClientService PdvClientService = Singleton<PdvClientService>.Instance();
+        private ClientService ClientService = Singleton<ClientService>.Instance();
+        private EmployeeService EmployeeService = Singleton<EmployeeService>.Instance();
+        private ProductService ProductService = Singleton<ProductService>.Instance();
         #endregion
         public PdvController()
         {
@@ -77,7 +33,7 @@ namespace HermesBarWEB.Controllers
 
         public ActionResult Index()
         {
-            var model = CaixaService.VerifyPayBox();
+            var model = PayBoxService.VerifyPayBox();
             LoadSessionPdv(ref model);
 
             return View();
@@ -102,7 +58,7 @@ namespace HermesBarWEB.Controllers
                 model.ValorFechamento = null;
 
                 LoadSessionPdv(ref model);
-                model.Aberto = CaixaService.Open(model, _user);
+                model.Aberto = PayBoxService.Open(model, _user);
 
                 return model.Aberto;
             }
@@ -123,7 +79,7 @@ namespace HermesBarWEB.Controllers
                     model.ValorFechamento = Convert.ToDecimal(valorFinal);
 
                     LoadSessionPdv(ref model);
-                    model.Aberto = !CaixaService.Close(model, _user);
+                    model.Aberto = !PayBoxService.Close(model, _user);
                     return model.Aberto;
                 }
                 return false;
@@ -156,8 +112,8 @@ namespace HermesBarWEB.Controllers
                     clienteModel.DataNascimento = Convert.ToDateTime(nascimento);
                     clienteModel.StatusSelected = "1";
 
-                    if (ClienteService.Insert(clienteModel, _user, true))
-                        id = ClienteService.Get(clienteModel, _user).FirstOrDefault().Id.ToString();
+                    if (ClientService.Insert(clienteModel, _user, true))
+                        id = ClientService.Get(clienteModel, _user).FirstOrDefault().Id.ToString();
                     else
                         return -3;
                 }
@@ -168,7 +124,7 @@ namespace HermesBarWEB.Controllers
                 model.Saida = DateTime.Now;
                 model.NumeroCartao = Convert.ToInt32(numeroCartao);
 
-                return PdvClienteService.Insert(model, _user);
+                return PdvClientService.Insert(model, _user);
             }
             return -3;
         }
@@ -185,7 +141,7 @@ namespace HermesBarWEB.Controllers
                 model.ValorReforco = Convert.ToDecimal(valorReforco);
                 model.Descricao = motivo;
                 
-                return CaixaService.Reinforcement(model, _user);
+                return PayBoxService.Reinforcement(model, _user);
             }
             catch (Exception)
             {
@@ -205,7 +161,7 @@ namespace HermesBarWEB.Controllers
                 model.ValorSangria = Convert.ToDecimal(valorSangria);
                 model.Descricao = motivo;
                 
-                return CaixaService.Depletion(model, _user);
+                return PayBoxService.Depletion(model, _user);
             }
             catch (Exception)
             {
@@ -216,7 +172,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return PdvClienteService.GetCard(new PdvClientModel() { NumeroCartao = Convert.ToInt32(numeroCartao) }, _user);
+                return PdvClientService.GetCard(new PdvClientModel() { NumeroCartao = Convert.ToInt32(numeroCartao) }, _user);
             }
             catch (Exception)
             {
@@ -227,7 +183,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return Json(FuncionarioServoce.Get(new MODEL.Employee.EmployeeModel() { Id = Convert.ToInt32(idFuncionario), Cpf = "" }, _user), JsonRequestBehavior.AllowGet);
+                return Json(EmployeeService.Get(new MODEL.Employee.EmployeeModel() { Id = Convert.ToInt32(idFuncionario), Cpf = "" }, _user), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -240,7 +196,7 @@ namespace HermesBarWEB.Controllers
             {
                 if (idProduto == "")
                     return Json(new ProdutoModel(), JsonRequestBehavior.AllowGet);
-                return Json(ProdutoService.GetId(Convert.ToInt32(idProduto), (int)HermesBarWEB.UTIL.Enumerators.Status.Ativo), JsonRequestBehavior.AllowGet);
+                return Json(ProductService.GetId(Convert.ToInt32(idProduto), (int)HermesBarWEB.UTIL.Enumerators.Status.Ativo), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -252,7 +208,7 @@ namespace HermesBarWEB.Controllers
             try
             {
 
-                return Json(PdvClienteService.Order(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user, GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
+                return Json(PdvClientService.Order(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user, GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -268,11 +224,11 @@ namespace HermesBarWEB.Controllers
             fechamentoModel.NumeroCartao = Convert.ToInt32(numeroCartao);
             fechamentoModel.IdCaixa = GetSessionPdv().Id;
 
-            return Json(PdvClienteService.Close(fechamentoModel), JsonRequestBehavior.AllowGet);
+            return Json(PdvClientService.Close(fechamentoModel), JsonRequestBehavior.AllowGet);
         }
         public ActionResult FecharComanda(string numeroCartao, string valorTotal, string valorRecebido, string troco, string formaPagamento)
         {
-            return Json(PdvClienteService.CloseCommands(ConvertToModel(numeroCartao, valorTotal, valorRecebido, troco, formaPagamento), _user), JsonRequestBehavior.AllowGet);
+            return Json(PdvClientService.CloseCommands(ConvertToModel(numeroCartao, valorTotal, valorRecebido, troco, formaPagamento), _user), JsonRequestBehavior.AllowGet);
         }
 
         
