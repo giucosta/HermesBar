@@ -14,23 +14,23 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class FuncionarioController : Controller
     {
-        private HermesBarWCF.FuncionarioService _service = null;
-        private HermesBarWCF.FuncionarioService Service
+        private HermesBarWCF.EmployeeService _service = null;
+        private HermesBarWCF.EmployeeService Service
         {
             get
             {
                 if (_service == null)
-                    _service = new HermesBarWCF.FuncionarioService();
+                    _service = new HermesBarWCF.EmployeeService();
                 return _service;
             }
         }
-        private HermesBarWCF.EnderecoService _enderecoService = null;
-        private HermesBarWCF.EnderecoService EnderecoService
+        private HermesBarWCF.AddressService _enderecoService = null;
+        private HermesBarWCF.AddressService EnderecoService
         {
             get
             {
                 if (_enderecoService == null)
-                    _enderecoService = new HermesBarWCF.EnderecoService();
+                    _enderecoService = new HermesBarWCF.AddressService();
                 return _enderecoService;
             }
         }

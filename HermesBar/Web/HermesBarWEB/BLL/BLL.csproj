@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\ClientBLL.cs" />
-    <Compile Include="Commom\ContatoBLL.cs" />
-    <Compile Include="Commom\EnderecoBLL.cs" />
+    <Compile Include="Commom\ContactBLL.cs" />
+    <Compile Include="Commom\AddressBLL.cs" />
     <Compile Include="Employee\EmployeeBLL.cs" />
     <Compile Include="Employee\PlaceEmployeeBLL.cs" />
     <Compile Include="Employee\TypeEmployeeBLL.cs" />
@@ -50,15 +50,15 @@
     <Compile Include="Event\EventBLL.cs" />
     <Compile Include="PDV\PdvClientBLL.cs" />
     <Compile Include="PDV\PdvPayBoxBLL.cs" />
-    <Compile Include="PDV\PdvPedidoBLL.cs" />
+    <Compile Include="PDV\PdvOrderBLL.cs" />
     <Compile Include="Product\ProductBLL.cs" />
     <Compile Include="Product\TypeBLL.cs" />
     <Compile Include="Product\UniMedBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Supplier\FornecedorBLL.cs" />
+    <Compile Include="Supplier\SupplierBLL.cs" />
     <Compile Include="User\EmailBLL.cs" />
     <Compile Include="User\LoginBLL.cs" />
-    <Compile Include="User\PerfilBLL.cs" />
+    <Compile Include="User\ProfileBLL.cs" />
     <Compile Include="User\UserBLL.cs" />
     <Compile Include="UTIL\Conversores.cs" />
     <Compile Include="UTIL\Exceptions.cs" />
@@ -73,6 +73,10 @@
     <ProjectReference Include="..\ENTITY\ENTITY.csproj">
       <Project>{0f38d845-4230-4e4a-8cff-96cbc928f135}</Project>
       <Name>ENTITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HELPER\HELPER.csproj">
+      <Project>{2b2d24b6-e3c0-4b91-81be-56f7b39809e4}</Project>
+      <Name>HELPER</Name>
     </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{17cd4e83-0675-457e-b458-e8d8f648eed8}</Project>

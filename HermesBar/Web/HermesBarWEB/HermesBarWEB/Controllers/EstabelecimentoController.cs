@@ -16,24 +16,24 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class EstabelecimentoController : Controller
     {
-        private HermesBarWCF.EstabelecimentoService _estabelecimentoService = null;
-        private HermesBarWCF.EstabelecimentoService EstabelecimentoService
+        private HermesBarWCF.EstablishmentService _estabelecimentoService = null;
+        private HermesBarWCF.EstablishmentService EstabelecimentoService
         {
             get
             {
                 if (_estabelecimentoService == null)
-                    _estabelecimentoService = new HermesBarWCF.EstabelecimentoService();
+                    _estabelecimentoService = new HermesBarWCF.EstablishmentService();
                 return _estabelecimentoService;
             }
         }
 
-        private HermesBarWCF.EnderecoService _enderecoService = null;
-        private HermesBarWCF.EnderecoService EnderecoService
+        private HermesBarWCF.AddressService _enderecoService = null;
+        private HermesBarWCF.AddressService EnderecoService
         {
             get
             {
                 if (_enderecoService == null)
-                    _enderecoService = new HermesBarWCF.EnderecoService();
+                    _enderecoService = new HermesBarWCF.AddressService();
                 return _enderecoService;
             }
         }

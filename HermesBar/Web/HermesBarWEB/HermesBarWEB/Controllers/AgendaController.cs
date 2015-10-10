@@ -14,23 +14,23 @@ namespace HermesBarWEB.Controllers
     public class AgendaController : Controller
     {
         #region Singleton
-        private HermesBarWCF.EventoService _eventoService = null;
-        private HermesBarWCF.EventoService EventoService
+        private HermesBarWCF.EventService _eventoService = null;
+        private HermesBarWCF.EventService EventoService
         {
             get
             {
                 if (_eventoService == null)
-                    _eventoService = new HermesBarWCF.EventoService();
+                    _eventoService = new HermesBarWCF.EventService();
                 return _eventoService;
             }
         }
-        private HermesBarWCF.ClienteService _clienteService = null;
-        private HermesBarWCF.ClienteService ClienteService
+        private HermesBarWCF.ClientService _clienteService = null;
+        private HermesBarWCF.ClientService ClienteService
         {
             get
             {
                 if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClienteService();
+                    _clienteService = new HermesBarWCF.ClientService();
                 return _clienteService;
             }
         }

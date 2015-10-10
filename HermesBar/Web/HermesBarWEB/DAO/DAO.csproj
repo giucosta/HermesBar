@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client\ClientDAO.cs" />
-    <Compile Include="Commom\EnderecoDAO.cs" />
+    <Compile Include="Commom\AddressDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
     <Compile Include="Employee\EmployeeDAO.cs" />
     <Compile Include="Employee\PlaceEmployeeDAO.cs" />
@@ -50,7 +50,7 @@
     <Compile Include="Event\EventDAO.cs" />
     <Compile Include="PDV\Pdv_CaixaDAO.cs" />
     <Compile Include="PDV\Pdv_ClientDAO.cs" />
-    <Compile Include="PDV\Pdv_PedidoDAO.cs" />
+    <Compile Include="PDV\Pdv_OrderDAO.cs" />
     <Compile Include="Product\ProductDAO.cs" />
     <Compile Include="Product\TypeDAO.cs" />
     <Compile Include="Product\UniMedDAO.cs" />
@@ -110,7 +110,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SP_USR.resx</DependentUpon>
     </Compile>
-    <Compile Include="Supplier\FornecedorDAO.cs" />
+    <Compile Include="Supplier\SupplierDAO.cs" />
     <Compile Include="User\LoginDAO.cs" />
     <Compile Include="User\ProfileDAO.cs" />
     <Compile Include="User\UserDAO.cs" />
@@ -122,6 +122,10 @@
     <ProjectReference Include="..\ENTITY\ENTITY.csproj">
       <Project>{0f38d845-4230-4e4a-8cff-96cbc928f135}</Project>
       <Name>ENTITY</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HELPER\HELPER.csproj">
+      <Project>{2b2d24b6-e3c0-4b91-81be-56f7b39809e4}</Project>
+      <Name>HELPER</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

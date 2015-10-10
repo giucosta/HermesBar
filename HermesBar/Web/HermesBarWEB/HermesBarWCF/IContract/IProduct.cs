@@ -11,12 +11,12 @@ namespace HermesBarWCF.IContract
     [ServiceContract]
     public interface IProduct
     {
-        bool Insert(ProdutoModel produto, UsuarioModel usuario);
+        bool Insert(ProdutoModel product, UsuarioModel user);
         List<ProdutoModel> Get();
         ProdutoModel GetId(int id, int ativo);
-        bool Active(ProdutoModel produto, UsuarioModel usuario);
-        bool Inactive(ProdutoModel produto, UsuarioModel usuario);
+        bool Active(ProdutoModel product, UsuarioModel user);
+        bool Inactive(ProdutoModel product, UsuarioModel user);
         int GetNextCode();
-        bool Update(ProdutoModel produto, UsuarioModel usuario);
+        bool Update(ProdutoModel product, UsuarioModel user);
     }
 }

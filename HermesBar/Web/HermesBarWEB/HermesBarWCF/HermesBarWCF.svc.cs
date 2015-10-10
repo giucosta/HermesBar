@@ -1,4 +1,5 @@
-﻿using HermesBarWCF.DataContracts;
+﻿using HELPER;
+using HermesBarWCF.DataContracts;
 using HermesBarWCF.IContract;
 using MODEL.Address;
 using MODEL.Client;
@@ -21,127 +22,82 @@ namespace HermesBarWCF
 {
     public class ProductService : IProduct
     {
-        private Produtos _produto = null;
-        public Produtos Produtos
-        {
-            get
-            {
-                if (_produto == null)
-                    _produto = new Produtos();
-                return _produto;
-            }
-        }
+        public Produtos Product = Singleton<Produtos>.Instance();
 
-        public bool Insert(ProdutoModel produto, UsuarioModel usuario)
+        public bool Insert(ProdutoModel product, UsuarioModel user)
         {
-            return Produtos.Insert(produto, usuario);
+            return Product.Insert(product, user);
         }
         public List<ProdutoModel> Get()
         {
-            return Produtos.Get();
+            return Product.Get();
         }
         public ProdutoModel GetId(int id, int ativo)
         {
-            return Produtos.GetId(id, ativo);
+            return Product.GetId(id, ativo);
         }
-        public bool Active(ProdutoModel produto, UsuarioModel usuario)
+        public bool Active(ProdutoModel product, UsuarioModel user)
         {
-            return Produtos.Active(produto, usuario);
+            return Product.Active(product, user);
         }
-        public bool Inactive(ProdutoModel produto, UsuarioModel usuario)
+        public bool Inactive(ProdutoModel product, UsuarioModel user)
         {
-            return Produtos.Inactive(produto, usuario);
+            return Product.Inactive(product, user);
         }
         public int GetNextCode()
         {
-            return Produtos.GetNextCode();
+            return Product.GetNextCode();
         }
-        public bool Update(ProdutoModel produto, UsuarioModel usuario)
+        public bool Update(ProdutoModel product, UsuarioModel user)
         {
-            return Produtos.Update(produto, usuario);
+            return Product.Update(product, user);
         }
     }
     public class LoginService : ILogin
     {
-        private Login _login = null;
-        private Login Login
-        {
-            get
-            {
-                if (_login == null)
-                    _login = new Login();
-                return _login;
-            }
-        }
+        private Login Login = Singleton<Login>.Instance();
 
-        public UsuarioModel EfetuarLogin(UsuarioModel usuario)
+        public UsuarioModel EfetuarLogin(UsuarioModel user)
         {
-            return Login.EfetuarLogin(usuario);
+            return Login.EfetuarLogin(user);
         }
     }
-    public class EstabelecimentoService : IEstablishment
+    public class EstablishmentService : IEstablishment
     {
-        private Establishment _estabelecimento = null;
-        private Establishment Estabelecimento
+        private Establishment Establishment = Singleton<Establishment>.Instance();
+        public List<EstablishmentModel> Get(EstablishmentModel establishment, UsuarioModel user)
         {
-            get
-            {
-                if (_estabelecimento == null)
-                    _estabelecimento = new Establishment();
-                return _estabelecimento;
-            }
+            return Establishment.Get(establishment, user);
         }
-        public List<EstablishmentModel> Get(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Insert(EstablishmentModel establishment, UsuarioModel user)
         {
-            return Estabelecimento.Get(estabelecimento, usuario);
+            return Establishment.Insert(establishment, user);
         }
-        public bool Insert(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Update(EstablishmentModel establishment, UsuarioModel user)
         {
-            return Estabelecimento.Insert(estabelecimento, usuario);
+            return Establishment.Update(establishment, user);
         }
-        public bool Update(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Inactive(EstablishmentModel establishment, UsuarioModel user)
         {
-            return Estabelecimento.Update(estabelecimento, usuario);
+            return Establishment.Inactive(establishment, user);
         }
-        public bool Inactive(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Active(EstablishmentModel establishment, UsuarioModel user)
         {
-            return Estabelecimento.Inactive(estabelecimento, usuario);
-        }
-        public bool Active(EstablishmentModel estabelecimento, UsuarioModel usuario)
-        {
-            return Estabelecimento.Active(estabelecimento, usuario);
+            return Establishment.Active(establishment, user);
         }
     }
-    public class EnderecoService : IAddress
+    public class AddressService : IAddress
     {
-        private Address _address = null;
-        private Address Address
-        {
-            get
-            {
-                if (_address == null)
-                    _address = new Address();
-                return _address;
-            }
-        }
+        private Address Address = Singleton<Address>.Instance();
 
-        public EnderecoModel GetStates(EnderecoModel endereco)
+        public EnderecoModel GetStates(EnderecoModel address)
         {
-            return Address.GetStates(endereco);
+            return Address.GetStates(address);
         }
     }
-    public class ClienteService : IClient
+    public class ClientService : IClient
     {
-        private Client _client = null;
-        private Client Client
-        {
-            get
-            {
-                if (_client == null)
-                    _client = new Client();
-                return _client;
-            }
-        }
+        private Client Client = Singleton<Client>.Instance();
 
         public List<ClientModel> Get(ClientModel client, UsuarioModel user)
         {
@@ -164,18 +120,9 @@ namespace HermesBarWCF
             return Client.Update(client, user);
         }
     }
-    public class EventoService : IEvent
+    public class EventService : IEvent
     {
-        private Event _event = null;
-        private Event Event
-        {
-            get
-            {
-                if (_event == null)
-                    _event = new Event();
-                return _event;
-            }
-        }
+        private Event Event = Singleton<Event>.Instance();
 
         public List<EventModel> Get(EventModel evento, UsuarioModel user)
         {
@@ -190,18 +137,9 @@ namespace HermesBarWCF
             return Event.Update(evento, user);
         }
     }
-    public class FuncionarioService : IEmployee
+    public class EmployeeService : IEmployee
     {
-        private Employee _employee = null;
-        private Employee Employee
-        {
-            get
-            {
-                if (_employee == null)
-                    _employee = new Employee();
-                return _employee;
-            }
-        }
+        private Employee Employee = Singleton<Employee>.Instance();
 
         public List<EmployeeModel> Get(EmployeeModel model, UsuarioModel user)
         {
@@ -232,18 +170,9 @@ namespace HermesBarWCF
             return Employee.Inactive(model, user);
         }
     }
-    public class CaixaService : IPayBox
+    public class PayBoxService : IPayBox
     {
-        private PayBox _payBox = null;
-        private PayBox PayBox
-        {
-            get
-            {
-                if (_payBox == null)
-                    _payBox = new PayBox();
-                return _payBox;
-            }
-        }
+        private PayBox PayBox = Singleton<PayBox>.Instance();
         public bool Open(PayBoxModel payBox, UsuarioModel user)
         {
             return PayBox.Open(payBox, user);
@@ -256,7 +185,6 @@ namespace HermesBarWCF
         {
             return PayBox.Close(payBox, user);
         }
-
         public bool Reinforcement(PayBoxModel payBox, UsuarioModel user)
         {
             return PayBox.Reinforcement(payBox, user);
@@ -266,23 +194,15 @@ namespace HermesBarWCF
             return PayBox.Depletion(payBox, user);
         }
     }
-    public class PdvClienteService : IPdvClient
+    public class PdvClientService : IPdvClient
     {
-        private PdvClient _pdv = null;
-        private PdvClient PdvClient
-        {
-            get
-            {
-                if (_pdv == null)
-                    _pdv = new PdvClient();
-                return _pdv;
-            }
-        }
+        private PdvClient PdvClient = Singleton<PdvClient>.Instance();
+        
         public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return PdvClient.Insert(client, user);
         }
-        public string GetCar(PdvClientModel client, UsuarioModel user)
+        public string GetCard(PdvClientModel client, UsuarioModel user)
         {
             return PdvClient.GetCard(client, user);
         }
@@ -290,7 +210,7 @@ namespace HermesBarWCF
         {
             return PdvClient.Order(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
         }
-        public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
+        public List<PdvFechamentoClientModel> Close(PdvClientModel client)
         {
             return PdvClient.Close(client);
         }
@@ -299,18 +219,9 @@ namespace HermesBarWCF
             return PdvClient.CloseCommands(client, user);
         }
     }
-    public class UsuarioService : IUser
+    public class UserService : IUser
     {
-        private User _user = null;
-        private User User
-        {
-            get
-            {
-                if (_user == null)
-                    _user = new User();
-                return _user;
-            }
-        }
+        private User User = Singleton<User>.Instance();
         public List<UsuarioModel> Get(UsuarioModel user)
         {
             return User.Get(user);
@@ -332,18 +243,9 @@ namespace HermesBarWCF
             return User.Inactive(user);
         }
     }
-    public class PerfilService : IProfile
+    public class ProfileService : IProfile
     {
-        private Profile _profile = null;
-        private Profile Profile
-        {
-            get
-            {
-                if (_profile == null)
-                    _profile = new Profile();
-                return _profile;
-            }
-        }
+        private Profile Profile = Singleton<Profile>.Instance();
 
         public List<PerfilModel> Get()
         {

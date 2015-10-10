@@ -18,44 +18,44 @@ namespace HermesBarWEB.Controllers
     {
         #region Singleton
         private UsuarioModel _user;
-        private HermesBarWCF.CaixaService _caixaService = null;
-        private HermesBarWCF.CaixaService CaixaService
+        private HermesBarWCF.PayBoxService _caixaService = null;
+        private HermesBarWCF.PayBoxService CaixaService
         {
             get
             {
                 if (_caixaService == null)
-                    _caixaService = new HermesBarWCF.CaixaService();
+                    _caixaService = new HermesBarWCF.PayBoxService();
                 return _caixaService;
             }
         }
-        private HermesBarWCF.PdvClienteService _pdvClienteService = null;
-        private HermesBarWCF.PdvClienteService PdvClienteService
+        private HermesBarWCF.PdvClientService _pdvClienteService = null;
+        private HermesBarWCF.PdvClientService PdvClienteService
         {
             get
             {
                 if (_pdvClienteService == null)
-                    _pdvClienteService = new HermesBarWCF.PdvClienteService();
+                    _pdvClienteService = new HermesBarWCF.PdvClientService();
                 return _pdvClienteService;
             }
         }
-        private HermesBarWCF.ClienteService _clienteService = null;
-        private HermesBarWCF.ClienteService ClienteService
+        private HermesBarWCF.ClientService _clienteService = null;
+        private HermesBarWCF.ClientService ClienteService
         {
             get
             {
                 if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClienteService();
+                    _clienteService = new HermesBarWCF.ClientService();
                 return _clienteService;
             }
         }
 
-        private HermesBarWCF.FuncionarioService _funcionarioService = null;
-        private HermesBarWCF.FuncionarioService FuncionarioServoce
+        private HermesBarWCF.EmployeeService _funcionarioService = null;
+        private HermesBarWCF.EmployeeService FuncionarioServoce
         {
             get
             {
                 if (_funcionarioService == null)
-                    _funcionarioService = new HermesBarWCF.FuncionarioService();
+                    _funcionarioService = new HermesBarWCF.EmployeeService();
                 return _funcionarioService;
             }
         }
@@ -216,7 +216,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return PdvClienteService.GetCar(new PdvClientModel() { NumeroCartao = Convert.ToInt32(numeroCartao) }, _user);
+                return PdvClienteService.GetCard(new PdvClientModel() { NumeroCartao = Convert.ToInt32(numeroCartao) }, _user);
             }
             catch (Exception)
             {
@@ -268,7 +268,7 @@ namespace HermesBarWEB.Controllers
             fechamentoModel.NumeroCartao = Convert.ToInt32(numeroCartao);
             fechamentoModel.IdCaixa = GetSessionPdv().Id;
 
-            return Json(PdvClienteService.Fechamento(fechamentoModel), JsonRequestBehavior.AllowGet);
+            return Json(PdvClienteService.Close(fechamentoModel), JsonRequestBehavior.AllowGet);
         }
         public ActionResult FecharComanda(string numeroCartao, string valorTotal, string valorRecebido, string troco, string formaPagamento)
         {

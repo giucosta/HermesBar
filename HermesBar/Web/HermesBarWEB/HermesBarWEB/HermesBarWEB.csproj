@@ -321,6 +321,10 @@
       <Project>{a269009c-05d5-4a0c-9e57-f70d9afc141f}</Project>
       <Name>BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HELPER\HELPER.csproj">
+      <Project>{2b2d24b6-e3c0-4b91-81be-56f7b39809e4}</Project>
+      <Name>HELPER</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HermesBarWCF\HermesBarWCF.csproj">
       <Project>{701c60ab-5239-433a-a068-e41df7b5563c}</Project>
       <Name>HermesBarWCF</Name>

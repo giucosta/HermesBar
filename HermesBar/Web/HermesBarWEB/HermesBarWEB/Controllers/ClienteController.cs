@@ -13,13 +13,13 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class ClienteController : Controller
     {
-        private HermesBarWCF.ClienteService _clienteService = null;
-        private HermesBarWCF.ClienteService ClienteService
+        private HermesBarWCF.ClientService _clienteService = null;
+        private HermesBarWCF.ClientService ClienteService
         {
             get
             {
                 if (_clienteService == null)
-                    _clienteService = new HermesBarWCF.ClienteService();
+                    _clienteService = new HermesBarWCF.ClientService();
                 return _clienteService;
             }
         }

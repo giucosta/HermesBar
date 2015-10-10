@@ -13,23 +13,23 @@ namespace HermesBarWEB.Controllers
     public class UsuarioController : Controller
     {
         #region Singleton
-        private UsuarioService _usuarioService = null;
-        private UsuarioService UsuarioService
+        private UserService _usuarioService = null;
+        private UserService UsuarioService
         {
             get
             {
                 if (_usuarioService == null)
-                    _usuarioService = new UsuarioService();
+                    _usuarioService = new UserService();
                 return _usuarioService;
             }
         }
-        private PerfilService _perfilService = null;
-        private PerfilService PerfilService
+        private ProfileService _perfilService = null;
+        private ProfileService PerfilService
         {
             get
             {
                 if (_perfilService == null)
-                    _perfilService = new PerfilService();
+                    _perfilService = new ProfileService();
                 return _perfilService;
             }
         }

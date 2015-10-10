@@ -111,6 +111,10 @@
       <Project>{0f38d845-4230-4e4a-8cff-96cbc928f135}</Project>
       <Name>ENTITY</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HELPER\HELPER.csproj">
+      <Project>{2b2d24b6-e3c0-4b91-81be-56f7b39809e4}</Project>
+      <Name>HELPER</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MODEL\MODEL.csproj">
       <Project>{17cd4e83-0675-457e-b458-e8d8f648eed8}</Project>
       <Name>MODEL</Name>
