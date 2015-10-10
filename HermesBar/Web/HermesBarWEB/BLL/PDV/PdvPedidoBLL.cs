@@ -12,13 +12,13 @@ namespace BLL.PDV
 {
     public class PdvPedidoBLL
     {
-        private Pdv_PedidoDAO _pedidoDAO = null;
-        private Pdv_PedidoDAO PedidoDAO
+        private Pdv_OrderDAO _pedidoDAO = null;
+        private Pdv_OrderDAO PedidoDAO
         {
             get
             {
                 if (_pedidoDAO == null)
-                    _pedidoDAO = new Pdv_PedidoDAO();
+                    _pedidoDAO = new Pdv_OrderDAO();
                 return _pedidoDAO;
             }
         }

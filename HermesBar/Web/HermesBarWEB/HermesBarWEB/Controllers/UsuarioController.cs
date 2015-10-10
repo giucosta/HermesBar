@@ -34,6 +34,7 @@ namespace HermesBarWEB.Controllers
             }
         }
         #endregion
+
         private UsuarioModel user;
         public UsuarioController()
         {

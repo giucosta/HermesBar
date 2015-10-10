@@ -11,13 +11,13 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Address
     {
-        private EnderecoBLL _enderecoBLL = null;
-        private EnderecoBLL EnderecoBLL
+        private AddressBLL _enderecoBLL = null;
+        private AddressBLL EnderecoBLL
         {
             get
             {
                 if (_enderecoBLL == null)
-                    _enderecoBLL = new EnderecoBLL();
+                    _enderecoBLL = new AddressBLL();
                 return _enderecoBLL;
             }
         }

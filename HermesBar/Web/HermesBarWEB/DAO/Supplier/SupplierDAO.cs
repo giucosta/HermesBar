@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Supplier
 {
-    public class FornecedorDAO : Connection.Connection
+    public class SupplierDAO : Connection.Connection
     {   
         public DataTable Insert(HMA_FOR forn, HMA_END end, HMA_CON con)
         {
@@ -75,8 +75,7 @@ namespace DAO.Supplier
             try
             {
                 OpenConnection();
-                var data = new DataTable();
-
+                
                 CreateDataAdapter(SQL.SP_SUPPLIER.UPDATE);
                 InserParameter("ID_FOR",SqlDbType.Int, forn._ID);
                 InserParameter("ATV", SqlDbType.Int, forn._ATV);

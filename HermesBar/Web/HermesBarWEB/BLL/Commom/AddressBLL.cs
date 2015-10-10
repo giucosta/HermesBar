@@ -11,24 +11,19 @@ using System.Web.Mvc;
 
 namespace BLL.Commom
 {
-    public class EnderecoBLL
+    public class AddressBLL
     {
-        private EnderecoDAO _enderecoDAO = null;
-        private EnderecoDAO EnderecoDAO
+        private AddressDAO _addressDAO = null;
+        private AddressDAO AddressDAO
         {
             get
             {
-                if (_enderecoDAO == null)
-                    _enderecoDAO = new EnderecoDAO();
-                return _enderecoDAO;
+                if (_addressDAO == null)
+                    _addressDAO = new AddressDAO();
+                return _addressDAO;
             }
         }
-        /// <summary>
-        /// Performs the model´s conversion to entity
-        /// </summary>
-        /// <param name="EnderecoModel"></param>
-        /// <param name="UsuarioModel"></param>
-        /// <returns>HMA_END</returns>
+        
         public HMA_END ConvertModelToEntity(EnderecoModel model, UsuarioModel usuario)
         {
             try
@@ -51,11 +46,7 @@ namespace BLL.Commom
                 throw ex;
             }
         }
-        /// <summary>
-        /// Performs the entity's conversion to model
-        /// </summary>
-        /// <param name="HMA_END"></param>
-        /// <returns>EnderecoModel</returns>
+        
         public EnderecoModel ConvertEntityToModel(HMA_END end)
         {
             try
@@ -82,7 +73,7 @@ namespace BLL.Commom
         {
             try
             {
-                var result = EnderecoDAO.GetStates();
+                var result = AddressDAO.GetStates();
 
                 model.UfList = new List<SelectListItem>();
                 for (int i = 0; i < result.Rows.Count; i++)

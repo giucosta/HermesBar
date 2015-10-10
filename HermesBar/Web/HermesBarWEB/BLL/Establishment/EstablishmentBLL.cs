@@ -26,23 +26,23 @@ namespace BLL.Establishment
                 return _estDAO;
             }
         }
-        private EnderecoBLL _enderecoBLL = null;
-        private EnderecoBLL EnderecoBLL
+        private AddressBLL _enderecoBLL = null;
+        private AddressBLL EnderecoBLL
         {
             get
             {
                 if (_enderecoBLL == null)
-                    _enderecoBLL = new EnderecoBLL();
+                    _enderecoBLL = new AddressBLL();
                 return _enderecoBLL;
             }
         }
-        private ContatoBLL _contatoBLL = null;
-        private ContatoBLL ContatoBLL
+        private ContactBLL _contatoBLL = null;
+        private ContactBLL ContatoBLL
         {
             get
             {
                 if (_contatoBLL == null)
-                    _contatoBLL = new ContatoBLL();
+                    _contatoBLL = new ContactBLL();
                 return _contatoBLL;
             }
         }

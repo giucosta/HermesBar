@@ -32,7 +32,7 @@ namespace BLL.PDV
         {
             try
             {
-                return ClientDAO.GetCar(ConvertModelToEntity(client, user)).Rows[0]["NOM"].ToString();
+                return ClientDAO.GetCard(ConvertModelToEntity(client, user)).Rows[0]["NOM"].ToString();
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ namespace BLL.PDV
         {
             try
             {
-                return ClientDAO.CloseCommand(ConvertModelToEntity(client, user)).GetResults();
+                return ClientDAO.CloseCommands(ConvertModelToEntity(client, user)).GetResults();
             }
             catch (Exception)
             {

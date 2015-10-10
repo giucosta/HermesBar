@@ -24,9 +24,9 @@ namespace DAO.Connection
                 conn = new SqlConnection(_connectionString);
                 conn.Open();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public void CloseConnection()
@@ -46,9 +46,9 @@ namespace DAO.Connection
                 adapter = new SqlDataAdapter(procedureName, conn);
                 adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
         public void InserParameter(string parameter, SqlDbType type, object value)

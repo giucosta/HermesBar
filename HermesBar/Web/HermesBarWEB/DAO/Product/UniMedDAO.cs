@@ -15,7 +15,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("[dbo].[SP_HMA_UNI_MED_GET]");
+                CreateDataAdapter(SQL.SP_PROD.GET_UNI_MED);
 
                 return GetResult();
             }
@@ -33,7 +33,7 @@ namespace DAO.Product
             try
             {
                 OpenConnection();
-                CreateDataAdapter("[dbo].[SP_HMA_UNI_MED_INS]");
+                CreateDataAdapter(SQL.SP_PROD.INSERT_UNI_MED);
                 InserParameter("USR", SqlDbType.Int, uniMed._USR);
                 InserParameter("ATV", SqlDbType.Int, uniMed._ATV);
                 InserParameter("NOM", SqlDbType.VarChar, uniMed.NOM);

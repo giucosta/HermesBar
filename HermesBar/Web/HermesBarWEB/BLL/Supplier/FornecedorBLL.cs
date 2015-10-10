@@ -16,33 +16,33 @@ namespace BLL.Supplier
     public class FornecedorBLL
     {
         #region Singleton
-        private FornecedorDAO _fornecedorDAO = null;
-        private FornecedorDAO FornecedorDAO
+        private SupplierDAO _fornecedorDAO = null;
+        private SupplierDAO FornecedorDAO
         {
             get
             {
                 if (_fornecedorDAO == null)
-                    _fornecedorDAO = new FornecedorDAO();
+                    _fornecedorDAO = new SupplierDAO();
                 return _fornecedorDAO;
             }
         }
-        private EnderecoBLL _enderecoBLL = null;
-        private EnderecoBLL EnderecoBLL
+        private AddressBLL _enderecoBLL = null;
+        private AddressBLL EnderecoBLL
         {
             get
             {
                 if (_enderecoBLL == null)
-                    _enderecoBLL = new EnderecoBLL();
+                    _enderecoBLL = new AddressBLL();
                 return _enderecoBLL;
             }
         }
-        private ContatoBLL _contatoBLL = null;
-        private ContatoBLL ContatoBLL
+        private ContactBLL _contatoBLL = null;
+        private ContactBLL ContatoBLL
         {
             get
             {
                 if (_contatoBLL == null)
-                    _contatoBLL = new ContatoBLL();
+                    _contatoBLL = new ContactBLL();
                 return _contatoBLL;
             }
         }

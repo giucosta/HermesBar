@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAO.PDV
 {
-    public class Pdv_PedidoDAO : Connection.Connection
+    public class Pdv_OrderDAO : Connection.Connection
     {
         public DataTable Insert(HMA_PDV_PED_CLI pedido)
         {

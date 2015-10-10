@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Commom
 {
-    public class ContatoBLL
+    public class ContactBLL
     {
         /// <summary>
         /// Performs the model´s conversion to entity

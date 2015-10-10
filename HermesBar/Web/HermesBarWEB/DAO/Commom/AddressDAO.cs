@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Commom
 {
-    public class EnderecoDAO : Connection.Connection
+    public class AddressDAO : Connection.Connection
     {
         public DataTable GetStates()
         {

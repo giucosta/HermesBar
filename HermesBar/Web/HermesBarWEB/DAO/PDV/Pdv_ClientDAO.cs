@@ -32,7 +32,7 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-        public DataTable GetCar(HMA_PDV_CLI cli)
+        public DataTable GetCard(HMA_PDV_CLI cli)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace DAO.PDV
                 CloseConnection();
             }
         }
-        public DataTable CloseCommand(HMA_PDV_CLI cli)
+        public DataTable CloseCommands(HMA_PDV_CLI cli)
         {
             try
             {

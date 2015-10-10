@@ -24,13 +24,13 @@ namespace BLL.Client
                 return _clientDAO;
             }
         }
-        private ContatoBLL _contatoBLL = null;
-        private ContatoBLL ContatoBLL
+        private ContactBLL _contatoBLL = null;
+        private ContactBLL ContatoBLL
         {
             get
             {
                 if (_contatoBLL == null)
-                    _contatoBLL = new ContatoBLL();
+                    _contatoBLL = new ContactBLL();
                 return _contatoBLL;
             }
         }

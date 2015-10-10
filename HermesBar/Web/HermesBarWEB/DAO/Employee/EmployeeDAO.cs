@@ -16,6 +16,7 @@ namespace DAO.Employee
             try
             {
                 OpenConnection();
+
                 CreateDataAdapter(SQL.SP_EMPL.GET);
                 InserParameter("ID", SqlDbType.Int, func._ID);
                 InserParameter("CPF", SqlDbType.VarChar, func.CPF);
@@ -36,6 +37,7 @@ namespace DAO.Employee
             try
             {
                 OpenConnection();
+
                 CreateDataAdapter(SQL.SP_EMPL.INSERT);
                 InserParameter("USR", SqlDbType.Int, func._USR);
                 InserParameter("ATV", SqlDbType.Int, func._ATV);
@@ -76,6 +78,7 @@ namespace DAO.Employee
         public DataTable Update(HMA_FUNC func, HMA_CON con, HMA_END end)
         {
             OpenConnection();
+
             CreateDataAdapter(SQL.SP_EMPL.UPDATE);
             InserParameter("ID", SqlDbType.Int, func._ID);
             InserParameter("USR", SqlDbType.Int, func._USR);
@@ -110,6 +113,7 @@ namespace DAO.Employee
             try
             {
                 OpenConnection();
+
                 CreateDataAdapter(SQL.SP_EMPL.INACTIVE);
                 InserParameter("ID", SqlDbType.Int, func._ID);
                 InserParameter("USR", SqlDbType.Int, func._USR);
@@ -130,6 +134,7 @@ namespace DAO.Employee
             try
             {
                 OpenConnection();
+
                 CreateDataAdapter(SQL.SP_EMPL.ACTIVE);
                 InserParameter("ID", SqlDbType.Int, func._ID);
                 InserParameter("USR", SqlDbType.Int, func._USR);
