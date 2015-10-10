@@ -27,13 +27,13 @@ namespace HermesBarWEB.Controllers
         }
 
         #region Singleton
-        private FornecedorBLL _fornecedorBLL = null;
-        private FornecedorBLL FornecedorBLL
+        private SupplierBLL _fornecedorBLL = null;
+        private SupplierBLL FornecedorBLL
         {
             get
             {
                 if (_fornecedorBLL == null)
-                    _fornecedorBLL = new FornecedorBLL();
+                    _fornecedorBLL = new SupplierBLL();
                 return _fornecedorBLL;
             }
         }

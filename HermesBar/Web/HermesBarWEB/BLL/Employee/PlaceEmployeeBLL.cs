@@ -7,22 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
 using ENTITY.Employee;
+using HELPER;
 
 namespace BLL.Employee
 {
     public class PlaceEmployeeBLL
     {
         #region Singleton
-        private PlaceEmployeeDAO _placeDAO = null;
-        private PlaceEmployeeDAO PlaceEmployeeDAO
-        {
-            get
-            {
-                if (_placeDAO == null)
-                    _placeDAO = new PlaceEmployeeDAO();
-                return _placeDAO;
-            }
-        }
+        private PlaceEmployeeDAO PlaceEmployeeDAO = Singleton<PlaceEmployeeDAO>.Instance();
         #endregion
 
         public List<PlaceEmployeeModel> Get()

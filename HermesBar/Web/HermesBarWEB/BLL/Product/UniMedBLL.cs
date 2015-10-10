@@ -8,21 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
 using MODEL.User;
+using HELPER;
 
 namespace BLL.Product
 {
     public class UniMedBLL
     {
-        private UniMedDAO _unimedDAO = null;
-        private UniMedDAO UniMedDAO
-        {
-            get
-            {
-                if (_unimedDAO == null)
-                    _unimedDAO = new UniMedDAO();
-                return _unimedDAO;
-            }
-        }
+        #region Singleton
+        private UniMedDAO UniMedDAO = Singleton<UniMedDAO>.Instance();
+        #endregion
 
         public List<UnidadeMedidaModel> Get()
         {
@@ -40,18 +34,19 @@ namespace BLL.Product
                 throw;
             }
         }
-
         public bool Insert(UnidadeMedidaModel model, UsuarioModel user)
         {
             try
             {
-                return Convert.ToInt32(UniMedDAO.Insert(ConvertModelToEntity(model, user)).Rows[0]["SUCCESS"]) == 1;
+                return UniMedDAO.Insert(ConvertModelToEntity(model, user)).GetResults();
             }
             catch (Exception)
             {
                 throw;
             }
         }
+
+        #region Private Methods
         private UnidadeMedidaModel ConvertEntityToModel(HMA_UNI_MED entity)
         {
             var model = new UnidadeMedidaModel();
@@ -73,5 +68,6 @@ namespace BLL.Product
 
             return entity;
         }
+        #endregion
     }
 }

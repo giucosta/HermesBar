@@ -111,7 +111,7 @@ namespace DAO.Establishment
                 CloseConnection();
             }
         }
-        public DataTable Inative(HMA_EST est)
+        public DataTable Inactive(HMA_EST est)
         {
             try
             {

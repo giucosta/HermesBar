@@ -7,21 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.User
 {
     public class LoginBLL
     {
-        private LoginDAO _loginDAO = null;
-        private LoginDAO LoginDAO
-        {
-            get
-            {
-                if (_loginDAO == null)
-                    _loginDAO = new LoginDAO();
-                return _loginDAO;
-            }
-        }
+        #region Singleton
+        private LoginDAO LoginDAO = Singleton<LoginDAO>.Instance();
+        #endregion
 
         public UsuarioModel EfetuarLogin(UsuarioModel usuario)
         {
@@ -51,9 +45,9 @@ namespace BLL.User
 
                 return entity;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         private UsuarioModel ConvertEntityToModel(HMA_USR entity)
@@ -69,9 +63,9 @@ namespace BLL.User
 
                 return model;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         #endregion

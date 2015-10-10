@@ -10,66 +10,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.Supplier
 {
-    public class FornecedorBLL
+    public class SupplierBLL
     {
         #region Singleton
-        private SupplierDAO _fornecedorDAO = null;
-        private SupplierDAO FornecedorDAO
-        {
-            get
-            {
-                if (_fornecedorDAO == null)
-                    _fornecedorDAO = new SupplierDAO();
-                return _fornecedorDAO;
-            }
-        }
-        private AddressBLL _enderecoBLL = null;
-        private AddressBLL EnderecoBLL
-        {
-            get
-            {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new AddressBLL();
-                return _enderecoBLL;
-            }
-        }
-        private ContactBLL _contatoBLL = null;
-        private ContactBLL ContatoBLL
-        {
-            get
-            {
-                if (_contatoBLL == null)
-                    _contatoBLL = new ContactBLL();
-                return _contatoBLL;
-            }
-        }
+        private SupplierDAO SupplierDAO = Singleton<SupplierDAO>.Instance();
+        private AddressBLL AddressBLL = Singleton<AddressBLL>.Instance();
+        private ContactBLL ContactBLL = Singleton<ContactBLL>.Instance();
         #endregion
 
-        public bool Insert(FornecedorModel fornecedor, UsuarioModel usuario)
+        public bool Insert(FornecedorModel supplier, UsuarioModel user)
         {
             try
             {
-                ProcessDataForInsert(ref fornecedor);
-                fornecedor.StatusSelected = "1";
-                var fornecedorEntity = ConvertModelToEntity(fornecedor, usuario);
-                var enderecoEntity = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
-                var contatoEntity = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
+                ProcessDataForInsert(ref supplier);
+                supplier.StatusSelected = "1";
+                
+                HMA_FOR supplierEntity;
+                HMA_END addressEntity;
+                HMA_CON contactEntity;
+                LoadModels(supplier, user, out supplierEntity, out addressEntity, out contactEntity);
 
-                return Convert.ToInt32(FornecedorDAO.Insert(fornecedorEntity, enderecoEntity, contatoEntity).Rows[0]["SUCCESS"]) != 0;
+                return SupplierDAO.Insert(supplierEntity, addressEntity, contactEntity).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao cadastrar fornecedor " +ex.Message);
+                throw;
             }
         }
-        public List<FornecedorModel> Get(FornecedorModel model, UsuarioModel usuario)
+        public List<FornecedorModel> Get(FornecedorModel model, UsuarioModel user)
         {
             try
             {
-                var result = FornecedorDAO.Get(ConvertModelToEntity(model, usuario));
+                var result = SupplierDAO.Get(ConvertModelToEntity(model, user));
                 var supplier = result.Tables[0].DataTableToList<HMA_FOR>();
                 var address = result.Tables[1].DataTableToList<HMA_END>();
                 var contact = result.Tables[2].DataTableToList<HMA_CON>();
@@ -81,22 +57,30 @@ namespace BLL.Supplier
                 
                 return list;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
-        public bool Update(FornecedorModel fornecedor, UsuarioModel usuario)
+        public bool Update(FornecedorModel supplier, UsuarioModel user)
         {
-            ProcessDataForInsert(ref fornecedor);
+            ProcessDataForInsert(ref supplier);
 
-            var supplier = ConvertModelToEntity(fornecedor, usuario);
-            var address = EnderecoBLL.ConvertModelToEntity(fornecedor.Endereco, usuario);
-            var contact = ContatoBLL.ConvertModelToEntity(fornecedor.Contato, usuario);
-            return Convert.ToInt32(FornecedorDAO.Update(supplier, address, contact).Rows[0]["SUCCESS"]) != 0;
+            HMA_FOR supplierEntity;
+            HMA_END addressEntity;
+            HMA_CON contactEntity;
+            LoadModels(supplier, user, out supplierEntity, out addressEntity, out contactEntity);
+
+            return SupplierDAO.Update(supplierEntity, addressEntity, contactEntity).GetResults();
         }
 
         #region Private Methods
+        private void LoadModels(FornecedorModel supplier, UsuarioModel user, out HMA_FOR supplierEntity, out HMA_END addressEntity, out HMA_CON contactEntity)
+        {
+            supplierEntity = ConvertModelToEntity(supplier, user);
+            addressEntity = AddressBLL.ConvertModelToEntity(supplier.Endereco, user);
+            contactEntity = ContactBLL.ConvertModelToEntity(supplier.Contato, user);
+        }
         private void ProcessDataForInsert(ref FornecedorModel forn)
         {
             try
@@ -149,8 +133,8 @@ namespace BLL.Supplier
                 model.RazaoSocial = forn.RAZ;
                 model.StatusSelected = forn._ATV.ToString();
 
-                model.Endereco = EnderecoBLL.ConvertEntityToModel(end);
-                model.Contato = ContatoBLL.ConvertEntityToModel(con);
+                model.Endereco = AddressBLL.ConvertEntityToModel(end);
+                model.Contato = ContactBLL.ConvertEntityToModel(con);
 
                 return model;
             }

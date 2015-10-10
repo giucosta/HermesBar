@@ -10,42 +10,16 @@ using System.Threading.Tasks;
 using BLL.UTIL;
 using ENTITY.Commom;
 using BLL.Commom;
+using HELPER;
 
 namespace BLL.Establishment
 {
     public class EstablishmentBLL
     {
         #region Singleton
-        private EstablishmentDAO _estDAO = null;
-        private EstablishmentDAO EstablishmentDAO
-        {
-            get
-            {
-                if (_estDAO == null)
-                    _estDAO = new EstablishmentDAO();
-                return _estDAO;
-            }
-        }
-        private AddressBLL _enderecoBLL = null;
-        private AddressBLL EnderecoBLL
-        {
-            get
-            {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new AddressBLL();
-                return _enderecoBLL;
-            }
-        }
-        private ContactBLL _contatoBLL = null;
-        private ContactBLL ContatoBLL
-        {
-            get
-            {
-                if (_contatoBLL == null)
-                    _contatoBLL = new ContactBLL();
-                return _contatoBLL;
-            }
-        }
+        private EstablishmentDAO EstablishmentDAO = Singleton<EstablishmentDAO>.Instance();
+        private AddressBLL AddressBLL = Singleton<AddressBLL>.Instance();
+        private ContactBLL ContactBLL = Singleton<ContactBLL>.Instance();
         #endregion
 
         public List<EstablishmentModel> Get(EstablishmentModel est, UsuarioModel user)
@@ -74,14 +48,14 @@ namespace BLL.Establishment
             {
                 ProccessForInsert(ref est);
                 var establishment = ConvertModelToEntity(est, user);
-                var address = EnderecoBLL.ConvertModelToEntity(est.Endereco, user);
-                var contact = ContatoBLL.ConvertModelToEntity(est.Contato, user);
+                var address = AddressBLL.ConvertModelToEntity(est.Endereco, user);
+                var contact = ContactBLL.ConvertModelToEntity(est.Contato, user);
 
-                return Convert.ToInt32(EstablishmentDAO.Insert(establishment, address, contact).Rows[0]["SUCCESS"]) == 1;
+                return EstablishmentDAO.Insert(establishment, address, contact).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao cadastrar estabelecimento " + ex.Message);
+                throw;
             }
         }
         public bool Update(EstablishmentModel est, UsuarioModel user)
@@ -90,36 +64,36 @@ namespace BLL.Establishment
             {
                 ProccessForInsert(ref est);
                 var establishment = ConvertModelToEntity(est, user);
-                var address = EnderecoBLL.ConvertModelToEntity(est.Endereco, user);
-                var contact = ContatoBLL.ConvertModelToEntity(est.Contato, user);
+                var address = AddressBLL.ConvertModelToEntity(est.Endereco, user);
+                var contact = ContactBLL.ConvertModelToEntity(est.Contato, user);
 
-                return Convert.ToInt32(EstablishmentDAO.Update(establishment, address, contact).Rows[0]["SUCCESS"]) != 0;
+                return EstablishmentDAO.Update(establishment, address, contact).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao editar estabelecimento " + ex.Message);
+                throw;
             }
         }
         public bool Inactive(EstablishmentModel est, UsuarioModel user)
         {
             try
             {
-                return Convert.ToInt32(EstablishmentDAO.Inative(ConvertModelToEntity(est, user)).Rows[0]["SUCCESS"]) != 0;
+                return EstablishmentDAO.Inactive(ConvertModelToEntity(est, user)).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao inativar estabelecimento " + ex.Message);
+                throw;
             }
         }
         public bool Active(EstablishmentModel est, UsuarioModel user)
         {
             try
             {
-                return Convert.ToInt32(EstablishmentDAO.Active(ConvertModelToEntity(est, user)).Rows[0]["SUCCESS"]) != 0;
+                return EstablishmentDAO.Active(ConvertModelToEntity(est, user)).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw new Exception("Erro ao ativar estabelecimento " + ex.Message);
+                throw;
             }
         }
 
@@ -188,8 +162,8 @@ namespace BLL.Establishment
                 model.RazaoSocial = est.RAZ;
                 model.StatusSelected = est._ATV.ToString();
 
-                model.Endereco = EnderecoBLL.ConvertEntityToModel(end);
-                model.Contato = ContatoBLL.ConvertEntityToModel(con);
+                model.Endereco = AddressBLL.ConvertEntityToModel(end);
+                model.Contato = ContactBLL.ConvertEntityToModel(con);
 
                 return model;
             }

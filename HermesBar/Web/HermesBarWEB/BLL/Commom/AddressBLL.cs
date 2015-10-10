@@ -1,34 +1,24 @@
 ﻿using DAO.Commom;
 using ENTITY.Commom;
+using HELPER;
 using MODEL.Address;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BLL.Commom
 {
     public class AddressBLL
     {
-        private AddressDAO _addressDAO = null;
-        private AddressDAO AddressDAO
-        {
-            get
-            {
-                if (_addressDAO == null)
-                    _addressDAO = new AddressDAO();
-                return _addressDAO;
-            }
-        }
+        private AddressDAO AddressDAO = Singleton<AddressDAO>.Instance();
         
         public HMA_END ConvertModelToEntity(EnderecoModel model, UsuarioModel usuario)
         {
             try
             {
-                var entity = new HMA_END();
+                var entity = Singleton<HMA_END>.Instance();
+
                 entity._ID = model.Id;
                 entity._USR = usuario.Id;
                 entity.BAI = model.Bairro;
@@ -46,12 +36,11 @@ namespace BLL.Commom
                 throw ex;
             }
         }
-        
         public EnderecoModel ConvertEntityToModel(HMA_END end)
         {
             try
             {
-                var model = new EnderecoModel();
+                var model = Singleton<EnderecoModel>.Instance();
                 model.Bairro = end.BAI;
                 model.Cep = end.CEP;
                 model.Cidade = end.CID;
@@ -63,12 +52,11 @@ namespace BLL.Commom
 
                 return model;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
-
         public EnderecoModel GetStates(EnderecoModel model)
         {
             try

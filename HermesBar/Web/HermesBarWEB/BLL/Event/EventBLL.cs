@@ -8,22 +8,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.Event
 {
     public class EventBLL
     {
         #region Singleton
-        private EventDAO _eventDAO = null;
-        private EventDAO EventDAO
-        {
-            get
-            {
-                if (_eventDAO == null)
-                    _eventDAO = new EventDAO();
-                return _eventDAO;
-            }
-        }
+        private EventDAO EventDAO = Singleton<EventDAO>.Instance();
         #endregion
 
         public List<EventModel> Get(EventModel evento, UsuarioModel user)
@@ -50,7 +42,7 @@ namespace BLL.Event
         {
             try
             {
-                return Convert.ToInt32(EventDAO.Insert(ConvertModelToEntity(evento, user)).Rows[0]["SUCCESS"]) != 0;
+                return EventDAO.Insert(ConvertModelToEntity(evento, user)).GetResults();
             }
             catch (Exception)
             {
@@ -61,7 +53,7 @@ namespace BLL.Event
         {
             try
             {
-                return Convert.ToInt32(EventDAO.Update(ConvertModelToEntity(evento, user)).Rows[0]["SUCCESS"]) != 0;
+                return EventDAO.Update(ConvertModelToEntity(evento, user)).GetResults();
             }
             catch (Exception)
             {

@@ -10,30 +10,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 namespace BLL.Client
 {
     public class ClientBLL
     {
-        private ClientDAO _clientDAO = null;
-        private ClientDAO ClientDAO
-        {
-            get
-            {
-                if (_clientDAO == null)
-                    _clientDAO = new ClientDAO();
-                return _clientDAO;
-            }
-        }
-        private ContactBLL _contatoBLL = null;
-        private ContactBLL ContatoBLL
-        {
-            get
-            {
-                if (_contatoBLL == null)
-                    _contatoBLL = new ContactBLL();
-                return _contatoBLL;
-            }
-        }
+        #region Singleton
+        private ClientDAO ClientDAO = Singleton<ClientDAO>.Instance();
+        private ContactBLL ContactBLL = Singleton<ContactBLL>.Instance();
+        #endregion
 
         public bool Insert(ClientModel client, UsuarioModel user, bool cadastroRapido = false)
         {
@@ -46,9 +31,8 @@ namespace BLL.Client
                     if(ClientDAO.Get(cli).Tables[0].Rows.Count != 0)
                         throw new Exceptions("Cliente já cadastrado com mesmo RG");
                 }
-                var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
-                return Convert.ToInt32(ClientDAO.Insert(cli, con).Rows[0]["SUCCESS"]) != 0;
-                
+                var con = ContactBLL.ConvertModelToEntity(client.Contato, user);
+                return ClientDAO.Insert(cli, con).GetResults();
             }
             catch (Exception)
             {
@@ -64,8 +48,8 @@ namespace BLL.Client
                 var cli = result.Tables[0].DataTableToList<HMA_CLI>();
                 var con = result.Tables[1].DataTableToList<HMA_CON>();
 
-                var list = new List<ClientModel>();
-
+                var list = Singleton<List<ClientModel>>.Instance();
+                
                 for (int i = 0; i < cli.Count; i++)
                     list.Add(ConvertEntityToModel(cli[i], con[i]));
 
@@ -80,7 +64,7 @@ namespace BLL.Client
         {
             try
             {
-                return Convert.ToInt32(ClientDAO.Inactive(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]) != 0;
+                return ClientDAO.Inactive(ConvertModelToEntity(client, user)).GetResults();
             }
             catch (Exception)
             {
@@ -91,7 +75,7 @@ namespace BLL.Client
         {
             try
             {
-                return Convert.ToInt32(ClientDAO.Active(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]) != 0;
+                return ClientDAO.Active(ConvertModelToEntity(client, user)).GetResults();
             }
             catch (Exception)
             {
@@ -104,8 +88,9 @@ namespace BLL.Client
             {
                 ProcessDataForInsert(ref client);
                 var cli = ConvertModelToEntity(client, user);
-                var con = ContatoBLL.ConvertModelToEntity(client.Contato, user);
-                return Convert.ToInt32(ClientDAO.Update(cli, con).Rows[0]["SUCCESS"]) != 0;
+                var con = ContactBLL.ConvertModelToEntity(client.Contato, user);
+                
+                return ClientDAO.Update(cli, con).GetResults();
             }
             catch (Exception)
             {
@@ -146,7 +131,8 @@ namespace BLL.Client
         {
             try
             {
-                var entity = new HMA_CLI();
+                var entity = Singleton<HMA_CLI>.Instance();
+
                 entity._ID = client.Id;
                 entity.NASC = client.DataNascimento;
                 entity._ATV = Convert.ToInt32(client.StatusSelected);
@@ -164,11 +150,12 @@ namespace BLL.Client
         {
             try
             {
-                var model = new ClientModel();
+                var model = Singleton<ClientModel>.Instance();
+
                 model.Id = cli._ID;
                 model.StatusSelected = cli._ATV.ToString();
                 model.DataNascimento = cli.NASC;
-                model.Contato = ContatoBLL.ConvertEntityToModel(con);
+                model.Contato = ContactBLL.ConvertEntityToModel(con);
                 model.RG = cli.RG;
 
                 return model;

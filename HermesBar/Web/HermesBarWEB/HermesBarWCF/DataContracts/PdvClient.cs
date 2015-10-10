@@ -38,7 +38,7 @@ namespace HermesBarWCF.DataContracts
         }
         public string GetCar(PdvClientModel client, UsuarioModel user)
         {
-            return ClientBLL.GetCar(client, user);
+            return ClientBLL.GetCard(client, user);
         }
         public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
@@ -51,7 +51,7 @@ namespace HermesBarWCF.DataContracts
         }
         public bool FecharComanda(PdvClientModel client, UsuarioModel user)
         {
-            return ClientBLL.FecharComanda(client, user);
+            return ClientBLL.CloseCommands(client, user);
         }
     }
 }

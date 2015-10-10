@@ -1,4 +1,5 @@
 ﻿using ENTITY.Commom;
+using HELPER;
 using MODEL.Contact;
 using MODEL.User;
 using System;
@@ -11,17 +12,11 @@ namespace BLL.Commom
 {
     public class ContactBLL
     {
-        /// <summary>
-        /// Performs the model´s conversion to entity
-        /// </summary>
-        /// <param name="ContatoModel"></param>
-        /// <param name="UsuarioModel"></param>
-        /// <returns>HMA_CON</returns>
         public HMA_CON ConvertModelToEntity(ContatoModel model, UsuarioModel usuario)
         {
             try
             {
-                var entity = new HMA_CON();
+                var entity = Singleton<HMA_CON>.Instance();
                 entity._ID = model.Id;
                 entity._USR = usuario.Id;
                 entity.CEL = model.Celular;
@@ -36,16 +31,11 @@ namespace BLL.Commom
                 throw ex;
             }
         }
-        /// <summary>
-        /// Performs the entity's conversion to model
-        /// </summary>
-        /// <param name="HMA_CON"></param>
-        /// <returns>ContatoModel</returns>
         public ContatoModel ConvertEntityToModel(HMA_CON con)
         {
             try
             {
-                var model = new ContatoModel();
+                var model = Singleton<ContatoModel>.Instance();
                 model.Celular = con.CEL;
                 model.Email = con.EMA;
                 model.Id = con._ID;
@@ -54,9 +44,9 @@ namespace BLL.Commom
 
                 return model;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
     }

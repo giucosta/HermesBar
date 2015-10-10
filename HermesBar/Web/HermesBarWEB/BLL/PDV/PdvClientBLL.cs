@@ -8,27 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.PDV
 {
     public class PdvClientBLL
     {
-        private Pdv_ClientDAO _clientDAO = null;
-        private Pdv_ClientDAO ClientDAO
-        {
-            get
-            {
-                if (_clientDAO == null)
-                    _clientDAO = new Pdv_ClientDAO();
-                return _clientDAO;
-            }
-        }
+        #region Singleton
+        private Pdv_ClientDAO ClientDAO = Singleton<Pdv_ClientDAO>.Instance();
+        #endregion
 
         public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return Convert.ToInt32(ClientDAO.Insert(ConvertModelToEntity(client, user)).Rows[0]["SUCCESS"]);
         }
-        public string GetCar(PdvClientModel client, UsuarioModel user)
+        public string GetCard(PdvClientModel client, UsuarioModel user)
         {
             try
             {
@@ -43,7 +37,7 @@ namespace BLL.PDV
         {
             return ClientDAO.Close(new HMA_PDV_CLI() { _ID_CAI = client.IdCaixa, NUM_CAR = client.NumeroCartao }).DataTableToList<PdvFechamentoClientModel>();
         }
-        public bool FecharComanda(PdvClientModel client, UsuarioModel user)
+        public bool CloseCommands(PdvClientModel client, UsuarioModel user)
         {
             try
             {
@@ -55,6 +49,7 @@ namespace BLL.PDV
             }
         }
 
+        #region Private Methods
         private HMA_PDV_CLI ConvertModelToEntity(PdvClientModel cli, UsuarioModel user)
         {
             try
@@ -79,5 +74,6 @@ namespace BLL.PDV
                 throw;
             }
         }
+        #endregion
     }
 }

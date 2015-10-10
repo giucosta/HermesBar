@@ -7,23 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
 using ENTITY.User;
+using HELPER;
 
 namespace BLL.User
 {
     public class UserBLL
     {
         #region Singleton
-        private UserDAO _usuarioDAO = null;
-        private UserDAO UsuarioDAO
-        {
-            get
-            {
-                if (_usuarioDAO == null)
-                    _usuarioDAO = new UserDAO();
-                return _usuarioDAO;
-            }
-        }
+        private UserDAO UsuarioDAO = Singleton<UserDAO>.Instance();
         #endregion
+
         public List<UsuarioModel> Get(UsuarioModel user)
         {
             try

@@ -11,42 +11,16 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
 using System.Data.SqlTypes;
+using HELPER;
 
 namespace BLL.Employee
 {
     public class EmployeeBLL
     {
         #region Singleton
-        private EmployeeDAO _employeeDAO = null;
-        private EmployeeDAO EmployeeDAO
-        {
-            get
-            {
-                if (_employeeDAO == null)
-                    _employeeDAO = new EmployeeDAO();
-                return _employeeDAO;
-            }
-        }
-        private ContactBLL _contatoBLL = null;
-        private ContactBLL ContatoBLL
-        {
-            get
-            {
-                if (_contatoBLL == null)
-                    _contatoBLL = new ContactBLL();
-                return _contatoBLL;
-            }
-        }
-        private AddressBLL _enderecoBLL = null;
-        private AddressBLL EnderecoBLL
-        {
-            get
-            {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new AddressBLL();
-                return _enderecoBLL;
-            }
-        }
+        private EmployeeDAO EmployeeDAO = Singleton<EmployeeDAO>.Instance();
+        private ContactBLL ContactBLL = Singleton<ContactBLL>.Instance();
+        private AddressBLL AddressBLL = Singleton<AddressBLL>.Instance();
         #endregion
 
         public List<EmployeeModel> Get(EmployeeModel model, UsuarioModel user)
@@ -77,8 +51,8 @@ namespace BLL.Employee
                 if (EmployeeDAO.Get(ConvertModelToEntity(employee, user)).Tables[0].Rows.Count == 0)
                 {
                     var employeeEntity = ConvertModelToEntity(employee, user);
-                    var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
-                    var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
+                    var addressEntity = AddressBLL.ConvertModelToEntity(employee.Endereco, user);
+                    var contatcEntity = ContactBLL.ConvertModelToEntity(employee.Contato, user);
 
                     return EmployeeDAO.Insert(employeeEntity, contatcEntity, addressEntity).GetResults();
                 }
@@ -98,8 +72,8 @@ namespace BLL.Employee
                 if (EmployeeDAO.Get(ConvertModelToEntity(employee, user)).Tables[0].Rows.Count == 1)
                 {
                     var employeeEntity = ConvertModelToEntity(employee, user);
-                    var addressEntity = EnderecoBLL.ConvertModelToEntity(employee.Endereco, user);
-                    var contatcEntity = ContatoBLL.ConvertModelToEntity(employee.Contato, user);
+                    var addressEntity = AddressBLL.ConvertModelToEntity(employee.Endereco, user);
+                    var contatcEntity = ContactBLL.ConvertModelToEntity(employee.Contato, user);
 
                     return EmployeeDAO.Update(employeeEntity, contatcEntity, addressEntity).GetResults();
                 }
@@ -158,8 +132,8 @@ namespace BLL.Employee
             {
                 var model = new EmployeeModel();
                 model.CargoSelected = emp._ID_CAR.ToString();
-                model.Contato = ContatoBLL.ConvertEntityToModel(con);
-                model.Endereco = EnderecoBLL.ConvertEntityToModel(end);
+                model.Contato = ContactBLL.ConvertEntityToModel(con);
+                model.Endereco = AddressBLL.ConvertEntityToModel(end);
                 model.Funcao = emp.FUN;
                 model.Id = emp._ID;
                 model.Rg = emp.RG;

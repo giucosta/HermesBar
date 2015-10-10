@@ -8,21 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 namespace BLL.PDV
 {
     public class PdvPayBoxBLL
     {
         #region Singleton
-        private Pdv_PayBoxDAO _payBoxDAO = null;
-        private Pdv_PayBoxDAO PayBoxDAO
-        {
-            get
-            {
-                if (_payBoxDAO == null)
-                    _payBoxDAO = new Pdv_PayBoxDAO();
-                return _payBoxDAO;
-            }
-        }
+        private Pdv_PayBoxDAO PayBoxDAO = Singleton<Pdv_PayBoxDAO>.Instance();
         #endregion
 
         public bool Open(PayBoxModel payBox, UsuarioModel user)

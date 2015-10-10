@@ -7,22 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.User
 {
     public class PerfilBLL
     {
         #region Singleton
-        private ProfileDAO _perfilDAO = null;
-        private ProfileDAO PerfilDAO
-        {
-            get
-            {
-                if (_perfilDAO == null)
-                    _perfilDAO = new ProfileDAO();
-                return _perfilDAO;
-            }
-        }
+        private ProfileDAO PerfilDAO = Singleton<ProfileDAO>.Instance();
         #endregion
 
         public List<PerfilModel> Get()

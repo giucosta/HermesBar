@@ -8,21 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BLL.UTIL;
+using HELPER;
 
 namespace BLL.Product
 {
     public class TypeBLL
     {
-        private TypeDAO _typeDAO = null;
-        private TypeDAO TypeDAO
-        {
-            get
-            {
-                if (_typeDAO == null)
-                    _typeDAO = new TypeDAO();
-                return _typeDAO;
-            }
-        }
+        #region Singleton
+        private TypeDAO TypeDAO = Singleton<TypeDAO>.Instance();
+        #endregion
 
         public List<TipoModel> Get()
         {
@@ -39,9 +33,9 @@ namespace BLL.Product
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public TipoModel GetId(TipoModel tipo, UsuarioModel user)
@@ -50,9 +44,9 @@ namespace BLL.Product
             {
                 return ConvertEntityToModel(TypeDAO.GetId(ConvertModelToEntity(tipo, user)).DataTableToList<HMA_TIP>().FirstOrDefault());
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public bool Insert(TipoModel tipo, UsuarioModel user)
@@ -61,22 +55,22 @@ namespace BLL.Product
             {
                 if (string.IsNullOrEmpty(tipo.Descricao))
                     tipo.Descricao = "";
-                return Convert.ToInt32(TypeDAO.Insert(ConvertModelToEntity(tipo, user)).Rows[0]["SUCCESS"]) == 1;
+                return TypeDAO.Insert(ConvertModelToEntity(tipo, user)).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public bool Update(TipoModel tipo, UsuarioModel user)
         {
             try
             {
-                return Convert.ToInt32(TypeDAO.Update(ConvertModelToEntity(tipo, user)).Rows[0]["SUCCESS"]) == 1;
+                return TypeDAO.Update(ConvertModelToEntity(tipo, user)).GetResults();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -94,9 +88,9 @@ namespace BLL.Product
 
                 return entity;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         internal TipoModel ConvertEntityToModel(HMA_TIP tipo)
@@ -111,9 +105,9 @@ namespace BLL.Product
 
                 return model;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         #endregion

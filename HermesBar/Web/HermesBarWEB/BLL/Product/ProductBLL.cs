@@ -8,32 +8,16 @@ using System.Threading.Tasks;
 using BLL.UTIL;
 using ENTITY.Product;
 using MODEL.User;
+using HELPER;
 
 namespace BLL.Product
 {
     public class ProductBLL
     {
-        private ProductDAO _productDAO = null;
-        private ProductDAO ProductDAO
-        {
-            get
-            {
-                if (_productDAO == null)
-                    _productDAO = new ProductDAO();
-                return _productDAO;
-            }
-        }
-        private TypeBLL _typeBLL = null;
-        private TypeBLL TypeBLL
-        {
-            get
-            {
-                if (_typeBLL == null)
-                    _typeBLL = new TypeBLL();
-                return _typeBLL;
-            }
-        }
-
+        #region Singleton
+        private ProductDAO ProductDAO = Singleton<ProductDAO>.Instance();
+        private TypeBLL TypeBLL = Singleton<TypeBLL>.Instance();
+        #endregion
 
         public List<ProdutoModel> Get()
         {
@@ -45,32 +29,40 @@ namespace BLL.Product
 
                 return listModel;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                throw;
             }
         }
         public ProdutoModel GetId(int id, int ativo)
         {
-            var entity = new HMA_PROD() { _ID = id, _ATV = ativo };
-            var result = ProductDAO.GetId(entity).DataTableToList<HMA_PROD>().FirstOrDefault();
+            try
+            {
+                var entity = new HMA_PROD() { _ID = id, _ATV = ativo };
+                var result = ProductDAO.GetId(entity).DataTableToList<HMA_PROD>().FirstOrDefault();
 
-            if (result != null)
-                return ConvertEntityToModel(result);
-            return new ProdutoModel();
+                if (result != null)
+                    return ConvertEntityToModel(result);
+                return new ProdutoModel();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public bool Insert(ProdutoModel produto, UsuarioModel user)
         {
             try
             {
-                var prod = ConvertModelToEntity(produto, user);
-                if (ProductDAO.VerifyExistingProduct(prod).Rows.Count == 0)
-                {
-                    var tipo = new HMA_TIP() { _ID = Convert.ToInt32(produto.TipoSelected) };
-                    var unidade = new HMA_UNI_MED() { _ID = Convert.ToInt32(produto.UnidadeMedidaSelected) };
+                HMA_PROD product;
+                HMA_TIP productType;
+                HMA_UNI_MED unity;
 
-                    return Convert.ToInt32(ProductDAO.Insert(prod, tipo, unidade).Rows[0]["SUCCESS"]) == 1;
-                }
+                LoadModels(produto, user, out product, out productType, out unity);
+
+                if (ProductDAO.VerifyExistingProduct(product).Rows.Count == 0)
+                    return ProductDAO.Insert(product, productType, unity).GetResults();
+
                 return false;
             }
             catch (Exception)
@@ -82,11 +74,13 @@ namespace BLL.Product
         {
             try
             {
-                var prod = ConvertModelToEntity(produto, user);
-                var tipo = new HMA_TIP() { _ID = Convert.ToInt32(produto.TipoSelected) };
-                var unidade = new HMA_UNI_MED() { _ID = Convert.ToInt32(produto.UnidadeMedidaSelected) };
+                HMA_PROD product;
+                HMA_TIP productType;
+                HMA_UNI_MED unity;
 
-                return Convert.ToInt32(ProductDAO.Update(prod, tipo, unidade).Rows[0]["SUCCESS"]) == 1;
+                LoadModels(produto, user, out product, out productType, out unity);
+
+                return ProductDAO.Update(product, productType, unity).GetResults();
             }
             catch (Exception)
             {
@@ -95,11 +89,11 @@ namespace BLL.Product
         }
         public bool Active(ProdutoModel produto, UsuarioModel user)
         {
-            return Convert.ToInt32(ProductDAO.Active(ConvertModelToEntity(produto, user)).Rows[0]["SUCCESS"]) == 1;
+            return ProductDAO.Active(ConvertModelToEntity(produto, user)).GetResults();
         }
         public bool Inactive(ProdutoModel produto, UsuarioModel user)
         {
-            return Convert.ToInt32(ProductDAO.Inactive(ConvertModelToEntity(produto, user)).Rows[0]["SUCCESS"]) == 1;
+            return ProductDAO.Inactive(ConvertModelToEntity(produto, user)).GetResults();
         }
         public int GetNextCode()
         {
@@ -114,6 +108,12 @@ namespace BLL.Product
         }
 
         #region Private Methods
+        private void LoadModels(ProdutoModel produto, UsuarioModel user, out HMA_PROD prod, out HMA_TIP tipo, out HMA_UNI_MED unidade)
+        {
+            prod = ConvertModelToEntity(produto, user);
+            tipo = new HMA_TIP() { _ID = Convert.ToInt32(produto.TipoSelected) };
+            unidade = new HMA_UNI_MED() { _ID = Convert.ToInt32(produto.UnidadeMedidaSelected) };
+        }
         private ProdutoModel ConvertEntityToModel(HMA_PROD entity)
         {
             try
