@@ -252,7 +252,7 @@ namespace HermesBarWEB.Controllers
             try
             {
 
-                return Json(PdvClienteService.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user, GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
+                return Json(PdvClienteService.Order(cartaoCliente, codigoAtendente, nomeProduto, quantidade, _user, GetSessionPdv().Id), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
@@ -272,7 +272,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult FecharComanda(string numeroCartao, string valorTotal, string valorRecebido, string troco, string formaPagamento)
         {
-            return Json(PdvClienteService.FecharComanda(ConvertToModel(numeroCartao, valorTotal, valorRecebido, troco, formaPagamento), _user), JsonRequestBehavior.AllowGet);
+            return Json(PdvClienteService.CloseCommands(ConvertToModel(numeroCartao, valorTotal, valorRecebido, troco, formaPagamento), _user), JsonRequestBehavior.AllowGet);
         }
 
         

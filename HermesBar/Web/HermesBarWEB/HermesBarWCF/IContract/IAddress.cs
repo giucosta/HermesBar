@@ -10,6 +10,6 @@ namespace HermesBarWCF.IContract
     [ServiceContract]
     public interface IAddress
     {
-        EnderecoModel GetStates(EnderecoModel endereco);
+        EnderecoModel GetStates(EnderecoModel address);
     }
 }

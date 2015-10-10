@@ -1,4 +1,5 @@
 ﻿using BLL.Establishment;
+using HELPER;
 using MODEL.Establishment;
 using MODEL.User;
 using System;
@@ -12,36 +13,31 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Establishment
     {
-        private EstablishmentBLL _estabelecimentoBLL = null;
-        private EstablishmentBLL EstabelecimentoBLL
+        private EstablishmentBLL EstablishmentBLL;
+        public Establishment()
         {
-            get
-            {
-                if (_estabelecimentoBLL == null)
-                    _estabelecimentoBLL = new EstablishmentBLL();
-                return _estabelecimentoBLL;
-            }
+            this.EstablishmentBLL = Singleton<EstablishmentBLL>.Instance();
         }
 
-        public List<EstablishmentModel> Get(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public List<EstablishmentModel> Get(EstablishmentModel establisment, UsuarioModel user)
         {
-            return EstabelecimentoBLL.Get(estabelecimento, usuario);
+            return EstablishmentBLL.Get(establisment, user);
         }
-        public bool Insert(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Insert(EstablishmentModel establisment, UsuarioModel user)
         {
-            return EstabelecimentoBLL.Insert(estabelecimento, usuario);
+            return EstablishmentBLL.Insert(establisment, user);
         }
-        public bool Update(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Update(EstablishmentModel establisment, UsuarioModel user)
         {
-            return EstabelecimentoBLL.Update(estabelecimento, usuario);
+            return EstablishmentBLL.Update(establisment, user);
         }
-        public bool Inactive(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Inactive(EstablishmentModel establisment, UsuarioModel user)
         {
-            return EstabelecimentoBLL.Inactive(estabelecimento, usuario);
+            return EstablishmentBLL.Inactive(establisment, user);
         }
-        public bool Active(EstablishmentModel estabelecimento, UsuarioModel usuario)
+        public bool Active(EstablishmentModel establisment, UsuarioModel user)
         {
-            return EstabelecimentoBLL.Active(estabelecimento, usuario);
+            return EstablishmentBLL.Active(establisment, user);
         }
     }
 }

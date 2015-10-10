@@ -1,4 +1,5 @@
 ﻿using BLL.User;
+using HELPER;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,10 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Profile
     {
-        private PerfilBLL _profileBLL = null;
-        private PerfilBLL ProfileBLL
+        private ProfileBLL ProfileBLL;
+        public Profile()
         {
-            get
-            {
-                if (_profileBLL == null)
-                    _profileBLL = new PerfilBLL();
-                return _profileBLL;
-            }
+            this.ProfileBLL = Singleton<ProfileBLL>.Instance();
         }
 
         public List<PerfilModel> Get()

@@ -1,4 +1,5 @@
 ﻿using BLL.Client;
+using HELPER;
 using MODEL.Client;
 using MODEL.User;
 using System;
@@ -12,36 +13,66 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Client
     {
-        private ClientBLL _clientBLL = null;
-        private ClientBLL ClientBLL
+        private ClientBLL ClientBLL;
+        public Client()
         {
-            get
-            {
-                if (_clientBLL == null)
-                    _clientBLL = new ClientBLL();
-                return _clientBLL;
-            }
+            this.ClientBLL = Singleton<ClientBLL>.Instance();
         }
 
         public List<ClientModel> Get(ClientModel client, UsuarioModel user)
         {
-            return ClientBLL.Get(client, user);
+            try
+            {
+                return ClientBLL.Get(client, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public bool Insert(ClientModel client, UsuarioModel user, bool cadastroRapido)
         {
-            return ClientBLL.Insert(client, user, cadastroRapido);
+            try
+            {
+                return ClientBLL.Insert(client, user, cadastroRapido);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public bool Update(ClientModel client, UsuarioModel user)
         {
-            return ClientBLL.Update(client, user);
+            try
+            {
+                return ClientBLL.Update(client, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public bool Inactive(ClientModel client, UsuarioModel user)
         {
-            return ClientBLL.Inactive(client, user);
+            try
+            {
+                return ClientBLL.Inactive(client, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public bool Active(ClientModel client, UsuarioModel user)
         {
-            return ClientBLL.Active(client, user);
+            try
+            {
+                return ClientBLL.Active(client, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

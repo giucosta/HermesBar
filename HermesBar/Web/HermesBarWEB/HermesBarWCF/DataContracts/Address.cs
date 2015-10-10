@@ -1,4 +1,5 @@
 ﻿using BLL.Commom;
+using HELPER;
 using MODEL.Address;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,15 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Address
     {
-        private AddressBLL _enderecoBLL = null;
-        private AddressBLL EnderecoBLL
+        private AddressBLL AddressBLL;
+        public Address()
         {
-            get
-            {
-                if (_enderecoBLL == null)
-                    _enderecoBLL = new AddressBLL();
-                return _enderecoBLL;
-            }
+            this.AddressBLL = Singleton<AddressBLL>.Instance();
         }
-        public EnderecoModel GetStates(EnderecoModel endereco)
+       
+        public EnderecoModel GetStates(EnderecoModel address)
         {
-            return EnderecoBLL.GetStates(endereco);
+            return AddressBLL.GetStates(address);
         }
     }
 }

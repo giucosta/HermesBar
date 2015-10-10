@@ -11,7 +11,7 @@ using HELPER;
 
 namespace BLL.PDV
 {
-    public class PdvPedidoBLL
+    public class PdvOrderBLL
     {
         #region Singleton
         private Pdv_OrderDAO Pdv_OrderDAO = Singleton<Pdv_OrderDAO>.Instance();

@@ -11,7 +11,7 @@ using HELPER;
 
 namespace BLL.User
 {
-    public class PerfilBLL
+    public class ProfileBLL
     {
         #region Singleton
         private ProfileDAO PerfilDAO = Singleton<ProfileDAO>.Instance();

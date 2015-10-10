@@ -1,4 +1,5 @@
 ﻿using BLL.PDV;
+using HELPER;
 using MODEL.PDV.PayBox;
 using MODEL.User;
 using System;
@@ -12,15 +13,10 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class PayBox
     {
-        private PdvPayBoxBLL _payBoxBLL = null;
-        private PdvPayBoxBLL PayBoxBLL
+        private PdvPayBoxBLL PayBoxBLL;
+        public PayBox()
         {
-            get
-            {
-                if (_payBoxBLL == null)
-                    _payBoxBLL = new PdvPayBoxBLL();
-                return _payBoxBLL;
-            }
+            this.PayBoxBLL = Singleton<PdvPayBoxBLL>.Instance();
         }
 
         public bool Open(PayBoxModel payBox, UsuarioModel user)

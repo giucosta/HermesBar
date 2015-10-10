@@ -10,6 +10,6 @@ namespace HermesBarWCF.IContract
     [ServiceContract]
     public interface ILogin
     {
-        UsuarioModel EfetuarLogin(UsuarioModel usuario);
+        UsuarioModel EfetuarLogin(UsuarioModel user);
     }
 }

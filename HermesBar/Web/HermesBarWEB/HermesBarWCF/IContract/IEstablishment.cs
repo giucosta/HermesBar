@@ -11,10 +11,10 @@ namespace HermesBarWCF.IContract
     [ServiceContract]
     public interface IEstablishment
     {
-        List<EstablishmentModel> Get(EstablishmentModel estabelecimento, UsuarioModel usuario);
-        bool Insert(EstablishmentModel estabelecimento, UsuarioModel usuario);
-        bool Update(EstablishmentModel estabelecimento, UsuarioModel usuario);
-        bool Inactive(EstablishmentModel estabelecimento, UsuarioModel usuario);
-        bool Active(EstablishmentModel estabelecimento, UsuarioModel usuario);
+        List<EstablishmentModel> Get(EstablishmentModel establisment, UsuarioModel user);
+        bool Insert(EstablishmentModel establisment, UsuarioModel user);
+        bool Update(EstablishmentModel establisment, UsuarioModel user);
+        bool Inactive(EstablishmentModel establisment, UsuarioModel user);
+        bool Active(EstablishmentModel establisment, UsuarioModel user);
     }
 }

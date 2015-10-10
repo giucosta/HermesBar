@@ -1,4 +1,5 @@
 ﻿using BLL.Product;
+using HELPER;
 using MODEL.Product;
 using MODEL.User;
 using System;
@@ -12,20 +13,15 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Produtos
     {
-        private ProductBLL _produtoBLL = null;
-        private ProductBLL ProdutoBLL
-        {
-            get
-            {
-                if (_produtoBLL == null)
-                    _produtoBLL = new ProductBLL();
-                return _produtoBLL;
-            }
-        }
+        private ProductBLL ProdutoBLL;
 
-        public bool Insert(ProdutoModel produto, UsuarioModel usuario)
+        public Produtos()
         {
-            return ProdutoBLL.Insert(produto, usuario);
+            this.ProdutoBLL = Singleton<ProductBLL>.Instance();
+        }
+        public bool Insert(ProdutoModel product, UsuarioModel user)
+        {
+            return ProdutoBLL.Insert(product, user);
         }
         public List<ProdutoModel> Get()
         {
@@ -35,21 +31,21 @@ namespace HermesBarWCF.DataContracts
         {
             return ProdutoBLL.GetId(id, ativo);
         }
-        public bool Active(ProdutoModel produto, UsuarioModel usuario)
+        public bool Active(ProdutoModel product, UsuarioModel user)
         {
-            return ProdutoBLL.Active(produto, usuario);
+            return ProdutoBLL.Active(product, user);
         }
-        public bool Inactive(ProdutoModel produto, UsuarioModel usuario)
+        public bool Inactive(ProdutoModel product, UsuarioModel user)
         {
-            return ProdutoBLL.Inactive(produto, usuario);
+            return ProdutoBLL.Inactive(product, user);
         }
         public int GetNextCode()
         {
             return ProdutoBLL.GetNextCode();
         }
-        public bool Update(ProdutoModel produto, UsuarioModel usuario)
+        public bool Update(ProdutoModel product, UsuarioModel user)
         {
-            return ProdutoBLL.Update(produto, usuario);
+            return ProdutoBLL.Update(product, user);
         }
     }
 }

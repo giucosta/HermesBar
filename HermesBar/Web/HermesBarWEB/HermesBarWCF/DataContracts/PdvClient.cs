@@ -1,4 +1,5 @@
 ﻿using BLL.PDV;
+using HELPER;
 using MODEL.PDV.Client;
 using MODEL.User;
 using System;
@@ -12,44 +13,31 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class PdvClient
     {
-        private PdvClientBLL _clientBLL = null;
-        private PdvClientBLL ClientBLL 
-        { 
-            get 
-            { 
-                if(_clientBLL == null) 
-                    _clientBLL = new PdvClientBLL(); 
-                return _clientBLL;
-            } 
-        }
-        private PdvPedidoBLL _pedidoBLL = null;
-        private PdvPedidoBLL PedidoBLL
+        private PdvClientBLL ClientBLL;
+        private PdvOrderBLL OrderBLL;
+        public PdvClient()
         {
-            get
-            {
-                if (_pedidoBLL == null)
-                    _pedidoBLL = new PdvPedidoBLL();
-                return _pedidoBLL;
-            }
+            this.ClientBLL = Singleton<PdvClientBLL>.Instance();
+            this.OrderBLL = Singleton<PdvOrderBLL>.Instance();
         }
+
         public int Insert(PdvClientModel client, UsuarioModel user)
         {
             return ClientBLL.Insert(client, user);
         }
-        public string GetCar(PdvClientModel client, UsuarioModel user)
+        public string GetCard(PdvClientModel client, UsuarioModel user)
         {
             return ClientBLL.GetCard(client, user);
         }
-        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
+        public bool Order(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
-            return PedidoBLL.Insert(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
+            return OrderBLL.Insert(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
         }
-
-        public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
+        public List<PdvFechamentoClientModel> Close(PdvClientModel client)
         {
             return ClientBLL.Fechamento(client);
         }
-        public bool FecharComanda(PdvClientModel client, UsuarioModel user)
+        public bool CloseCommands(PdvClientModel client, UsuarioModel user)
         {
             return ClientBLL.CloseCommands(client, user);
         }

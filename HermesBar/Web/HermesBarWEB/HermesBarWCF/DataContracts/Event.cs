@@ -1,4 +1,5 @@
 ﻿using BLL.Event;
+using HELPER;
 using MODEL.Event;
 using MODEL.User;
 using System;
@@ -12,15 +13,10 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Event
     {
-        private EventBLL _eventBLL = null;
-        private EventBLL EventBLL
+        private EventBLL EventBLL;
+        public Event()
         {
-            get
-            {
-                if (_eventBLL == null)
-                    _eventBLL = new EventBLL();
-                return _eventBLL;
-            }
+            this.EventBLL = Singleton<EventBLL>.Instance();
         }
 
         public List<EventModel> Get(EventModel evento, UsuarioModel user)

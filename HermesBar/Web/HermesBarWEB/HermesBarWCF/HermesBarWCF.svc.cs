@@ -284,19 +284,19 @@ namespace HermesBarWCF
         }
         public string GetCar(PdvClientModel client, UsuarioModel user)
         {
-            return PdvClient.GetCar(client, user);
+            return PdvClient.GetCard(client, user);
         }
-        public bool Pedido(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
+        public bool Order(string cartaoCliente, string codigoAtendente, string nomeProduto, string quantidade, UsuarioModel user, int idCaixa)
         {
-            return PdvClient.Pedido(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
+            return PdvClient.Order(cartaoCliente, codigoAtendente, nomeProduto, quantidade, user, idCaixa);
         }
         public List<PdvFechamentoClientModel> Fechamento(PdvClientModel client)
         {
-            return PdvClient.Fechamento(client);
+            return PdvClient.Close(client);
         }
-        public bool FecharComanda(PdvClientModel client, UsuarioModel user)
+        public bool CloseCommands(PdvClientModel client, UsuarioModel user)
         {
-            return PdvClient.FecharComanda(client, user);
+            return PdvClient.CloseCommands(client, user);
         }
     }
     public class UsuarioService : IUser

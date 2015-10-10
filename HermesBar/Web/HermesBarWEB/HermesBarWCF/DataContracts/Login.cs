@@ -1,4 +1,5 @@
 ﻿using BLL.User;
+using HELPER;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,14 @@ namespace HermesBarWCF.DataContracts
     [DataContract]
     public class Login
     {
-        private LoginBLL _loginBLL = null;
-        private LoginBLL LoginBLL
+        private LoginBLL LoginBLL;
+        public Login()
         {
-            get
-            {
-                if (_loginBLL == null)
-                    _loginBLL = new LoginBLL();
-                return _loginBLL;
-            }
+            this.LoginBLL = Singleton<LoginBLL>.Instance();
         }
-        public UsuarioModel EfetuarLogin(UsuarioModel usuario)
+        public UsuarioModel EfetuarLogin(UsuarioModel user)
         {
-            return LoginBLL.EfetuarLogin(usuario);
+            return LoginBLL.EfetuarLogin(user);
         }
     }
 }
