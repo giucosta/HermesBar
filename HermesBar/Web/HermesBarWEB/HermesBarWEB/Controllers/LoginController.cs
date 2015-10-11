@@ -1,5 +1,4 @@
-﻿using BLL.User;
-using HELPER;
+﻿using HELPER;
 using HermesBarWCF;
 using MODEL.User;
 using System;

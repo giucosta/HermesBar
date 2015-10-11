@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Commom;
 using MODEL.User;
 using System;
@@ -25,7 +27,7 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult GetEmails()
         {
-            return Json(GetEmail.Get(), JsonRequestBehavior.AllowGet);
+            return Json(Singleton<EmailService>.Instance().Get(), JsonRequestBehavior.AllowGet);
         }
     }
 }

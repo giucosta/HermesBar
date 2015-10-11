@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Product;
 using MODEL.User;
 using System;
@@ -12,15 +14,11 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class UnidadeMedidaController : Controller
     {
-        private UniMedBLL _unidadeMedidaBLL = null;
-        private UniMedBLL UnidadeMedidaBLL
+        private ProductUnitySizeService ProductUnitySizeService = Singleton<ProductUnitySizeService>.Instance();
+        private UsuarioModel user;
+        public UnidadeMedidaController()
         {
-            get
-            {
-                if (_unidadeMedidaBLL == null)
-                    _unidadeMedidaBLL = new UniMedBLL();
-                return _unidadeMedidaBLL;
-            }
+            GetSession.GetUserSession(ref user);
         }
         public ActionResult Index()
         {
@@ -28,22 +26,18 @@ namespace HermesBarWEB.Controllers
         }
         public ActionResult GetJson()
         {
-            return Json(UnidadeMedidaBLL.Get(), JsonRequestBehavior.AllowGet);
+            return Json(ProductUnitySizeService.Get(), JsonRequestBehavior.AllowGet);
         }
         public bool CadastroRapido(string nome)
         {
             try
             {
-                return UnidadeMedidaBLL.Insert(new UnidadeMedidaModel() { Nome = nome, Descricao = "", StatusSelected = "1" }, GetUser());
+                return ProductUnitySizeService.Insert(new UnidadeMedidaModel() { Nome = nome, Descricao = "", StatusSelected = "1" }, user);
             }
             catch (Exception)
             {
                 return false;
             }
-        }
-        private UsuarioModel GetUser()
-        {
-            return (UsuarioModel)Session["USR"];
         }
     }
 }

@@ -65,13 +65,16 @@
   <ItemGroup>
     <Compile Include="DataContracts\Address.cs" />
     <Compile Include="DataContracts\Client.cs" />
+    <Compile Include="DataContracts\Email.cs" />
     <Compile Include="DataContracts\Employee.cs" />
     <Compile Include="DataContracts\Establishment.cs" />
     <Compile Include="DataContracts\Event.cs" />
     <Compile Include="DataContracts\Login.cs" />
     <Compile Include="DataContracts\PayBox.cs" />
     <Compile Include="DataContracts\PdvClient.cs" />
-    <Compile Include="DataContracts\Produtos.cs" />
+    <Compile Include="DataContracts\Product.cs" />
+    <Compile Include="DataContracts\ProductType.cs" />
+    <Compile Include="DataContracts\ProductUnitySize.cs" />
     <Compile Include="DataContracts\Profile.cs" />
     <Compile Include="DataContracts\Supplier.cs" />
     <Compile Include="DataContracts\User.cs" />
@@ -80,6 +83,7 @@
     </Compile>
     <Compile Include="IContract\IAddress.cs" />
     <Compile Include="IContract\IClient.cs" />
+    <Compile Include="IContract\IEmail.cs" />
     <Compile Include="IContract\IEmployee.cs" />
     <Compile Include="IContract\IEstablishment.cs" />
     <Compile Include="IContract\IEvent.cs" />
@@ -87,6 +91,8 @@
     <Compile Include="IContract\IPayBox.cs" />
     <Compile Include="IContract\IPdvClient.cs" />
     <Compile Include="IContract\IProduct.cs" />
+    <Compile Include="IContract\IProductType.cs" />
+    <Compile Include="IContract\IProductUnitySize.cs" />
     <Compile Include="IContract\IProfile.cs" />
     <Compile Include="IContract\ISupplier.cs" />
     <Compile Include="IContract\IUser.cs" />

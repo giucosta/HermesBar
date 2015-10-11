@@ -1,4 +1,6 @@
-﻿using HermesBarWEB.UTIL;
+﻿using HELPER;
+using HermesBarWCF;
+using HermesBarWEB.UTIL;
 using MODEL.Product;
 using MODEL.User;
 using System;
@@ -12,30 +14,27 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class TipoController : Controller
     {
-        private TypeBLL _typeBLL = null;
-        private TypeBLL TypeBLL
+        private ProductTypeService ProductTypeService = Singleton<ProductTypeService>.Instance();
+        private UsuarioModel user;
+        public TipoController()
         {
-            get
-            {
-                if (_typeBLL == null)
-                    _typeBLL = new TypeBLL();
-                return _typeBLL;
-            }
+            GetSession.GetUserSession(ref user);
+            ViewBag.User = user.Nome;
         }
         public ActionResult Get()
         {
-            var listModel = TypeBLL.Get();
+            var listModel = ProductTypeService.Get();
             if(listModel.Count > 0)
                 return View(listModel);
             return View(new List<TipoModel>());
         }
         public ActionResult GetJson()
         {
-            return Json(TypeBLL.Get(), JsonRequestBehavior.AllowGet);
+            return Json(ProductTypeService.Get(), JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetId(int id)
         {
-            var result = TypeBLL.GetId(new TipoModel() { Id = id }, GetUser());
+            var result = ProductTypeService.GetId(new TipoModel() { Id = id }, user);
             CarregaCampos(ref result);
             return View("Cadastrar", result);
         }
@@ -52,8 +51,8 @@ namespace HermesBarWEB.Controllers
                 if (tipo.Id != 0)
                     return Editar(tipo);
 
-                if (TypeBLL.Insert(tipo, GetUser()))
-                    return View("Get", TypeBLL.Get());
+                if (ProductTypeService.Insert(tipo, user))
+                    return View("Get", ProductTypeService.Get());
                 return View("Cadastrar", tipo);
                     
             }
@@ -62,12 +61,11 @@ namespace HermesBarWEB.Controllers
                 throw ex;
             }
         }
-
         public bool CadastroRapido(string nome)
         {
             try
             {
-                return TypeBLL.Insert(new TipoModel() { Nome = nome, Descricao = "", StatusSelected = "1" }, GetUser());
+                return ProductTypeService.Insert(new TipoModel() { Nome = nome, Descricao = "", StatusSelected = "1" }, user);
             }
             catch (Exception)
             {
@@ -78,8 +76,8 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                if (TypeBLL.Update(tipo, GetUser()))
-                    return View("Get", TypeBLL.Get());
+                if (ProductTypeService.Update(tipo, user))
+                    return View("Get", ProductTypeService.Get());
                 return View("Cadastrar", tipo);
             }
             catch (Exception)
@@ -98,10 +96,6 @@ namespace HermesBarWEB.Controllers
                     tipo.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
             }
 
-        }
-        private UsuarioModel GetUser()
-        {
-            return (UsuarioModel)Session["USR"];
         }
     }
 }

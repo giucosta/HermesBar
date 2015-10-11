@@ -114,7 +114,7 @@ namespace HermesBarWEB.Controllers
                 model.CodigoVenda = ProductService.GetNextCode().ToString();
 
             model.Tipos = new List<SelectListItem>();
-            var tipos = new TypeBLL().Get();
+            var tipos = Singleton<ProductTypeService>.Instance().Get();
             foreach (var item in tipos)
             {
                 if (item.Id.ToString() == model.TipoSelected)
@@ -124,7 +124,7 @@ namespace HermesBarWEB.Controllers
             }
 
             model.UnidadesMedida = new List<SelectListItem>();
-            var unidades = new UniMedBLL().Get();
+            var unidades = Singleton<ProductUnitySizeService>.Instance().Get();
             foreach (var item in unidades)
             {
                 if (item.Id.ToString() == model.UnidadeMedidaSelected)

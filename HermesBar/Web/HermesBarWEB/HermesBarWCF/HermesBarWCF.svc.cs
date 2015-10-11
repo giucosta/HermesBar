@@ -3,6 +3,7 @@ using HermesBarWCF.DataContracts;
 using HermesBarWCF.IContract;
 using MODEL.Address;
 using MODEL.Client;
+using MODEL.Commom;
 using MODEL.Employee;
 using MODEL.Establishment;
 using MODEL.Event;
@@ -281,6 +282,88 @@ namespace HermesBarWCF
         public bool Update(FornecedorModel supplier, UsuarioModel user)
         {
             return Supplier.Update(supplier, user);
+        }
+    }
+    public class ProductTypeService : IProductType
+    {
+        private ProductType ProductType = Singleton<ProductType>.Instance();
+        public List<TipoModel> Get()
+        {
+            try
+            {
+                return ProductType.Get();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public TipoModel GetId(TipoModel tipo, UsuarioModel user)
+        {
+            try
+            {
+                return ProductType.GetId(tipo, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Insert(TipoModel tipo, UsuarioModel user)
+        {
+            try
+            {
+                return ProductType.Insert(tipo, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Update(TipoModel tipo, UsuarioModel user)
+        {
+            try
+            {
+                return ProductType.Update(tipo, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+    public class ProductUnitySizeService : IProductUnitySize
+    {
+        private ProductUnitySize ProductUnitySize = Singleton<ProductUnitySize>.Instance();
+        public List<UnidadeMedidaModel> Get()
+        {
+            try
+            {
+                return ProductUnitySize.Get();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Insert(UnidadeMedidaModel model, UsuarioModel user)
+        {
+            try
+            {
+                return ProductUnitySize.Insert(model, user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+    public class EmailService : IEmail
+    {
+        private Email Email = Singleton<Email>.Instance();
+        public LayoutModel Get()
+        {
+            return Email.Get();
         }
     }
 }
