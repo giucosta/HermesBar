@@ -35,8 +35,6 @@
         <section>
             <div class="row">
                 <div class="col-md-12">
-                    @using (Html.BeginForm("CadastrarListaCompra", "ListaCompras", FormMethod.Post, new { @class = "form-horizontal" }))
-                    {
                         <section class="panel">
                             <header class="panel-heading">
                                 Cadastro de Lista de Compras
@@ -51,17 +49,32 @@
                                     </div>
                                     <label class="col-sm-2 control-label">Quantidade</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" />
+                                        <input type="text" class="form-control" id="quantidade-produto-lista"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <button type="button" id="adicionar-produto-lista" class="btn btn-primary">Adicionar Produto</button>
                                 </div>
                             </div>
-                            
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <td>Id</td>
+                                                <td>Produto</td>
+                                                <td>Quantidade</td>
+                                                <td>#</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="produtos-compra">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </section>
-                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
-                    }
+                    <button type="button" class="btn btn-primary" id="salvar-lista">Salvar</button>
                 </div>
             </div>
         </section>

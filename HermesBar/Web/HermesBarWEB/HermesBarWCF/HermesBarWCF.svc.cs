@@ -7,6 +7,7 @@ using MODEL.Commom;
 using MODEL.Employee;
 using MODEL.Establishment;
 using MODEL.Event;
+using MODEL.ListaCompras;
 using MODEL.PDV.Client;
 using MODEL.PDV.PayBox;
 using MODEL.Product;
@@ -368,6 +369,15 @@ namespace HermesBarWCF
         public LayoutModel Get()
         {
             return Email.Get();
+        }
+    }
+    public class ShoppingListService : IShoppingList
+    {
+        private ShoppingList ShoppingList = Singleton<ShoppingList>.Instance();
+
+        public bool Insert(List<ListaComprasModel> shoppingListModel, UsuarioModel user)
+        {
+            return ShoppingList.Insert(shoppingListModel, user);
         }
     }
 }

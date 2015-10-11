@@ -55,6 +55,7 @@
     <Compile Include="Product\TypeBLL.cs" />
     <Compile Include="Product\UniMedBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingList\ShoppingListBLL.cs" />
     <Compile Include="Supplier\SupplierBLL.cs" />
     <Compile Include="User\EmailBLL.cs" />
     <Compile Include="User\LoginBLL.cs" />

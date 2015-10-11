@@ -76,6 +76,7 @@
     <Compile Include="DataContracts\ProductType.cs" />
     <Compile Include="DataContracts\ProductUnitySize.cs" />
     <Compile Include="DataContracts\Profile.cs" />
+    <Compile Include="DataContracts\ShoppingList.cs" />
     <Compile Include="DataContracts\Supplier.cs" />
     <Compile Include="DataContracts\User.cs" />
     <Compile Include="HermesBarWCF.svc.cs">
@@ -94,6 +95,7 @@
     <Compile Include="IContract\IProductType.cs" />
     <Compile Include="IContract\IProductUnitySize.cs" />
     <Compile Include="IContract\IProfile.cs" />
+    <Compile Include="IContract\IShoppingList.cs" />
     <Compile Include="IContract\ISupplier.cs" />
     <Compile Include="IContract\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,6 +55,7 @@
     <Compile Include="Product\HMA_UNI_MED.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegControl.cs" />
+    <Compile Include="ShoppingList\HMA_LIS_COM.cs" />
     <Compile Include="Supplier\HMA_FOR.cs" />
     <Compile Include="User\HMA_PER.cs" />
     <Compile Include="User\HMA_USR.cs" />

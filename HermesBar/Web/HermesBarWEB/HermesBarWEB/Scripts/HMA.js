@@ -588,6 +588,7 @@ $('body').on('click', '#fechar-pedido', function () {
 /**************************END PEDIDOS METHODS*************************************/
 /***************************LISTA COMPRA METHODS************************************/
 CarregaProdutos();
+var produtos = null;
 function CarregaProdutos() {
     $.ajax({
         type: 'GET',
@@ -597,9 +598,8 @@ function CarregaProdutos() {
         cache: false,
         success: function (data) {
             if (data != null) {
-                for (var i = 0; i < data.length; i++) {
-                    $('#lista-produto').append('<option value="' + data[i].Id + '">' + data[i].Nome + '</option>');
-                }
+                produtos = data;
+                CarregaComboProdutos();
             }
         },
         statusCode: {
@@ -610,6 +610,66 @@ function CarregaProdutos() {
             console.log(xhr.responseText);
         }
     });
+}
+function CarregaComboProdutos() {
+    for (var i = 0; i < produtos.length; i++) {
+        $('#lista-produto').append('<option value="' + produtos[i].Id + '">' + produtos[i].Nome + '</option>');
+    }
+}
+$('body').on('click', '#adicionar-produto-lista', function () {
+    if ($('#lista-produto').val() == '0') {
+        GenerateTimeMessage('Oops!', 'Selecione um produto', 'warning');
+        $('#lista-produto').focus();
+        return;
+    }
+    if ($('#quantidade-produto-lista').val() == '') {
+        GenerateTimeMessage('Oops!', 'Insira uma quantidade', 'warning');
+        return;
+    }
+        
+    $('#produtos-compra').append('<tr><td class="id-produto">' + $("#lista-produto option:selected").val() + '</td><td class="nome-produto">' + $("#lista-produto option:selected").text() + '</td><td class="quant-produto">' + $('#quantidade-produto-lista').val() + '</td><td><button type="button" class="btn btn-danger" id="excluir-produto-lista">Excluir</button></td></tr>');
+    $('#lista-produto').val(0);
+    $('#quantidade-produto-lista').val('');
+});
+$('body').on('click', '#excluir-produto-lista', function () {
+    $(this).parent().parent().remove();
+});
+
+$('body').on('click', '#salvar-lista', function () {
+    var listas = [];
+    var linhas = $('#produtos-compra').children();
+    for (var i = 0; i < linhas.length; i++) {
+
+        var id = $(linhas[i]).children()[0];
+        var quantidade = $(linhas[i]).children()[2];
+
+        listas[listas.length] = new Lista($(id).html(), $(quantidade).html());
+    }
+    var data = { lista: JSON.stringify(listas) }
+    $.ajax({
+        type: 'GET',
+        url: '/ListaCompras/CadastrarListaCompra',
+        data: data,
+        async: true,
+        cache: false,
+        success: function (data) {
+            if (data != null) {
+                GenerateTimeMessage('Uhul!', 'Lista cadastrada', 'success');
+            }
+        },
+        statusCode: {
+            404: function (content) { console.log('cannot find resource'); },
+            500: function (content) { console.log('internal server error'); }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+function Lista(id, quantidade) {
+    this.id = id;
+    this.quantidade = quantidade;
 }
 /************************END LISTA COMPRA METHODS***********************************/
 
