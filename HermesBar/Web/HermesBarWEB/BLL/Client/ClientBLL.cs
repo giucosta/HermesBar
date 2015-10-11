@@ -43,13 +43,14 @@ namespace BLL.Client
         {
             try
             {
-                var result = ClientDAO.Get(ConvertModelToEntity(client, user));
+                var list = new List<ClientModel>();
 
+                var result = ClientDAO.Get(ConvertModelToEntity(client, user));
                 var cli = result.Tables[0].DataTableToList<HMA_CLI>();
+                if (cli.Count() == 0)
+                    return list;
                 var con = result.Tables[1].DataTableToList<HMA_CON>();
 
-                var list = Singleton<List<ClientModel>>.Instance();
-                
                 for (int i = 0; i < cli.Count; i++)
                     list.Add(ConvertEntityToModel(cli[i], con[i]));
 

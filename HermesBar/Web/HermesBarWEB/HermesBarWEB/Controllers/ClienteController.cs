@@ -55,11 +55,11 @@ namespace HermesBarWEB.Controllers
                 if (result != null)
                     return Json(result, JsonRequestBehavior.AllowGet);
                 else
-                    return Json(null, JsonRequestBehavior.AllowGet);
+                    return Json("", JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {
-                return null;
+                return Json("", JsonRequestBehavior.AllowGet);
             }
         }
         public ActionResult Cadastrar()

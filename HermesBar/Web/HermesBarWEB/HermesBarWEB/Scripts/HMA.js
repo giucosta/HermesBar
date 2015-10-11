@@ -337,7 +337,7 @@ $('body').on('focusout', '#rg-cliente', function () {
     resultRequest = null;
     var data = { rg: $(this).val() };
     GenerateRequest('GET', '/Cliente/GetRg', data, false);
-    if (resultRequest != undefined) {
+    if (resultRequest != "") {
         $('#id-cliente').val(resultRequest.Id);
         $('#nome-cliente').val(resultRequest.Contato.Nome);
         $('#telefone-cliente').val(resultRequest.Contato.Celular);
