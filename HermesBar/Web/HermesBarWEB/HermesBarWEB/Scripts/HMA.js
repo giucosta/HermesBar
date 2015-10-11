@@ -586,6 +586,32 @@ $('body').on('click', '#fechar-pedido', function () {
         
 });
 /**************************END PEDIDOS METHODS*************************************/
+/***************************LISTA COMPRA METHODS************************************/
+CarregaProdutos();
+function CarregaProdutos() {
+    $.ajax({
+        type: 'GET',
+        url: '/Produto/GetJson',
+        data: null,
+        async: true,
+        cache: false,
+        success: function (data) {
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    $('#lista-produto').append('<option value="' + data[i].Id + '">' + data[i].Nome + '</option>');
+                }
+            }
+        },
+        statusCode: {
+            404: function (content) { console.log('cannot find resource'); },
+            500: function (content) { console.log('internal server error'); }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+    });
+}
+/************************END LISTA COMPRA METHODS***********************************/
 
 /***********************************AUX METHODS**************************************/
 function CnpjValidade(cnpj){

@@ -25,6 +25,10 @@ namespace HermesBarWEB.Controllers
         {
             return View(ProductService.Get());
         }
+        public ActionResult GetJson()
+        {
+            return Json(ProductService.Get(), JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Cadastrar()
         {
             var model = new ProdutoModel();

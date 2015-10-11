@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--Necessário para o sweet-->
+@Scripts.Render("~/bundles/jquery");
+@Scripts.Render("~/bundles/sweetalert");
+@Styles.Render("~/content/sweetalert")
+<!--Necessário para o sweet-->
+@if (ViewBag.Erro != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao cadastrar lista de compras!", "error");
+    </script>
+}
+@if (ViewBag.EditarErro != null)
+{
+    <script type="text/javascript">
+        swal("Oops!", "Erro ao editar lista de compras!", "error");
+    </script>
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Lista de Compras</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/ListaCompras/CriarLista">Lista de Compra</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("CadastrarListaCompra", "ListaCompras", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Cadastro de Lista de Compras
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Produto</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="lista-produto">
+                                            <option value="0">Selecione</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">Quantidade</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" id="adicionar-produto-lista" class="btn btn-primary">Adicionar Produto</button>
+                                </div>
+                            </div>
+                            
+                        </section>
+                        @Html.Partial("~/Views/Partials/SalvarVoltarPartial.cshtml")
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

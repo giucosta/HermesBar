@@ -133,6 +133,7 @@
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\FuncionarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListaComprasController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PdvController.cs" />
     <Compile Include="Controllers\PedidoController.cs" />
@@ -381,6 +382,7 @@
     <Content Include="Views\Pdv\SaidaCliente.cshtml" />
     <Content Include="Views\Usuario\Get.cshtml" />
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
+    <Content Include="Views\ListaCompras\CriarLista.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
