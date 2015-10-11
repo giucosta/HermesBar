@@ -45,7 +45,30 @@ namespace BLL.ShoppingList
                 throw;
             }
         }
+        public List<ListaComprasModel> Get()
+        {
+            try
+            {
+                var result = ShoppingListDAO.Get().DataTableToList<HMA_LIS_COM>();
+                var listModel = new List<ListaComprasModel>();
+                int id = -1;
+                foreach (var item in result)
+                {
+                    if (id != item._ID_LIS)
+                    {
+                        listModel.Add(ConvertEntityToModel(item));
+                        id = item._ID_LIS;
+                    }
+                }
+                return listModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        #region Private Methods
         private HMA_LIS_COM ConvertModelToEntity(ListaComprasModel model, UsuarioModel user, int idList)
         {
             try
@@ -63,5 +86,21 @@ namespace BLL.ShoppingList
                 throw;
             }
         }
+        private ListaComprasModel ConvertEntityToModel(HMA_LIS_COM entity)
+        {
+            try
+            {
+                var model = new ListaComprasModel();
+                model.IdLista = entity._ID_LIS;
+                model.DataCriacao = entity._INS;
+
+                return model;
+            }
+            catch (Exception)
+            {   
+                throw;
+            }
+        }
+        #endregion
     }
 }

@@ -21,6 +21,11 @@ namespace HermesBarWEB.Controllers
         {
             GetSession.GetUserSession(ref this.user);
         }
+
+        public ActionResult Get()
+        {
+            return View(ShoppingListService.Get());
+        }
         public ActionResult CriarLista()
         {
             return View();

@@ -379,5 +379,9 @@ namespace HermesBarWCF
         {
             return ShoppingList.Insert(shoppingListModel, user);
         }
+        public List<ListaComprasModel> Get()
+        {
+            return ShoppingList.Get();
+        }
     }
 }

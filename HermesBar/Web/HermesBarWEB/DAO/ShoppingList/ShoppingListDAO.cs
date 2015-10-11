@@ -50,5 +50,23 @@ namespace DAO.ShoppingList
                 CloseConnection();
             }
         }
+        public DataTable Get()
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_LIS_COM.GET);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

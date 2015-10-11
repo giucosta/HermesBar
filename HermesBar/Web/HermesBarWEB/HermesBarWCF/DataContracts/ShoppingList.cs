@@ -30,5 +30,9 @@ namespace HermesBarWCF.DataContracts
 		        throw;
 	        }
         }
+        public List<ListaComprasModel> Get()
+        {
+            return ShoppingListBLL.Get();
+        }
     }
 }

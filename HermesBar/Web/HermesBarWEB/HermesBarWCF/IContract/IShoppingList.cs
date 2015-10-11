@@ -12,5 +12,6 @@ namespace HermesBarWCF.IContract
     public interface IShoppingList
     {
         bool Insert(List<ListaComprasModel> shoppingListModel, UsuarioModel user);
+        List<ListaComprasModel> Get();
     }
 }

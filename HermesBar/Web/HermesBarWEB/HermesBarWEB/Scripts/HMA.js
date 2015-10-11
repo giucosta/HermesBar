@@ -645,26 +645,16 @@ $('body').on('click', '#salvar-lista', function () {
 
         listas[listas.length] = new Lista($(id).html(), $(quantidade).html());
     }
+
     var data = { lista: JSON.stringify(listas) }
-    $.ajax({
-        type: 'GET',
-        url: '/ListaCompras/CadastrarListaCompra',
-        data: data,
-        async: true,
-        cache: false,
-        success: function (data) {
-            if (data != null) {
-                GenerateTimeMessage('Uhul!', 'Lista cadastrada', 'success');
-            }
-        },
-        statusCode: {
-            404: function (content) { console.log('cannot find resource'); },
-            500: function (content) { console.log('internal server error'); }
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseText);
-        }
-    });
+    GenerateRequest('GET', '/ListaCompras/CadastrarListaCompra', data, false);
+
+    if (resultRequest) {
+        GenerateTimeMessage('Uhul!', 'Lista cadastrada', 'success');
+        window.location = '/Home';
+    } else {
+        GenerateTimeMessage('Oops!', 'Erro ao cadastrar lista de compras', 'error');
+    }
 });
 
 function Lista(id, quantidade) {

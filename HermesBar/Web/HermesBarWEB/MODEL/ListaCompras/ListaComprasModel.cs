@@ -8,6 +8,8 @@ namespace MODEL.ListaCompras
 {
     public class ListaComprasModel
     {
+        public int IdLista { get; set; }
+        public DateTime DataCriacao { get; set; }
         public string id { get; set; }
         public string quantidade { get; set; }
     }
