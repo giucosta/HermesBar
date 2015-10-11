@@ -44,5 +44,16 @@ namespace HermesBarWEB.Controllers
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
         }
+        public ActionResult IniciarCompra(int id)
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

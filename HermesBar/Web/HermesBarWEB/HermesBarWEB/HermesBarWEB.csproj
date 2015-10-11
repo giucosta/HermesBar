@@ -384,6 +384,7 @@
     <Content Include="Views\Usuario\Cadastrar.cshtml" />
     <Content Include="Views\ListaCompras\CriarLista.cshtml" />
     <Content Include="Views\ListaCompras\Get.cshtml" />
+    <Content Include="Views\ListaCompras\IniciarCompra.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

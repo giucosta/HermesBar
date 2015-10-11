@@ -1,0 +1,79 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hermes Bar - Lista de Compas</title>
+    @Styles.Render("~/content/bootstrap")
+    @Styles.Render("~/content/bootstrap-theme")
+    @Styles.Render("~/content/elegante-icons")
+    @Styles.Render("~/content/font-awesome")
+    @Styles.Render("~/content/style")
+    @Styles.Render("~/content/responsive")
+    @Styles.Render("~/content/sweetalert")
+    @Styles.Render("~/content/calendar")
+</head>
+<body>
+    <div class="col-md-12">
+        <br />
+        <section>
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <h3>Hermes Bar | Lista de Compras</h3>
+                            </header>
+                            <div class="panel-body">
+                                <div class="form-group table-responsive">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <td>Produto</td>
+                                                <td>Quantidade</td>
+                                                <td>Valor</td>
+                                                <td>Ação</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Coca-cola
+                                                </td>
+                                                <td>
+                                                    12
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <input type="text" class="form-control"/>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary">+</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                        <button type="button" class="btn btn-primary" id="fechar-pedido">Concluir  pedido</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/scrollTo")
+@Scripts.Render("~/bundles/niceScroll")
+@Scripts.Render("~/bundles/jqueryMask")
+@Scripts.Render("~/bundles/scripts")
+@Scripts.Render("~/bundles/sweetalert")
+@Scripts.Render("~/bundles/calendar")
+<script src="~/Scripts/lang-all.js"></script>
+@Scripts.Render("~/bundles/hma")
+</html>
