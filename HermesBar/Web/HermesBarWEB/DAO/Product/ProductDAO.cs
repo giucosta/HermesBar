@@ -185,5 +185,23 @@ namespace DAO.Product
                 CloseConnection();
             }
         }
+        public DataTable LowProducts()
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_PROD.GET_EST_BAI);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

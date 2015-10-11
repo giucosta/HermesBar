@@ -47,5 +47,9 @@ namespace HermesBarWCF.DataContracts
         {
             return ProdutoBLL.Update(product, user);
         }
+        public List<ProdutoModel> GetLow()
+        {
+            return ProdutoBLL.GetLow();
+        }
     }
 }

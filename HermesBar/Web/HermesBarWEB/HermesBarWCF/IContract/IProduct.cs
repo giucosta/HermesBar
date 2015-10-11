@@ -18,5 +18,6 @@ namespace HermesBarWCF.IContract
         bool Inactive(ProdutoModel product, UsuarioModel user);
         int GetNextCode();
         bool Update(ProdutoModel product, UsuarioModel user);
+        List<ProdutoModel> GetLow();
     }
 }

@@ -107,6 +107,10 @@ namespace HermesBarWEB.Controllers
             return View("Get", ProductService.Get());
         }
 
+        public ActionResult GetProdutosBaixo()
+        {
+            return Json(ProductService.GetLow(), JsonRequestBehavior.AllowGet);
+        }
         #region Private Methods
         private void LoadModel(ref ProdutoModel model)
         {

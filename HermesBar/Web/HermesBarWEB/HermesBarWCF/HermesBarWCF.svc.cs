@@ -54,6 +54,10 @@ namespace HermesBarWCF
         {
             return Product.Update(product, user);
         }
+        public List<ProdutoModel> GetLow()
+        {
+            return Product.GetLow();
+        }
     }
     public class LoginService : ILogin
     {

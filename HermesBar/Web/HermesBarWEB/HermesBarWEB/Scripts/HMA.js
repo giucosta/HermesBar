@@ -30,6 +30,7 @@ $('#codigo-cliente').focus();
 
 /********************************LAYOUT METHODS**************************************/
 var VerifyEmail = setInterval(function () { VerifyEmails() }, 300000);
+var VerifyProduct = setInterval(function () { VerifyProducts() }, 300000);
 var connection = VerifyConnection();
 //if (connection != false) {
 //    initDatabase();
@@ -61,12 +62,41 @@ function VerifyEmails() {
         }
     });
 }
+function VerifyProducts() {
+    $.ajax({
+        type: 'GET',
+        url: '/Produto/GetProdutosBaixo',
+        data: null,
+        async: true,
+        cache: false,
+        success: function (data) {
+            if (data != null) {
+                GenerateTimeMessage('Atenção', 'Produtos em baixa no estoque', 'warning');
+                GenerateProductInfo(data);
+            }
+        },
+        statusCode: {
+            404: function (content) { console.log('cannot find resource'); },
+            500: function (content) { console.log('internal server error'); }
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+        }
+    });
+}
 function GenerateEmailInfo(data) {
     for (var i = 0; i < data.List.length; i++) {
         if (data.List[i].Subject.length > 40) {
             data.List[i].Subject = data.List[i].Subject.substr(0, 40);
         }
         $('#Infos-Email').append('<a href="#">' + '<span class="photo"></span>' + '<span class="subject"><span class="from" id="From">' + data.List[i].From + '</span><span class="time">1 min</span></span><span id="Subject">' + data.List[i].Subject +'</span></a>');
+    }
+}
+function GenerateProductInfo(data) {
+    $('#quant-produto-baixa').append(data.length);
+    $('#nao-produto-baixa').remove();
+    for (var i = 0; i < data.length; i++) {
+        $('#produtos-baixa').append('<a href="/Produto/GetId?Id='+data[i].Id+'"><span class="label label-primary"><i class="icon_profile"></i></span>' + 'Produto: ' + data[i].Nome + ' |  Quantidade: ' + data[i].QuantidadeAtual + '</a>')
     }
 }
 /****************************END LAYOUT METHODS**************************************/

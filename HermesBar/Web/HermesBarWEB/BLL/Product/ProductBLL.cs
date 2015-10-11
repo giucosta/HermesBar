@@ -106,6 +106,25 @@ namespace BLL.Product
                 throw;
             }
         }
+        public List<ProdutoModel> GetLow()
+        {
+            try
+            {
+                var result = ProductDAO.LowProducts().DataTableToList<HMA_PROD>();
+                if (result.Count() > 0)
+                {
+                    var list = new List<ProdutoModel>();
+                    foreach (var item in result)
+                        list.Add(ConvertEntityToModel(item));
+                    return list;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private void LoadModels(ProdutoModel produto, UsuarioModel user, out HMA_PROD prod, out HMA_TIP tipo, out HMA_UNI_MED unidade)
