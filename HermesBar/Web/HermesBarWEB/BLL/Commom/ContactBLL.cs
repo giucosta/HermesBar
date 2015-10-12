@@ -35,7 +35,7 @@ namespace BLL.Commom
         {
             try
             {
-                var model = Singleton<ContatoModel>.Instance();
+                var model = new ContatoModel();
                 model.Celular = con.CEL;
                 model.Email = con.EMA;
                 model.Id = con._ID;

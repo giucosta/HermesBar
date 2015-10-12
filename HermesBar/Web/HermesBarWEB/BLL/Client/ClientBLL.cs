@@ -151,7 +151,7 @@ namespace BLL.Client
         {
             try
             {
-                var model = Singleton<ClientModel>.Instance();
+                var model = new ClientModel();
 
                 model.Id = cli._ID;
                 model.StatusSelected = cli._ATV.ToString();

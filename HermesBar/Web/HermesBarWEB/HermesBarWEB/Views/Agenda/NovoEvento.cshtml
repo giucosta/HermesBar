@@ -28,7 +28,7 @@
                 <ol class="breadcrumb">
                     <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
                     <li><i class="icon_document_alt"></i><a href="/Agenda/Consultar">Agenda</a></li>
-                    <li><i class="icon_document_alt"></i><a href="/Cliente/NovoEvento">Cadastro de evento</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Agenda/NovoEvento">Cadastro de evento</a></li>
                 </ol>
             </div>
         </div>
@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     @Html.LabelFor(m => m.Cliente, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-9">
-                                        @Html.DropDownListFor(m => m.ClienteSelected, Model.Cliente, "Selecione", new { @class="form-control" })
+                                        @Html.DropDownListFor(m => m.ClienteSelected, Model.Cliente, "Selecione", new { @class="form-control", @required="required" })
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="button" id="novo-cliente" class="btn btn-default">Novo</button>

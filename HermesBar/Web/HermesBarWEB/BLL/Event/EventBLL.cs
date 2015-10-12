@@ -42,6 +42,8 @@ namespace BLL.Event
         {
             try
             {
+                if (string.IsNullOrEmpty(evento.Observacao))
+                    evento.Observacao = "";
                 return EventDAO.Insert(ConvertModelToEntity(evento, user)).GetResults();
             }
             catch (Exception)
