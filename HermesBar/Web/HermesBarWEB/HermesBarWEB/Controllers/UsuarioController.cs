@@ -29,11 +29,11 @@ namespace HermesBarWEB.Controllers
 
         public ActionResult Get()
         {
-            return View(UserService.Get(new UsuarioModel()));
+            return View(UserService.Get(new UsuarioModel() { MatrizSelected = _user.MatrizSelected }));
         }
         public ActionResult GetId(int id)
         {
-             var model = UserService.Get(new UsuarioModel() { Id = id }).FirstOrDefault();
+            var model = UserService.Get(new UsuarioModel() { Id = id, MatrizSelected = _user.MatrizSelected }).FirstOrDefault();
             LoadModel(ref model);
             return View("Cadastrar", model);
         }
@@ -53,7 +53,7 @@ namespace HermesBarWEB.Controllers
                 usuario.Id = _user.Id;
                 usuario.MatrizSelected = _user.MatrizSelected;
                 if (UserService.Insert(usuario))
-                    return View("Get", UserService.Get(new UsuarioModel()));
+                    return View("Get", UserService.Get(new UsuarioModel() { MatrizSelected = _user.MatrizSelected }));
 
                 LoadModel(ref usuario);
                 return View("Cadastrar", usuario);
@@ -71,13 +71,13 @@ namespace HermesBarWEB.Controllers
                     ViewBag.ActiveSuccess = true;
                 else
                     ViewBag.ActiveError = true;
-                return View("Get", UserService.Get(new UsuarioModel()));
+                return View("Get", UserService.Get(new UsuarioModel() { MatrizSelected = _user.MatrizSelected }));
 
             }
             catch (Exception)
             {
                 ViewBag.ActiveError = true;
-                return View("Get", UserService.Get(new UsuarioModel()));
+                return View("Get", UserService.Get(new UsuarioModel() { MatrizSelected = _user.MatrizSelected }));
             }
         }
         public ActionResult InactiveId(int id)
@@ -104,7 +104,7 @@ namespace HermesBarWEB.Controllers
                 if (UserService.Update(usuario))
                 {
                     ViewBag.UpdateSuccess = true;
-                    return View("Get", UserService.Get(new UsuarioModel()));
+                    return View("Get", UserService.Get(new UsuarioModel() { MatrizSelected = _user.MatrizSelected }));
                 }
                 ViewBag.UpdateError = true;
                 LoadModel(ref usuario);
