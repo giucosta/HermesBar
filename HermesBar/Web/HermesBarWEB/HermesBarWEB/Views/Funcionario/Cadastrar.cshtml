@@ -52,6 +52,12 @@
                             </header>
                             <div class="panel-body">
                                 <div class="form-group">
+                                    @Html.LabelFor(m => m.Matriz, new { @class = "col-sm-2 control-label" })
+                                    <div class="col-sm-10">
+                                        @Html.DropDownListFor(m => m.MatrizSelected, Model.Matriz, "Selecione", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     @Html.LabelFor(m => m.Tipo, new { @class = "col-sm-2 control-label" })
                                     <div class="col-sm-4">
                                         @Html.DropDownListFor(m => m.TipoSelected, Model.Tipo, "Selecione", new { @class="form-control", @required="required" })

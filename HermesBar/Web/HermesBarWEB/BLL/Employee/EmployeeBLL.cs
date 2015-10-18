@@ -144,6 +144,7 @@ namespace BLL.Employee
                 model.SexoSelected = emp.SEX;
                 model.TipoSelected = emp.TIP.ToString();
                 model.StatusSelected = emp._ATV.ToString();
+                model.MatrizSelected = emp.MTR.ToString();
 
                 return model;
             }
@@ -169,7 +170,7 @@ namespace BLL.Employee
                 entity.RG = model.Rg;
                 entity.SEX = model.SexoSelected;
                 entity.TIP = Convert.ToInt32(model.TipoSelected);
-
+                entity.MTR = Convert.ToInt32(model.MatrizSelected);
                 return entity;
             }
             catch (Exception)

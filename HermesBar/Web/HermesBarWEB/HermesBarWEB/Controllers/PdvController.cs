@@ -183,7 +183,14 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return Json(EmployeeService.Get(new MODEL.Employee.EmployeeModel() { Id = Convert.ToInt32(idFuncionario), Cpf = "" }, _user), JsonRequestBehavior.AllowGet);
+                return Json(EmployeeService.Get(
+                            new MODEL.Employee.EmployeeModel() { 
+                                Id = Convert.ToInt32(idFuncionario), 
+                                Cpf = "", 
+                                MatrizSelected = _user.MatrizSelected, 
+                                StatusSelected = 1.ToString() 
+                            }, 
+                        _user), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

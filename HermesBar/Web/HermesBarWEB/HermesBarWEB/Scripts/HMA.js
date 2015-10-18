@@ -550,7 +550,7 @@ $('body').on('focusout', '#codigo-cliente', function () {
 $('body').on('focusout', '#codigo-funcionario', function () {
     var data = { idFuncionario: $(this).val() };
     GenerateRequest('GET', '/Pdv/GetFuncionarioId', data, false);
-    if (resultRequest != null) {
+    if (resultRequest.length != 0) {
         $('#nome-funcionario').val(resultRequest[0].Contato.Nome);
         $('#codigo-produto').prop('disabled', false);
         $('#codigo-produto').focus();

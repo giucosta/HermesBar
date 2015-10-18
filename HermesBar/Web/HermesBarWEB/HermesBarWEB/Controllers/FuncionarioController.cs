@@ -4,6 +4,7 @@ using HermesBarWEB.UTIL;
 using MODEL.Address;
 using MODEL.Contact;
 using MODEL.Employee;
+using MODEL.Establishment;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace HermesBarWEB.Controllers
     {
         private EmployeeService EmployeeService = Singleton<EmployeeService>.Instance();
         private AddressService AddressService = Singleton<AddressService>.Instance();
-       
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
+
         private UsuarioModel user;
         public FuncionarioController()
         {
@@ -29,7 +31,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return View(EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                return View(EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
             }
             catch (Exception)
             {
@@ -62,7 +64,7 @@ namespace HermesBarWEB.Controllers
                 if (EmployeeService.Insert(employee, user))
                 {
                     ViewBag.InsertSuccess = true;
-                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
                 }
                 ViewBag.InsertError = true;
                 LoadModel(ref employee);
@@ -79,7 +81,7 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var model = EmployeeService.Get(new EmployeeModel() { Id = id, Cpf = "" }, user).FirstOrDefault();
+                var model = EmployeeService.Get(new EmployeeModel() { Id = id, Cpf = "", MatrizSelected = user.MatrizSelected }, user).FirstOrDefault();
                 LoadModel(ref model);
                 return View("Cadastrar", model);
             }
@@ -95,7 +97,7 @@ namespace HermesBarWEB.Controllers
                 if (EmployeeService.Update(employee, user))
                 {
                     ViewBag.UpdateSuccess = true;
-                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                    return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
                 }
                 ViewBag.UpdateError = true;
                 LoadModel(ref employee);
@@ -116,12 +118,12 @@ namespace HermesBarWEB.Controllers
                     ViewBag.InactiveSuccess = true;
                 else
                     ViewBag.InactiveError = true;
-                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf= "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
             }
             catch (Exception)
             {
                 ViewBag.InactiveError = true;
-                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
             }
         }
         public ActionResult ActiveId(int id)
@@ -132,12 +134,12 @@ namespace HermesBarWEB.Controllers
                     ViewBag.ActiveSuccess = true;
                 else
                     ViewBag.ActiveError = true;
-                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
             }
             catch (Exception)
             {
                 ViewBag.ActiveError = true;
-                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "" }, user));
+                return View("Get", EmployeeService.Get(new EmployeeModel() { Cpf = "", MatrizSelected = user.MatrizSelected }, user));
             }
         }
 
@@ -187,6 +189,15 @@ namespace HermesBarWEB.Controllers
                     employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Id.ToString(), Selected = true });
                 else
                     employee.Cargo.Add(new SelectListItem() { Text = item.Cargo, Value = item.Id.ToString() });
+            }
+
+            employee.Matriz = new List<SelectListItem>();
+            foreach (var item in EstablishmentService.Get(new EstablishmentModel(), user))
+            {
+                if (employee.MatrizSelected == item.Id.ToString())
+                    employee.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                else
+                    employee.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString() });
             }
         }
         #endregion

@@ -113,6 +113,8 @@ namespace BLL.Supplier
                 entity.INSMUN = model.InscricaoMunicipal;
                 entity.FAN = model.NomeFantasia;
                 entity.RAZ = model.RazaoSocial;
+                entity.MTR = Convert.ToInt32(model.MatrizSelected);
+                
                 return entity;
             }
             catch (Exception)
@@ -132,6 +134,7 @@ namespace BLL.Supplier
                 model.NomeFantasia = forn.FAN;
                 model.RazaoSocial = forn.RAZ;
                 model.StatusSelected = forn._ATV.ToString();
+                model.MatrizSelected = forn.MTR.ToString();
 
                 model.Endereco = AddressBLL.ConvertEntityToModel(end);
                 model.Contato = ContactBLL.ConvertEntityToModel(con);

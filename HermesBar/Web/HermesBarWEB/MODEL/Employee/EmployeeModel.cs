@@ -34,5 +34,7 @@ namespace MODEL.Employee
         public string SexoSelected { get; set; }
         public List<SelectListItem> Cargo { get; set; }
         public string CargoSelected { get; set; }
+        public string MatrizSelected { get; set; }
+        public List<SelectListItem> Matriz { get; set; }
     }
 }

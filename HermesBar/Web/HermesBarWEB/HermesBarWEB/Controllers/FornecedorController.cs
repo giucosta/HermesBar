@@ -10,12 +10,18 @@ using System.Web.Mvc;
 using HermesBarWEB.UTIL;
 using HermesBarWCF;
 using HELPER;
+using MODEL.Establishment;
 
 namespace HermesBarWEB.Controllers
 {
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class FornecedorController : Controller
     {
+        #region Singleton
+        private SupplierService SupplierService = Singleton<SupplierService>.Instance();
+        private AddressService AddressService = Singleton<AddressService>.Instance();
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
+        #endregion
         private UsuarioModel user;
         public FornecedorController()
         {
@@ -25,13 +31,10 @@ namespace HermesBarWEB.Controllers
             ViewBag.Sucesso = false;
         }
 
-        #region Singleton
-        private SupplierService SupplierService = Singleton<SupplierService>.Instance();
-        private AddressService AddressService = Singleton<AddressService>.Instance();
-        #endregion
+        
         public ActionResult Get()
         {
-            return View(SupplierService.Get(new FornecedorModel(), user));
+            return View(SupplierService.Get(new FornecedorModel() { MatrizSelected = user.MatrizSelected }, user));
         }
         public ActionResult Cadastrar()
         {
@@ -52,7 +55,7 @@ namespace HermesBarWEB.Controllers
                 if (SupplierService.Insert(fornecedor, user))
                 {
                     ViewBag.Sucesso = true;
-                    return View("Get", SupplierService.Get(new FornecedorModel(), user));
+                    return View("Get", SupplierService.Get(new FornecedorModel() { MatrizSelected = user.MatrizSelected }, user));
                 }
                 LoadModel(ref fornecedor);
                 ViewBag.Erro = true;
@@ -68,8 +71,8 @@ namespace HermesBarWEB.Controllers
             try
             {
                 if (SupplierService.Update(fornecedor, user))
-                    return View("Get", SupplierService.Get(new FornecedorModel(), user));
-                return View("Get", SupplierService.Get(new FornecedorModel(), user));
+                    return View("Get", SupplierService.Get(new FornecedorModel() { MatrizSelected = user.MatrizSelected }, user));
+                return View("Get", SupplierService.Get(new FornecedorModel() { MatrizSelected = user.MatrizSelected }, user));
             }
             catch (Exception)
             {
@@ -80,9 +83,9 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                var result = SupplierService.Get(new FornecedorModel() { Id = id }, user).FirstOrDefault();
+                var result = SupplierService.Get(new FornecedorModel() { Id = id, MatrizSelected = user.MatrizSelected }, user).FirstOrDefault();
                 result.Endereco = AddressService.GetStates(result.Endereco);
-
+                LoadModel(ref result);
                 return View("Cadastrar", result);
             }
             catch (Exception)
@@ -90,10 +93,26 @@ namespace HermesBarWEB.Controllers
                 return View("~/Views/Shared/Error.cshtml");
             }
         }
+
+        #region Private Methods
         private void LoadModel(ref FornecedorModel fornecedor)
         {
-            fornecedor.Contato = new ContatoModel();
-            fornecedor.Endereco = AddressService.GetStates(new EnderecoModel());
+            if(fornecedor.Contato == null)
+                fornecedor.Contato = new ContatoModel();
+            if (fornecedor.Endereco == null)
+                fornecedor.Endereco = AddressService.GetStates(new EnderecoModel());
+            else
+                fornecedor.Endereco = AddressService.GetStates(fornecedor.Endereco);
+
+            fornecedor.Matriz = new List<SelectListItem>();
+            foreach (var item in EstablishmentService.Get(new EstablishmentModel(), user))
+            {
+                if (fornecedor.MatrizSelected == item.Id.ToString())
+                    fornecedor.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                else
+                    fornecedor.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString() });
+            }
         }
+        #endregion
     }
 }

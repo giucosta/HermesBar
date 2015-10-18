@@ -26,6 +26,7 @@ namespace DAO.Supplier
                 InserParameter("CNPJ", SqlDbType.VarChar, forn.CNPJ);
                 InserParameter("INSMUN", SqlDbType.VarChar, forn.INSMUN);
                 InserParameter("INSEST", SqlDbType.VarChar, forn.INSEST);
+                InserParameter("MTR", SqlDbType.Int, forn.MTR);
 
                 InserParameter("RUA", SqlDbType.VarChar, end.RUA);
                 InserParameter("NUM", SqlDbType.VarChar, end.NUM);
@@ -58,6 +59,7 @@ namespace DAO.Supplier
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_SUPPLIER.GET);
                 InserParameter("FOR_ID", SqlDbType.Int, forn._ID);
+                InserParameter("MTR", SqlDbType.Int, forn.MTR);
 
                 return GetResultAsDataSet();
             }
@@ -85,6 +87,7 @@ namespace DAO.Supplier
                 InserParameter("CNPJ", SqlDbType.VarChar, forn.CNPJ);
                 InserParameter("INSMUN", SqlDbType.VarChar, forn.INSMUN);
                 InserParameter("INSEST", SqlDbType.VarChar, forn.INSEST);
+                InserParameter("MTR", SqlDbType.Int, forn.MTR);
 
                 InserParameter("RUA", SqlDbType.VarChar, end.RUA);
                 InserParameter("NUM", SqlDbType.VarChar, end.NUM);

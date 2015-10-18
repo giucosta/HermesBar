@@ -20,6 +20,8 @@ namespace DAO.Employee
                 CreateDataAdapter(SQL.SP_EMPL.GET);
                 InserParameter("ID", SqlDbType.Int, func._ID);
                 InserParameter("CPF", SqlDbType.VarChar, func.CPF);
+                InserParameter("MTR", SqlDbType.Int, func.MTR);
+                InserParameter("ATV", SqlDbType.Int, func._ATV);
 
                 return GetResultAsDataSet();
             }
@@ -50,6 +52,7 @@ namespace DAO.Employee
                 InserParameter("ID_CAR", SqlDbType.Int, func._ID_CAR);
                 InserParameter("FUN", SqlDbType.VarChar, func.FUN);
                 InserParameter("SEX", SqlDbType.Char, func.SEX);
+                InserParameter("MTR", SqlDbType.Int, func.MTR);
 
                 InserParameter("RUA", SqlDbType.VarChar, end.RUA);
                 InserParameter("NUM", SqlDbType.VarChar, end.NUM);
@@ -92,6 +95,7 @@ namespace DAO.Employee
             InserParameter("ID_CAR", SqlDbType.Int, func._ID_CAR);
             InserParameter("FUN", SqlDbType.VarChar, func.FUN);
             InserParameter("SEX", SqlDbType.Char, func.SEX);
+            InserParameter("MTR", SqlDbType.Int, func.MTR);
 
             InserParameter("RUA", SqlDbType.VarChar, end.RUA);
             InserParameter("NUM", SqlDbType.VarChar, end.NUM);
