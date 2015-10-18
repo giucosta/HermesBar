@@ -2,6 +2,7 @@
 using HermesBarWCF;
 using HermesBarWEB.UTIL;
 using MODEL.Client;
+using MODEL.Establishment;
 using MODEL.Event;
 using MODEL.User;
 using System;
@@ -18,6 +19,7 @@ namespace HermesBarWEB.Controllers
         #region Singleton
         private EventService EventService = Singleton<EventService>.Instance();
         private ClientService ClientService = Singleton<ClientService>.Instance();
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
         #endregion
 
         private UsuarioModel user;
@@ -126,6 +128,16 @@ namespace HermesBarWEB.Controllers
                     else
                         evento.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
                 }
+
+                evento.Matriz = new List<SelectListItem>();
+                foreach (var item in EstablishmentService.Get(new EstablishmentModel(), user))
+                {
+                    if (evento.MatrizSelected == item.Id.ToString())
+                        evento.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                    else
+                        evento.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString() });
+                }
+
             }
             catch (Exception)
             {

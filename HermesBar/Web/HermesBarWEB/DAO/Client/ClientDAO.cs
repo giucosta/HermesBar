@@ -21,6 +21,7 @@ namespace DAO.Client
                 InserParameter("ATV", SqlDbType.Int, cli._ATV);
                 InserParameter("NASC", SqlDbType.DateTime, cli.NASC);
                 InserParameter("RG", SqlDbType.VarChar, cli.RG);
+                InserParameter("MTR", SqlDbType.Int, cli.MTR);
 
                 InserParameter("NOM", SqlDbType.VarChar, con.NOM);
                 InserParameter("TEL", SqlDbType.VarChar, con.TEL);
@@ -46,6 +47,7 @@ namespace DAO.Client
                 CreateDataAdapter(SQL.SP_CLI.GET);
                 InserParameter("ID", SqlDbType.Int, cli._ID);
                 InserParameter("RG", SqlDbType.VarChar, cli.RG);
+                InserParameter("MTR", SqlDbType.Int, cli.MTR);
 
                 return GetResultAsDataSet();
             }
@@ -109,6 +111,7 @@ namespace DAO.Client
                 InserParameter("ATV", SqlDbType.Int, cli._ATV);
                 InserParameter("NASC", SqlDbType.DateTime, cli.NASC);
                 InserParameter("RG", SqlDbType.VarChar, cli.RG);
+                InserParameter("MTR", SqlDbType.Int, cli.MTR);
 
                 InserParameter("NOM", SqlDbType.VarChar, con.NOM);
                 InserParameter("TEL", SqlDbType.VarChar, con.TEL);

@@ -17,6 +17,7 @@ namespace DAO.Event
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_AGE.GET);
                 InserParameter("ID", SqlDbType.Int, age._ID);
+                InserParameter("MTR", SqlDbType.Int, age.MTR);
 
                 return GetResult();
             }
@@ -41,6 +42,7 @@ namespace DAO.Event
                 InserParameter("QUANT_RESR", SqlDbType.Int, age.QUANT_RESR);
                 InserParameter("OBS", SqlDbType.VarChar, age.OBS);
                 InserParameter("DATA_RESER", SqlDbType.DateTime, age.DATA_RESER);
+                InserParameter("MTR", SqlDbType.Int, age.MTR);
 
                 return GetResult();
             }
@@ -65,6 +67,7 @@ namespace DAO.Event
                 InserParameter("OBS", SqlDbType.VarChar, age.OBS);
                 InserParameter("DATA_RESER", SqlDbType.DateTime, age.DATA_RESER);
                 InserParameter("ID", SqlDbType.Int, age._ID);
+                InserParameter("MTR", SqlDbType.Int, age.MTR);
 
                 return GetResult();
             }

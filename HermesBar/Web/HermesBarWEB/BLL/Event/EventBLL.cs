@@ -76,6 +76,7 @@ namespace BLL.Event
                 ent.OBS = eve.Observacao;
                 ent.DATA_RESER = eve.Data;
                 ent.QUANT_RESR = eve.QuantidadePessoas;
+                ent.MTR = Convert.ToInt32(user.MatrizSelected);
 
                 return ent;
             }
@@ -96,6 +97,7 @@ namespace BLL.Event
                 model.Observacao = age.OBS;
                 model.QuantidadePessoas = age.QUANT_RESR;
                 model.StatusSelected = age._ATV.ToString();
+                model.MatrizSelected = age.MTR.ToString();
 
                 return model;
             }

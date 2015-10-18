@@ -138,7 +138,8 @@ namespace BLL.Client
                 entity.NASC = client.DataNascimento;
                 entity._ATV = Convert.ToInt32(client.StatusSelected);
                 entity._USR = user.Id;
-                entity.RG = client.RG == null ? "0" : client.RG; 
+                entity.RG = client.RG == null ? "0" : client.RG;
+                entity.MTR = Convert.ToInt32(user.MatrizSelected);
 
                 return entity;
             }
@@ -158,6 +159,7 @@ namespace BLL.Client
                 model.DataNascimento = cli.NASC;
                 model.Contato = ContactBLL.ConvertEntityToModel(con);
                 model.RG = cli.RG;
+                model.MatrizSelected = cli.MTR.ToString();
 
                 return model;
             }

@@ -3,6 +3,7 @@ using HermesBarWCF;
 using HermesBarWEB.UTIL;
 using MODEL.Client;
 using MODEL.Contact;
+using MODEL.Establishment;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,10 @@ namespace HermesBarWEB.Controllers
     [HmaAuthorize(new int[] { (int)PerfilAuthorize.Perfil.Administrador })]
     public class ClienteController : Controller
     {
+        #region Singleton
         private ClientService ClienteService = Singleton<ClientService>.Instance();
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
+        #endregion
 
         private UsuarioModel user;
         public ClienteController()
@@ -189,6 +193,15 @@ namespace HermesBarWEB.Controllers
                         cliente.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString(), Selected = true });
                     else
                         cliente.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
+                }
+
+                cliente.Matriz = new List<SelectListItem>();
+                foreach (var item in EstablishmentService.Get(new EstablishmentModel(), user))
+                {
+                    if (cliente.MatrizSelected == item.Id.ToString())
+                        cliente.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                    else
+                        cliente.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString() });
                 }
             }
             catch (Exception)

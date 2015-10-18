@@ -19,5 +19,7 @@ namespace MODEL.Event
         public string ClienteSelected { get; set; }
         public List<SelectListItem> Cliente { get; set; }
         public string ClienteNome { get; set; }
+        public string MatrizSelected { get; set; }
+        public List<SelectListItem> Matriz { get; set; }
     }
 }
