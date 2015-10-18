@@ -12,5 +12,7 @@ namespace ENTITY.ShoppingList
         public int QUANT { get; set; }
         public int COMP { get; set; }
         public int _ID_LIS { get; set; }
+        public string NOM { get; set; }
+
     }
 }

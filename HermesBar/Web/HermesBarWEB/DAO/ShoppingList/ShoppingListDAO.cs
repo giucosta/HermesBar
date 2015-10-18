@@ -68,5 +68,46 @@ namespace DAO.ShoppingList
                 CloseConnection();
             }
         }
+        public DataTable GetId(int id)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_LIS_COM.GET_ID);
+                InserParameter("ID_LIS", SqlDbType.Int, id);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
+        public DataTable InsertPurchase(HMA_LIS_COM shoppingList)
+        {
+            try
+            {
+                OpenConnection();
+                CreateDataAdapter(SQL.SP_LIS_COM.INS_COMP);
+                InserParameter("ID_LIS", SqlDbType.Int, shoppingList._ID_LIS);
+                InserParameter("ID_PROD", SqlDbType.Int, shoppingList._ID_PROD);
+                InserParameter("QUANT", SqlDbType.Int, shoppingList.QUANT);
+                InserParameter("USR", SqlDbType.Int, shoppingList._USR);
+
+                return GetResult();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+        }
     }
 }

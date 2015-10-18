@@ -67,6 +67,37 @@ namespace BLL.ShoppingList
                 throw;
             }
         }
+        public List<ListaComprasModel> GetId(int id)
+        {
+            try
+            {
+                var result = ShoppingListDAO.GetId(id).DataTableToList<HMA_LIS_COM>();
+                if (result.Count() > 0)
+                {
+                    var list = new List<ListaComprasModel>();
+                    foreach (var item in result)
+                        list.Add(ConvertEntityToModel(item));
+
+                    return list;
+                }
+                return null;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool InsertPurchase(ListaComprasModel shoppingListModel, UsuarioModel user, int idList)
+        {
+            try
+            {
+                return ShoppingListDAO.InsertPurchase(ConvertModelToEntity(shoppingListModel, user, idList)).GetResults();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         #region Private Methods
         private HMA_LIS_COM ConvertModelToEntity(ListaComprasModel model, UsuarioModel user, int idList)
@@ -93,6 +124,9 @@ namespace BLL.ShoppingList
                 var model = new ListaComprasModel();
                 model.IdLista = entity._ID_LIS;
                 model.DataCriacao = entity._INS;
+                model.ProdutoNome = entity.NOM;
+                model.quantidade = entity.QUANT.ToString();
+                model.id = entity._ID_PROD.ToString();
 
                 return model;
             }

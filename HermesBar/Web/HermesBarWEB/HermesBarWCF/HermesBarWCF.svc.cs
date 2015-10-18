@@ -383,5 +383,13 @@ namespace HermesBarWCF
         {
             return ShoppingList.Get();
         }
+        public List<ListaComprasModel> GetId(int id)
+        {
+            return ShoppingList.GetId(id);
+        }
+        public bool InsertPurchase(ListaComprasModel shoppingListModel, UsuarioModel user, int idList)
+        {
+            return ShoppingList.InsertPurchase(shoppingListModel, user, idList);
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace MODEL.ListaCompras
         public DateTime DataCriacao { get; set; }
         public string id { get; set; }
         public string quantidade { get; set; }
+        public string ProdutoNome { get; set; }
+        
     }
 }

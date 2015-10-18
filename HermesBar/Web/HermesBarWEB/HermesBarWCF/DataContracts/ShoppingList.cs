@@ -34,5 +34,13 @@ namespace HermesBarWCF.DataContracts
         {
             return ShoppingListBLL.Get();
         }
+        public List<ListaComprasModel> GetId(int id)
+        {
+            return ShoppingListBLL.GetId(id);
+        }
+        public bool InsertPurchase(ListaComprasModel shoppingListModel, UsuarioModel user, int idList)
+        {
+            return ShoppingListBLL.InsertPurchase(shoppingListModel, user, idList);
+        }
     }
 }

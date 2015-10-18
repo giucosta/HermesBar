@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<MODEL.ListaCompras.ListaComprasModel>
+@{
     Layout = null;
 }
 <!DOCTYPE html>
@@ -21,46 +22,47 @@
         <section>
             <div class="row">
                 <div class="col-md-12">
-                    <form class="form-horizontal">
                         <section class="panel">
                             <header class="panel-heading">
-                                <h3>Hermes Bar | Lista de Compras</h3>
+                                <h3>Lista de Compras</h3>
                             </header>
                             <div class="panel-body">
-                                <div class="form-group table-responsive">
-                                    <table class="table table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <td>Produto</td>
-                                                <td>Quantidade</td>
-                                                <td>Valor</td>
-                                                <td>Ação</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    Coca-cola
-                                                </td>
-                                                <td>
-                                                    12
-                                                </td>
-                                                <td>
-                                                    <div>
-                                                        <input type="text" class="form-control"/>
+                                <div class="panel-group m-bot20" id="accordion">
+                                    @foreach (var item in Model)
+                                    {
+                                        @Html.HiddenFor(m => item.IdLista)
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#@item.id">
+                                                        @item.ProdutoNome
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="@item.id" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-2">Quantidade</label>
+                                                        <div class="col-sm-10">
+                                                            @Html.TextBoxFor(m => item.quantidade, new { @class = "form-control", @required = "required" })
+                                                            @Html.HiddenFor(m => item.id)
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-primary">+</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                    <div class="form-group">
+                                                        <label class="control-label col-sm-2">Valor Unidade</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="valor-compra"/>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" id="produto-comprado">Adicionar Produto</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </section>
                         <button type="button" class="btn btn-primary" id="fechar-pedido">Concluir  pedido</button>
-                    </form>
                 </div>
             </div>
         </section>
@@ -73,7 +75,20 @@
 @Scripts.Render("~/bundles/jqueryMask")
 @Scripts.Render("~/bundles/scripts")
 @Scripts.Render("~/bundles/sweetalert")
+<script src="~/Scripts/moment.min.js"></script>
+@*@Scripts.Render("~/bundles/moment")*@
 @Scripts.Render("~/bundles/calendar")
 <script src="~/Scripts/lang-all.js"></script>
 @Scripts.Render("~/bundles/hma")
+<script>
+    if ($(".custom-custom-bar-chart")) {
+        $(".bar").each(function () {
+            var i = jQuery(this).find(".value").html();
+            $(this).find(".value").html("");
+            $(this).find(".value").animate({
+                height: i
+            }, 2000)
+        })
+    }
+</script>
 </html>

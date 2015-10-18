@@ -19,6 +19,7 @@ $('#caixa-valor-inicial').mask('000.000.000.000.000,00', { reverse: true });
 $('#reforco-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
 $('#sangria-valor-caixa').mask('000.000.000.000.000,00', { reverse: true });
 $('#caixa-valor-final').mask('000.000.000.000.000,00', { reverse: true });
+$('#valor-compra').mask('000.000.000.000.000,00', { reverse: true });
 $('#nascimento-cliente').mask('00/00/0000');
 $('#data-abertura-caixa').val(FormatActualDate(new Date()));
 $('#data-fechamento-caixa').val(FormatActualDate(new Date()));
@@ -634,7 +635,6 @@ $('body').on('click', '#adicionar-produto-lista', function () {
 $('body').on('click', '#excluir-produto-lista', function () {
     $(this).parent().parent().remove();
 });
-
 $('body').on('click', '#salvar-lista', function () {
     var listas = [];
     var linhas = $('#produtos-compra').children();
@@ -651,16 +651,42 @@ $('body').on('click', '#salvar-lista', function () {
 
     if (resultRequest) {
         GenerateTimeMessage('Uhul!', 'Lista cadastrada', 'success');
-        window.location = '/Home';
+        window.location = '/ListaCompras/Get';
     } else {
         GenerateTimeMessage('Oops!', 'Erro ao cadastrar lista de compras', 'error');
     }
 });
+$('body').on('click', '#produto-comprado', function () {
 
+    var div = $(this).parent();
+    quantidade = $(div).children()[0];
+    quantidade = $(quantidade).children()[1];
+    quantidade = $(quantidade).children()[0];
+
+    var idProduto = $(div).children()[0];
+    idProduto = $(idProduto).children()[1];
+    idProduto = $(idProduto).children()[1];
+    idProduto = $(idProduto).val();
+    
+
+    var valor = $(div).children()[1];
+    valor = $(valor).children()[1]
+    valor = $(valor).children();
+    valor = $(valor).val();
+
+    var data = { quantidade: $(quantidade).val(), valorUnidade: valor, idProduto: idProduto, idLista: $('#item_IdLista').val() };
+    GenerateRequest('GET', '/ListaCompras/ItemComprado', data, false);
+    if (resultRequest == true) {
+        GenerateTimeMessage('Uhul!', 'Produto comprado com sucesso', 'success');
+        $(div).parent().parent().remove();
+    }
+});
 function Lista(id, quantidade) {
     this.id = id;
     this.quantidade = quantidade;
 }
+
+
 /************************END LISTA COMPRA METHODS***********************************/
 
 /***********************************AUX METHODS**************************************/

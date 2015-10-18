@@ -48,7 +48,23 @@ namespace HermesBarWEB.Controllers
         {
             try
             {
-                return View();
+                return View(ShoppingListService.GetId(id));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ActionResult ItemComprado(string quantidade, string valorUnidade, string idProduto, string idLista)
+        {
+            try
+            {
+                var model = new ListaComprasModel();
+                model.quantidade = quantidade;
+                model.id = idProduto;
+                model.IdLista = Convert.ToInt32(idLista);
+
+                return Json(ShoppingListService.InsertPurchase(model, user, Convert.ToInt32(idLista)), JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
             {

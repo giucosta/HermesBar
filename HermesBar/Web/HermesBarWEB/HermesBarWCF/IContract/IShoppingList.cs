@@ -13,5 +13,7 @@ namespace HermesBarWCF.IContract
     {
         bool Insert(List<ListaComprasModel> shoppingListModel, UsuarioModel user);
         List<ListaComprasModel> Get();
+        List<ListaComprasModel> GetId(int id);
+        bool InsertPurchase(ListaComprasModel shoppingListModel, UsuarioModel user, int idList);
     }
 }
