@@ -18,6 +18,7 @@ namespace DAO.Establishment
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_EST.GET);
                 InserParameter("ID_EST", SqlDbType.Int, est._ID);
+                InserParameter("USR", SqlDbType.Int, est._USR);
 
                 return GetResultAsDataSet();
             }
@@ -45,6 +46,7 @@ namespace DAO.Establishment
                 InserParameter("INSMUN", SqlDbType.VarChar, est.INSMUN);
                 InserParameter("QUANT_MESA", SqlDbType.Int, est.QUANT_MESA);
                 InserParameter("QUANT_CLI", SqlDbType.Int, est.QUANT_CLI);
+                InserParameter("MTR", SqlDbType.Int, est.MTR);
 
                 InserParameter("RUA", SqlDbType.VarChar, end.RUA);
                 InserParameter("NUM", SqlDbType.VarChar, end.NUM);
@@ -86,6 +88,7 @@ namespace DAO.Establishment
                 InserParameter("INSMUN", SqlDbType.VarChar, est.INSMUN);
                 InserParameter("QUANT_MESA", SqlDbType.Int, est.QUANT_MESA);
                 InserParameter("QUANT_CLI", SqlDbType.Int, est.QUANT_CLI);
+                InserParameter("MTR", SqlDbType.Int, est.MTR);
 
                 InserParameter("RUA", SqlDbType.VarChar, end.RUA);
                 InserParameter("NUM", SqlDbType.VarChar, end.NUM);

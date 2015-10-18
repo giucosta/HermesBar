@@ -17,6 +17,7 @@ namespace DAO.User
                 OpenConnection();
                 CreateDataAdapter(SQL.SP_USR.GET);
                 InserParameter("ID", SqlDbType.Int, user._ID);
+                InserParameter("MTR", SqlDbType.Int, user.MTR);
 
                 return GetResult();
             }
@@ -41,6 +42,7 @@ namespace DAO.User
                 InserParameter("EMA", SqlDbType.VarChar, user.EMA);
                 InserParameter("ID_PER", SqlDbType.Int, user.PER_ID);
                 InserParameter("PAS", SqlDbType.VarChar, user.PAS);
+                InserParameter("MTR", SqlDbType.Int, user.MTR);
 
                 return GetResult();
             }
@@ -65,6 +67,7 @@ namespace DAO.User
                 InserParameter("PAS", SqlDbType.VarChar, user.PAS);
                 InserParameter("ID_USR", SqlDbType.Int, user._ID);
                 InserParameter("ID_PER", SqlDbType.Int, user.PER_ID);
+                InserParameter("MTR", SqlDbType.Int, user.MTR);
 
                 return GetResult();
             }

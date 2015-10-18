@@ -80,8 +80,8 @@
                             <span class="menu-arrow arrow_carrot-right"></span>
                         </a>
                         <ul class="sub">
-                            <li>@Html.ActionLink("Entrada", "Get", "Fornecedor")</li>
-                            <li>@Html.ActionLink("Saída", "Get", "Produto")</li>
+                            <li>@Html.ActionLink("Entrada", "EntradaCliente", "Pdv")</li>
+                            <li>@Html.ActionLink("Saída", "SaidaCliente", "Pdv")</li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -94,17 +94,7 @@
                             <li>@Html.ActionLink("Abrir Caixa", "AbrirCaixa", "Pdv")</li>
                             <li>@Html.ActionLink("Sangria", "SangriaCaixa", "Pdv")</li>
                             <li>@Html.ActionLink("Reforço", "ReforcoCaixa", "Pdv")</li>
-                            <li>@Html.ActionLink("Fechar Caixa", "Get", "Cliente")</li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon_desktop"></i>
-                            <span>Vender</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-                        <ul class="sub">
-                            <li>@Html.ActionLink("Vender", "Configuracoes", "Estabelecimento")</li>
+                            <li>@Html.ActionLink("Fechar Caixa", "FecharCaixa", "Pdv")</li>
                         </ul>
                     </li>
                     <li class="sub-menu">

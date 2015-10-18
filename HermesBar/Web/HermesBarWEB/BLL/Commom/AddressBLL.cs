@@ -63,6 +63,9 @@ namespace BLL.Commom
             {
                 var result = AddressDAO.GetStates();
 
+                if (model == null)
+                    model = new EnderecoModel();
+
                 model.UfList = new List<SelectListItem>();
                 for (int i = 0; i < result.Rows.Count; i++)
                     model.UfList.Add(new SelectListItem() { Text = result.Rows[i]["SIG"].ToString(), Value = result.Rows[i]["_ID"].ToString() });

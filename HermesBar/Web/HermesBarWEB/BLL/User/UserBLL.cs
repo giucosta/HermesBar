@@ -91,6 +91,7 @@ namespace BLL.User
                 if(!string.IsNullOrEmpty(user.PerfilSelected))
                     ent.PER_ID = Convert.ToInt32(user.PerfilSelected);
                 ent.EMA = user.Email;
+                ent.MTR = Convert.ToInt32(user.MatrizSelected);
 
                 return ent;
             }
@@ -110,6 +111,7 @@ namespace BLL.User
                 model.PerfilDescricao = user.DSC;
                 model.Nome = user.NOM;
                 model.StatusSelected = user._ATV.ToString();
+                model.MatrizSelected = user.MTR.ToString();
 
                 return model;
             }

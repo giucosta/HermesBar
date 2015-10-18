@@ -167,6 +167,15 @@ namespace HermesBarWEB.Controllers
                 else
                     model.Status.Add(new SelectListItem() { Text = item.ToString(), Value = ((int)item).ToString() });
             }
+
+            model.Matriz = new List<SelectListItem>();
+            foreach (var item in EstablishmentService.Get(new EstablishmentModel(), user))
+            {
+                if (model.MatrizSelected == item.Id.ToString())
+                    model.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                else
+                    model.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString() });
+            }
         }
         #endregion
     }

@@ -1,6 +1,7 @@
 ﻿using HELPER;
 using HermesBarWCF;
 using HermesBarWEB.UTIL;
+using MODEL.Establishment;
 using MODEL.User;
 using System;
 using System.Collections.Generic;
@@ -16,13 +17,14 @@ namespace HermesBarWEB.Controllers
         #region Singleton
         private UserService UserService = Singleton<UserService>.Instance();
         private ProfileService ProfileService = Singleton<ProfileService>.Instance();
+        private EstablishmentService EstablishmentService = Singleton<EstablishmentService>.Instance();
         #endregion
 
-        private UsuarioModel user;
+        private UsuarioModel _user;
         public UsuarioController()
         {
-            GetSession.GetUserSession(ref user);
-            ViewBag.User = user.Nome;
+            GetSession.GetUserSession(ref _user);
+            ViewBag.User = _user.Nome;
         }
 
         public ActionResult Get()
@@ -48,7 +50,8 @@ namespace HermesBarWEB.Controllers
                 if (usuario.Id != 0)
                     return EditarUsuario(usuario);
 
-                usuario.Id = user.Id;
+                usuario.Id = _user.Id;
+                usuario.MatrizSelected = _user.MatrizSelected;
                 if (UserService.Insert(usuario))
                     return View("Get", UserService.Get(new UsuarioModel()));
 
@@ -134,6 +137,14 @@ namespace HermesBarWEB.Controllers
                     user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString(), Selected = true });
                 else
                     user.Perfil.Add(new SelectListItem() { Text = item.Descricao.ToString(), Value = item.Id.ToString() });
+            }
+            user.Matriz = new List<SelectListItem>();
+            foreach (var item in EstablishmentService.Get(new EstablishmentModel(), _user))
+            {
+                if (user.MatrizSelected == item.Id.ToString())
+                    user.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString(), Selected = true });
+                else
+                    user.Matriz.Add(new SelectListItem() { Text = item.RazaoSocial, Value = item.Id.ToString()});
             }
         }
         #endregion

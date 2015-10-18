@@ -30,5 +30,8 @@ namespace MODEL.Establishment
         public string InscricaoEstadual { get; set; }
         [DisplayName("Inscrição Municipal")]
         public string InscricaoMunicipal { get; set; }
+
+        public string MatrizSelected { get; set; }
+        public List<SelectListItem> Matriz { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace BLL.User
                 entity.EMA = usuario.Email;
                 entity.NOM = usuario.Nome;
                 entity.PAS = usuario.Senha;
+                entity.MTR = Convert.ToInt32(usuario.MatrizSelected);
 
                 return entity;
             }
@@ -60,6 +61,7 @@ namespace BLL.User
                 model.Nome = entity.NOM;
                 model.PerfilSigla = entity.SIG;
                 model.PerfilId = entity.PER_ID;
+                model.MatrizSelected = entity.MTR.ToString();
 
                 return model;
             }

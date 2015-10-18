@@ -20,5 +20,7 @@ namespace MODEL.User
         public string Senha { get; set; }
         public string StatusSelected { get; set; }
         public List<SelectListItem> Status { get; set; }
+        public string MatrizSelected { get; set; }
+        public List<SelectListItem> Matriz { get; set; }
     }
 }

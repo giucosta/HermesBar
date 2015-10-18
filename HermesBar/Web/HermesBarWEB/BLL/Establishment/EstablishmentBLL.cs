@@ -139,6 +139,7 @@ namespace BLL.Establishment
                 entity.QUANT_CLI = est.QuantidadeMaximoPessoas;
                 entity.QUANT_MESA = est.QuantidadeMesas;
                 entity.RAZ = est.RazaoSocial;
+                entity.MTR = Convert.ToInt32(est.MatrizSelected);
 
                 return entity;
             }
@@ -161,6 +162,7 @@ namespace BLL.Establishment
                 model.QuantidadeMesas = est.QUANT_MESA;
                 model.RazaoSocial = est.RAZ;
                 model.StatusSelected = est._ATV.ToString();
+                model.MatrizSelected = est.MTR.ToString();
 
                 model.Endereco = AddressBLL.ConvertEntityToModel(end);
                 model.Contato = ContactBLL.ConvertEntityToModel(con);
