@@ -99,6 +99,8 @@ namespace BLL.Product
         {
             try
             {
+                if (ProductDAO.GetNextCod().Rows[0]["COD_VEN"] == DBNull.Value)
+                    return 1;
                 return Convert.ToInt32(ProductDAO.GetNextCod().Rows[0]["COD_VEN"]);
             }
             catch (Exception)

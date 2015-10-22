@@ -685,7 +685,10 @@ function Lista(id, quantidade) {
     this.id = id;
     this.quantidade = quantidade;
 }
-
+$('body').on('click', '#fechar-lista', function () {
+    GenerateTimeMessage('Ok!', 'Lista encerrada!', 'success');
+    window.location = '/ListaCompras/Get';
+});
 
 /************************END LISTA COMPRA METHODS***********************************/
 

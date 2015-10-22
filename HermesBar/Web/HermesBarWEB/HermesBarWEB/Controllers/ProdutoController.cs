@@ -123,23 +123,30 @@ namespace HermesBarWEB.Controllers
 
             model.Tipos = new List<SelectListItem>();
             var tipos = Singleton<ProductTypeService>.Instance().Get();
-            foreach (var item in tipos)
+            if (tipos != null)
             {
-                if (item.Id.ToString() == model.TipoSelected)
-                    model.Tipos.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString(), Selected = true });
-                else
-                    model.Tipos.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
+                foreach (var item in tipos)
+                {
+                    if (item.Id.ToString() == model.TipoSelected)
+                        model.Tipos.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString(), Selected = true });
+                    else
+                        model.Tipos.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
+                }
             }
-
+            
             model.UnidadesMedida = new List<SelectListItem>();
             var unidades = Singleton<ProductUnitySizeService>.Instance().Get();
-            foreach (var item in unidades)
+            if (unidades != null)
             {
-                if (item.Id.ToString() == model.UnidadeMedidaSelected)
-                    model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString(), Selected = true });
-                else
-                    model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
+                foreach (var item in unidades)
+                {
+                    if (item.Id.ToString() == model.UnidadeMedidaSelected)
+                        model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString(), Selected = true });
+                    else
+                        model.UnidadesMedida.Add(new SelectListItem() { Text = item.Nome, Value = item.Id.ToString() });
+                }
             }
+            
             model.Status = new List<SelectListItem>();
             foreach (var item in Enum.GetValues(typeof(Enumerators.Status)))
             {
