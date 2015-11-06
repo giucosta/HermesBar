@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17CD4E83-0675-457E-B458-E8D8F648EED8}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MODEL</RootNamespace>
-    <AssemblyName>MODEL</AssemblyName>
+    <RootNamespace>HMADBAdministrator</RootNamespace>
+    <AssemblyName>HMADBAdministrator</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,8 +33,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,29 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address\EnderecoModel.cs" />
-    <Compile Include="Backup\BackupModel.cs" />
-    <Compile Include="Client\ClientModel.cs" />
-    <Compile Include="Commom\LayoutModel.cs" />
-    <Compile Include="Contact\ContatoModel.cs" />
-    <Compile Include="Employee\EmployeeModel.cs" />
-    <Compile Include="Employee\PlaceEmployeeModel.cs" />
-    <Compile Include="Employee\TypeEmployeeModel.cs" />
-    <Compile Include="Establishment\EstablishmentModel.cs" />
-    <Compile Include="Event\EventModel.cs" />
-    <Compile Include="ListaCompras\ListaComprasModel.cs" />
-    <Compile Include="PDV\Client\PdvClientModel.cs" />
-    <Compile Include="PDV\Client\PdvFechamentoClientModel.cs" />
-    <Compile Include="PDV\PayBox\CaixaModel.cs" />
-    <Compile Include="PDV\Session\PdvSession.cs" />
-    <Compile Include="Product\CategoriaModel.cs" />
-    <Compile Include="Product\ProdutoModel.cs" />
-    <Compile Include="Product\TipoModel.cs" />
-    <Compile Include="Product\UnidadeMedidaModel.cs" />
+    <Compile Include="Backup\DBBackup.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Supplier\FornecedorModel.cs" />
-    <Compile Include="User\PerfilModel.cs" />
-    <Compile Include="User\UsuarioModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -21,5 +21,10 @@ namespace HermesBarWCF.DataContracts
         {
             return LoginBLL.EfetuarLogin(user);
         }
+
+        public void GenerateBackup()
+        {
+            LoginBLL.CreateBackup();
+        }
     }
 }

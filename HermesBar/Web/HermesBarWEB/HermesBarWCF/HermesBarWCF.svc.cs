@@ -2,6 +2,7 @@
 using HermesBarWCF.DataContracts;
 using HermesBarWCF.IContract;
 using MODEL.Address;
+using MODEL.Backup;
 using MODEL.Client;
 using MODEL.Commom;
 using MODEL.Employee;
@@ -67,6 +68,10 @@ namespace HermesBarWCF
         public UsuarioModel EfetuarLogin(UsuarioModel user)
         {
             return Login.EfetuarLogin(user);
+        }
+        public void GenerateBackup()
+        {
+            Login.GenerateBackup();
         }
     }
     public class EstablishmentService : IEstablishment
@@ -390,6 +395,19 @@ namespace HermesBarWCF
         public bool InsertPurchase(ListaComprasModel shoppingListModel, UsuarioModel user, int idList)
         {
             return ShoppingList.InsertPurchase(shoppingListModel, user, idList);
+        }
+    }
+    public class BackupService : IBackup
+    {
+        private Backup Backup = Singleton<Backup>.Instance();
+
+        public List<BackupModel> Get()
+        {
+            return Backup.Get();
+        }
+        public void Restore(string backupAddress)
+        {
+            Backup.Restore(backupAddress);
         }
     }
 }

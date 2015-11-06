@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HermesBarWCF", "HermesBarWC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HELPER", "HELPER\HELPER.csproj", "{2B2D24B6-E3C0-4B91-81BE-56F7B39809E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMADBAdministrator", "HMADBAdministrator\HMADBAdministrator.csproj", "{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,16 @@ Global
 		{2B2D24B6-E3C0-4B91-81BE-56F7B39809E4}.Release|ARM.ActiveCfg = Release|Any CPU
 		{2B2D24B6-E3C0-4B91-81BE-56F7B39809E4}.Release|x64.ActiveCfg = Release|Any CPU
 		{2B2D24B6-E3C0-4B91-81BE-56F7B39809E4}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Release|x64.ActiveCfg = Release|Any CPU
+		{A0F404C0-2CE9-4FD5-998D-2621DC9B9FCD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

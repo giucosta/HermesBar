@@ -1,4 +1,4 @@
-﻿using MODEL.User;
+﻿using MODEL.Backup;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +8,9 @@ using System.Web;
 namespace HermesBarWCF.IContract
 {
     [ServiceContract]
-    public interface ILogin
+    public interface IBackup
     {
-        UsuarioModel EfetuarLogin(UsuarioModel user);
-        void GenerateBackup();
+        List<BackupModel> Get();
+        void Restore(string backupAddress);
     }
 }

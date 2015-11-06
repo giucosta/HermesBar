@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NMS_DBConnection">
+      <HintPath>..\..\..\..\..\NMS_DBConnection.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -40,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backup\BackupDAO.cs" />
     <Compile Include="Client\ClientDAO.cs" />
     <Compile Include="Commom\AddressDAO.cs" />
     <Compile Include="Connection\Connection.cs" />
@@ -132,6 +136,10 @@
     <ProjectReference Include="..\HELPER\HELPER.csproj">
       <Project>{2b2d24b6-e3c0-4b91-81be-56f7b39809e4}</Project>
       <Name>HELPER</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HMADBAdministrator\HMADBAdministrator.csproj">
+      <Project>{a0f404c0-2ce9-4fd5-998d-2621dc9b9fcd}</Project>
+      <Name>HMADBAdministrator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -32,6 +32,10 @@ namespace BLL.User
             }
         }
 
+        public void CreateBackup()
+        {
+            LoginDAO.GenerateBackup();
+        }
         #region Private Methods
         private HMA_USR ConvertModelToEntity(UsuarioModel usuario)
         {

@@ -79,5 +79,9 @@ namespace DAO.Connection
 
             return data;
         }
+        public string GetConnectionString()
+        {
+            return _connectionString;
+        }
     }
 }
