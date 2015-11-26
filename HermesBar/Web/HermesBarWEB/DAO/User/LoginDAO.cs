@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ENTITY.User;
-using HMADBAdministrator.Backup;
 
 namespace DAO.User
 {
@@ -33,16 +32,5 @@ namespace DAO.User
             }
         }
 
-        public void GenerateBackup()
-        {
-            try
-            {
-                new DBBackup(GetConnectionString()).Generate();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
     }
 }

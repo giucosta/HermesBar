@@ -31,11 +31,6 @@ namespace BLL.User
                 throw new Exception("Erro ao efetuar login! " + ex.Message);
             }
         }
-
-        public void CreateBackup()
-        {
-            LoginDAO.GenerateBackup();
-        }
         #region Private Methods
         private HMA_USR ConvertModelToEntity(UsuarioModel usuario)
         {

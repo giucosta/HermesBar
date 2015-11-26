@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.Title = "Hermes Bar WEB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa fa-bars"></i>Produtos</h3>
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home"></i><a href="/Home/Index">Home</a></li>
+                    <li><i class="icon_document_alt"></i><a href="/Documentacao/Index">Documentação</a></li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <div id="c-slide" class="carousel slide auto panel-body">
+                        <ol class="carousel-indicators out">
+                            <li class="" data-slide-to="0" data-target="#c-slide"></li>
+                            <li class="active" data-slide-to="1" data-target="#c-slide"></li>
+                            <li class="" data-slide-to="2" data-target="#c-slide"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item text-center">
+                                <h3> Consultas</h3>
+                                <small class="">O sistema disponibiliza consulta de todas os cadastros</small>
+                            </div>
+                            <div class="item text-center active">
+                                <h3><i class="icon_plus_alt2"></i> Edição</h3>
+                                <small class="">O sistema disponibiliza edição de inúmeros cadastros</small>
+                            </div>
+                            <div class="item text-center">
+                                <h3>Para mais informações</h3>
+                                <small class="">Acesse a documentação do sistema</small>
+                            </div>
+                        </div>
+                        <a data-slide="prev" href="#c-slide" class="left carousel-control">
+                            <i class="arrow_carrot-left_alt2"></i>
+                        </a>
+                        <a data-slide="next" href="#c-slide" class="right carousel-control">
+                            <i class="arrow_carrot-right_alt2"></i>
+                        </a>
+                    </div>
+                </section>
+                <section class="panel">
+                    <header class="panel-heading">
+                        Documentação
+                    </header>
+                    <div class="panel-group m-bot20" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                        Fornecedores
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    Para <b>consultar</b> um fornecedor clique <a href="/Fornecedor/Get">aqui</a>, ou para cadastrar um <b>novo</b> fornecedor clique <a href="/Fornecedor/Cadastrar">aqui</a>
+                                    <br />
+                                    <br />
+                                    As informações dos fornecedores serão uteis para o controle financeiro e emissão de pedido de compra de produtos.
+                                    <br />
+                                    <br />
+                                    Para um maior controle, os fornecedores podem ser cadastrados por filiais, ou no grupo geral.
+                                    <br />
+                                    <br />
+                                    <h4>Regras</h4>
+                                    <ul>
+                                        <li>O sistema só aceita cnpjs válidos.</li>
+                                        <li>Caso o fornecedor possua Inscrição Estadual ou Inscrição Municial como isento, deixar o campo em branco.</li>
+                                        <li>É obrigatório o preenchimento dos campos relacionados a endereço.</li>
+                                        <li>É obrigatório o preenchimento dos campos relacionados a contato.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        Produtos
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Para <b>consultar</b> um produto clique <a href="/Produto/Get">aqui</a>, ou para cadastrar um <b>novo</b> produto clique <a href="/Produto/Cadastrar">aqui</a>
+                                    <br />
+                                    <br />
+                                    As informações dos produtos serão uteis na emissão dos pedidos no PDV.
+                                    <br />
+                                    <br />
+                                    Para um maior controle, os produtos poderão ser dividos entre as filiais.
+                                    <br />
+                                    <br />
+                                    <h4>Regras</h4>
+                                    <ul>
+                                        <li>O código de venda é unico pro produto. Não podendo ter o mesmo código em dois produtos</li>
+                                        <li>O valor de compra deve ser inferior ao valor de venda.</li>
+                                        <li>A quantidade atual <b>inicial</b> precisa ser igual ou maior que 0</li>
+                                        <li>Todos os produtos precisam ter um tipo e uma unidade de medida válida</li>
+                                        <li>O valor de venda será utilizado como padrão no PDV</li>
+                                        <li>O sistema interrompe as vendas caso a quantidade em estoque seja igual a 0</li>
+                                        <li>Para ativar/inativar um produto, é possível acessando a tela de pesquisa ou diretamente pelo cadastro do item</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                        Clientes
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Para <b>consultar</b> um cliente clique <a href="/Cliente/Get">aqui</a>, ou para cadastrar um <b>novo</b> cliente clique <a href="/Cliente/Cadastrar">aqui</a>
+                                    <br />
+                                    <br />
+                                    As informações do cliente serão uteis para o fechamento da comanda no PDV
+                                    <br />
+                                    <br />
+                                    Para um maior controle é possível cadastrar um cliente para uma das unidades (filiais)
+                                    <br />
+                                    <br />
+                                    <h4>Regras</h4>
+                                    <ul>
+                                        <li>O sistema identifica o cliente pelo RG</li>
+                                        <li>O sistema só cadastra clientes maiores que 18 anos</li>
+                                        <li>É obrigatório o preenchimento de pelo menos um telefone</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                        Agenda
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    Para <b>consultar</b> um cliente clique <a href="/Cliente/Get">aqui</a>, ou para cadastrar um <b>novo</b> cliente clique <a href="/Cliente/Cadastrar">aqui</a>
+                                    <br />
+                                    <br />
+                                    As informações do cliente serão uteis para o fechamento da comanda no PDV
+                                    <br />
+                                    <br />
+                                    Para um maior controle é possível cadastrar um cliente para uma das unidades (filiais)
+                                    <br />
+                                    <br />
+                                    <h4>Regras</h4>
+                                    <ul>
+                                        <li>O sistema identifica o cliente pelo RG</li>
+                                        <li>O sistema só cadastra clientes maiores que 18 anos</li>
+                                        <li>É obrigatório o preenchimento de pelo menos um telefone</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

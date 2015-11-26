@@ -47,7 +47,6 @@ namespace HermesBarWEB.Controllers
 
         public ActionResult EfetuarLogoff()
         {
-            LoginService.GenerateBackup();
             FormsAuthentication.SignOut();
             Session["USR"] = null;
             return View("Login");

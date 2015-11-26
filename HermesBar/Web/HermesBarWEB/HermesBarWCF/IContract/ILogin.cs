@@ -11,6 +11,5 @@ namespace HermesBarWCF.IContract
     public interface ILogin
     {
         UsuarioModel EfetuarLogin(UsuarioModel user);
-        void GenerateBackup();
     }
 }

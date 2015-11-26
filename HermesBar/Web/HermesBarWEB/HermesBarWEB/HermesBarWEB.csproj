@@ -127,8 +127,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AgendaController.cs" />
-    <Compile Include="Controllers\BackupController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\DocumentacaoController.cs" />
     <Compile Include="Controllers\EstabelecimentoController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
@@ -387,6 +387,7 @@
     <Content Include="Views\ListaCompras\Get.cshtml" />
     <Content Include="Views\ListaCompras\IniciarCompra.cshtml" />
     <Content Include="Views\Backup\Get.cshtml" />
+    <Content Include="Views\Documentacao\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
