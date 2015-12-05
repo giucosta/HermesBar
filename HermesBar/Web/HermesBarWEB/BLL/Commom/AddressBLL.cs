@@ -24,7 +24,8 @@ namespace BLL.Commom
                 entity.BAI = model.Bairro;
                 entity.CEP = model.Cep;
                 entity.CID = model.Cidade;
-                entity.COMP = model.Complemento;
+                entity.COMP = model.Complemento == null ? "" : model.Complemento;
+                entity.COMP = "";
                 entity.NUM = model.Numero;
                 entity.RUA = model.Rua;
                 entity.UF = Convert.ToInt32(model.UfSelected);

@@ -11,7 +11,7 @@ namespace DAO.Connection
 {
     public class Connection
     {
-        private string _connectionString = @"Data Source=GIULIANOCOSTA\SQLEXPRESS;Database = HERMESBARWEB;Integrated Security=SSPI;";
+        private string _connectionString = @"Data Source=GIULIANOCOSTA\SQLEXPRESS;Database = HERMESBARWEB2;Integrated Security=SSPI;";
         SqlConnection conn = null;
         SqlDataAdapter adapter = null;
 
