@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B2F0EC43-11F9-45CC-81B7-A9DE82BA8514}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ConsultaCep">
+      <HintPath>..\HermesManagementAssistant\ConsultaCep.dll</HintPath>
+    </Reference>
+<<<<<<< HEAD
+=======
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Atracoes\AtracoesBLL.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Atracoes\EstiloAtracoesBLL.cs" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
+    <Compile Include="Comum\ContatoBLL.cs" />
+    <Compile Include="Comum\EnderecoBLL.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoBLL.cs" />
+    <Compile Include="Estabelecimento\ConfigEstabelecimentoEstabelecimentoBLL.cs" />
+    <Compile Include="Estabelecimento\EstabelecimentoBLL.cs" />
+<<<<<<< HEAD
+    <Compile Include="Funcionario\FuncionarioBLL.cs" />
+    <Compile Include="Login\LoginBLL.cs" />
+    <Compile Include="Perfil\PerfilBLL.cs" />
+=======
+    <Compile Include="Estoque\EstoqueBLL.cs" />
+    <Compile Include="Fornecedor\FornecedorBLL.cs" />
+    <Compile Include="Funcionario\FuncionarioBLL.cs" />
+    <Compile Include="Login\LoginBLL.cs" />
+    <Compile Include="Perfil\PerfilBLL.cs" />
+    <Compile Include="Produtos\MarcaProdutoBLL.cs" />
+    <Compile Include="Produtos\ProdutoBLL.cs" />
+    <Compile Include="Produtos\TipoProdutoBLL.cs" />
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Session\SessionBLL.cs" />
+    <Compile Include="Funcionario\TipoFuncionarioBLL.cs" />
+    <Compile Include="Usuario\UsuarioBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{928090e3-dff9-4e0b-855a-d5a83ecfb0bc}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MODEL\MODEL.csproj">
+      <Project>{d5a3dfce-2fc3-483a-a142-55ca22bd7c8c}</Project>
+      <Name>MODEL</Name>
+    </ProjectReference>
+<<<<<<< HEAD
+    <ProjectReference Include="..\UTILS\UTILS.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTILS</Name>
+=======
+    <ProjectReference Include="..\UTILS\UTIL.csproj">
+      <Project>{133d0be1-2b91-4be5-8fe1-b35872b26758}</Project>
+      <Name>UTIL</Name>
+>>>>>>> d637a64450bd0a26ff59171c44a6b0ef7dbbe8ea
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,175 @@
+﻿using BLL.Comum;
+using DAO.Connections;
+using DAO.Fornecedor;
+using DAO.Utils;
+using MODEL;
+using MODEL.Fornecedor;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using UTIL;
+
+
+namespace BLL.Fornecedor
+{
+    public class FornecedorBLL
+    {
+        private FornecedorDAO _fornecedorDAO = null;
+        public FornecedorDAO FornecedorDAO
+        {
+            get
+            {
+                if (_fornecedorDAO == null)
+                    _fornecedorDAO = new FornecedorDAO();
+                return _fornecedorDAO;
+            }
+        }
+        private EnderecoBLL _enderecoBLL = null;
+        public EnderecoBLL EnderecoBLL
+        {
+            get
+            {
+                if (_enderecoBLL == null)
+                    _enderecoBLL = new EnderecoBLL();
+                return _enderecoBLL;
+            }
+        }
+        private ContatoBLL _contatoBLL = null;
+        public ContatoBLL ContatoBLL
+        {
+            get
+            {
+                if (_contatoBLL == null)
+                    _contatoBLL = new ContatoBLL();
+                return _contatoBLL;
+            }
+        }
+
+        public bool Salvar(FornecedorModel fornecedor)
+        {
+            if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
+                fornecedor.Endereco = SaveAddress(fornecedor.Endereco);
+                if (fornecedor.Endereco != null)
+                {
+                    var contatoSalvo = ContatoBLL.Salvar(fornecedor.Contato);
+                    if (contatoSalvo != null)
+                    {
+                        fornecedor.Contato = contatoSalvo;
+                        FornecedorDAO.Salvar(fornecedor);
+                        AO.Commit();
+                        return true;
+                    }
+                    else
+                        AO.Rollback();
+                }
+            }
+            return false;
+        }
+        public List<FornecedorModel> Pesquisar(FornecedorModel fornecedor)
+        {
+            var listFornecedor = FornecedorDAO.Pesquisar(fornecedor).DataTableToList<FornecedorModel>();
+            foreach (var item in listFornecedor)
+            {
+                item.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(item));
+                item.Endereco = EnderecoBLL.RecuperaEnderecoId(RecuperaIdEndereco(item));
+            }
+            return listFornecedor;
+        }
+        public int RecuperaIdContato(FornecedorModel fornecedor)
+        {
+            return FornecedorDAO.RetornaIdContato(fornecedor);
+        }
+        public int RecuperaIdEndereco(FornecedorModel fornecedor)
+        {
+            return FornecedorDAO.RetornaIdEndereco(fornecedor);
+        }
+        public bool Editar(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
+                if (Validacoes.ValidaCNPJ(fornecedor.Cpj))
+                {
+                    if (FornecedorDAO.Editar(fornecedor))
+                    {
+                        if (EnderecoBLL.Editar(fornecedor.Endereco))
+                        {
+                            if (ContatoBLL.Editar(fornecedor.Contato))
+                            {
+                                AO.Commit();
+                                return true;
+                            }
+                            else
+                                AO.Rollback();
+                        }
+                        else
+                            AO.Rollback();
+                    }
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public bool Excluir(FornecedorModel fornecedor)
+        {
+            try
+            {
+                AccessObject<FornecedorModel> AO = new AccessObject<FornecedorModel>();
+                AO.GetTransaction();
+                if (FornecedorDAO.Excluir(fornecedor))
+                {
+                    if (EnderecoBLL.Excluir(fornecedor.Endereco))
+                    {
+                        if (ContatoBLL.Excluir(fornecedor.Contato))
+                        {
+                            AO.Commit();
+                            return true;
+                        }
+                        else
+                            AO.Rollback();
+                    }
+                    else
+                        AO.Rollback();
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public FornecedorModel PesquisaFornecedorPorId(int id)
+        {
+            var fornecedor = FornecedorDAO.Pesquisar(new FornecedorModel() { Id = id }).DataTableToSimpleObject<FornecedorModel>();
+            fornecedor.Contato = ContatoBLL.RecuperaContatoId(RecuperaIdContato(fornecedor));
+            fornecedor.Endereco = EnderecoBLL.RecuperaEnderecoId(RecuperaIdEndereco(fornecedor));
+
+            return fornecedor;
+        }
+
+        #region EnderecoFornecedor
+        private EnderecoModel SaveAddress(EnderecoModel endereco)
+        {
+            if (!string.IsNullOrWhiteSpace(endereco.Rua) && !string.IsNullOrWhiteSpace(endereco.Numero))
+                return EnderecoBLL.Salvar(endereco);
+            return null;
+        }
+        private bool DeleteAddress(EnderecoModel endereco)
+        {
+            if (endereco.Id != 0)
+                return EnderecoBLL.Excluir(endereco);
+            return false;
+        }
+        #endregion
+    }
+}
